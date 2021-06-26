@@ -1,0 +1,281 @@
+$schema: https://json-schema.org/draft/2019-09/schema
+info: # из #.Sample-univ
+  type: db                            # Артефакт DBD - описание структуры БД
+  title: БД управления номенклатурой  # Краткое наименование артефакта
+  version: 1.0
+  summary:
+  description: DBD для #.Sample-univ
+  termsOfService:
+  contact:
+  license:
+servers:
+  fs-mts:
+    dbType: POSTGRES
+    dbVersion: 12.6 (Debian 12.6-1.pgdg100+1)
+    url: jdbc:postgresql://k8s.fusionsoft.ru:31003/mts
+    user: postgres # Сервисный аккаунт для dbgit
+    password: H2VzovwvU7HC6PBhqGZCp5pW
+    description: "Сервер разработки"
+    variables:
+schemas:
+  mts:
+    owner: mts_owner
+    tables:
+      vendors:
+        columns:
+          - iuColumn: uid
+            dbName: uid
+            type: "string"
+            dbNullable: false
+            description: Глобальный ид объекта
+          - iuColumn: name
+            dbName: brand_name
+            type: "string"
+            description: Имя бренда
+          - iuColumn: name
+            dbName: name
+            type: "string"
+            description: Наименование объекта (краткое)
+          - iuColumn: decr
+            dbName: descr
+            type: "string"
+            description: Наименование объекта (полное)
+          - iuColumn: comm
+            dbName: comm
+            type: "string"
+            description: Пояснение к объекту
+          - dbName: vendor_id
+            dbLocalIdMethod: GLOBAL_SEQ
+            dbNullable: false
+            description: Локальный идентификатор производителя
+          - iuColumn: vendor_name
+            dbName: vendor_name
+            type: "string"
+            dbNullable: false
+            description: Имя производителя
+        constraints:
+          pk_vendors:
+            dbConstraintType: PK
+            dbColumn:
+              - vendor_id
+        indexes:
+          pk_vendors:
+            dbColumn:
+              - vendor_id
+            dbUnique: true
+      merch_groups:
+        columns:
+          - iuColumn: uid
+            dbName: uid
+            type: "string"
+            dbNullable: false
+            description: Глобальный ид объекта
+          - iuColumn: name
+            dbName: name
+            type: "string"
+            description: Наименование объекта (краткое)
+          - iuColumn: decr
+            dbName: descr
+            type: "string"
+            description: Наименование объекта (полное)
+          - iuColumn: comm
+            dbName: comm
+            type: "string"
+            description: Пояснение к объекту
+          - dbName: mgroup_id
+            dbLocalIdMethod: GLOBAL_SEQ
+            dbNullable: false
+            description: Локальный идентификатор группы
+          - iuColumn: categoryStatus
+            dbName: status
+            type: "string"
+            description:  Статус категории
+          - iuColumn: categoryRole
+            dbName: grp_role
+            type: "string"
+            description: Роль категории в каталоге
+          - iuColumn: parentCategory
+            dbName: parent_category
+            type: "string"
+            description: Родительская категория
+          - iuColumn: listPosition
+            dbName: pos
+            type: "number"
+            description: Относительная позиция в папке родительской категории
+          - iuJsonColumn: props
+            iuIncludeProps:
+              - chColor
+              - chSize
+            iuIncludeRest: true
+            pgType: jsonb
+            description: Характеристики товарной группы
+        constraints:
+          pk_merch_groups:
+            dbConstraintType: PK
+            dbColumn:
+              - mgroup_id
+        indexes:
+          pk_merch_groups:
+            dbColumn:
+              - mgroup_id
+            dbUnique: true
+      merch_in_group:
+      merch_items:
+      suppl_price_groups:
+      merch_variants:
+      merch_components:
+      mvariant_sku:
+      suppliers:
+      sku_items:
+      sku_packs:
+      domains:
+        infoSchema: "../Sample-univ/Domains.yaml"
+        columns:
+          - iuColumn: uid
+            type: "string"
+            format: "uuid"
+            dbNullable: "false"
+          - iuColumn: domain_id
+            dbName: domain_id
+            type: "string"
+            pgType: "text" # NOT NULL - надо выносить отдельно
+            description: Мнемоника домена
+            dbNullable: false
+            dbDefaultValue:
+            dbLength:
+            dbScale:
+            dbPrecision:
+          - iuColumn: name
+            dbName: name
+            description: Наименование домена
+            dbNullable: false
+            type: "string"
+            pgType: text
+          - iuColumn: code
+            dbName: code
+            description: Код домена
+            dbNullable: false
+            type: "string"
+            pgType: text
+          - iuColumn: descr
+            dbName: descr
+            description: Описание домена
+            type: "string"
+            pgType: text
+        data:
+          "instanceStatus": [0, "Статус экземпляра объекта", "instanceStatus", null]
+          "TaxGroups": [1, "Справочник схем налогообложения", "TaxGroups", null]
+          "GroupRoles": [2, "Перечень ролей позиций в товарных каталогах", "GroupRoles" null]
+          "merchStatus": [3, "Статус номенклатурной позиции", "viewType", null]
+          "viewType": [4, "Вид изображения", "viewType", null]
+          "offerType": [5, "Вид предложения", "offerType", null]
+          "variantStatus": [6, "Статус варианта ТП", "variantStatus", null]
+        constraints:
+          pk_domains:
+            dbColumn:
+              - domain_id
+            dbConstraintType: PK
+        indexes:
+          pk_domains:
+            dbColumn:
+              - domain_id
+            dbUnique: true
+            pgIndexType: btree
+      domain_values:
+        infoSchema: "../Sample-univ/Domains.yaml/properties/domain_values"
+        columns:
+          - dbName: domain_id
+            description: Мнемоника домена
+            dbNullable: false
+            type: "string"
+            pgType: text
+          - iuColumn: Val-Id
+            dbName: val_id
+            description: Идентификатор значения в домене
+            dbNullable: false
+            type: "number"
+          - iuColumn: name
+            dbName: name
+            description: Наименование значения домена
+            dbNullable: false
+            type: "string"
+          - iuColumn: code
+            dbName: code
+            description: Код значения домена
+            dbNullable: false
+            type: "string"
+            pgType: text
+          - iuColumn: descr
+            dbName: descr
+            description: Описание значения домена
+            type: "string"
+          - iuColumn: par-val-id
+            dbName: par_val_id
+            description: Ссылка на родительское значение того же домена
+            dbNullable: true
+            type: "number"
+        data:
+          "instanceStatus~ACTIVE": [0, 1, "ACTIVE", "ACTIVE", null, null]
+          "instanceStatus~DELETED": [0, 2, "DELETED", "DELETED", null, null]
+          "TaxGroups~НДС20": [1, 1, "НДС20", "НДС20", null, null]
+          "TaxGroups~НДС20_120": [1, 2, "НДС20_120", "НДС20_120"] # Хвостовые null не обязательны
+          "TaxGroups~НДС18": [1, 3, "НДС18", "НДС18"]
+          "TaxGroups~НДС18_118": [1, 4, "НДС18_118", "НДС18_118"]
+          "TaxGroups~НДС10": [1, 5, "НДС10", "НДС10"]
+          "TaxGroups~НДС10_110": [1, 6, "НДС10_110", "НДС10_110"]
+          "TaxGroups~НДС0": [1, 7, "НДС0", "НДС0"]
+          "TaxGroups~БезНДС": [1, 8, "БезНДС", "БезНДС"]
+          "GroupRoles~NORM": [2, 1, "NORM", "NORM"]
+          "GroupRoles~SPECIAL": [2, 2, "SPECIAL", "SPECIAL"]
+          "merchStatus~ACTIVE": [3, 1, "ACTIVE", "ACTIVE"]
+          "merchStatus~INACTIVE": [3, 2, "INACTIVE", "INACTIVE"]
+          "viewType~MAIN": [4, 1, "MAIN", "MAIN"]
+          "viewType~LEFT": [4, 2, "LEFT", "LEFT"]
+          "viewType~RIGHT": [4, 3, "RIGHT", "RIGHT"]
+          "offerType~ORDINARY": [5, 1, "ORDINARY", "ORDINARY"]
+          "offerType~ACTION": [5, 2, "ACTION", "ACTION"]
+          "offerType~CUTPRICE": [5, 3, "CUTPRICE", "CUTPRICE"]
+          "variantStatus~ONSALE": [6, 1, "ONSALE", "ONSALE"]
+          "variantStatus~OFFSALE": [6, 2, "OFFSALE", "OFFSALE"]
+        constraints:
+          pk_domain_values:
+            dbColumn:
+              - domain_id
+              - val_id
+            dbConstraintType: PK
+          fk_domain_values_domains:
+            dbFKColumn:
+              - domain_id
+            dbRefSchema: mts
+            dbRefTable: domains
+            dbRefColumn:
+              - domain_id
+            dbRefUpdate: RESTRICT
+            dbRefDelete: RESTRICT
+            dbConstraintType: FK
+          fk_domain_values_parent:
+            uiProperty: par-val-id
+            dbFKColumn:
+              - domain_id
+              - par_val_id
+            dbRefSchema: mts
+            dbRefTable: domain_values
+            dbRefColumn:
+              - domain_id
+              - val_id
+            dbRefUpdate: RESTRICT
+            dbRefDelete: RESTRICT
+            dbConstraintType: FK
+        indexes:
+          pk_domain_values:
+            dbColumn:
+              - domain_id
+              - val_id
+            dbUnique: true
+            pgIndexType: btree
+          fk_domain_values_parent:
+            dbColumn:
+              - domain_id
+              - par_val_id
+            dbUnique: false
+            pgIndexType: btree                      
