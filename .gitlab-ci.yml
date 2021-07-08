@@ -1,13 +1,12 @@
 image: maven:3.6.3-jdk-8
 stages:
     - test
-    - build
 include:
     - template: Security/SAST.gitlab-ci.yml
 build:
     stage: build
     script:
-        - time mvn build
+        - time mvn package
     only:
         refs:
             - master
