@@ -14,17 +14,17 @@ public class SimpleIUSchemaDBD implements IUSchemaDBD {
     }
 
     @Override
-    public String key() throws IOException {
+    public final String key() throws IOException {
         return this.key;
     }
 
     @Override
-    public String owner() throws IOException {
+    public final String owner() throws IOException {
         return this.owner;
     }
 
     @Override
-    public Iterable<IUTableDBD> tableDescriptions() throws IOException {
+    public final Iterable<IUTableDBD> tableDescriptions() throws IOException {
         return this.tableDBDs;
     }
 }

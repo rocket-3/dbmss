@@ -12,12 +12,12 @@ public class SimpleIUDBD implements IUDBD {
     }
 
     @Override
-    public Iterable<IUServerDBD> serverDescriptions() throws IOException {
+    public final Iterable<IUServerDBD> serverDescriptions() throws IOException {
         return this.serverDBDs;
     }
 
     @Override
-    public Iterable<IUSchemaDBD> schemaDescriptions() throws IOException {
+    public final Iterable<IUSchemaDBD> schemaDescriptions() throws IOException {
         return this.schemaDBDs;
     }
 }

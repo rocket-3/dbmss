@@ -16,22 +16,22 @@ public class SimpleIUTableDBD implements IUTableDBD {
     }
 
     @Override
-    public String key() throws IOException {
+    public final String key() throws IOException {
         return this.key;
     }
 
     @Override
-    public Iterable<IUColumnDBD> columns() throws IOException {
+    public final Iterable<IUColumnDBD> columns() throws IOException {
         return this.columns;
     }
 
     @Override
-    public Iterable<IUConstraintDBD> constraints() throws IOException {
+    public final Iterable<IUConstraintDBD> constraints() throws IOException {
         return this.constraints;
     }
 
     @Override
-    public Iterable<IUIndexDBD> indexes() throws IOException {
+    public final Iterable<IUIndexDBD> indexes() throws IOException {
         return this.indexes;
     }
 }

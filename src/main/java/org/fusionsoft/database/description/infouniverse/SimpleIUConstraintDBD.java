@@ -26,47 +26,47 @@ public class SimpleIUConstraintDBD implements IUConstraintDBD {
     }
 
     @Override
-    public String key() {
+    public final String key() {
         return this.key;
     }
 
     @Override
-    public Set<String> dbColumn() {
+    public final Set<String> dbColumn() {
         return this.dbColumn;
     }
 
     @Override
-    public String dbConstraintType() {
+    public final String dbConstraintType() {
         return this.dbConstraintType;
     }
 
     @Override
-    public Set<String> dbFKColumn() {
+    public final Set<String> dbFKColumn() {
         return this.dbFKColumn;
     }
 
     @Override
-    public String dbRefSchema() {
+    public final String dbRefSchema() {
         return this.dbRefSchema;
     }
 
     @Override
-    public String dbRefTable() {
+    public final String dbRefTable() {
         return this.dbRefTable;
     }
 
     @Override
-    public Set<String> dbRefColumn() {
+    public final Set<String> dbRefColumn() {
         return dbRefColumn;
     }
 
     @Override
-    public String dbRefUpdate() {
+    public final String dbRefUpdate() {
         return this.dbRefUpdate;
     }
 
     @Override
-    public String dbRefDelete() {
+    public final String dbRefDelete() {
         return this.dbRefDelete;
     }
 }

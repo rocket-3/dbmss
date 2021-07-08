@@ -22,37 +22,37 @@ public class SimpleIUServerDBD implements IUServerDBD{
     
     
     @Override
-    public String key() {
+    public final String key() {
         return this.key;
     }
 
     @Override
-    public String dbType() {
+    public final String dbType() {
         return this.dbType;
     }
 
     @Override
-    public String url() {
+    public final String url() {
         return this.url;
     }
 
     @Override
-    public String user() {
+    public final String user() {
         return this.user;
     }
 
     @Override
-    public String password() {
+    public final String password() {
         return this.password;
     }
 
     @Override
-    public String description() {
+    public final String description() {
         return this.description;
     }
 
     @Override
-    public String variables() {
+    public final String variables() {
         return this.variables;
     }
 }

@@ -16,22 +16,22 @@ public class SimpleIUIndexDBD implements IUIndexDBD {
     }
 
     @Override
-    public String key() {
+    public final String key() {
         return this.key;
     }
 
     @Override
-    public String dbColumn() {
+    public final String dbColumn() {
         return this.dbColumn;
     }
 
     @Override
-    public boolean dbUnique() throws IOException {
+    public final boolean dbUnique() throws IOException {
         return this.dbUnique;
     }
 
     @Override
-    public String indexType() {
+    public final String indexType() {
         return this.indexType;
     }
 }

@@ -37,52 +37,52 @@ public class SimpleIUColumnDBD implements IUColumnDBD {
     }
 
     @Override
-    public String name() {
+    public final String name() {
         return this.name;
     }
 
     @Override
-    public String iuColumn() {
+    public final String iuColumn() {
         return this.iuColumn;
     }
 
     @Override
-    public String iuJsonColumn() {
+    public final String iuJsonColumn() {
         return this.iuJsonColumn;
     }
 
     @Override
-    public Set<String> iuIncludeProps() {
+    public final Set<String> iuIncludeProps() {
         return this.iuIncludeProps;
     }
 
     @Override
-    public String dbType() {
+    public final String dbType() {
         return this.dbType;
     }
 
     @Override
-    public String dbName() {
+    public final String dbName() {
         return this.dbName;
     }
 
     @Override
-    public String type() {
+    public final String type() {
         return this.type;
     }
 
     @Override
-    public boolean nullable() {
+    public final boolean nullable() {
         return this.nullable;
     }
 
     @Override
-    public String description() {
+    public final String description() {
         return this.description;
     }
 
     @Override
-    public String dbLocalIdMethod() {
+    public final String dbLocalIdMethod() {
         return this.dbLocalIdMethod;
     }
 }
