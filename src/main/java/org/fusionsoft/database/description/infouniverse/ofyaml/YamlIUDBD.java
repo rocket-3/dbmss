@@ -1,20 +1,20 @@
-package org.fusionsoft.database.description.infouniverse.fromyaml;
+package org.fusionsoft.database.description.infouniverse.ofyaml;
 
 import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlMapping;
 import java.io.IOException;
 import org.fusionsoft.database.description.infouniverse.SimpleIUDBD;
-import org.fusionsoft.database.ofyaml.IterableOfClassByMappingKeysFrom;
+import org.fusionsoft.database.ofyaml.IterableOfClassFromYamlNode;
 
 public class YamlIUDBD extends SimpleIUDBD {
     
     public YamlIUDBD(YamlMapping mapping) {
         super(
-            new IterableOfClassByMappingKeysFrom<>(
+            new IterableOfClassFromYamlNode<>(
                 YamlIUServerDBD::new, 
                 mapping.yamlMapping("servers")
             ),
-            new IterableOfClassByMappingKeysFrom<>(
+            new IterableOfClassFromYamlNode<>(
                 YamlIUSchemaDBD::new, 
                 mapping.yamlMapping("schemas")
             )

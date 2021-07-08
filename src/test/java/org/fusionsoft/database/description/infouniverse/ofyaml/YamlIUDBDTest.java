@@ -1,19 +1,20 @@
-package org.fusionsoft.database.description.infouniverse.fromyaml;
+package org.fusionsoft.database.description.infouniverse.ofyaml;
 
 import org.fusionsoft.database.description.infouniverse.IUColumnDBD;
 import org.fusionsoft.database.description.infouniverse.IUConstraintDBD;
 import org.fusionsoft.database.description.infouniverse.IUSchemaDBD;
 import org.fusionsoft.database.description.infouniverse.IUTableDBD;
 import org.fusionsoft.database.text.TextOfExampleYaml;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class YamlIUDBDTest {
     @Test
     public void constructsFromText() throws Exception {
         final YamlIUDBD tested = new YamlIUDBD(new TextOfExampleYaml().asString());
-        System.out.println("tested.serverDescriptions().iterator().next().description() = "
-                           + tested.serverDescriptions().iterator().next().description());
+        System.out.println(
+            "tested.serverDescriptions().iterator().next().description() = "
+           + tested.serverDescriptions().iterator().next().description()
+        );
         for (IUSchemaDBD sch : tested.schemaDescriptions()) {
             System.out.println("sch.key() = " + sch.key());
             System.out.println("sch.owner() = " + sch.owner());

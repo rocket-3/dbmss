@@ -1,4 +1,4 @@
-package org.fusionsoft.database.description.infouniverse.fromyaml;
+package org.fusionsoft.database.description.infouniverse.ofyaml;
 
 import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlMapping;

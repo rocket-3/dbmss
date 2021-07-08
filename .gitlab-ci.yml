@@ -1,0 +1,23 @@
+image: maven:3.6.3-jdk-8
+stages:
+    - build
+    - test
+include:
+    - template: Security/SAST.gitlab-ci.yml
+build:
+    stage: build
+    script:
+        - time mvn package
+    only:
+        refs:
+            - master
+    artifacts:
+        expire_in: never
+test:
+    stage: test
+    script:
+        - time mvn test
+    allow_failure: false
+cache:
+  paths:
+    - .m2/repository
