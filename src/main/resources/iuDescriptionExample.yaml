@@ -3,11 +3,11 @@ info: # из #.Sample-univ
   type: db                            # Артефакт DBD - описание структуры БД
   title: БД управления номенклатурой  # Краткое наименование артефакта
   version: 1.0
-  summary:
+  summary: ''
   description: DBD для #.Sample-univ
-  termsOfService:
-  contact:
-  license:
+  termsOfService: ''
+  contact: ''
+  license: ''
 servers:
   fs-mts:
     dbType: POSTGRES
@@ -16,7 +16,7 @@ servers:
     user: postgres # Сервисный аккаунт для dbgit
     password: H2VzovwvU7HC6PBhqGZCp5pW
     description: "Сервер разработки"
-    variables:
+    variables: ''
 schemas:
   mts:
     owner: mts_owner
@@ -119,15 +119,6 @@ schemas:
             dbColumn:
               - mgroup_id
             dbUnique: true
-      merch_in_group:
-      merch_items:
-      suppl_price_groups:
-      merch_variants:
-      merch_components:
-      mvariant_sku:
-      suppliers:
-      sku_items:
-      sku_packs:
       domains:
         infoSchema: "../Sample-univ/Domains.yaml"
         columns:
@@ -141,10 +132,10 @@ schemas:
             pgType: "text" # NOT NULL - надо выносить отдельно
             description: Мнемоника домена
             dbNullable: false
-            dbDefaultValue:
-            dbLength:
-            dbScale:
-            dbPrecision:
+            dbDefaultValue: ''
+            dbLength: ''
+            dbScale: ''
+            dbPrecision: ''
           - iuColumn: name
             dbName: name
             description: Наименование домена
