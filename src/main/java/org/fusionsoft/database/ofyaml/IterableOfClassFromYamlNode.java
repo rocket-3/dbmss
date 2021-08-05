@@ -7,6 +7,7 @@ import org.cactoos.BiFunc;
 import org.cactoos.Func;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.iterable.Skipped;
 
 public class IterableOfClassFromYamlNode<Y> extends IterableEnvelope<Y> {
     public IterableOfClassFromYamlNode(
@@ -26,7 +27,7 @@ public class IterableOfClassFromYamlNode<Y> extends IterableEnvelope<Y> {
     ) {
         super(
             new Mapped<>(
-                mappingYFunc::apply,
+                mappingYFunc,
                 new Mapped<YamlMapping>(
                     YamlNode::asMapping,
                     yamlSequence.values()
