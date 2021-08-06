@@ -65,7 +65,7 @@ class TextOfExampleYamlTest {
         }
     }    
     
-    @Test
+//    @Test
     public void yamlValues() throws Exception {
         final String pathToInspect = "C:\\Users\\worki\\OneDrive\\dbgit\\target\\itoutput\\05\\.dbgit\\public";
         final Stream<Path> pathStream = Files.find(
