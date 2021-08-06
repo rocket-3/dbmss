@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public interface DbObject {
     DbObjectSignature signature();
-    Collection<String> props();
+    Collection<StringProperty> props();
     
     DbObject Absent = new DbObject() {
         @Override
@@ -14,7 +14,7 @@ public interface DbObject {
         }
 
         @Override
-        public Collection<String> props() {
+        public Collection<StringProperty> props() {
             return Collections.emptyList();
         }
     };

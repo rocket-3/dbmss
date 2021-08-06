@@ -14,30 +14,32 @@ import org.fusionsoft.database.artefacts.diff.DboDiffPairsOf;
 
 public class DboCollectionMigration implements Migration {
     private final Server server;
-    private final Collection<DbObject> persistentDbObjectCollection;
-    private final Collection<DbObject> targetDbObjectCollection;
-    private final Collection<DiffPair<DbObject>> diffPairs;
     private final RestoreParams restoreParams;
     private final Condition condition;
     private final Iterable<Migration> migrations;
 
-    public DboCollectionMigration(Server server, Collection<DbObject> persistentDbObjectCollection, Collection<DbObject> targetDbObjectCollection, RestoreParams restoreParams) {
+    public DboCollectionMigration(Server server, Collection<DbObject> persistentDBOs, Collection<DbObject> targetDBOs, RestoreParams restoreParams) {
         this.server = server;
-        this.persistentDbObjectCollection = persistentDbObjectCollection;
-        this.targetDbObjectCollection = targetDbObjectCollection;
-        this.diffPairs = new DboDiffPairsOf(
-            persistentDbObjectCollection,
-            targetDbObjectCollection
+        final Collection<DiffPair<DbObject>> diffPairs = new DboDiffPairsOf(
+            persistentDBOs,
+            targetDBOs
         );
         this.restoreParams = restoreParams;
         this.condition = new CndDbObjectsHaveSameDBMSSignature(
             server.dbmsSignature(),
-            targetDbObjectCollection
+            targetDBOs
         );
         this.migrations = new IterableOf<Migration>(
-            new DboCollectionPreMigration(),   
-            new DboCollectionNoConstraintsMigration(),
-            new DboCollectionPostMigration()
+            new DboCollectionPreMigration(persistentDBOs, server),   
+            new DboCollectionNoConstraintsMigration(
+                new DboDiffPairsOf(
+                    persistentDBOs, 
+                    targetDBOs
+                ), 
+                restoreParams, 
+                server
+            ),
+            new DboCollectionPostMigration(targetDBOs, server)
         );
     }
 

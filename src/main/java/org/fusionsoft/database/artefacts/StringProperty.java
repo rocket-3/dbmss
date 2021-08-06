@@ -1,9 +1,47 @@
 package org.fusionsoft.database.artefacts;
 
+import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.scalar.Unchecked;
 
 public interface StringProperty extends Text {
     StringPropertyType type();
+    
+    final class Envelope implements StringProperty {
+        private final StringProperty stringProperty;
+
+        public Envelope(StringProperty stringProperty) {
+            this.stringProperty = stringProperty;
+        }
+
+        @Override
+        public StringPropertyType type() {
+            return stringProperty.type();
+        }
+
+        @Override
+        public String asString() throws Exception {
+            return stringProperty.asString();
+        }
+    }
+    
+    final class OfScalar implements StringProperty {
+        private final Unchecked<StringProperty> scalar;
+        
+        public OfScalar(Scalar<StringProperty> scalar) {
+            this.scalar = new Unchecked<>(scalar);
+        }
+
+        @Override
+        public StringPropertyType type() {
+            return scalar.value().type();
+        }
+
+        @Override
+        public String asString() throws Exception {
+            return scalar.value().asString();
+        }
+    }
     
     abstract class OfText implements StringProperty{
         private final StringPropertyType stringPropertyType;
