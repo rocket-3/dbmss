@@ -8,8 +8,6 @@ import org.fusionsoft.database.artefacts.DbObject;
 import org.fusionsoft.database.artefacts.DiffPair;
 
 public class DboDiffPairsOf extends CollectionEnvelope<DiffPair<DbObject>> {
-    private final Collection<DbObject> persistentDbObjects;
-    private final Collection<DbObject> targetDbObjects;
     public DboDiffPairsOf(Collection<DbObject> persistentDbObjects, Collection<DbObject> targetDbObjects) {
         super(
             new ListOf<>(
@@ -21,7 +19,5 @@ public class DboDiffPairsOf extends CollectionEnvelope<DiffPair<DbObject>> {
                 )
             )
         );
-        this.persistentDbObjects = persistentDbObjects;
-        this.targetDbObjects = targetDbObjects;
     }
 }
