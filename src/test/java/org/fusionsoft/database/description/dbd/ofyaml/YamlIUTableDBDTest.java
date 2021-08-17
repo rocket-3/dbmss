@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class YamlIUTableDBDTest {
     @Test
     public void constructsFromText() throws IOException {
-        final Table vendors = new YamlIUTableDBD(
+        final Table vendors = new TableOf(
             "vendors",
             "columns:\n"
             + "  - iuColumn: uid\n"

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class YamlIUDBDTest {
     @Test
     public void constructsFromText() throws Exception {
-        final YamlIUDBD tested = new YamlIUDBD(new TextOfExampleYaml().asString());
+        final DbdOf tested = new DbdOf(new TextOfExampleYaml().asString());
         System.out.println(
             "tested.serverDescriptions().iterator().next().description() = "
            + tested.serverDescriptions().iterator().next().description()
