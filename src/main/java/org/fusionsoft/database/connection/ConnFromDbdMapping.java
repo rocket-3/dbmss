@@ -19,8 +19,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import org.fusionsoft.database.yaml.DBDYamlInput;
+import org.fusionsoft.lib.connection.ConnectionEnvelope;
 
-public class ConnFromDbdMapping extends ConnEnvelope {
+public class ConnFromDbdMapping extends ConnectionEnvelope {
     private final DBDYamlInput dbdYamlInput;
     private final CharSequence serverName;
 

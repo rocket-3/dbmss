@@ -7,7 +7,11 @@ import org.cactoos.text.TextOf;
 public class TextOfExampleYaml extends TextEnvelope {
 
     public TextOfExampleYaml() {
-        super(new TextOf(new ResourceOf("iuDescriptionExample.yaml")));
+        super(
+            new TextOf(
+                new ResourceOf("iuDescriptionExample.yaml")
+            )
+        );
     }
-    
+
 }

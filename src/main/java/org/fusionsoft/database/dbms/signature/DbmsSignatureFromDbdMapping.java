@@ -1,4 +1,4 @@
-package org.fusionsoft.database.server;
+package org.fusionsoft.database.dbms.signature;
 
 import org.fusionsoft.database.DbmsName;
 import org.fusionsoft.database.DbmsSignature;

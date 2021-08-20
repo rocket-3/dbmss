@@ -4,6 +4,7 @@ import java.sql.Connection;
 import org.fusionsoft.database.DbmsSignature;
 import org.fusionsoft.database.Server;
 import org.fusionsoft.database.connection.ConnFromDbdMapping;
+import org.fusionsoft.database.dbms.signature.DbmsSignatureFromDbdMapping;
 import org.fusionsoft.database.yaml.DBDYamlInput;
 
 public class ServerFromDbdMapping implements Server {

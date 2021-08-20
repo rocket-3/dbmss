@@ -7,8 +7,8 @@ class DboCollectionMigrationTest {
 
     @Test
     void validate() {
-        new DboCollectionMigration(
-            
-        )
+//        new DboCollectionMigration(
+//            
+//        )
     }
 }

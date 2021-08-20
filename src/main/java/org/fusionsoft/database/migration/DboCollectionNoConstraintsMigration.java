@@ -29,7 +29,7 @@ public class DboCollectionNoConstraintsMigration implements Migration {
 
     @Override
     public boolean validate() throws Exception {
-        return false;
+        return true;
     }
 
     @Override

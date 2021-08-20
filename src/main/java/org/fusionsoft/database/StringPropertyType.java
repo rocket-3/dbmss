@@ -7,4 +7,5 @@ public interface StringPropertyType extends Text {
     StringPropertyType Boolean = () -> "boolean";
     StringPropertyType Integer = () -> "integer";
     StringPropertyType Float = () -> "float";
+    
 }

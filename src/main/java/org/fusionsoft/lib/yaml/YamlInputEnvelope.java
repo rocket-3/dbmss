@@ -43,4 +43,6 @@ public class YamlInputEnvelope implements YamlInput {
     public Scalar readLiteralBlockScalar() throws IOException {
         return this.yamlInput.readLiteralBlockScalar();
     }
+    
+    
 }

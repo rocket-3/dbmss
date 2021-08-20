@@ -10,19 +10,16 @@ public class YamlInputOf extends YamlInputEnvelope {
     public YamlInputOf(InputStream inputStream) {
         super(Yaml.createYamlInput(inputStream));
     }
-    
     public YamlInputOf(Path pathToFile) {
         this(
             new InputStreamOf(pathToFile)
         );
-    }    
-    
+    }
     public YamlInputOf(CharSequence chars) {
         this(
             new InputStreamOf(chars)
         );
     }
-    
     public YamlInputOf(Text text) {
         this(
             new InputStreamOf(text)

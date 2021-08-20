@@ -2,19 +2,32 @@ package org.fusionsoft.database.description.dbd.ofyaml;
 
 import org.fusionsoft.database.description.dbd.Column;
 import org.fusionsoft.database.description.dbd.Constraint;
+import org.fusionsoft.database.description.dbd.DBD;
 import org.fusionsoft.database.description.dbd.Schema;
 import org.fusionsoft.database.description.dbd.Table;
 import org.fusionsoft.database.text.TextOfExampleYaml;
+import org.fusionsoft.database.yaml.DBDYamlInput;
+import org.fusionsoft.lib.yaml.YamlInputOf;
+import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 import org.junit.jupiter.api.Test;
 
 class YamlIUDBDTest {
     @Test
     public void constructsFromText() throws Exception {
-        final DbdOf tested = new DbdOf(new TextOfExampleYaml().asString());
+
+        final DBD tested = new DbdOf(
+            new DBDYamlInput(
+                new YamlInputOf(
+                    new TextOfExampleYaml()
+                )
+            )
+        );
+
         System.out.println(
             "tested.serverDescriptions().iterator().next().description() = "
            + tested.serverDescriptions().iterator().next().description()
         );
+
         for (Schema sch : tested.schemaDescriptions()) {
             System.out.println("sch.key() = " + sch.key());
             System.out.println("sch.owner() = " + sch.owner());
@@ -35,5 +48,6 @@ class YamlIUDBDTest {
                 }
             }
         }
+
     }
 }
