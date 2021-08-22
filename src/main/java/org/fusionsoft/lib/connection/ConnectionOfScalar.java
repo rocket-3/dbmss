@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2018-2021 FusionSoft
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ *
+ * See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
 package org.fusionsoft.lib.connection;
 
 import java.sql.Array;
@@ -22,9 +37,10 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
 public class ConnectionOfScalar implements Connection {
+
     private final Unchecked<Connection> scalar;
 
-    public ConnectionOfScalar(Scalar<Connection> scalar) {
+    public ConnectionOfScalar(final Scalar<Connection> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
@@ -34,22 +50,22 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql) throws SQLException {
+    public PreparedStatement prepareStatement(final String sql) throws SQLException {
         return this.scalar.value().prepareStatement(sql);
     }
 
     @Override
-    public CallableStatement prepareCall(String sql) throws SQLException {
+    public CallableStatement prepareCall(final String sql) throws SQLException {
         return this.scalar.value().prepareCall(sql);
     }
 
     @Override
-    public String nativeSQL(String sql) throws SQLException {
+    public String nativeSQL(final String sql) throws SQLException {
         return this.scalar.value().nativeSQL(sql);
     }
 
     @Override
-    public void setAutoCommit(boolean autoCommit) throws SQLException {
+    public void setAutoCommit(final boolean autoCommit) throws SQLException {
         this.scalar.value().setAutoCommit(autoCommit);
     }
 
@@ -84,7 +100,7 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public void setReadOnly(boolean readOnly) throws SQLException {
+    public void setReadOnly(final boolean readOnly) throws SQLException {
         this.scalar.value().setReadOnly(readOnly);
     }
 
@@ -94,7 +110,7 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public void setCatalog(String catalog) throws SQLException {
+    public void setCatalog(final String catalog) throws SQLException {
         this.scalar.value().setCatalog(catalog);
     }
 
@@ -104,7 +120,7 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public void setTransactionIsolation(int level) throws SQLException {
+    public void setTransactionIsolation(final int level) throws SQLException {
         this.scalar.value().setTransactionIsolation(level);
     }
 
@@ -124,18 +140,29 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
-        return this.scalar.value().createStatement(resultSetType, resultSetConcurrency);
+    public Statement createStatement(final int resultSetType, final int resultSetConcurrency) throws SQLException {
+        return this.scalar.value().createStatement(
+            resultSetType,
+            resultSetConcurrency
+        );
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
-        return this.scalar.value().prepareStatement(sql, resultSetType, resultSetConcurrency);
+    public PreparedStatement prepareStatement(final String sql, final int resultSetType, final int resultSetConcurrency) throws SQLException {
+        return this.scalar.value().prepareStatement(
+            sql,
+            resultSetType,
+            resultSetConcurrency
+        );
     }
 
     @Override
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
-        return this.scalar.value().prepareCall(sql, resultSetType, resultSetConcurrency);
+    public CallableStatement prepareCall(final String sql, final int resultSetType, final int resultSetConcurrency) throws SQLException {
+        return this.scalar.value().prepareCall(
+            sql,
+            resultSetType,
+            resultSetConcurrency
+        );
     }
 
     @Override
@@ -144,12 +171,12 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public void setTypeMap(Map<String, Class<?>> map) throws SQLException {
+    public void setTypeMap(final Map<String, Class<?>> map) throws SQLException {
         this.scalar.value().setTypeMap(map);
     }
 
     @Override
-    public void setHoldability(int holdability) throws SQLException {
+    public void setHoldability(final int holdability) throws SQLException {
         this.scalar.value().setHoldability(holdability);
     }
 
@@ -164,47 +191,61 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public Savepoint setSavepoint(String name) throws SQLException {
+    public Savepoint setSavepoint(final String name) throws SQLException {
         return this.scalar.value().setSavepoint(name);
     }
 
     @Override
-    public void rollback(Savepoint savepoint) throws SQLException {
+    public void rollback(final Savepoint savepoint) throws SQLException {
         this.scalar.value().rollback();
     }
 
     @Override
-    public void releaseSavepoint(Savepoint savepoint) throws SQLException {
+    public void releaseSavepoint(final Savepoint savepoint) throws SQLException {
         this.scalar.value().releaseSavepoint(savepoint);
     }
 
     @Override
-    public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return this.scalar.value().createStatement(resultSetType, resultSetConcurrency, resultSetHoldability);
+    public Statement createStatement(final int resultSetType, final int resultSetConcurrency, final int resultSetHoldability) throws SQLException {
+        return this.scalar.value().createStatement(
+            resultSetType,
+            resultSetConcurrency,
+            resultSetHoldability
+        );
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return this.scalar.value().prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+    public PreparedStatement prepareStatement(final String sql, final int resultSetType, final int resultSetConcurrency, final int resultSetHoldability) throws SQLException {
+        return this.scalar.value().prepareStatement(
+            sql,
+            resultSetType,
+            resultSetConcurrency,
+            resultSetHoldability
+        );
     }
 
     @Override
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return this.scalar.value().prepareCall(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+    public CallableStatement prepareCall(final String sql, final int resultSetType, final int resultSetConcurrency, final int resultSetHoldability) throws SQLException {
+        return this.scalar.value().prepareCall(
+            sql,
+            resultSetType,
+            resultSetConcurrency,
+            resultSetHoldability
+        );
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys) throws SQLException {
+    public PreparedStatement prepareStatement(final String sql, final int autoGeneratedKeys) throws SQLException {
         return this.scalar.value().prepareStatement(sql, autoGeneratedKeys);
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int[] columnIndexes) throws SQLException {
+    public PreparedStatement prepareStatement(final String sql, final int[] columnIndexes) throws SQLException {
         return this.scalar.value().prepareStatement(sql, columnIndexes);
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, String[] columnNames) throws SQLException {
+    public PreparedStatement prepareStatement(final String sql, final String[] columnNames) throws SQLException {
         return this.scalar.value().prepareStatement(sql, columnNames);
     }
 
@@ -229,22 +270,22 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public boolean isValid(int timeout) throws SQLException {
+    public boolean isValid(final int timeout) throws SQLException {
         return this.scalar.value().isValid(timeout);
     }
 
     @Override
-    public void setClientInfo(String name, String value) throws SQLClientInfoException {
+    public void setClientInfo(final String name, final String value) throws SQLClientInfoException {
         this.scalar.value().setClientInfo(name, value);
     }
 
     @Override
-    public void setClientInfo(Properties properties) throws SQLClientInfoException {
+    public void setClientInfo(final Properties properties) throws SQLClientInfoException {
         this.scalar.value().setClientInfo(properties);
     }
 
     @Override
-    public String getClientInfo(String name) throws SQLException {
+    public String getClientInfo(final String name) throws SQLException {
         return this.scalar.value().getClientInfo(name);
     }
 
@@ -254,17 +295,17 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
+    public Array createArrayOf(final String typeName, final Object[] elements) throws SQLException {
         return this.scalar.value().createArrayOf(typeName, elements);
     }
 
     @Override
-    public Struct createStruct(String typeName, Object[] attributes) throws SQLException {
+    public Struct createStruct(final String typeName, final Object[] attributes) throws SQLException {
         return this.scalar.value().createStruct(typeName, attributes);
     }
 
     @Override
-    public void setSchema(String schema) throws SQLException {
+    public void setSchema(final String schema) throws SQLException {
         this.scalar.value().setSchema(schema);
     }
 
@@ -274,12 +315,12 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public void abort(Executor executor) throws SQLException {
+    public void abort(final Executor executor) throws SQLException {
         this.scalar.value().abort(executor);
     }
 
     @Override
-    public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
+    public void setNetworkTimeout(final Executor executor, final int milliseconds) throws SQLException {
         this.scalar.value().setNetworkTimeout(executor, milliseconds);
     }
 
@@ -289,12 +330,13 @@ public class ConnectionOfScalar implements Connection {
     }
 
     @Override
-    public <T> T unwrap(Class<T> iface) throws SQLException {
+    public <T> T unwrap(final Class<T> iface) throws SQLException {
         return this.scalar.value().unwrap(iface);
     }
 
     @Override
-    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+    public boolean isWrapperFor(final Class<?> iface) throws SQLException {
         return this.scalar.value().isWrapperFor(iface);
     }
+
 }

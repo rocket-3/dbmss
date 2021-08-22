@@ -1,19 +1,43 @@
+/*
+ * Copyright (C) 2018-2021 FusionSoft
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ *
+ * See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
 package org.fusionsoft.database.description.dbd;
 
 import java.util.Set;
 
 public class SimpleConstraint implements Constraint {
+
     private final String key;
+
     private final Set<String> dbColumn;
+
     private final String dbConstraintType;
+
     private final String dbRefSchema;
+
     private final String dbRefTable;
+
     private final Set<String> dbRefColumn;
+
     private final Set<String> dbFKColumn;
+
     private final String dbRefUpdate;
+
     private final String dbRefDelete;
 
-    public SimpleConstraint(String key, Set<String> dbColumn, String dbConstraintType, String dbRefSchema, String dbRefTable, Set<String> dbRefColumn, Set<String> dbFKColumn, String dbRefUpdate, String dbRefDelete) {
+    public SimpleConstraint(final String key, final Set<String> dbColumn, final String dbConstraintType, final String dbRefSchema, final String dbRefTable, final Set<String> dbRefColumn, final Set<String> dbFKColumn, final String dbRefUpdate, final String dbRefDelete) {
         this.key = key;
         this.dbColumn = dbColumn;
         this.dbConstraintType = dbConstraintType;
@@ -69,4 +93,5 @@ public class SimpleConstraint implements Constraint {
     public final String dbRefDelete() {
         return this.dbRefDelete;
     }
+
 }
