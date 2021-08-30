@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.migration;
 
@@ -25,16 +24,31 @@ import org.fusionsoft.database.DiffPair;
 import org.fusionsoft.database.RestoreParams;
 import org.fusionsoft.database.condition.DbObjectsHasSameDbmsSignature;
 
-//generates dbms/object type specific migration
+/**
+ * The type of Migration pair of DbObjects
+ * that can be performed by passing SQL to consumer.
+ * @since 0.1
+ */
+@SuppressWarnings("PMD.UnusedFormalParameter")
 public class DboSqlMigration extends SqlMigration {
 
-    public DboSqlMigration(final DiffPair<DbObject> diffPair, final RestoreParams restoreParams, final Proc<Text> consumer) {
+    /**
+     * Instantiates a new Dbo sql migration.
+     * @param pair The DiffPair of DbObject to be encapsulated.
+     * @param params The RestoreParams to be encapsulated.
+     * @param consumer The Proc of Text to be encapsulated.
+     */
+    public DboSqlMigration(
+        final DiffPair<DbObject> pair,
+        final RestoreParams params,
+        final Proc<Text> consumer
+    ) {
         super(
             new TextOf(""),
             consumer,
             new And(
                 () -> true,
-                new DbObjectsHasSameDbmsSignature(diffPair)
+                new DbObjectsHasSameDbmsSignature(pair)
             )
         );
     }

@@ -12,14 +12,26 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
+/**
+ * The interface DiffPair representing pair of same type objects to be compared.
+ * @param <T> The type of object in pair parameter.
+ * @since 0.1
+ */
 public interface DiffPair<T> {
 
+    /**
+     * Previous value in pair (or first).
+     * @return The T type object.
+     */
     T previousValue();
 
+    /**
+     * Current value in pair (or second).
+     * @return The T type object.
+     */
     T currentValue();
 
 }

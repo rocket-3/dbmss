@@ -19,24 +19,50 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import org.cactoos.Text;
 
+/**
+ * The type of that can be constructed of.
+ * @since 0.1
+ */
 public class OutputStreamPrinting implements Runnable {
 
-    private final PrintStream printStream;
+    /**
+     * The PrintStream encapsulated.
+     */
+    private final PrintStream stream;
 
+    /**
+     * The Text encapsulated.
+     */
     private final Text text;
 
-    public OutputStreamPrinting(final PrintStream printStream, final Text text) {
-        this.printStream = printStream;
+    /**
+     * Instantiates a new OutputStreamPrinting.
+     * @param stream The PrintStream to be used for printing.
+     * @param text The Text to be printed.
+     */
+    public OutputStreamPrinting(
+        final PrintStream stream,
+        final Text text
+    ) {
+        this.stream = stream;
         this.text = text;
     }
 
-    public OutputStreamPrinting(final OutputStream outputStream, final Text text) {
-        this(new PrintStream(outputStream), text);
+    /**
+     * Instantiates a new OutputStreamPrinting.
+     * @param stream The OutputStream to be used for printing.
+     * @param text The Text to be printed.
+     */
+    public OutputStreamPrinting(
+        final OutputStream stream,
+        final Text text
+    ) {
+        this(new PrintStream(stream), text);
     }
 
     @Override
-    public void run() {
-        this.printStream.println(this.text);
+    public final void run() {
+        this.stream.println(this.text);
     }
 
 }

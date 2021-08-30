@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.collection;
 
@@ -24,11 +23,18 @@ import org.cactoos.map.MapEnvelope;
 import org.cactoos.map.MapOf;
 import org.cactoos.scalar.ScalarOf;
 
+/**
+ * The type of Map that is validated each time it's used.
+ * @param <X> The type of key parameter.
+ * @param <Y> The type of value parameter.
+ * @since 0.1
+ */
 public class ValidatedMap<X, Y> extends MapEnvelope<X, Y> {
 
     /**
+     * Instantiates a new Validated map.
      * @param validation The procedure to apply to map before returning `map`
-     * @param map        The wrapped map
+     * @param map The wrapped map
      */
     public ValidatedMap(final Proc<Map<X, Y>> validation, final Map<X, Y> map) {
         super(

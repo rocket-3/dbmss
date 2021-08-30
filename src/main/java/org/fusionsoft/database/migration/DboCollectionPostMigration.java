@@ -19,26 +19,51 @@ import java.util.Collection;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.Migration;
 import org.fusionsoft.database.Server;
+import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The type of Migration that migrates database through
+ * collection of objects difference between current and previous state,
+ * restoring constraints for tables.
+ * @since 0.1
+ */
 public class DboCollectionPostMigration implements Migration {
 
-    private final Collection<DbObject> targetDbObjects;
+    /**
+     * The Collection of DbObject encapsulated.
+     */
+    private final Collection<DbObject> target;
 
+    /**
+     * The Server encapsulated.
+     */
     private final Server server;
 
-    public DboCollectionPostMigration(final Collection<DbObject> targetDbObjects, final Server server) {
-        this.targetDbObjects = targetDbObjects;
+    /**
+     * Instantiates a new Dbo collection post migration.
+     * @param target The Collection of DbObject to be encapsulated.
+     * @param server The Server to be encapsulated.
+     */
+    public DboCollectionPostMigration(
+        final Collection<DbObject> target,
+        final Server server
+    ) {
+        this.target = target;
         this.server = server;
     }
 
     @Override
-    public boolean validate() {
-        return true;
+    public final boolean validate() {
+        this.target.notifyAll();
+        this.server.notifyAll();
+        throw new NotImplemented();
     }
 
     @Override
-    public void perform() {
-
+    public final void perform() {
+        this.target.notifyAll();
+        this.server.notifyAll();
+        throw new NotImplemented();
     }
 
 }

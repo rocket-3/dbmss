@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbobject.signature;
 
@@ -20,10 +19,24 @@ import org.cactoos.Text;
 import org.fusionsoft.database.DbObjectType;
 import org.fusionsoft.database.DbmsSignature;
 
+/**
+ * The DbObjectSignature of database table.
+ * @since 0.1
+ */
 public class TableDbObjectSignature extends SimpleDbObjectSignature {
 
-    public TableDbObjectSignature(final Text name, final Text parentName, final DbmsSignature dbmsSignature) {
-        super(name, parentName, DbObjectType.Table, dbmsSignature);
+    /**
+     * Instantiates a new Table db object signature.
+     * @param name The object name.
+     * @param parent The parent object name.
+     * @param dbms The dbms signature
+     */
+    public TableDbObjectSignature(
+        final Text name,
+        final Text parent,
+        final DbmsSignature dbms
+    ) {
+        super(name, parent, DbObjectType.TABLE, dbms);
     }
 
 }

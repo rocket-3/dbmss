@@ -12,12 +12,19 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import org.cactoos.Scalar;
 
+/**
+ * The interface Condition representing any condition that is met or not.
+ * @apiNote extends Scalar and can be wrapped as Sticky or passed inside And.
+ * @see org.cactoos.Scalar
+ * @see org.cactoos.scalar.Sticky
+ * @see org.cactoos.scalar.And
+ * @since 0.1
+ */
 public interface Condition extends Scalar<Boolean> {
 
 }

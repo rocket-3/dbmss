@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.stringproperty;
 
@@ -21,6 +20,11 @@ import org.cactoos.map.MapOf;
 import org.fusionsoft.database.StringProperty;
 import org.fusionsoft.database.StringPropertySignature;
 
+/**
+ * The type of Map that can be constructed of iterable {@link StringProperty},
+ * keyed by {@link StringPropertySignature}.
+ * @since 0.1
+ */
 public class SignatureMapOfProps extends MapEnvelope<StringPropertySignature, StringProperty> {
 
     /**

@@ -12,38 +12,45 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import java.nio.file.Path;
-import org.fusionsoft.database.is.PersistentISFromYamlDBDInput;
+import org.fusionsoft.database.is.FromYamlInput;
 import org.fusionsoft.lib.functional.RunnableWithException;
 
-//root thing, actually very close to CMDRestore
+/**
+ * Root thing, very close to CMDRestore.
+ * @since 0.1
+ */
 public class RestoreProcedure implements RunnableWithException {
 
-    private final IS<?> instanceState;
+    /**
+     * The IS encapsulated.
+     */
+    private final IS<?> state;
 
-    public RestoreProcedure(final Path pathToDbd, final CharSequence serverName, final RestoreParams restoreParams) {
-        this.instanceState = new PersistentISFromYamlDBDInput(
-            pathToDbd,
-            serverName,
-            restoreParams
+    /**
+     * Instantiates a new Restore procedure.
+     * @param path The Path to be encapsulated.
+     * @param server The key from 'server' section to get target DBMS from.
+     * @param params The RestoreParams to be encapsulated.
+     */
+    public RestoreProcedure(
+        final Path path,
+        final CharSequence server,
+        final RestoreParams params
+    ) {
+        this.state = new FromYamlInput(
+            path,
+            server,
+            params
         );
     }
 
-    //how to split execution and configuration? 
-    //all now for configuration and we have only simple run
-
     @Override
-    public void run() throws Exception {
-        this.instanceState.restore().perform();
-        //0. get server from path
-        //1. get `server DBMS type and version`
-        //2. get DBD with needed DBMS t/v from path (or fail) / TIS
-        //3. get DBD with same DBMS t/v from connection, obtained from HEADER / PIS
-        //4. create migration PIS -> TIS (PIS must become TIS, that way)
+    public final void run() throws Exception {
+        this.state.restore().perform();
     }
 
 }

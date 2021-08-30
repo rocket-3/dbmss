@@ -19,6 +19,25 @@ import java.util.Collection;
 import java.util.Collections;
 import org.fusionsoft.database.StringProperty;
 
+/**
+ * Unfinished JavaDoc.
+ * The type is still in pre-design stage.
+ * @since 0.0.1
+ * @todo Make right Javadoc after re-design
+ * @checkstyle JavadocTagsCheck (4096 lines)
+ * @checkstyle JavadocLocationCheck (4096 lines)
+ * @checkstyle JavadocMethodCheck (4096 lines)
+ * @checkstyle RegexpSinglelineCheck (4096 lines)
+ * @checkstyle JavadocVariableCheck (4096 lines)
+ * @checkstyle MemberNameCheck (4096 lines)
+ * @checkstyle ParameterNameCheck (4096 lines)
+ * @checkstyle ParameterNumberCheck (4096 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (4096 lines)
+ * @checkstyle AbbreviationAsWordInNameCheck (4096 lines)
+ * @checkstyle LineLengthCheck (4096 lines)
+ * @checkstyle AvoidFieldNameMatchingMethodName (4096 lines)
+ */
+@SuppressWarnings("PMD")
 public class SimpleTable implements Table {
 
     private final String key;
@@ -29,7 +48,12 @@ public class SimpleTable implements Table {
 
     private final Iterable<Index> indexes;
 
-    public SimpleTable(final String key, final Iterable<Column> columns, final Iterable<Constraint> constraints, final Iterable<Index> indexes) {
+    public SimpleTable(
+        final String key,
+        final Iterable<Column> columns,
+        final Iterable<Constraint> constraints,
+        final Iterable<Index> indexes
+    ) {
         this.key = key;
         this.columns = columns;
         this.constraints = constraints;
@@ -57,7 +81,7 @@ public class SimpleTable implements Table {
     }
 
     @Override
-    public Collection<StringProperty> dmbsProps() {
+    public final Collection<StringProperty> dmbsProps() {
         return Collections.emptySet();
     }
 

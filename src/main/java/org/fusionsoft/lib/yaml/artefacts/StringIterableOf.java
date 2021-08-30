@@ -12,14 +12,15 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml.artefacts;
 
 import com.amihaiemil.eoyaml.Scalar;
 import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import com.amihaiemil.eoyaml.YamlNodeNotFoundException;
+import java.util.Iterator;
 import org.cactoos.Fallback;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
@@ -31,20 +32,34 @@ import org.cactoos.text.Split;
 import org.cactoos.text.Sub;
 import org.cactoos.text.TextOf;
 
+/**
+ * The set of String, can be constructed of different Yaml artifacts.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 public class StringIterableOf extends IterableEnvelope<String> {
 
-    private StringIterableOf(final StrictYamlMapping yamlMapping, final String key) {
+    /**
+     * Instantiates a new String iterable of.
+     * @param mapping The StrictYamlMapping to be encapsulated.
+     * @param key The String to be encapsulated.
+     */
+    private StringIterableOf(
+        final StrictYamlMapping mapping,
+        final String key
+    ) {
         super(
             new Mapped<>(
                 x -> x.asScalar().value(),
-                new IterableOf<>(
-                    new ScalarWithFallback<>(
-                        () -> yamlMapping.value(key)
+                new IterableOf<YamlNode>(
+                    new ScalarWithFallback<Iterator<? extends YamlNode>>(
+                        () -> mapping
+                            .value(key)
                             .asSequence()
                             .iterator(),
                         new Fallback.From<>(
                             YamlNodeNotFoundException.class,
-                            (ynnfe) -> new IteratorOf<>()
+                            exception -> new IteratorOf<YamlNode>()
                         )
                     )
                 )
@@ -52,19 +67,31 @@ public class StringIterableOf extends IterableEnvelope<String> {
         );
     }
 
-    public StringIterableOf(final YamlMapping yamlMapping, final String key) {
-        this(new StrictYamlMapping(yamlMapping), key);
+    /**
+     * Instantiates a new String iterable of {@link YamlMapping} by key.
+     * @param mapping The YamlMapping to be encapsulated.
+     * @param key The String key to be encapsulated.
+     */
+    public StringIterableOf(
+        final YamlMapping mapping,
+        final String key
+    ) {
+        this(new StrictYamlMapping(mapping), key);
     }
 
-    public StringIterableOf(final Scalar yamlScalar) {
+    /**
+     * Instantiates a new String iterable of Yaml {@link Scalar}.
+     * @param scalar The yaml Scalar to be encapsulated.
+     */
+    public StringIterableOf(final Scalar scalar) {
         super(
             new Mapped<>(
                 Text::asString,
                 new Split(
                     new Sub(
-                        new TextOf(yamlScalar.value()),
+                        new TextOf(scalar.value()),
                         1,
-                        (str) -> str.length() - 2
+                        str -> str.length() - 1
                     ),
                     ",[ ]?"
                 )

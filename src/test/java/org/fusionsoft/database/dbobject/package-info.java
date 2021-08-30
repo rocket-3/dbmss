@@ -13,12 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database;
-
-public final class App {
-
-    public static void main(final String[] args) {
-
-    }
-
-}
+/**
+ * Tests for {@link org.fusionsoft.database.DbObject} implementations.
+ */
+package org.fusionsoft.database.dbobject;

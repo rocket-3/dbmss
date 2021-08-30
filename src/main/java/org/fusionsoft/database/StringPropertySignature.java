@@ -12,14 +12,26 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
+/**
+ * The interface StringPropertySignature representing
+ *  signature of {@link StringProperty}.
+ * @since 0.1
+ */
 public interface StringPropertySignature {
 
+    /**
+     * Type of string property.
+     * @return The StringPropertyType instance.
+     */
     StringPropertyType type();
 
-    String key();
+    /**
+     * Name of StringProperty.
+     * @return The string.
+     */
+    String name();
 
 }

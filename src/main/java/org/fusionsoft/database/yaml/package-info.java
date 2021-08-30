@@ -12,12 +12,8 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
-package org.fusionsoft.database;
-
-import org.cactoos.Scalar;
-
-public interface Property<ValueType> extends Scalar<ValueType> {
-
-}
+/**
+ * Workarounds with Yaml format in the project.
+ */
+package org.fusionsoft.database.yaml;

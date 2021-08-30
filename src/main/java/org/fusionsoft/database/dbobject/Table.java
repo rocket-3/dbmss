@@ -12,19 +12,31 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbobject;
 
 import org.fusionsoft.database.dbobject.signature.TableDbObjectSignature;
 import org.fusionsoft.database.stringproperty.TableProps;
 
+/**
+ * A DbObject that represents a table.
+ * @since 0.1
+ */
 public class Table extends SimpleDbObject {
 
-    public Table(final TableDbObjectSignature tableSignature, final TableProps tableProps) {
+    /**
+     * Instantiates a new DbObject with Table' DbObjectType.
+     * Constraints the input parameters.
+     * @param signature The table signature.
+     * @param props The table props.
+     */
+    public Table(
+        final TableDbObjectSignature signature,
+        final TableProps props
+    ) {
         super(
-            tableSignature,
-            tableProps
+            signature,
+            props
         );
     }
 

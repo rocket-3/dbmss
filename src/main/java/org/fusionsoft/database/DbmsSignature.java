@@ -12,26 +12,42 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
+import org.fusionsoft.database.dbms.signature.name.Absent;
+
+/**
+ * The interface, describes all we need to specify DBMS type specification.
+ * @since 0.1
+ */
 public interface DbmsSignature {
 
-    DbmsName dbmsName();
-
-    String dbmsVersion();
-
-    DbmsSignature Absent = new DbmsSignature() {
+    /**
+     * The constant Absent means null DBMS type.
+     */
+    DbmsSignature ABSENT = new DbmsSignature() {
         @Override
         public DbmsName dbmsName() {
-            return DbmsName.Absent;
+            return new Absent();
         }
 
         @Override
-        public String dbmsVersion() {
-            return "";
+        public DbmsVersion dbmsVersion() {
+            return DbmsVersion.DUMMY;
         }
     };
+
+    /**
+     * Dbms name.
+     * @return The dbms name.
+     */
+    DbmsName dbmsName();
+
+    /**
+     * Dbms version string.
+     * @return The dbms version as string.
+     */
+    DbmsVersion dbmsVersion();
 
 }

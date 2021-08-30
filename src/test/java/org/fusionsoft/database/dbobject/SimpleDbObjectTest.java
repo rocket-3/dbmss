@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbobject;
 
@@ -28,41 +27,50 @@ import org.fusionsoft.database.stringproperty.MapOfProps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The test of SimpleDbObjectTest.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 class SimpleDbObjectTest {
 
+    /**
+     * Has data.
+     * @throws Exception When can't.
+     */
     @Test
     void hasData() throws Exception {
         final String name = "rental";
         final String schema = "public";
-        final String key1 = "isPartitioned";
-        final boolean value1 = false;
-        final String key2 = "rows";
-        final int value2 = 100;
+        final String partitioned = "isPartitioned";
+        final boolean bool = false;
+        final String rows = "rows";
+        final int number = 100;
         Assertions.assertTrue(
             new And(
                 new SimpleDbObject(
                     new SimpleDbObjectSignature(
                         new TextOf(name),
                         new TextOf(schema),
-                        DbObjectType.Table,
+                        DbObjectType.TABLE,
                         new PgDbmsSignature(
-                            DbmsVersion.Dummy
+                            DbmsVersion.DUMMY
                         )
                     ),
                     new SetOf<>(
-                        new StringProperty.Of(key1, value1),
-                        new StringProperty.Of(key2, value2)
+                        new StringProperty.Of(partitioned, bool),
+                        new StringProperty.Of(rows, number)
                     )
                 ),
                 x -> x.signature().name().equals(name),
                 x -> new MapOfProps(x.props())
-                    .get(key2)
+                    .get(rows)
                     .asString()
-                    .equals(String.valueOf(value2)),
+                    .equals(String.valueOf(number)),
                 x -> new MapOfProps(x.props())
-                    .get(key1)
+                    .get(partitioned)
                     .asString()
-                    .equals(String.valueOf(value1))
+                    .equals(String.valueOf(bool))
             ).value()
         );
     }

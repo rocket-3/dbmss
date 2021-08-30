@@ -12,14 +12,24 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import org.cactoos.Text;
 
+/**
+ * The DBMS version type to constraint Text instances.
+ * @see org.cactoos.Text
+ * @since 0.1
+ * @checkstyle InterfaceIsTypeCheck (100 lines)
+ * @todo Redesign all this.
+ */
+@SuppressWarnings("PMD")
 public interface DbmsVersion extends Text {
 
-    DbmsVersion Dummy = () -> "0.0.0.0";
+    /**
+     * The constant Dummy.
+     */
+    DbmsVersion DUMMY = () -> "0.0";
 
 }

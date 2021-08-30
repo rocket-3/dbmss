@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.condition;
 
@@ -22,14 +21,26 @@ import org.cactoos.scalar.And;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbmsSignature;
 
+/**
+ * The Condition that each db object has same dbms signature.
+ * @since 0.1
+ */
 public class EachDboHasDbmsSignature extends ConditionEnvelope {
 
-    public EachDboHasDbmsSignature(final DbmsSignature dbmsSignature, final Collection<DbObject> dbObjectCollection) {
+    /**
+     * Instantiates a new Condition that each db object has same dbms signature.
+     * @param signature The dbms signature.
+     * @param objects The db object collection.
+     */
+    public EachDboHasDbmsSignature(
+        final DbmsSignature signature,
+        final Collection<DbObject> objects
+    ) {
         super(
             new And(
                 new Mapped<>(
-                    x -> new DboHasDbmsSignature(dbmsSignature, x),
-                    dbObjectCollection
+                    x -> new DboHasDbmsSignature(signature, x),
+                    objects
                 )
             )
         );

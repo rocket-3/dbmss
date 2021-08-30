@@ -12,21 +12,20 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
+/**
+ * The interface representing a signature of DBMS operated object.
+ * @since 0.1
+ */
 public interface DbObjectSignature {
 
-    String name();
-
-    String parentName();
-
-    DbObjectType type();
-
-    DbmsSignature dbmsSignature();
-
-    DbObjectSignature Absent = new DbObjectSignature() {
+    /**
+     * The constant ABSENT means no object signature provided, i.e. null.
+     * @checkstyle AnonInnerLengthCheck (22 lines)
+     */
+    DbObjectSignature ABSENT = new DbObjectSignature() {
 
         @Override
         public String name() {
@@ -40,13 +39,37 @@ public interface DbObjectSignature {
 
         @Override
         public DbObjectType type() {
-            return DbObjectType.Absent;
+            return DbObjectType.ABSENT;
         }
 
         @Override
         public DbmsSignature dbmsSignature() {
-            return DbmsSignature.Absent;
+            return DbmsSignature.ABSENT;
         }
     };
+
+    /**
+     * The name of DBMS object.
+     * @return The string.
+     */
+    String name();
+
+    /**
+     * The name hierarchical upper object.
+     * @return The string.
+     */
+    String parentName();
+
+    /**
+     * Type of the object.
+     * @return The DbObjectType instance.
+     */
+    DbObjectType type();
+
+    /**
+     * Dbms signature of the object.
+     * @return The DbmsSignature instance.
+     */
+    DbmsSignature dbmsSignature();
 
 }

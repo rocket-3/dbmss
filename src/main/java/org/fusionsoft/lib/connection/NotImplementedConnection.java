@@ -12,18 +12,26 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.connection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * A dummy Connection that does nothing and throws exceptions.
+ * @since 0.1
+ */
 public class NotImplementedConnection extends ConnectionOfScalar {
 
+    /**
+     * Instantiates a new NotImplementedConnection.
+     */
     public NotImplementedConnection() {
-        super(() -> {
-            throw new NotImplementedException();
-        });
+        super(
+            () -> {
+                throw new NotImplemented();
+            }
+        );
     }
 
 }

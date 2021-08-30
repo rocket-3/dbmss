@@ -12,20 +12,42 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml.artefacts;
 
+import com.amihaiemil.eoyaml.Scalar;
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.set.SetEnvelope;
 import org.cactoos.set.SetOf;
 
+/**
+ * The type Set of that can be constructed of different Yaml artifacts.
+ * @see StringIterableOf
+ * @since 0.1
+ */
 public class StringSetOf extends SetEnvelope<String> {
 
-    public StringSetOf(final YamlMapping yamlMapping, final String key) {
+    /**
+     * Instantiates a new String set of {@link YamlMapping}.
+     * @param mapping The YamlMapping to be encapsulated.
+     * @param key The String key to be encapsulated.
+     */
+    public StringSetOf(final YamlMapping mapping, final String key) {
         super(
             new SetOf<>(
-                new StringIterableOf(yamlMapping, key)
+                new StringIterableOf(mapping, key)
+            )
+        );
+    }
+
+    /**
+     * Instantiates a new String set of {@link Scalar}.
+     * @param scalar The Scalar to be encapsulated.
+     */
+    public StringSetOf(final Scalar scalar) {
+        super(
+            new SetOf<String>(
+                new StringIterableOf(scalar)
             )
         );
     }

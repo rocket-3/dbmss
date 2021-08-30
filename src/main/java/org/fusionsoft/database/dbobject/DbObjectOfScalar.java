@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbobject;
 
@@ -23,10 +22,25 @@ import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbObjectSignature;
 import org.fusionsoft.database.StringProperty;
 
-public class DbObjectOfScalar implements DbObject {
+/**
+ * The type Db object of scalar.
+ * @see Scalar
+ * @see DbObject
+ * @since 0.1
+ */
+public final class DbObjectOfScalar implements DbObject {
 
+    /**
+     * The scalar of DbObject to delegate everything on its return value.
+     * @see Scalar
+     * @see Unchecked
+     */
     private final Unchecked<DbObject> scalar;
 
+    /**
+     * Instantiates a new DbObject of scalar.
+     * @param scalar The function that returns DbObject.
+     */
     public DbObjectOfScalar(final Scalar<DbObject> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }

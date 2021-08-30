@@ -12,20 +12,40 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import java.util.Map;
 
+/**
+ * The interface MappingDiff representing difference in two mappings.
+ * @since 0.1
+ */
 public interface MappingDiff {
 
+    /**
+     * Persistent present only props map.
+     * @return The map.
+     */
     Map<String, String> persistentOnlyProps();
 
+    /**
+     * Target present only props map.
+     * @return The map.
+     */
     Map<String, String> targetOnlyProps();
 
-    Map<String, DiffPair<String>> differingProps(String key);
+    /**
+     * Differing props map.
+     * @return The map.
+     */
+    Map<String, DiffPair<String>> differingProps();
 
-    MappingDiff nestedDiff();
+    /**
+     * Nested diff mapping diff.
+     * @param key By what key to obtain nested difference.
+     * @return The mapping diff.
+     */
+    MappingDiff nestedDiff(String key);
 
 }

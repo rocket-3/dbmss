@@ -12,27 +12,8 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
-package org.fusionsoft.database.description.dbd.ofyaml;
-
-import org.cactoos.text.TextOf;
-import org.fusionsoft.lib.input.InputPrintsToConsole;
-import org.fusionsoft.lib.input.ManualConsoleInput;
-
-public final class EOTest {
-
-    public static void main(final String[] args) {
-
-        System.out.println(
-            new TextOf(
-                new InputPrintsToConsole(
-                    new TextOf("Type your text and press Enter:"),
-                    new ManualConsoleInput(new TextOf("utf-8"))
-                )
-            )
-        );
-    }
-
-}
-
+/**
+ * Tests for collections decorators.
+ */
+package org.fusionsoft.lib.collection;

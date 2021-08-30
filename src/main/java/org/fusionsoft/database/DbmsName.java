@@ -12,19 +12,18 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import org.cactoos.Text;
 
+/**
+ * The DBMS name type, is Text alias actually.
+ * Used to constraint it by list of its implementations.
+ * @see org.cactoos.Text
+ * @since 0.1
+ * @checkstyle InterfaceIsTypeCheck (100 lines)
+ */
 public interface DbmsName extends Text {
-
-    DbmsName Postgres = () -> "pg";
-    DbmsName Oracle = () -> "ora";
-    DbmsName MsSqlServer = () -> "mssql";
-    DbmsName MySql = () -> "mysql";
-    DbmsName Absent = () -> "absent";
-    DbmsName Unknown = () -> "unknown";
 
 }

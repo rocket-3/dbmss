@@ -12,36 +12,43 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.collection;
 
-import java.text.MessageFormat;
 import java.util.Map;
 import java.util.Set;
 import org.cactoos.map.MapEnvelope;
+import org.fusionsoft.lib.exception.ValueNotFoundException;
 
+/**
+ * The type of Map that can be constructed of another map and keys
+ *  to be validated.
+ * @param <X> The type parameter of key.
+ * @param <Y> The type parameter of value.
+ * @since 0.1
+ */
 public class MapHasKeys<X, Y> extends MapEnvelope<X, Y> {
 
     /**
-     * @param map  The original map to be tested before each operation on it.
+     * Instantiates a new Map has keys.
      * @param keys The keys the map should contain.
-     * @throws RuntimeException is thrown at the moment of usage, if any of `keys` is not found in `map`
-     * @implNote also wrapped by StrictMap
-     * @see StrictMap
+     * @param map The original map to be tested before each operation on it.
+     * @throws RuntimeException Throws at the moment of usage,
+     *  if any of `keys` is not found in `map`
+     * @implNote Also wrapped by {@link StrictMap}
+     * @since 0.1
      */
     public MapHasKeys(final Set<X> keys, final Map<X, Y> map) {
         super(
             new StrictMap<>(
                 new ValidatedMap<>(
-                    m -> keys.forEach(k -> {
-                        if (! map.containsKey(k)) {
-                            throw new RuntimeException(MessageFormat.format(
-                                "No value found for key {0}",
-                                k.toString()
-                            ));
+                    m -> keys.forEach(
+                        k -> {
+                            if (!map.containsKey(k)) {
+                                throw new ValueNotFoundException(k.toString());
+                            }
                         }
-                    }),
+                    ),
                     map
                 )
             )

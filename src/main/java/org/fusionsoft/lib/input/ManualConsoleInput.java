@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.input;
 
@@ -24,25 +23,36 @@ import org.cactoos.Text;
 import org.cactoos.io.Stdin;
 import org.cactoos.scalar.ScalarOf;
 
+/**
+ * The type of Input that uses console and returns at 'Enter' key being pressed.
+ * @since 0.1
+ */
 public class ManualConsoleInput implements Input {
 
-    private final Scalar<Input> iptScalar;
+    /**
+     * The Scalar of Input encapsulated.
+     */
+    private final Scalar<Input> scalar;
 
-    public ManualConsoleInput(final Text charsetName) {
-        this.iptScalar = new ScalarOf<Input>(
-            charset -> new ReaderReadLineInput(
+    /**
+     * Instantiates a new Manual console input.
+     * @param charset The Text to be encapsulated.
+     */
+    public ManualConsoleInput(final Text charset) {
+        this.scalar = new ScalarOf<Input>(
+            chrset -> new ReaderReadLineInput(
                 new InputStreamReader(
                     new Stdin().stream(),
-                    charset.asString()
+                    chrset.asString()
                 )
             ),
-            charsetName
+            charset
         );
     }
 
     @Override
-    public InputStream stream() throws Exception {
-        return this.iptScalar.value().stream();
+    public final InputStream stream() throws Exception {
+        return this.scalar.value().stream();
     }
 
 }

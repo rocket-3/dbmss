@@ -20,61 +20,60 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.stringproperty.signature.SimpleStringPropertySignature;
+import org.fusionsoft.database.stringproperty.type.Bool;
+import org.fusionsoft.database.stringproperty.type.Chars;
+import org.fusionsoft.database.stringproperty.type.Float;
+import org.fusionsoft.database.stringproperty.type.Int;
 
+/**
+ * The interface StringProperty representing textual property of some domain
+ *  entity.
+ * @since 0.1
+ */
+@SuppressWarnings("PMD.IntegerInstantiation")
 public interface StringProperty extends Text {
 
+    /**
+     * Signature string property signature.
+     * @return The string property signature.
+     */
     StringPropertySignature signature();
 
     @Override
     String asString();
 
-    //    abstract class Envelope implements StringProperty {
-    //        private final StringProperty stringProperty;
-    //
-    //        public Envelope(StringProperty stringProperty) {
-    //            this.stringProperty = stringProperty;
-    //        }
-    //
-    //        @Override
-    //        public StringPropertySignature signature() {
-    //            return this.stringProperty.signature();
-    //        }
-    //
-    //        @Override
-    //        public final String asString() throws Exception {
-    //            return stringProperty.asString();
-    //        }
-    //    }
-    //    
-    //    final class OfScalar implements StringProperty {
-    //        private final Unchecked<StringProperty> scalar;
-    //        
-    //        public OfScalar(Scalar<StringProperty> scalar) {
-    //            this.scalar = new Unchecked<>(scalar);
-    //        }
-    //
-    //        @Override
-    //        public StringPropertySignature signature() {
-    //            return this.scalar.value().signature();
-    //        }
-    //
-    //        @Override
-    //        public String asString() throws Exception {
-    //            return this.scalar.value().asString();
-    //        }
-    //    }
-
+    /**
+     * The type of that can be constructed of.
+     * @since 0.1
+     */
     final class Of implements StringProperty {
 
+        /**
+         * The StringPropertySignature encapsulated.
+         */
         private final StringPropertySignature signature;
 
+        /**
+         * The UncheckedText encapsulated.
+         */
         private final UncheckedText text;
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param signature The StringPropertySignature to be encapsulated.
+         * @param text The Text to be encapsulated.
+         */
         private Of(final StringPropertySignature signature, final Text text) {
             this.signature = signature;
             this.text = new UncheckedText(text);
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The Text to be encapsulated.
+         * @param type The StringPropertyType to be encapsulated.
+         * @param text The Text to be encapsulated.
+         */
         private Of(final Text key, final StringPropertyType type, final Text text) {
             this(
                 new SimpleStringPropertySignature(
@@ -85,74 +84,134 @@ public interface StringProperty extends Text {
             );
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The Text to be encapsulated.
+         * @param text The CharSequence to be encapsulated.
+         */
         public Of(final Text key, final CharSequence text) {
             this(
                 key,
-                StringPropertyType.Text,
+                new Chars(),
                 new TextOfScalar(() -> text)
             );
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The CharSequence to be encapsulated.
+         * @param text The CharSequence to be encapsulated.
+         */
         public Of(final CharSequence key, final CharSequence text) {
             this(new TextOf(key), text);
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The Text to be encapsulated.
+         * @param bool The boolean to be encapsulated.
+         */
         public Of(final Text key, final boolean bool) {
             this(
                 key,
-                StringPropertyType.Boolean,
+                new Bool(),
                 new TextOfScalar(() -> String.valueOf(bool))
             );
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The CharSequence to be encapsulated.
+         * @param bool The boolean to be encapsulated.
+         */
         public Of(final CharSequence key, final boolean bool) {
             this(new TextOf(key), bool);
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The Text to be encapsulated.
+         * @param number The float to be encapsulated.
+         */
         public Of(final Text key, final float number) {
             this(
                 key,
-                StringPropertyType.Float,
+                new Float(),
                 new TextOfScalar(() -> String.valueOf(number))
             );
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The CharSequence to be encapsulated.
+         * @param number The float to be encapsulated.
+         */
         public Of(final CharSequence key, final float number) {
             this(new TextOf(key), number);
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The Text to be encapsulated.
+         * @param number The double to be encapsulated.
+         */
         public Of(final Text key, final double number) {
             this(
                 key,
-                StringPropertyType.Float,
+                new Float(),
                 new TextOfScalar(() -> String.valueOf(number))
             );
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The CharSequence to be encapsulated.
+         * @param number The double to be encapsulated.
+         */
         public Of(final CharSequence key, final double number) {
             this(new TextOf(key), number);
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The Text to be encapsulated.
+         * @param number The int to be encapsulated.
+         */
         public Of(final Text key, final int number) {
             this(
                 key,
-                StringPropertyType.Integer,
+                new Int(),
                 new TextOfScalar(() -> String.valueOf(number))
             );
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The CharSequence to be encapsulated.
+         * @param number The int to be encapsulated.
+         */
         public Of(final CharSequence key, final int number) {
             this(new TextOf(key), number);
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The Text to be encapsulated.
+         * @param number The long to be encapsulated.
+         */
         public Of(final Text key, final long number) {
             this(
                 key,
-                StringPropertyType.Integer,
+                new Int(),
                 new TextOfScalar(() -> String.valueOf(number))
             );
         }
 
+        /**
+         * Instantiates a new StringProperty.
+         * @param key The CharSequence to be encapsulated.
+         * @param number The long to be encapsulated.
+         */
         public Of(final CharSequence key, final long number) {
             this(new TextOf(key), number);
         }
@@ -163,41 +222,10 @@ public interface StringProperty extends Text {
         }
 
         @Override
-        public final String asString() {
-            return text.asString();
+        public String asString() {
+            return this.text.asString();
         }
 
     }
 
-    //    final class Boolean extends Envelope {
-    //        public Boolean(Text key, Text text) {
-    //            super(
-    //                new Of(key, StringPropertyType.Boolean, text)
-    //            );
-    //        }
-    //    }
-    //    
-    //    final class Integer extends Envelope {
-    //        public Integer(Text key, Text text) {
-    //            super(
-    //                new Of(key, StringPropertyType.Integer, text)
-    //            );
-    //        }
-    //    }    
-    //    
-    //    final class Textual extends Envelope {
-    //        public Textual(Text key, Text text) {
-    //            super(
-    //                new Of(key, StringPropertyType.Text, text)
-    //            );
-    //        }
-    //    }
-    //    
-    //    final class Float extends Envelope {
-    //        public Float(Text key, Text text) {
-    //            super(
-    //                new Of(key, StringPropertyType.Float, text)
-    //            );
-    //        }
-    //    }
 }

@@ -12,19 +12,8 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
-package org.fusionsoft.database.migration;
-
-import org.junit.jupiter.api.Test;
-
-class DboCollectionMigrationTest {
-
-    @Test
-    void validate() {
-        //        new DboCollectionMigration(
-        //            
-//        )
-    }
-
-}
+/**
+ * Artefacts, referred to {@link org.fusionsoft.database.StringProperty}.
+ */
+package org.fusionsoft.database.stringproperty;

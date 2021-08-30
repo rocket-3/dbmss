@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml;
 
@@ -24,27 +23,39 @@ import java.util.Set;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * The type of YamlMapping that can be constructed of {@link Scalar}
+ *  for on-demand usage pattern.
+ * @since 0.1
+ */
 public class YamlMappingOfScalar extends BaseYamlMapping {
 
+    /**
+     * The Unchecked Scalar of YamlMapping encapsulated.
+     */
     private final Unchecked<YamlMapping> scalar;
 
+    /**
+     * Instantiates a new Yaml mapping of scalar.
+     * @param scalar The Scalar of YamlMapping to be encapsulated.
+     */
     public YamlMappingOfScalar(final Scalar<YamlMapping> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
     @Override
-    public Set<YamlNode> keys() {
-        return scalar.value().keys();
+    public final Set<YamlNode> keys() {
+        return this.scalar.value().keys();
     }
 
     @Override
-    public YamlNode value(final YamlNode key) {
-        return scalar.value().value(key);
+    public final YamlNode value(final YamlNode key) {
+        return this.scalar.value().value(key);
     }
 
     @Override
-    public Comment comment() {
-        return scalar.value().comment();
+    public final Comment comment() {
+        return this.scalar.value().comment();
     }
 
 }

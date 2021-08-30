@@ -12,19 +12,29 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
+/**
+ * The interface RestoreParams representing params of migration.
+ * @since 0.1
+ */
 public interface RestoreParams {
 
-    String someProp();
-
-    RestoreParams Default = new RestoreParams() {
+    /**
+     * The constant Default.
+     */
+    RestoreParams DEFAULT = new RestoreParams() {
         @Override
         public String someProp() {
             return "someValue";
         }
     };
+
+    /**
+     * Some prop string.
+     * @return The string.
+     */
+    String someProp();
 
 }

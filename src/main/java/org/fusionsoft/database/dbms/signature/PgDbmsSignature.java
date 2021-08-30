@@ -12,17 +12,24 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbms.signature;
 
-import org.fusionsoft.database.DbmsName;
 import org.fusionsoft.database.DbmsVersion;
+import org.fusionsoft.database.dbms.signature.name.Postgres;
 
+/**
+ * The Postgres dbms signature constant.
+ * @since 0.1
+ */
 public class PgDbmsSignature extends SimpleDbmsSignature {
 
-    public PgDbmsSignature(final DbmsVersion dbmsVersion) {
-        super(DbmsName.Postgres, dbmsVersion);
+    /**
+     * Instantiates a new Pg dbms signature.
+     * @param version The dbms version.
+     */
+    public PgDbmsSignature(final DbmsVersion version) {
+        super(new Postgres(), version);
     }
 
 }

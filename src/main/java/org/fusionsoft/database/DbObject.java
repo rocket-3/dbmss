@@ -12,23 +12,25 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * The interface representing description of DBMS operated object.
+ * @since 0.1
+ */
 public interface DbObject {
 
-    DbObjectSignature signature();
-
-    Collection<StringProperty> props();
-
-    DbObject Absent = new DbObject() {
+    /**
+     * The constant Absent.
+     */
+    DbObject ABSENT = new DbObject() {
         @Override
         public DbObjectSignature signature() {
-            return DbObjectSignature.Absent;
+            return DbObjectSignature.ABSENT;
         }
 
         @Override
@@ -36,5 +38,18 @@ public interface DbObject {
             return Collections.emptyList();
         }
     };
+
+    /**
+     * Signature db object signature.
+     * @return The db object signature.
+     */
+    DbObjectSignature signature();
+
+    /**
+     * DBMS attributes of operated object.
+     * @return The collection of StringProperty.
+     * @see StringProperty
+     */
+    Collection<StringProperty> props();
 
 }

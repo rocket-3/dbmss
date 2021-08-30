@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml.artefacts;
 
@@ -24,30 +23,46 @@ import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.ScalarOf;
 
+/**
+ * The type of String Iterable that extracts all nested keys from YamlNode.
+ * @since 0.1
+ * @todo Add more description.
+ * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+ */
 public class KeysFromYamlNode extends IterableEnvelope<String> {
 
-    public KeysFromYamlNode(final YamlNode yn) {
-        this(yn, "");
+    /**
+     * Instantiates a new Keys from yaml node.
+     * @param node The YamlNode to be encapsulated.
+     */
+    public KeysFromYamlNode(final YamlNode node) {
+        this(node, "");
     }
 
-    public KeysFromYamlNode(final YamlNode yn, final String path) {
+    /**
+     * Instantiates a new Keys from yaml node.
+     * @param node The YamlNode to be encapsulated.
+     * @param path The String to be encapsulated.
+     * @checkstyle ReturnCountCheck (100 lines)
+     */
+    public KeysFromYamlNode(final YamlNode node, final String path) {
         super(
             new IterableOf<>(
                 new ScalarOf<>(
                     () -> {
-                        if (yn.type().equals(Node.MAPPING)) {
+                        if (node.type().equals(Node.MAPPING)) {
                             return new Joined<String>(
                                 new Mapped<>(
                                     x -> path + x.asScalar().value(),
-                                    yn.asMapping().keys()
+                                    node.asMapping().keys()
                                 ),
                                 new Joined<>(
                                     new Mapped<>(
                                         x -> new KeysFromYamlNode(
-                                            yn.asMapping().value(x),
+                                            node.asMapping().value(x),
                                             path + x.asScalar().value() + "/"
                                         ),
-                                        yn.asMapping().keys()
+                                        node.asMapping().keys()
                                     )
                                 )
                             ).iterator();

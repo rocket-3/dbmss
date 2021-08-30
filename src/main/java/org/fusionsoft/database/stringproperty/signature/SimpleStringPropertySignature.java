@@ -23,36 +23,61 @@ import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.StringPropertySignature;
 import org.fusionsoft.database.StringPropertyType;
 
+/**
+ * The signature of StringProperty entity
+ * that can be constructed of key and type.
+ * @since 0.1
+ */
+@SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
 public class SimpleStringPropertySignature implements StringPropertySignature {
 
+    /**
+     * The StringPropertyType encapsulated.
+     */
     private final StringPropertyType type;
 
+    /**
+     * The UncheckedText encapsulated.
+     */
     private final UncheckedText key;
 
-    public SimpleStringPropertySignature(final Text key, final StringPropertyType type) {
+    /**
+     * Instantiates a new Simple string property signature.
+     * @param key The Text to be encapsulated.
+     * @param type The StringPropertyType to be encapsulated.
+     */
+    public SimpleStringPropertySignature(
+        final Text key,
+        final StringPropertyType type
+    ) {
         this.type = type;
         this.key = new UncheckedText(key);
     }
 
-    public SimpleStringPropertySignature(final CharSequence key, final StringPropertyType type) {
-        this(
-            new TextOf(key),
-            type
-        );
+    /**
+     * Instantiates a new Simple string property signature.
+     * @param key The CharSequence to be encapsulated.
+     * @param type The StringPropertyType to be encapsulated.
+     */
+    public SimpleStringPropertySignature(
+        final CharSequence key,
+        final StringPropertyType type
+    ) {
+        this(new TextOf(key), type);
     }
 
     @Override
-    public StringPropertyType type() {
+    public final StringPropertyType type() {
         return this.type;
     }
 
     @Override
-    public String key() {
+    public final String name() {
         return this.key.asString();
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return MessageFormat.format(
             "{0} : {1}",
             this.key,
@@ -61,19 +86,15 @@ public class SimpleStringPropertySignature implements StringPropertySignature {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (! ( o instanceof SimpleStringPropertySignature )) {
-            return false;
-        }
-        final SimpleStringPropertySignature that = (SimpleStringPropertySignature) o;
-        return that.toString().equals(this.toString());
+    public final boolean equals(final Object object) {
+        return object instanceof SimpleStringPropertySignature
+            && this.toString().equals(
+            ((SimpleStringPropertySignature) object).toString()
+        );
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(this.toString());
     }
 

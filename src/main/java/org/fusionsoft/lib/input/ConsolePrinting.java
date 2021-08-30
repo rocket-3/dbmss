@@ -12,20 +12,27 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.input;
 
 import org.cactoos.Text;
 import org.cactoos.proc.RunnableEnvelope;
 
+/**
+ * The type of {@link OutputStreamPrinting} that prints to console.
+ * @since 0.1
+ */
 public class ConsolePrinting extends RunnableEnvelope {
 
-    public ConsolePrinting(final Text textToPrint) {
+    /**
+     * Instantiates a new Console printing.
+     * @param text The Text to be printed.
+     */
+    public ConsolePrinting(final Text text) {
         super(
             new OutputStreamPrinting(
                 System.out,
-                textToPrint
+                text
             )
         );
     }

@@ -12,20 +12,41 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbobject;
 
 import org.cactoos.collection.CollectionEnvelope;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.list.ListOf;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbmsSignature;
 import org.fusionsoft.database.description.dbd.DBD;
+import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The type Db objects from dbd.
+ * @see DbObject
+ * @since 0.1
+ */
 public class DbObjectsFromDbd extends CollectionEnvelope<DbObject> {
 
-    public DbObjectsFromDbd(final DBD dbd, final DbmsSignature dbmsSignature) {
-        super(new ListOf<>());
+    /**
+     * Instantiates a collection of DbObjects, extracting from DBD.
+     * @param dbd The original DBD.
+     * @param signature The dbms signature of extracted objects.
+     */
+    public DbObjectsFromDbd(final DBD dbd, final DbmsSignature signature) {
+        super(
+            new ListOf<>(
+                new IterableOf<>(
+                    () -> {
+                        dbd.notifyAll();
+                        signature.notifyAll();
+                        throw new NotImplemented();
+                    }
+                )
+            )
+        );
     }
 
 }

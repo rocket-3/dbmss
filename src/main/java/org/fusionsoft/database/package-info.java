@@ -12,6 +12,9 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
+ */
+/**
+ * The whole project interfaces.
+ * @todo add JavaDoc for package.
  */
 package org.fusionsoft.database;

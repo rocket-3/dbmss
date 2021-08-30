@@ -23,6 +23,24 @@ import java.io.IOException;
 import org.fusionsoft.database.description.dbd.SimpleTable;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
+/**
+ * Unfinished JavaDoc.
+ * The type is still in pre-design stage.
+ * @since 0.0.1
+ * @todo Make right Javadoc after re-design
+ * @checkstyle JavadocTagsCheck (4096 lines)
+ * @checkstyle JavadocLocationCheck (4096 lines)
+ * @checkstyle JavadocMethodCheck (4096 lines)
+ * @checkstyle RegexpSinglelineCheck (4096 lines)
+ * @checkstyle JavadocVariableCheck (4096 lines)
+ * @checkstyle MemberNameCheck (4096 lines)
+ * @checkstyle ParameterNameCheck (4096 lines)
+ * @checkstyle ParameterNumberCheck (4096 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (4096 lines)
+ * @checkstyle AbbreviationAsWordInNameCheck (4096 lines)
+ * @checkstyle LineLengthCheck (4096 lines)
+ * @checkstyle AvoidFieldNameMatchingMethodName (4096 lines)
+ */
 public class TableOf extends SimpleTable {
 
     private TableOf(final StrictYamlMapping mapping, final String name) {

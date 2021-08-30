@@ -19,25 +19,40 @@ import org.fusionsoft.database.DbmsName;
 import org.fusionsoft.database.DbmsSignature;
 import org.fusionsoft.database.DbmsVersion;
 
+/**
+ * The naive dbms DbmsSignature impl.
+ * @since 0.1
+ */
 public class SimpleDbmsSignature implements DbmsSignature {
 
-    private final DbmsName dbmsName;
+    /**
+     * The DbmsName wrapped.
+     */
+    private final DbmsName kind;
 
-    private final DbmsVersion dbmsVersion;
+    /**
+     * The DbmsName wrapped wrapped.
+     */
+    private final DbmsVersion version;
 
-    public SimpleDbmsSignature(final DbmsName dbmsName, final DbmsVersion dbmsVersion) {
-        this.dbmsName = dbmsName;
-        this.dbmsVersion = dbmsVersion;
+    /**
+     * Instantiates a new Simple dbms signature.
+     * @param kind The name of dbms to return.
+     * @param version The version of dbms to return.
+     */
+    public SimpleDbmsSignature(final DbmsName kind, final DbmsVersion version) {
+        this.kind = kind;
+        this.version = version;
     }
 
     @Override
-    public DbmsName dbmsName() {
-        return this.dbmsName;
+    public final DbmsName dbmsName() {
+        return this.kind;
     }
 
     @Override
-    public String dbmsVersion() {
-        return this.dbmsVersion.toString();
+    public final DbmsVersion dbmsVersion() {
+        return this.version;
     }
 
 }

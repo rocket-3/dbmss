@@ -12,36 +12,51 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbms.signature;
 
 import org.fusionsoft.database.DbmsName;
 import org.fusionsoft.database.DbmsSignature;
+import org.fusionsoft.database.DbmsVersion;
 import org.fusionsoft.database.connection.ConnFromDbdMapping;
 import org.fusionsoft.database.yaml.DBDYamlInput;
 
+/**
+ * The type Dbms signature from dbd mapping.
+ * @since 0.1
+ */
 public class DbmsSignatureFromDbdMapping implements DbmsSignature {
 
-    private final DbmsSignature dbmsSignature;
+    /**
+     * The delegate of DbmsSignature.
+     */
+    private final DbmsSignature delegate;
 
-    public DbmsSignatureFromDbdMapping(final DBDYamlInput dbdYamlInput, final CharSequence serverName) {
-        this.dbmsSignature = new DbmsSignatureFromConnection(
+    /**
+     * Instantiates a new Dbms signature from dbd mapping.
+     * @param input The DBDYamlInput to be encapsulated.
+     * @param server The CharSequence to be encapsulated.
+     */
+    public DbmsSignatureFromDbdMapping(
+        final DBDYamlInput input,
+        final CharSequence server
+    ) {
+        this.delegate = new DbmsSignatureFromConnection(
             new ConnFromDbdMapping(
-                dbdYamlInput,
-                serverName
+                input,
+                server
             )
         );
     }
 
     @Override
-    public DbmsName dbmsName() {
-        return dbmsSignature.dbmsName();
+    public final DbmsName dbmsName() {
+        return this.delegate.dbmsName();
     }
 
     @Override
-    public String dbmsVersion() {
-        return dbmsSignature.dbmsVersion();
+    public final DbmsVersion dbmsVersion() {
+        return this.delegate.dbmsVersion();
     }
 
 }

@@ -13,7 +13,6 @@
   ~
   ~ See the License for the specific language governing permissions
   ~ and limitations under the License.
-  ~
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -47,6 +46,10 @@
                 <version>0.18.19</version>
                 <configuration>
                     <license>file:${basedir}/LICENSE</license>
+                    <excludes>
+                        <exclude>findbugs:.*</exclude>
+                        <exclude>duplicatefinder:.*</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
@@ -74,10 +77,9 @@
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>junit-jupiter-api</artifactId>
             <version>5.7.2</version>
         </dependency>
     </dependencies>
-
 
 </project>

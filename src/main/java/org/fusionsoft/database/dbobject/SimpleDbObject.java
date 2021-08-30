@@ -20,20 +20,39 @@ import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbObjectSignature;
 import org.fusionsoft.database.StringProperty;
 
+/**
+ * The naive implementation of DbObject.
+ * @since 0.1
+ */
+@SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
 public class SimpleDbObject implements DbObject {
 
-    private final DbObjectSignature dbObjectSignature;
+    /**
+     * THe signature to return.
+     */
+    private final DbObjectSignature signature;
 
+    /**
+     * The props to return.
+     */
     private final Collection<StringProperty> properties;
 
-    public SimpleDbObject(final DbObjectSignature dbObjectSignature, final Collection<StringProperty> properties) {
-        this.dbObjectSignature = dbObjectSignature;
+    /**
+     * Instantiates a new Simple db object.
+     * @param signature The db object signature to wrap.
+     * @param properties The properties to wrap.
+     */
+    public SimpleDbObject(
+        final DbObjectSignature signature,
+        final Collection<StringProperty> properties
+    ) {
+        this.signature = signature;
         this.properties = properties;
     }
 
     @Override
     public final DbObjectSignature signature() {
-        return this.dbObjectSignature;
+        return this.signature;
     }
 
     @Override

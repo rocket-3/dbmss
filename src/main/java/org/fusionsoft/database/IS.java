@@ -12,14 +12,28 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
-public interface IS<DescriptionType> {
+/**
+ * The interface IS representing database instance state.
+ * @param <D> The type of IS description parameter.
+ * @since 0.1
+ */
+public interface IS<D> {
 
+    /**
+     * Restore migration.
+     * @return The migration.
+     * @throws Exception When can't.
+     */
     Migration restore() throws Exception;
 
-    DescriptionType describe() throws Exception;
+    /**
+     * Describe description type.
+     * @return The description type.
+     * @throws Exception When can't.
+     */
+    D describe() throws Exception;
 
 }

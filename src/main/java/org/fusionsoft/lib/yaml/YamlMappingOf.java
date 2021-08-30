@@ -12,20 +12,27 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlInput;
 import org.cactoos.scalar.Sticky;
 
+/**
+ * The type of on-demand YamlMapping that can be constructed of YamlInput.
+ * @since 0.1
+ */
 public class YamlMappingOf extends YamlMappingEnvelope {
 
-    public YamlMappingOf(final YamlInput yamlInput) {
+    /**
+     * Instantiates a new YamlMapping of YamlInput, that is used on demand.
+     * @param input The YamlInput to be encapsulated.
+     */
+    public YamlMappingOf(final YamlInput input) {
         super(
             new YamlMappingOfScalar(
                 new Sticky<>(
-                    yamlInput::readYamlMapping
+                    input::readYamlMapping
                 )
             )
         );

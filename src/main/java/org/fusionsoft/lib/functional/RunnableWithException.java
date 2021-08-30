@@ -12,12 +12,21 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.functional;
 
-public interface RunnableWithException {
+/**
+ * The interface RunnableWithException representing a Runnable that can throw
+ * some type of Throwable.
+ * @param <E> The subtype of Throwable parameter.
+ * @since 0.1
+ */
+public interface RunnableWithException<E extends Throwable> {
 
-    void run() throws Exception;
+    /**
+     * Run.
+     * @throws E When can't.
+     */
+    void run() throws E;
 
 }

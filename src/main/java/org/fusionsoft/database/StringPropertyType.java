@@ -12,17 +12,16 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import org.cactoos.Text;
 
+/**
+ * The interface StringPropertyType representing type of {@link StringProperty}.
+ * @since 0.1
+ * @checkstyle InterfaceIsTypeCheck (100 lines)
+ */
 public interface StringPropertyType extends Text {
-
-    StringPropertyType Text = () -> "text";
-    StringPropertyType Boolean = () -> "boolean";
-    StringPropertyType Integer = () -> "integer";
-    StringPropertyType Float = () -> "float";
 
 }

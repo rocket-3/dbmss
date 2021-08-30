@@ -25,56 +25,82 @@ import org.fusionsoft.database.RestoreParams;
 import org.fusionsoft.database.Server;
 import org.fusionsoft.database.condition.EachDboHasDbmsSignature;
 
+/**
+ * The type of Migration that migrates persistent collection to target state.
+ * @since 0.1
+ */
 public class DboCollectionMigration implements Migration {
 
+    /**
+     * The Iterable Condition encapsulated.
+     */
     private final Iterable<Condition> conditions;
 
+    /**
+     * The Iterable Migration encapsulated.
+     */
     private final Iterable<Migration> migrations;
 
-    private DboCollectionMigration(final Iterable<Condition> conditions, final Iterable<Migration> migrations) {
+    /**
+     * Instantiates a new Dbo collection migration.
+     * @param conditions The Iterable of Condition to be encapsulated.
+     * @param migrations The Iterable of Migration to be encapsulated.
+     */
+    private DboCollectionMigration(
+        final Iterable<Condition> conditions,
+        final Iterable<Migration> migrations
+    ) {
         this.conditions = conditions;
         this.migrations = migrations;
     }
 
+    /**
+     * Instantiates a new Dbo collection migration.
+     * @param server The Server to be encapsulated.
+     * @param persistent The Collection of DbObject to be encapsulated.
+     * @param target The Collection of DbObject to be encapsulated.
+     * @param params The RestoreParams to be encapsulated.
+     * @checkstyle ParameterNumberCheck (20 lines)
+     */
     public DboCollectionMigration(
         final Server server,
-        final Collection<DbObject> persistentDBOs,
-        final Collection<DbObject> targetDBOs,
-        final RestoreParams restoreParams
+        final Collection<DbObject> persistent,
+        final Collection<DbObject> target,
+        final RestoreParams params
     ) {
         this(
             new IterableOf<Condition>(
                 new EachDboHasDbmsSignature(
                     server.dbmsSignature(),
-                    targetDBOs
+                    target
                 )
             ),
             new IterableOf<Migration>(
-                new DboCollectionPreMigration(persistentDBOs, server),
+                new DboCollectionPreMigration(persistent, server),
                 new DboCollectionNoConstraintsMigration(
-                    persistentDBOs,
-                    targetDBOs,
-                    restoreParams,
+                    persistent,
+                    target,
+                    params,
                     server
                 ),
-                new DboCollectionPostMigration(targetDBOs, server)
+                new DboCollectionPostMigration(target, server)
             )
         );
     }
 
     @Override
-    public boolean validate() throws Exception {
+    public final boolean validate() throws Exception {
         return new And(
             new And(this.conditions),
             new And(
                 Migration::validate,
-                migrations
+                this.migrations
             )
         ).value();
     }
 
     @Override
-    public void perform() throws Exception {
+    public final void perform() throws Exception {
         for (final Migration migration : this.migrations) {
             migration.perform();
         }

@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.connection;
 
@@ -22,231 +21,246 @@ import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 
+/**
+ * The Statement from other statement wrapped.
+ * Used to construct Statement from composition by subtyping.
+ * @since 0.1
+ * @checkstyle ParameterNameCheck (400 lines)
+ * @checkstyle LineLengthCheck (400 lines)
+ */
+@SuppressWarnings("PMD")
 public class StatementEnvelope implements Statement {
 
+    /**
+     * The original statement to delegate everything to.
+     */
     private final Statement statement;
 
+    /**
+     * Instantiates a new Statement from other.
+     * @param statement The original statement to be wrapped.
+     */
     public StatementEnvelope(final Statement statement) {
         this.statement = statement;
     }
 
     @Override
-    public ResultSet executeQuery(final String sql) throws SQLException {
+    public final ResultSet executeQuery(final String sql) throws SQLException {
         return this.statement.executeQuery(sql);
     }
 
     @Override
-    public int executeUpdate(final String sql) throws SQLException {
+    public final int executeUpdate(final String sql) throws SQLException {
         return this.statement.executeUpdate(sql);
     }
 
     @Override
-    public void close() throws SQLException {
+    public final void close() throws SQLException {
         this.statement.close();
     }
 
     @Override
-    public int getMaxFieldSize() throws SQLException {
+    public final int getMaxFieldSize() throws SQLException {
         return this.statement.getMaxFieldSize();
     }
 
     @Override
-    public void setMaxFieldSize(final int max) throws SQLException {
+    public final void setMaxFieldSize(final int max) throws SQLException {
         this.statement.setMaxFieldSize(max);
     }
 
     @Override
-    public int getMaxRows() throws SQLException {
+    public final int getMaxRows() throws SQLException {
         return this.statement.getMaxRows();
     }
 
     @Override
-    public void setMaxRows(final int max) throws SQLException {
+    public final void setMaxRows(final int max) throws SQLException {
         this.statement.setMaxRows(max);
     }
 
     @Override
-    public void setEscapeProcessing(final boolean enable) throws SQLException {
+    public final void setEscapeProcessing(final boolean enable) throws SQLException {
         this.statement.setEscapeProcessing(enable);
     }
 
     @Override
-    public int getQueryTimeout() throws SQLException {
+    public final int getQueryTimeout() throws SQLException {
         return this.statement.getQueryTimeout();
     }
 
     @Override
-    public void setQueryTimeout(final int seconds) throws SQLException {
+    public final void setQueryTimeout(final int seconds) throws SQLException {
         this.statement.setQueryTimeout(seconds);
     }
 
     @Override
-    public void cancel() throws SQLException {
+    public final void cancel() throws SQLException {
         this.statement.cancel();
     }
 
     @Override
-    public SQLWarning getWarnings() throws SQLException {
+    public final SQLWarning getWarnings() throws SQLException {
         return this.statement.getWarnings();
     }
 
     @Override
-    public void clearWarnings() throws SQLException {
+    public final void clearWarnings() throws SQLException {
         this.statement.clearWarnings();
     }
 
     @Override
-    public void setCursorName(final String name) throws SQLException {
+    public final void setCursorName(final String name) throws SQLException {
         this.statement.setCursorName(name);
     }
 
     @Override
-    public boolean execute(final String sql) throws SQLException {
+    public final boolean execute(final String sql) throws SQLException {
         return this.statement.execute(sql);
     }
 
     @Override
-    public ResultSet getResultSet() throws SQLException {
+    public final ResultSet getResultSet() throws SQLException {
         return this.statement.getResultSet();
     }
 
     @Override
-    public int getUpdateCount() throws SQLException {
+    public final int getUpdateCount() throws SQLException {
         return this.statement.getUpdateCount();
     }
 
     @Override
-    public boolean getMoreResults() throws SQLException {
+    public final boolean getMoreResults() throws SQLException {
         return this.statement.getMoreResults();
     }
 
     @Override
-    public void setFetchDirection(final int direction) throws SQLException {
+    public final void setFetchDirection(final int direction) throws SQLException {
         this.statement.setFetchDirection(direction);
     }
 
     @Override
-    public int getFetchDirection() throws SQLException {
+    public final int getFetchDirection() throws SQLException {
         return this.statement.getFetchDirection();
     }
 
     @Override
-    public void setFetchSize(final int rows) throws SQLException {
+    public final void setFetchSize(final int rows) throws SQLException {
         this.statement.setFetchSize(rows);
     }
 
     @Override
-    public int getFetchSize() throws SQLException {
+    public final int getFetchSize() throws SQLException {
         return this.statement.getFetchSize();
     }
 
     @Override
-    public int getResultSetConcurrency() throws SQLException {
+    public final int getResultSetConcurrency() throws SQLException {
         return this.statement.getResultSetConcurrency();
     }
 
     @Override
-    public int getResultSetType() throws SQLException {
+    public final int getResultSetType() throws SQLException {
         return this.statement.getResultSetType();
     }
 
     @Override
-    public void addBatch(final String sql) throws SQLException {
+    public final void addBatch(final String sql) throws SQLException {
         this.statement.addBatch(sql);
     }
 
     @Override
-    public void clearBatch() throws SQLException {
+    public final void clearBatch() throws SQLException {
         this.statement.clearBatch();
     }
 
     @Override
-    public int[] executeBatch() throws SQLException {
+    public final int[] executeBatch() throws SQLException {
         return this.statement.executeBatch();
     }
 
     @Override
-    public Connection getConnection() throws SQLException {
+    public final Connection getConnection() throws SQLException {
         return this.statement.getConnection();
     }
 
     @Override
-    public boolean getMoreResults(final int current) throws SQLException {
+    public final boolean getMoreResults(final int current) throws SQLException {
         return this.statement.getMoreResults();
     }
 
     @Override
-    public ResultSet getGeneratedKeys() throws SQLException {
+    public final ResultSet getGeneratedKeys() throws SQLException {
         return this.statement.getGeneratedKeys();
     }
 
     @Override
-    public int executeUpdate(final String sql, final int autoGeneratedKeys) throws SQLException {
+    public final int executeUpdate(final String sql, final int autoGeneratedKeys) throws SQLException {
         return this.statement.executeUpdate(sql, autoGeneratedKeys);
     }
 
     @Override
-    public int executeUpdate(final String sql, final int[] columnIndexes) throws SQLException {
+    public final int executeUpdate(final String sql, final int[] columnIndexes) throws SQLException {
         return this.statement.executeUpdate(sql, columnIndexes);
     }
 
     @Override
-    public int executeUpdate(final String sql, final String[] columnNames) throws SQLException {
+    public final int executeUpdate(final String sql, final String[] columnNames) throws SQLException {
         return this.statement.executeUpdate(sql, columnNames);
     }
 
     @Override
-    public boolean execute(final String sql, final int autoGeneratedKeys) throws SQLException {
+    public final boolean execute(final String sql, final int autoGeneratedKeys) throws SQLException {
         return this.statement.execute(sql, autoGeneratedKeys);
     }
 
     @Override
-    public boolean execute(final String sql, final int[] columnIndexes) throws SQLException {
+    public final boolean execute(final String sql, final int[] columnIndexes) throws SQLException {
         return this.statement.execute(sql, columnIndexes);
     }
 
     @Override
-    public boolean execute(final String sql, final String[] columnNames) throws SQLException {
+    public final boolean execute(final String sql, final String[] columnNames) throws SQLException {
         return this.statement.execute(sql, columnNames);
     }
 
     @Override
-    public int getResultSetHoldability() throws SQLException {
+    public final int getResultSetHoldability() throws SQLException {
         return this.statement.getResultSetHoldability();
     }
 
     @Override
-    public boolean isClosed() throws SQLException {
+    public final boolean isClosed() throws SQLException {
         return this.statement.isClosed();
     }
 
     @Override
-    public void setPoolable(final boolean poolable) throws SQLException {
+    public final void setPoolable(final boolean poolable) throws SQLException {
         this.statement.setPoolable(poolable);
     }
 
     @Override
-    public boolean isPoolable() throws SQLException {
+    public final boolean isPoolable() throws SQLException {
         return this.statement.isPoolable();
     }
 
     @Override
-    public void closeOnCompletion() throws SQLException {
+    public final void closeOnCompletion() throws SQLException {
         this.statement.closeOnCompletion();
     }
 
     @Override
-    public boolean isCloseOnCompletion() throws SQLException {
+    public final boolean isCloseOnCompletion() throws SQLException {
         return this.statement.isCloseOnCompletion();
     }
 
     @Override
-    public <T> T unwrap(final Class<T> iface) throws SQLException {
+    public final <T> T unwrap(final Class<T> iface) throws SQLException {
         return this.statement.unwrap(iface);
     }
 
     @Override
-    public boolean isWrapperFor(final Class<?> iface) throws SQLException {
+    public final boolean isWrapperFor(final Class<?> iface) throws SQLException {
         return this.statement.isWrapperFor(iface);
     }
 

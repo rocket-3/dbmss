@@ -12,11 +12,11 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml.artefacts;
 
 import com.amihaiemil.eoyaml.StrictYamlMapping;
+import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNodeNotFoundException;
 import org.cactoos.Fallback;
 import org.cactoos.scalar.ScalarOf;
@@ -24,18 +24,32 @@ import org.cactoos.scalar.ScalarWithFallback;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
 
+/**
+ * The type of Text that can be constructed of value from
+ *  {@link YamlMapping} and its key, which may be absent and empty value is
+ *   returned in that case.
+ * @since 0.1
+ */
 public class MaybeEmptyTextOf extends TextEnvelope {
 
-    public MaybeEmptyTextOf(final StrictYamlMapping yamlMapping, final String key) {
+    /**
+     * Instantiates a new Maybe empty text of.
+     * @param mapping The StrictYamlMapping to be encapsulated.
+     * @param key The String to be encapsulated.
+     */
+    public MaybeEmptyTextOf(
+        final StrictYamlMapping mapping,
+        final String key
+    ) {
         super(
             new TextOf(
                 new ScalarWithFallback<>(
                     new ScalarOf<>(
-                        () -> yamlMapping.value(key).asScalar().value()
+                        () -> mapping.value(key).asScalar().value()
                     ),
                     new Fallback.From<>(
                         YamlNodeNotFoundException.class,
-                        (e) -> ""
+                        e -> ""
                     )
                 )
             )

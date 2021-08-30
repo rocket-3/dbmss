@@ -12,24 +12,35 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.condition;
 
 import org.cactoos.Scalar;
 import org.fusionsoft.database.Condition;
 
+/**
+ * The type Condition implementation that delegates everything on wrapped one.
+ * @since 0.1
+ */
 public class ConditionEnvelope implements Condition {
 
-    private final Scalar<Boolean> booleanScalar;
+    /**
+     * The wrapped condition predecessor.
+     */
+    private final Scalar<Boolean> origin;
 
-    public ConditionEnvelope(final Scalar<Boolean> booleanScalar) {
-        this.booleanScalar = booleanScalar;
+    /**
+     * Instantiates a new Condition from a Boolean Scalar.
+     * @param origin The scalar of boolean, the delegate.
+     * @since 0.1
+     */
+    public ConditionEnvelope(final Scalar<Boolean> origin) {
+        this.origin = origin;
     }
 
     @Override
-    public Boolean value() throws Exception {
-        return this.booleanScalar.value();
+    public final Boolean value() throws Exception {
+        return this.origin.value();
     }
 
 }

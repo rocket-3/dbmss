@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml.artefacts;
 
@@ -24,30 +23,46 @@ import org.cactoos.Func;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 
+/**
+ * The type of {@link Iterable} that can be constructed of YamlMapping.
+ * @param <Y> The type of iterated parameter.
+ * @since 0.1
+ */
 public class IterableOfClassFromYamlNode<Y> extends IterableEnvelope<Y> {
 
+    /**
+     * Instantiates a new Iterable of class from yaml node.
+     * @param constructor The BiFunc that has a YamlMapping and YamlNode per key
+     *  and  returns an element of an Iterable, to be used for extracting.
+     * @param mapping The YamlMapping to be used for extracting.
+     */
     public IterableOfClassFromYamlNode(
-        final BiFunc<YamlMapping, YamlNode, Y> mapAndItsKeyBiFunc,
-        final YamlMapping yamlMapping
+        final BiFunc<YamlMapping, YamlNode, Y> constructor,
+        final YamlMapping mapping
     ) {
         super(
             new Mapped<>(
-                key -> mapAndItsKeyBiFunc.apply(yamlMapping, key),
-                yamlMapping.keys()
+                key -> constructor.apply(mapping, key),
+                mapping.keys()
             )
         );
     }
 
+    /**
+     * Instantiates a new Iterable of class of YamlSequence.
+     * @param constructor The Func of YamlMapping to be used to create Y inst.
+     * @param sequence The YamlSequence of YamlMapping to be used.
+     */
     public IterableOfClassFromYamlNode(
-        final Func<YamlMapping, Y> mappingYFunc,
-        final YamlSequence yamlSequence
+        final Func<YamlMapping, Y> constructor,
+        final YamlSequence sequence
     ) {
         super(
             new Mapped<>(
-                mappingYFunc,
+                constructor,
                 new Mapped<YamlMapping>(
                     YamlNode::asMapping,
-                    yamlSequence.values()
+                    sequence.values()
                 )
             )
         );

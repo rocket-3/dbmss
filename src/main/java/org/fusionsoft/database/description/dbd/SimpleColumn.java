@@ -18,6 +18,25 @@ package org.fusionsoft.database.description.dbd;
 import java.util.Set;
 import org.fusionsoft.lib.yaml.artefacts.FirstNotEmptyTextOf;
 
+/**
+ * Unfinished JavaDoc.
+ * The type is still in pre-design stage.
+ * @since 0.0.1
+ * @todo Make right Javadoc after re-design
+ * @checkstyle JavadocTagsCheck (4096 lines)
+ * @checkstyle JavadocLocationCheck (4096 lines)
+ * @checkstyle JavadocMethodCheck (4096 lines)
+ * @checkstyle RegexpSinglelineCheck (4096 lines)
+ * @checkstyle JavadocVariableCheck (4096 lines)
+ * @checkstyle MemberNameCheck (4096 lines)
+ * @checkstyle ParameterNameCheck (4096 lines)
+ * @checkstyle ParameterNumberCheck (4096 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (4096 lines)
+ * @checkstyle AbbreviationAsWordInNameCheck (4096 lines)
+ * @checkstyle LineLengthCheck (4096 lines)
+ * @checkstyle AvoidFieldNameMatchingMethodName (4096 lines)
+ */
+@SuppressWarnings("PMD")
 public class SimpleColumn implements Column {
 
     private final String name;
@@ -40,7 +59,17 @@ public class SimpleColumn implements Column {
 
     private final String dbLocalIdMethod;
 
-    public SimpleColumn(final String iuColumn, final String iuJsonColumn, final String type, final boolean nullable, final String description, final Set<String> iuIncludeProps, final String dbName, final String dbType, final String dbLocalIdMethod) {
+    public SimpleColumn(
+        final String iuColumn,
+        final String iuJsonColumn,
+        final String type,
+        final boolean nullable,
+        final String description,
+        final Set<String> iuIncludeProps,
+        final String dbName,
+        final String dbType,
+        final String dbLocalIdMethod
+    ) {
         try {
             this.name = new FirstNotEmptyTextOf(
                 dbName,
@@ -56,7 +85,7 @@ public class SimpleColumn implements Column {
             this.nullable = nullable;
             this.description = description;
             this.dbLocalIdMethod = dbLocalIdMethod;
-        } catch (final Exception e) {
+        } catch (final FirstNotEmptyTextOf.AllEmptyException e) {
             throw new RuntimeException(
                 "Unable to construct an object when all "
                 + "'iuColumn', 'iuJsonColumn' and 'dbName' are empty",

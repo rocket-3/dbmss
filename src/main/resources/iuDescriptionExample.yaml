@@ -269,4 +269,4 @@ schemas:
               - domain_id
               - par_val_id
             dbUnique: false
-            pgIndexType: btree                      
+            pgIndexType: btree

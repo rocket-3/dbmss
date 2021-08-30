@@ -12,17 +12,25 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.yaml;
 
 import com.amihaiemil.eoyaml.YamlInput;
 import org.fusionsoft.lib.yaml.YamlInputEnvelope;
 
+/**
+ * The type of YamlInput alias that can be constructed of YamlInput.
+ * @since 0.1
+ * @checkstyle AbbreviationAsWordInNameCheck (100 lines)
+ */
 public class DBDYamlInput extends YamlInputEnvelope {
 
-    public DBDYamlInput(final YamlInput yamlInput) {
-        super(yamlInput);
+    /**
+     * Instantiates a new Dbd yaml input.
+     * @param input The YamlInput to be encapsulated.
+     */
+    public DBDYamlInput(final YamlInput input) {
+        super(input);
     }
 
 }

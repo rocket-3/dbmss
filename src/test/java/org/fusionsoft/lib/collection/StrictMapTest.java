@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.collection;
 
@@ -21,8 +20,15 @@ import org.cactoos.map.MapOf;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The test for {@link StrictMap}.
+ * @since 0.1
+ */
 class StrictMapTest {
 
+    /**
+     * Can get existing value.
+     */
     @Test
     void canGetExistingValue() {
         Assertions.assertDoesNotThrow(
@@ -35,6 +41,9 @@ class StrictMapTest {
         );
     }
 
+    /**
+     * Throws {@link RuntimeException} on getting absent value.
+     */
     @Test
     void canNotGetAbsentValue() {
         Assertions.assertThrows(

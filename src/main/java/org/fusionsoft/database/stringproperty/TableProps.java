@@ -19,22 +19,31 @@ import java.util.Collection;
 import org.cactoos.collection.CollectionEnvelope;
 import org.cactoos.set.SetOf;
 import org.fusionsoft.database.StringProperty;
-import org.fusionsoft.database.StringPropertyType;
 import org.fusionsoft.database.stringproperty.signature.SimpleStringPropertySignature;
+import org.fusionsoft.database.stringproperty.type.Chars;
+import org.fusionsoft.database.stringproperty.type.Int;
 
+/**
+ * The type of that can be constructed of.
+ * @since 0.1
+ */
 public class TableProps extends CollectionEnvelope<StringProperty> {
 
+    /**
+     * Instantiates a new Table props.
+     * @param collection The Collection of StringProperty to be encapsulated.
+     */
     public TableProps(final Collection<StringProperty> collection) {
         super(
             new PropsHasKeys(
                 new SetOf<>(
                     new SimpleStringPropertySignature(
                         "param1",
-                        StringPropertyType.Text
+                        new Chars()
                     ),
                     new SimpleStringPropertySignature(
                         "param2",
-                        StringPropertyType.Integer
+                        new Int()
                     )
                 ),
                 collection
@@ -42,11 +51,17 @@ public class TableProps extends CollectionEnvelope<StringProperty> {
         );
     }
 
-    public TableProps(final String param1, final Integer param2) {
+    /**
+     * Instantiates a new Table props.
+     * @param string The String to be encapsulated.
+     * @param number The Integer to be encapsulated.
+     * @checkstyle ParameterNameCheck (100 lines)
+     */
+    public TableProps(final String string, final Integer number) {
         this(
             new SetOf<>(
-                new StringProperty.Of("param1", param1),
-                new StringProperty.Of("param2", param2)
+                new StringProperty.Of("string", string),
+                new StringProperty.Of("number", number)
             )
         );
     }

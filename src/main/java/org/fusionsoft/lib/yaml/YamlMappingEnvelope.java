@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml;
 
@@ -22,27 +21,38 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Set;
 
+/**
+ * The type of YamlMapping that can be constructed of another.
+ * @since 0.1
+ */
 public class YamlMappingEnvelope extends BaseYamlMapping {
 
-    private final YamlMapping yamlMapping;
+    /**
+     * The YamlMapping encapsulated.
+     */
+    private final YamlMapping mapping;
 
-    public YamlMappingEnvelope(final YamlMapping yamlMapping) {
-        this.yamlMapping = yamlMapping;
+    /**
+     * Instantiates a new Yaml mapping envelope.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
+    public YamlMappingEnvelope(final YamlMapping mapping) {
+        this.mapping = mapping;
     }
 
     @Override
-    public Set<YamlNode> keys() {
-        return yamlMapping.keys();
+    public final Set<YamlNode> keys() {
+        return this.mapping.keys();
     }
 
     @Override
-    public YamlNode value(final YamlNode key) {
-        return yamlMapping.value(key);
+    public final YamlNode value(final YamlNode key) {
+        return this.mapping.value(key);
     }
 
     @Override
-    public Comment comment() {
-        return yamlMapping.comment();
+    public final Comment comment() {
+        return this.mapping.comment();
     }
 
 }

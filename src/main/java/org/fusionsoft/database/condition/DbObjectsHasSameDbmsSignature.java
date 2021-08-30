@@ -12,25 +12,24 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.condition;
 
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DiffPair;
+import org.fusionsoft.database.diffpair.Of;
 
+/**
+ * The type Db objects has same dbms signature.
+ * @see org.fusionsoft.database.DbmsSignature
+ * @since 0.1
+ */
 public class DbObjectsHasSameDbmsSignature extends ConditionEnvelope {
 
-    public DbObjectsHasSameDbmsSignature(final DbObject first, final DbObject second) {
-        super(
-            () -> {
-                return first.signature().dbmsSignature().equals(
-                    second.signature().dbmsSignature()
-                );
-            }
-        );
-    }
-
+    /**
+     * Instantiates a new Condition that DbObjects has same DbmsSignature.
+     * @param pair The pair of objects.
+     */
     public DbObjectsHasSameDbmsSignature(final DiffPair<DbObject> pair) {
         super(
             () -> {
@@ -38,6 +37,17 @@ public class DbObjectsHasSameDbmsSignature extends ConditionEnvelope {
                     pair.previousValue().signature().dbmsSignature()
                 );
             }
+        );
+    }
+
+    /**
+     * Instantiates a new Condition that DbObjects has same DbmsSignature.
+     * @param first The first DbObject instance.
+     * @param second The second DbObject instance.
+     */
+    public DbObjectsHasSameDbmsSignature(final DbObject first, final DbObject second) {
+        this(
+            new Of<>(first, second)
         );
     }
 

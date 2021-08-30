@@ -20,21 +20,51 @@ import org.fusionsoft.database.DbObjectSignature;
 import org.fusionsoft.database.DbObjectType;
 import org.fusionsoft.database.DbmsSignature;
 
+/**
+ * The naive impl. of DbObjectSignature.
+ * @since 0.1
+ */
+@SuppressWarnings("PMD")
 public class SimpleDbObjectSignature implements DbObjectSignature {
 
+    /**
+     * The name encapsulated.
+     */
     private final Text name;
 
-    private final Text parentName;
+    /**
+     * The parent name encapsulated.
+     */
+    private final Text parent;
 
-    private final DbObjectType dbObjectType;
+    /**
+     * The DbObjectType encapsulated.
+     */
+    private final DbObjectType type;
 
-    private final DbmsSignature dbmsSignature;
+    /**
+     * The DbmsSignature encapsulated.
+     */
+    private final DbmsSignature dbms;
 
-    public SimpleDbObjectSignature(final Text name, final Text parentName, final DbObjectType dbObjectType, final DbmsSignature dbmsSignature) {
+    /**
+     * Instantiates a new Simple db object signature.
+     * @param name The name of object.
+     * @param parent The name of hierarchical upper object or empty text.
+     * @param type The type of object.
+     * @param dbms The signature of DBMS it belongs.
+     * @checkstyle ParameterNumberCheck (4 lines)
+     */
+    public SimpleDbObjectSignature(
+        final Text name,
+        final Text parent,
+        final DbObjectType type,
+        final DbmsSignature dbms
+    ) {
         this.name = name;
-        this.parentName = parentName;
-        this.dbObjectType = dbObjectType;
-        this.dbmsSignature = dbmsSignature;
+        this.parent = parent;
+        this.type = type;
+        this.dbms = dbms;
     }
 
     @Override
@@ -44,17 +74,17 @@ public class SimpleDbObjectSignature implements DbObjectSignature {
 
     @Override
     public final String parentName() {
-        return this.parentName.toString();
+        return this.parent.toString();
     }
 
     @Override
     public final DbObjectType type() {
-        return this.dbObjectType;
+        return this.type;
     }
 
     @Override
     public final DbmsSignature dbmsSignature() {
-        return this.dbmsSignature;
+        return this.dbms;
     }
 
 }

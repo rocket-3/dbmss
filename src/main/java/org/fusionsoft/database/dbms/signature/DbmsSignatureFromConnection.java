@@ -12,31 +12,44 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbms.signature;
 
 import java.sql.Connection;
 import org.fusionsoft.database.DbmsName;
 import org.fusionsoft.database.DbmsSignature;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.fusionsoft.database.DbmsVersion;
+import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The type Dbms signature from connection.
+ * @since 0.1
+ */
 public class DbmsSignatureFromConnection implements DbmsSignature {
 
+    /**
+     * The connection to obtain DbmsSignature from.
+     */
     private final Connection connection;
 
+    /**
+     * Instantiates a new Dbms signature from connection.
+     * @param connection The connection to obtain data from.
+     */
     public DbmsSignatureFromConnection(final Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public DbmsName dbmsName() {
-        throw new NotImplementedException();
+    public final DbmsName dbmsName() {
+        this.connection.notifyAll();
+        throw new NotImplemented();
     }
 
     @Override
-    public String dbmsVersion() {
-        throw new NotImplementedException();
+    public final DbmsVersion dbmsVersion() {
+        this.connection.notifyAll();
+        throw new NotImplemented();
     }
 
 }

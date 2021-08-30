@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml;
 
@@ -23,42 +22,54 @@ import com.amihaiemil.eoyaml.YamlSequence;
 import com.amihaiemil.eoyaml.YamlStream;
 import java.io.IOException;
 
+/**
+ * The type {@link YamlInput} of that can be constructed of another.
+ * Can be used for composition.
+ * @since 0.1
+ */
 public class YamlInputEnvelope implements YamlInput {
 
-    private final YamlInput yamlInput;
+    /**
+     * The YamlInput encapsulated.
+     */
+    private final YamlInput input;
 
-    public YamlInputEnvelope(final YamlInput yamlInput) {
-        this.yamlInput = yamlInput;
+    /**
+     * Instantiates a new Yaml input envelope.
+     * @param input The YamlInput to be encapsulated.
+     */
+    public YamlInputEnvelope(final YamlInput input) {
+        this.input = input;
     }
 
     @Override
-    public YamlMapping readYamlMapping() throws IOException {
-        return this.yamlInput.readYamlMapping();
+    public final YamlMapping readYamlMapping() throws IOException {
+        return this.input.readYamlMapping();
     }
 
     @Override
-    public YamlSequence readYamlSequence() throws IOException {
-        return this.yamlInput.readYamlSequence();
+    public final YamlSequence readYamlSequence() throws IOException {
+        return this.input.readYamlSequence();
     }
 
     @Override
-    public YamlStream readYamlStream() throws IOException {
-        return this.yamlInput.readYamlStream();
+    public final YamlStream readYamlStream() throws IOException {
+        return this.input.readYamlStream();
     }
 
     @Override
-    public Scalar readPlainScalar() throws IOException {
-        return this.yamlInput.readPlainScalar();
+    public final Scalar readPlainScalar() throws IOException {
+        return this.input.readPlainScalar();
     }
 
     @Override
-    public Scalar readFoldedBlockScalar() throws IOException {
-        return this.yamlInput.readFoldedBlockScalar();
+    public final Scalar readFoldedBlockScalar() throws IOException {
+        return this.input.readFoldedBlockScalar();
     }
 
     @Override
-    public Scalar readLiteralBlockScalar() throws IOException {
-        return this.yamlInput.readLiteralBlockScalar();
+    public final Scalar readLiteralBlockScalar() throws IOException {
+        return this.input.readLiteralBlockScalar();
     }
 
 }

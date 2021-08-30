@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.input;
 
@@ -24,19 +23,34 @@ import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.scalar.ScalarOf;
 
+/**
+ * The type of Input that decorates reader and reads first line from decorated.
+ * @since 0.1
+ */
 public class ReaderReadLineInput implements Input {
 
-    private final Scalar<InputStream> inputStreamScalar;
+    /**
+     * The Scalar of InputStream encapsulated.
+     */
+    private final Scalar<InputStream> scalar;
 
-    private ReaderReadLineInput(final BufferedReader bufferedReader) {
-        this.inputStreamScalar = new ScalarOf<InputStream>(
+    /**
+     * Instantiates a new Reader read line input.
+     * @param reader The BufferedReader to be encapsulated.
+     */
+    private ReaderReadLineInput(final BufferedReader reader) {
+        this.scalar = new ScalarOf<InputStream>(
             br -> new InputStreamOf(
                 br.readLine()
             ),
-            bufferedReader
+            reader
         );
     }
 
+    /**
+     * Instantiates a new instance from {@link Reader}.
+     * @param reader The Reader to be encapsulated.
+     */
     public ReaderReadLineInput(final Reader reader) {
         this(
             new BufferedReader(reader)
@@ -44,8 +58,8 @@ public class ReaderReadLineInput implements Input {
     }
 
     @Override
-    public InputStream stream() throws Exception {
-        return inputStreamScalar.value();
+    public final InputStream stream() throws Exception {
+        return this.scalar.value();
     }
 
 }

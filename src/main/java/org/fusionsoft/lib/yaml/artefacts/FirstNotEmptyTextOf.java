@@ -12,32 +12,67 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.yaml.artefacts;
 
 import java.util.Iterator;
+import org.cactoos.Text;
+import org.cactoos.iterator.Filtered;
 import org.cactoos.iterator.IteratorOf;
-import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
+import org.cactoos.iterator.Mapped;
 
-public class FirstNotEmptyTextOf extends TextEnvelope {
+/**
+ * The type of Text that can be constructed of array of CharSequence, most of
+ * which can be empty. You get a first non-empty one.
+ * @since 0.1
+ */
+public class FirstNotEmptyTextOf implements Text {
 
+    /**
+     * The Iterator of String encapsulated.
+     */
+    private final Iterator<String> iterator;
+
+    /**
+     * Instantiates a new First not empty text of presented variants.
+     * @param variants The CharSequence array to be checked for being non-empty.
+     * @implNote The first element from array that is not empty, is returned.
+     */
     public FirstNotEmptyTextOf(final CharSequence... variants) {
-        super(
-            new TextOfScalar(
-                () -> {
-                    final Iterator<CharSequence> it = new IteratorOf<>(variants);
-                    while (it.hasNext()) {
-                        final String var = it.next().toString();
-                        if (! var.isEmpty()) {
-                            return var;
-                        }
-                    }
-                    throw new Exception("All variants are empty");
-                }
+        this.iterator = new Filtered<>(
+            x -> !x.isEmpty(),
+            new Mapped<>(
+                CharSequence::toString,
+                new IteratorOf<>(variants)
             )
         );
+    }
+
+    @Override
+    public final String asString() throws AllEmptyException {
+        if (this.iterator.hasNext()) {
+            return this.iterator.next();
+        } else {
+            throw new AllEmptyException();
+        }
+    }
+
+    /**
+     * The type of Exception that means all variants in
+     * {@link FirstNotEmptyTextOf} are empty.
+     * @since 0.1
+     */
+    public static class AllEmptyException extends Exception {
+
+        /**
+         * Instantiates a new All empty exception.
+         */
+        public AllEmptyException() {
+            super(
+                "All variants are empty"
+            );
+        }
+
     }
 
 }

@@ -21,6 +21,24 @@ import org.fusionsoft.database.description.dbd.SimpleColumn;
 import org.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOf;
 import org.fusionsoft.lib.yaml.artefacts.StringSetOf;
 
+/**
+ * Unfinished JavaDoc.
+ * The type is still in pre-design stage.
+ * @since 0.0.1
+ * @todo Make right Javadoc after re-design
+ * @checkstyle JavadocTagsCheck (4096 lines)
+ * @checkstyle JavadocLocationCheck (4096 lines)
+ * @checkstyle JavadocMethodCheck (4096 lines)
+ * @checkstyle RegexpSinglelineCheck (4096 lines)
+ * @checkstyle JavadocVariableCheck (4096 lines)
+ * @checkstyle MemberNameCheck (4096 lines)
+ * @checkstyle ParameterNameCheck (4096 lines)
+ * @checkstyle ParameterNumberCheck (4096 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (4096 lines)
+ * @checkstyle AbbreviationAsWordInNameCheck (4096 lines)
+ * @checkstyle LineLengthCheck (4096 lines)
+ * @checkstyle AvoidFieldNameMatchingMethodName (4096 lines)
+ */
 public class ColumnOf extends SimpleColumn {
 
     public ColumnOf(final StrictYamlMapping mapping) throws Exception {
@@ -28,7 +46,7 @@ public class ColumnOf extends SimpleColumn {
             new MaybeEmptyTextOf(mapping, "iuColumn").asString(),
             new MaybeEmptyTextOf(mapping, "iuJsonColumn").asString(),
             new MaybeEmptyTextOf(mapping, "type").asString(),
-            ! new MaybeEmptyTextOf(mapping, "dbNullable").asString().equals(
+            !new MaybeEmptyTextOf(mapping, "dbNullable").asString().equals(
                 "false"
             ),
             new MaybeEmptyTextOf(mapping, "description").asString(),

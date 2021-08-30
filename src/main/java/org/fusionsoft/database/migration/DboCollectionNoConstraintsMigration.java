@@ -23,36 +23,63 @@ import org.fusionsoft.database.Migration;
 import org.fusionsoft.database.RestoreParams;
 import org.fusionsoft.database.Server;
 import org.fusionsoft.database.diffpair.DbObjectDiffPairs;
+import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The type of Migration that migrates database through
+ * collection of objects difference between current and previous state,
+ * assuming there's no table constraints exists at the moment.
+ * @since 0.1
+ */
 public class DboCollectionNoConstraintsMigration implements Migration {
 
-    private final Collection<DiffPair<DbObject>> diffDBOs;
+    /**
+     * The Collection of DiffPair of DbObject encapsulated.
+     */
+    private final Collection<DiffPair<DbObject>> diff;
 
-    private final RestoreParams restoreParams;
+    /**
+     * The RestoreParams encapsulated.
+     */
+    private final RestoreParams params;
 
+    /**
+     * The Server encapsulated.
+     */
     private final Server server;
 
+    /**
+     * Instantiates a new Dbo collection no constraints migration.
+     * @param persistent The Collection of DbObject to be encapsulated.
+     * @param target The Collection of DbObject to be encapsulated.
+     * @param params The RestoreParams to be encapsulated.
+     * @param server The Server to be encapsulated.
+     * @checkstyle ParameterNumberCheck (10 lines).
+     */
     public DboCollectionNoConstraintsMigration(
-        final Collection<DbObject> persistentDBOs,
-        final Collection<DbObject> targetDBOs,
-        final RestoreParams restoreParams,
+        final Collection<DbObject> persistent,
+        final Collection<DbObject> target,
+        final RestoreParams params,
         final Server server
     ) {
-        this.diffDBOs = new ListOf<>(
-            new DbObjectDiffPairs(persistentDBOs, targetDBOs)
+        this.diff = new ListOf<>(
+            new DbObjectDiffPairs(persistent, target)
         );
-        this.restoreParams = restoreParams;
+        this.params = params;
         this.server = server;
     }
 
     @Override
-    public boolean validate() {
-        return true;
+    public final boolean validate() {
+        throw new NotImplemented();
     }
 
     @Override
-    public void perform() {
-
+    public final void perform() {
+        this.diff.notifyAll();
+        this.params.notifyAll();
+        this.server.notifyAll();
+        throw new NotImplemented();
     }
 
 }

@@ -19,27 +19,51 @@ import java.util.Collection;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.Migration;
 import org.fusionsoft.database.Server;
+import org.fusionsoft.lib.exception.NotImplemented;
 
-//want to convert to PersistentDbObjectsWithoutConstraints extends Collection<DbObject>
+/**
+ * The type of Migration that migrates database through
+ * collection of objects difference between current and previous state,
+ * preparing IS for flawless update migration.
+ * @since 0.1
+ */
 public class DboCollectionPreMigration implements Migration {
 
-    private final Collection<DbObject> persistentDbObjects;
+    /**
+     * The Collection of DbObject encapsulated.
+     */
+    private final Collection<DbObject> persistent;
 
+    /**
+     * The Server encapsulated.
+     */
     private final Server server;
 
-    public DboCollectionPreMigration(final Collection<DbObject> persistentDbObjects, final Server server) {
-        this.persistentDbObjects = persistentDbObjects;
+    /**
+     * Instantiates a new Dbo collection pre migration.
+     * @param persistent The Collection of DbObject to be encapsulated.
+     * @param server The Server to be encapsulated.
+     */
+    public DboCollectionPreMigration(
+        final Collection<DbObject> persistent,
+        final Server server
+    ) {
+        this.persistent = persistent;
         this.server = server;
     }
 
     @Override
-    public boolean validate() {
-        return true;
+    public final boolean validate() {
+        this.persistent.notifyAll();
+        this.server.notifyAll();
+        throw new NotImplemented();
     }
 
     @Override
-    public void perform() {
-
+    public final void perform() {
+        this.persistent.notifyAll();
+        this.server.notifyAll();
+        throw new NotImplemented();
     }
 
 }

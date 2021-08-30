@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.migration;
 
@@ -24,69 +23,101 @@ import org.fusionsoft.database.Server;
 import org.fusionsoft.database.dbobject.DbObjectsFromDbd;
 import org.fusionsoft.database.dbobject.DbObjectsFromServer;
 import org.fusionsoft.database.description.dbd.ofyaml.DbdOf;
-import org.fusionsoft.database.server.ServerFromDbdMapping;
+import org.fusionsoft.database.server.ServerFromDBDYamlInput;
 import org.fusionsoft.database.yaml.DBDYamlInput;
 
+/**
+ * The type of Migration that can be constructed
+ * of DBD yaml input and server name.
+ * @since 0.1
+ * @checkstyle AbbreviationAsWordInNameCheck (100 lines)
+ */
 public class DBDToServerMigration implements Migration {
 
+    /**
+     * The Migration encapsulated.
+     */
     private final Migration migration;
 
+    /**
+     * Instantiates a new Dbd to server migration.
+     * @param migration The Migration to be encapsulated.
+     */
     private DBDToServerMigration(final Migration migration) {
         this.migration = migration;
     }
 
-    private DBDToServerMigration(final Server server, final Collection<DbObject> persistentDBOs, final Collection<DbObject> targetDBOs, final RestoreParams restoreParams) {
+    /**
+     * Instantiates a new Dbd to server migration.
+     * @param server The Server to be encapsulated.
+     * @param persistent The Collection of DbObject to be encapsulated.
+     * @param target The Collection of DbObject to be encapsulated.
+     * @param params The RestoreParams to be encapsulated.
+     * @checkstyle ParameterNumberCheck (48 lines)
+     */
+    private DBDToServerMigration(
+        final Server server,
+        final Collection<DbObject> persistent,
+        final Collection<DbObject> target,
+        final RestoreParams params
+    ) {
         this(
             new DboCollectionMigration(
                 server,
-                persistentDBOs,
-                targetDBOs,
-                restoreParams
+                persistent,
+                target,
+                params
             )
         );
     }
 
-    //there we can insert our stick on dbd by server validation
-    /*public*/
-    private DBDToServerMigration(final DBDYamlInput dbdYamlInput, final Server server, final RestoreParams restoreParams) {
+    /**
+     * Instantiates a new Dbd to server migration.
+     * @param input The DBDYamlInput to be encapsulated.
+     * @param server The Server to be encapsulated.
+     * @param params The RestoreParams to be encapsulated.
+     */
+    private DBDToServerMigration(
+        final DBDYamlInput input,
+        final Server server,
+        final RestoreParams params
+    ) {
         this(
             server,
             new DbObjectsFromServer(server),
             new DbObjectsFromDbd(
-                new DbdOf(dbdYamlInput),
+                new DbdOf(input),
                 server.dbmsSignature()
             ),
-            restoreParams
+            params
         );
     }
 
-    public DBDToServerMigration(final DBDYamlInput dbdYamlInput, final CharSequence serverName, final RestoreParams restoreParams) {
+    /**
+     * Instantiates a new Dbd to server migration.
+     * @param input The DBDYamlInput to be encapsulated.
+     * @param server The CharSequence to be encapsulated.
+     * @param params The RestoreParams to be encapsulated.
+     */
+    public DBDToServerMigration(
+        final DBDYamlInput input,
+        final CharSequence server,
+        final RestoreParams params
+    ) {
         this(
-            dbdYamlInput,
-            new ServerFromDbdMapping(dbdYamlInput, serverName),
-            restoreParams
+            input,
+            new ServerFromDBDYamlInput(input, server),
+            params
         );
     }
 
-    //    public DBDToServerMigration(YamlDBDMapping yamlDbdMapping, CharSequence serverName, RestoreParams restoreParams) {
-    //        this.server = new ServerFromDbdMapping(yamlDbdMapping, serverName);
-    //        this.migration = new DboCollectionMigration(
-    //            server, 
-    //            new DbObjectsFromServer(server),
-    //            new DbObjectsFromDbdMapping(
-    //                new YamlIUDBD(yamlDbdMapping), 
-    //                server.dbmsSignature()
-    //            ),
-    //            restoreParams
-    //        );
-    //    }
     @Override
-    public boolean validate() throws Exception {
+    public final boolean validate() throws Exception {
         return this.migration.validate();
     }
 
     @Override
-    public void perform() throws Exception {
+    public final void perform() throws Exception {
         this.migration.perform();
     }
 

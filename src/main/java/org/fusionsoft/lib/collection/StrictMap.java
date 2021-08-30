@@ -15,21 +15,30 @@
  */
 package org.fusionsoft.lib.collection;
 
-import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import org.cactoos.text.TextOf;
+import org.fusionsoft.lib.exception.ValueNotFoundException;
 
 /**
- * Map wrapper, allowing no nulls to be returned
- * @see RuntimeException is thrown on `get(X)` method if the original map doesn't contain the X key
+ * Map wrapper, allowing no nulls to be returned.
+ * @param <X> The type of key parameter.
+ * @param <Y> The type of value parameter.
+ * @see RuntimeException is thrown on `get(X)` method
+ *  if the original map doesn't contain the X key.
+ * @since 0.1
  */
+@SuppressWarnings("PMD")
 public class StrictMap<X, Y> implements Map<X, Y> {
 
+    /**
+     * The Map encapsulated.
+     */
     private final Map<X, Y> map;
 
     /**
+     * Instantiates a new Strict map.
      * @param original The original map.
      */
     public StrictMap(final Map<X, Y> original) {
@@ -61,10 +70,7 @@ public class StrictMap<X, Y> implements Map<X, Y> {
         if (this.containsKey(key)) {
             return this.map.get(key);
         } else {
-            throw new RuntimeException(MessageFormat.format(
-                "No value found for key {0}",
-                key.toString()
-            ));
+            throw new ValueNotFoundException(key.toString());
         }
     }
 

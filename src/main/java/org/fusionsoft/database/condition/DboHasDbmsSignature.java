@@ -19,20 +19,35 @@ import org.fusionsoft.database.Condition;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbmsSignature;
 
+/**
+ * The type Dbo has specific dbms signature Condition.
+ * @since 0.1
+ */
 public class DboHasDbmsSignature implements Condition {
 
+    /**
+     * The signature must present, wrapped.
+     */
     private final DbmsSignature signature;
 
-    private final DbObject dbObject;
+    /**
+     * The db object to be tested, wrapped.
+     */
+    private final DbObject checked;
 
-    public DboHasDbmsSignature(final DbmsSignature signature, final DbObject dbObject) {
+    /**
+     * Instantiates a new Dbo has dbms signature.
+     * @param signature The signature must present.
+     * @param checked The db object to be tested.
+     */
+    public DboHasDbmsSignature(final DbmsSignature signature, final DbObject checked) {
         this.signature = signature;
-        this.dbObject = dbObject;
+        this.checked = checked;
     }
 
     @Override
-    public Boolean value() {
-        return dbObject.signature().dbmsSignature().equals(signature);
+    public final Boolean value() {
+        return this.checked.signature().dbmsSignature().equals(this.signature);
     }
 
 }

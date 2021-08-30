@@ -18,20 +18,33 @@ package org.fusionsoft.database.connection;
 import org.fusionsoft.database.yaml.DBDYamlInput;
 import org.fusionsoft.lib.connection.ConnectionEnvelope;
 import org.fusionsoft.lib.connection.ConnectionOfScalar;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The Connection obtained from DBD's 'server' section data.
+ * @see java.sql.Connection
+ * @since 0.1
+ */
 public class ConnFromDbdMapping extends ConnectionEnvelope {
 
-    private final DBDYamlInput dbdYamlInput;
-
-    private final CharSequence serverName;
-
-    public ConnFromDbdMapping(final DBDYamlInput dbdYamlInput, final CharSequence serverName) {
-        super(new ConnectionOfScalar(() -> {
-            throw new NotImplementedException();
-        }));
-        this.dbdYamlInput = dbdYamlInput;
-        this.serverName = serverName;
+    /**
+     * Instantiates a new Conn from dbd mapping.
+     * @param input The DBD yaml input.
+     * @param server The name to take from 'server' section of DBD.
+     */
+    public ConnFromDbdMapping(
+        final DBDYamlInput input,
+        final CharSequence server
+    ) {
+        super(
+            new ConnectionOfScalar(
+                () -> {
+                    input.notifyAll();
+                    server.notifyAll();
+                    throw new NotImplemented();
+                }
+            )
+        );
     }
 
 }

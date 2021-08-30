@@ -20,17 +20,41 @@ import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.fusionsoft.database.Migration;
 
+/**
+ * The type of Migration
+ * that can be performed by passing SQL to consumer.
+ * @since 0.1
+ */
 public abstract class SqlMigration implements Migration {
 
+    /**
+     * The Text encapsulated.
+     */
     private final Text sql;
 
-    private final Proc<Text> sqlConsumer;
+    /**
+     * The Proc of Text encapsulated.
+     */
+    private final Proc<Text> consumer;
 
+    /**
+     * The Scalar of Boolean encapsulated.
+     */
     private final Scalar<Boolean> validation;
 
-    public SqlMigration(final Text sql, final Proc<Text> sqlConsumer, final Scalar<Boolean> validation) {
+    /**
+     * Instantiates a new Sql migration.
+     * @param sql The Text to be encapsulated.
+     * @param consumer The Proc of Text to be encapsulated.
+     * @param validation The Scalar of Boolean to be encapsulated.
+     */
+    public SqlMigration(
+        final Text sql,
+        final Proc<Text> consumer,
+        final Scalar<Boolean> validation
+    ) {
         this.sql = sql;
-        this.sqlConsumer = sqlConsumer;
+        this.consumer = consumer;
         this.validation = validation;
     }
 
@@ -41,7 +65,7 @@ public abstract class SqlMigration implements Migration {
 
     @Override
     public final void perform() throws Exception {
-        sqlConsumer.exec(sql);
+        this.consumer.exec(this.sql);
     }
 
 }

@@ -12,22 +12,22 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
 import java.sql.Connection;
 import org.fusionsoft.lib.connection.NotImplementedConnection;
 
+/**
+ * The interface Server representing a database in 'servers' section in DBGit.
+ * @since 0.1
+ */
 public interface Server {
 
-    Connection connection();
-
-    String name();
-
-    DbmsSignature dbmsSignature();
-
-    Server Fake = new Server() {
+    /**
+     * The constant FAKE.
+     */
+    Server FAKE = new Server() {
         @Override
         public Connection connection() {
             return new NotImplementedConnection();
@@ -40,8 +40,26 @@ public interface Server {
 
         @Override
         public DbmsSignature dbmsSignature() {
-            return DbmsSignature.Absent;
+            return DbmsSignature.ABSENT;
         }
     };
+
+    /**
+     * Connection by JDBC.
+     * @return The java.sql.Connection.
+     */
+    Connection connection();
+
+    /**
+     * Name of server in the list.
+     * @return The string.
+     */
+    String name();
+
+    /**
+     * The signature of DBMS.
+     * @return The DbmsSignature.
+     */
+    DbmsSignature dbmsSignature();
 
 }

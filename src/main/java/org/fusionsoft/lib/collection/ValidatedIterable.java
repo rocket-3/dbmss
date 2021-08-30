@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.collection;
 
@@ -21,15 +20,24 @@ import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.ScalarOf;
 
+/**
+ * The type of Iterable that is validated at each usage.
+ * @param <X> The type of iterable parameter.
+ * @since 0.1
+ */
 public class ValidatedIterable<X> extends IterableEnvelope<X> {
 
     /**
      * Ctor.
-     * @param col The wrapped collection
+     * @param validation The Proc of Iterable X to be encapsulated.
+     * @param col The wrapped collection.
      */
-    public ValidatedIterable(final Proc<Iterable<X>> validation, final Iterable<X> col) {
+    public ValidatedIterable(
+        final Proc<Iterable<X>> validation,
+        final Iterable<X> col
+    ) {
         super(
-            new IterableOf<X>(
+            new IterableOf<>(
                 new ScalarOf<>(
                     () -> {
                         validation.exec(col);

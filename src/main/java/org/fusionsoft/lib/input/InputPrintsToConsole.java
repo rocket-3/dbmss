@@ -19,21 +19,36 @@ import java.io.InputStream;
 import org.cactoos.Input;
 import org.cactoos.Text;
 
+/**
+ * The type of Input that prints text to {@link org.cactoos.io.Stdout} at usage.
+ * @since 0.1
+ */
 public class InputPrintsToConsole implements Input {
 
-    private final Runnable printingRunnable;
+    /**
+     * The printing Runnable encapsulated.
+     */
+    private final Runnable printing;
 
+    /**
+     * The Input encapsulated.
+     */
     private final Input origin;
 
-    public InputPrintsToConsole(final Text textToConsole, final Input origin) {
-        this.printingRunnable = new ConsolePrinting(textToConsole);
+    /**
+     * Instantiates a new Input prints to console.
+     * @param promt The Text to be printed at usage.
+     * @param origin The Input to be encapsulated.
+     */
+    public InputPrintsToConsole(final Text promt, final Input origin) {
+        this.printing = new ConsolePrinting(promt);
         this.origin = origin;
     }
 
     @Override
-    public InputStream stream() throws Exception {
-        printingRunnable.run();
-        return origin.stream();
+    public final InputStream stream() throws Exception {
+        this.printing.run();
+        return this.origin.stream();
     }
 
 }

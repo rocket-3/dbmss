@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.dbobject;
 
@@ -21,21 +20,33 @@ import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbObjectSignature;
 import org.fusionsoft.database.StringProperty;
 
-public class DbObjectEnvelope implements DbObject {
+/**
+ * The DbObject instance wrapping original one and delegating all methods to it.
+ * Used to compose list of decorators together by subtyping.
+ * @since 0.1
+ */
+public abstract class DbObjectEnvelope implements DbObject {
 
+    /**
+     * The wrapped DbObject instance.
+     */
     private final DbObject origin;
 
+    /**
+     * Instantiates a new DbObject from other instance.
+     * @param origin The wrapped DbObject.
+     */
     public DbObjectEnvelope(final DbObject origin) {
         this.origin = origin;
     }
 
     @Override
-    public DbObjectSignature signature() {
+    public final DbObjectSignature signature() {
         return this.origin.signature();
     }
 
     @Override
-    public Collection<StringProperty> props() {
+    public final Collection<StringProperty> props() {
         return this.origin.props();
     }
 

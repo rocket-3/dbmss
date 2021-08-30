@@ -12,14 +12,27 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database;
 
+/**
+ * The interface Migration representing operation of migration database state or
+ * its part.
+ * @since 0.1
+ */
 public interface Migration {
 
+    /**
+     * Validate if can be performed.
+     * @return The boolean.
+     * @throws Exception When can't.
+     */
     boolean validate() throws Exception;
 
+    /**
+     * Perform.
+     * @throws Exception When can't.
+     */
     void perform() throws Exception;
 
 }

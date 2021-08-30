@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.stringproperty;
 
@@ -23,6 +22,11 @@ import org.cactoos.set.SetOf;
 import org.fusionsoft.database.StringProperty;
 import org.fusionsoft.database.StringPropertySignature;
 
+/**
+ * The type of Collection of {@link StringPropertySignature} that can be
+ *  constructed of {@link StringProperty} collection.
+ * @since 0.1
+ */
 public class SigsOfProps extends CollectionEnvelope<StringPropertySignature> {
 
     /**

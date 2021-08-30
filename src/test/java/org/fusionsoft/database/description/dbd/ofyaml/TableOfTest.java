@@ -12,22 +12,31 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.database.description.dbd.ofyaml;
 
 import java.io.IOException;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
+import org.cactoos.scalar.And;
 import org.fusionsoft.database.description.dbd.Table;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class YamlIUTableDBDTest {
+/**
+ * The test for {@link TableOf}.
+ * @since 0.1
+ */
+@SuppressWarnings("PMD")
+class TableOfTest {
 
+    /**
+     * Constructs {@link Table} from text.
+     * @throws IOException When can't.
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     */
     @Test
-    public void constructsFromText() throws IOException {
+    public void constructsFromText() throws Exception {
         final Table vendors = new TableOf(
             "vendors",
             "columns:\n"
@@ -72,18 +81,27 @@ class YamlIUTableDBDTest {
             + "      - vendor_id\n"
             + "    dbUnique: true"
         );
-        assertEquals(
-            "Глобальный ид объекта",
-            vendors.columns().iterator().next().description()
-        );
-        assertTrue(
-            new MapOf<>(
-                constraint -> new MapEntry<>(constraint.key(), constraint),
-                vendors.constraints()
-            )
-                .get("pk_vendors")
-                .dbColumn()
-                .contains("vendor_id")
+        Assertions.assertTrue(
+            new And(
+                () -> {
+                    return new MapOf<>(
+                        constraint -> new MapEntry<>(
+                            constraint.key(),
+                            constraint
+                        ),
+                        vendors.constraints()
+                    )
+                        .get("pk_vendors")
+                        .dbColumn()
+                        .contains("vendor_id");
+                },
+                () -> {
+                    return "Глобальный ид объекта"
+                        .equals(
+                            vendors.columns().iterator().next().description()
+                        );
+                }
+            ).value()
         );
     }
 

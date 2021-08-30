@@ -12,7 +12,6 @@
  *
  * See the License for the specific language governing permissions
  * and limitations under the License.
- *
  */
 package org.fusionsoft.lib.connection;
 
@@ -24,231 +23,246 @@ import java.sql.Statement;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * The Statement can be instantiated from Scalar.
+ * @see Scalar
+ * @since 0.1
+ * @checkstyle ParameterNameCheck (400 lines)
+ * @checkstyle LineLengthCheck (400 lines)
+ */
+@SuppressWarnings("PMD")
 public class StatementOfScalar implements Statement {
 
+    /**
+     * The scalar to delegate everything to.
+     */
     private final Unchecked<Statement> scalar;
 
+    /**
+     * Instantiates a new Statement of scalar.
+     * @param scalar The scalar to delegate everything to.
+     */
     public StatementOfScalar(final Scalar<Statement> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
     @Override
-    public ResultSet executeQuery(final String sql) throws SQLException {
+    public final ResultSet executeQuery(final String sql) throws SQLException {
         return this.scalar.value().executeQuery(sql);
     }
 
     @Override
-    public int executeUpdate(final String sql) throws SQLException {
+    public final int executeUpdate(final String sql) throws SQLException {
         return this.scalar.value().executeUpdate(sql);
     }
 
     @Override
-    public void close() throws SQLException {
+    public final void close() throws SQLException {
         this.scalar.value().close();
     }
 
     @Override
-    public int getMaxFieldSize() throws SQLException {
+    public final int getMaxFieldSize() throws SQLException {
         return this.scalar.value().getMaxFieldSize();
     }
 
     @Override
-    public void setMaxFieldSize(final int max) throws SQLException {
+    public final void setMaxFieldSize(final int max) throws SQLException {
         this.scalar.value().setMaxFieldSize(max);
     }
 
     @Override
-    public int getMaxRows() throws SQLException {
+    public final int getMaxRows() throws SQLException {
         return this.scalar.value().getMaxRows();
     }
 
     @Override
-    public void setMaxRows(final int max) throws SQLException {
+    public final void setMaxRows(final int max) throws SQLException {
         this.scalar.value().setMaxRows(max);
     }
 
     @Override
-    public void setEscapeProcessing(final boolean enable) throws SQLException {
+    public final void setEscapeProcessing(final boolean enable) throws SQLException {
         this.scalar.value().setEscapeProcessing(enable);
     }
 
     @Override
-    public int getQueryTimeout() throws SQLException {
+    public final int getQueryTimeout() throws SQLException {
         return this.scalar.value().getQueryTimeout();
     }
 
     @Override
-    public void setQueryTimeout(final int seconds) throws SQLException {
+    public final void setQueryTimeout(final int seconds) throws SQLException {
         this.scalar.value().setQueryTimeout(seconds);
     }
 
     @Override
-    public void cancel() throws SQLException {
+    public final void cancel() throws SQLException {
         this.scalar.value().cancel();
     }
 
     @Override
-    public SQLWarning getWarnings() throws SQLException {
+    public final SQLWarning getWarnings() throws SQLException {
         return this.scalar.value().getWarnings();
     }
 
     @Override
-    public void clearWarnings() throws SQLException {
+    public final void clearWarnings() throws SQLException {
         this.scalar.value().clearWarnings();
     }
 
     @Override
-    public void setCursorName(final String name) throws SQLException {
+    public final void setCursorName(final String name) throws SQLException {
         this.scalar.value().setCursorName(name);
     }
 
     @Override
-    public boolean execute(final String sql) throws SQLException {
+    public final boolean execute(final String sql) throws SQLException {
         return this.scalar.value().execute(sql);
     }
 
     @Override
-    public ResultSet getResultSet() throws SQLException {
+    public final ResultSet getResultSet() throws SQLException {
         return this.scalar.value().getResultSet();
     }
 
     @Override
-    public int getUpdateCount() throws SQLException {
+    public final int getUpdateCount() throws SQLException {
         return this.scalar.value().getUpdateCount();
     }
 
     @Override
-    public boolean getMoreResults() throws SQLException {
+    public final boolean getMoreResults() throws SQLException {
         return this.scalar.value().getMoreResults();
     }
 
     @Override
-    public void setFetchDirection(final int direction) throws SQLException {
+    public final void setFetchDirection(final int direction) throws SQLException {
         this.scalar.value().setFetchDirection(direction);
     }
 
     @Override
-    public int getFetchDirection() throws SQLException {
+    public final int getFetchDirection() throws SQLException {
         return this.scalar.value().getFetchDirection();
     }
 
     @Override
-    public void setFetchSize(final int rows) throws SQLException {
+    public final void setFetchSize(final int rows) throws SQLException {
         this.scalar.value().setFetchSize(rows);
     }
 
     @Override
-    public int getFetchSize() throws SQLException {
+    public final int getFetchSize() throws SQLException {
         return this.scalar.value().getFetchSize();
     }
 
     @Override
-    public int getResultSetConcurrency() throws SQLException {
+    public final int getResultSetConcurrency() throws SQLException {
         return this.scalar.value().getResultSetConcurrency();
     }
 
     @Override
-    public int getResultSetType() throws SQLException {
+    public final int getResultSetType() throws SQLException {
         return this.scalar.value().getResultSetType();
     }
 
     @Override
-    public void addBatch(final String sql) throws SQLException {
+    public final void addBatch(final String sql) throws SQLException {
         this.scalar.value().addBatch(sql);
     }
 
     @Override
-    public void clearBatch() throws SQLException {
+    public final void clearBatch() throws SQLException {
         this.scalar.value().clearBatch();
     }
 
     @Override
-    public int[] executeBatch() throws SQLException {
+    public final int[] executeBatch() throws SQLException {
         return this.scalar.value().executeBatch();
     }
 
     @Override
-    public Connection getConnection() throws SQLException {
+    public final Connection getConnection() throws SQLException {
         return this.scalar.value().getConnection();
     }
 
     @Override
-    public boolean getMoreResults(final int current) throws SQLException {
+    public final boolean getMoreResults(final int current) throws SQLException {
         return this.scalar.value().getMoreResults();
     }
 
     @Override
-    public ResultSet getGeneratedKeys() throws SQLException {
+    public final ResultSet getGeneratedKeys() throws SQLException {
         return this.scalar.value().getGeneratedKeys();
     }
 
     @Override
-    public int executeUpdate(final String sql, final int autoGeneratedKeys) throws SQLException {
+    public final int executeUpdate(final String sql, final int autoGeneratedKeys) throws SQLException {
         return this.scalar.value().executeUpdate(sql, autoGeneratedKeys);
     }
 
     @Override
-    public int executeUpdate(final String sql, final int[] columnIndexes) throws SQLException {
+    public final int executeUpdate(final String sql, final int[] columnIndexes) throws SQLException {
         return this.scalar.value().executeUpdate(sql, columnIndexes);
     }
 
     @Override
-    public int executeUpdate(final String sql, final String[] columnNames) throws SQLException {
+    public final int executeUpdate(final String sql, final String[] columnNames) throws SQLException {
         return this.scalar.value().executeUpdate(sql, columnNames);
     }
 
     @Override
-    public boolean execute(final String sql, final int autoGeneratedKeys) throws SQLException {
+    public final boolean execute(final String sql, final int autoGeneratedKeys) throws SQLException {
         return this.scalar.value().execute(sql, autoGeneratedKeys);
     }
 
     @Override
-    public boolean execute(final String sql, final int[] columnIndexes) throws SQLException {
+    public final boolean execute(final String sql, final int[] columnIndexes) throws SQLException {
         return this.scalar.value().execute(sql, columnIndexes);
     }
 
     @Override
-    public boolean execute(final String sql, final String[] columnNames) throws SQLException {
+    public final boolean execute(final String sql, final String[] columnNames) throws SQLException {
         return this.scalar.value().execute(sql, columnNames);
     }
 
     @Override
-    public int getResultSetHoldability() throws SQLException {
+    public final int getResultSetHoldability() throws SQLException {
         return this.scalar.value().getResultSetHoldability();
     }
 
     @Override
-    public boolean isClosed() throws SQLException {
+    public final boolean isClosed() throws SQLException {
         return this.scalar.value().isClosed();
     }
 
     @Override
-    public void setPoolable(final boolean poolable) throws SQLException {
+    public final void setPoolable(final boolean poolable) throws SQLException {
         this.scalar.value().setPoolable(poolable);
     }
 
     @Override
-    public boolean isPoolable() throws SQLException {
+    public final boolean isPoolable() throws SQLException {
         return this.scalar.value().isPoolable();
     }
 
     @Override
-    public void closeOnCompletion() throws SQLException {
+    public final void closeOnCompletion() throws SQLException {
         this.scalar.value().closeOnCompletion();
     }
 
     @Override
-    public boolean isCloseOnCompletion() throws SQLException {
+    public final boolean isCloseOnCompletion() throws SQLException {
         return this.scalar.value().isCloseOnCompletion();
     }
 
     @Override
-    public <T> T unwrap(final Class<T> iface) throws SQLException {
+    public final <T> T unwrap(final Class<T> iface) throws SQLException {
         return this.scalar.value().unwrap(iface);
     }
 
     @Override
-    public boolean isWrapperFor(final Class<?> iface) throws SQLException {
+    public final boolean isWrapperFor(final Class<?> iface) throws SQLException {
         return this.scalar.value().isWrapperFor(iface);
     }
 
