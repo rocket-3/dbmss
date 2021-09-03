@@ -19,7 +19,6 @@ package org.fusionsoft.database.description.dbd;
  * Unfinished JavaDoc.
  * The type is still in pre-design stage.
  * @since 0.0.1
- * @todo Make right Javadoc after re-design
  * @checkstyle JavadocTagsCheck (4096 lines)
  * @checkstyle JavadocLocationCheck (4096 lines)
  * @checkstyle JavadocMethodCheck (4096 lines)

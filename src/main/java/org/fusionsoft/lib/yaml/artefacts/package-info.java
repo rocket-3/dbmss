@@ -15,6 +15,5 @@
  */
 /**
  * A junkyard with artefacts we can obtain from Yaml sources.
- * @todo Split into parts.
  */
 package org.fusionsoft.lib.yaml.artefacts;

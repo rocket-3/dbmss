@@ -64,7 +64,7 @@ class TableOfTest {
             + "  - dbName: vendor_id\n"
             + "    dbLocalIdMethod: GLOBAL_SEQ\n"
             + "    dbNullable: false\n"
-            + "    description: Локальный идентификатор производителя\n"
+            + "    description: Local provider id\n"
             + "  - iuColumn: vendor_name\n"
             + "    dbName: vendor_name\n"
             + "    type: \"string\"\n"

@@ -21,7 +21,7 @@ import org.cactoos.Text;
  * The interface representing names of DBMS object types.
  * @since 0.1
  * @checkstyle InterfaceIsTypeCheck (10 lines)
- * @todo Redesign without constants
+ * @todo #4:60min Redesign without constants
  */
 @SuppressWarnings("PMD")
 public interface DbObjectType extends Text {

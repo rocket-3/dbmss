@@ -22,7 +22,7 @@ import org.cactoos.Text;
  * @see org.cactoos.Text
  * @since 0.1
  * @checkstyle InterfaceIsTypeCheck (100 lines)
- * @todo Redesign all this.
+ * @todo #4:60min Redesign the purpose of this code.
  */
 @SuppressWarnings("PMD")
 public interface DbmsVersion extends Text {
