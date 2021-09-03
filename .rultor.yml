@@ -6,4 +6,4 @@ merge:
   script: |-
     java -version --batch-mode
     mvn -version --batch-mode
-    mvn clean install -Pcheckstyle --batch-mode
+    mvn clean install -Pqulice --batch-mode
