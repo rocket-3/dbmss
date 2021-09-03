@@ -1,0 +1,9 @@
+architect:
+  - rocket-3
+env:
+  MAVEN_OPTS: "-XX:MaxPermSize=256m -Xmx1g"
+merge:
+  script: |-
+    java -version --batch-mode
+    mvn -version --batch-mode
+    mvn clean install -Pcheckstyle --batch-mode
