@@ -13,19 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.stringproperty.type;
-
 /**
- * The type StringPropertyType, the boolean one.
- * @since 0.1
+ * Ways to create {@link org.fusionsoft.database.AttributeSignature}.
  */
-public class Bool extends RtStringPropertyType {
-
-    /**
-     * Instantiates a new Bool StringPropertyType.
-     */
-    public Bool() {
-        super("bool");
-    }
-
-}
+package org.fusionsoft.database.attribute.signature;

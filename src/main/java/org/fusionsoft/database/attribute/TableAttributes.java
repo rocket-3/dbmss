@@ -13,37 +13,37 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.stringproperty;
+package org.fusionsoft.database.attribute;
 
 import java.util.Collection;
 import org.cactoos.collection.CollectionEnvelope;
 import org.cactoos.set.SetOf;
-import org.fusionsoft.database.StringProperty;
-import org.fusionsoft.database.stringproperty.signature.SimpleStringPropertySignature;
-import org.fusionsoft.database.stringproperty.type.Chars;
-import org.fusionsoft.database.stringproperty.type.Int;
+import org.fusionsoft.database.Attribute;
+import org.fusionsoft.database.attribute.signature.SimpleAttributeSignature;
+import org.fusionsoft.database.attribute.type.TypeInteger;
+import org.fusionsoft.database.attribute.type.TypeText;
 
 /**
- * The type of that can be constructed of.
+ * Attributes of table object in some DBMS.
  * @since 0.1
  */
-public class TableProps extends CollectionEnvelope<StringProperty> {
+public class TableAttributes extends CollectionEnvelope<Attribute> {
 
     /**
-     * Instantiates a new Table props.
-     * @param collection The Collection of StringProperty to be encapsulated.
+     * Instantiates a new TableAttributes.
+     * @param collection The collection of {@link Attribute} to be encapsulated.
      */
-    public TableProps(final Collection<StringProperty> collection) {
+    public TableAttributes(final Collection<Attribute> collection) {
         super(
-            new PropsHasKeys(
+            new AttributesHasKeys(
                 new SetOf<>(
-                    new SimpleStringPropertySignature(
+                    new SimpleAttributeSignature(
                         "param1",
-                        new Chars()
+                        new TypeText()
                     ),
-                    new SimpleStringPropertySignature(
+                    new SimpleAttributeSignature(
                         "param2",
-                        new Int()
+                        new TypeInteger()
                     )
                 ),
                 collection
@@ -52,16 +52,15 @@ public class TableProps extends CollectionEnvelope<StringProperty> {
     }
 
     /**
-     * Instantiates a new Table props.
+     * Instantiates a new TableAttributes.
      * @param string The String to be encapsulated.
      * @param number The Integer to be encapsulated.
-     * @checkstyle ParameterNameCheck (100 lines)
      */
-    public TableProps(final String string, final Integer number) {
+    public TableAttributes(final String string, final Integer number) {
         this(
             new SetOf<>(
-                new StringProperty.Of("string", string),
-                new StringProperty.Of("number", number)
+                new AttributeOf("string", string),
+                new AttributeOf("number", number)
             )
         );
     }

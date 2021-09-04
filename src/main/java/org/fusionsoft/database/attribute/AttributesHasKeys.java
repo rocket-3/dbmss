@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.stringproperty;
+package org.fusionsoft.database.attribute;
 
 import java.util.Collection;
 import java.util.Set;
@@ -21,27 +21,27 @@ import org.cactoos.collection.CollectionEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.ScalarOf;
 import org.cactoos.set.SetOf;
-import org.fusionsoft.database.StringProperty;
-import org.fusionsoft.database.StringPropertySignature;
+import org.fusionsoft.database.Attribute;
+import org.fusionsoft.database.AttributeSignature;
 import org.fusionsoft.lib.collection.MapHasKeys;
 
 /**
- * The type of Props collection of that can be constructed of Props
+ * The decorator of {@link Attribute} collection.
  * and signatures it must contain.
- * @see StringPropertySignature
+ * @see AttributeSignature
  * @since 0.1
  */
-public class PropsHasKeys extends CollectionEnvelope<StringProperty> {
+public class AttributesHasKeys extends CollectionEnvelope<Attribute> {
 
     /**
-     * Instantiates a new Props has keys.
+     * Instantiates a new AttributesHasKeys.
      * @param keys The Set of StringPropertySignature must present in props.
      * @param props The Collection of StringProperty to be encapsulated
      *  and tested at runtime.
      */
-    public PropsHasKeys(
-        final Set<StringPropertySignature> keys,
-        final Collection<StringProperty> props
+    public AttributesHasKeys(
+        final Set<AttributeSignature> keys,
+        final Collection<Attribute> props
     ) {
         super(
             new SetOf<>(
@@ -50,7 +50,7 @@ public class PropsHasKeys extends CollectionEnvelope<StringProperty> {
                         x -> x.values().iterator(),
                         new MapHasKeys<>(
                             keys,
-                            new SignatureMapOfProps(props)
+                            new AttributesMap(props)
                         )
                     )
                 )

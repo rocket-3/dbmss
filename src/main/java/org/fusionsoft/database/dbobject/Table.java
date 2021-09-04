@@ -15,8 +15,8 @@
  */
 package org.fusionsoft.database.dbobject;
 
+import org.fusionsoft.database.attribute.TableAttributes;
 import org.fusionsoft.database.dbobject.signature.TableDbObjectSignature;
-import org.fusionsoft.database.stringproperty.TableProps;
 
 /**
  * A DbObject that represents a table.
@@ -32,7 +32,7 @@ public class Table extends SimpleDbObject {
      */
     public Table(
         final TableDbObjectSignature signature,
-        final TableProps props
+        final TableAttributes props
     ) {
         super(
             signature,

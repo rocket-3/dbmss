@@ -13,7 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database.attribute.type;
+
+import org.fusionsoft.database.AttributeType;
+
 /**
- * Variants of {@link org.fusionsoft.database.StringProperty}'s type.
+ * The float number origin of {@link org.fusionsoft.database.Attribute}'s value.
+ * @since 0.1
  */
-package org.fusionsoft.database.stringproperty.type;
+public class TypeFloat implements AttributeType {
+
+    @Override
+    public final String name() {
+        return "float";
+    }
+
+}

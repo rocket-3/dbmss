@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.stringproperty.type;
+package org.fusionsoft.database.attribute.type;
+
+import org.fusionsoft.database.AttributeType;
 
 /**
- * The type of StringPropertyType, the number with floating point one.
+ * The integer origin of {@link org.fusionsoft.database.Attribute}'s value.
  * @since 0.1
  */
-public class Float extends RtStringPropertyType {
+public class TypeInteger implements AttributeType {
 
-    /**
-     * Instantiates a new Float StringPropertyType.
-     */
-    public Float() {
-        super("float");
+    @Override
+    public final String name() {
+        return "integer";
     }
 
 }

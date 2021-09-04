@@ -20,10 +20,10 @@ import org.cactoos.set.SetOf;
 import org.cactoos.text.TextOf;
 import org.fusionsoft.database.DbObjectType;
 import org.fusionsoft.database.DbmsVersion;
-import org.fusionsoft.database.StringProperty;
+import org.fusionsoft.database.attribute.AttributeOf;
+import org.fusionsoft.database.attribute.NameMapOfProps;
 import org.fusionsoft.database.dbms.signature.PgDbmsSignature;
 import org.fusionsoft.database.dbobject.signature.SimpleDbObjectSignature;
-import org.fusionsoft.database.stringproperty.MapOfProps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -58,18 +58,18 @@ class SimpleDbObjectTest {
                         )
                     ),
                     new SetOf<>(
-                        new StringProperty.Of(partitioned, bool),
-                        new StringProperty.Of(rows, number)
+                        new AttributeOf(partitioned, bool),
+                        new AttributeOf(rows, number)
                     )
                 ),
                 x -> x.signature().name().equals(name),
-                x -> new MapOfProps(x.props())
+                x -> new NameMapOfProps(x.attributes())
                     .get(rows)
-                    .asString()
+                    .value()
                     .equals(String.valueOf(number)),
-                x -> new MapOfProps(x.props())
+                x -> new NameMapOfProps(x.attributes())
                     .get(partitioned)
-                    .asString()
+                    .value()
                     .equals(String.valueOf(bool))
             ).value()
         );

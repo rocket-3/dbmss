@@ -18,9 +18,9 @@ package org.fusionsoft.database.dbobject;
 import java.util.Collection;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
+import org.fusionsoft.database.Attribute;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbObjectSignature;
-import org.fusionsoft.database.StringProperty;
 
 /**
  * The type Db object of scalar.
@@ -51,8 +51,8 @@ public final class DbObjectOfScalar implements DbObject {
     }
 
     @Override
-    public Collection<StringProperty> props() {
-        return this.scalar.value().props();
+    public Collection<Attribute> attributes() {
+        return this.scalar.value().attributes();
     }
 
 }

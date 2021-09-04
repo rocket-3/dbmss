@@ -34,7 +34,7 @@ public interface DbObject {
         }
 
         @Override
-        public Collection<StringProperty> props() {
+        public Collection<Attribute> attributes() {
             return Collections.emptyList();
         }
     };
@@ -47,9 +47,9 @@ public interface DbObject {
 
     /**
      * DBMS attributes of operated object.
-     * @return The collection of StringProperty.
-     * @see StringProperty
+     * @return The collection of {@link Attribute}.
+     * @see Attribute
      */
-    Collection<StringProperty> props();
+    Collection<Attribute> attributes();
 
 }

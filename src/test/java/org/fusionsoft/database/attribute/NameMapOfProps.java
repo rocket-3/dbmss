@@ -13,25 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.stringproperty;
+package org.fusionsoft.database.attribute;
 
 import org.cactoos.map.MapEnvelope;
 import org.cactoos.map.MapOf;
-import org.fusionsoft.database.StringProperty;
+import org.fusionsoft.database.Attribute;
+import org.fusionsoft.database.AttributeSignature;
 
 /**
  * The type of Map, keyed by
- * {@link org.fusionsoft.database.StringPropertySignature}
- * that can be constructed of iterable of {@link StringProperty}.
+ * {@link AttributeSignature}
+ * that can be constructed of iterable of {@link Attribute}.
  * @since 0.1
  */
-public class MapOfProps extends MapEnvelope<String, StringProperty> {
+public class NameMapOfProps extends MapEnvelope<String, Attribute> {
 
     /**
      * Ctor.
      * @param iterable The iterable of StringProperty.
      */
-    public MapOfProps(final Iterable<StringProperty> iterable) {
+    public NameMapOfProps(final Iterable<Attribute> iterable) {
         super(
             new MapOf<>(
                 sp -> sp.signature().name(),

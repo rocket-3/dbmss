@@ -16,22 +16,21 @@
 package org.fusionsoft.database;
 
 /**
- * The interface StringPropertySignature representing
- *  signature of {@link StringProperty}.
+ * The interface representing signature of {@link Attribute}.
  * @since 0.1
  */
-public interface StringPropertySignature {
+public interface AttributeSignature {
 
     /**
-     * Type of string property.
-     * @return The StringPropertyType instance.
-     */
-    StringPropertyType type();
-
-    /**
-     * Name of StringProperty.
+     * Name of {@link Attribute}.
      * @return The string.
      */
     String name();
+
+    /**
+     * Name of {@link AttributeType} used in {@link Attribute}'s construction.
+     * @return The string.
+     */
+    String type();
 
 }

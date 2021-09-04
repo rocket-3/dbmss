@@ -13,19 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.stringproperty.type;
-
 /**
- * The type of StringPropertyType, the textual one.
- * @since 0.1
+ * Artefacts, referred to {@link org.fusionsoft.database.Attribute}.
  */
-public class Chars extends RtStringPropertyType {
-
-    /**
-     * Instantiates a new Chars StringPropertyType.
-     */
-    public Chars() {
-        super("chars");
-    }
-
-}
+package org.fusionsoft.database.attribute;

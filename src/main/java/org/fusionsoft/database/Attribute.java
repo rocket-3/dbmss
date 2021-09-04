@@ -13,7 +13,25 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database;
+
 /**
- * Tests for {@link org.fusionsoft.database.StringProperty} implementations.
+ * The interface StringProperty representing textual property of some domain
+ *  entity.
+ * @since 0.1
  */
-package org.fusionsoft.database.stringproperty;
+public interface Attribute {
+
+    /**
+     * Attribute's ID.
+     * @return The AttributeSignature.
+     */
+    AttributeSignature signature();
+
+    /**
+     * Text value.
+     * @return The instance of {@link String}.
+     */
+    String value();
+
+}

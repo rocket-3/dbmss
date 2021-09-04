@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database;
+package org.fusionsoft.database.attribute.type;
 
-import org.cactoos.Text;
+import org.fusionsoft.database.AttributeType;
 
 /**
- * The interface StringPropertyType representing type of {@link StringProperty}.
+ * The boolean origin of {@link org.fusionsoft.database.Attribute}'s value.
  * @since 0.1
- * @checkstyle InterfaceIsTypeCheck (100 lines)
  */
-public interface StringPropertyType extends Text {
+public class TypeBoolean implements AttributeType {
+
+    @Override
+    public final String name() {
+        return "boolean";
+    }
 
 }

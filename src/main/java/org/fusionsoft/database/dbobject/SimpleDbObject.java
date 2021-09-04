@@ -16,9 +16,9 @@
 package org.fusionsoft.database.dbobject;
 
 import java.util.Collection;
+import org.fusionsoft.database.Attribute;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbObjectSignature;
-import org.fusionsoft.database.StringProperty;
 
 /**
  * The naive implementation of DbObject.
@@ -35,7 +35,7 @@ public class SimpleDbObject implements DbObject {
     /**
      * The props to return.
      */
-    private final Collection<StringProperty> properties;
+    private final Collection<Attribute> properties;
 
     /**
      * Instantiates a new Simple db object.
@@ -44,7 +44,7 @@ public class SimpleDbObject implements DbObject {
      */
     public SimpleDbObject(
         final DbObjectSignature signature,
-        final Collection<StringProperty> properties
+        final Collection<Attribute> properties
     ) {
         this.signature = signature;
         this.properties = properties;
@@ -56,7 +56,7 @@ public class SimpleDbObject implements DbObject {
     }
 
     @Override
-    public final Collection<StringProperty> props() {
+    public final Collection<Attribute> attributes() {
         return this.properties;
     }
 

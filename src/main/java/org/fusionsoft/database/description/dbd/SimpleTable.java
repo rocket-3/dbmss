@@ -17,7 +17,7 @@ package org.fusionsoft.database.description.dbd;
 
 import java.util.Collection;
 import java.util.Collections;
-import org.fusionsoft.database.StringProperty;
+import org.fusionsoft.database.Attribute;
 
 /**
  * Unfinished JavaDoc.
@@ -80,7 +80,7 @@ public class SimpleTable implements Table {
     }
 
     @Override
-    public final Collection<StringProperty> dmbsProps() {
+    public final Collection<Attribute> dmbsProps() {
         return Collections.emptySet();
     }
 

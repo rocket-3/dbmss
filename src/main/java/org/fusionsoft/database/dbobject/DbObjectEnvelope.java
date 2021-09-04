@@ -16,9 +16,9 @@
 package org.fusionsoft.database.dbobject;
 
 import java.util.Collection;
+import org.fusionsoft.database.Attribute;
 import org.fusionsoft.database.DbObject;
 import org.fusionsoft.database.DbObjectSignature;
-import org.fusionsoft.database.StringProperty;
 
 /**
  * The DbObject instance wrapping original one and delegating all methods to it.
@@ -46,8 +46,8 @@ public abstract class DbObjectEnvelope implements DbObject {
     }
 
     @Override
-    public final Collection<StringProperty> props() {
-        return this.origin.props();
+    public final Collection<Attribute> attributes() {
+        return this.origin.attributes();
     }
 
 }

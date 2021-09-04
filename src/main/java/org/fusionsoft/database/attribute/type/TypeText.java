@@ -13,7 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database.attribute.type;
+
+import org.fusionsoft.database.AttributeType;
+
 /**
- * Ways to create {@link org.fusionsoft.database.StringPropertySignature}.
+ * The chars origin of {@link org.fusionsoft.database.Attribute}'s value.
+ * @since 0.1
  */
-package org.fusionsoft.database.stringproperty.signature;
+public class TypeText implements AttributeType {
+
+    @Override
+    public final String name() {
+        return "text";
+    }
+
+}

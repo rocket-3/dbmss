@@ -13,19 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.stringproperty.type;
-
 /**
- * The type of StringPropertyType, the integer one.
- * @since 0.1
+ * Variants of {@link org.fusionsoft.database.AttributeSignature}'s types.
  */
-public class Int extends RtStringPropertyType {
-
-    /**
-     * Instantiates a new Integer StringPropertyType.
-     */
-    public Int() {
-        super("integer");
-    }
-
-}
+package org.fusionsoft.database.attribute.type;

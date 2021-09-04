@@ -13,7 +13,18 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database;
+
 /**
- * Artefacts, referred to {@link org.fusionsoft.database.StringProperty}.
+ * The interface AttributeType representing origin type of {@link Attribute}.
+ * @since 0.1
  */
-package org.fusionsoft.database.stringproperty;
+public interface AttributeType {
+
+    /**
+     * Name of origin data type.
+     * @return The string.
+     */
+    String name();
+
+}
