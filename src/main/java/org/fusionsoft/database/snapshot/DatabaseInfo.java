@@ -19,7 +19,7 @@ package org.fusionsoft.database.snapshot;
  * The type representing information about database,
  *  such as url, kind, version and credentials.
  * @since 0.1
- * @todo 15#15min Implement {@link DatabaseInfo} behaviour.
+ * @todo 15#15min Implement DatabaseInfo behaviour.
  */
 public interface DatabaseInfo {
 
