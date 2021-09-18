@@ -11,6 +11,9 @@ Now building the codebase from scratch.
 - visit the [release repo](https://github.com/databasegit/dbgit)
 - follow instructions in the same section
 
+#### DBD format of storing database description
+![Class diagram of an absraction](http://www.plantuml.com/plantuml/svg/3Son3SCm34JHtbCa0qGiqgNoAZ95n48aoY2FoFfcTGyuuE-EQeWvjcTN7j4aR3nEuF8FaTL_-NQSSOIByLA8el2QP8j_WjURsZ7TQLQ76BbniYjbC9zMhiIsYxRS6m00)
+
 ## License
 Copyright (C) 2021-2021 [Fusionsoft](https://www.fusionsoft.ru/en/)
 

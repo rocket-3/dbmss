@@ -1,0 +1,98 @@
+@startuml
+
+namespace data {
+Identity : name
+Identity : dbName
+Identity : description
+
+
+SchemaObject : schemaName
+SchemaObject : ownerName
+
+Code : sql
+
+Dbms : dbmsName
+Dbms : dbmsVersion
+
+Dependencies *-- "*" Identity
+
+DbmsEntity *-- Identity
+DbmsEntity *-- Dbms
+DbmsEntity o-- "*" Dependencies
+
+Field *-- Identity
+Field : primaryKey
+Field : nullable
+Field : typePhysical
+Field : typeLogical
+Field : order
+Field : default
+Field : fixed
+Field : length
+Field : precision
+Field : scale
+
+Index *-- CodeDbmsEntity
+Constraint *-- CodeDbmsEntity
+
+Table *-- DbmsEntity
+Table *-- SchemaObject
+Table *-- "*" Field
+Table *-- "*" Index
+Table *-- "*" Constraint
+Table *-- "1" TableSpace
+Table "1" --* TableSpace
+
+TableSpace *-- Identity
+
+Sequence *-- DbmsEntity
+Sequence *-- SchemaObject
+
+CodeDbmsEntity *-- DbmsEntity
+CodeDbmsEntity *-- Code
+
+Enum *-- CodeDbmsEntity
+Udt *-- CodeDbmsEntity
+Domain *-- CodeDbmsEntity
+Function *-- CodeDbmsEntity
+Procedure *-- CodeDbmsEntity
+Trigger *-- CodeDbmsEntity
+View *-- CodeDbmsEntity
+
+User *-- Identity
+User : password
+Role *-- Identity
+Role *-- "*" User
+
+Schema *-- DbmsEntity
+Schema *-- "*" Table
+Schema *-- "*" Sequence
+Schema *-- "*" View
+Schema *-- "*" Function
+Schema *-- "*" Procedure
+Schema *-- "*" Trigger
+Schema *-- "*" Udt
+Schema *-- "*" Domain
+Schema *-- "*" Enum
+Schema : Collection<Table> tables
+Schema : Collection<Sequence> sequences
+Schema : Collection<View> views
+Schema : Collection<Function> functions
+Schema : Collection<Procedure> procedures
+Schema : Collection<Trigger> triggers
+Schema : Collection<Udt> udts
+Schema : Collection<Domain> domains
+Schema : Collection<Enum> enums
+
+Server : name
+Server : url
+Server : user
+Server : password
+Server *-- Dbms
+}
+
+DBD *-- "*" data.Schema
+DBD *-- "*" data.TableSpace
+DBD *-- "*" data.Server
+
+@enduml
