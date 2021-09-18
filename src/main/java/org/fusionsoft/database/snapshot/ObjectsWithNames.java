@@ -19,7 +19,7 @@ package org.fusionsoft.database.snapshot;
 /**
  * The type of {@link DbObjects} that are filtered by {@link ObjectNames}.
  * @since 0.1
- * @todo #15:15min TBD Implement later in other puzzle
+ * @todo #15:15min Implement later in other puzzle
  */
 @SuppressWarnings("PMD")
 public class ObjectsWithNames extends DbObjects {

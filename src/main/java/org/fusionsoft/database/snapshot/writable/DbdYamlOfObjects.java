@@ -24,7 +24,7 @@ import org.fusionsoft.database.snapshot.Writable;
  * The type of {@link Writable} representing Dbd yaml file,
  *  describing {@link DbObjects}.
  * @since 0.1
- * @todo #15:15min TBD Implement later in other puzzle
+ * @todo #15:15min Implement later in other puzzle
  */
 @SuppressWarnings("PMD")
 public class DbdYamlOfObjects implements Writable {
