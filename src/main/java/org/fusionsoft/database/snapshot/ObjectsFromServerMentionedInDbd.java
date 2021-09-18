@@ -21,7 +21,7 @@ import org.fusionsoft.database.DbdFile;
  * The type of {@link DbObjects} from database mentioned in {@link DatabaseInfo}
  *  that names present in {@link DbdFile} only.
  * @since 0.1
- * @todo #15:15min Implement later in other puzzle, TBD.
+ * @todo #15:15min TBD Implement later in other puzzle
  */
 @SuppressWarnings("PMD")
 public class ObjectsFromServerMentionedInDbd extends DbObjects {

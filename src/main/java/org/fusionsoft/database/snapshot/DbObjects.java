@@ -18,7 +18,7 @@ package org.fusionsoft.database.snapshot;
 /**
  * The type representing database objects data we can obtain from DBMS.
  * @since 0.1
- * @todo #15:15min Implement later in other puzzle, TBD.
+ * @todo #15:15min TBD Implement later in other puzzle
  */
 public class DbObjects {
 
