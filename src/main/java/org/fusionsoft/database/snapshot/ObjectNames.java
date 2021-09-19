@@ -19,7 +19,7 @@ package org.fusionsoft.database.snapshot;
 /**
  * The interface ObjectNames representing names of a set of db objects.
  * @since 0.1
- * @todo #15:30min Figure out what format we use for {@link ObjectNames}.
+ * @todo #15:30min Figure out what format we use for ObjectNames.
  */
 public interface ObjectNames {
 

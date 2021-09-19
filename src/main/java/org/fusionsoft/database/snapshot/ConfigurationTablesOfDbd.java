@@ -22,7 +22,7 @@ import org.fusionsoft.database.DbdFile;
  * The type of {@link ObjectNames} that represents configuration tables from
  *  {@link DbdFile}.
  * @since 0.1
- * @todo #15:15min Implement later in other puzzle, TBD.
+ * @todo #15:15min Implement ConfigurationTablesOfDbd in other puzzle
  */
 @SuppressWarnings("PMD")
 public class ConfigurationTablesOfDbd implements ObjectNames {
