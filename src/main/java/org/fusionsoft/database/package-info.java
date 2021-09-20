@@ -15,6 +15,5 @@
  */
 /**
  * The whole project interfaces.
- * @todo #3:15min add JavaDoc for package.
  */
 package org.fusionsoft.database;

@@ -23,7 +23,7 @@ import org.fusionsoft.database.snapshot.Writable;
  * The type of {@link Writable} that represents db tables data
  *  of given {@link DbObjects}.
  * @since 0.1
- * @todo #15:15min Implement later TableDataFilesOfObjects in other parent puzzle
+ * @todo #40:60min Implement `TableDataFilesOfObjects` `Writable`
  * @checkstyle (100 lines)
  */
 @SuppressWarnings("PMD")

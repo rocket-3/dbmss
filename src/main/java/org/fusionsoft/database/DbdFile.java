@@ -19,7 +19,6 @@ package org.fusionsoft.database;
 /**
  * The interface Dbd representing a DBD file.
  * @since 0.1
- * @todo #15:60min Figure out, what contracts we need about DbdFile.
  */
 public interface DbdFile {
 

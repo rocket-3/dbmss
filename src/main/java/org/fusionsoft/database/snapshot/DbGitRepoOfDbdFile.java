@@ -23,7 +23,7 @@ import org.fusionsoft.database.DbdFile;
 /**
  * The type representing dbgit repo in which {@link DbdFile} is placed.
  * @since 0.1
- * @todo #15:15min specify where's Dbd file placed related to the DbGit repo.
+ * @todo #40:15min Specify relation of `Dbd file` and `DbGit repo`.
  * @checkstyle NonStaticMethodCheck (100 lines)
  */
 @SuppressWarnings("PMD")

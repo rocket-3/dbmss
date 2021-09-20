@@ -23,7 +23,6 @@ import org.cactoos.Text;
 /**
  * The type representing folder of some Snapshot by given name.
  * @since 0.1
- * @todo #15:15min Implement correct `path` method behaviour.
  * @checkstyle NonStaticMethodCheck (100 lines)
  */
 @SuppressWarnings("PMD")

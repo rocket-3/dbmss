@@ -26,7 +26,7 @@ import org.fusionsoft.database.snapshot.Writable;
  * @since 0.1
  * @checkstyle ParameterNumberCheck (100 lines)
  * @checkstyle ParameterNameCheck (100 lines)
- * @todo #15:30min Implement method `writeTo` correct behaviour.
+ * @todo #40:60min Implement `SnapshotInfo` `Writable`.
  */
 @SuppressWarnings("PMD")
 public class SnapshotInfo implements Writable {

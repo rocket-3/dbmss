@@ -35,7 +35,7 @@ import org.fusionsoft.database.snapshot.writable.TableDataFilesOfObjects;
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.
  * @since 0.1
- * @todo #15:15min Think what about ClassDataAbstractionCouplingCheck
+ * @todo #39:30min Refactor and fix Qulice checks suppressions
  * @checkstyle AvoidInlineConditionalsCheck (256 lines)
  * @checkstyle ParameterNameCheck (256 lines)
  * @checkstyle ParameterNumberCheck (256 lines)
@@ -107,7 +107,7 @@ public class SnapshotCreateProcedure {
             this.database
         );
         final DbObjects objects = new ObjectsFromServerMentionedInDbd(
-            new DatabaseInfoOfDbd(this.dbd, this.database),
+            info,
             this.dbd
         );
         new IterableOf<Writable>(

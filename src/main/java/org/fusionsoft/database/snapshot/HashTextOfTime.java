@@ -21,7 +21,7 @@ import org.cactoos.text.TextOfScalar;
 /**
  * The type of Text that is a hash of {@link AstronomicalTime}.
  * @since 0.1
- * @todo #15:15min Implement hashing of AstronomicalTime.
+ * @todo #40:15min Implement hashing of AstronomicalTime.
  */
 public class HashTextOfTime extends TextEnvelope {
 

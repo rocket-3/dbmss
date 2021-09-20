@@ -21,7 +21,7 @@ import org.fusionsoft.database.DbdFile;
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
  *  name of server for which data is.
  * @since 0.1
- * @todo #15:15min Implement later in dbd-related puzzle.
+ * @todo #40:30min Obtain database info from Dbd file.
  */
 @SuppressWarnings("PMD")
 public class DatabaseInfoOfDbd implements DatabaseInfo {

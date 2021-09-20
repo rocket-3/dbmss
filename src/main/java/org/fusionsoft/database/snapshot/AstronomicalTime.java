@@ -18,7 +18,7 @@ package org.fusionsoft.database.snapshot;
 /**
  * The class representing 'Astronomical type' at the moment of creation.
  * @since 0.1
- * @todo #15:15min Implement AstronomicalTime representation behaviours.
+ * @todo #40:30min Design AstronomicalTime contract.
  */
 public class AstronomicalTime {
 

@@ -26,7 +26,6 @@ import org.cactoos.scalar.ScalarOf;
 /**
  * The type of String Iterable that extracts all nested keys from YamlNode.
  * @since 0.1
- * @todo #3:15min Add more description.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class KeysFromYamlNode extends IterableEnvelope<String> {

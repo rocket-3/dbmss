@@ -19,7 +19,7 @@ package org.fusionsoft.database.snapshot;
  * The interface Writable representing a thing,
  *  can be written in {@link SnapshotFolder}.
  * @since 0.1
- * @todo #15:15min Relax the contract of `writeTo`.
+ * @todo #39:30min Create basic `Writable` implementation.
  */
 public interface Writable {
 
