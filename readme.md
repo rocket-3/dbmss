@@ -1,9 +1,8 @@
-# [DBGit](http://databasegit.com) by [Fusionsoft](https://www.fusionsoft.ru/en/) [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![0pdd](http://www.0pdd.com/svg?name=rocket-3/dbmss)](http://www.0pdd.com/svg?name=rocket-3/dbmss)
-
-
+# [DBGit](http://databasegit.com) by [Fusionsoft](https://www.fusionsoft.ru/en/) [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![0pdd](http://www.0pdd.com/svg?name=rocket-3/dbmss)](http://www.0pdd.com/p?name=rocket-3/dbmss)
 
 #### Release Notes
 There's a [stable version](https://github.com/databasegit) that works pretty well with `Postgres` dbms
+
 Now building the codebase from scratch.
 
 #### Start using DBGit
@@ -11,8 +10,9 @@ Now building the codebase from scratch.
 - visit the [release repo](https://github.com/databasegit/dbgit)
 - follow instructions in the same section
 
-#### DBD format of storing database description
-![Class diagram of an absraction](http://www.plantuml.com/plantuml/svg/3Son3SCm34JHtbCa0qGiqgNoAZ95n48aoY2FoFfcTGyuuE-EQeWvjcTN7j4aR3nEuF8FaTL_-NQSSOIByLA8el2QP8j_WjURsZ7TQLQ76BbniYjbC9zMhiIsYxRS6m00)
+#### Additional documentation
+
+- [DBD format reference](http://www.plantuml.com/plantuml/svg/3Son3SCm34JHtbCa0qGiqgNoAZ95n48aoY2FoFfcTGyuuE-EQeWvjcTN7j4aR3nEuF8FaTL_-NQSSOIByLA8el2QP8j_WjURsZ7TQLQ76BbniYjbC9zMhiIsYxRS6m00)
 
 ## License
 Copyright (C) 2021-2021 [Fusionsoft](https://www.fusionsoft.ru/en/)
