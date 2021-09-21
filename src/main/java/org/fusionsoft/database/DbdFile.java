@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database;
 
+import com.amihaiemil.eoyaml.YamlInput;
+
 /**
- * The interface Dbd representing a DBD file.
+ * The interface representing a DBD file.
  * @since 0.1
- * @todo #45:60min Design DbdFile contract with priority
- *  to DatabaseInfo can be obtained from there for now.
  */
 public interface DbdFile {
+
+    /**
+     * Represent file data as Yaml.
+     * @return The yaml input.
+     */
+    YamlInput asYaml();
 
 }
