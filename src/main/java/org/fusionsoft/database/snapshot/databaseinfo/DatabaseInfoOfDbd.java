@@ -23,7 +23,7 @@ import org.fusionsoft.lib.exception.NotImplemented;
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
  *  name of server for which data is.
  * @since 0.1
- * @todo #40:30min Obtain database info from Dbd file.
+ * @todo #45:30min Implement methods and create a unit test.
  */
 @SuppressWarnings("PMD")
 public class DatabaseInfoOfDbd implements DatabaseInfo {
