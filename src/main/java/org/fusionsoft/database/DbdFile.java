@@ -19,6 +19,8 @@ package org.fusionsoft.database;
 /**
  * The interface Dbd representing a DBD file.
  * @since 0.1
+ * @todo #45:60min Design DbdFile contract with priority
+ *  to DatabaseInfo can be obtained from there for now.
  */
 public interface DbdFile {
 
