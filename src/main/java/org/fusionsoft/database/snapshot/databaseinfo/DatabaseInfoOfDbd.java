@@ -49,22 +49,22 @@ public class DatabaseInfoOfDbd implements DatabaseInfo {
     }
 
     @Override
-    public String kind() {
+    public final String kind() {
         throw new NotImplemented();
     }
 
     @Override
-    public String version() {
+    public final String version() {
         throw new NotImplemented();
     }
 
     @Override
-    public String url() {
+    public final String url() {
         throw new NotImplemented();
     }
 
     @Override
-    public String name() {
+    public final String name() {
         throw new NotImplemented();
     }
 

@@ -42,8 +42,7 @@ public interface DatabaseInfo {
     String url();
 
     /**
-     * The name of database in terms of 'DBD' file content format,
-     *  see {@linkplain /main/uml/dbd.puml}.
+     * The name of database in terms of 'DBD' file content format.
      * @return The string.
      */
     String name();
