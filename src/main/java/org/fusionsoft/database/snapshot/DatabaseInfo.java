@@ -23,4 +23,28 @@ package org.fusionsoft.database.snapshot;
  */
 public interface DatabaseInfo {
 
+    /**
+     * Kind of DBMS used e.g. Postgres.
+     * @return The string.
+     */
+    String kind();
+
+    /**
+     * Version of DBMS used.
+     * @return The string.
+     */
+    String version();
+
+    /**
+     * Url of database to connect.
+     * @return The connection string.
+     */
+    String url();
+
+    /**
+     * The name of database in terms of 'DBD' file content format,
+     *  see {@linkplain /main/uml/dbd.puml}.
+     * @return The string.
+     */
+    String name();
 }

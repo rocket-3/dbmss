@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database.snapshot.databaseinfo;
 
 import org.fusionsoft.database.DbdFile;
+import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.lib.exception.NotImplemented;
 
 /**
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
@@ -44,6 +46,26 @@ public class DatabaseInfoOfDbd implements DatabaseInfo {
     public DatabaseInfoOfDbd(final DbdFile file, final String name) {
         this.file = file;
         this.name = name;
+    }
+
+    @Override
+    public String kind() {
+        throw new NotImplemented();
+    }
+
+    @Override
+    public String version() {
+        throw new NotImplemented();
+    }
+
+    @Override
+    public String url() {
+        throw new NotImplemented();
+    }
+
+    @Override
+    public String name() {
+        throw new NotImplemented();
     }
 
 }
