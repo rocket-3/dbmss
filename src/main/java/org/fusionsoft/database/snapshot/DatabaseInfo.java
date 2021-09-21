@@ -19,13 +19,13 @@ package org.fusionsoft.database.snapshot;
  * The type representing information about database,
  *  such as url, kind, version and credentials.
  * @since 0.1
- * @todo #45:30min Design DatabaseInfo contract and basic impl.
  */
 public interface DatabaseInfo {
 
     /**
      * Kind of DBMS used e.g. Postgres.
      * @return The string.
+     * @todo #57:30 Design an enumeration of DBMS kinds.
      */
     String kind();
 
