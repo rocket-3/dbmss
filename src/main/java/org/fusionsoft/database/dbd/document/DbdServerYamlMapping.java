@@ -13,33 +13,32 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.lib.yaml.artefacts;
 
-import com.amihaiemil.eoyaml.YamlNode;
-import org.cactoos.func.FuncOf;
-import org.cactoos.iterable.Mapped;
-import org.cactoos.set.SetEnvelope;
-import org.cactoos.set.SetOf;
+package org.fusionsoft.database.dbd.document;
+
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.dbd.document.fields.DbdServerFields;
+import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
 /**
- * The type of String Iterable that extracts all nested keys from YamlNode.
+ * The type of {@link YamlMappingHasKeys},
+ *  when the keys are {@link DbdServerFields}.
  * @since 0.1
- * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
-public class KeysFromYamlNode extends SetEnvelope<String> {
+public class DbdServerYamlMapping extends YamlMappingHasKeys {
 
     /**
-     * Instantiates a new Keys from yaml node.
+     * Instantiates a new Yaml mapping has keys.
      * @param mapping The YamlMapping to be used.
      */
-    public KeysFromYamlNode(final YamlNode mapping) {
+    public DbdServerYamlMapping(
+        final YamlMapping mapping
+    ) {
         super(
-            new SetOf<>(
-                new Mapped<>(
-                    new FuncOf<>((YamlNode node) -> node.asScalar().value()),
-                    mapping.asMapping().keys()
-                )
-            )
+            mapping,
+            new IterableOf<Text>(DbdServerFields.values())
         );
     }
 

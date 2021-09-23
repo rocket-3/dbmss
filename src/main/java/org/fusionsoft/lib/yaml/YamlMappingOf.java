@@ -17,6 +17,7 @@ package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlInput;
 import org.cactoos.scalar.Sticky;
+import org.fusionsoft.database.YamlRepresentative;
 
 /**
  * The type of on-demand YamlMapping that can be constructed of YamlInput.
@@ -26,13 +27,28 @@ public class YamlMappingOf extends YamlMappingEnvelope {
 
     /**
      * Instantiates a new YamlMapping of YamlInput, that is used on demand.
-     * @param input The YamlInput to be encapsulated.
+     * @param input The YamlInput to be used.
      */
     public YamlMappingOf(final YamlInput input) {
         super(
             new YamlMappingOfScalar(
                 new Sticky<>(
                     input::readYamlMapping
+                )
+            )
+        );
+    }
+
+    /**
+     * Instantiates a new YamlMapping of YamlRepresentative,
+     *  that is used on demand.
+     * @param input The YamlRepresentative to be used.
+     */
+    public YamlMappingOf(final YamlRepresentative input) {
+        super(
+            new YamlMappingOfScalar(
+                new Sticky<>(
+                    () -> input.asYaml().asMapping()
                 )
             )
         );
