@@ -15,18 +15,18 @@
  */
 package org.fusionsoft.database;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 
 /**
- * The interface representing a DBD file.
+ * The interface representing a thing, can be represented as {@link YamlNode}.
  * @since 0.1
  */
-public interface DbdFile extends YamlRepresentative {
+public interface YamlRepresentative {
 
     /**
-     * Represent file data as Yaml.
-     * @return The yaml input.
+     * Represent object as yaml node.
+     * @return The yaml node.
      */
-    YamlMapping asYaml();
+    YamlNode asYaml();
 
 }
