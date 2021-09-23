@@ -28,9 +28,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfPath;
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
  *  name of server for which data is.
  * @since 0.1
- * @todo #45:30min Implement methods and create a unit test.
  */
-@SuppressWarnings("PMD")
 public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements DatabaseInfo {
 
     /**
@@ -39,9 +37,9 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
     private final DbdServerYamlMapping mapping;
 
     /**
-     * The String encapsulated.
+     * The String of database name in terms of 'DBD' format encapsulated.
      */
-    private final String name;
+    private final String key;
 
     /**
      * Instantiates a new Database info of dbd.
@@ -66,7 +64,7 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
     private DatabaseInfoOfDbd(final DbdServerYamlMapping mapping, final String name) {
         super(mapping);
         this.mapping = mapping;
-        this.name = name;
+        this.key = name;
     }
 
     /**
@@ -92,7 +90,7 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
 
     @Override
     public final String name() {
-        return this.name;
+        return this.key;
     }
 
 }
