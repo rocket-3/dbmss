@@ -15,35 +15,33 @@
  */
 package org.fusionsoft.database.snapshot;
 
+import java.sql.Connection;
+import org.fusionsoft.database.YamlRepresentative;
+import org.fusionsoft.database.snapshot.databaseinfo.DbmsSignature;
+
 /**
  * The type representing information about database,
  *  such as url, kind, version and credentials.
  * @since 0.1
  */
-public interface DatabaseInfo {
+public interface DatabaseInfo extends YamlRepresentative {
 
     /**
-     * Kind of DBMS used e.g. Postgres.
-     * @return The string.
-     * @todo #57:30 Design an enumeration of DBMS kinds.
+     * Signature of DBMS.
+     * @return The dbms signature.
      */
-    String kind();
+    DbmsSignature signature();
 
     /**
-     * Version of DBMS used.
-     * @return The string.
+     * Connection to connect to datavase.
+     * @return The {@link java.sql.Connection}.
      */
-    String version();
-
-    /**
-     * Url of database to connect.
-     * @return The connection string.
-     */
-    String url();
+    Connection connection();
 
     /**
      * The name of database in terms of 'DBD' file content format.
      * @return The string.
      */
     String name();
+
 }
