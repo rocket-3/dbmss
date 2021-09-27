@@ -21,11 +21,11 @@ import org.fusionsoft.database.snapshot.ConfigurationTablesOfDbd;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.DbGitRepoOfDbdFile;
 import org.fusionsoft.database.snapshot.DbObjects;
-import org.fusionsoft.database.snapshot.HashTextOfTime;
+import org.fusionsoft.database.snapshot.HashTextOf;
 import org.fusionsoft.database.snapshot.ObjectsFromServerMentionedInDbd;
 import org.fusionsoft.database.snapshot.ObjectsWithNames;
+import org.fusionsoft.database.snapshot.SnapshotCatalogName;
 import org.fusionsoft.database.snapshot.SnapshotFolder;
-import org.fusionsoft.database.snapshot.SnapshotName;
 import org.fusionsoft.database.snapshot.Writable;
 import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
 import org.fusionsoft.database.snapshot.writable.DbdYamlOfObjects;
@@ -112,7 +112,7 @@ public class SnapshotCreateProcedure {
         );
         new IterableOf<Writable>(
             new SnapshotInfo(
-                new SnapshotName(this.time),
+                new SnapshotCatalogName(this.time),
                 this.time,
                 info,
                 this.withOperationalData
@@ -129,7 +129,7 @@ public class SnapshotCreateProcedure {
             x -> x.writeTo(
                 new SnapshotFolder(
                     new DbGitRepoOfDbdFile(this.dbd).path(),
-                    new HashTextOfTime(this.time)
+                    new HashTextOf(this.time)
                 )
             )
         );

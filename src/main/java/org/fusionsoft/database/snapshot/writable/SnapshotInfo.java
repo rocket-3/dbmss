@@ -17,8 +17,8 @@ package org.fusionsoft.database.snapshot.writable;
 
 import org.fusionsoft.database.snapshot.AstronomicalTime;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.database.snapshot.SnapshotCatalogName;
 import org.fusionsoft.database.snapshot.SnapshotFolder;
-import org.fusionsoft.database.snapshot.SnapshotName;
 import org.fusionsoft.database.snapshot.Writable;
 
 /**
@@ -39,7 +39,7 @@ public class SnapshotInfo implements Writable {
      * @param withOperationalData The Boolean to be encapsulated.
      */
     public SnapshotInfo(
-        final SnapshotName name,
+        final SnapshotCatalogName name,
         final AstronomicalTime time,
         final DatabaseInfo database,
         final Boolean withOperationalData

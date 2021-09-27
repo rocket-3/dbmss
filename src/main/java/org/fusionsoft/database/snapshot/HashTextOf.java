@@ -15,26 +15,44 @@
  */
 package org.fusionsoft.database.snapshot;
 
+import org.cactoos.Bytes;
+import org.cactoos.Input;
+import org.cactoos.Text;
+import org.cactoos.bytes.Sha256DigestOf;
+import org.cactoos.io.InputOf;
+import org.cactoos.text.HexOf;
 import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
 
 /**
  * The type of Text that is a hash of {@link AstronomicalTime}.
  * @since 0.1
- * @todo #40:15min Implement hashing of AstronomicalTime.
  */
-public class HashTextOfTime extends TextEnvelope {
+public class HashTextOf extends TextEnvelope {
 
     /**
      * Instantiates a new Hash text of time.
-     * @param time The AstronomicalTime to be encapsulated.
+     * @param input The Input to be used.
      */
-    public HashTextOfTime(final AstronomicalTime time) {
+    private HashTextOf(final Input input) {
         super(
-            new TextOfScalar(
-                () -> time.toString()
-            )
+            new HexOf(new Sha256DigestOf(input))
         );
+    }
+
+    /**
+     * Instantiates a new Hash text of time.
+     * @param text The Text to be hashed.
+     */
+    public HashTextOf(final Text text) {
+        this(new InputOf(text));
+    }
+
+    /**
+     * Instantiates a new Hash text of time.
+     * @param time The Text to be hashed.
+     */
+    public HashTextOf(final AstronomicalTime time) {
+        this(new InputOf((Bytes) time));
     }
 
 }

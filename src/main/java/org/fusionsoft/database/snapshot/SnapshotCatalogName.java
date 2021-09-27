@@ -15,21 +15,31 @@
  */
 package org.fusionsoft.database.snapshot;
 
+import java.text.MessageFormat;
 import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOfScalar;
 
 /**
  * The type of {@link org.cactoos.Text} that represents name of snapshot created
  *  at some {@link AstronomicalTime} moment.
  * @since 0.1
  */
-public class SnapshotName extends TextEnvelope {
+public class SnapshotCatalogName extends TextEnvelope {
 
     /**
      * Instantiates a new Snapshot name.
      * @param time The AstronomicalTime to be encapsulated.
      */
-    public SnapshotName(final AstronomicalTime time) {
-        super(new HashTextOfTime(time));
+    public SnapshotCatalogName(final AstronomicalTime time) {
+        super(
+            new TextOfScalar(
+                () -> MessageFormat.format(
+                    "{0} {1}",
+                    "snapshot",
+                    new HashTextOf(time).asString()
+                )
+            )
+        );
     }
 
 }
