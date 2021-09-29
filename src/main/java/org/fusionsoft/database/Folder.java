@@ -13,8 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database;
+
+import java.nio.file.Path;
 
 /**
- * {@link org.fusionsoft.database.Writable} implementations.
+ * The interface representing a folder in FS.
+ * @since 0.1
  */
-package org.fusionsoft.database.snapshot.writable;
+public interface Folder {
+
+    /**
+     * Gimme the Path of that please.
+     * @return The Path.
+     */
+    Path path();
+
+}

@@ -13,8 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database;
 
 /**
- * {@link org.fusionsoft.database.Writable} implementations.
+ * The interface Writable representing a thing,
+ *  can be written in {@link Folder}.
+ * @since 0.1
  */
-package org.fusionsoft.database.snapshot.writable;
+public interface Writable {
+
+    /**
+     * Write to.
+     * @param folder The folder.
+     */
+    void writeTo(Folder folder);
+
+}

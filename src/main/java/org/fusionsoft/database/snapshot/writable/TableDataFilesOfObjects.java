@@ -15,9 +15,9 @@
  */
 package org.fusionsoft.database.snapshot.writable;
 
+import org.fusionsoft.database.Folder;
+import org.fusionsoft.database.Writable;
 import org.fusionsoft.database.snapshot.DbObjects;
-import org.fusionsoft.database.snapshot.SnapshotFolder;
-import org.fusionsoft.database.snapshot.Writable;
 
 /**
  * The type of {@link Writable} that represents db tables data
@@ -37,7 +37,7 @@ public class TableDataFilesOfObjects implements Writable {
     }
 
     @Override
-    public void writeTo(final SnapshotFolder folder) {
+    public void writeTo(final Folder folder) {
     }
 
 }

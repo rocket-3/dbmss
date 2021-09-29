@@ -13,20 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database;
+
+import com.amihaiemil.eoyaml.Yaml;
+import org.fusionsoft.lib.yaml.YamlMappingOf;
 
 /**
- * The interface Writable representing a thing,
- *  can be written in {@link SnapshotFolder}.
+ * The type of YamlMapping which is just empty.
  * @since 0.1
- * @todo #39:30min Create basic `Writable` implementation.
  */
-public interface Writable {
+public class MappingEmpty extends YamlMappingOf {
 
     /**
-     * Write to.
-     * @param folder The folder.
+     * Instantiates a new Mapping empty.
      */
-    void writeTo(SnapshotFolder folder);
+    public MappingEmpty() {
+        super(
+            () -> Yaml.createYamlMappingBuilder().build()
+        );
+    }
 
 }

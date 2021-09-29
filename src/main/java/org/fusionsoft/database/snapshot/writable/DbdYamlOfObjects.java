@@ -15,10 +15,13 @@
  */
 package org.fusionsoft.database.snapshot.writable;
 
+import org.cactoos.text.TextOf;
+import org.fusionsoft.database.BaseYamlRepresentative;
+import org.fusionsoft.database.MappingEmpty;
+import org.fusionsoft.database.Writable;
+import org.fusionsoft.database.WritableYamlDocument;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.DbObjects;
-import org.fusionsoft.database.snapshot.SnapshotFolder;
-import org.fusionsoft.database.snapshot.Writable;
 
 /**
  * The type of {@link Writable} representing Dbd yaml file,
@@ -27,18 +30,21 @@ import org.fusionsoft.database.snapshot.Writable;
  * @todo #40:60min Implement `DbdYamlOfObjects` `Writable`
  */
 @SuppressWarnings("PMD")
-public class DbdYamlOfObjects implements Writable {
+public class DbdYamlOfObjects extends WritableYamlDocument {
 
     /**
      * Instantiates a new Dbd yaml of objects.
      * @param database The DatabaseInfo to be encapsulated.
      * @param objects The DbObjects to be encapsulated.
      */
-    public DbdYamlOfObjects(final DatabaseInfo database, final DbObjects objects) {
-    }
-
-    @Override
-    public final void writeTo(final SnapshotFolder folder) {
+    public DbdYamlOfObjects(
+        final DatabaseInfo database,
+        final DbObjects objects
+    ) {
+        super(
+            new BaseYamlRepresentative(new MappingEmpty()),
+            new TextOf("DBD.yaml")
+        );
     }
 
 }

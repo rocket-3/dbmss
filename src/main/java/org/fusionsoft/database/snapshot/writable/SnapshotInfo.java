@@ -15,11 +15,12 @@
  */
 package org.fusionsoft.database.snapshot.writable;
 
+import org.cactoos.text.TextOf;
+import org.fusionsoft.database.MappingEmpty;
+import org.fusionsoft.database.Writable;
+import org.fusionsoft.database.WritableYamlDocument;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
-import org.fusionsoft.database.snapshot.SnapshotCatalogName;
-import org.fusionsoft.database.snapshot.SnapshotFolder;
-import org.fusionsoft.database.snapshot.Writable;
 
 /**
  * The type {@link Writable} that represents db objects snapshot info data.
@@ -29,25 +30,21 @@ import org.fusionsoft.database.snapshot.Writable;
  * @todo #40:60min Implement `SnapshotInfo` `Writable`.
  */
 @SuppressWarnings("PMD")
-public class SnapshotInfo implements Writable {
+public class SnapshotInfo extends WritableYamlDocument {
 
     /**
      * Instantiates a new Snapshot info.
-     * @param name The SnapshotName to be encapsulated.
      * @param time The AstronomicalTime to be encapsulated.
      * @param database The DatabaseInfo to be encapsulated.
-     * @param withOperationalData The Boolean to be encapsulated.
+     * @param withOperationalData Was the snapshot with operational data
+     *  or configuration data only.
      */
     public SnapshotInfo(
-        final SnapshotCatalogName name,
         final AstronomicalTime time,
         final DatabaseInfo database,
         final Boolean withOperationalData
     ) {
-    }
-
-    @Override
-    public void writeTo(final SnapshotFolder folder) {
+        super(new MappingEmpty(), new TextOf(".snapshot.yml"));
     }
 
 }

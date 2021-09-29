@@ -18,15 +18,12 @@ package org.fusionsoft.database;
 import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
 import org.fusionsoft.database.snapshot.ConfigurationTablesOfDbd;
+import org.fusionsoft.database.snapshot.CreatingSnapshotFolder;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.DbGitRepoOfDbdFile;
 import org.fusionsoft.database.snapshot.DbObjects;
-import org.fusionsoft.database.snapshot.HashTextOf;
 import org.fusionsoft.database.snapshot.ObjectsFromServerMentionedInDbd;
 import org.fusionsoft.database.snapshot.ObjectsWithNames;
-import org.fusionsoft.database.snapshot.SnapshotCatalogName;
-import org.fusionsoft.database.snapshot.SnapshotFolder;
-import org.fusionsoft.database.snapshot.Writable;
 import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
 import org.fusionsoft.database.snapshot.writable.DbdYamlOfObjects;
 import org.fusionsoft.database.snapshot.writable.SnapshotInfo;
@@ -112,7 +109,6 @@ public class SnapshotCreateProcedure {
         );
         new IterableOf<Writable>(
             new SnapshotInfo(
-                new SnapshotCatalogName(this.time),
                 this.time,
                 info,
                 this.withOperationalData
@@ -127,9 +123,9 @@ public class SnapshotCreateProcedure {
             )
         ).forEach(
             x -> x.writeTo(
-                new SnapshotFolder(
+                new CreatingSnapshotFolder(
                     new DbGitRepoOfDbdFile(this.dbd).path(),
-                    new HashTextOf(this.time)
+                    this.time
                 )
             )
         );
