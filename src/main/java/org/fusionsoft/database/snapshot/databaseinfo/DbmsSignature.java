@@ -16,6 +16,7 @@
 package org.fusionsoft.database.snapshot.databaseinfo;
 
 import org.cactoos.Text;
+import org.fusionsoft.database.snapshot.databaseinfo.dbmssignature.DbmsSignatureName;
 
 /**
  * The interface DbmsSignature representing DBMS's name and version.
@@ -27,7 +28,7 @@ public interface DbmsSignature {
      * Kind of DBMS used e.g. Postgres.
      * @return The Text.
      */
-    Text name();
+    DbmsSignatureName name();
 
     /**
      * Version of DBMS used.
