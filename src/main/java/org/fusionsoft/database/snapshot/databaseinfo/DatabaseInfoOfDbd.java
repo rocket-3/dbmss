@@ -28,6 +28,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfPath;
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
  *  name of server for which data is.
  * @since 0.1
+ * @todo #40:60min Implement DatabaseInfoOfDbd::connection method.
  */
 public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements DatabaseInfo {
 
