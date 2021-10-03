@@ -15,5 +15,7 @@
  */
 /**
  * The whole project interfaces.
+ * @todo #40:15min extract DbdServerYamlMapping return type
+ *  in YamlRepresentative implementations.
  */
 package org.fusionsoft.database;
