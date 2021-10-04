@@ -30,7 +30,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfPath;
  * @since 0.1
  * @todo #40:60min Implement DatabaseInfoOfDbd::connection method.
  */
-public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements DatabaseInfo {
+public class DatabaseInfoOfDbd implements DatabaseInfo, YamlRepresentative {
 
     /**
      * The YamlMapping encapsulated.
@@ -49,10 +49,7 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
      */
     public DatabaseInfoOfDbd(final DbdFile file, final String name) {
         this(
-            new YamlMappingOfPath(
-                file.asYaml(),
-                "servers", name
-            ),
+            new DbdServerMappingOfDbdFile(file, name),
             name
         );
     }
@@ -63,18 +60,8 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
      * @param name The name to be encapsulated.
      */
     private DatabaseInfoOfDbd(final DbdServerYamlMapping mapping, final String name) {
-        super(mapping);
         this.mapping = mapping;
         this.key = name;
-    }
-
-    /**
-     * Instantiates a new Database info of dbd.
-     * @param mapping The DbdServerYamlMapping, data should be contained in.
-     * @param name The name to be encapsulated.
-     */
-    private DatabaseInfoOfDbd(final YamlMapping mapping, final String name) {
-        this(new DbdServerYamlMapping(mapping), name);
     }
 
     @Override
@@ -92,6 +79,11 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
     @Override
     public final String name() {
         return this.key;
+    }
+
+    @Override
+    public final DbdServerYamlMapping asYaml() {
+        return this.mapping;
     }
 
 }
