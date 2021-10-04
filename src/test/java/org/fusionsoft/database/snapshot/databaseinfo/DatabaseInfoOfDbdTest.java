@@ -15,7 +15,9 @@
  */
 package org.fusionsoft.database.snapshot.databaseinfo;
 
+import org.fusionsoft.database.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
+import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureName;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,11 +31,11 @@ class DatabaseInfoOfDbdTest {
      * Retrieves username data.
      */
     @Test
-    void retrievesData() throws Exception {
+    void retrievesData() {
         Assertions.assertEquals(
-            "POSTGRES",
+            DbmsSignatureName.POSTGRES.asString(),
             new DatabaseInfoOfDbd(
-                MappingOfExampleYaml::new,
+                new DbdFileOfMapping(new MappingOfExampleYaml()),
                 "fs-mts"
             ).signature().name().asString()
         );
