@@ -16,24 +16,20 @@
 package org.fusionsoft.database.snapshot.databaseinfo;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.text.MessageFormat;
-
 import org.fusionsoft.database.BaseYamlRepresentative;
 import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.dbd.document.DbdServerYamlMapping;
 import org.fusionsoft.database.dbd.document.fields.DbdServerFields;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
-import org.fusionsoft.database.snapshot.HashTextOf;
 import org.fusionsoft.lib.connection.ConnectionOfScalar;
-import org.fusionsoft.lib.connection.NotImplementedConnection;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
- *  name of server for which data is.
+ * name of server for which data is.
  * @since 0.1
  */
 public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements DatabaseInfo {
@@ -50,6 +46,7 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
 
     /**
      * Instantiates a new Database info of dbd.
+     *
      * @param file The DbdFile to be encapsulated.
      * @param name The String to be encapsulated.
      */
@@ -65,6 +62,7 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
 
     /**
      * Instantiates a new Database info of dbd.
+     *
      * @param mapping The YamlMapping, data should be contained in.
      * @param name The name to be encapsulated.
      */
@@ -76,6 +74,7 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
 
     /**
      * Instantiates a new Database info of dbd.
+     *
      * @param mapping The DbdServerYamlMapping, data should be contained in.
      * @param name The name to be encapsulated.
      */
@@ -92,16 +91,14 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
 
     @Override
     public final Connection connection() {
-
         return new ConnectionOfScalar(
-                () -> DriverManager.getConnection(
-                    this.mapping.string(DbdServerFields.URL.asString()),
-                    this.mapping.string(DbdServerFields.USER.asString()),
-                    this.mapping.string(DbdServerFields.PWD.asString())
-                    )
-                );
+            () -> DriverManager.getConnection(
+                this.mapping.string(DbdServerFields.URL.asString()),
+                this.mapping.string(DbdServerFields.USER.asString()),
+                this.mapping.string(DbdServerFields.PWD.asString())
+            )
+        );
     }
-
 
     @Override
     public final String name() {
