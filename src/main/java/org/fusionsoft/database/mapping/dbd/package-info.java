@@ -15,6 +15,6 @@
  */
 
 /**
- * The enumerations of fields of 'DBD' documents.
+ * The artifacts of 'DBD' sub-documents.
  */
-package org.fusionsoft.database.dbd.document.fields;
+package org.fusionsoft.database.mapping.dbd;

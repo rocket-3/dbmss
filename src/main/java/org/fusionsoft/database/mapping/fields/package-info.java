@@ -15,6 +15,6 @@
  */
 
 /**
- * {@link org.fusionsoft.database.Writable} implementations.
+ * The enumerations of fields of 'DBD' documents.
  */
-package org.fusionsoft.database.snapshot.writable;
+package org.fusionsoft.database.mapping.fields;

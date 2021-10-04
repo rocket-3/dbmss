@@ -15,6 +15,6 @@
  */
 
 /**
- * The artifacts of 'DBD' sub-documents.
+ * Artefacts of {@link org.fusionsoft.database.snapshot.DbmsSignature}.
  */
-package org.fusionsoft.database.dbd.document;
+package org.fusionsoft.database.snapshot.dbmssignature;

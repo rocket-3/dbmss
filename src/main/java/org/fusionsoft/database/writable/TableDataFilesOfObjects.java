@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.writable;
+package org.fusionsoft.database.writable;
 
 import org.fusionsoft.database.Folder;
 import org.fusionsoft.database.Writable;

@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.databaseinfo;
 
-import org.fusionsoft.database.MappingOfExampleYaml;
+import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

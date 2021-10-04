@@ -14,12 +14,12 @@
  * and limitations under the License.
  */
 
-package org.fusionsoft.database.dbd.document;
+package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
-import org.fusionsoft.database.dbd.document.fields.DbdServerFields;
+import org.fusionsoft.database.mapping.fields.DbdServerFields;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
 /**

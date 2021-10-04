@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.databaseinfo;
+package org.fusionsoft.database.snapshot.dbmssignature;
 
 import org.cactoos.Text;
 import org.fusionsoft.database.TextEnumValueOf;
-import org.fusionsoft.database.dbd.document.DbdServerYamlMapping;
-import org.fusionsoft.database.dbd.document.fields.DbdServerFields;
-import org.fusionsoft.database.snapshot.databaseinfo.dbmssignature.DbmsSignatureName;
+import org.fusionsoft.database.mapping.dbd.DbdServerYamlMapping;
+import org.fusionsoft.database.mapping.fields.DbdServerFields;
+import org.fusionsoft.database.snapshot.DbmsSignature;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
 /**

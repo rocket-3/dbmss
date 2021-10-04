@@ -25,9 +25,9 @@ import org.fusionsoft.database.snapshot.DbObjects;
 import org.fusionsoft.database.snapshot.ObjectsFromServerMentionedInDbd;
 import org.fusionsoft.database.snapshot.ObjectsWithNames;
 import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
-import org.fusionsoft.database.snapshot.writable.DbdYamlOfObjects;
-import org.fusionsoft.database.snapshot.writable.SnapshotInfo;
-import org.fusionsoft.database.snapshot.writable.TableDataFilesOfObjects;
+import org.fusionsoft.database.writable.DbdYamlOfObjects;
+import org.fusionsoft.database.writable.SnapshotInfo;
+import org.fusionsoft.database.writable.TableDataFilesOfObjects;
 
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.

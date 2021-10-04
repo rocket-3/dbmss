@@ -13,23 +13,27 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database;
+package org.fusionsoft.database.snapshot;
 
-import org.cactoos.io.ResourceOf;
-import org.fusionsoft.lib.yaml.YamlInputOf;
-import org.fusionsoft.lib.yaml.YamlMappingOf;
+import org.cactoos.Text;
+import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureName;
 
 /**
- * The type of Text that is constructed of example YAML from resources.
+ * The interface DbmsSignature representing DBMS's name and version.
  * @since 0.1
  */
-public class MappingOfExampleYaml extends YamlMappingOf {
+public interface DbmsSignature {
 
     /**
-     * Instantiates a new Input of example yaml.
+     * Kind of DBMS used e.g. Postgres.
+     * @return The Text.
      */
-    public MappingOfExampleYaml() {
-        super(new YamlInputOf(new ResourceOf("iuDescriptionExample.yaml")));
-    }
+    DbmsSignatureName name();
+
+    /**
+     * Version of DBMS used.
+     * @return The Text.
+     */
+    Text version();
 
 }

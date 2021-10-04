@@ -15,14 +15,15 @@
  */
 package org.fusionsoft.database.snapshot.databaseinfo;
 
-import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
-import org.fusionsoft.database.BaseYamlRepresentative;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.dbd.document.DbdServerYamlMapping;
+import org.fusionsoft.database.YamlRepresentative;
+import org.fusionsoft.database.mapping.dbd.DbdServerMappingOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.DbdServerYamlMapping;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.database.snapshot.DbmsSignature;
+import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureOfServerMapping;
 import org.fusionsoft.lib.connection.NotImplementedConnection;
-import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and

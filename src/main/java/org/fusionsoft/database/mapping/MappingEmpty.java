@@ -13,34 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database.mapping;
 
-import java.sql.Connection;
-import org.fusionsoft.database.YamlRepresentative;
+import com.amihaiemil.eoyaml.Yaml;
+import org.fusionsoft.lib.yaml.YamlMappingOf;
 
 /**
- * The type representing information about database,
- *  such as url, kind, version and credentials.
+ * The type of YamlMapping which is just empty.
  * @since 0.1
  */
-public interface DatabaseInfo extends YamlRepresentative {
+public class MappingEmpty extends YamlMappingOf {
 
     /**
-     * Signature of DBMS.
-     * @return The dbms signature.
+     * Instantiates a new Mapping empty.
      */
-    DbmsSignature signature();
-
-    /**
-     * Connection to connect to datavase.
-     * @return The {@link java.sql.Connection}.
-     */
-    Connection connection();
-
-    /**
-     * The name of database in terms of 'DBD' file content format.
-     * @return The string.
-     */
-    String name();
+    public MappingEmpty() {
+        super(
+            () -> Yaml.createYamlMappingBuilder().build()
+        );
+    }
 
 }
