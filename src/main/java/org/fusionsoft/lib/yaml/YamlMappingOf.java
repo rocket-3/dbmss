@@ -16,6 +16,7 @@
 package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlInput;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.scalar.Sticky;
 import org.fusionsoft.database.YamlRepresentative;
 
@@ -24,6 +25,20 @@ import org.fusionsoft.database.YamlRepresentative;
  * @since 0.1
  */
 public class YamlMappingOf extends YamlMappingEnvelope {
+
+    /**
+     * Instantiates a new YamlMapping of YamlNode, that is used on demand.
+     * @param input The YamlNode to be used.
+     */
+    public YamlMappingOf(final YamlNode input) {
+        super(
+            new YamlMappingOfScalar(
+                new Sticky<>(
+                    input::asMapping
+                )
+            )
+        );
+    }
 
     /**
      * Instantiates a new YamlMapping of YamlInput, that is used on demand.
