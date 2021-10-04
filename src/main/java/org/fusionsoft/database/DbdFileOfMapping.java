@@ -28,13 +28,13 @@ import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 public class DbdFileOfMapping implements DbdFile {
 
     /**
-     * The Scalar<DbdRootMapping> encapsulated.
+     * The Scalar of DbdRootMapping encapsulated.
      */
     private final Scalar<DbdRootMapping> mapping;
 
     /**
      * Instantiates a new Dbd file of mapping.
-     * @param mapping The Scalar<DbdRootMapping> to be encapsulated.
+     * @param mapping The Scalar of DbdRootMapping to be encapsulated.
      */
     private DbdFileOfMapping(final Scalar<DbdRootMapping> mapping) {
         this.mapping = mapping;
@@ -49,7 +49,7 @@ public class DbdFileOfMapping implements DbdFile {
     }
 
     @Override
-    public DbdRootMapping asYaml() {
+    public final DbdRootMapping asYaml() {
         return new Unchecked<>(this.mapping).value();
     }
 

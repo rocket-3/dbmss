@@ -40,7 +40,7 @@ public class DbdRootMapping extends YamlMappingOf {
         super(
             new YamlNodeValidated(
                 m -> {
-                    if (!("db").equals(
+                    if (!"db".equals(
                         new TextOfMappingValue(
                             new YamlMappingHasKeys(
                                 new YamlMappingOfPath(m.asMapping(), "info"),
