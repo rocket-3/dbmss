@@ -16,11 +16,18 @@
 package org.fusionsoft.database.snapshot.databaseinfo;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.text.MessageFormat;
+
 import org.fusionsoft.database.BaseYamlRepresentative;
 import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.dbd.document.DbdServerYamlMapping;
+import org.fusionsoft.database.dbd.document.fields.DbdServerFields;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.database.snapshot.HashTextOf;
+import org.fusionsoft.lib.connection.ConnectionOfScalar;
 import org.fusionsoft.lib.connection.NotImplementedConnection;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
@@ -28,7 +35,6 @@ import org.fusionsoft.lib.yaml.YamlMappingOfPath;
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
  *  name of server for which data is.
  * @since 0.1
- * @todo #40:60min Implement DatabaseInfoOfDbd::connection method.
  */
 public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements DatabaseInfo {
 
@@ -86,8 +92,16 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
 
     @Override
     public final Connection connection() {
-        return new NotImplementedConnection();
+
+        return new ConnectionOfScalar(
+                () -> DriverManager.getConnection(
+                    this.mapping.string(DbdServerFields.URL.asString()),
+                    this.mapping.string(DbdServerFields.USER.asString()),
+                    this.mapping.string(DbdServerFields.PWD.asString())
+                    )
+                );
     }
+
 
     @Override
     public final String name() {
