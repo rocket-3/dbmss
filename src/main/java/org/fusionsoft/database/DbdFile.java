@@ -20,7 +20,6 @@ import com.amihaiemil.eoyaml.YamlMapping;
 /**
  * The interface representing a DBD file.
  * @since 0.1
- * @todo #40:15min Create basic DbdFile implementation.
  */
 public interface DbdFile extends YamlRepresentative {
 
