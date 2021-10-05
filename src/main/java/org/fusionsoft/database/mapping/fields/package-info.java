@@ -17,4 +17,4 @@
 /**
  * The enumerations of fields of 'DBD' documents.
  */
-package org.fusionsoft.database.dbd.document.fields;
+package org.fusionsoft.database.mapping.fields;

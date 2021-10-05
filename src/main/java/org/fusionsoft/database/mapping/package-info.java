@@ -15,6 +15,6 @@
  */
 
 /**
- * {@link org.fusionsoft.database.Writable} implementations.
+ * Various yaml mappings artefacts.
  */
-package org.fusionsoft.database.snapshot.writable;
+package org.fusionsoft.database.mapping;

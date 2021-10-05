@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 
 /**
  * The interface representing a DBD file.
@@ -27,6 +27,6 @@ public interface DbdFile extends YamlRepresentative {
      * Represent file data as Yaml.
      * @return The yaml input.
      */
-    YamlMapping asYaml();
+    DbdRootMapping asYaml();
 
 }

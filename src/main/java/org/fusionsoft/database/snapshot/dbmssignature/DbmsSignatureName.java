@@ -13,42 +13,31 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.dbd.document.fields;
+package org.fusionsoft.database.snapshot.dbmssignature;
 
 import org.cactoos.Text;
 
 /**
- * The enumeration of node DBD/servers.
+ * The enum DbmsSignatureName.
  */
-public enum DbdServerFields implements Text {
+public enum DbmsSignatureName implements Text {
+
     /**
-     *Url database credentials field.
+     *Postgres dbms signature name.
      */
-    DBTYPE("dbType"),
+    POSTGRES("POSTGRES"),
     /**
-     *Url database credentials field.
+     *Mysql dbms signature name.
      */
-    DBVERSION("dbVersion"),
+    MYSQL("MYSQL"),
     /**
-     *Url database credentials field.
+     *Mssql dbms signature name.
      */
-    URL("url"),
+    MSSQL("MSSQL"),
     /**
-     *User database credentials field.
+     *Oracle dbms signature name.
      */
-    USER("user"),
-    /**
-     *Pwd database credentials field.
-     */
-    PWD("password"),
-    /**
-     *Vars database credentials field.
-     */
-    DESCRIPTION("description"),
-    /**
-     *Vars database credentials field.
-     */
-    VARS("variables");
+    ORACLE("ORACLE");
 
     /**
      * The String encapsulated.
@@ -56,10 +45,10 @@ public enum DbdServerFields implements Text {
     private final String value;
 
     /**
-     * Instantiates a new Database info fields.
+     * Instantiates a new Dbms signature name.
      * @param string The String to be encapsulated.
      */
-    DbdServerFields(final String string) {
+    DbmsSignatureName(final String string) {
         this.value = string;
     }
 

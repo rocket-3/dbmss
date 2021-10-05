@@ -15,6 +15,6 @@
  */
 
 /**
- * {@link org.fusionsoft.database.DbdFile}-related classes.
+ * The artifacts of 'DBD' sub-documents.
  */
-package org.fusionsoft.database.dbdfile;
+package org.fusionsoft.database.mapping.dbd;

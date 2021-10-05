@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database;
+package org.fusionsoft.database.writable;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.scalar.ScalarOf;
+import org.fusionsoft.database.BaseYamlRepresentative;
+import org.fusionsoft.database.Folder;
+import org.fusionsoft.database.Writable;
+import org.fusionsoft.database.WriteTo;
+import org.fusionsoft.database.YamlRepresentative;
 
 /**
  * The type of that can be constructed of.

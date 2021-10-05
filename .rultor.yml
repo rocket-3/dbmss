@@ -1,9 +1,9 @@
+image: g4s8/rultor:alpine3.10
 architect:
   - rocket-3
-env:
-  MAVEN_OPTS: "-XX:MaxPermSize=256m -Xmx1g"
 merge:
   script: |-
+    pdd -f /dev/null
     java -version --batch-mode
     mvn -version --batch-mode
     mvn clean install -Pqulice --batch-mode

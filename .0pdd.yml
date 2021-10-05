@@ -4,7 +4,4 @@ alerts:
   github:
     - rocket-3
 format:
-  - short-title
   - title-length=120
-tags:
-  - pdd

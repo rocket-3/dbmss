@@ -13,9 +13,23 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database.mapping;
+
+import org.cactoos.io.ResourceOf;
+import org.fusionsoft.lib.yaml.YamlInputOf;
+import org.fusionsoft.lib.yaml.YamlMappingOf;
 
 /**
- * Artefacts of
- *  {@link org.fusionsoft.database.snapshot.databaseinfo.DbmsSignature}.
+ * The type of Text that is constructed of example YAML from resources.
+ * @since 0.1
  */
-package org.fusionsoft.database.snapshot.databaseinfo.dbmssignature;
+public class MappingOfExampleYaml extends YamlMappingOf {
+
+    /**
+     * Instantiates a new Input of example yaml.
+     */
+    public MappingOfExampleYaml() {
+        super(new YamlInputOf(new ResourceOf("iuDescriptionExample.yaml")));
+    }
+
+}

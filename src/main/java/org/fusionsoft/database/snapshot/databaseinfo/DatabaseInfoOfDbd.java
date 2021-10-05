@@ -15,14 +15,15 @@
  */
 package org.fusionsoft.database.snapshot.databaseinfo;
 
-import com.amihaiemil.eoyaml.YamlMapping;
-import org.fusionsoft.database.BaseYamlRepresentative;
+import java.sql.Connection;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.dbd.document.DbdServerYamlMapping;
-import org.fusionsoft.database.dbd.document.fields.DbdServerFields;
+import org.fusionsoft.database.YamlRepresentative;
+import org.fusionsoft.database.mapping.dbd.DbdServerMappingOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.DbdServerYamlMapping;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
-import org.fusionsoft.lib.connection.ConnectionOfScalar;
-import org.fusionsoft.lib.yaml.YamlMappingOfPath;
+import org.fusionsoft.database.snapshot.DbmsSignature;
+import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureOfServerMapping;
+import org.fusionsoft.lib.connection.NotImplementedConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,7 +33,7 @@ import java.sql.DriverManager;
  * name of server for which data is.
  * @since 0.1
  */
-public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements DatabaseInfo {
+public class DatabaseInfoOfDbd implements DatabaseInfo, YamlRepresentative {
 
     /**
      * The YamlMapping encapsulated.
@@ -46,40 +47,24 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
 
     /**
      * Instantiates a new Database info of dbd.
-     *
      * @param file The DbdFile to be encapsulated.
      * @param name The String to be encapsulated.
      */
     public DatabaseInfoOfDbd(final DbdFile file, final String name) {
         this(
-            new YamlMappingOfPath(
-                file.asYaml(),
-                "servers", name
-            ),
+            new DbdServerMappingOfDbdFile(file, name),
             name
         );
     }
 
     /**
      * Instantiates a new Database info of dbd.
-     *
      * @param mapping The YamlMapping, data should be contained in.
      * @param name The name to be encapsulated.
      */
     private DatabaseInfoOfDbd(final DbdServerYamlMapping mapping, final String name) {
-        super(mapping);
         this.mapping = mapping;
         this.key = name;
-    }
-
-    /**
-     * Instantiates a new Database info of dbd.
-     *
-     * @param mapping The DbdServerYamlMapping, data should be contained in.
-     * @param name The name to be encapsulated.
-     */
-    private DatabaseInfoOfDbd(final YamlMapping mapping, final String name) {
-        this(new DbdServerYamlMapping(mapping), name);
     }
 
     @Override
@@ -103,6 +88,11 @@ public class DatabaseInfoOfDbd extends BaseYamlRepresentative implements Databas
     @Override
     public final String name() {
         return this.key;
+    }
+
+    @Override
+    public final DbdServerYamlMapping asYaml() {
+        return this.mapping;
     }
 
 }

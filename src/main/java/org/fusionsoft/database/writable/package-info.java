@@ -13,26 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.databaseinfo;
-
-import org.cactoos.Text;
 
 /**
- * The interface DbmsSignature representing DBMS's name and version.
- * @since 0.1
+ * {@link org.fusionsoft.database.Writable} implementations.
  */
-public interface DbmsSignature {
-
-    /**
-     * Kind of DBMS used e.g. Postgres.
-     * @return The Text.
-     */
-    Text name();
-
-    /**
-     * Version of DBMS used.
-     * @return The Text.
-     */
-    Text version();
-
-}
+package org.fusionsoft.database.writable;

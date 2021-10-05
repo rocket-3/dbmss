@@ -13,23 +13,29 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database;
+package org.fusionsoft.lib.exception;
 
-import com.amihaiemil.eoyaml.Yaml;
-import org.fusionsoft.lib.yaml.YamlMappingOf;
+import org.cactoos.text.Concatenated;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.UncheckedText;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The type of RuntimeException that's about error of some data validation.
  * @since 0.1
  */
-public class MappingEmpty extends YamlMappingOf {
+public class ValidationException extends RuntimeException {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Instantiates a new Validation exception.
+     * @param message The String to be encapsulated.
      */
-    public MappingEmpty() {
+    public ValidationException(final String message) {
         super(
-            () -> Yaml.createYamlMappingBuilder().build()
+            new UncheckedText(
+                new Concatenated(
+                    new TextOf("Validation error: "),
+                    new TextOf(message)
+                )).asString()
         );
     }
 
