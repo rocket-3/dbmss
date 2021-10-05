@@ -17,14 +17,13 @@ package org.fusionsoft.database;
 
 import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
-import org.fusionsoft.database.snapshot.ConfigurationTablesOfDbd;
 import org.fusionsoft.database.snapshot.CreatingSnapshotFolder;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.DbGitRepoOfDbdFile;
-import org.fusionsoft.database.snapshot.DbObjects;
-import org.fusionsoft.database.snapshot.ObjectsFromServerMentionedInDbd;
-import org.fusionsoft.database.snapshot.ObjectsWithNames;
+import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
+import org.fusionsoft.database.snapshot.objects.ObjectsFromServerMentionedInDbd;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectsMentionedAsConfigTablesInDbd;
 import org.fusionsoft.database.writable.DbdYamlOfObjects;
 import org.fusionsoft.database.writable.SnapshotInfo;
 import org.fusionsoft.database.writable.TableDataFilesOfObjects;
@@ -103,7 +102,7 @@ public class SnapshotCreateProcedure {
             this.dbd,
             this.database
         );
-        final DbObjects objects = new ObjectsFromServerMentionedInDbd(
+        final Objects objects = new ObjectsFromServerMentionedInDbd(
             info,
             this.dbd
         );
@@ -116,10 +115,7 @@ public class SnapshotCreateProcedure {
             new DbdYamlOfObjects(info, objects),
             new TableDataFilesOfObjects(this.withOperationalData
                 ? objects
-                : new ObjectsWithNames(
-                    objects,
-                    new ConfigurationTablesOfDbd(this.dbd)
-                )
+                : new ObjectsMentionedAsConfigTablesInDbd(objects, this.dbd)
             )
         ).forEach(
             x -> x.writeTo(

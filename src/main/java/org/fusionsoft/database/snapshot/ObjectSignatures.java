@@ -16,22 +16,10 @@
 
 package org.fusionsoft.database.snapshot;
 
-import org.fusionsoft.database.DbdFile;
-
 /**
- * The type of {@link ObjectNames} that represents configuration tables from
- *  {@link DbdFile}.
+ * The interface ObjectNames representing names of a set of db objects.
  * @since 0.1
- * @todo #40:60min Implement ConfigurationTablesOfDbd.java
  */
-@SuppressWarnings("PMD")
-public class ConfigurationTablesOfDbd implements ObjectNames {
-
-    /**
-     * Instantiates a new Configuration tables of dbd.
-     * @param file The DbdFile to be encapsulated.
-     */
-    public ConfigurationTablesOfDbd(final DbdFile file) {
-    }
+public interface ObjectSignatures extends Iterable<ObjectSignature> {
 
 }

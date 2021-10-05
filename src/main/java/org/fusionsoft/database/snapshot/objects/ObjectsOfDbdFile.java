@@ -13,26 +13,25 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database.snapshot.objects;
 
-package org.fusionsoft.database.snapshot;
+import org.fusionsoft.database.DbdFile;
+import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 
 /**
- * The type of {@link DbObjects} that are filtered by {@link ObjectNames}.
+ * The type of Objects that can be constructed of {@link DbdFile}.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsWithNames extends DbObjects {
+public class ObjectsOfDbdFile extends ObjectsOfDbdRootMapping {
 
     /**
-     * Instantiates a new Objects with names.
-     * @param objects The DbObjects to be encapsulated.
-     * @param names The ObjectNames to be encapsulated.
+     * Instantiates a new Objects of dbd file.
+     * @param mapping The DbdFile to be encapsulated.
      */
-    public ObjectsWithNames(
-        final DbObjects objects,
-        final ObjectNames names
-    ) {
-        super();
+    public ObjectsOfDbdFile(final DbdFile mapping) {
+        super(
+            new DbdRootMapping(mapping::asYaml)
+        );
     }
 
 }

@@ -15,10 +15,24 @@
  */
 package org.fusionsoft.database.snapshot;
 
+import org.cactoos.Text;
+
 /**
- * The type representing database objects data we can obtain from DBMS.
+ * The interface ObjectSignature representing identifier of object in DBMS .
  * @since 0.1
  */
-public class DbObjects {
+public interface ObjectSignature extends Text {
+
+    /**
+     * The name of object in DBMS text.
+     * @return The text.
+     */
+    Text name();
+
+    /**
+     * The DBMS type of object text.
+     * @return The object type.
+     */
+    ObjectType type();
 
 }

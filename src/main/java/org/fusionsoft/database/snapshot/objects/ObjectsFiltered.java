@@ -13,31 +13,34 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.writable;
+package org.fusionsoft.database.snapshot.objects;
 
-import org.fusionsoft.database.Folder;
-import org.fusionsoft.database.Writable;
+import org.cactoos.Func;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.IterableEnvelope;
+import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of {@link Writable} that represents db tables data
- *  of given {@link Objects}.
+ * The type of DbObjects that was filtered by some predicate.
  * @since 0.1
- * @todo #40:60min Implement `TableDataFilesOfObjects` `Writable`
- * @checkstyle (100 lines)
  */
-@SuppressWarnings("PMD")
-public class TableDataFilesOfObjects implements Writable {
+public class ObjectsFiltered extends IterableEnvelope<DbObject> implements Objects {
 
     /**
-     * Instantiates a new Table data files of objects.
-     * @param objects The DbObjects to be encapsulated.
+     * Ctor.
+     * @param origin The wrapped DbObjects
+     * @param predicate The predicate to be used.
      */
-    public TableDataFilesOfObjects(final Objects objects) {
-    }
-
-    @Override
-    public void writeTo(final Folder folder) {
+    public ObjectsFiltered(
+        final Objects origin,
+        final Func<DbObject, Boolean> predicate
+    ) {
+        super(
+            new Filtered<>(
+                predicate, origin
+            )
+        );
     }
 
 }

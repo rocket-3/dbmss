@@ -14,12 +14,7 @@
  * and limitations under the License.
  */
 
-package org.fusionsoft.database.snapshot;
-
 /**
- * The interface ObjectNames representing names of a set of db objects.
- * @since 0.1
+ * Artefacts of {@link org.fusionsoft.database.snapshot.ObjectSignature}.
  */
-public interface ObjectNames {
-
-}
+package org.fusionsoft.database.snapshot.objectsignature;
