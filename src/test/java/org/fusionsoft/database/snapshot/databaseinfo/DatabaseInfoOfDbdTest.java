@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.databaseinfo;
 
+import org.fusionsoft.database.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class DatabaseInfoOfDbdTest {
         Assertions.assertEquals(
             "POSTGRES",
             new DatabaseInfoOfDbd(
-                MappingOfExampleYaml::new,
+                new DbdFileOfMapping(new MappingOfExampleYaml()),
                 "fs-mts"
             ).signature().name().asString()
         );

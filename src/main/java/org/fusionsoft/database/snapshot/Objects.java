@@ -15,27 +15,10 @@
  */
 package org.fusionsoft.database.snapshot;
 
-import org.fusionsoft.database.DbdFile;
-
 /**
- * The type of {@link DbObjects} from database mentioned in {@link DatabaseInfo}
- *  that names present in {@link DbdFile} only.
+ * The type representing database objects data we can obtain from DBMS.
  * @since 0.1
- * @todo #40:60min Obtain db objects from database
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromServerMentionedInDbd extends DbObjects {
-
-    /**
-     * Instantiates a new Objects from server mentioned in dbd.
-     * @param database The DatabaseInfo to be encapsulated.
-     * @param file The DbdFile to be encapsulated.
-     */
-    public ObjectsFromServerMentionedInDbd(
-        final DatabaseInfo database,
-        final DbdFile file
-    ) {
-        super();
-    }
+public interface Objects extends Iterable<DbObject> {
 
 }

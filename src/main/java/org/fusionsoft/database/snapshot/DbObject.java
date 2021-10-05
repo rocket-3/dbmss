@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database;
+package org.fusionsoft.database.snapshot;
 
-import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import org.fusionsoft.database.YamlRepresentative;
 
 /**
- * The interface representing a DBD file.
+ * The interface DbObject representing object in Dbms coordinates and attributes.
  * @since 0.1
  */
-public interface DbdFile extends YamlRepresentative {
+public interface DbObject extends YamlRepresentative {
 
     /**
-     * Represent file data as Yaml.
-     * @return The yaml input.
+     * Signature object signature.
+     * @return The object signature.
      */
-    DbdRootMapping asYaml();
+    ObjectSignature signature();
 
 }

@@ -39,8 +39,8 @@ public class YamlMappingOfScalar extends BaseYamlMapping {
      * Instantiates a new Yaml mapping of scalar.
      * @param scalar The Scalar of YamlMapping to be encapsulated.
      */
-    public YamlMappingOfScalar(final Scalar<YamlMapping> scalar) {
-        this.scalar = new Unchecked<>(scalar);
+    public YamlMappingOfScalar(final Scalar<? extends YamlMapping> scalar) {
+        this.scalar = new Unchecked<>(scalar::value);
     }
 
     @Override

@@ -13,36 +13,33 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.writable;
+package org.fusionsoft.database.snapshot.objects;
 
-import org.cactoos.text.TextOf;
-import org.fusionsoft.database.BaseYamlRepresentative;
-import org.fusionsoft.database.Writable;
-import org.fusionsoft.database.mapping.MappingEmpty;
+import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of {@link Writable} representing Dbd yaml file,
- *  describing {@link Objects}.
+ * The type of {@link Objects} from database mentioned in {@link DatabaseInfo}
+ *  that names present in {@link DbdFile} only.
  * @since 0.1
- * @todo #40:60min Implement `DbdYamlOfObjects` `Writable`
+ * @todo #40:60min Obtain db objects from database
  */
 @SuppressWarnings("PMD")
-public class DbdYamlOfObjects extends WritableYamlDocument {
+public class ObjectsFromServerMentionedInDbd extends ObjectsFiltered {
 
     /**
-     * Instantiates a new Dbd yaml of objects.
+     * Instantiates a new Objects from server mentioned in dbd.
      * @param database The DatabaseInfo to be encapsulated.
-     * @param objects The DbObjects to be encapsulated.
+     * @param file The DbdFile to be encapsulated.
      */
-    public DbdYamlOfObjects(
+    public ObjectsFromServerMentionedInDbd(
         final DatabaseInfo database,
-        final Objects objects
+        final DbdFile file
     ) {
         super(
-            new BaseYamlRepresentative(new MappingEmpty()),
-            new TextOf("DBD.yaml")
+            new ObjectsFromDatabase(database),
+            new ObjectsInDbdPredicate(file)
         );
     }
 

@@ -13,31 +13,33 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.writable;
+package org.fusionsoft.database.snapshot.objects;
 
-import org.fusionsoft.database.Folder;
-import org.fusionsoft.database.Writable;
+import org.cactoos.iterable.IterableEnvelope;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterator.IteratorOf;
+import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of {@link Writable} that represents db tables data
- *  of given {@link Objects}.
+ * The DbObjects from {@link DatabaseInfo}.
  * @since 0.1
- * @todo #40:60min Implement `TableDataFilesOfObjects` `Writable`
- * @checkstyle (100 lines)
+ * @todo #46:30min Start implementing.
  */
 @SuppressWarnings("PMD")
-public class TableDataFilesOfObjects implements Writable {
+public class ObjectsFromDatabase extends IterableEnvelope<DbObject> implements Objects {
 
     /**
-     * Instantiates a new Table data files of objects.
-     * @param objects The DbObjects to be encapsulated.
+     * Ctor.
+     * @param database The database used to extract data.
      */
-    public TableDataFilesOfObjects(final Objects objects) {
-    }
-
-    @Override
-    public void writeTo(final Folder folder) {
+    public ObjectsFromDatabase(final DatabaseInfo database) {
+        super(
+            new IterableOf<DbObject>(
+                new IteratorOf<>()
+            )
+        );
     }
 
 }
