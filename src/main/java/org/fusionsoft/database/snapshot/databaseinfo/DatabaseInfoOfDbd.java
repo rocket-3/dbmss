@@ -29,7 +29,7 @@ import org.fusionsoft.lib.connection.ConnectionOfScalar;
 
 /**
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
- * name of server for which data is.
+ *  name of server for which data is.
  * @since 0.1
  */
 public class DatabaseInfoOfDbd implements DatabaseInfo, YamlRepresentative {
