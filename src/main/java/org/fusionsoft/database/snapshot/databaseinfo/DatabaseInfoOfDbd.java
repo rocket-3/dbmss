@@ -16,17 +16,16 @@
 package org.fusionsoft.database.snapshot.databaseinfo;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.YamlRepresentative;
 import org.fusionsoft.database.mapping.dbd.DbdServerMappingOfDbdFile;
 import org.fusionsoft.database.mapping.dbd.DbdServerYamlMapping;
+import org.fusionsoft.database.mapping.fields.DbdServerFields;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.DbmsSignature;
 import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureOfServerMapping;
-import org.fusionsoft.lib.connection.NotImplementedConnection;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
+import org.fusionsoft.lib.connection.ConnectionOfScalar;
 
 /**
  * The type of {@link DatabaseInfo} that is obtained from {@link DbdFile} and
