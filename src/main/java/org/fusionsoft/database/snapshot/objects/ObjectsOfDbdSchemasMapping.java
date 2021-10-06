@@ -15,28 +15,30 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.iterable.IterableEnvelope;
-import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import org.cactoos.iterable.Joined;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.lib.yaml.YamlMappingOfPath;
+import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
- * The type of Objects that can be constructed of DbdRootMapping.
+ * The Objects that can be constructed of DBD/schemas mapping.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsOfDbdRootMapping extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsOfDbdSchemasMapping extends IterableEnvelope<DbObject> implements Objects {
 
     /**
-     * Instantiates a new Objects of dbd root mapping.
-     * @param mapping The DbdRootMapping to be encapsulated.
-     * @todo #46:30min Implement iterator scalar.
+     * Ctor.
+     * @param mapping The wrapped mapping
      */
-    public ObjectsOfDbdRootMapping(final DbdRootMapping mapping) {
+    public ObjectsOfDbdSchemasMapping(final YamlMapping mapping) {
         super(
-            new ObjectsOfDbdSchemasMapping(
-                new YamlMappingOfPath(mapping, "schemas")
+            new Joined<DbObject>(
+                new IterableOfClassFromYamlNode<>(
+                    ObjectsOfDbdSchemaMapping::new,
+                    mapping
+                )
             )
         );
     }
