@@ -21,7 +21,7 @@ import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
-import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
+import org.fusionsoft.database.mapping.fields.DdbTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
@@ -33,51 +33,65 @@ import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
 /**
- * The type of db schema Objects of DBD/schemas/#schema node.
+ * The type of db table Objects of DBD/schemas/#schema/tables/#table node.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ObjectsOfDbdSchemaMapping extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsOfDbdTableMapping extends IterableEnvelope<DbObject> implements Objects {
 
     /**
-     * Instantiates a new Objects of dbd schema mapping.
+     * Instantiates a new Objects of dbd table mapping.
      * @param parent The YamlMapping to be encapsulated.
      * @param key The YamlNode to be encapsulated.
+     * @param schema The Text to be encapsulated.
      */
-    public ObjectsOfDbdSchemaMapping(
+    public ObjectsOfDbdTableMapping(
         final YamlMapping parent,
-        final YamlNode key
+        final YamlNode key,
+        final Text schema
     ) {
         this(
             new YamlMappingOfScalar(() -> parent.value(key).asMapping()),
-            new TextOfScalarNode(key)
+            new NamesJoined(schema, new TextOfScalarNode(key))
         );
     }
 
     /**
      * Instantiates a new Objects of dbd schema mapping.
      * @param mapping The YamlMapping to be encapsulated.
-     * @param key The Text to be encapsulated.
+     * @param name The fully qualified name of table to be encapsulated.
      */
-    public ObjectsOfDbdSchemaMapping(
+    public ObjectsOfDbdTableMapping(
         final YamlMapping mapping,
-        final Text key
+        final Text name
     ) {
         super(
             new Joined<>(
                 new NaiveDbObject(
                     new MappingFromMappingIgnoreKeys(
                         mapping,
-                        new IterableOf<>(DbdSchemaFields.TABLES)
+                        new IterableOf<>(
+                            DdbTableFields.CONSTRAINTS,
+                            DdbTableFields.INDEXES
+                        )
                     ),
-                    new NaiveObjectSignature(key, ObjectType.SCHEMA)
+                    new NaiveObjectSignature(name, ObjectType.TABLE)
                 ),
-                new ObjectsOfDbdTablesMapping(
-                    new YamlMappingOfPath(
-                        mapping,
-                        DbdSchemaFields.TABLES.asString()
+                new Joined<DbObject>(
+                    new ObjectsOfDbdIndexesMapping(
+                        new YamlMappingOfPath(
+                            mapping,
+                            DdbTableFields.INDEXES.asString()
+                        ),
+                        name
                     ),
-                    key
+                    new ObjectsOfDbdConstraintsMapping(
+                        new YamlMappingOfPath(
+                            mapping,
+                            DdbTableFields.CONSTRAINTS.asString()
+                        ),
+                        name
+                    )
                 )
             )
         );

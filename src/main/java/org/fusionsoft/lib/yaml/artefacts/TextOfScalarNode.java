@@ -13,32 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.lib.yaml.artefacts;
 
-import org.cactoos.Text;
+import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOfScalar;
 
 /**
- * The interface ObjectSignature representing identifier of object in DBMS .
+ * The Text of scalar yaml node.
  * @since 0.1
  */
-public interface ObjectSignature extends Text {
+public class TextOfScalarNode extends TextEnvelope {
 
     /**
-     * The name of object in DBMS text.
-     * @return The text.
+     * Ctor.
+     * @param node Scalar yaml node representing the text value.
      */
-    Text name();
-
-    /**
-     * The DBMS type of object text.
-     * @return The object type.
-     */
-    ObjectType type();
-
-    /**
-     * Overridden contract of {@link Text} w/0 exception thrown.
-     * @return The String representation of the signature.
-     */
-    String asString();
+    public TextOfScalarNode(final YamlNode node) {
+        super(new TextOfScalar(() -> node.asScalar().value()));
+    }
 
 }

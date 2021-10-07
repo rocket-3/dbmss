@@ -51,4 +51,28 @@ public class YamlMappingOfPath extends YamlMappingEnvelope {
         );
     }
 
+    /**
+     * Instantiates a new Yaml mapping from {@link YamlNode} and array of
+     *  subdirs to dive through.
+     * @param node The YamlNode to be encapsulated.
+     * @param paths The subdirectories to dive through.
+     */
+    public YamlMappingOfPath(final YamlNode node, final YamlNode... paths) {
+        super(
+            new YamlMappingOfScalar(
+                new Sticky<>(
+                    () -> new StrictYamlMapping(
+                        new YamlNodeOfPath(
+                            node,
+                            new Mapped<>(
+                                path -> path.asScalar().value(),
+                                new IterableOf<>(paths)
+                            )
+                        ).asMapping()
+                    )
+                )
+            )
+        );
+    }
+
 }

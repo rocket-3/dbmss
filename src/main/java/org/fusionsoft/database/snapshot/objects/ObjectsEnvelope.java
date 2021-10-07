@@ -13,32 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database.snapshot.objects;
 
-import org.cactoos.Text;
+import org.cactoos.iterable.IterableEnvelope;
+import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The interface ObjectSignature representing identifier of object in DBMS .
+ * The Objects implementation that can be constructed of Iterable of DbObjects.
  * @since 0.1
  */
-public interface ObjectSignature extends Text {
+public class ObjectsEnvelope extends IterableEnvelope<DbObject> implements Objects {
 
     /**
-     * The name of object in DBMS text.
-     * @return The text.
+     * Ctor.
+     * @param iterable The wrapped iterable
      */
-    Text name();
-
-    /**
-     * The DBMS type of object text.
-     * @return The object type.
-     */
-    ObjectType type();
-
-    /**
-     * Overridden contract of {@link Text} w/0 exception thrown.
-     * @return The String representation of the signature.
-     */
-    String asString();
+    public ObjectsEnvelope(final Iterable<DbObject> iterable) {
+        super(iterable);
+    }
 
 }

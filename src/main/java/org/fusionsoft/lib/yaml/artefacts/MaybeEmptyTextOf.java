@@ -56,4 +56,16 @@ public class MaybeEmptyTextOf extends TextEnvelope {
         );
     }
 
+    /**
+     * Instantiates a new Maybe empty text of.
+     * @param mapping The YamlMapping to be encapsulated.
+     * @param key The String to be encapsulated.
+     */
+    public MaybeEmptyTextOf(
+        final YamlMapping mapping,
+        final String key
+    ) {
+        this(new StrictYamlMapping(mapping), key);
+    }
+
 }

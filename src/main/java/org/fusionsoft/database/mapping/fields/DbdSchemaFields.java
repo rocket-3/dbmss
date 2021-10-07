@@ -13,32 +13,34 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database.mapping.fields;
 
 import org.cactoos.Text;
 
 /**
- * The interface ObjectSignature representing identifier of object in DBMS .
- * @since 0.1
+ * The enum of DBD/schemas/#schema mapping fields.
  */
-public interface ObjectSignature extends Text {
+public enum DbdSchemaFields implements Text {
+    /**
+     *Tables dbd schema fields.
+     */
+    TABLES("tables");
 
     /**
-     * The name of object in DBMS text.
-     * @return The text.
+     * The String encapsulated.
      */
-    Text name();
+    private final String value;
 
     /**
-     * The DBMS type of object text.
-     * @return The object type.
+     * Instantiates a new Database info fields.
+     * @param string The String to be encapsulated.
      */
-    ObjectType type();
+    DbdSchemaFields(final String string) {
+        this.value = string;
+    }
 
-    /**
-     * Overridden contract of {@link Text} w/0 exception thrown.
-     * @return The String representation of the signature.
-     */
-    String asString();
-
+    @Override
+    public String asString() {
+        return this.value;
+    }
 }

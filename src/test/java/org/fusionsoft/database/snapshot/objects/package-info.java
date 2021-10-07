@@ -13,32 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
-
-import org.cactoos.Text;
 
 /**
- * The interface ObjectSignature representing identifier of object in DBMS .
- * @since 0.1
+ * Tests for {@link org.fusionsoft.database.snapshot.objects} package.
  */
-public interface ObjectSignature extends Text {
-
-    /**
-     * The name of object in DBMS text.
-     * @return The text.
-     */
-    Text name();
-
-    /**
-     * The DBMS type of object text.
-     * @return The object type.
-     */
-    ObjectType type();
-
-    /**
-     * Overridden contract of {@link Text} w/0 exception thrown.
-     * @return The String representation of the signature.
-     */
-    String asString();
-
-}
+package org.fusionsoft.database.snapshot.objects;

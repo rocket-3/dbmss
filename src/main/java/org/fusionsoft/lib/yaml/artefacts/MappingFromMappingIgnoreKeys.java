@@ -56,10 +56,10 @@ public class MappingFromMappingIgnoreKeys extends YamlMappingOfScalar {
     ) {
         super(
             () -> {
-                final YamlMappingBuilder yml = Yaml.createYamlMappingBuilder();
+                YamlMappingBuilder yml = Yaml.createYamlMappingBuilder();
                 for (final String key : new KeysFromYamlNode(mapping)) {
                     if (!ignores.contains(key)) {
-                        yml.add(key, mapping.value(key));
+                        yml = yml.add(key, mapping.value(key));
                     }
                 }
                 return yml.build();

@@ -137,5 +137,24 @@ public enum ObjectType implements Text {
         public String asString() {
             return "domain";
         }
-    }
+    },
+    /**
+     * The db constraint objectType constant.
+     */
+    CONSTRAINT() {
+        @Override
+        public String asString() {
+            return "constraint";
+        }
+    },
+    /**
+     * The db index objectType constant.
+     */
+    INDEX() {
+        @Override
+        public String asString() {
+            return "index";
+        }
+    };
+
 }
