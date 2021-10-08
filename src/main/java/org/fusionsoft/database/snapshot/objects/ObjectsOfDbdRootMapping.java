@@ -31,7 +31,6 @@ public class ObjectsOfDbdRootMapping extends IterableEnvelope<DbObject> implemen
     /**
      * Instantiates a new Objects of dbd root mapping.
      * @param mapping The DbdRootMapping to be encapsulated.
-     * @todo #46:30min Implement iterator scalar.
      */
     public ObjectsOfDbdRootMapping(final DbdRootMapping mapping) {
         super(
