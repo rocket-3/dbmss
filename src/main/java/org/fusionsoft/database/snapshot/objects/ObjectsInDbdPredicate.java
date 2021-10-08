@@ -22,7 +22,6 @@ import org.fusionsoft.database.snapshot.objectsignature.NamesOfObjects;
 /**
  * The predicate of {@link DbObject} which tests it presents in DBD file.
  * @since 0.1
- * @todo #46:30min Implement corresponding classes.
  */
 public class ObjectsInDbdPredicate extends ObjectsWithNamesPredicate {
 

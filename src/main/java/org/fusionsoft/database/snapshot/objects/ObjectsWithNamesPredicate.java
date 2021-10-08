@@ -53,7 +53,7 @@ public class ObjectsWithNamesPredicate implements Func<DbObject, Boolean> {
     }
 
     @Override
-    public final Boolean apply(final DbObject input) throws Exception {
+    public final Boolean apply(final DbObject input) {
         return this.set.contains(input.signature().asString());
     }
 
