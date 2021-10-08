@@ -15,7 +15,6 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import org.cactoos.text.TextOf;
 import org.fusionsoft.database.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
@@ -46,9 +45,9 @@ class ObjectsInDbdPredicateTest {
                     new MappingEmpty(),
                     new NaiveObjectSignature(
                         new NamesJoined(
-                            new TextOf("mts"),
-                            new TextOf("domains"),
-                            new TextOf("pk_domains")
+                            "mts",
+                            "domains",
+                            "pk_domains"
                         ),
                         ObjectType.CONSTRAINT
                     )

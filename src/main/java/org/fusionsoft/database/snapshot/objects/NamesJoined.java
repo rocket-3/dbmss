@@ -16,8 +16,11 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Mapped;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOf;
 
 /**
  * The Text of db object names joined.
@@ -29,8 +32,24 @@ public class NamesJoined extends TextEnvelope {
      * Ctor.
      * @param names The names to be joined.
      */
+    public NamesJoined(final Iterable<Text> names) {
+        super(new Joined(new TextOf("$"), names));
+    }
+
+    /**
+     * Ctor.
+     * @param names The names to be joined.
+     */
     public NamesJoined(final Text... names) {
-        super(new Joined("$", names));
+        this(new IterableOf<Text>(names));
+    }
+
+    /**
+     * Ctor.
+     * @param names The names to be joined.
+     */
+    public NamesJoined(final CharSequence... names) {
+        this(new Mapped<Text>(TextOf::new, names));
     }
 
 }
