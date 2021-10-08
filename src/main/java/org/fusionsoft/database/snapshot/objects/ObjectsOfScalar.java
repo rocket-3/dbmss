@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database.snapshot.objects;
 
-import org.cactoos.Text;
-import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureKind;
+import org.cactoos.Scalar;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The interface DbmsSignature representing DBMS's name and version.
+ * The Objects of scalar.
  * @since 0.1
  */
-public interface DbmsSignature {
+public class ObjectsOfScalar extends ObjectsEnvelope {
 
     /**
-     * Kind of DBMS used e.g. Postgres.
-     * @return The Text.
+     * Ctor.
+     * @param scalar The Scalar of Iterable of DbObject to be encapsulated.
      */
-    DbmsSignatureKind kind();
-
-    /**
-     * Version of DBMS used.
-     * @return The Text.
-     */
-    Text version();
+    public ObjectsOfScalar(final Scalar<? extends Iterable<? extends DbObject>> scalar) {
+        super(new IterableOf<>(() -> scalar.value().iterator()));
+    }
 
 }

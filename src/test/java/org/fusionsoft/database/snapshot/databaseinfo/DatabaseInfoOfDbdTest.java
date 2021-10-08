@@ -15,9 +15,10 @@
  */
 package org.fusionsoft.database.snapshot.databaseinfo;
 
+import org.cactoos.text.TextOf;
 import org.fusionsoft.database.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
-import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureName;
+import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureKindOfText;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,11 +34,11 @@ class DatabaseInfoOfDbdTest {
     @Test
     void retrievesData() {
         Assertions.assertEquals(
-            DbmsSignatureName.POSTGRES.asString(),
+            new DbmsSignatureKindOfText(new TextOf("POSTGRES")).asString(),
             new DatabaseInfoOfDbd(
                 new DbdFileOfMapping(new MappingOfExampleYaml()),
                 "fs-mts"
-            ).signature().name().asString()
+            ).signature().kind().asString()
         );
     }
 

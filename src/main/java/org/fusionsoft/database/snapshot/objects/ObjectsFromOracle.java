@@ -15,31 +15,23 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import org.cactoos.iterable.IterableEnvelope;
+import java.sql.Connection;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterator.IteratorOf;
-import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The DbObjects from {@link DatabaseInfo}.
+ * The Objects of {@link Connection} of Oracle dbms.
  * @since 0.1
- * @todo #46:30min Start implementing.
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromDatabase extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsFromOracle extends ObjectsEnvelope {
 
     /**
      * Ctor.
-     * @param database The database used to extract data.
+     * @param connection The connection used
      */
-    public ObjectsFromDatabase(final DatabaseInfo database) {
-        super(
-            new IterableOf<DbObject>(
-                new IteratorOf<>()
-            )
-        );
+    public ObjectsFromOracle(final Connection connection) {
+        super(new IterableOf<DbObject>());
     }
 
 }

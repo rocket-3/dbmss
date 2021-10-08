@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database.snapshot.objects;
 
-import org.cactoos.Text;
-import org.fusionsoft.database.snapshot.dbmssignature.DbmsSignatureKind;
+import java.sql.Connection;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The interface DbmsSignature representing DBMS's name and version.
+ * The Objects of {@link Connection} of MySql dbms.
  * @since 0.1
  */
-public interface DbmsSignature {
+@SuppressWarnings("PMD")
+public class ObjectsFromMySql extends ObjectsEnvelope {
 
     /**
-     * Kind of DBMS used e.g. Postgres.
-     * @return The Text.
+     * Ctor.
+     * @param connection The connection used
      */
-    DbmsSignatureKind kind();
-
-    /**
-     * Version of DBMS used.
-     * @return The Text.
-     */
-    Text version();
+    public ObjectsFromMySql(final Connection connection) {
+        super(new IterableOf<DbObject>());
+    }
 
 }

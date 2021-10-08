@@ -16,7 +16,6 @@
 package org.fusionsoft.database.snapshot.dbmssignature;
 
 import org.cactoos.Text;
-import org.fusionsoft.database.TextEnumValueOf;
 import org.fusionsoft.database.mapping.dbd.DbdServerYamlMapping;
 import org.fusionsoft.database.mapping.fields.DbdServerFields;
 import org.fusionsoft.database.snapshot.DbmsSignature;
@@ -43,11 +42,10 @@ public class DbmsSignatureOfServerMapping implements DbmsSignature {
     }
 
     @Override
-    public final DbmsSignatureName name() {
-        return new TextEnumValueOf<>(
-            DbmsSignatureName.class,
+    public final DbmsSignatureKind kind() {
+        return new DbmsSignatureKindOfText(
             new TextOfMappingValue(this.mapping, DbdServerFields.DBTYPE)
-        ).value();
+        );
     }
 
     @Override

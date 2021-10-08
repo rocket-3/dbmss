@@ -15,31 +15,24 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
-import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of {@link Objects} from database mentioned in {@link DatabaseInfo}
- *  that names present in {@link DbdFile} only.
+ * The DbObjects from {@link DatabaseInfo}.
  * @since 0.1
- * @todo #40:60min Obtain db objects from database
+ * @todo #46:30min Start implementing.
+ * @todo #83:30min Continue implementing corresponding classes.
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromServerMentionedInDbd extends ObjectsFiltered {
+public class ObjectsFromDatabaseInfo extends ObjectsOfScalar {
 
     /**
-     * Instantiates a new Objects from server mentioned in dbd.
-     * @param database The DatabaseInfo to be encapsulated.
-     * @param file The DbdFile to be encapsulated.
+     * Ctor.
+     * @param database The database used to extract data.
      */
-    public ObjectsFromServerMentionedInDbd(
-        final DatabaseInfo database,
-        final DbdFile file
-    ) {
+    public ObjectsFromDatabaseInfo(final DatabaseInfo database) {
         super(
-            new ObjectsFromDatabaseInfo(database),
-            new ObjectsInDbdPredicate(file)
+            () -> database.signature().kind().objects(database.connection())
         );
     }
 
