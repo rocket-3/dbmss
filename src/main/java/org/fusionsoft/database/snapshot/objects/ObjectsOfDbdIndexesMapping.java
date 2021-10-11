@@ -36,7 +36,7 @@ public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope {
         final Text table
     ) {
         super(
-            new IterableOfClassFromYamlNode<DbObject>(
+            new IterableOfClassFromYamlNode<DbObject<? extends YamlMapping>>(
                 (map, node) -> new ObjectOfDbdIndexMapping(map, node, table),
                 indexes
             )

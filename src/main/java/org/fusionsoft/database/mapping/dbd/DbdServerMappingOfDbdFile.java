@@ -19,10 +19,10 @@ import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
- * The type of DbdServerYamlMapping that can be constructed of {@link DbdFile}.
+ * The type of DbdServerMapping that can be constructed of {@link DbdFile}.
  * @since 0.1
  */
-public class DbdServerMappingOfDbdFile extends DbdServerYamlMapping {
+public class DbdServerMappingOfDbdFile extends DbdServerMapping {
 
     /**
      * Instantiates a new Dbd server mapping of dbd file.

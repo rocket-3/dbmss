@@ -15,10 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import org.cactoos.iterable.IterableEnvelope;
 import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
@@ -26,7 +23,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfPath;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsOfDbdRootMapping extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsOfDbdRootMapping extends ObjectsEnvelope {
 
     /**
      * Instantiates a new Objects of dbd root mapping.

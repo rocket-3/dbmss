@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.lib.text;
 
-import com.amihaiemil.eoyaml.Yaml;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOf;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The {@link org.cactoos.Text} that is empty.
  * @since 0.1
  */
-public class MappingEmpty extends MappingOfRepresentative {
+public class Empty extends TextEnvelope {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Ctor.
      */
-    public MappingEmpty() {
-        super(
-            () -> Yaml.createYamlMappingBuilder().build()
-        );
+    public Empty() {
+        super(new TextOf(""));
     }
 
 }

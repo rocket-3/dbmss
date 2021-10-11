@@ -15,14 +15,17 @@
  */
 package org.fusionsoft.database.snapshot;
 
-import com.amihaiemil.eoyaml.YamlNode;
-import org.fusionsoft.database.BaseYamlRepresentative;
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.fusionsoft.database.SimpleYamlRepresentative;
 
 /**
  * The naive impl of DbObject.
+ * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public class NaiveDbObject extends BaseYamlRepresentative implements DbObject {
+public class NaiveDbObject<Y extends YamlMapping>
+    extends SimpleYamlRepresentative<Y>
+    implements DbObject<Y> {
 
     /**
      * The ObjectSignature encapsulated.
@@ -34,7 +37,7 @@ public class NaiveDbObject extends BaseYamlRepresentative implements DbObject {
      * @param yaml The YamlNode to be encapsulated.
      * @param signature The ObjectSignature to be encapsulated.
      */
-    public NaiveDbObject(final YamlNode yaml, final ObjectSignature signature) {
+    public NaiveDbObject(final Y yaml, final ObjectSignature signature) {
         super(yaml);
         this.sig = signature;
     }

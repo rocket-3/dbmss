@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.database.snapshot.objectsignature;
 
-import com.amihaiemil.eoyaml.Yaml;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOf;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The text that used as delimiter for names in
+ *  {@link org.fusionsoft.database.snapshot.DbObject}.
  * @since 0.1
  */
-public class MappingEmpty extends MappingOfRepresentative {
+public class FullNameDelimiter extends TextEnvelope {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Ctor.
      */
-    public MappingEmpty() {
-        super(
-            () -> Yaml.createYamlMappingBuilder().build()
-        );
+    public FullNameDelimiter() {
+        super(new TextOf("$"));
     }
 
 }

@@ -13,23 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
-
-import com.amihaiemil.eoyaml.Yaml;
 
 /**
- * The type of YamlMapping which is just empty.
- * @since 0.1
+ * The {@link org.cactoos.Text} utils.
  */
-public class MappingEmpty extends MappingOfRepresentative {
-
-    /**
-     * Instantiates a new Mapping empty.
-     */
-    public MappingEmpty() {
-        super(
-            () -> Yaml.createYamlMappingBuilder().build()
-        );
-    }
-
-}
+package org.fusionsoft.lib.text;

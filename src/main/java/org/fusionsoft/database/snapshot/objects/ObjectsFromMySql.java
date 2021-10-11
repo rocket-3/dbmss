@@ -17,7 +17,6 @@ package org.fusionsoft.database.snapshot.objects;
 
 import java.sql.Connection;
 import org.cactoos.iterable.IterableOf;
-import org.fusionsoft.database.snapshot.DbObject;
 
 /**
  * The Objects of {@link Connection} of MySql dbms.
@@ -31,7 +30,7 @@ public class ObjectsFromMySql extends ObjectsEnvelope {
      * @param connection The connection used
      */
     public ObjectsFromMySql(final Connection connection) {
-        super(new IterableOf<DbObject>());
+        super(new IterableOf<>());
     }
 
 }

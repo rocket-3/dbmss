@@ -23,7 +23,7 @@ import org.fusionsoft.database.snapshot.DbGitRepoOfDbdFile;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
 import org.fusionsoft.database.snapshot.objects.ObjectsFromServerMentionedInDbd;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectsMentionedAsConfigTablesInDbd;
+import org.fusionsoft.database.snapshot.objects.TablesWithDataMentionedInDbd;
 import org.fusionsoft.database.writable.DbdYamlOfObjects;
 import org.fusionsoft.database.writable.SnapshotInfo;
 import org.fusionsoft.database.writable.TableDataFilesOfObjects;
@@ -115,7 +115,7 @@ public class SnapshotCreateProcedure {
             new DbdYamlOfObjects(info, objects),
             new TableDataFilesOfObjects(this.withOperationalData
                 ? objects
-                : new ObjectsMentionedAsConfigTablesInDbd(objects, this.dbd)
+                : new TablesWithDataMentionedInDbd(objects, this.dbd)
             )
         ).forEach(
             x -> x.writeTo(

@@ -17,13 +17,14 @@ package org.fusionsoft.database.snapshot;
 
 import java.sql.Connection;
 import org.fusionsoft.database.YamlRepresentative;
+import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
 
 /**
  * The type representing information about database,
  *  such as url, kind, version and credentials.
  * @since 0.1
  */
-public interface DatabaseInfo extends YamlRepresentative {
+public interface DatabaseInfo extends YamlRepresentative<DbdServerMapping> {
 
     /**
      * Signature of DBMS.

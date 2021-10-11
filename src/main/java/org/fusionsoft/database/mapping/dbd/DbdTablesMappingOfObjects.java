@@ -13,33 +13,30 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.dbd;
 
-import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.Text;
-import org.cactoos.iterable.IterableOf;
-import org.fusionsoft.database.mapping.fields.DbdServerFields;
-import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
+import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
- * The type of {@link YamlMappingHasKeys},
- *  when the keys are {@link DbdServerFields}.
+ * The type of that can be constructed of.
  * @since 0.1
  */
-public class DbdServerYamlMapping extends YamlMappingHasKeys {
+@SuppressWarnings("PMD")
+public class DbdTablesMappingOfObjects extends YamlMappingOfEntries {
 
     /**
-     * Instantiates a new Yaml mapping has keys.
-     * @param mapping The YamlMapping to be used.
+     * Instantiates a new Dbd tables mapping of objects.
+     * @param objects The all Objects to be encapsulated.
+     * @param schema The parent schema DbObject to be encapsulated.
+     * @todo #49:30min Implement ctor.
      */
-    public DbdServerYamlMapping(
-        final YamlMapping mapping
+    public DbdTablesMappingOfObjects(
+        final Objects objects,
+        final DbObject<?> schema
     ) {
-        super(
-            mapping,
-            new IterableOf<Text>(DbdServerFields.values())
-        );
+        super();
     }
 
 }

@@ -38,8 +38,8 @@ public class ObjectsFromServerMentionedInDbd extends ObjectsFiltered {
         final DbdFile file
     ) {
         super(
-            new ObjectsFromDatabaseInfo(database),
-            new ObjectsInDbdPredicate(file)
+            (Objects) new ObjectsFromDatabaseInfo(database),
+            new ObjectsMentionedInDbdFilePredicate(file)
         );
     }
 

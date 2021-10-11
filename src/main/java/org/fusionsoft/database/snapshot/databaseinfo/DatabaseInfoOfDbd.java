@@ -18,9 +18,8 @@ package org.fusionsoft.database.snapshot.databaseinfo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.YamlRepresentative;
+import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import org.fusionsoft.database.mapping.dbd.DbdServerMappingOfDbdFile;
-import org.fusionsoft.database.mapping.dbd.DbdServerYamlMapping;
 import org.fusionsoft.database.mapping.fields.DbdServerFields;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.DbmsSignature;
@@ -32,12 +31,12 @@ import org.fusionsoft.lib.connection.ConnectionOfScalar;
  *  name of server for which data is.
  * @since 0.1
  */
-public class DatabaseInfoOfDbd implements DatabaseInfo, YamlRepresentative {
+public class DatabaseInfoOfDbd implements DatabaseInfo {
 
     /**
      * The YamlMapping encapsulated.
      */
-    private final DbdServerYamlMapping mapping;
+    private final DbdServerMapping mapping;
 
     /**
      * The String of database name in terms of 'DBD' format encapsulated.
@@ -61,7 +60,7 @@ public class DatabaseInfoOfDbd implements DatabaseInfo, YamlRepresentative {
      * @param mapping The YamlMapping, data should be contained in.
      * @param name The name to be encapsulated.
      */
-    private DatabaseInfoOfDbd(final DbdServerYamlMapping mapping, final String name) {
+    private DatabaseInfoOfDbd(final DbdServerMapping mapping, final String name) {
         this.mapping = mapping;
         this.key = name;
     }
@@ -69,7 +68,7 @@ public class DatabaseInfoOfDbd implements DatabaseInfo, YamlRepresentative {
     @Override
     public final DbmsSignature signature() {
         return new DbmsSignatureOfServerMapping(
-            new DbdServerYamlMapping(this.mapping)
+            new DbdServerMapping(this.mapping)
         );
     }
 
@@ -90,7 +89,7 @@ public class DatabaseInfoOfDbd implements DatabaseInfo, YamlRepresentative {
     }
 
     @Override
-    public final DbdServerYamlMapping asYaml() {
+    public final DbdServerMapping asYaml() {
         return this.mapping;
     }
 

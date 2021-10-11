@@ -19,14 +19,15 @@ import com.amihaiemil.eoyaml.YamlNode;
 
 /**
  * The interface representing a thing, can be represented as {@link YamlNode}.
+ * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public interface YamlRepresentative {
+public interface YamlRepresentative<Y extends YamlNode> {
 
     /**
      * Represent object as yaml node.
      * @return The yaml node.
      */
-    YamlNode asYaml();
+    Y asYaml();
 
 }

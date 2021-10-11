@@ -19,8 +19,8 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.scalar.ScalarOf;
-import org.fusionsoft.database.BaseYamlRepresentative;
 import org.fusionsoft.database.Folder;
+import org.fusionsoft.database.SimpleYamlRepresentative;
 import org.fusionsoft.database.Writable;
 import org.fusionsoft.database.WriteTo;
 import org.fusionsoft.database.YamlRepresentative;
@@ -34,7 +34,7 @@ public class WritableYamlDocument implements Writable {
     /**
      * The YamlRepresentative encapsulated.
      */
-    private final YamlRepresentative yaml;
+    private final YamlRepresentative<?> yaml;
 
     /**
      * The Text encapsulated.
@@ -47,7 +47,7 @@ public class WritableYamlDocument implements Writable {
      * @param name The Text of file name to be encapsulated.
      */
     public WritableYamlDocument(
-        final YamlRepresentative yaml,
+        final YamlRepresentative<?> yaml,
         final Text name
     ) {
         this.yaml = yaml;
@@ -63,7 +63,7 @@ public class WritableYamlDocument implements Writable {
         final Scalar<YamlNode> scalar,
         final Text name
     ) {
-        this(new BaseYamlRepresentative(scalar), name);
+        this(new SimpleYamlRepresentative<>(scalar), name);
     }
 
     /**

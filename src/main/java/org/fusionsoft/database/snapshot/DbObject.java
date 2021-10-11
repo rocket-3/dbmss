@@ -15,13 +15,15 @@
  */
 package org.fusionsoft.database.snapshot;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.YamlRepresentative;
 
 /**
  * The interface DbObject representing object in Dbms coordinates and attributes.
+ * @param <Y> The type of YamlNode representation parameter.
  * @since 0.1
  */
-public interface DbObject extends YamlRepresentative {
+public interface DbObject<Y extends YamlMapping> extends YamlRepresentative<Y> {
 
     /**
      * Signature object signature.

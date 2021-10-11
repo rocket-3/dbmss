@@ -18,15 +18,14 @@ package org.fusionsoft.database.snapshot.objects;
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.fusionsoft.database.mapping.fields.DdbTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
-import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objectsignature.NaiveObjectSignature;
+import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
@@ -37,7 +36,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ObjectsOfDbdTableMapping extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
 
     /**
      * Instantiates a new Objects of dbd table mapping.
@@ -52,7 +51,7 @@ public class ObjectsOfDbdTableMapping extends IterableEnvelope<DbObject> impleme
     ) {
         this(
             new YamlMappingOfScalar(() -> parent.value(key).asMapping()),
-            new NamesJoined(schema, new TextOfScalarNode(key))
+            new FullObjectName(schema, new TextOfScalarNode(key))
         );
     }
 
@@ -67,7 +66,7 @@ public class ObjectsOfDbdTableMapping extends IterableEnvelope<DbObject> impleme
     ) {
         super(
             new Joined<>(
-                new NaiveDbObject(
+                new NaiveDbObject<>(
                     new MappingFromMappingIgnoreKeys(
                         mapping,
                         new IterableOf<>(
@@ -75,9 +74,12 @@ public class ObjectsOfDbdTableMapping extends IterableEnvelope<DbObject> impleme
                             DdbTableFields.INDEXES
                         )
                     ),
-                    new NaiveObjectSignature(name, ObjectType.TABLE)
+                    new SimpleObjectSignature(
+                        new FullObjectName(name),
+                        ObjectType.TABLE
+                    )
                 ),
-                new Joined<DbObject>(
+                new Joined<DbObject<? extends YamlMapping>>(
                     new ObjectsOfDbdIndexesMapping(
                         new YamlMappingOfPath(
                             mapping,

@@ -13,43 +13,37 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.lib.text;
 
 import org.cactoos.Text;
-import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Mapped;
-import org.cactoos.text.Joined;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
+import org.cactoos.text.TextOfScalar;
 
 /**
- * The Text of db object names joined.
+ * The Regexp pattern of text being escaped for matching.
  * @since 0.1
  */
-public class NamesJoined extends TextEnvelope {
+public class RegexpPatternLiteralEscaped extends TextEnvelope {
 
     /**
      * Ctor.
-     * @param names The names to be joined.
+     * @param text Text to be quoted.
      */
-    public NamesJoined(final Iterable<Text> names) {
-        super(new Joined(new TextOf("$"), names));
+    public RegexpPatternLiteralEscaped(final Text text) {
+        super(
+            new TextOfScalar(
+                () -> text.asString().replaceAll("[\\W]", "\\\\$0")
+            )
+        );
     }
 
     /**
      * Ctor.
-     * @param names The names to be joined.
+     * @param text Text to be quoted.
      */
-    public NamesJoined(final Text... names) {
-        this(new IterableOf<Text>(names));
-    }
-
-    /**
-     * Ctor.
-     * @param names The names to be joined.
-     */
-    public NamesJoined(final CharSequence... names) {
-        this(new Mapped<Text>(TextOf::new, names));
+    public RegexpPatternLiteralEscaped(final CharSequence text) {
+        this(new TextOf(text));
     }
 
 }

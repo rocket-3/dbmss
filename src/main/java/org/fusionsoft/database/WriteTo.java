@@ -55,7 +55,7 @@ public class WriteTo implements Runnable {
      * @param ipt The YamlRepresentative to be encapsulated.
      * @param opt The Output to be encapsulated.
      */
-    public WriteTo(final YamlRepresentative ipt, final Output opt) {
+    public WriteTo(final YamlRepresentative<?> ipt, final Output opt) {
         this(
             () -> new InputStreamOf(ipt.asYaml().toString()),
             opt
@@ -68,7 +68,7 @@ public class WriteTo implements Runnable {
      * @param opt The Folder to be encapsulated.
      * @param name The Text of file name to be encapsulated.
      */
-    public WriteTo(final YamlRepresentative ipt, final Folder opt, final Text name) {
+    public WriteTo(final YamlRepresentative<?> ipt, final Folder opt, final Text name) {
         this(
             ipt,
             () -> new OutputStreamTo(opt.path().resolve(name.asString()))

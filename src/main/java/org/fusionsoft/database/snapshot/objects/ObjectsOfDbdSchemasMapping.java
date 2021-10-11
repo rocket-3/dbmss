@@ -16,17 +16,15 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Joined;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
  * The Objects that can be constructed of DBD/schemas mapping.
  * @since 0.1
  */
-public class ObjectsOfDbdSchemasMapping extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsOfDbdSchemasMapping extends ObjectsEnvelope {
 
     /**
      * Ctor.
@@ -34,7 +32,7 @@ public class ObjectsOfDbdSchemasMapping extends IterableEnvelope<DbObject> imple
      */
     public ObjectsOfDbdSchemasMapping(final YamlMapping mapping) {
         super(
-            new Joined<DbObject>(
+            new Joined<DbObject<? extends YamlMapping>>(
                 new IterableOfClassFromYamlNode<>(
                     ObjectsOfDbdSchemaMapping::new,
                     mapping

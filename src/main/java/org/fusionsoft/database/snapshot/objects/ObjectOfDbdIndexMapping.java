@@ -20,7 +20,8 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
-import org.fusionsoft.database.snapshot.objectsignature.NaiveObjectSignature;
+import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
@@ -42,7 +43,7 @@ public class ObjectOfDbdIndexMapping extends NaiveDbObject {
         final Text table) {
         this(
             new YamlMappingOfPath(root, key),
-            new NamesJoined(table, new TextOfScalarNode(key))
+            new FullObjectName(table, new TextOfScalarNode(key))
         );
     }
 
@@ -52,7 +53,13 @@ public class ObjectOfDbdIndexMapping extends NaiveDbObject {
      * @param name The Text to be encapsulated.
      */
     public ObjectOfDbdIndexMapping(final YamlMapping mapping, final Text name) {
-        super(mapping, new NaiveObjectSignature(name, ObjectType.INDEX));
+        super(
+            mapping,
+            new SimpleObjectSignature(
+                new FullObjectName(name),
+                ObjectType.INDEX
+            )
+        );
     }
 
 }

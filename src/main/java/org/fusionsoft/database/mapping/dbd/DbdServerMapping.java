@@ -13,26 +13,32 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.iterable.IterableEnvelope;
-import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.Objects;
+import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.mapping.fields.DbdServerFields;
+import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
 /**
- * The Objects implementation that can be constructed of Iterable of DbObjects.
+ * The mapping of DBD/server validated by having keys,
+ *  when the keys are {@link DbdServerFields}.
  * @since 0.1
  */
-public class ObjectsEnvelope
-    extends IterableEnvelope<DbObject<? extends YamlMapping>> implements Objects {
+public class DbdServerMapping extends YamlMappingHasKeys {
 
     /**
-     * Ctor.
-     * @param iterable The wrapped iterable
+     * Instantiates a new Yaml mapping has keys.
+     * @param mapping The YamlMapping to be used.
      */
-    public ObjectsEnvelope(final Iterable<DbObject<? extends YamlMapping>> iterable) {
-        super(iterable);
+    public DbdServerMapping(
+        final YamlMapping mapping
+    ) {
+        super(
+            mapping,
+            new IterableOf<Text>(DbdServerFields.values())
+        );
     }
 
 }

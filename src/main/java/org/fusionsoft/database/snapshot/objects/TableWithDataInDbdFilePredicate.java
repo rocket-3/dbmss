@@ -25,7 +25,7 @@ import org.fusionsoft.lib.exception.NotImplemented;
  * @since 0.1
  * @todo #40:30min Implement 'apply' method.
  */
-public class ObjectIsDbdConfigurationTablePredicate implements Func<DbObject, Boolean> {
+public class TableWithDataInDbdFilePredicate implements Func<DbObject<?>, Boolean> {
 
     /**
      * The DbdFile encapsulated.
@@ -36,7 +36,7 @@ public class ObjectIsDbdConfigurationTablePredicate implements Func<DbObject, Bo
      * Instantiates a new Object is dbd configuration table predicate.
      * @param file The DbdFile to be encapsulated.
      */
-    public ObjectIsDbdConfigurationTablePredicate(final DbdFile file) {
+    public TableWithDataInDbdFilePredicate(final DbdFile file) {
         this.file = file;
     }
 

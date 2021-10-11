@@ -13,22 +13,30 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.database.mapping.dbd;
 
-import com.amihaiemil.eoyaml.Yaml;
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
+import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The DBD/schemas/#schema node mapping.
  * @since 0.1
  */
-public class MappingEmpty extends MappingOfRepresentative {
+public class DbdSchemaMapping extends YamlMappingHasKeys {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Instantiates a new Yaml mapping envelope.
+     * @param mapping The YamlMapping to be encapsulated.
      */
-    public MappingEmpty() {
+    public DbdSchemaMapping(final YamlMapping mapping) {
         super(
-            () -> Yaml.createYamlMappingBuilder().build()
+            mapping,
+            new IterableOf<Text>(
+                DbdSchemaFields.values()
+            )
         );
     }
 

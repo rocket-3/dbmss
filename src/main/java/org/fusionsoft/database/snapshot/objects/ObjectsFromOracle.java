@@ -17,7 +17,6 @@ package org.fusionsoft.database.snapshot.objects;
 
 import java.sql.Connection;
 import org.cactoos.iterable.IterableOf;
-import org.fusionsoft.database.snapshot.DbObject;
 
 /**
  * The Objects of {@link Connection} of Oracle dbms.
@@ -31,7 +30,7 @@ public class ObjectsFromOracle extends ObjectsEnvelope {
      * @param connection The connection used
      */
     public ObjectsFromOracle(final Connection connection) {
-        super(new IterableOf<DbObject>());
+        super(new IterableOf<>());
     }
 
 }

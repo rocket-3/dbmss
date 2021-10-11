@@ -49,8 +49,8 @@ class ObjectsOfDbdRootMappingTest {
                             )
                         )
                     ),
-                    (Iterable<DbObject> itrb) -> new SetOf<>(itrb).size() == 4,
-                    (Iterable<DbObject> itrb) -> new And(
+                    (Iterable<DbObject<?>> itrb) -> new SetOf<>(itrb).size() == 4,
+                    (Iterable<DbObject<?>> itrb) -> new And(
                         item -> !item.asYaml().toString().isEmpty(),
                         itrb
                     ).value()

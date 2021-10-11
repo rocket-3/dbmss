@@ -18,17 +18,25 @@ package org.fusionsoft.database.mapping.fields;
 import org.cactoos.Text;
 
 /**
- * The enum of DBD/schemas/#schema mapping fields.
+ * The enum of Dbd/ root node fields.
  */
-public enum DbdSchemaFields implements Text {
+public enum DbdRootFields implements Text {
     /**
-     *The dbd/schema/owner field.
+     *The dbd/$schema node.
      */
-    OWNER("owner"),
+    SCHEMA("$schema"),
     /**
-     *The dbd/schema/tables field.
+     *The dbd/info node.
      */
-    TABLES("tables");
+    INFO("info"),
+    /**
+     *The dbd/servers field.
+     */
+    SERVERS("servers"),
+    /**
+     *The dbd/schemas node.
+     */
+    SCHEMAS("schemas");
 
     /**
      * The String encapsulated.
@@ -36,10 +44,10 @@ public enum DbdSchemaFields implements Text {
     private final String value;
 
     /**
-     * Instantiates a new Database info fields.
+     * Instantiates a new DbdRootFields.
      * @param string The String to be encapsulated.
      */
-    DbdSchemaFields(final String string) {
+    DbdRootFields(final String string) {
         this.value = string;
     }
 

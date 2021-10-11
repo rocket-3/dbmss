@@ -13,22 +13,30 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.Yaml;
+import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.ParentName;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The test for {@link ParentName}.
  * @since 0.1
  */
-public class MappingEmpty extends MappingOfRepresentative {
+class ParentNameTest {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Represents expected name of parent.
+     * @throws Exception When can't.
      */
-    public MappingEmpty() {
-        super(
-            () -> Yaml.createYamlMappingBuilder().build()
+    @Test
+    public void works() throws Exception {
+        Assertions.assertEquals(
+            "c",
+            new ParentName(
+                new FullObjectName("a", "b", "c", "d")
+            ).asString()
         );
     }
 

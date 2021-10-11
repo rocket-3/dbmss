@@ -16,14 +16,14 @@
 package org.fusionsoft.database.snapshot.dbmssignature;
 
 import org.cactoos.Text;
-import org.fusionsoft.database.mapping.dbd.DbdServerYamlMapping;
+import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import org.fusionsoft.database.mapping.fields.DbdServerFields;
 import org.fusionsoft.database.snapshot.DbmsSignature;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
 /**
  * The type of {@link DbmsSignature} that can be constructed
- *  of {@link DbdServerYamlMapping}.
+ *  of {@link DbdServerMapping}.
  * @since 0.1
  */
 public class DbmsSignatureOfServerMapping implements DbmsSignature {
@@ -31,13 +31,13 @@ public class DbmsSignatureOfServerMapping implements DbmsSignature {
     /**
      * The DbdServerYamlMapping encapsulated.
      */
-    private final DbdServerYamlMapping mapping;
+    private final DbdServerMapping mapping;
 
     /**
      * Instantiates a new DbmsSignatureOfServerMapping.
      * @param mapping The DbdServerYamlMapping to be used.
      */
-    public DbmsSignatureOfServerMapping(final DbdServerYamlMapping mapping) {
+    public DbmsSignatureOfServerMapping(final DbdServerMapping mapping) {
         this.mapping = mapping;
     }
 

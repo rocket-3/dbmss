@@ -17,7 +17,6 @@ package org.fusionsoft.database.snapshot.objects;
 
 import org.cactoos.Func;
 import org.cactoos.iterable.Filtered;
-import org.cactoos.iterable.IterableEnvelope;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
@@ -25,7 +24,7 @@ import org.fusionsoft.database.snapshot.Objects;
  * The type of DbObjects that was filtered by some predicate.
  * @since 0.1
  */
-public class ObjectsFiltered extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsFiltered extends ObjectsEnvelope {
 
     /**
      * Ctor.
@@ -34,13 +33,25 @@ public class ObjectsFiltered extends IterableEnvelope<DbObject> implements Objec
      */
     public ObjectsFiltered(
         final Objects origin,
-        final Func<DbObject, Boolean> predicate
+        final Func<DbObject<?>, Boolean> predicate
     ) {
         super(
             new Filtered<>(
                 predicate, origin
             )
         );
+    }
+
+    /**
+     * Ctor.
+     * @param predicate The predicate to be used.
+     * @param origin The wrapped DbObjects
+     */
+    public ObjectsFiltered(
+        final Func<DbObject<?>, Boolean> predicate,
+        final Objects origin
+    ) {
+        this(origin, predicate);
     }
 
 }

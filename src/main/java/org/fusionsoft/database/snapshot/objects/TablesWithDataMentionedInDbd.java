@@ -13,28 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objectsignature;
+package org.fusionsoft.database.snapshot.objects;
 
 import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.snapshot.ObjectSignatures;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectIsDbdConfigurationTablePredicate;
-import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 
 /**
  * The type of {@link ObjectSignatures} that represents objects that are
  *  mentioned as configuration tables in {@link DbdFile}.
  * @since 0.1
  */
-public class ObjectsMentionedAsConfigTablesInDbd extends ObjectsFiltered {
+public class TablesWithDataMentionedInDbd extends ObjectsFiltered {
 
     /**
      * Instantiates a new Configuration tables of dbd.
      * @param origin The original Objects to be encapsulated.
      * @param file The DbdFile to be encapsulated.
      */
-    public ObjectsMentionedAsConfigTablesInDbd(final Objects origin, final DbdFile file) {
-        super(origin, new ObjectIsDbdConfigurationTablePredicate(file));
+    public TablesWithDataMentionedInDbd(final Objects origin, final DbdFile file) {
+        super(origin, new TableWithDataInDbdFilePredicate(file));
     }
 
 }

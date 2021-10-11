@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.Yaml;
+import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The {@link Objects} filtered by {@link ObjectType}.
  * @since 0.1
  */
-public class MappingEmpty extends MappingOfRepresentative {
+public class ObjectsWithType extends ObjectsFiltered {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Instantiates a new Objects with type.
+     * @param type The ObjectType to be encapsulated.
+     * @param origin The Objects to be encapsulated.
      */
-    public MappingEmpty() {
+    public ObjectsWithType(final ObjectType type, final Objects origin) {
         super(
-            () -> Yaml.createYamlMappingBuilder().build()
+            o -> o.signature().type().equals(type),
+            origin
         );
     }
 

@@ -17,7 +17,11 @@ package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Scalar;
+import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.mapping.fields.DbdRootFields;
 import org.fusionsoft.lib.yaml.YamlMappingEnvelope;
+import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 import org.fusionsoft.lib.yaml.YamlMappingOf;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 import org.fusionsoft.lib.yaml.YamlNodeValidated;
@@ -34,11 +38,14 @@ public class DbdRootMapping extends YamlMappingEnvelope {
      */
     public DbdRootMapping(final YamlMapping mapping) {
         super(
-            new YamlMappingOf(
-                new YamlNodeValidated(
-                    new DbdRootNodeValidation(),
-                    mapping
-                )
+            new YamlMappingHasKeys(
+                new YamlMappingOf(
+                    new YamlNodeValidated(
+                        new DbdRootNodeValidation(),
+                        mapping
+                    )
+                ),
+                new IterableOf<Text>(DbdRootFields.values())
             )
         );
     }

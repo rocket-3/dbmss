@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.Yaml;
+import org.fusionsoft.database.DbdFile;
+import org.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The predicate of {@link DbObject} which tests it presents in DBD file.
  * @since 0.1
  */
-public class MappingEmpty extends MappingOfRepresentative {
+public class ObjectsMentionedInDbdFilePredicate extends ObjectsMentionedInPredicate {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Instantiates a new Objects in dbd predicate.
+     * @param file The DbdFile to be encapsulated.
      */
-    public MappingEmpty() {
-        super(
-            () -> Yaml.createYamlMappingBuilder().build()
-        );
+    public ObjectsMentionedInDbdFilePredicate(final DbdFile file) {
+        super(new ObjectsOfDbdFile(file));
     }
 
 }

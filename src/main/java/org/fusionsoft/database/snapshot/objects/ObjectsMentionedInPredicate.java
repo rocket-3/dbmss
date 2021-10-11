@@ -30,21 +30,21 @@ import org.fusionsoft.database.snapshot.Objects;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsWithNamesPredicate implements Func<DbObject, Boolean> {
+public class ObjectsMentionedInPredicate implements Func<DbObject<?>, Boolean> {
 
     /**
      * The Set of String of signatures encapsulated.
      */
-    private final Set<String> set;
+    private final Set<String> names;
 
     /**
      * Instantiates a new Objects with names.
      * @param names The Sinatures to be encapsulated.
      */
-    public ObjectsWithNamesPredicate(
+    private ObjectsMentionedInPredicate(
         final Iterable<ObjectSignature> names
     ) {
-        this.set = new SetOf<String>(
+        this.names = new SetOf<String>(
             new Mapped<>(
                 Text::asString,
                 names
@@ -52,9 +52,17 @@ public class ObjectsWithNamesPredicate implements Func<DbObject, Boolean> {
         );
     }
 
+    /**
+     * Instantiates a new Objects with names.
+     * @param mentions The objects with names to pass.
+     */
+    public ObjectsMentionedInPredicate(final Objects mentions) {
+        this(new Mapped<ObjectSignature>(DbObject::signature, mentions));
+    }
+
     @Override
     public final Boolean apply(final DbObject input) {
-        return this.set.contains(input.signature().asString());
+        return this.names.contains(input.signature().asString());
     }
 
 }

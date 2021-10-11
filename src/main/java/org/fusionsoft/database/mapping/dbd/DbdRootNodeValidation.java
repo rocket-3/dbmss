@@ -17,11 +17,8 @@ package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Proc;
-import org.cactoos.Text;
-import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.mapping.fields.DbdInfoFields;
 import org.fusionsoft.lib.exception.ValidationException;
-import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
@@ -35,12 +32,11 @@ public class DbdRootNodeValidation implements Proc<YamlNode> {
     public final void exec(final YamlNode input) throws Exception {
         if (!"db".equals(
             new TextOfMappingValue(
-                new YamlMappingHasKeys(
+                new DbdInfoMapping(
                     new YamlMappingOfPath(
                         input.asMapping(),
                         "info"
-                    ),
-                    new IterableOf<Text>(DbdInfoFields.values())
+                    )
                 ),
                 DbdInfoFields.TYPE.asString()
             ).asString()

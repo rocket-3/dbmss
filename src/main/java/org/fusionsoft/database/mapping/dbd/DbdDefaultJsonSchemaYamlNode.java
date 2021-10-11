@@ -13,23 +13,21 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.database.mapping.dbd;
 
-import com.amihaiemil.eoyaml.Yaml;
+import org.fusionsoft.lib.yaml.YamlPlainScalarOf;
 
 /**
- * The type of YamlMapping which is just empty.
+ * The default value scalar node of DBD/$schema.
  * @since 0.1
  */
-public class MappingEmpty extends MappingOfRepresentative {
+public class DbdDefaultJsonSchemaYamlNode extends YamlPlainScalarOf {
 
     /**
-     * Instantiates a new Mapping empty.
+     * Instantiates a new DbdJsonSchemaYamlNode.
      */
-    public MappingEmpty() {
-        super(
-            () -> Yaml.createYamlMappingBuilder().build()
-        );
+    public DbdDefaultJsonSchemaYamlNode() {
+        super("https://json-schema.org/draft/2019-09/schema");
     }
 
 }

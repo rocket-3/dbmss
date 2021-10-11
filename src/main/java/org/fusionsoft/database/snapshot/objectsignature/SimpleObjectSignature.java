@@ -16,7 +16,6 @@
 package org.fusionsoft.database.snapshot.objectsignature;
 
 import java.text.MessageFormat;
-import org.cactoos.Text;
 import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.snapshot.ObjectSignature;
 import org.fusionsoft.database.snapshot.ObjectType;
@@ -25,12 +24,12 @@ import org.fusionsoft.database.snapshot.ObjectType;
  * The base {@link ObjectSignature} implementation.
  * @since 0.1
  */
-public class NaiveObjectSignature implements ObjectSignature {
+public class SimpleObjectSignature implements ObjectSignature {
 
     /**
      * The Text encapsulated.
      */
-    private final Text nam;
+    private final FullObjectName nam;
 
     /**
      * The ObjectType encapsulated.
@@ -42,13 +41,13 @@ public class NaiveObjectSignature implements ObjectSignature {
      * @param name The Text to be encapsulated.
      * @param type The ObjectType to be encapsulated.
      */
-    public NaiveObjectSignature(final Text name, final ObjectType type) {
+    public SimpleObjectSignature(final FullObjectName name, final ObjectType type) {
         this.nam = name;
         this.typ = type;
     }
 
     @Override
-    public final Text name() {
+    public final FullObjectName name() {
         return this.nam;
     }
 

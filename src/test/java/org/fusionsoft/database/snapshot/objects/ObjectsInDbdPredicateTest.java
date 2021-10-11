@@ -20,12 +20,13 @@ import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
-import org.fusionsoft.database.snapshot.objectsignature.NaiveObjectSignature;
+import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * The test for {@link ObjectsInDbdPredicate}.
+ * The test for {@link ObjectsMentionedInDbdFilePredicate}.
  * @since 0.1
  */
 class ObjectsInDbdPredicateTest {
@@ -36,15 +37,15 @@ class ObjectsInDbdPredicateTest {
     @Test
     public void matchesObject() {
         Assertions.assertTrue(
-            new ObjectsInDbdPredicate(
+            new ObjectsMentionedInDbdFilePredicate(
                 new DbdFileOfMapping(
                     new MappingOfExampleYaml()
                 )
             ).apply(
                 new NaiveDbObject(
                     new MappingEmpty(),
-                    new NaiveObjectSignature(
-                        new NamesJoined(
+                    new SimpleObjectSignature(
+                        new FullObjectName(
                             "mts",
                             "domains",
                             "pk_domains"

@@ -18,15 +18,14 @@ package org.fusionsoft.database.snapshot.objects;
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
-import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objectsignature.NaiveObjectSignature;
+import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
@@ -37,7 +36,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ObjectsOfDbdSchemaMapping extends IterableEnvelope<DbObject> implements Objects {
+public class ObjectsOfDbdSchemaMapping extends ObjectsEnvelope {
 
     /**
      * Instantiates a new Objects of dbd schema mapping.
@@ -64,13 +63,16 @@ public class ObjectsOfDbdSchemaMapping extends IterableEnvelope<DbObject> implem
         final Text key
     ) {
         super(
-            new Joined<>(
+            new Joined<DbObject<? extends YamlMapping>>(
                 new NaiveDbObject(
                     new MappingFromMappingIgnoreKeys(
                         mapping,
                         new IterableOf<>(DbdSchemaFields.TABLES)
                     ),
-                    new NaiveObjectSignature(key, ObjectType.SCHEMA)
+                    new SimpleObjectSignature(
+                        new FullObjectName(key),
+                        ObjectType.SCHEMA
+                    )
                 ),
                 new ObjectsOfDbdTablesMapping(
                     new YamlMappingOfPath(

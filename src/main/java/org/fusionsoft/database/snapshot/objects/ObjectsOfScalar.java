@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.snapshot.DbObject;
@@ -29,7 +30,9 @@ public class ObjectsOfScalar extends ObjectsEnvelope {
      * Ctor.
      * @param scalar The Scalar of Iterable of DbObject to be encapsulated.
      */
-    public ObjectsOfScalar(final Scalar<? extends Iterable<? extends DbObject>> scalar) {
+    public ObjectsOfScalar(
+        final Scalar<? extends Iterable<? extends DbObject<? extends YamlMapping>>> scalar
+    ) {
         super(new IterableOf<>(() -> scalar.value().iterator()));
     }
 

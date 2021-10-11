@@ -17,39 +17,40 @@ package org.fusionsoft.database;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Scalar;
-import org.fusionsoft.lib.yaml.YamlNodeOfScalar;
+import org.cactoos.scalar.Unchecked;
 
 /**
  * The type of YamlRepresentative that provides its functionality
  *  in the most straightforward way.
+ * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public class BaseYamlRepresentative implements YamlRepresentative {
+public class SimpleYamlRepresentative<Y extends YamlNode> implements YamlRepresentative<Y> {
 
     /**
      * The YamlNode encapsulated.
      */
-    private final YamlNode yaml;
+    private final Unchecked<Y> yaml;
 
     /**
      * Instantiates a new YamlRepresentative of YamlNode.
      * @param yaml The YamlNode to be encapsulated.
      */
-    public BaseYamlRepresentative(final YamlNode yaml) {
-        this.yaml = yaml;
+    public SimpleYamlRepresentative(final Y yaml) {
+        this(() -> yaml);
     }
 
     /**
      * Instantiates a new YamlRepresentative of YamlNode's scalar.
      * @param scalar The Scalar of YamlNode to be used.
      */
-    public BaseYamlRepresentative(final Scalar<YamlNode> scalar) {
-        this(new YamlNodeOfScalar(scalar));
+    public SimpleYamlRepresentative(final Scalar<Y> scalar) {
+        this.yaml = new Unchecked<>(scalar);
     }
 
     @Override
-    public final YamlNode asYaml() {
-        return this.yaml;
+    public final Y asYaml() {
+        return this.yaml.value();
     }
 
 }

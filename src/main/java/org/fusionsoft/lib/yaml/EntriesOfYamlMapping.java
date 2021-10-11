@@ -13,26 +13,32 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableEnvelope;
-import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.Objects;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Mapped;
+import org.cactoos.map.MapEntry;
 
 /**
- * The Objects implementation that can be constructed of Iterable of DbObjects.
+ * The entries of {@link YamlMapping} iterable.
  * @since 0.1
  */
-public class ObjectsEnvelope
-    extends IterableEnvelope<DbObject<? extends YamlMapping>> implements Objects {
+public class EntriesOfYamlMapping extends IterableEnvelope<MapEntry<YamlNode, YamlNode>> {
 
     /**
      * Ctor.
-     * @param iterable The wrapped iterable
+     * @param mapping The wrapped mapping
      */
-    public ObjectsEnvelope(final Iterable<DbObject<? extends YamlMapping>> iterable) {
-        super(iterable);
+    public EntriesOfYamlMapping(final YamlMapping mapping) {
+        super(
+            new Mapped<>(
+                key -> new MapEntry<>(key, mapping.value(key)),
+                new IterableOf<>(() -> mapping.keys().iterator())
+            )
+        );
     }
 
 }
