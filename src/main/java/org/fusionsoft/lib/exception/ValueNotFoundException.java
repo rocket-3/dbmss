@@ -27,11 +27,16 @@ public class ValueNotFoundException extends RuntimeException {
     /**
      * Instantiates a new ValueNotFoundException.
      * @param key The key for which value was not found.
+     * @param mapping The CharSequence to be encapsulated.
      */
-    public ValueNotFoundException(final CharSequence key) {
+    public ValueNotFoundException(
+        final CharSequence key,
+        final CharSequence mapping
+    ) {
         super(MessageFormat.format(
-            "No value found for key {0}",
-            key.toString()
+            "No value found for key `{0}` in mapping: \n- - - -\n{1}\n- - - -",
+            key.toString(),
+            mapping.toString()
         ));
     }
 

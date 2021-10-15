@@ -13,38 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping.fields;
+package org.fusionsoft.database.mapping.dbd;
 
 import org.cactoos.Text;
 
 /**
- * The enum of DBD/schemas/#schema mapping fields.
+ * The default value scalar node of DBD/$schema.
+ * @since 0.1
  */
-public enum DbdSchemaFields implements Text {
-    /**
-     *The dbd/schema/owner field.
-     */
-    OWNER("owner"),
-    /**
-     *The dbd/schema/tables field.
-     */
-    TABLES("tables");
-
-    /**
-     * The String encapsulated.
-     */
-    private final String value;
-
-    /**
-     * Instantiates a new DbdSchemaFields.
-     * @param string The String to be encapsulated.
-     */
-    DbdSchemaFields(final String string) {
-        this.value = string;
-    }
+public class TextOfDbdDefaultJsonSchemaRef implements Text {
 
     @Override
-    public String asString() {
-        return this.value;
+    public final String asString() {
+        return "https://json-schema.org/draft/2019-09/schema";
     }
+
 }

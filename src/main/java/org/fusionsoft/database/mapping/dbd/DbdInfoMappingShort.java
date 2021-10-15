@@ -16,18 +16,18 @@
 package org.fusionsoft.database.mapping.dbd;
 
 import org.cactoos.Text;
-import org.cactoos.map.MapEntry;
+import org.cactoos.text.TextOf;
+import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdInfoFields;
-import org.fusionsoft.lib.text.Empty;
+import org.fusionsoft.lib.text.JsonEmptyText;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
-import org.fusionsoft.lib.yaml.YamlPlainScalarOf;
 
 /**
  * The DbdInfoMapping that can be constructed of main attributes
  *  with default values.
  * @since 0.1
  */
-public class DbdInfoMappingOf extends DbdInfoMapping {
+public class DbdInfoMappingShort extends DbdInfoMapping {
 
     /**
      * Instantiates a new Dbd info mapping of.
@@ -35,44 +35,44 @@ public class DbdInfoMappingOf extends DbdInfoMapping {
      * @param description The Text to be encapsulated.
      * @param version The Text to be encapsulated.
      */
-    public DbdInfoMappingOf(
+    public DbdInfoMappingShort(
         final Text title,
         final Text description,
         final Text version
     ) {
         super(
             new YamlMappingOfEntries(
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.TYPE,
-                    new YamlPlainScalarOf("db")
+                    new TextOf("db")
                 ),
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.TITLE,
-                    new YamlPlainScalarOf(title)
+                    title
                 ),
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.VERSION,
-                    new YamlPlainScalarOf(version)
+                    version
                 ),
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.SUMMARY,
-                    new YamlPlainScalarOf(new Empty())
+                    new JsonEmptyText()
                 ),
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.DESCRIPTION,
-                    new YamlPlainScalarOf(description)
+                    description
                 ),
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.TERMS,
-                    new YamlPlainScalarOf(new Empty())
+                    new JsonEmptyText()
                 ),
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.CONTACT,
-                    new YamlPlainScalarOf(new Empty())
+                    new JsonEmptyText()
                 ),
-                new MapEntry<>(
+                new ScalarEntry(
                     DbdInfoFields.LICENSE,
-                    new YamlPlainScalarOf(new Empty())
+                    new JsonEmptyText()
                 )
             )
         );

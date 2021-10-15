@@ -18,9 +18,10 @@ package org.fusionsoft.lib.yaml;
 import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlMappingBuilder;
 import com.amihaiemil.eoyaml.YamlNode;
+import java.util.Map;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.map.MapEntry;
+import org.cactoos.iterable.Joined;
 
 /**
  * The type of YamlMapping that can be constructed of map entries.
@@ -32,11 +33,13 @@ public class YamlMappingOfEntries extends YamlMappingOfScalar {
      * Instantiates a new Yaml mapping of scalar.
      * @param entries The keys and YamlNodes associated to put into the mapping.
      */
-    public YamlMappingOfEntries(final Iterable<MapEntry<Text, YamlNode>> entries) {
+    public YamlMappingOfEntries(
+        final Iterable<? extends Map.Entry<? extends Text, ? extends YamlNode>> entries
+    ) {
         super(
             () -> {
                 YamlMappingBuilder yaml = Yaml.createYamlMappingBuilder();
-                for (final MapEntry<Text, YamlNode> entry : entries) {
+                for (final Map.Entry<? extends Text, ? extends YamlNode> entry : entries) {
                     yaml = yaml.add(
                         entry.getKey().asString(),
                         entry.getValue()
@@ -52,8 +55,28 @@ public class YamlMappingOfEntries extends YamlMappingOfScalar {
      * @param entries The keys and YamlNodes associated to put into the mapping.
      */
     @SafeVarargs
-    public YamlMappingOfEntries(final MapEntry<Text, YamlNode>... entries) {
+    public YamlMappingOfEntries(
+        final Map.Entry<? extends Text, ? extends YamlNode>... entries
+    ) {
         this(new IterableOf<>(entries));
+    }
+
+    /**
+     * Instantiates a new Yaml mapping of scalar.
+     * @param iterable The Iterable of Text -> YamlNode to be encapsulated.
+     * @param entries The keys and YamlNodes associated to put into the mapping.
+     */
+    @SafeVarargs
+    public YamlMappingOfEntries(
+        final Iterable<? extends Map.Entry<? extends Text, ? extends YamlNode>> iterable,
+        final Map.Entry<? extends Text, ? extends YamlNode>... entries
+    ) {
+        this(
+            new Joined<Map.Entry<? extends Text, ? extends YamlNode>>(
+                iterable,
+                new IterableOf<>(entries)
+            )
+        );
     }
 
 }

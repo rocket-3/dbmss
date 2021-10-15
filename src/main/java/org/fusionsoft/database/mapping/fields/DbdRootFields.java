@@ -18,13 +18,13 @@ package org.fusionsoft.database.mapping.fields;
 import org.cactoos.Text;
 
 /**
- * The enum of Dbd/ root node fields.
+ * The enum of Dbd root node fields.
  */
 public enum DbdRootFields implements Text {
     /**
      *The dbd/$schema node.
      */
-    SCHEMA("$schema"),
+    JSONSCHEMA("$schema"),
     /**
      *The dbd/info node.
      */

@@ -22,13 +22,13 @@ import org.cactoos.text.TextOf;
  * The {@link org.cactoos.Text} that is empty.
  * @since 0.1
  */
-public class Empty extends TextEnvelope {
+public class JsonEmptyText extends TextEnvelope {
 
     /**
      * Ctor.
      */
-    public Empty() {
-        super(new TextOf(""));
+    public JsonEmptyText() {
+        super(new TextOf("''"));
     }
 
 }

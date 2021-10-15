@@ -20,7 +20,7 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
-import org.fusionsoft.database.mapping.fields.DdbTableFields;
+import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
@@ -70,8 +70,8 @@ public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
                     new MappingFromMappingIgnoreKeys(
                         mapping,
                         new IterableOf<>(
-                            DdbTableFields.CONSTRAINTS,
-                            DdbTableFields.INDEXES
+                            DbdTableFields.CONSTRAINTS,
+                            DbdTableFields.INDEXES
                         )
                     ),
                     new SimpleObjectSignature(
@@ -83,14 +83,14 @@ public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
                     new ObjectsOfDbdIndexesMapping(
                         new YamlMappingOfPath(
                             mapping,
-                            DdbTableFields.INDEXES.asString()
+                            DbdTableFields.INDEXES.asString()
                         ),
                         name
                     ),
                     new ObjectsOfDbdConstraintsMapping(
                         new YamlMappingOfPath(
                             mapping,
-                            DdbTableFields.CONSTRAINTS.asString()
+                            DbdTableFields.CONSTRAINTS.asString()
                         ),
                         name
                     )

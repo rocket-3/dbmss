@@ -21,6 +21,7 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Set;
 import org.cactoos.Scalar;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 
 /**
@@ -40,7 +41,7 @@ public class YamlMappingOfScalar extends BaseYamlMapping {
      * @param scalar The Scalar of YamlMapping to be encapsulated.
      */
     public YamlMappingOfScalar(final Scalar<? extends YamlMapping> scalar) {
-        this.scalar = new Unchecked<>(scalar::value);
+        this.scalar = new Unchecked<>(new Sticky<>(scalar::value));
     }
 
     @Override

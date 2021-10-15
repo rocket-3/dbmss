@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import org.cactoos.text.TextOf;
+import org.fusionsoft.lib.exception.TextOfMap;
 import org.fusionsoft.lib.exception.ValueNotFoundException;
 
 /**
@@ -70,7 +71,10 @@ public class StrictMap<X, Y> implements Map<X, Y> {
         if (this.containsKey(key)) {
             return this.map.get(key);
         } else {
-            throw new ValueNotFoundException(key.toString());
+            throw new ValueNotFoundException(
+                key.toString(),
+                new TextOfMap(this).asString()
+            );
         }
     }
 

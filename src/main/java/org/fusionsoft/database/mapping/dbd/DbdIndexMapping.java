@@ -15,19 +15,22 @@
  */
 package org.fusionsoft.database.mapping.dbd;
 
-import org.fusionsoft.lib.yaml.YamlPlainScalarOf;
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.fusionsoft.database.mapping.fields.DbdIndexFields;
+import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
 /**
- * The default value scalar node of DBD/$schema.
+ * The DBD/schemas/#schema/tables/#table/indexes/#index node mapping.
  * @since 0.1
  */
-public class DbdDefaultJsonSchemaYamlNode extends YamlPlainScalarOf {
+public class DbdIndexMapping extends YamlMappingHasKeys {
 
     /**
-     * Instantiates a new DbdJsonSchemaYamlNode.
+     * Instantiates a new Yaml mapping has keys.
+     * @param mapping The YamlMapping to be used.
      */
-    public DbdDefaultJsonSchemaYamlNode() {
-        super("https://json-schema.org/draft/2019-09/schema");
+    public DbdIndexMapping(final YamlMapping mapping) {
+        super(mapping, DbdIndexFields.necessary());
     }
 
 }

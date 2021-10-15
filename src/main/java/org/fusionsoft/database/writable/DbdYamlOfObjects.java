@@ -18,8 +18,8 @@ package org.fusionsoft.database.writable;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.TextOf;
 import org.fusionsoft.database.Writable;
-import org.fusionsoft.database.mapping.dbd.DbdInfoMappingOf;
-import org.fusionsoft.database.mapping.dbd.DbdRootMappingOf;
+import org.fusionsoft.database.mapping.dbd.DbdInfoMappingShort;
+import org.fusionsoft.database.mapping.dbd.DbdRootMappingBuilt;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.Objects;
 
@@ -42,9 +42,9 @@ public class DbdYamlOfObjects extends WritableYamlDocument {
         final Objects objects
     ) {
         super(
-            new DbdRootMappingOf(
+            new DbdRootMappingBuilt(
                 new IterableOf<DatabaseInfo>(database),
-                new DbdInfoMappingOf(
+                new DbdInfoMappingShort(
                     new TextOf("a"),
                     new TextOf("b"),
                     new TextOf("c")

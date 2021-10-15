@@ -17,6 +17,7 @@ package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.lib.exception.ValueNotFoundException;
 import org.fusionsoft.lib.yaml.artefacts.KeysFromYamlNode;
@@ -34,7 +35,7 @@ public class YamlMappingHasKeys extends YamlMappingOfScalar {
      */
     public YamlMappingHasKeys(
         final YamlMapping mapping,
-        final Iterable<Text> keys
+        final Iterable<? extends Text> keys
     ) {
         super(
             () -> new YamlNodeValidated(
@@ -42,13 +43,25 @@ public class YamlMappingHasKeys extends YamlMappingOfScalar {
                     final KeysFromYamlNode present = new KeysFromYamlNode(map);
                     for (final String key : new Mapped<>(Text::asString, keys)) {
                         if (!present.contains(key)) {
-                            throw new ValueNotFoundException(key);
+                            throw new ValueNotFoundException(key, mapping.toString());
                         }
                     }
                 },
                 mapping
             ).asMapping()
         );
+    }
+
+    /**
+     * Instantiates a new Yaml mapping has keys.
+     * @param mapping The YamlMapping to be used.
+     * @param keys The Iterable of Text to be checked for presence.
+     */
+    public YamlMappingHasKeys(
+        final YamlMapping mapping,
+        final Text... keys
+    ) {
+        this(mapping, new IterableOf<>(keys));
     }
 
 }

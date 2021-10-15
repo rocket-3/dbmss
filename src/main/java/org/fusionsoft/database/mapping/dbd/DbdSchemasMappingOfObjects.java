@@ -15,8 +15,7 @@
  */
 package org.fusionsoft.database.mapping.dbd;
 
-import org.cactoos.iterable.Mapped;
-import org.cactoos.map.MapEntry;
+import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsWithType;
@@ -34,12 +33,10 @@ public class DbdSchemasMappingOfObjects extends YamlMappingOfEntries {
      */
     public DbdSchemasMappingOfObjects(final Objects objects) {
         super(
-            new Mapped<>(
-                schema -> new MapEntry<>(
-                    schema.signature().name(),
-                    new DbdSchemaMappingOfObjects(objects, schema)
-                ),
-                new ObjectsWithType(ObjectType.SCHEMA, objects)
+            new UnwrapEntriesOfObjects<>(
+                objects,
+                new ObjectsWithType(ObjectType.SCHEMA, objects),
+                DbdSchemaMappingOfObjects::new
             )
         );
     }

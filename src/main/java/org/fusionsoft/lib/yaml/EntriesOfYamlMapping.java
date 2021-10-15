@@ -17,26 +17,30 @@ package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
+import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
 /**
- * The entries of {@link YamlMapping} iterable.
+ * The MapEntries of Text and YamlNode constructed of {@link YamlMapping}.
  * @since 0.1
  */
-public class EntriesOfYamlMapping extends IterableEnvelope<MapEntry<YamlNode, YamlNode>> {
+public class EntriesOfYamlMapping extends IterableEnvelope<MapEntry<Text, ? extends YamlNode>> {
 
     /**
      * Ctor.
-     * @param mapping The wrapped mapping
+     * @param mapping The wrapped mapping.
      */
     public EntriesOfYamlMapping(final YamlMapping mapping) {
         super(
             new Mapped<>(
-                key -> new MapEntry<>(key, mapping.value(key)),
-                new IterableOf<>(() -> mapping.keys().iterator())
+                entry -> new MapEntry<>(
+                    new TextOfScalarNode(entry.getKey()),
+                    entry.getValue()
+                ),
+                new NodeEntriesOfYamlMapping(mapping)
             )
         );
     }

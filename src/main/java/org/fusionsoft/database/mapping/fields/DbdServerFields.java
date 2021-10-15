@@ -18,7 +18,7 @@ package org.fusionsoft.database.mapping.fields;
 import org.cactoos.Text;
 
 /**
- * The enumeration of node DBD/servers.
+ * The enum of fields of DBD/servers.
  */
 public enum DbdServerFields implements Text {
     /**

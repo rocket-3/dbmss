@@ -19,6 +19,7 @@ import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNodeNotFoundException;
 import org.cactoos.Fallback;
+import org.cactoos.Text;
 import org.cactoos.scalar.ScalarOf;
 import org.cactoos.scalar.ScalarWithFallback;
 import org.cactoos.text.TextEnvelope;
@@ -30,22 +31,22 @@ import org.cactoos.text.TextOf;
  *   returned in that case.
  * @since 0.1
  */
-public class MaybeEmptyTextOf extends TextEnvelope {
+public class MaybeEmptyTextOfYamlMapping extends TextEnvelope {
 
     /**
      * Instantiates a new Maybe empty text of.
      * @param mapping The StrictYamlMapping to be encapsulated.
      * @param key The String to be encapsulated.
      */
-    public MaybeEmptyTextOf(
+    public MaybeEmptyTextOfYamlMapping(
         final StrictYamlMapping mapping,
-        final String key
+        final Text key
     ) {
         super(
             new TextOf(
                 new ScalarWithFallback<>(
                     new ScalarOf<>(
-                        () -> mapping.value(key).asScalar().value()
+                        () -> mapping.value(key.asString()).asScalar().value()
                     ),
                     new Fallback.From<>(
                         YamlNodeNotFoundException.class,
@@ -61,9 +62,9 @@ public class MaybeEmptyTextOf extends TextEnvelope {
      * @param mapping The YamlMapping to be encapsulated.
      * @param key The String to be encapsulated.
      */
-    public MaybeEmptyTextOf(
+    public MaybeEmptyTextOfYamlMapping(
         final YamlMapping mapping,
-        final String key
+        final Text key
     ) {
         this(new StrictYamlMapping(mapping), key);
     }

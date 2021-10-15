@@ -18,6 +18,7 @@ package org.fusionsoft.lib.collection;
 import java.util.Map;
 import java.util.Set;
 import org.cactoos.map.MapEnvelope;
+import org.fusionsoft.lib.exception.TextOfMap;
 import org.fusionsoft.lib.exception.ValueNotFoundException;
 
 /**
@@ -45,7 +46,10 @@ public class MapHasKeys<X, Y> extends MapEnvelope<X, Y> {
                     m -> keys.forEach(
                         k -> {
                             if (!map.containsKey(k)) {
-                                throw new ValueNotFoundException(k.toString());
+                                throw new ValueNotFoundException(
+                                    k.toString(),
+                                    new TextOfMap(map).asString()
+                                );
                             }
                         }
                     ),

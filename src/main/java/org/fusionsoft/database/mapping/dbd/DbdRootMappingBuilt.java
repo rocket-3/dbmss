@@ -16,6 +16,7 @@
 package org.fusionsoft.database.mapping.dbd;
 
 import org.cactoos.map.MapEntry;
+import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdRootFields;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.Objects;
@@ -25,7 +26,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * The ways to construct DBD mapping.
  * @since 0.1
  */
-public class DbdRootMappingOf extends DbdRootMapping {
+public class DbdRootMappingBuilt extends DbdRootMapping {
 
     /**
      * Instantiates a new Dbd root mapping of.
@@ -33,16 +34,16 @@ public class DbdRootMappingOf extends DbdRootMapping {
      * @param info The DbdInfoMapping to be encapsulated.
      * @param objects The Objects to be encapsulated.
      */
-    public DbdRootMappingOf(
+    public DbdRootMappingBuilt(
         final Iterable<DatabaseInfo> databases,
         final DbdInfoMapping info,
         final Objects objects
     ) {
         super(
             new YamlMappingOfEntries(
-                new MapEntry<>(
-                    DbdRootFields.SCHEMA,
-                    new DbdDefaultJsonSchemaYamlNode()
+                new ScalarEntry(
+                    DbdRootFields.JSONSCHEMA,
+                    new TextOfDbdDefaultJsonSchemaRef()
                 ),
                 new MapEntry<>(
                     DbdRootFields.INFO,

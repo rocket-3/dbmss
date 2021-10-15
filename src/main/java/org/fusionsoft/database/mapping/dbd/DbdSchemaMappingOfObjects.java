@@ -24,7 +24,7 @@ import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.lib.yaml.TextEntriesOfYamlMapping;
+import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
@@ -44,8 +44,8 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
     ) {
         super(
             new YamlMappingOfEntries(
-                new Joined<MapEntry<Text, YamlNode>>(
-                    new TextEntriesOfYamlMapping(
+                new Joined<MapEntry<Text, ? extends YamlNode>>(
+                    new EntriesOfYamlMapping(
                         new MappingOfRepresentative(schema)
                     ),
                     new IterableOf<>(

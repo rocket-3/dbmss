@@ -64,7 +64,7 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsEnvelope {
     ) {
         super(
             new Joined<DbObject<? extends YamlMapping>>(
-                new NaiveDbObject(
+                new NaiveDbObject<>(
                     new MappingFromMappingIgnoreKeys(
                         mapping,
                         new IterableOf<>(DbdSchemaFields.TABLES)

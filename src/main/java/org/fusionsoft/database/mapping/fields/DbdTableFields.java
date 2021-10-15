@@ -15,20 +15,31 @@
  */
 package org.fusionsoft.database.mapping.fields;
 
+import java.util.Set;
 import org.cactoos.Text;
+import org.cactoos.set.SetOf;
 
 /**
  * The enum of fields of DBD/schemas/#schema/tables/#table mapping.
  */
-public enum DdbTableFields implements Text {
+public enum DbdTableFields implements Text {
+
     /**
-     *Indexes ddb table fields.
+     *The dbd/schemas/#schema/tables/#table/columns node.
+     */
+    COLUMNS("columns"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/indexes node.
      */
     INDEXES("indexes"),
     /**
-     *Constraints ddb table fields.
+     *The dbd/schemas/#schema/tables/#table/constraints node.
      */
-    CONSTRAINTS("constraints");
+    CONSTRAINTS("constraints"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/data node.
+     */
+    DATA("data");
 
     /**
      * The String encapsulated.
@@ -36,15 +47,33 @@ public enum DdbTableFields implements Text {
     private final String value;
 
     /**
-     * Instantiates a new Database info fields.
+     * Instantiates a new DbdTableFields.
      * @param string The String to be encapsulated.
      */
-    DdbTableFields(final String string) {
+    DbdTableFields(final String string) {
         this.value = string;
     }
 
     @Override
     public String asString() {
         return this.value;
+    }
+
+    /**
+     * Necessary set.
+     * @return The set.
+     */
+    @SuppressWarnings("PMD")
+    public static Set<Text> necessary() {
+        return new SetOf<>(COLUMNS, INDEXES, CONSTRAINTS);
+    }
+
+    /**
+     * With data set.
+     * @return The set.
+     */
+    @SuppressWarnings("PMD")
+    public static Set<Text> withData() {
+        return new SetOf<>(DbdTableFields.values());
     }
 }

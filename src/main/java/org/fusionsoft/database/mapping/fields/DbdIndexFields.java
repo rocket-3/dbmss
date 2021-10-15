@@ -16,19 +16,24 @@
 package org.fusionsoft.database.mapping.fields;
 
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
 
 /**
- * The enum of DBD/schemas/#schema mapping fields.
+ * The enum of DBD/schemas/#schema/tables/#tables/indexes/#index fields.
  */
-public enum DbdSchemaFields implements Text {
+public enum DbdIndexFields implements Text {
     /**
-     *The dbd/schema/owner field.
+     *Dbcolumn dbd index fields.
      */
-    OWNER("owner"),
+    DBCOLUMN("dbColumn"),
     /**
-     *The dbd/schema/tables field.
+     *Dbunique dbd index fields.
      */
-    TABLES("tables");
+    DBUNIQUE("dbUnique"),
+    /**
+     *Dbmstype dbd index fields.
+     */
+    DBMSTYPE("pgIndexType");
 
     /**
      * The String encapsulated.
@@ -36,15 +41,24 @@ public enum DbdSchemaFields implements Text {
     private final String value;
 
     /**
-     * Instantiates a new DbdSchemaFields.
+     * Instantiates a new DBD/schemas/#schema/tables/#table/indexes/# fields.
      * @param string The String to be encapsulated.
      */
-    DbdSchemaFields(final String string) {
+    DbdIndexFields(final String string) {
         this.value = string;
     }
 
     @Override
     public String asString() {
         return this.value;
+    }
+
+    /**
+     * Necessary iterable.
+     * @return The iterable.
+     */
+    @SuppressWarnings("PMD")
+    public static Iterable<Text> necessary() {
+        return new IterableOf<Text>(DBCOLUMN, DBUNIQUE);
     }
 }

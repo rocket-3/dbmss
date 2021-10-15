@@ -17,9 +17,12 @@ package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.text.TextOf;
+import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
 /**
  * The type of YamlMapping that can be constructed of {@link YamlNode} and path.
@@ -33,7 +36,7 @@ public class YamlMappingOfPath extends YamlMappingEnvelope {
      * @param node The YamlNode to be encapsulated.
      * @param paths The subdirectories to dive through.
      */
-    public YamlMappingOfPath(final YamlNode node, final CharSequence... paths) {
+    public YamlMappingOfPath(final YamlNode node, final Iterable<Text> paths) {
         super(
             new YamlMappingOfScalar(
                 new Sticky<>(
@@ -41,8 +44,8 @@ public class YamlMappingOfPath extends YamlMappingEnvelope {
                         new YamlNodeOfPath(
                             node,
                             new Mapped<>(
-                                String::valueOf,
-                                new IterableOf<>(paths)
+                                Text::asString,
+                                paths
                             )
                         ).asMapping()
                     )
@@ -57,20 +60,41 @@ public class YamlMappingOfPath extends YamlMappingEnvelope {
      * @param node The YamlNode to be encapsulated.
      * @param paths The subdirectories to dive through.
      */
+    public YamlMappingOfPath(final YamlNode node, final Text... paths) {
+        this(
+            node,
+            new IterableOf<Text>(paths)
+        );
+    }
+
+    /**
+     * Instantiates a new Yaml mapping from {@link YamlNode} and array of
+     *  subdirs to dive through.
+     * @param node The YamlNode to be encapsulated.
+     * @param paths The subdirectories to dive through.
+     */
     public YamlMappingOfPath(final YamlNode node, final YamlNode... paths) {
-        super(
-            new YamlMappingOfScalar(
-                new Sticky<>(
-                    () -> new StrictYamlMapping(
-                        new YamlNodeOfPath(
-                            node,
-                            new Mapped<>(
-                                path -> path.asScalar().value(),
-                                new IterableOf<>(paths)
-                            )
-                        ).asMapping()
-                    )
-                )
+        this(
+            node,
+            new Mapped<>(
+                TextOfScalarNode::new,
+                paths
+            )
+        );
+    }
+
+    /**
+     * Instantiates a new Yaml mapping from {@link YamlNode} and array of
+     *  subdirs to dive through.
+     * @param node The YamlNode to be encapsulated.
+     * @param paths The subdirectories to dive through.
+     */
+    public YamlMappingOfPath(final YamlNode node, final CharSequence... paths) {
+        this(
+            node,
+            new Mapped<Text>(
+                TextOf::new,
+                paths
             )
         );
     }

@@ -17,21 +17,50 @@ package org.fusionsoft.lib.yaml.artefacts;
 
 import java.util.Iterator;
 import org.cactoos.Text;
-import org.cactoos.iterator.Filtered;
-import org.cactoos.iterator.IteratorOf;
-import org.cactoos.iterator.Mapped;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Mapped;
+import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.TextOf;
 
 /**
  * The type of Text that can be constructed of array of CharSequence, most of
  * which can be empty. You get a first non-empty one.
  * @since 0.1
+ * @checkstyle HiddenFieldCheck (100 lines)
  */
 public class FirstNotEmptyTextOf implements Text {
 
     /**
      * The Iterator of String encapsulated.
      */
-    private final Iterator<String> iterator;
+    private final Unchecked<Iterator<String>> iterator;
+
+    /**
+     * Instantiates a new First not empty text of presented variants.
+     * @param variants The iterator of Strings to be checked for being non-empty.
+     * @implNote The first element from array that is not empty, is returned.
+     */
+    public FirstNotEmptyTextOf(final Iterable<Text> variants) {
+        this.iterator = new Unchecked<>(
+            () -> new Filtered<>(
+                x -> !x.isEmpty(),
+                new Mapped<>(
+                    Text::asString,
+                    variants
+                )
+            ).iterator()
+        );
+    }
+
+    /**
+     * Instantiates a new First not empty text of presented variants.
+     * @param variants The CharSequence array to be checked for being non-empty.
+     * @implNote The first element from array that is not empty, is returned.
+     */
+    public FirstNotEmptyTextOf(final Text... variants) {
+        this(new IterableOf<Text>(variants));
+    }
 
     /**
      * Instantiates a new First not empty text of presented variants.
@@ -39,19 +68,14 @@ public class FirstNotEmptyTextOf implements Text {
      * @implNote The first element from array that is not empty, is returned.
      */
     public FirstNotEmptyTextOf(final CharSequence... variants) {
-        this.iterator = new Filtered<>(
-            x -> !x.isEmpty(),
-            new Mapped<>(
-                CharSequence::toString,
-                new IteratorOf<>(variants)
-            )
-        );
+        this(new Mapped<>(TextOf::new, new IterableOf<CharSequence>(variants)));
     }
 
     @Override
     public final String asString() throws AllEmptyException {
-        if (this.iterator.hasNext()) {
-            return this.iterator.next();
+        final Iterator<String> iterator = this.iterator.value();
+        if (iterator.hasNext()) {
+            return iterator.next();
         } else {
             throw new AllEmptyException();
         }

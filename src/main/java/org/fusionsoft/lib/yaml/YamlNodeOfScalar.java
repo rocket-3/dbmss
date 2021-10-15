@@ -23,6 +23,7 @@ import com.amihaiemil.eoyaml.YamlNode;
 import com.amihaiemil.eoyaml.YamlSequence;
 import com.amihaiemil.eoyaml.YamlStream;
 import com.amihaiemil.eoyaml.exceptions.YamlReadingException;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 
 /**
@@ -43,7 +44,7 @@ public class YamlNodeOfScalar implements YamlNode {
      * @param scalar The Scalar of YamlNode to be encapsulated.
      */
     public YamlNodeOfScalar(final org.cactoos.Scalar<YamlNode> scalar) {
-        this.scalar = new Unchecked<>(scalar);
+        this.scalar = new Unchecked<>(new Sticky<>(scalar));
     }
 
     @Override
@@ -87,6 +88,11 @@ public class YamlNodeOfScalar implements YamlNode {
     @Override
     public final int compareTo(final YamlNode o) {
         return this.scalar.value().compareTo(o);
+    }
+
+    @Override
+    public final String toString() {
+        return this.scalar.value().toString();
     }
 
 }
