@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.database.snapshot.objects.predicate;
 
-import com.amihaiemil.eoyaml.YamlMapping;
-import org.fusionsoft.database.YamlRepresentative;
+import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
+import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdFile;
 
 /**
- * The YamlMapping of {@link DbObject} YamlRepresentative.
+ * The predicate of {@link DbObject} which tests it presents in DBD file.
  * @since 0.1
  */
-public class MappingOfRepresentative extends YamlMappingOfScalar {
+public class ObjectMentionedInDbdFilePredicate extends ObjectMentionedInPredicate {
 
     /**
-     * Instantiates a new Yaml mapping of scalar.
-     * @param representative The Scalar of YamlMapping to be encapsulated.
+     * Instantiates a new Objects in dbd predicate.
+     * @param file The DbdFile to be encapsulated.
      */
-    public MappingOfRepresentative(
-        final YamlRepresentative<? extends YamlMapping> representative
-    ) {
-        super(() -> representative.asYaml().asMapping());
+    public ObjectMentionedInDbdFilePredicate(final DbdFile file) {
+        super(new ObjectsOfDbdFile(file));
     }
 
 }

@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbms;
 
-import org.fusionsoft.database.snapshot.DatabaseInfo;
+import java.sql.Connection;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The DbObjects from {@link DatabaseInfo}.
+ * The Objects of {@link Connection} of Oracle dbms.
  * @since 0.1
- * @todo #46:30min Start implementing.
- * @todo #83:30min Continue implementing corresponding classes.
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromDatabaseInfo extends ObjectsOfScalar {
+public class ObjectsFromOracle extends ObjectsEnvelope {
 
     /**
      * Ctor.
-     * @param database The database used to extract data.
+     * @param connection The connection used
      */
-    public ObjectsFromDatabaseInfo(final DatabaseInfo database) {
-        super(
-            () -> database.signature().kind().objects(database.connection())
-        );
+    public ObjectsFromOracle(final Connection connection) {
+        super(new IterableOf<>());
     }
 
 }

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.SimpleDbObject;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -29,7 +29,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * The db index object of DBD/schemas/#schema/tables/#table/indexes/#index node.
  * @since 0.1
  */
-public class ObjectOfDbdIndexMapping extends NaiveDbObject {
+public class ObjectOfDbdIndexMapping extends SimpleDbObject<YamlMapping> {
 
     /**
      * Instantiates a new Object of dbd index mapping.
@@ -40,7 +40,8 @@ public class ObjectOfDbdIndexMapping extends NaiveDbObject {
     public ObjectOfDbdIndexMapping(
         final YamlMapping root,
         final YamlNode key,
-        final Text table) {
+        final Text table
+    ) {
         this(
             new YamlMappingOfPath(root, key),
             new FullObjectName(table, new TextOfScalarNode(key))

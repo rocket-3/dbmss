@@ -13,24 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbms;
 
-import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import java.sql.Connection;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The type of Objects that can be constructed of {@link DbdFile}.
+ * The Objects of {@link Connection} of Oracle dbms.
  * @since 0.1
  */
-public class ObjectsOfDbdFile extends ObjectsOfDbdRootMapping {
+@SuppressWarnings("PMD")
+public class ObjectsFromPostgres extends ObjectsEnvelope {
 
     /**
-     * Instantiates a new Objects of dbd file.
-     * @param mapping The DbdFile to be encapsulated.
+     * Ctor.
+     * @param connection The wrapped connection.
      */
-    public ObjectsOfDbdFile(final DbdFile mapping) {
+    public ObjectsFromPostgres(final Connection connection) {
         super(
-            new DbdRootMapping(mapping::asYaml)
+            new IterableOf<>()
         );
     }
 

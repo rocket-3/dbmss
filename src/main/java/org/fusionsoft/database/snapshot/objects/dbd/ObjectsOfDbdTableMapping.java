@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
+import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.SimpleDbObject;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -66,12 +68,14 @@ public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
     ) {
         super(
             new Joined<>(
-                new NaiveDbObject<>(
-                    new MappingFromMappingIgnoreKeys(
-                        mapping,
-                        new IterableOf<>(
-                            DbdTableFields.CONSTRAINTS,
-                            DbdTableFields.INDEXES
+                new SimpleDbObject<>(
+                    new DbdTableMapping(
+                        new MappingFromMappingIgnoreKeys(
+                            mapping,
+                            new IterableOf<>(
+                                DbdTableFields.CONSTRAINTS,
+                                DbdTableFields.INDEXES
+                            )
                         )
                     ),
                     new SimpleObjectSignature(

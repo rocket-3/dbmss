@@ -13,37 +13,35 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.predicate;
 
 import org.cactoos.Func;
-import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.lib.exception.NotImplemented;
+import org.fusionsoft.database.snapshot.ObjectType;
 
 /**
- * The predicate of DbObject to test it's a configuration table in DBD.
+ * The Func of DbObject -> Boolean, that checks {@link DbObject}
+ *  has specific {@link ObjectType} node.
  * @since 0.1
- * @todo #40:30min Implement 'apply' method.
  */
-public class TableWithDataInDbdFilePredicate implements Func<DbObject<?>, Boolean> {
+public class ObjectHasTypePredicate implements Func<DbObject<?>, Boolean> {
 
     /**
-     * The DbdFile encapsulated.
+     * The ObjectType encapsulated.
      */
-    private final DbdFile file;
+    private final ObjectType type;
 
     /**
-     * Instantiates a new Object is dbd configuration table predicate.
-     * @param file The DbdFile to be encapsulated.
+     * Instantiates a new Object has type predicate.
+     * @param type The ObjectType to be encapsulated.
      */
-    public TableWithDataInDbdFilePredicate(final DbdFile file) {
-        this.file = file;
+    public ObjectHasTypePredicate(final ObjectType type) {
+        this.type = type;
     }
 
     @Override
-    public final Boolean apply(final DbObject input) {
-        this.file.notifyAll();
-        throw new NotImplemented();
+    public final Boolean apply(final DbObject<?> input) {
+        return input.signature().type().equals(this.type);
     }
 
 }

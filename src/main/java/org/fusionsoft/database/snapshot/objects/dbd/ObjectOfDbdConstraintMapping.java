@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.SimpleDbObject;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
@@ -30,7 +30,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  *  DBD/schemas/#schema/tables/#table/constraints/#constraint node.
  * @since 0.1
  */
-public class ObjectOfDbdConstraintMapping extends NaiveDbObject {
+public class ObjectOfDbdConstraintMapping extends SimpleDbObject<YamlMapping> {
 
     /**
      * Instantiates a new Objects of dbd constraint mapping.

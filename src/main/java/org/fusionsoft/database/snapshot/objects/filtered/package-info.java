@@ -13,24 +13,9 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
-
-import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
 
 /**
- * The Objects of {@link Connection} of MS SQL Server dbms.
- * @since 0.1
+ * {@link org.fusionsoft.database.snapshot.Objects} from another
+ *  and filtered by some predicate.
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromMssql extends ObjectsEnvelope {
-
-    /**
-     * Ctor.
-     * @param connection The wrapped connection
-     */
-    public ObjectsFromMssql(final Connection connection) {
-        super(new IterableOf<>());
-    }
-
-}
+package org.fusionsoft.database.snapshot.objects.filtered;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
@@ -22,8 +22,9 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.NaiveDbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.SimpleDbObject;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -64,7 +65,7 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsEnvelope {
     ) {
         super(
             new Joined<DbObject<? extends YamlMapping>>(
-                new NaiveDbObject<>(
+                new SimpleDbObject<>(
                     new MappingFromMappingIgnoreKeys(
                         mapping,
                         new IterableOf<>(DbdSchemaFields.TABLES)

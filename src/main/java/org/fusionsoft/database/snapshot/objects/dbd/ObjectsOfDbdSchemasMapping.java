@@ -13,32 +13,31 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.Text;
+import org.cactoos.iterable.Joined;
 import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
- * The db index objects of DBD/schemas/#schema/tables/#table/indexes mapping.
+ * The Objects that can be constructed of DBD/schemas mapping.
  * @since 0.1
  */
-public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdSchemasMapping extends ObjectsEnvelope {
 
     /**
-     * Instantiates a new Objects of dbd indexes mapping.
-     * @param indexes The YamlMapping to be encapsulated.
-     * @param table The Text to be encapsulated.
+     * Ctor.
+     * @param mapping The wrapped mapping
      */
-    public ObjectsOfDbdIndexesMapping(
-        final YamlMapping indexes,
-        final Text table
-    ) {
+    public ObjectsOfDbdSchemasMapping(final YamlMapping mapping) {
         super(
-            new IterableOfClassFromYamlNode<DbObject<? extends YamlMapping>>(
-                (map, node) -> new ObjectOfDbdIndexMapping(map, node, table),
-                indexes
+            new Joined<DbObject<? extends YamlMapping>>(
+                new IterableOfClassFromYamlNode<>(
+                    ObjectsOfDbdSchemaMapping::new,
+                    mapping
+                )
             )
         );
     }

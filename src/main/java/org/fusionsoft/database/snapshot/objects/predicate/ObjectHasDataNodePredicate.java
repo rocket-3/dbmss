@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.predicate;
 
-import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
+import org.cactoos.Func;
+import org.fusionsoft.database.mapping.fields.DbdTableFields;
+import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.lib.yaml.artefacts.KeysFromYamlNode;
 
 /**
- * The Objects of {@link Connection} of Oracle dbms.
+ * The Func of DbObject -> Boolean, that checks {@link DbObject} has 'data' node.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromOracle extends ObjectsEnvelope {
+public class ObjectHasDataNodePredicate implements Func<DbObject<?>, Boolean> {
 
-    /**
-     * Ctor.
-     * @param connection The connection used
-     */
-    public ObjectsFromOracle(final Connection connection) {
-        super(new IterableOf<>());
+    @Override
+    public final Boolean apply(final DbObject<?> input) throws Exception {
+        return new KeysFromYamlNode(input.asYaml()).contains(
+            DbdTableFields.DATA.asString()
+        );
     }
 
 }

@@ -13,24 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
-
-import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
 
 /**
- * The Objects of {@link Connection} of MySql dbms.
- * @since 0.1
+ * {@link org.fusionsoft.database.snapshot.Objects} from 'DBD' file and mappings.
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromMySql extends ObjectsEnvelope {
-
-    /**
-     * Ctor.
-     * @param connection The connection used
-     */
-    public ObjectsFromMySql(final Connection connection) {
-        super(new IterableOf<>());
-    }
-
-}
+package org.fusionsoft.database.snapshot.objects.dbd;

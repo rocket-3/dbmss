@@ -13,28 +13,25 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbms;
 
-import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import org.fusionsoft.lib.yaml.YamlMappingOfPath;
+import java.sql.Connection;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The type of Objects that can be constructed of DbdRootMapping.
+ * The Objects of {@link Connection} of MS SQL Server dbms.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsOfDbdRootMapping extends ObjectsEnvelope {
+public class ObjectsFromMssql extends ObjectsEnvelope {
 
     /**
-     * Instantiates a new Objects of dbd root mapping.
-     * @param mapping The DbdRootMapping to be encapsulated.
+     * Ctor.
+     * @param connection The wrapped connection
      */
-    public ObjectsOfDbdRootMapping(final DbdRootMapping mapping) {
-        super(
-            new ObjectsOfDbdSchemasMapping(
-                new YamlMappingOfPath(mapping, "schemas")
-            )
-        );
+    public ObjectsFromMssql(final Connection connection) {
+        super(new IterableOf<>());
     }
 
 }

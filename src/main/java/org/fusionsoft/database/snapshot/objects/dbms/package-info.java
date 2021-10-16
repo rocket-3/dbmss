@@ -13,26 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
-
-import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
-
 /**
- * The Objects of {@link Connection} of Oracle dbms.
- * @since 0.1
+ * {@link org.fusionsoft.database.snapshot.Objects} of database of some DBMS.
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromPostgres extends ObjectsEnvelope {
-
-    /**
-     * Ctor.
-     * @param connection The wrapped connection.
-     */
-    public ObjectsFromPostgres(final Connection connection) {
-        super(
-            new IterableOf<>()
-        );
-    }
-
-}
+package org.fusionsoft.database.snapshot.objects.dbms;

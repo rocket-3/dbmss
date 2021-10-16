@@ -13,23 +13,9 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
-
-import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The predicate of {@link DbObject} which tests it presents in DBD file.
- * @since 0.1
+ * Complex {@link org.fusionsoft.database.snapshot.Objects}
+ *  with lots of filtering of from different sources.
  */
-public class ObjectsMentionedInDbdFilePredicate extends ObjectsMentionedInPredicate {
-
-    /**
-     * Instantiates a new Objects in dbd predicate.
-     * @param file The DbdFile to be encapsulated.
-     */
-    public ObjectsMentionedInDbdFilePredicate(final DbdFile file) {
-        super(new ObjectsOfDbdFile(file));
-    }
-
-}
+package org.fusionsoft.database.snapshot.objects.composite;

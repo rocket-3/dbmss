@@ -13,30 +13,35 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.iterable.Joined;
-import org.fusionsoft.database.snapshot.DbObject;
+import org.cactoos.Text;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
- * The Objects that can be constructed of DBD/schemas mapping.
+ * The db constraint objects
+ *  of DBD/schemas/#schema/tables/#table/constraints mapping.
  * @since 0.1
  */
-public class ObjectsOfDbdSchemasMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdConstraintsMapping extends ObjectsEnvelope {
 
     /**
-     * Ctor.
-     * @param mapping The wrapped mapping
+     * Instantiates a new Objects of dbd constraints mapping.
+     * @param constraints The YamlMapping to be encapsulated.
+     * @param table The Text to be encapsulated.
      */
-    public ObjectsOfDbdSchemasMapping(final YamlMapping mapping) {
+    public ObjectsOfDbdConstraintsMapping(
+        final YamlMapping constraints,
+        final Text table
+    ) {
         super(
-            new Joined<DbObject<? extends YamlMapping>>(
-                new IterableOfClassFromYamlNode<>(
-                    ObjectsOfDbdSchemaMapping::new,
-                    mapping
-                )
+            new IterableOfClassFromYamlNode<>(
+                (map, node) -> new ObjectOfDbdConstraintMapping(
+                    map, node, table
+                ),
+                constraints
             )
         );
     }

@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.filtered;
 
 import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
+import org.fusionsoft.database.snapshot.objects.predicate.ObjectHasTypePredicate;
 
 /**
  * The {@link Objects} filtered by {@link ObjectType}.
@@ -31,7 +33,7 @@ public class ObjectsWithType extends ObjectsFiltered {
      */
     public ObjectsWithType(final ObjectType type, final Objects origin) {
         super(
-            o -> o.signature().type().equals(type),
+            new ObjectHasTypePredicate(type),
             origin
         );
     }

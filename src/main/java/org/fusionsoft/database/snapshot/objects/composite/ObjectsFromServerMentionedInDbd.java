@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.composite;
 
 import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
+import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromDatabaseInfo;
+import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 
 /**
  * The type of {@link Objects} from database mentioned in {@link DatabaseInfo}
@@ -38,8 +41,8 @@ public class ObjectsFromServerMentionedInDbd extends ObjectsFiltered {
         final DbdFile file
     ) {
         super(
-            (Objects) new ObjectsFromDatabaseInfo(database),
-            new ObjectsMentionedInDbdFilePredicate(file)
+            new ObjectsFromDatabaseInfo(database),
+            new ObjectMentionedInDbdFilePredicate(file)
         );
     }
 

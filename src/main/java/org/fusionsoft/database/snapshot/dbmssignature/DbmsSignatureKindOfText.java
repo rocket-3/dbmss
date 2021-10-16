@@ -19,7 +19,7 @@ import java.sql.Connection;
 import org.cactoos.Text;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
-import org.fusionsoft.database.snapshot.objects.ObjectsFromPostgres;
+import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromPostgres;
 
 /**
  * The DbmsSignatureName that can be constructed of Text.

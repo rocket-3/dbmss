@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.filtered;
 
 import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.DbObject;

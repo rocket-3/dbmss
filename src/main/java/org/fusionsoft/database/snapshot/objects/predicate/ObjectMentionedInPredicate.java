@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects;
+package org.fusionsoft.database.snapshot.objects.predicate;
 
 import java.util.Set;
 import org.cactoos.Func;
@@ -30,7 +30,7 @@ import org.fusionsoft.database.snapshot.Objects;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsMentionedInPredicate implements Func<DbObject<?>, Boolean> {
+public class ObjectMentionedInPredicate implements Func<DbObject<?>, Boolean> {
 
     /**
      * The Set of String of signatures encapsulated.
@@ -41,7 +41,7 @@ public class ObjectsMentionedInPredicate implements Func<DbObject<?>, Boolean> {
      * Instantiates a new Objects with names.
      * @param names The Sinatures to be encapsulated.
      */
-    private ObjectsMentionedInPredicate(
+    private ObjectMentionedInPredicate(
         final Iterable<ObjectSignature> names
     ) {
         this.names = new SetOf<String>(
@@ -56,7 +56,7 @@ public class ObjectsMentionedInPredicate implements Func<DbObject<?>, Boolean> {
      * Instantiates a new Objects with names.
      * @param mentions The objects with names to pass.
      */
-    public ObjectsMentionedInPredicate(final Objects mentions) {
+    public ObjectMentionedInPredicate(final Objects mentions) {
         this(new Mapped<ObjectSignature>(DbObject::signature, mentions));
     }
 
