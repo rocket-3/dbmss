@@ -34,7 +34,6 @@ public class DbdTablesMappingOfObjects extends YamlMappingOfEntries {
      * Instantiates a new Dbd tables mapping of objects.
      * @param objects The all Objects to be encapsulated.
      * @param schema The parent schema DbObject to be encapsulated.
-     * @todo #49:30min Implement ctor.
      */
     public DbdTablesMappingOfObjects(
         final Objects objects,
