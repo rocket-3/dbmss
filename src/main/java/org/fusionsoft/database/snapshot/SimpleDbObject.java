@@ -23,7 +23,7 @@ import org.fusionsoft.database.SimpleYamlRepresentative;
  * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public class NaiveDbObject<Y extends YamlMapping>
+public class SimpleDbObject<Y extends YamlMapping>
     extends SimpleYamlRepresentative<Y>
     implements DbObject<Y> {
 
@@ -37,7 +37,7 @@ public class NaiveDbObject<Y extends YamlMapping>
      * @param yaml The YamlNode to be encapsulated.
      * @param signature The ObjectSignature to be encapsulated.
      */
-    public NaiveDbObject(final Y yaml, final ObjectSignature signature) {
+    public SimpleDbObject(final Y yaml, final ObjectSignature signature) {
         super(yaml);
         this.sig = signature;
     }

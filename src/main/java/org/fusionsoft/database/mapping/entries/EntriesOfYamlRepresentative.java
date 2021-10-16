@@ -13,35 +13,34 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.lib.yaml;
+package org.fusionsoft.database.mapping.entries;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Map;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.iterable.Mapped;
-import org.cactoos.map.MapEntry;
-import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import org.fusionsoft.database.YamlRepresentative;
+import org.fusionsoft.database.mapping.MappingOfRepresentative;
+import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 
 /**
- * The MapEntries of Text and YamlNode constructed of {@link YamlMapping}.
+ * The Map.Entry of Text and YamlNode from {@link YamlRepresentative}.
  * @since 0.1
  */
-public class EntriesOfYamlMapping extends IterableEnvelope<Map.Entry<Text, ? extends YamlNode>> {
+public class EntriesOfYamlRepresentative
+    extends IterableEnvelope<Map.Entry<Text, ? extends YamlNode>> {
 
     /**
-     * Ctor.
-     * @param mapping The wrapped mapping.
+     * Instantiates a new Entries of yaml representative.
+     * @param representative The YamlRepresentative to be encapsulated.
      */
-    public EntriesOfYamlMapping(final YamlMapping mapping) {
+    public EntriesOfYamlRepresentative(
+        final YamlRepresentative<? extends YamlMapping> representative
+    ) {
         super(
-            new Mapped<>(
-                entry -> new MapEntry<>(
-                    new TextOfScalarNode(entry.getKey()),
-                    entry.getValue()
-                ),
-                new NodeEntriesOfYamlMapping(mapping)
+            new EntriesOfYamlMapping(
+                new MappingOfRepresentative(representative)
             )
         );
     }

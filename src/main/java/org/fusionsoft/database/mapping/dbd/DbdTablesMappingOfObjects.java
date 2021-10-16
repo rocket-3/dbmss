@@ -19,8 +19,8 @@ import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectsWithParent;
-import org.fusionsoft.database.snapshot.objects.ObjectsWithType;
+import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParent;
+import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**

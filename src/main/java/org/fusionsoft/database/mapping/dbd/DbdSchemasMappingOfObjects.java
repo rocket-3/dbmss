@@ -18,7 +18,7 @@ package org.fusionsoft.database.mapping.dbd;
 import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectsWithType;
+import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**

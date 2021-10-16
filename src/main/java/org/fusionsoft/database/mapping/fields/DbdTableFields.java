@@ -65,7 +65,7 @@ public enum DbdTableFields implements Text {
      */
     @SuppressWarnings("PMD")
     public static Set<Text> necessary() {
-        return new SetOf<>(COLUMNS, INDEXES, CONSTRAINTS);
+        return new SetOf<>(COLUMNS);
     }
 
     /**
@@ -73,7 +73,7 @@ public enum DbdTableFields implements Text {
      * @return The set.
      */
     @SuppressWarnings("PMD")
-    public static Set<Text> withData() {
+    public static Set<Text> all() {
         return new SetOf<>(DbdTableFields.values());
     }
 }

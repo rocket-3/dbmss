@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectsWithParentAndType;
+import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
 
 /**
  * The The DBD/schemas/#schema/tables/#table node mapping of
@@ -39,8 +39,10 @@ public class DbdTableMappingOfObjects extends DbdTableMapping {
         final DbObject<?> table
     ) {
         super(
-            new DbdTableMappingOfEntries(
-                table,
+            new DbdTableMappingWithChildObjects(
+                new DbdTableMapping(
+                    new MappingOfRepresentative(table)
+                ),
                 new UnwrapEntriesOfObjects<>(
                     objects,
                     new ObjectsWithParentAndType(

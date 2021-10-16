@@ -16,6 +16,7 @@
 package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlNode;
+import java.util.Map;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
@@ -44,7 +45,7 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
     ) {
         super(
             new YamlMappingOfEntries(
-                new Joined<MapEntry<Text, ? extends YamlNode>>(
+                new Joined<Map.Entry<Text, ? extends YamlNode>>(
                     new EntriesOfYamlMapping(
                         new MappingOfRepresentative(schema)
                     ),

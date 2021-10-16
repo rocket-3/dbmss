@@ -17,20 +17,20 @@ package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.map.MapEntry;
-import org.fusionsoft.database.mapping.entries.SpareEntriesOfMapping;
+import org.fusionsoft.database.mapping.entries.EntriesWithKeys;
+import org.fusionsoft.database.mapping.entries.EntriesWithoutKeys;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
-import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The DBD/sequences/#sequence/tables/#table node mapping.
  * @since 0.1
  */
-public class DbdTableMappingOfEntries extends DbdTableMapping {
+public class DbdTableMappingWithChildObjects extends DbdTableMapping {
 
     /**
      * Instantiates a new Dbd table mapping of entries.
@@ -38,32 +38,25 @@ public class DbdTableMappingOfEntries extends DbdTableMapping {
      * @param indexes The Iterable of YamlMapping to be encapsulated.
      * @param constraints The Iterable of YamlMapping to be encapsulated.
      */
-    public DbdTableMappingOfEntries(
-        final DbObject<? extends YamlNode> table,
+    public DbdTableMappingWithChildObjects(
+        final DbdTableMapping table,
         final Iterable<MapEntry<Text, DbdIndexMapping>> indexes,
         final Iterable<MapEntry<Text, DbdConstraintMapping>> constraints
     ) {
         super(
             new YamlMappingOfEntries(
                 new Joined<>(
-                    new SpareEntriesOfMapping(
-                        table,
-                        DbdTableFields.withData()
+                    new EntriesWithoutKeys(
+                        new EntriesOfYamlMapping(table),
+                        DbdTableFields.all()
                     ),
-                    new IterableOf<MapEntry<? extends Text, ? extends YamlNode>>(
-                        new MapEntry<>(
-                            DbdTableFields.COLUMNS,
-                            new DbdTableColumnsSequenceOf(table)
-                        )
+                    new EntriesWithKeys(
+                        new EntriesOfYamlMapping(table),
+                        DbdTableFields.COLUMNS
                     ),
-                    new Filtered<MapEntry<? extends Text, ? extends YamlNode>>(
-                        x -> x.getKey().asString().equals(
-                            DbdTableFields.DATA.asString()
-                        ),
-                        new SpareEntriesOfMapping(
-                            table,
-                            DbdTableFields.necessary()
-                        )
+                    new EntriesWithKeys(
+                        new EntriesOfYamlMapping(table),
+                        DbdTableFields.DATA
                     ),
                     new IterableOf<MapEntry<? extends Text, ? extends YamlNode>>(
                         new MapEntry<>(
