@@ -20,7 +20,7 @@ import org.fusionsoft.database.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.mapping.fields.DbdRootFields;
 import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
-import org.fusionsoft.database.snapshot.objects.ObjectsOfDbdRootMapping;
+import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdRootMapping;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-class DbdRootMappingBuiltTest {
+public class DbdRootMappingBuiltTest {
 
     /**
      * Creates a mapping identical to input in text representation.

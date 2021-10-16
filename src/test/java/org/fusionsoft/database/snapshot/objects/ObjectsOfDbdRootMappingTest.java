@@ -23,6 +23,7 @@ import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdRootMapping;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -13,36 +13,41 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping.dbd;
+package org.fusionsoft.database.snapshot.objects;
 
+import org.cactoos.list.ListOf;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
+import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdRootMapping;
-import org.fusionsoft.lib.yaml.YamlMappingOfPath;
+import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * The tests for {@link DbdSchemasMappingOfObjects}.
+ * The tests for {@link ObjectsWithType}.
  * @since 0.1
  */
-class DbdSchemasMappingOfObjectsTest {
+class ObjectsWithTypeTest {
 
     /**
-     * Creates mapping identical to input.
-     * @throws Exception When can't.
+     * Retrieves all tables of example yaml.
      */
     @Test
-    public void createsMappingIdenticalToInput() throws Exception {
-        final MappingOfExampleYaml yaml = new MappingOfExampleYaml();
+    public void retrievesAllTablesOfExampleYaml() {
+        final int tables = 4;
         Assertions.assertEquals(
-            new YamlMappingOfPath(yaml, "schemas").toString(),
-            new DbdSchemasMappingOfObjects(
-                new ObjectsOfDbdRootMapping(
-                    new DbdRootMapping(
-                        yaml
+            tables,
+            new ListOf<>(
+                new ObjectsWithType(
+                    ObjectType.TABLE,
+                    new ObjectsOfDbdRootMapping(
+                        new DbdRootMapping(
+                            new MappingOfExampleYaml()
+                        )
                     )
                 )
-            ).toString()
+            ).size()
         );
     }
 
