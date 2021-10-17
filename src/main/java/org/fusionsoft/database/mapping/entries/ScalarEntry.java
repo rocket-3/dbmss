@@ -15,14 +15,11 @@
  */
 package org.fusionsoft.database.mapping.entries;
 
-import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Map;
-import org.cactoos.Scalar;
 import org.cactoos.Text;
-import org.cactoos.scalar.Sticky;
-import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.lib.exception.NotImplemented;
+import org.fusionsoft.lib.yaml.YamlPlainScalarOf;
 
 /**
  * The type of Map.Entry of Text -> YamlNode that can be constructed of
@@ -37,18 +34,18 @@ public class ScalarEntry implements Map.Entry<Text, YamlNode> {
     private final Text text;
 
     /**
-     * The Scalar of YamlNode encapsulated.
+     * The Scalar YamlNode encapsulated.
      */
-    private final Unchecked<YamlNode> node;
+    private final YamlNode node;
 
     /**
      * Instantiates a new Scalar entry.
      * @param text The Text to be encapsulated.
-     * @param node The Scalar of YamlNode to be encapsulated.
+     * @param node The Scalar YamlNode to be encapsulated.
      */
-    private ScalarEntry(final Text text, final Scalar<YamlNode> node) {
+    private ScalarEntry(final Text text, final YamlNode node) {
         this.text = text;
-        this.node = new Unchecked<>(new Sticky<>(node));
+        this.node = node;
     }
 
     /**
@@ -59,7 +56,7 @@ public class ScalarEntry implements Map.Entry<Text, YamlNode> {
     public ScalarEntry(final Text key, final Text value) {
         this(
             key,
-            () -> Yaml.createYamlScalarBuilder().addLine(value.asString()).buildPlainScalar()
+            new YamlPlainScalarOf(value)
         );
     }
 
@@ -70,7 +67,7 @@ public class ScalarEntry implements Map.Entry<Text, YamlNode> {
 
     @Override
     public final YamlNode getValue() {
-        return this.node.value();
+        return this.node;
     }
 
     @Override
