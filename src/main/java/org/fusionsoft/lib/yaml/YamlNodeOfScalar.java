@@ -48,6 +48,11 @@ public class YamlNodeOfScalar implements YamlNode {
     }
 
     @Override
+    public boolean isEmpty() {
+        return this.scalar.value().isEmpty();
+    }
+
+    @Override
     public final Comment comment() {
         return this.scalar.value().comment();
     }
