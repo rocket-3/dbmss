@@ -28,7 +28,6 @@ import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFi
  * The type of {@link Objects} from database mentioned in {@link DbdFile}'s
  *  that names present in {@link org.fusionsoft.database.mapping.dbd.DbdServersMapping} only.
  * @since 0.1
- * @todo #40 :60min Obtain db objects from database
  */
 @SuppressWarnings("PMD")
 public class ObjectsFromServerMentionedInDbd extends ObjectsFiltered {

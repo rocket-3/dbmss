@@ -35,9 +35,16 @@ public class ObjectsFromServer extends ObjectsOfScalar {
      */
     public ObjectsFromServer(final DbdServerMapping server) {
         super(
-            () -> new DbmsOfText(
-                new TextOfMappingValue(server, DbdServerFields.DBTYPE)
-            ).objects().apply(new ConnectionOfDbdServerMapping(server))
+            () -> {
+                return new DbmsOfText(
+                    new TextOfMappingValue(
+                        server,
+                        DbdServerFields.DBTYPE
+                    )
+                ).objects().apply(
+                    new ConnectionOfDbdServerMapping(server)
+                );
+            }
         );
     }
 

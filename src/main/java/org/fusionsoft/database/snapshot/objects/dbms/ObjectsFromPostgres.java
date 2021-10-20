@@ -22,6 +22,7 @@ import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 /**
  * The Objects of {@link Connection} of Oracle dbms.
  * @since 0.1
+ * @todo #40:30min Create skeleton of class hierarchy.
  */
 @SuppressWarnings("PMD")
 public class ObjectsFromPostgres extends ObjectsEnvelope {
