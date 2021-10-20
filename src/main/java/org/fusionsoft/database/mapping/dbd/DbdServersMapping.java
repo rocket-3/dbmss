@@ -15,34 +15,31 @@
  */
 package org.fusionsoft.database.mapping.dbd;
 
-import org.cactoos.iterable.Mapped;
-import org.cactoos.map.MapEntry;
-import org.cactoos.text.TextOf;
-import org.fusionsoft.database.snapshot.DatabaseInfo;
+import java.util.Map;
+import org.cactoos.Text;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
- * The DBD/servers mapping that can be constructed of {@link DatabaseInfo}'s.
+ * The DBD/servers mapping that can be constructed of {@link DbdServerMapping}'s.
  * @since 0.1
  */
 public class DbdServersMapping extends YamlMappingOfEntries {
 
     /**
      * Instantiates a new Dbd servers mapping.
-     * @param databases The Iterable of DatabaseInfo to be encapsulated.
+     * @param entries The Iterable of DbdServerMapping to be encapsulated.
      */
-    public DbdServersMapping(final Iterable<DatabaseInfo> databases) {
-        super(
-            new Mapped<>(
-                entry -> {
-                    return new MapEntry<>(
-                        new TextOf(entry.name()),
-                        entry.asYaml()
-                    );
-                },
-                databases
-            )
-        );
+    public DbdServersMapping(final Iterable<Map.Entry<Text, DbdServerMapping>> entries) {
+        super(entries);
+    }
+
+    /**
+     * Instantiates a new Dbd servers mapping.
+     * @param entries The DbdServerMapping array to be encapsulated.
+     */
+    @SafeVarargs
+    public DbdServersMapping(final Map.Entry<Text, DbdServerMapping>... entries) {
+        super(entries);
     }
 
 }

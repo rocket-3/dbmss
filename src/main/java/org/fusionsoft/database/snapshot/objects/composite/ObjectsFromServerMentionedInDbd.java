@@ -15,33 +15,39 @@
  */
 package org.fusionsoft.database.snapshot.objects.composite;
 
+import org.cactoos.Text;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.database.mapping.dbd.DbdServerEntryOfDbdFile;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromDatabaseInfo;
+import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromServer;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 
 /**
- * The type of {@link Objects} from database mentioned in {@link DatabaseInfo}
- *  that names present in {@link DbdFile} only.
+ * The type of {@link Objects} from database mentioned in {@link DbdFile}'s
+ *  that names present in {@link org.fusionsoft.database.mapping.dbd.DbdServersMapping} only.
  * @since 0.1
- * @todo #40:60min Obtain db objects from database
+ * @todo #40 :60min Obtain db objects from database
  */
 @SuppressWarnings("PMD")
 public class ObjectsFromServerMentionedInDbd extends ObjectsFiltered {
 
     /**
      * Instantiates a new Objects from server mentioned in dbd.
-     * @param database The DatabaseInfo to be encapsulated.
      * @param file The DbdFile to be encapsulated.
+     * @param server The Text of server name encapsulated.
      */
     public ObjectsFromServerMentionedInDbd(
-        final DatabaseInfo database,
-        final DbdFile file
+        final DbdFile file,
+        final Text server
     ) {
         super(
-            new ObjectsFromDatabaseInfo(database),
+            new ObjectsOfScalar(
+                () -> new ObjectsFromServer(
+                    new DbdServerEntryOfDbdFile(file, server).getValue()
+                )
+            ),
             new ObjectMentionedInDbdFilePredicate(file)
         );
     }

@@ -18,9 +18,10 @@ package org.fusionsoft.database.writable;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.TextOf;
 import org.fusionsoft.database.Writable;
-import org.fusionsoft.database.mapping.dbd.DbdInfoMappingShort;
+import org.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import org.fusionsoft.database.mapping.dbd.DbdRootMappingBuilt;
-import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.database.mapping.dbd.DbdServerEntry;
+import org.fusionsoft.database.mapping.dbd.DbdServersMapping;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
@@ -30,25 +31,27 @@ import org.fusionsoft.database.snapshot.Objects;
  * @todo #40:60min Implement `DbdYamlOfObjects` `Writable`
  */
 @SuppressWarnings("PMD")
-public class DbdYamlOfObjects extends WritableYamlDocument {
+public class DbdSnapshotDocument extends WritableYamlDocument {
 
     /**
      * Instantiates a new Dbd yaml of objects.
-     * @param database The DatabaseInfo to be encapsulated.
-     * @param objects The DbObjects to be encapsulated.
+     * @param server The DbdServerEntry to be encapsulated.
+     * @param info The DbdInfoMapping to be encapsulated.
+     * @param objects The Objects to be encapsulated.
      */
-    public DbdYamlOfObjects(
-        final DatabaseInfo database,
+    public DbdSnapshotDocument(
+        final DbdServerEntry server,
+        final DbdInfoMapping info,
         final Objects objects
     ) {
         super(
             new DbdRootMappingBuilt(
-                new IterableOf<DatabaseInfo>(database),
-                new DbdInfoMappingShort(
-                    new TextOf("a"),
-                    new TextOf("b"),
-                    new TextOf("c")
+                new DbdServersMapping(
+                    new IterableOf<>(
+                        server
+                    )
                 ),
+                info,
                 objects
             ),
             new TextOf("DBD.yaml")

@@ -13,9 +13,21 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.lib.path;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.cactoos.Scalar;
 
 /**
- * Implementations of {@link org.fusionsoft.database.snapshot.DatabaseInfo}
- *  contracts.
+ * The {@link Scalar} of {@link Path} that represents current working directory.
+ * @since 0.1
  */
-package org.fusionsoft.database.snapshot.databaseinfo;
+public class CurrentWorkingDirectory implements Scalar<Path> {
+
+    @Override
+    public final Path value() {
+        return Paths.get("");
+    }
+
+}

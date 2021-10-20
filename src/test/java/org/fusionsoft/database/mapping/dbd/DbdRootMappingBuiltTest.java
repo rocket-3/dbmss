@@ -15,12 +15,11 @@
  */
 package org.fusionsoft.database.mapping.dbd;
 
-import org.cactoos.iterable.IterableOf;
+import org.cactoos.text.TextOf;
 import org.fusionsoft.database.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.mapping.fields.DbdRootFields;
-import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
-import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdRootMapping;
+import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdFile;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -42,10 +41,10 @@ public class DbdRootMappingBuiltTest {
         Assertions.assertEquals(
             yaml.toString(),
             new DbdRootMappingBuilt(
-                new IterableOf<>(
-                    new DatabaseInfoOfDbd(
+                new DbdServersMapping(
+                    new DbdServerEntryOfDbdFile(
                         file,
-                        "fs-mts"
+                        new TextOf("fs-mts")
                     )
                 ),
                 new DbdInfoMapping(
@@ -54,9 +53,7 @@ public class DbdRootMappingBuiltTest {
                         DbdRootFields.INFO
                     )
                 ),
-                new ObjectsOfDbdRootMapping(
-                    file.asYaml()
-                )
+                new ObjectsOfDbdFile(file)
             ).toString()
         );
     }

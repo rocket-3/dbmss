@@ -13,8 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database.writable;
+
+import org.fusionsoft.database.Folder;
+import org.fusionsoft.database.Writable;
 
 /**
- * Tests for {@link org.fusionsoft.database.snapshot.databaseinfo} package.
+ * The {@link Writable} that writes nothing.
+ * @since 0.1
  */
-package org.fusionsoft.database.snapshot.databaseinfo;
+@SuppressWarnings("PMD")
+public class EmptyWritable implements Writable {
+
+    @Override
+    public void writeTo(final Folder folder) {
+    }
+
+}

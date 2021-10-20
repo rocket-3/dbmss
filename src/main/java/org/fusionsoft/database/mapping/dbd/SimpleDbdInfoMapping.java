@@ -27,7 +27,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  *  with default values.
  * @since 0.1
  */
-public class DbdInfoMappingShort extends DbdInfoMapping {
+public class SimpleDbdInfoMapping extends DbdInfoMapping {
 
     /**
      * Instantiates a new Dbd info mapping of.
@@ -35,7 +35,7 @@ public class DbdInfoMappingShort extends DbdInfoMapping {
      * @param description The Text to be encapsulated.
      * @param version The Text to be encapsulated.
      */
-    public DbdInfoMappingShort(
+    public SimpleDbdInfoMapping(
         final Text title,
         final Text description,
         final Text version

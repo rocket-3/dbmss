@@ -13,31 +13,36 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+
 package org.fusionsoft.database.writable;
 
 import org.fusionsoft.database.Folder;
 import org.fusionsoft.database.Writable;
-import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of {@link Writable} that represents db tables data
- *  of given {@link Objects}.
+ * The {@link Writable} that represents an iterable of writeables.
  * @since 0.1
- * @todo #40:60min Implement `TableDataFilesOfObjects` `Writable`
- * @checkstyle (100 lines)
  */
-@SuppressWarnings("PMD")
-public class TableDataFilesOfObjects implements Writable {
+public class CombinedWritable implements Writable {
 
     /**
-     * Instantiates a new Table data files of objects.
-     * @param objects The DbObjects to be encapsulated.
+     * The Iterable of Writable encapsulated.
      */
-    public TableDataFilesOfObjects(final Objects objects) {
+    private final Iterable<Writable> writables;
+
+    /**
+     * Instantiates a new Combined writable.
+     * @param writeable The Iterable of Writable to be encapsulated.
+     */
+    public CombinedWritable(final Iterable<Writable> writeable) {
+        this.writables = writeable;
     }
 
     @Override
-    public void writeTo(final Folder folder) {
+    public final void writeTo(final Folder folder) {
+        for (final Writable writable : this.writables) {
+            writable.writeTo(folder);
+        }
     }
 
 }

@@ -15,25 +15,32 @@
  */
 package org.fusionsoft.database.snapshot.objects.dbms;
 
-import org.fusionsoft.database.snapshot.DatabaseInfo;
+import org.fusionsoft.database.TextEnumValueOf;
+import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
+import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
+import org.fusionsoft.database.mapping.fields.DbdServerFields;
+import org.fusionsoft.database.snapshot.dbmssignature.DbmsType;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
 /**
- * The DbObjects from {@link DatabaseInfo}.
+ * The DbObjects from {@link DbdServerMapping}.
  * @since 0.1
  * @todo #46:30min Start implementing.
- * @todo #83:30min Continue implementing corresponding classes.
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromDatabaseInfo extends ObjectsOfScalar {
+public class ObjectsFromServer extends ObjectsOfScalar {
 
     /**
      * Ctor.
-     * @param database The database used to extract data.
+     * @param server The server used to extract data.
      */
-    public ObjectsFromDatabaseInfo(final DatabaseInfo database) {
+    public ObjectsFromServer(final DbdServerMapping server) {
         super(
-            () -> database.signature().kind().objects(database.connection())
+            () -> new TextEnumValueOf<Class<DbmsType>, DbmsType>(
+                DbmsType.class,
+                new TextOfMappingValue(server, DbdServerFields.DBTYPE)
+            ).value().objects().apply(new ConnectionOfDbdServerMapping(server))
         );
     }
 

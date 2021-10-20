@@ -19,7 +19,6 @@ import org.cactoos.text.TextOf;
 import org.fusionsoft.database.Writable;
 import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
-import org.fusionsoft.database.snapshot.DatabaseInfo;
 
 /**
  * The type {@link Writable} that represents db objects snapshot info data.
@@ -29,18 +28,16 @@ import org.fusionsoft.database.snapshot.DatabaseInfo;
  * @todo #40:60min Implement `SnapshotInfo` `Writable`.
  */
 @SuppressWarnings("PMD")
-public class SnapshotInfo extends WritableYamlDocument {
+public class SnapshotInfoDocument extends WritableYamlDocument {
 
     /**
      * Instantiates a new Snapshot info.
      * @param time The AstronomicalTime to be encapsulated.
-     * @param database The DatabaseInfo to be encapsulated.
      * @param withOperationalData Was the snapshot with operational data
      *  or configuration data only.
      */
-    public SnapshotInfo(
+    public SnapshotInfoDocument(
         final AstronomicalTime time,
-        final DatabaseInfo database,
         final Boolean withOperationalData
     ) {
         super(new MappingEmpty(), new TextOf(".snapshot.yml"));

@@ -18,7 +18,6 @@ package org.fusionsoft.database.mapping.dbd;
 import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdRootFields;
-import org.fusionsoft.database.snapshot.DatabaseInfo;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
@@ -35,7 +34,7 @@ public class DbdRootMappingBuilt extends DbdRootMapping {
      * @param objects The Objects to be encapsulated.
      */
     public DbdRootMappingBuilt(
-        final Iterable<DatabaseInfo> databases,
+        final DbdServersMapping databases,
         final DbdInfoMapping info,
         final Objects objects
     ) {
@@ -51,7 +50,7 @@ public class DbdRootMappingBuilt extends DbdRootMapping {
                 ),
                 new MapEntry<>(
                     DbdRootFields.SERVERS,
-                    new DbdServersMapping(databases)
+                    databases
                 ),
                 new MapEntry<>(
                     DbdRootFields.SCHEMAS,

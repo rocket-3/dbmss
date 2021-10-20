@@ -16,9 +16,12 @@
 package org.fusionsoft.database.snapshot;
 
 import java.nio.file.Path;
+import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.Folder;
+import org.fusionsoft.lib.path.CurrentWorkingDirectory;
 
 /**
  * The type representing folder of some Snapshot by given name.
@@ -31,7 +34,7 @@ public class CreatingSnapshotFolder implements Folder {
     /**
      * The Path encapsulated.
      */
-    private final Path path;
+    private final Scalar<Path> root;
 
     /**
      * The Text encapsulated.
@@ -43,26 +46,28 @@ public class CreatingSnapshotFolder implements Folder {
      * @param dbgit The Path of .dbgit to be encapsulated.
      * @param name The Text to be encapsulated.
      */
-    private CreatingSnapshotFolder(final Path dbgit, final Text name) {
-        this.path = dbgit;
+    private CreatingSnapshotFolder(final Scalar<Path> dbgit, final Text name) {
+        this.root = dbgit;
         this.name = name;
     }
 
     /**
      * Instantiates a new Snapshot folder.
-     * @param dbgit The Path of .dbgit to be encapsulated.
      * @param time The AstronomicalTime of creation to be encapsulated.
      */
-    public CreatingSnapshotFolder(final Path dbgit, final AstronomicalTime time) {
-        this(dbgit, new SnapshotCatalogName(time));
+    public CreatingSnapshotFolder(final AstronomicalTime time) {
+        this(
+            new CurrentWorkingDirectory(),
+            new SnapshotCatalogName(time)
+        );
     }
 
     @Override
     public final Path path() {
-        final Path resolve = this.path.resolve(
+        final Path resolve = new Unchecked<>(this.root).value().resolve(
             new UncheckedText(this.name).asString()
         );
-        resolve.toFile().mkdir();
+        resolve.toFile().mkdirs();
         return resolve;
     }
 

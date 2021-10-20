@@ -15,18 +15,10 @@
  */
 package org.fusionsoft.database;
 
-import org.cactoos.iterable.IterableOf;
+import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
 import org.fusionsoft.database.snapshot.CreatingSnapshotFolder;
-import org.fusionsoft.database.snapshot.DatabaseInfo;
-import org.fusionsoft.database.snapshot.DbGitRepoOfDbdFile;
-import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.databaseinfo.DatabaseInfoOfDbd;
-import org.fusionsoft.database.snapshot.objects.composite.ObjectsFromServerMentionedInDbd;
-import org.fusionsoft.database.snapshot.objects.composite.ObjectsMentionedInDbdAsDataTable;
-import org.fusionsoft.database.writable.DbdYamlOfObjects;
-import org.fusionsoft.database.writable.SnapshotInfo;
-import org.fusionsoft.database.writable.TableDataFilesOfObjects;
+import org.fusionsoft.database.writable.SnapshotWritable;
 
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.
@@ -38,93 +30,69 @@ import org.fusionsoft.database.writable.TableDataFilesOfObjects;
  * @checkstyle MemberNameCheck (256 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (256 lines)
  */
-@SuppressWarnings("PMD")
-public class SnapshotCreateProcedure {
+public class SnapshotCreateProcedure implements Runnable {
 
     /**
-     * The AstronomicalTime encapsulated.
+     * The Writable encapsulated.
      */
-    private final AstronomicalTime time;
+    private final Writable writable;
 
     /**
-     * The DbdFile encapsulated.
+     * The Folder encapsulated.
      */
-    private final DbdFile dbd;
+    private final Folder folder;
 
     /**
-     * The String encapsulated.
+     * Instantiates a new Snapshot create procedure.
+     * @param writable The Writable to be encapsulated.
+     * @param folder The Folder to be encapsulated.
      */
-    private final String database;
-
-    /**
-     * The Boolean encapsulated.
-     */
-    private final Boolean withOperationalData;
+    private SnapshotCreateProcedure(final Writable writable, final Folder folder) {
+        this.writable = writable;
+        this.folder = folder;
+    }
 
     /**
      * Instantiates a new Snapshot create procedure.
      * @param time The AstronomicalTime to be encapsulated.
      * @param dbd The DbdFile to be encapsulated.
-     * @param database The String to be encapsulated.
-     * @param withOperationalData The Boolean to be encapsulated.
+     * @param server The Text of server name to be encapsulated.
+     * @param alldata The Boolean of to fetch all tables data or not to be encapsulated.
      */
     public SnapshotCreateProcedure(
         final AstronomicalTime time,
         final DbdFile dbd,
-        final String database,
-        final Boolean withOperationalData
+        final Text server,
+        final Boolean alldata
     ) {
-        this.time = time;
-        this.dbd = dbd;
-        this.database = database;
-        this.withOperationalData = withOperationalData;
+        this(
+            new SnapshotWritable(time, dbd, server, alldata),
+            new CreatingSnapshotFolder(time)
+        );
     }
 
     /**
      * Instantiates a new Snapshot create procedure.
-     * @param dbdFile The DbdFile to be encapsulated.
+     * @param file The DbdFile to be encapsulated.
      * @param database The String to be encapsulated.
-     * @param withOperationalData The boolean to be encapsulated.
+     * @param alldata The Boolean of to fetch all tables data or not to be encapsulated.
      */
     public SnapshotCreateProcedure(
-        final DbdFile dbdFile,
-        final String database,
-        final boolean withOperationalData
+        final DbdFile file,
+        final Text database,
+        final Boolean alldata
     ) {
-        this(new AstronomicalTime(), dbdFile, database, withOperationalData);
+        this(
+            new AstronomicalTime(),
+            file,
+            database,
+            alldata
+        );
     }
 
-    /**
-     * Perform.
-     */
-    public void perform() {
-        final DatabaseInfo info = new DatabaseInfoOfDbd(
-            this.dbd,
-            this.database
-        );
-        final Objects objects = new ObjectsFromServerMentionedInDbd(
-            info,
-            this.dbd
-        );
-        new IterableOf<Writable>(
-            new SnapshotInfo(
-                this.time,
-                info,
-                this.withOperationalData
-            ),
-            new DbdYamlOfObjects(info, objects),
-            new TableDataFilesOfObjects(this.withOperationalData
-                ? objects
-                : new ObjectsMentionedInDbdAsDataTable(objects, this.dbd)
-            )
-        ).forEach(
-            x -> x.writeTo(
-                new CreatingSnapshotFolder(
-                    new DbGitRepoOfDbdFile(this.dbd).path(),
-                    this.time
-                )
-            )
-        );
+    @Override
+    public final void run() {
+        this.writable.writeTo(this.folder);
     }
 
 }

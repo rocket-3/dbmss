@@ -15,25 +15,30 @@
  */
 package org.fusionsoft.database.mapping.dbd;
 
+import org.cactoos.Text;
 import org.fusionsoft.database.DbdFile;
+import org.fusionsoft.database.mapping.fields.DbdRootFields;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
  * The type of DbdServerMapping that can be constructed of {@link DbdFile}.
  * @since 0.1
  */
-public class DbdServerMappingOfDbdFile extends DbdServerMapping {
+public class DbdServerEntryOfDbdFile extends DbdServerEntry {
 
     /**
      * Instantiates a new Dbd server mapping of dbd file.
      * @param file The DbdFile to be encapsulated.
      * @param name The String of server's name to be used.
      */
-    public DbdServerMappingOfDbdFile(final DbdFile file, final String name) {
+    public DbdServerEntryOfDbdFile(final DbdFile file, final Text name) {
         super(
-            new YamlMappingOfPath(
-                file.asYaml(),
-                "servers", name
+            name,
+            new DbdServerMapping(
+                new YamlMappingOfPath(
+                    file.asYaml(),
+                    DbdRootFields.SERVERS, name
+                )
             )
         );
     }
