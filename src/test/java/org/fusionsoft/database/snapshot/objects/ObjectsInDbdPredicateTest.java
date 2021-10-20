@@ -18,8 +18,6 @@ package org.fusionsoft.database.snapshot.objects;
 import org.fusionsoft.database.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
-import org.fusionsoft.database.snapshot.ObjectType;
-import org.fusionsoft.database.snapshot.SimpleDbObject;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;

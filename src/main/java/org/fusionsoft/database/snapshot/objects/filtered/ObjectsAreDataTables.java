@@ -15,8 +15,8 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
-import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import org.fusionsoft.database.snapshot.objects.predicate.CombinedAndPredicate;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectHasDataNodePredicate;

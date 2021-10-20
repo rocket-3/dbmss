@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot;
+package org.fusionsoft.database.snapshot.objects;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.SimpleYamlRepresentative;
+import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.ObjectSignature;
 
 /**
  * The naive impl of DbObject.

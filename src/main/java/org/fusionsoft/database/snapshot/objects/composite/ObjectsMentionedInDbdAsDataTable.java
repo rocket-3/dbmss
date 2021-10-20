@@ -16,7 +16,6 @@
 package org.fusionsoft.database.snapshot.objects.composite;
 
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.snapshot.ObjectSignatures;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdFile;
@@ -24,7 +23,7 @@ import org.fusionsoft.database.snapshot.objects.filtered.ObjectsAreDataTables;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsMentionedIn;
 
 /**
- * The type of {@link ObjectSignatures} that represents objects that are
+ * The type of {@link Objects} that represents objects that are
  *  mentioned as configuration tables in {@link DbdFile}.
  * @since 0.1
  */

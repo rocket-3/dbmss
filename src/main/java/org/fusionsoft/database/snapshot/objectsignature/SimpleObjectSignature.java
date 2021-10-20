@@ -18,7 +18,7 @@ package org.fusionsoft.database.snapshot.objectsignature;
 import java.text.MessageFormat;
 import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.snapshot.ObjectSignature;
-import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.objects.ObjectType;
 
 /**
  * The base {@link ObjectSignature} implementation.
