@@ -25,7 +25,6 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 /**
  * The DbObjects from {@link DbdServerMapping}.
  * @since 0.1
- * @todo #46:30min Start implementing.
  */
 @SuppressWarnings("PMD")
 public class ObjectsFromServer extends ObjectsOfScalar {
