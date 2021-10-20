@@ -16,6 +16,7 @@
 package org.fusionsoft.database.snapshot;
 
 import org.cactoos.Text;
+import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 
 /**

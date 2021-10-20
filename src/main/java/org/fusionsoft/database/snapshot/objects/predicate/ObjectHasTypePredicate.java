@@ -17,7 +17,7 @@ package org.fusionsoft.database.snapshot.objects.predicate;
 
 import org.cactoos.Func;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.ObjectType;
+import org.fusionsoft.database.snapshot.objects.ObjectType;
 
 /**
  * The Func of DbObject -> Boolean, that checks {@link DbObject}

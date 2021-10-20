@@ -17,8 +17,8 @@ package org.fusionsoft.database.snapshot.objects.filtered;
 
 import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.objects.ObjectType;
 
 /**
  * The Objects filtered by their parent and type given.

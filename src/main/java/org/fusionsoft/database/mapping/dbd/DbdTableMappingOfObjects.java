@@ -18,8 +18,8 @@ package org.fusionsoft.database.mapping.dbd;
 import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.ObjectType;
 import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
 
 /**
