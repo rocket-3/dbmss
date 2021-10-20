@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import org.fusionsoft.database.DbdFileOfMapping;
+import org.fusionsoft.database.dbdfile.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.snapshot.ObjectType;

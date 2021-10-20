@@ -16,7 +16,7 @@
 package org.fusionsoft.database.mapping.dbd;
 
 import org.cactoos.text.TextOf;
-import org.fusionsoft.database.DbdFileOfMapping;
+import org.fusionsoft.database.dbdfile.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.mapping.fields.DbdRootFields;
 import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdFile;

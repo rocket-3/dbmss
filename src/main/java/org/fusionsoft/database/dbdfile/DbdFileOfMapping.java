@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database;
+package org.fusionsoft.database.dbdfile;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.Scalar;
-import org.cactoos.scalar.Unchecked;
+import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 
 /**
@@ -25,32 +24,14 @@ import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
  *  and returns specific {@link DbdRootMapping}.
  * @since 0.1
  */
-public class DbdFileOfMapping implements DbdFile {
-
-    /**
-     * The Scalar of DbdRootMapping encapsulated.
-     */
-    private final Scalar<DbdRootMapping> mapping;
-
-    /**
-     * Instantiates a new Dbd file of mapping.
-     * @param mapping The Scalar of DbdRootMapping to be encapsulated.
-     */
-    private DbdFileOfMapping(final Scalar<DbdRootMapping> mapping) {
-        this.mapping = mapping;
-    }
+public class DbdFileOfMapping extends DbdFileOfRootMapping {
 
     /**
      * Instantiates a new Dbd file of mapping.
      * @param mapping The YamlMapping to be encapsulated.
      */
     public DbdFileOfMapping(final YamlMapping mapping) {
-        this(() -> new DbdRootMapping(mapping));
-    }
-
-    @Override
-    public final DbdRootMapping asYaml() {
-        return new Unchecked<>(this.mapping).value();
+        super(new DbdRootMapping(mapping));
     }
 
 }

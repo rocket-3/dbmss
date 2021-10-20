@@ -51,7 +51,7 @@ public class SnapshotWritable extends CombinedWritable {
                 new SnapshotInfoDocument(
                     time, false
                 ),
-                new DbdSnapshotDocument(
+                new SnapshotDbdDocument(
                     new DbdServerEntryOfDbdFile(dbd, server),
                     new DbdInfoMappingOfDbdFile(dbd),
                     new ObjectsFromServerMentionedInDbd(dbd, server)
