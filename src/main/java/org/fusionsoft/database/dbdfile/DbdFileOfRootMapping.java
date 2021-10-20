@@ -44,11 +44,11 @@ public class DbdFileOfRootMapping implements DbdFile {
      * @param mapping The DbdRootMapping to be encapsulated.
      */
     public DbdFileOfRootMapping(final DbdRootMapping mapping) {
-        this.mapping = () -> mapping;
+        this(() -> mapping);
     }
 
     @Override
-    public DbdRootMapping asYaml() {
+    public final DbdRootMapping asYaml() {
         return new Unchecked<>(this.mapping).value();
     }
 

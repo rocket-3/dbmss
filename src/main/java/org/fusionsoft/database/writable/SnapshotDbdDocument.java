@@ -26,7 +26,6 @@ import org.fusionsoft.database.snapshot.Objects;
  * The type of {@link Writable} representing Dbd yaml file,
  *  describing {@link Objects}.
  * @since 0.1
- * @todo #40:60min Implement `DbdYamlOfObjects` `Writable`
  */
 @SuppressWarnings("PMD")
 public class SnapshotDbdDocument extends WritableYamlDocument {
