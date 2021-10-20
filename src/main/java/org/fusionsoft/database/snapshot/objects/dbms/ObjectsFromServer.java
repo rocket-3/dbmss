@@ -15,11 +15,10 @@
  */
 package org.fusionsoft.database.snapshot.objects.dbms;
 
-import org.fusionsoft.database.TextEnumValueOf;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import org.fusionsoft.database.mapping.fields.DbdServerFields;
-import org.fusionsoft.database.snapshot.dbmssignature.DbmsType;
+import org.fusionsoft.database.snapshot.dbms.DbmsOfText;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
@@ -37,10 +36,9 @@ public class ObjectsFromServer extends ObjectsOfScalar {
      */
     public ObjectsFromServer(final DbdServerMapping server) {
         super(
-            () -> new TextEnumValueOf<Class<DbmsType>, DbmsType>(
-                DbmsType.class,
+            () -> new DbmsOfText(
                 new TextOfMappingValue(server, DbdServerFields.DBTYPE)
-            ).value().objects().apply(new ConnectionOfDbdServerMapping(server))
+            ).objects().apply(new ConnectionOfDbdServerMapping(server))
         );
     }
 
