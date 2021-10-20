@@ -23,12 +23,7 @@ import org.fusionsoft.database.writable.SnapshotWritable;
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.
  * @since 0.1
- * @todo #39:30min Refactor and fix Qulice checks suppressions
- * @checkstyle AvoidInlineConditionalsCheck (256 lines)
- * @checkstyle ParameterNameCheck (256 lines)
- * @checkstyle ParameterNumberCheck (256 lines)
- * @checkstyle MemberNameCheck (256 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (256 lines)
+ * @checkstyle ParameterNumberCheck (100 lines)
  */
 public class SnapshotCreateProcedure implements Runnable {
 
