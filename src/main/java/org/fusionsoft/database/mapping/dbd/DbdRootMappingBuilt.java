@@ -16,10 +16,10 @@
 package org.fusionsoft.database.mapping.dbd;
 
 import org.cactoos.map.MapEntry;
-import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdRootFields;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
+import org.fusionsoft.lib.yaml.YamlPlainScalarOf;
 
 /**
  * The ways to construct DBD mapping.
@@ -40,9 +40,9 @@ public class DbdRootMappingBuilt extends DbdRootMapping {
     ) {
         super(
             new YamlMappingOfEntries(
-                new ScalarEntry(
+                new MapEntry<>(
                     DbdRootFields.JSONSCHEMA,
-                    new TextOfDbdDefaultJsonSchemaRef()
+                    new YamlPlainScalarOf(new TextOfDbdDefaultJsonSchemaRef())
                 ),
                 new MapEntry<>(
                     DbdRootFields.INFO,

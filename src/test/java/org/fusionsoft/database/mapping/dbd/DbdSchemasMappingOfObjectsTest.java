@@ -29,10 +29,9 @@ class DbdSchemasMappingOfObjectsTest {
 
     /**
      * Creates mapping identical to input.
-     * @throws Exception When can't.
      */
     @Test
-    public void createsMappingIdenticalToInput() throws Exception {
+    public void createsMappingIdenticalToInput() {
         final MappingOfExampleYaml yaml = new MappingOfExampleYaml();
         Assertions.assertEquals(
             new YamlMappingOfPath(yaml, "schemas").toString(),
