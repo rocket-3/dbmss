@@ -16,16 +16,15 @@
 package org.fusionsoft.database.snapshot.objects.dbms;
 
 import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import org.fusionsoft.database.snapshot.objects.dbms.postgres.PostgresSchemas;
 
 /**
- * The Objects of {@link Connection} of Oracle dbms.
+ * The Objects of {@link Connection} of Postgres dbms.
  * @since 0.1
  * @todo #40:30min Create skeleton of class hierarchy.
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromPostgres extends ObjectsEnvelope {
+public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
 
     /**
      * Ctor.
@@ -33,7 +32,8 @@ public class ObjectsFromPostgres extends ObjectsEnvelope {
      */
     public ObjectsFromPostgres(final Connection connection) {
         super(
-            new IterableOf<>()
+            connection,
+            PostgresSchemas::new
         );
     }
 

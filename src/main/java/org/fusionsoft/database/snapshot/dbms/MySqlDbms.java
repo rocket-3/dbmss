@@ -27,7 +27,11 @@ public class MySqlDbms extends AnyDbms {
      * Instantiates a new My sql dbms.
      */
     public MySqlDbms() {
-        super("MYSQL", ObjectsFromMySql::new);
+        super(
+            "MYSQL",
+            "MySQL",
+            ObjectsFromMySql::new
+        );
     }
 
 }

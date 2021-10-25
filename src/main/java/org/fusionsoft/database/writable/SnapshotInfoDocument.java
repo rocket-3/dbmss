@@ -17,8 +17,8 @@ package org.fusionsoft.database.writable;
 
 import org.cactoos.text.TextOf;
 import org.fusionsoft.database.Writable;
-import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
+import org.fusionsoft.lib.yaml.MappingEmpty;
 
 /**
  * The type {@link Writable} that represents db objects snapshot info data.

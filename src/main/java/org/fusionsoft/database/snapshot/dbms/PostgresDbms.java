@@ -27,7 +27,11 @@ public class PostgresDbms extends AnyDbms {
      * Instantiates a new Postgres dbms.
      */
     public PostgresDbms() {
-        super("POSTGRES", ObjectsFromPostgres::new);
+        super(
+            "POSTGRES",
+            "PostgreSQL",
+            ObjectsFromPostgres::new
+        );
     }
 
 }

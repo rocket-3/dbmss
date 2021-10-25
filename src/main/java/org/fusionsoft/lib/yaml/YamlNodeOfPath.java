@@ -17,9 +17,12 @@ package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.Text;
 import org.cactoos.func.Chained;
 import org.cactoos.func.FuncOf;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.text.TextOf;
 
 /**
  * Yaml node of YamlMapping by given path.
@@ -34,7 +37,7 @@ public class YamlNodeOfPath extends YamlNodeOfScalar {
      */
     public YamlNodeOfPath(
         final YamlNode mapping,
-        final Iterable<String> paths
+        final Iterable<Text> paths
     ) {
         super(() -> {
             return new Chained<YamlNode, YamlNode, YamlNode>(
@@ -43,13 +46,37 @@ public class YamlNodeOfPath extends YamlNodeOfScalar {
                     path -> new FuncOf<>(
                         node -> new StrictYamlMapping(
                             node.asMapping()
-                        ).value(path)
+                        ).value(path.asString())
                     ),
                     paths
                 ),
                 new FuncOf<>(node -> node)
             ).apply(mapping);
         });
+    }
+
+    /**
+     * Primary ctor. of class.
+     * @param mapping The source of searched node.
+     * @param paths The paths to go through.
+     */
+    public YamlNodeOfPath(
+        final YamlNode mapping,
+        final Text... paths
+    ) {
+        this(mapping, new IterableOf<Text>(paths));
+    }
+
+    /**
+     * Primary ctor. of class.
+     * @param mapping The source of searched node.
+     * @param paths The paths to go through.
+     */
+    public YamlNodeOfPath(
+        final YamlNode mapping,
+        final String... paths
+    ) {
+        this(mapping, new Mapped<Text>(TextOf::new, paths));
     }
 
 }

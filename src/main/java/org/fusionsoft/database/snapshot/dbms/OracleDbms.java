@@ -27,7 +27,11 @@ public class OracleDbms extends AnyDbms {
      * Instantiates a new Oracle dbms.
      */
     public OracleDbms() {
-        super("ORACLE", ObjectsFromOracle::new);
+        super(
+            "ORACLE",
+            "Oracle",
+            ObjectsFromOracle::new
+        );
     }
 
 }

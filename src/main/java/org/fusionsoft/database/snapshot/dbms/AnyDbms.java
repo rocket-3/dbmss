@@ -20,7 +20,6 @@ import java.sql.Connection;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.text.TextOf;
-import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
@@ -30,9 +29,14 @@ import org.fusionsoft.database.snapshot.Objects;
 public class AnyDbms implements Dbms {
 
     /**
-     * The Text encapsulated.
+     * The Text of dbd label encapsulated.
      */
-    private final Text text;
+    private final Text dbdtext;
+
+    /**
+     * The Text of driver dbms name label encapsulated.
+     */
+    private final Text drivertext;
 
     /**
      * The The Func of Connection returns Objects to be encapsulated.
@@ -41,26 +45,42 @@ public class AnyDbms implements Dbms {
 
     /**
      * Instantiates a new Any dbms.
-     * @param text The String to be encapsulated.
+     * @param dbd The String of DBD label to be encapsulated.
+     * @param driver The String of driver dbms label to be encapsulated.
      * @param objects The Func of Connection returns Objects to be encapsulated.
      */
-    public AnyDbms(final String text, final Func<Connection, Objects> objects) {
-        this(new TextOf(text), objects);
+    public AnyDbms(
+        final String dbd,
+        final String driver,
+        final Func<Connection, Objects> objects
+    ) {
+        this(new TextOf(dbd), new TextOf(driver), objects);
     }
 
     /**
      * Instantiates a new Any dbms.
-     * @param text The Text to be encapsulated.
+     * @param dbd The Text of DBD label to be encapsulated.
+     * @param driver The Text of driver dbms label to be encapsulated.
      * @param objects The Func of Connection returns Objects to be encapsulated.
      */
-    public AnyDbms(final Text text, final Func<Connection, Objects> objects) {
-        this.text = text;
+    public AnyDbms(
+        final Text dbd,
+        final Text driver,
+        final Func<Connection, Objects> objects
+    ) {
+        this.dbdtext = dbd;
+        this.drivertext = driver;
         this.objectsf = objects;
     }
 
     @Override
-    public final String asString() {
-        return new UncheckedText(this.text).asString();
+    public final Text dbd() {
+        return this.dbdtext;
+    }
+
+    @Override
+    public final Text driver() {
+        return this.drivertext;
     }
 
     @Override

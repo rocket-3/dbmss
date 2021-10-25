@@ -15,36 +15,34 @@
  */
 package org.fusionsoft.database.snapshot.objects.dbms;
 
+import java.sql.Connection;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
-import org.fusionsoft.database.mapping.fields.DbdServerFields;
-import org.fusionsoft.database.snapshot.dbms.DbmsOfText;
-import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
+import org.fusionsoft.database.snapshot.dbms.DbmsOfConnection;
 
 /**
  * The DbObjects from {@link DbdServerMapping}.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromServer extends ObjectsOfScalar {
+public class ObjectsFromServer extends ObjectsOfConnection {
 
     /**
      * Ctor.
      * @param server The server used to extract data.
      */
     public ObjectsFromServer(final DbdServerMapping server) {
+        this(new ConnectionOfDbdServerMapping(server));
+    }
+
+    /**
+     * Ctor.
+     * @param connection The connection used to extract data.
+     */
+    public ObjectsFromServer(final Connection connection) {
         super(
-            () -> {
-                return new DbmsOfText(
-                    new TextOfMappingValue(
-                        server,
-                        DbdServerFields.DBTYPE
-                    )
-                ).objects().apply(
-                    new ConnectionOfDbdServerMapping(server)
-                );
-            }
+            connection,
+            c -> new DbmsOfConnection(connection).objects().apply(c)
         );
     }
 

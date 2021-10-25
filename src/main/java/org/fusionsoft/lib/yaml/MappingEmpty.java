@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping;
+package org.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.Yaml;
+import org.fusionsoft.database.mapping.MappingOfRepresentative;
 
 /**
  * The type of YamlMapping which is just empty.

@@ -18,6 +18,8 @@ package org.fusionsoft.database.snapshot.dbms;
 import java.sql.Connection;
 import org.cactoos.Func;
 import org.cactoos.Scalar;
+import org.cactoos.Text;
+import org.cactoos.scalar.NoNulls;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.database.snapshot.Objects;
@@ -38,12 +40,17 @@ public class DbmsOfScalar implements Dbms {
      * @param scalar The Scalar of Dbms to be encapsulated.
      */
     public DbmsOfScalar(final Scalar<Dbms> scalar) {
-        this.scalar = new Unchecked<>(new Sticky<>(scalar));
+        this.scalar = new Unchecked<>(new Sticky<>(new NoNulls<>(scalar)));
     }
 
     @Override
-    public final String asString() {
-        return this.scalar.value().asString();
+    public final Text dbd() {
+        return this.scalar.value().dbd();
+    }
+
+    @Override
+    public final Text driver() {
+        return this.scalar.value().driver();
     }
 
     @Override
