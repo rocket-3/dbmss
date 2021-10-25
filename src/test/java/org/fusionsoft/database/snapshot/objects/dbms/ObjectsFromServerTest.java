@@ -43,7 +43,7 @@ class ObjectsFromServerTest {
                 )
             ),
             new HasSize(size)
-        );
+        ).affirm();
     }
 
 }
