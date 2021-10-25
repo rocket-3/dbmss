@@ -16,11 +16,11 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import org.fusionsoft.database.dbdfile.DbdFileOfMapping;
-import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.lib.yaml.MappingEmpty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
