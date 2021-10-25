@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint:
-    name: Like Rultor 
+    name: Like Rultor
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -26,4 +26,7 @@ jobs:
       - name: Qulice
         run: mvn clean install -DskipTests=true --errors --batch-mode
       - name: Tests
-        run: mvn test
+        env:
+          pgUser: ${{ secrets.pgUser }}
+          pgPass: ${{ secrets.pgPass }}
+        run: mvn test -DpgUser="$pgUser" -DpgPass="$pgPass"
