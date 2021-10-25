@@ -43,10 +43,7 @@ public class YamlMappingOfPath extends YamlMappingEnvelope {
                     () -> new StrictYamlMapping(
                         new YamlNodeOfPath(
                             node,
-                            new Mapped<>(
-                                Text::asString,
-                                paths
-                            )
+                            paths
                         ).asMapping()
                     )
                 )

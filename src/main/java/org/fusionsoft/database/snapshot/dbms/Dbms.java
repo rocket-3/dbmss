@@ -24,13 +24,19 @@ import org.fusionsoft.database.snapshot.Objects;
  * The DbmsSignatureName representing DBMS type related behavior.
  * @since 0.1
  */
-public interface Dbms extends Text {
+public interface Dbms {
 
     /**
-     * Text representation of Dbms name.
-     * @return The String of name.
+     * Text representation of Dbms name in 'DBD'/servers.
+     * @return The Text of label.
      */
-    String asString();
+    Text dbd();
+
+    /**
+     * Text representation of Dbms driver in JDBC.
+     * @return The Text of label.
+     */
+    Text driver();
 
     /**
      * Objects of {@link Connection} function.

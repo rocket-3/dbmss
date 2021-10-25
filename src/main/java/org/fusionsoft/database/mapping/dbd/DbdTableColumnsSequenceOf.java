@@ -15,7 +15,6 @@
  */
 package org.fusionsoft.database.mapping.dbd;
 
-import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
@@ -49,9 +48,7 @@ public class DbdTableColumnsSequenceOf extends YamlSequenceOfNodes {
                 () ->
                     new YamlNodeOfPath(
                         new MappingOfRepresentative(table),
-                        new IterableOf<String>(
-                            DbdTableFields.COLUMNS.asString()
-                        )
+                        DbdTableFields.COLUMNS
                     ).asSequence().values().iterator()
             )
         );

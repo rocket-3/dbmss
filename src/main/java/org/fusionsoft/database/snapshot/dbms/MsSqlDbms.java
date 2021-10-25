@@ -27,7 +27,11 @@ public class MsSqlDbms extends AnyDbms {
      * Instantiates a new Ms sql dbms.
      */
     public MsSqlDbms() {
-        super("MSSQL", ObjectsFromMssql::new);
+        super(
+            "MSSQL",
+            "Microsoft SQL Server",
+            ObjectsFromMssql::new
+        );
     }
 
 }

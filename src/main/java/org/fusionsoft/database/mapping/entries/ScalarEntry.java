@@ -22,6 +22,7 @@ import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.TextOf;
 import org.fusionsoft.lib.exception.NotImplemented;
 
 /**
@@ -61,6 +62,15 @@ public class ScalarEntry implements Map.Entry<Text, YamlNode> {
             key,
             () -> Yaml.createYamlScalarBuilder().addLine(value.asString()).buildPlainScalar()
         );
+    }
+
+    /**
+     * Instantiates a new Scalar entry.
+     * @param key The String to be encapsulated.
+     * @param value The String to be encapsulated.
+     */
+    public ScalarEntry(final String key, final String value) {
+        this(new TextOf(key), new TextOf(value));
     }
 
     @Override

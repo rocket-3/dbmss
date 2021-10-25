@@ -15,21 +15,19 @@
  */
 package org.fusionsoft.database.mapping;
 
-import org.cactoos.io.ResourceOf;
-import org.fusionsoft.lib.yaml.YamlInputOf;
-import org.fusionsoft.lib.yaml.YamlMappingOf;
+import org.fusionsoft.lib.yaml.MappingOfResource;
 
 /**
  * The type of Text that is constructed of example YAML from resources.
  * @since 0.1
  */
-public class MappingOfExampleYaml extends YamlMappingOf {
+public class MappingOfExampleYaml extends MappingOfResource {
 
     /**
      * Instantiates a new Input of example yaml.
      */
     public MappingOfExampleYaml() {
-        super(new YamlInputOf(new ResourceOf("iuDescriptionExample.yaml")));
+        super("iuDescriptionExample.yaml");
     }
 
 }

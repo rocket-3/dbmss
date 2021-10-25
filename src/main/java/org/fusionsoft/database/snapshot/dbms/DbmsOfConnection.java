@@ -15,28 +15,34 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
-import org.cactoos.Text;
+import java.sql.Connection;
+import java.util.Locale;
+import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Mapped;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
+import org.fusionsoft.lib.collection.Single;
 
 /**
- * The type of {@link Dbms} that can be constructed of Scalar.
+ * The type of {@link Dbms} that can be constructed of {@link Connection}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class DbmsOfText extends DbmsOfScalar {
+public class DbmsOfConnection extends DbmsOfScalar {
 
     /**
-     * Instantiates a new Dbms of text.
-     * @param text The Text to be searched.
+     * Instantiates a new Dbms of scalar.
+     * @param connection The Connection to Dbms to be used.
      */
-    public DbmsOfText(final Text text) {
+    public DbmsOfConnection(final Connection connection) {
         super(
-            () -> new MapOf<String, Dbms>(
-                new Mapped<>(
-                    x -> new MapEntry<>(x.dbd().asString(), x),
+            new Single<Dbms>(
+                new Filtered<Dbms>(
+                    dbms -> connection
+                        .getMetaData()
+                        .getDatabaseProductName()
+                        .toLowerCase(Locale.ENGLISH)
+                        .contains(
+                            dbms.driver().asString().toLowerCase(Locale.ENGLISH)
+                        ),
                     new IterableOf<Dbms>(
                         new PostgresDbms(),
                         new MySqlDbms(),
@@ -44,7 +50,7 @@ public class DbmsOfText extends DbmsOfScalar {
                         new MsSqlDbms()
                     )
                 )
-            ).get(text.asString())
+            )
         );
     }
 
