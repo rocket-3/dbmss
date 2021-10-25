@@ -1,6 +1,9 @@
 image: g4s8/rultor:alpine3.10
 architect:
   - rocket-3
+assets:
+  pgSecret.txt: rocket-3/dbgit-test#pgSecret.txt
+  gitSecret.txt: rocket-3/dbgit-test#gitSecret.txt
 merge:
   script: |-
     pdd -f /dev/null

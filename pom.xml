@@ -122,11 +122,15 @@
             <artifactId>cactoos</artifactId>
             <version>0.50</version>
         </dependency>
-
         <dependency>
             <groupId>com.amihaiemil.web</groupId>
             <artifactId>eo-yaml</artifactId>
             <version>5.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.llorllale</groupId>
+            <artifactId>cactoos-matchers</artifactId>
+            <version>0.25</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -142,6 +146,14 @@
             <version>5.7.2</version>
             <scope>
                 test
+            </scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
+            <scope>
+                runtime
             </scope>
         </dependency>
     </dependencies>

@@ -20,7 +20,6 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.list.ListOf;
 import org.cactoos.scalar.And;
 import org.fusionsoft.database.dbdfile.DbdFileOfMapping;
-import org.fusionsoft.database.mapping.MappingEmpty;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
@@ -30,6 +29,7 @@ import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import org.fusionsoft.database.snapshot.objects.composite.ObjectsMentionedInDbdAsDataTable;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.lib.yaml.MappingEmpty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
