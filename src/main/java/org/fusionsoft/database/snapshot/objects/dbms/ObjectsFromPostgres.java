@@ -21,7 +21,6 @@ import org.fusionsoft.database.snapshot.objects.dbms.postgres.PostgresSchemas;
 /**
  * The Objects of {@link Connection} of Postgres dbms.
  * @since 0.1
- * @todo #40:30min Create skeleton of class hierarchy.
  */
 @SuppressWarnings("PMD")
 public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
