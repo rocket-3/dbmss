@@ -26,13 +26,13 @@ import org.fusionsoft.lib.collection.ListOfResultSet;
  * @since 0.1
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
-public class PostgresSchemas extends ObjectsOfScalar {
+public class PgSchemas extends ObjectsOfScalar {
 
     /**
      * Instantiates a new Postgres schemas.
      * @param connection The Connection to be encapsulated.
      */
-    public PostgresSchemas(final Connection connection) {
+    public PgSchemas(final Connection connection) {
         super(
             () ->
                 new ListOfResultSet<DbObject<?>>(

@@ -23,6 +23,22 @@ import org.cactoos.iterable.IterableOf;
  */
 public enum DbdIndexFields implements Text {
     /**
+     *Schema dbd index fields.
+     */
+    TABLESPACE("tablespace"),
+    /**
+     *Schema dbd index fields.
+     */
+    SCHEMA("schema"),
+    /**
+     *Table dbd index fields.
+     */
+    TABLE("table"),
+    /**
+     *Index dbd index fields.
+     */
+    INDEX("index"),
+    /**
      *Dbcolumn dbd index fields.
      */
     DBCOLUMN("dbColumn"),
@@ -33,7 +49,15 @@ public enum DbdIndexFields implements Text {
     /**
      *Dbmstype dbd index fields.
      */
-    DBMSTYPE("pgIndexType");
+    DBMSTYPE("pgIndexType"),
+    /**
+     *Dbmstype dbd index fields.
+     */
+    OWNER("owner"),
+    /**
+     *Dbmstype dbd index fields.
+     */
+    DDL("ddl");
 
     /**
      * The String encapsulated.
