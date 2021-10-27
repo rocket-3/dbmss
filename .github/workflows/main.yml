@@ -24,7 +24,7 @@ jobs:
       - name: Puzzles
         run: pdd --file=/dev/null
       - name: Qulice
-        run: mvn clean install -DskipTests=true --errors --batch-mode
+        run: mvn clean install -Pqulice -DskipTests=true --errors --batch-mode
       - name: Tests
         env:
           pgUser: ${{ secrets.pgUser }}
