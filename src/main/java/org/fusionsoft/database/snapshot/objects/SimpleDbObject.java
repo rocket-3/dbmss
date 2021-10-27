@@ -16,6 +16,7 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import java.text.MessageFormat;
 import org.fusionsoft.database.SimpleYamlRepresentative;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectSignature;
@@ -47,6 +48,15 @@ public class SimpleDbObject<Y extends YamlMapping>
     @Override
     public final ObjectSignature signature() {
         return this.sig;
+    }
+
+    @Override
+    public String toString() {
+        return MessageFormat.format(
+            "\n=   =   =   =\n{0}\n-   -   -   -\n{1}",
+            this.sig.asString(),
+            this.asYaml().toString()
+        );
     }
 
 }
