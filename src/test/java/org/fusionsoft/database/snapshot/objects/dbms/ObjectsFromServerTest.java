@@ -18,12 +18,10 @@ package org.fusionsoft.database.snapshot.objects.dbms;
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
-import org.fusionsoft.database.mapping.MappingOfExampleYaml;
-import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 import org.fusionsoft.database.mapping.dbd.DbdSchemasMappingOfObjects;
 import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdRootMapping;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
@@ -58,28 +56,25 @@ class ObjectsFromServerTest {
      * The Dbd created can be rendered.
      */
     @Test
+    @Disabled
     public void createsCorrectDbd() {
-        System.out.println(new DbdSchemasMappingOfObjects(
-            new ObjectsOfDbdRootMapping(
-                new DbdRootMapping(
-                    new MappingOfExampleYaml()
+        System.out.println(
+            new DbdSchemasMappingOfObjects(
+                new ObjectsFromServer(
+                    new DbdServerMappingWithCredentials(
+                        new UrlOfPgGitLabDatabaseV11(database),
+                        new CredsOfPgTestDatabase()
+                    )
                 )
-            )
-        ).toString());
-        System.out.println(new DbdSchemasMappingOfObjects(
-            new ObjectsFromServer(
-                new DbdServerMappingWithCredentials(
-                    new UrlOfPgGitLabDatabaseV11(database),
-                    new CredsOfPgTestDatabase()
-                )
-            )
-        ).toString());
+            ).toString()
+        );
     }
 
     /**
      * Show me.
      */
     @Test
+    @Disabled
     public void showMe() {
         for (final DbObject<? extends YamlMapping> object : new ObjectsFromServer(
             new DbdServerMappingWithCredentials(
@@ -87,9 +82,7 @@ class ObjectsFromServerTest {
                 new CredsOfPgTestDatabase()
             )
         )) {
-            System.out.println(object.signature().asString());
-            System.out.println(object.asYaml().toString());
-            System.out.println("-  -  -  -  -  -");
+            System.out.println(object.toString());
         }
     }
 
