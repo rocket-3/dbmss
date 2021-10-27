@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.ci;
 
-import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
+package org.fusionsoft.database.snapshot.query;
 
-/**
- * The {@link org.cactoos.Text} of url of pg v.11 test instance.
- * @since 0.1
- */
-public class UrlOfPgTestDatabaseV11 extends TextEnvelope {
+import org.junit.jupiter.api.Test;
 
-    /**
-     * Instantiates a new Url of pg test database v 11.
-     */
-    public UrlOfPgTestDatabaseV11() {
-        super(new TextOfScalar(() -> "jdbc:postgresql://135.181.94.98:31107/"));
+class PgIndexesQueryTest {
+
+    @Test public void showMeText() throws Exception {
+        System.out.println(new PgIndexesQuery().asString());
     }
-
 }

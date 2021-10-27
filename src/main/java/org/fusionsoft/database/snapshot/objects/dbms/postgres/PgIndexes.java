@@ -19,6 +19,7 @@ import java.sql.Connection;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.query.PgIndexesQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
@@ -30,16 +31,16 @@ import org.fusionsoft.lib.collection.ListOfResultSet;
 public class PgIndexes extends ObjectsOfScalar {
 
     /**
-     * Instantiates a new Postgres ... .
+     * Instantiates a new Postgres indexes.
      * @param connection The Connection to be encapsulated.
      */
     public PgIndexes(final Connection connection) {
         super(
             () ->
                 new ListOfResultSet<DbObject<?>>(
-                    PostgresSchemaOfResultSet::new,
+                    PgIndexOfResultSet::new,
                     () -> connection.createStatement().executeQuery(
-                        ""
+                        new PgIndexesQuery().asString()
                     )
                 )
         );

@@ -13,28 +13,29 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects.dbms;
+package org.fusionsoft.database.ci;
 
-import java.sql.Connection;
-import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgIndexes;
-import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSchemas;
+import java.text.MessageFormat;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOfScalar;
 
 /**
- * The Objects of {@link Connection} of Postgres dbms.
+ * The {@link org.cactoos.Text} of url of pg v.11 test instance.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
+public class UrlOfPgGitLabDatabaseV11 extends TextEnvelope {
 
     /**
-     * Ctor.
-     * @param connection The wrapped connection.
+     * Instantiates a new Url of pg test database v 11.
      */
-    public ObjectsFromPostgres(final Connection connection) {
+    public UrlOfPgGitLabDatabaseV11(final String database) {
         super(
-            connection,
-            PgSchemas::new,
-            PgIndexes::new
+            new TextOfScalar(
+                () -> MessageFormat.format(
+                    "jdbc:postgresql://135.181.94.98:31107/{0}",
+                    database
+                )
+            )
         );
     }
 

@@ -15,9 +15,15 @@
  */
 package org.fusionsoft.database.snapshot.objects.dbms;
 
-import org.fusionsoft.database.ci.UrlOfPgTestDatabaseV11;
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
+import org.fusionsoft.database.mapping.MappingOfExampleYaml;
+import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import org.fusionsoft.database.mapping.dbd.DbdSchemasMappingOfObjects;
 import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
+import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdRootMapping;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
@@ -28,22 +34,63 @@ import org.llorllale.cactoos.matchers.HasSize;
  */
 class ObjectsFromServerTest {
 
+    private final String database = "pagilla";
+
     /**
      * Works.
      */
     @Test
     public void works() {
-        final int size = 1;
+        final int size = 48;
         new Assertion<>(
             "Has expected size",
             new ObjectsFromServer(
                 new DbdServerMappingWithCredentials(
-                    new UrlOfPgTestDatabaseV11(),
+                    new UrlOfPgGitLabDatabaseV11(database),
                     new CredsOfPgTestDatabase()
                 )
             ),
             new HasSize(size)
         ).affirm();
+    }
+
+    /**
+     * The Dbd created can be rendered.
+     */
+    @Test
+    public void createsCorrectDbd() {
+        System.out.println(new DbdSchemasMappingOfObjects(
+            new ObjectsOfDbdRootMapping(
+                new DbdRootMapping(
+                    new MappingOfExampleYaml()
+                )
+            )
+        ).toString());
+        System.out.println(new DbdSchemasMappingOfObjects(
+            new ObjectsFromServer(
+                new DbdServerMappingWithCredentials(
+                    new UrlOfPgGitLabDatabaseV11(database),
+                    new CredsOfPgTestDatabase()
+                )
+            )
+        ).toString());
+    }
+
+    /**
+     * Show me.
+     */
+    @Test
+    public void showMe() {
+        for (final DbObject<? extends YamlMapping> object : new ObjectsFromServer(
+            new DbdServerMappingWithCredentials(
+                new UrlOfPgGitLabDatabaseV11(database),
+                new CredsOfPgTestDatabase()
+            )
+        )) {
+            System.out.println(object.signature().asString());
+            System.out.println(object.asYaml().toString());
+            System.out.println("-  -  -  -  -  -");
+        }
     }
 
 }
