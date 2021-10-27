@@ -33,7 +33,7 @@ public class FullObjectName extends TextEnvelope {
      * @param names The names to be joined.
      */
     public FullObjectName(final Iterable<Text> names) {
-        super(new Joined(new TextOf("$"), names));
+        super(new Joined(new FullNameDelimiter(), names));
     }
 
     /**

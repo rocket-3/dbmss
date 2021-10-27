@@ -29,7 +29,7 @@ public class FullNameDelimiter extends TextEnvelope {
      * Ctor.
      */
     public FullNameDelimiter() {
-        super(new TextOf("$"));
+        super(new TextOf(" (->) "));
     }
 
 }
