@@ -23,12 +23,23 @@ import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.UncheckedText;
 
+/**
+ * The Text of sql query, which SELECT outcomes
+ *  are mapped 1 to 1 as aliases to some prop set.
+ * @param <E> The outcome target Text subtype parameter.
+ * @since 0.1
+ */
 public abstract class Query<E extends Text> extends TextEnvelope {
 
+    /**
+     * The Map of String, String encapsulated.
+     */
     private final Map<String, String> propmap;
 
     /**
      * Ctor.
+     * @param query The Text to be encapsulated.
+     * @param propmap The Map of String to String to be encapsulated.
      */
     private Query(final Text query, final Map<String, String> propmap) {
         super(query);
@@ -37,6 +48,8 @@ public abstract class Query<E extends Text> extends TextEnvelope {
 
     /**
      * Ctor.
+     * @param query The String to be encapsulated.
+     * @param propmap The Map of E extends Text to String to be encapsulated.
      */
     public Query(final String query, final Map<E, String> propmap) {
         this(
@@ -51,6 +64,11 @@ public abstract class Query<E extends Text> extends TextEnvelope {
         );
     }
 
+    /**
+     * Outcome for alias.
+     * @param prop The prop for which type the query was created for.
+     * @return The string.
+     */
     public final String outcomeFor(final E prop) {
         return this.propmap.get(new UncheckedText(prop).asString());
     }
