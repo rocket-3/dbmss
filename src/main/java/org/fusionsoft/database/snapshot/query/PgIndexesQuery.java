@@ -20,10 +20,15 @@ import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.fusionsoft.database.mapping.fields.DbdIndexFields;
 
+/**
+ * The type of that can be constructed of.
+ * @since 0.1
+ * @checkstyle MagicNumberCheck (100 lines)
+ */
 public class PgIndexesQuery extends Query<DbdIndexFields> {
 
     /**
-     * Ctor.
+     * Ctor of PgIndexesQuery with default outcomes.
      */
     public PgIndexesQuery() {
         this(
@@ -41,6 +46,8 @@ public class PgIndexesQuery extends Query<DbdIndexFields> {
 
     /**
      * Ctor.
+     * @param outcomes The outcomes array to be encapsulated.
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
      */
     private PgIndexesQuery(final String... outcomes) {
         super(

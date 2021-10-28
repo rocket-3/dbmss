@@ -32,7 +32,17 @@ import org.llorllale.cactoos.matchers.HasSize;
  */
 class ObjectsFromServerTest {
 
-    private final String database = "pagilla";
+    /**
+     * The default database name encapsulated.
+     */
+    private final String database;
+
+    /**
+     * Instantiates a new Objects from server test.
+     */
+    ObjectsFromServerTest() {
+        this.database = "pagilla";
+    }
 
     /**
      * Works.
@@ -44,7 +54,7 @@ class ObjectsFromServerTest {
             "Has expected size",
             new ObjectsFromServer(
                 new DbdServerMappingWithCredentials(
-                    new UrlOfPgGitLabDatabaseV11(database),
+                    new UrlOfPgGitLabDatabaseV11(this.database),
                     new CredsOfPgTestDatabase()
                 )
             ),
@@ -57,12 +67,13 @@ class ObjectsFromServerTest {
      */
     @Test
     @Disabled
+    @SuppressWarnings("PMD")
     public void createsCorrectDbd() {
         System.out.println(
             new DbdSchemasMappingOfObjects(
                 new ObjectsFromServer(
                     new DbdServerMappingWithCredentials(
-                        new UrlOfPgGitLabDatabaseV11(database),
+                        new UrlOfPgGitLabDatabaseV11(this.database),
                         new CredsOfPgTestDatabase()
                     )
                 )
@@ -75,10 +86,11 @@ class ObjectsFromServerTest {
      */
     @Test
     @Disabled
+    @SuppressWarnings("PMD")
     public void showMe() {
         for (final DbObject<? extends YamlMapping> object : new ObjectsFromServer(
             new DbdServerMappingWithCredentials(
-                new UrlOfPgGitLabDatabaseV11(database),
+                new UrlOfPgGitLabDatabaseV11(this.database),
                 new CredsOfPgTestDatabase()
             )
         )) {

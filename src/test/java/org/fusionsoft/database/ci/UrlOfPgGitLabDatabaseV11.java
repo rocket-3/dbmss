@@ -26,7 +26,8 @@ import org.cactoos.text.TextOfScalar;
 public class UrlOfPgGitLabDatabaseV11 extends TextEnvelope {
 
     /**
-     * Instantiates a new Url of pg test database v 11.
+     * Instantiates a new Url of pg test database v.11.
+     * @param database The String of database name to be encapsulated.
      */
     public UrlOfPgGitLabDatabaseV11(final String database) {
         super(

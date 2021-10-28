@@ -22,8 +22,19 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * The type of {@link com.amihaiemil.eoyaml.BaseYamlSequence}
+ *  of {@link com.amihaiemil.eoyaml.Scalar} that can be constructed of
+ *  {@link ResultSet} and some key.
+ * @since 0.1
+ */
 public class YamlScalarSequenceOfResultSet extends YamlSequenceOfNodes {
 
+    /**
+     * Instantiates a new Yaml scalar sequence of result set.
+     * @param key The String to be encapsulated.
+     * @param rset The ResultSet to be encapsulated.
+     */
     public YamlScalarSequenceOfResultSet(final String key, final ResultSet rset) {
         super(
             new Mapped<YamlNode>(

@@ -36,7 +36,7 @@ public class SimpleDbObject<Y extends YamlMapping>
     private final ObjectSignature sig;
 
     /**
-     * Instantiates a new Naive db object.
+     * Instantiates a new simple db object.
      * @param yaml The YamlNode to be encapsulated.
      * @param signature The ObjectSignature to be encapsulated.
      */
@@ -51,7 +51,7 @@ public class SimpleDbObject<Y extends YamlMapping>
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return MessageFormat.format(
             "\n=   =   =   =\n{0}\n-   -   -   -\n{1}",
             this.sig.asString(),

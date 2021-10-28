@@ -30,14 +30,17 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
 /**
- * The type of that can be constructed of.
+ * The type of {@link org.fusionsoft.database.snapshot.DbObject}
+ *  of {@link DbdIndexMapping}, constructed of {@link ResultSet} and {@link Query}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (128 lines)
  */
 public class IndexOfResultSet extends SimpleDbObject<DbdIndexMapping> {
 
     /**
-     * Instantiates a new Naive db object.
+     * Instantiates a new Simple db object.
      * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdIndexFields to be encapsulated.
      */
     public IndexOfResultSet(final ResultSet rset, final Query<DbdIndexFields> query) {
         super(
