@@ -28,6 +28,7 @@ import org.cactoos.scalar.LengthOf;
 import org.cactoos.set.SetOf;
 import org.cactoos.text.TextOf;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
+import org.fusionsoft.lib.text.JsonUndefinedText;
 import org.fusionsoft.lib.yaml.artefacts.KeysFromYamlNode;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
@@ -190,4 +191,37 @@ class MappingMergedTest {
         ).affirm();
     }
 
+    /**
+     * Replaces the value even if changed one is null in terms of JSON.
+     * @checkstyle LocalFinalVariableNameCheck (200 lines)
+     */
+    @Test
+    public void replacesToNull() {
+        final String key = "a";
+        final String value = "b";
+        final ScalarEntry first = new ScalarEntry(key, value);
+        final ScalarEntry second = new ScalarEntry(
+            new TextOf(key),
+            new JsonUndefinedText()
+        );
+        new Assertion<>(
+            "Should have entry from second set exactly",
+            new TextOfMappingValue(
+                new MappingMerged(
+                    new YamlMappingOfEntries(first),
+                    new MappingWithoutEmptyScalars(
+                        new YamlMappingOfEntries(
+                            second,
+                            new MapEntry<>(
+                                new TextOf("b"),
+                                new YamlMappingOfEntries(second)
+                            )
+                        )
+                    )
+                ),
+                key
+            ),
+            new IsText(new JsonUndefinedText())
+        ).affirm();
+    }
 }

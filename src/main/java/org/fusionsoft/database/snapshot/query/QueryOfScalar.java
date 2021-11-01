@@ -13,17 +13,29 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+
 package org.fusionsoft.database.snapshot.query;
 
+import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.scalar.Unchecked;
 
-public interface Query<E extends Text> extends Text {
+public class QueryOfScalar<E extends Text> implements Query<E>{
 
-    /**
-     * Outcome for alias.
-     * @param prop The prop for which type the query was created for.
-     * @return The string.
-     */
-    String outcomeFor(final E prop);
+    private final Unchecked<Query<E>> scalar;
+
+    public QueryOfScalar(final Scalar<Query<E>> scalar) {
+        this.scalar = new Unchecked<>(scalar);
+    }
+
+    @Override
+    public final String asString() throws Exception {
+        return this.scalar.value().asString();
+    }
+
+    @Override
+    public final String outcomeFor(final E prop) {
+        return this.scalar.value().outcomeFor(prop);
+    }
 
 }

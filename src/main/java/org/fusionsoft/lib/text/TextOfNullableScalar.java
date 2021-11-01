@@ -13,17 +13,27 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.query;
+package org.fusionsoft.lib.text;
 
-import org.cactoos.Text;
+import org.cactoos.Scalar;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOfScalar;
 
-public interface Query<E extends Text> extends Text {
+public class TextOfNullableScalar extends TextEnvelope {
 
     /**
-     * Outcome for alias.
-     * @param prop The prop for which type the query was created for.
-     * @return The string.
+     * Ctor.
+     * @param nullable Text, can be null.
      */
-    String outcomeFor(final E prop);
+    public TextOfNullableScalar(final Scalar<String> nullable) {
+        super(
+            new TextOfScalar(
+                () -> {
+                    final String value = nullable.value();
+                    return value != null ? value : "";
+                }
+            )
+        );
+    }
 
 }

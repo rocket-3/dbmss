@@ -32,9 +32,13 @@ public enum DbdColumnFields implements Text {
      */
     DBNAME("dbName"),
     /**
+     *Order dbd column fields.
+     */
+    ORDER("order"),
+    /**
      *Type dbd column fields.
      */
-    TYPE("type"),
+    IUTYPE("type"),
     /**
      *Dbnullable dbd column fields.
      */
@@ -46,7 +50,7 @@ public enum DbdColumnFields implements Text {
     /**
      *Identity dbd column fields.
      */
-    IDENTITY("dbLocalIdMethod"),
+    DEFAULT("dbLocalIdMethod"),
     /**
      *Iujsoncolumn dbd column fields.
      */

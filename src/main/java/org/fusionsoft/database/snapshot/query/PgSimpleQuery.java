@@ -17,13 +17,16 @@ package org.fusionsoft.database.snapshot.query;
 
 import org.cactoos.Text;
 
-public interface Query<E extends Text> extends Text {
+public class PgSimpleQuery<T extends Text> extends SimpleQuery<T> {
 
-    /**
-     * Outcome for alias.
-     * @param prop The prop for which type the query was created for.
-     * @return The string.
-     */
-    String outcomeFor(final E prop);
+    @SafeVarargs
+    public PgSimpleQuery(final Text text, final T... keys) {
+        super(text, new PgEscapeSymbol(), keys);
+    }
+
+    @SafeVarargs
+    public PgSimpleQuery(final String text, final T... keys) {
+        super(text, new PgEscapeSymbol().asString(), keys);
+    }
 
 }

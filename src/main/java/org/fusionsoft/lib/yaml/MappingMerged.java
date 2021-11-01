@@ -33,7 +33,11 @@ public class MappingMerged extends YamlMappingOfScalar {
      */
     public MappingMerged(final YamlMapping original, final YamlMapping changed) {
         super(
-            () -> new MergedYamlMapping(original, changed, true)
+            () -> new MergedYamlMapping(
+                original,
+                changed,
+                true
+            )
         );
     }
 

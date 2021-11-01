@@ -25,7 +25,7 @@ import org.fusionsoft.database.mapping.fields.DbdIndexFields;
  * @since 0.1
  * @checkstyle MagicNumberCheck (100 lines)
  */
-public class PgIndexesQuery extends Query<DbdIndexFields> {
+public class PgIndexesQuery extends BasicQuery<DbdIndexFields> {
 
     /**
      * Ctor of PgIndexesQuery with default outcomes.

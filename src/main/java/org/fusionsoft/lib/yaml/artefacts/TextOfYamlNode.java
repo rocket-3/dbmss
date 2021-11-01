@@ -13,30 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects.dbms;
+package org.fusionsoft.lib.yaml.artefacts;
 
-import java.sql.Connection;
-import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgIndexes;
-import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSchemas;
-import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTables;
+import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.Text;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOfScalar;
 
 /**
- * The Objects of {@link Connection} of Postgres dbms.
+ * The type of {@link Text} that can be constructed of {@link YamlNode}.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
+public class TextOfYamlNode extends TextEnvelope {
 
     /**
      * Ctor.
-     * @param connection The wrapped connection.
+     * @param node The YamlNode to be encapsulated.
      */
-    public ObjectsFromPostgres(final Connection connection) {
+    public TextOfYamlNode(final YamlNode node) {
         super(
-            connection,
-            PgSchemas::new,
-            PgTables::new,
-            PgIndexes::new
+            new TextOfScalar(node::toString)
         );
     }
 

@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+
 package org.fusionsoft.database.snapshot.query;
 
-import org.cactoos.Text;
+import org.cactoos.scalar.NumberOf;
+import org.junit.jupiter.api.Test;
 
-public interface Query<E extends Text> extends Text {
+class PgTablesQueryTest {
 
-    /**
-     * Outcome for alias.
-     * @param prop The prop for which type the query was created for.
-     * @return The string.
-     */
-    String outcomeFor(final E prop);
+    @Test public void showMe() throws Exception {
+        System.out.println(new PgTablesQuery(new NumberOf("12")).asString());
+    }
+
+    @Test public void showOldMe() throws Exception {
+        System.out.println(new PgTablesQuery(new NumberOf("8")).asString());
+    }
 
 }

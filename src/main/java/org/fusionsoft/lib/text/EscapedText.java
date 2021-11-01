@@ -13,17 +13,29 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.query;
+package org.fusionsoft.lib.text;
 
+import java.text.MessageFormat;
 import org.cactoos.Text;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOfScalar;
 
-public interface Query<E extends Text> extends Text {
+public class EscapedText extends TextEnvelope {
 
     /**
-     * Outcome for alias.
-     * @param prop The prop for which type the query was created for.
-     * @return The string.
+     * Ctor.
+     * @param text Text representing the text value.
      */
-    String outcomeFor(final E prop);
+    public EscapedText(final Text text, final Text quotes) {
+        super(
+            new TextOfScalar(
+                () -> MessageFormat.format(
+                    "{0}{1}{0}",
+                    quotes.asString(),
+                    text.asString()
+                )
+            )
+        );
+    }
 
 }
