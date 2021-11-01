@@ -85,7 +85,7 @@ class ObjectsFromServerTest {
      * Show me.
      */
     @Test
-    @Disabled
+//    @Disabled
     @SuppressWarnings("PMD")
     public void showMe() {
         for (final DbObject<? extends YamlMapping> object : new ObjectsFromServer(

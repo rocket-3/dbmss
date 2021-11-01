@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
-import org.cactoos.text.TextOfScalar;
 import org.cactoos.text.TextOfString;
 import org.cactoos.text.UncheckedText;
 
@@ -38,8 +37,8 @@ public class TextOfResultSet extends TextEnvelope {
         super(
             new TextOfString(
                 new UncheckedText(
-                    new TextOfScalar(
-                        () -> rset.getString(new UncheckedText(label).asString())
+                    new TextOfNullableScalar(
+                        () -> rset.getString(label.asString())
                     )
                 ).asString()
             )

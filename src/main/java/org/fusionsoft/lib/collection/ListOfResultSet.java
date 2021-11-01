@@ -15,13 +15,16 @@
  */
 package org.fusionsoft.lib.collection;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import org.cactoos.BiFunc;
 import org.cactoos.Func;
 import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.list.ListEnvelope;
 import org.cactoos.list.ListOf;
+import org.fusionsoft.database.snapshot.query.Query;
 
 /**
  * The type of {@link java.util.List} of some type
@@ -51,6 +54,64 @@ public class ListOfResultSet<T> extends ListEnvelope<T> {
                     }
                 )
             )
+        );
+    }
+
+    /**
+     * Ctor.
+     */
+    public ListOfResultSet(
+        final BiFunc<ResultSet, Connection, T> func,
+        final Scalar<ResultSet> rset,
+        final Connection connection
+    ) {
+        super(
+            new ListOf<T>(
+                new IterableOf<T>(
+                    () -> {
+                        final ArrayList<T> list = new ArrayList<>(1);
+                        try (ResultSet resultSet = rset.value()) {
+                            while (resultSet.next()) {
+                                list.add(func.apply(resultSet, connection));
+                            }
+                        }
+                        return list.iterator();
+                    }
+                )
+            )
+        );
+    }
+
+    /**
+     * Ctor.
+     */
+    public ListOfResultSet(
+        final Func<ResultSet, T> func,
+        final Query<?> query,
+        final Connection connection
+    ) {
+        this(
+            func,
+            () -> connection.createStatement().executeQuery(
+                query.asString()
+            )
+        );
+    }
+
+    /**
+     * Ctor.
+     */
+    public ListOfResultSet(
+        final BiFunc<ResultSet, Connection, T> func,
+        final Query<?> query,
+        final Connection connection
+    ) {
+        this(
+            func,
+            () -> connection.createStatement().executeQuery(
+                query.asString()
+            ),
+            connection
         );
     }
 

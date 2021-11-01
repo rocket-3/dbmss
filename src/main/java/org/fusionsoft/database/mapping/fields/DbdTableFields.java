@@ -25,6 +25,42 @@ import org.cactoos.set.SetOf;
 public enum DbdTableFields implements Text {
 
     /**
+     *The dbd/schemas/#schema node.
+     */
+    SCHEMA("schema"),
+    /**
+     *The dbd/schemas/#schema/tables/#table node.
+     */
+    TABLE("table"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/owner node.
+     */
+    OWNER("owner"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/columns node.
+     */
+    TABLESPACE("tablespace"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/columns node.
+     */
+    DESCRIPTION("description"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/columns node.
+     */
+    DEPENDENCIES("dependencies"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/columns node.
+     */
+    PARTKEYDEFINITION("partkeydefinition"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/columns node.
+     */
+    PARTKEYRANGE("partkeyrange"),
+    /**
+     *The dbd/schemas/#schema/tables/#table/columns node.
+     */
+    PARENT("parent"),
+    /**
      *The dbd/schemas/#schema/tables/#table/columns node.
      */
     COLUMNS("columns"),

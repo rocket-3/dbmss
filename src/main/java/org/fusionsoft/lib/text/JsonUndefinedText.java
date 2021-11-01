@@ -13,17 +13,23 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.query;
+package org.fusionsoft.lib.text;
 
-import org.cactoos.Text;
+import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOf;
 
-public interface Query<E extends Text> extends Text {
+/**
+ * The {@link org.cactoos.Text} that is undefined
+ *  (null in terms of {@link com.amihaiemil.eoyaml.Scalar}).
+ * @since 0.1
+ */
+public class JsonUndefinedText extends TextEnvelope {
 
     /**
-     * Outcome for alias.
-     * @param prop The prop for which type the query was created for.
-     * @return The string.
+     * Ctor.
      */
-    String outcomeFor(final E prop);
+    public JsonUndefinedText() {
+        super(new TextOf(""));
+    }
 
 }

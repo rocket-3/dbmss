@@ -39,9 +39,8 @@ public class PgIndexes extends ObjectsOfScalar {
             () ->
                 new ListOfResultSet<DbObject<?>>(
                     PgIndexOfResultSet::new,
-                    () -> connection.createStatement().executeQuery(
-                        new PgIndexesQuery().asString()
-                    )
+                    new PgIndexesQuery(),
+                    connection
                 )
         );
     }
