@@ -16,6 +16,7 @@
 package org.fusionsoft.database.connection;
 
 import java.sql.DriverManager;
+import org.cactoos.scalar.Sticky;
 import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import org.fusionsoft.database.mapping.fields.DbdServerFields;
 import org.fusionsoft.lib.connection.ConnectionOfScalar;
@@ -32,11 +33,11 @@ public class ConnectionOfDbdServerMapping extends ConnectionOfScalar {
      */
     public ConnectionOfDbdServerMapping(final DbdServerMapping mapping) {
         super(
-            () -> DriverManager.getConnection(
+            new Sticky<>(() -> DriverManager.getConnection(
                 mapping.string(DbdServerFields.URL.asString()),
                 mapping.string(DbdServerFields.USER.asString()),
                 mapping.string(DbdServerFields.PWD.asString())
-            )
+            ))
         );
     }
 

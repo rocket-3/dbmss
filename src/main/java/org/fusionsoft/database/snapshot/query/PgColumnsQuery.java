@@ -28,7 +28,7 @@ public class PgColumnsQuery extends PgSimpleQuery<DbdColumnFields> {
                 + "    col.column_name AS {0},\n"
                 + "    pgd.description AS {1},\n"
                 + "    col.column_default AS {2},\n"
-                + "    col.is_nullable AS {3},\n"
+                + "    case when col.is_nullable in ('NO') then 'false' else 'true' end AS {3},\n"
                 + "    col.udt_name::regtype AS {4},\n"
                 + "    col.character_maximum_length,\n"
                 + "    col.numeric_precision,\n"
