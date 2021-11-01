@@ -65,20 +65,9 @@ public class ListOfResultSet<T> extends ListEnvelope<T> {
         final Scalar<ResultSet> rset,
         final Connection connection
     ) {
-        super(
-            new ListOf<T>(
-                new IterableOf<T>(
-                    () -> {
-                        final ArrayList<T> list = new ArrayList<>(1);
-                        try (ResultSet resultSet = rset.value()) {
-                            while (resultSet.next()) {
-                                list.add(func.apply(resultSet, connection));
-                            }
-                        }
-                        return list.iterator();
-                    }
-                )
-            )
+        this(
+            rs -> func.apply(rs, connection),
+            rset
         );
     }
 
