@@ -209,13 +209,11 @@ class MappingMergedTest {
             new TextOfMappingValue(
                 new MappingMerged(
                     new YamlMappingOfEntries(first),
-                    new MappingWithoutNullScalars(
-                        new YamlMappingOfEntries(
-                            second,
-                            new MapEntry<>(
-                                new TextOf("b"),
-                                new YamlMappingOfEntries(second)
-                            )
+                    new YamlMappingOfEntries(
+                        second,
+                        new MapEntry<>(
+                            new TextOf("b"),
+                            new YamlMappingOfEntries(second)
                         )
                     )
                 ),
@@ -224,4 +222,5 @@ class MappingMergedTest {
             new IsText(new JsonUndefinedText())
         ).affirm();
     }
+
 }
