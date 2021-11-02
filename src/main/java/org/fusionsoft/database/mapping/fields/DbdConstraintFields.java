@@ -28,6 +28,18 @@ public enum DbdConstraintFields implements Text {
      */
     TYPE("dbConstraintType"),
     /**
+     *Src schema dbd constraint fields.
+     */
+    SCHEMA("schema"),
+    /**
+     *Src table dbd constraint fields.
+     */
+    TABLE("table"),
+    /**
+     *Src table dbd constraint fields.
+     */
+    CONSTRAINT("constraint"),
+    /**
      *Src pk col dbd constraint fields.
      */
     SRC_PK_COL("dbColumn"),
