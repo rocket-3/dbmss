@@ -25,9 +25,17 @@ import org.cactoos.scalar.Not;
 import org.cactoos.scalar.Or;
 import org.fusionsoft.lib.text.JsonUndefinedText;
 
-public class MappingWithoutEmptyScalars extends YamlMappingOfEntries {
+/**
+ * The type of {@link YamlMapping} decorator that filters out 'null' scalar nodes.
+ * @since 0.1
+ */
+public class MappingWithoutNullScalars extends YamlMappingOfEntries {
 
-    public MappingWithoutEmptyScalars(final YamlMapping mapping) {
+    /**
+     * Instantiates a new Mapping without null scalars.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
+    public MappingWithoutNullScalars(final YamlMapping mapping) {
         super(
             new Filtered<Map.Entry<? extends Text, ? extends YamlNode>>(
                 entry -> new Or(
@@ -36,7 +44,11 @@ public class MappingWithoutEmptyScalars extends YamlMappingOfEntries {
                             Node.SCALAR
                         )
                     ),
-                    () -> !entry.getValue().asScalar().value().equals(new JsonUndefinedText().asString())
+                    new Not(
+                        () -> entry.getValue().asScalar().value().equals(
+                            new JsonUndefinedText().asString()
+                        )
+                    )
                 ).value(),
                 new EntriesOfYamlMapping(mapping)
             )

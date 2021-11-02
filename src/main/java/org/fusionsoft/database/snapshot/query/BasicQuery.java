@@ -30,6 +30,7 @@ import org.fusionsoft.lib.collection.StrictMap;
  * @param <E> The outcome target Text subtype parameter.
  * @since 0.1
  */
+@SuppressWarnings("PMD.UnusedFormalParameter")
 public abstract class BasicQuery<E extends Text> extends TextEnvelope implements Query<E> {
 
     /**
@@ -41,12 +42,12 @@ public abstract class BasicQuery<E extends Text> extends TextEnvelope implements
      * Ctor.
      * @param query The Text to be encapsulated.
      * @param propmap The Map of String to String to be encapsulated.
-     * @param javaIsShit You know how to struggle with same type erasure error?
+     * @param javaisshit You know how to struggle with same type erasure error?
      */
     private BasicQuery(
         final Text query,
         final Map<String, String> propmap,
-        final boolean javaIsShit
+        final boolean javaisshit
     ) {
         super(query);
         this.propmap = propmap;
@@ -86,7 +87,7 @@ public abstract class BasicQuery<E extends Text> extends TextEnvelope implements
     }
 
     @Override
-    public String outcomeFor(final E prop) {
+    public final String outcomeFor(final E prop) {
         return this.propmap.get(new UncheckedText(prop).asString());
     }
 

@@ -19,6 +19,11 @@ import org.cactoos.Scalar;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOfScalar;
 
+/**
+ * The type of {@link org.cactoos.Text} that can be constructed
+ *  of {@link Scalar} of String that can return null, in that case empty text is returned.
+ * @since 0.1
+ */
 public class TextOfNullableScalar extends TextEnvelope {
 
     /**
@@ -29,8 +34,11 @@ public class TextOfNullableScalar extends TextEnvelope {
         super(
             new TextOfScalar(
                 () -> {
-                    final String value = nullable.value();
-                    return value != null ? value : "";
+                    String value = nullable.value();
+                    if (value == null) {
+                        value = "";
+                    }
+                    return value;
                 }
             )
         );

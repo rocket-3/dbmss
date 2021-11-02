@@ -18,6 +18,7 @@ package org.fusionsoft.database.snapshot.objectsignature;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.iterable.NoNulls;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
@@ -33,7 +34,7 @@ public class FullObjectName extends TextEnvelope {
      * @param names The names to be joined.
      */
     public FullObjectName(final Iterable<Text> names) {
-        super(new Joined(new FullNameDelimiter(), names));
+        super(new Joined(new FullNameDelimiter(), new NoNulls<>(names)));
     }
 
     /**

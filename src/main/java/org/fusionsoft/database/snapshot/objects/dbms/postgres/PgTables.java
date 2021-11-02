@@ -26,9 +26,9 @@ import org.fusionsoft.database.snapshot.query.PgTablesQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
- * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of {@link Objects} that can be constructed
+ *  of {@link Connection} to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Implement fetching tables and columns from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @SuppressWarnings("PMD")
@@ -36,6 +36,7 @@ public class PgTables extends ObjectsOfScalar {
 
     /**
      * Instantiates a new Postgres tables.
+     * @param connection The Connection to be encapsulated.
      */
     public PgTables(final Connection connection) {
         super(

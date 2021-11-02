@@ -24,8 +24,16 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsText;
 
-class MappingWithoutEmptyScalarsTest {
+/**
+ * The test for {@link MappingWithoutNullScalars}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
+class MappingWithoutNullScalarsTest {
 
+    /**
+     * Deletes first level null scalars.
+     */
     @Test
     public void deletesFirstLevelNullScalars() {
         final ScalarEntry nullable = new ScalarEntry(
@@ -43,7 +51,7 @@ class MappingWithoutEmptyScalarsTest {
         new Assertion<>(
             "Should not contain null scalar entry",
             new TextOfYamlNode(
-                new MappingWithoutEmptyScalars(
+                new MappingWithoutNullScalars(
                     new YamlMappingOfEntries(
                         nullable,
                         scalar,

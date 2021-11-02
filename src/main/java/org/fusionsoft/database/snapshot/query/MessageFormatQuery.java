@@ -27,13 +27,26 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.lib.text.EscapedText;
 
-public class SimpleQuery<T extends Text> extends BasicQuery<T> {
+/**
+ * The type of {@link BasicQuery} that can be constructed
+ *  of query {@link String} with template {?} points,
+ *  escape character and array of outcomes in natural order.
+ *  Very similar to {@link MessageFormat},
+ *  but you don't need to double escape ' -> '' chars.
+ * @param <T> The type of outcomes parameter.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
+public class MessageFormatQuery<T extends Text> extends BasicQuery<T> {
 
     /**
      * Ctor of PgIndexesQuery with default outcomes.
+     * @param text The String to be encapsulated.
+     * @param quotes The String to be encapsulated.
+     * @param keys The T... to be encapsulated.
      */
     @SafeVarargs
-    public SimpleQuery(final String text, final String quotes, final T... keys) {
+    public MessageFormatQuery(final String text, final String quotes, final T... keys) {
         this(
             new TextOf(text),
             new TextOf(quotes),
@@ -43,9 +56,12 @@ public class SimpleQuery<T extends Text> extends BasicQuery<T> {
 
     /**
      * Ctor of PgIndexesQuery with default outcomes.
+     * @param text The Text of query to be encapsulated.
+     * @param quotes The Text of escape chars to be encapsulated.
+     * @param keys The array of outcomes in natural order to be encapsulated.
      */
     @SafeVarargs
-    public SimpleQuery(final Text text, final Text quotes, final T... keys) {
+    public MessageFormatQuery(final Text text, final Text quotes, final T... keys) {
         this(
             text,
             quotes,
@@ -55,9 +71,11 @@ public class SimpleQuery<T extends Text> extends BasicQuery<T> {
 
     /**
      * Ctor.
-     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     * @param text The Text of query to be encapsulated.
+     * @param quotes The Text of escape chars to be encapsulated.
+     * @param keys The Iterable of keys to be encapsulated.
      */
-    private SimpleQuery(
+    private MessageFormatQuery(
         final Text text,
         final Text quotes,
         final Iterable<T> keys
@@ -68,7 +86,7 @@ public class SimpleQuery<T extends Text> extends BasicQuery<T> {
                     text.asString().replace("'", "''"),
                     new ListOf<>(
                         new Mapped<String>(
-                            x->new EscapedText(x, quotes).asString(),
+                            x -> new EscapedText(x, quotes).asString(),
                             keys
                         )
                     ).toArray()

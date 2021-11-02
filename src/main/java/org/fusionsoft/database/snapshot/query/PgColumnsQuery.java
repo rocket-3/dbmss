@@ -19,8 +19,20 @@ import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.fields.DbdColumnFields;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 
+/**
+ * The type of {@link Query} of {@link DbdColumnFields}
+ *  that can be constructed of {@link FullObjectName} of table.
+ * @since 0.1
+ * @checkstyle LineLengthCheck (100 lines)
+ * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+ * @checkstyle BracketsStructureCheck (100 lines)
+ */
 public class PgColumnsQuery extends PgSimpleQuery<DbdColumnFields> {
 
+    /**
+     * Instantiates a new Pg columns query.
+     * @param table The FullObjectName of table to be used in WHERE statement.
+     */
     public PgColumnsQuery(final FullObjectName table) {
         super(
             new TextOfScalar(() ->

@@ -59,6 +59,9 @@ public class ListOfResultSet<T> extends ListEnvelope<T> {
 
     /**
      * Ctor.
+     * @param func The BiFunc of ResultSet, Connection -> T to be encapsulated.
+     * @param rset The Scalar of ResultSet to be encapsulated.
+     * @param connection The Connection to be encapsulated.
      */
     public ListOfResultSet(
         final BiFunc<ResultSet, Connection, T> func,
@@ -73,6 +76,9 @@ public class ListOfResultSet<T> extends ListEnvelope<T> {
 
     /**
      * Ctor.
+     * @param func The Func of ResultSet -> T to be encapsulated.
+     * @param query The Query to be encapsulated.
+     * @param connection The Connection to be encapsulated.
      */
     public ListOfResultSet(
         final Func<ResultSet, T> func,
@@ -89,6 +95,9 @@ public class ListOfResultSet<T> extends ListEnvelope<T> {
 
     /**
      * Ctor.
+     * @param func The BiFunc of ResultSet, Connection -> T to be encapsulated.
+     * @param query The Query to be encapsulated.
+     * @param connection The Connection to be encapsulated.
      */
     public ListOfResultSet(
         final BiFunc<ResultSet, Connection, T> func,

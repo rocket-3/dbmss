@@ -33,11 +33,13 @@ public class ConnectionOfDbdServerMapping extends ConnectionOfScalar {
      */
     public ConnectionOfDbdServerMapping(final DbdServerMapping mapping) {
         super(
-            new Sticky<>(() -> DriverManager.getConnection(
-                mapping.string(DbdServerFields.URL.asString()),
-                mapping.string(DbdServerFields.USER.asString()),
-                mapping.string(DbdServerFields.PWD.asString())
-            ))
+            new Sticky<>(
+                () -> DriverManager.getConnection(
+                    mapping.string(DbdServerFields.URL.asString()),
+                    mapping.string(DbdServerFields.USER.asString()),
+                    mapping.string(DbdServerFields.PWD.asString())
+                )
+            )
         );
     }
 

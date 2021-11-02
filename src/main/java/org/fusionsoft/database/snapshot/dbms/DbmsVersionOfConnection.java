@@ -19,10 +19,15 @@ import java.sql.Connection;
 import java.text.MessageFormat;
 import org.cactoos.scalar.NumberEnvelope;
 
+/**
+ * The {@link Number} of database version that can be constructed of {@link Connection}.
+ * @since 0.1
+ */
 public class DbmsVersionOfConnection extends NumberEnvelope {
 
     /**
      * Ctor.
+     * @param connection The Connection to be encapsulated.
      */
     public DbmsVersionOfConnection(final Connection connection) {
         super(
