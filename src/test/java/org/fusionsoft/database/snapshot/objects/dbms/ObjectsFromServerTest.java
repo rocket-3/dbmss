@@ -21,6 +21,7 @@ import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.mapping.dbd.DbdSchemasMappingOfObjects;
 import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
 import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.objects.StickyObjects;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -29,6 +30,7 @@ import org.llorllale.cactoos.matchers.HasSize;
 /**
  * The test for {@link ObjectsFromServer}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 class ObjectsFromServerTest {
 
@@ -71,10 +73,12 @@ class ObjectsFromServerTest {
     public void createsCorrectDbd() {
         System.out.println(
             new DbdSchemasMappingOfObjects(
-                new ObjectsFromServer(
-                    new DbdServerMappingWithCredentials(
-                        new UrlOfPgGitLabDatabaseV11(this.database),
-                        new CredsOfPgTestDatabase()
+                new StickyObjects(
+                    new ObjectsFromServer(
+                        new DbdServerMappingWithCredentials(
+                            new UrlOfPgGitLabDatabaseV11(this.database),
+                            new CredsOfPgTestDatabase()
+                        )
                     )
                 )
             ).toString()
@@ -85,7 +89,7 @@ class ObjectsFromServerTest {
      * Show me.
      */
     @Test
-//    @Disabled
+    @Disabled
     @SuppressWarnings("PMD")
     public void showMe() {
         for (final DbObject<? extends YamlMapping> object : new ObjectsFromServer(
