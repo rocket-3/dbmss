@@ -23,8 +23,16 @@ import org.cactoos.Text;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
 
-public class MappingWithoutNullScalarsNested extends MappingWithoutEmptyScalars {
+/**
+ * The type of {@link MappingWithoutNullScalars} that can go in depth when filters nodes.
+ * @since 0.1
+ */
+public class MappingWithoutNullScalarsNested extends MappingWithoutNullScalars {
 
+    /**
+     * Instantiates a new Mapping without null scalars nested.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
     public MappingWithoutNullScalarsNested(final YamlMapping mapping) {
         super(
             new YamlMappingOfEntries(
@@ -32,7 +40,7 @@ public class MappingWithoutNullScalarsNested extends MappingWithoutEmptyScalars 
                     entry -> {
                         final YamlNode value = entry.getValue();
                         if (value.type().equals(Node.MAPPING)) {
-                            return new MapEntry<>(
+                            entry = new MapEntry<>(
                                 entry.getKey(),
                                 new MappingWithoutNullScalarsNested(
                                     value.asMapping()

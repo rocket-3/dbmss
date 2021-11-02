@@ -205,11 +205,11 @@ class MappingMergedTest {
             new JsonUndefinedText()
         );
         new Assertion<>(
-            "Should have entry from second set exactly",
+            "Should have entry from second set, which is null",
             new TextOfMappingValue(
                 new MappingMerged(
                     new YamlMappingOfEntries(first),
-                    new MappingWithoutEmptyScalars(
+                    new MappingWithoutNullScalars(
                         new YamlMappingOfEntries(
                             second,
                             new MapEntry<>(

@@ -20,11 +20,16 @@ import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOfScalar;
 
+/**
+ * The type of {@link Text} decorator that is escaped by some char sequence.
+ * @since 0.1
+ */
 public class EscapedText extends TextEnvelope {
 
     /**
      * Ctor.
      * @param text Text representing the text value.
+     * @param quotes The Text to be encapsulated.
      */
     public EscapedText(final Text text, final Text quotes) {
         super(

@@ -38,13 +38,13 @@ public class PgSchemas extends ObjectsOfScalar {
                 new ListOfResultSet<DbObject<?>>(
                     PostgresSchemaOfResultSet::new,
                     () -> connection.createStatement().executeQuery(
-                        "select nspname AS name, usename AS owner"
-                        + " from pg_namespace,pg_user"
-                        + " where nspname!='pg_toast' and nspname!='pg_temp_1'"
-                        + " and nspname!='pg_toast_temp_1' and nspname!='pg_catalog'"
-                        + " and nspname!='information_schema' and nspname!='pgagent'"
-                        + " and nspname!='pg_temp_3' and nspname!='pg_toast_temp_3'"
-                        + " and usesysid = nspowner"
+                        "select nspname AS name, usename AS owner\n"
+                        + " from pg_namespace,pg_user\n"
+                        + " where nspname!='pg_toast' and nspname!='pg_temp_1'\n"
+                        + " and nspname!='pg_toast_temp_1' and nspname!='pg_catalog'\n"
+                        + " and nspname!='information_schema' and nspname!='pgagent'\n"
+                        + " and nspname!='pg_temp_3' and nspname!='pg_toast_temp_3'\n"
+                        + " and usesysid = nspowner\n"
                     )
                 )
         );

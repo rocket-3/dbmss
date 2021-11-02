@@ -14,18 +14,7 @@
  * and limitations under the License.
  */
 
-package org.fusionsoft.database.snapshot.query;
-
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
-import org.junit.jupiter.api.Test;
-
-class PgColumnsQueryTest {
-    @Test public void showMe() throws Exception {
-        System.out.println(new PgColumnsQuery(
-            new FullObjectName(
-                "schema", "table"
-            )
-        ).asString());
-    }
-
-}
+/**
+ * Tests for {@link org.fusionsoft.database.snapshot.dbms} package.
+ */
+package org.fusionsoft.database.snapshot.dbms;

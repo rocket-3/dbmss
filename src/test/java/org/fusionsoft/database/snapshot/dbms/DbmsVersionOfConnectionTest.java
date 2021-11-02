@@ -24,10 +24,18 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsNumber;
 
+/**
+ * The tests for {@link DbmsVersionOfConnection}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 class DbmsVersionOfConnectionTest {
 
+    /**
+     * Is correct number.
+     */
     @Test
-    public void works() {
+    public void isCorrectNumber() {
         new Assertion<>(
             "Version number of Postgres 11 database should be '11'",
             new DbmsVersionOfConnection(

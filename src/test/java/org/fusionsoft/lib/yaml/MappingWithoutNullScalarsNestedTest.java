@@ -24,11 +24,19 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsText;
 
+/**
+ * The test for {@link MappingWithoutNullScalarsNested}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 class MappingWithoutNullScalarsNestedTest {
 
+    /**
+     * Deletes all null scalars.
+     */
     @Test
     public void deletesAllNullScalars() {
-        final TextOf nullableMappingKey = new TextOf("c");
+        final TextOf key = new TextOf("c");
         final ScalarEntry nullable = new ScalarEntry(
             new TextOf("a"),
             new JsonUndefinedText()
@@ -38,7 +46,7 @@ class MappingWithoutNullScalarsNestedTest {
             new TextOf("value")
         );
         final MapEntry<TextOf, YamlMappingOfEntries> mapping = new MapEntry<>(
-            nullableMappingKey,
+            key,
             new YamlMappingOfEntries(nullable)
         );
         new Assertion<>(
@@ -57,7 +65,7 @@ class MappingWithoutNullScalarsNestedTest {
                     new YamlMappingOfEntries(
                         scalar,
                         new MapEntry<>(
-                            nullableMappingKey,
+                            key,
                             new MappingEmpty()
                         )
                     )

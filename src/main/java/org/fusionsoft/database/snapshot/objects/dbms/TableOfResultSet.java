@@ -35,12 +35,22 @@ import org.fusionsoft.lib.text.TextOfResultSet;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
 
+/**
+ * The type of {@link org.fusionsoft.database.snapshot.DbObject}
+ * of {@link DbdTableFields}
+ * that can be constructed of {@link Connection}, {@link Query} and {@link ResultSet}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (256 lines)
+ * @checkstyle ParameterNumberCheck (256 lines)
+ */
 public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
 
     /**
      * Instantiates a new Simple db object.
      * @param rset The ResultSet to be encapsulated.
-     * @param query The Query of DbdIndexFields to be encapsulated.
+     * @param connection The Connection to be encapsulated.
+     * @param query The Query of DbdTableFields to be encapsulated.
+     * @param columns The Func of FullObjectName -> Query of DbdColumnFields to be encapsulated.
      */
     public TableOfResultSet(
         final ResultSet rset,
@@ -69,7 +79,10 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
     /**
      * Instantiates a new Simple db object.
      * @param rset The ResultSet to be encapsulated.
+     * @param connection The Connection to be encapsulated.
      * @param query The Query of DbdIndexFields to be encapsulated.
+     * @param columns The Func of FullObjectName -> Query of DbdColumnFields to be encapsulated.
+     * @param tablename The FullObjectName to be encapsulated.
      */
     private TableOfResultSet(
         final ResultSet rset,
@@ -82,7 +95,7 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
             rset,
             connection,
             query,
-            new QueryOfScalar<DbdColumnFields>(() -> columns.apply(tablename)),
+            new QueryOfScalar<>(() -> columns.apply(tablename)),
             tablename
         );
     }
@@ -90,7 +103,10 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
     /**
      * Instantiates a new Simple db object.
      * @param rset The ResultSet to be encapsulated.
-     * @param query The Query of DbdIndexFields to be encapsulated.
+     * @param connection The Connection to be encapsulated.
+     * @param query The Query of DbdTableFields to be encapsulated.
+     * @param columns The Query of DbdColumnFields to be encapsulated.
+     * @param tablename The FullObjectName to be encapsulated.
      */
     private TableOfResultSet(
         final ResultSet rset,

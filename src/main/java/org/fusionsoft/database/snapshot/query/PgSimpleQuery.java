@@ -17,13 +17,28 @@ package org.fusionsoft.database.snapshot.query;
 
 import org.cactoos.Text;
 
-public class PgSimpleQuery<T extends Text> extends SimpleQuery<T> {
+/**
+ * The type of {@link MessageFormatQuery} with default {@link PgEscapeSymbol} as 'quotes' argument.
+ * @param <T> The type of fields to query parameter.
+ * @since 0.1
+ */
+public class PgSimpleQuery<T extends Text> extends MessageFormatQuery<T> {
 
+    /**
+     * Instantiates a new Pg simple query.
+     * @param text The Text of query to be encapsulated.
+     * @param keys The Text array of outcomes keys to be encapsulated.
+     */
     @SafeVarargs
     public PgSimpleQuery(final Text text, final T... keys) {
         super(text, new PgEscapeSymbol(), keys);
     }
 
+    /**
+     * Instantiates a new Pg simple query.
+     * @param text The String of query to be encapsulated.
+     * @param keys The Text array of outcomes keys to be encapsulated.
+     */
     @SafeVarargs
     public PgSimpleQuery(final String text, final T... keys) {
         super(text, new PgEscapeSymbol().asString(), keys);

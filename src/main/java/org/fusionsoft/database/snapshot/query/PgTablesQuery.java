@@ -15,62 +15,75 @@
  */
 package org.fusionsoft.database.snapshot.query;
 
+import org.cactoos.scalar.NumberOf;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.objectsignature.FullNameDelimiter;
 
+/**
+ * The only type of {@link PgSimpleQuery} of {@link DbdTableFields}.
+ * @since 0.1
+ */
 public class PgTablesQuery extends PgSimpleQuery<DbdTableFields> {
 
     /**
      * Ctor of PgIndexesQuery with default outcomes.
+     * @param dbversion The Number of database version to be encapsulated.
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     * @checkstyle AvoidInlineConditionalsCheck (100 lines)
+     * @checkstyle CascadeIndentationCheck (100 lines)
+     * @checkstyle LineLengthCheck (100 lines)
      */
     public PgTablesQuery(final Number dbversion) {
         super(
-            new TextOfScalar(() ->
-                "SELECT \n"
-                + " schemaname AS {0},\n"
-                + " tablename AS {1},\n"
-                + " tableowner AS {2},\n"
-                + " tablespace AS {3}, \n"
-                + " obj_description(\n"
-                + "    (('\"' || schemaname || '\".\"' || tablename || '\"')::regclass)::oid \n"
-                + " ) AS {4},\n"
-                + " (\n"
-                + "    SELECT array_agg( distinct"
-                + " n2.nspname || '" + new FullNameDelimiter() + "' || c2.relname "
-                + " ) AS dependencies\n"
-                + "    FROM pg_catalog.pg_constraint c \n"
-                + "    JOIN ONLY pg_catalog.pg_class c1     ON c1.oid = c.conrelid\n"
-                + "    JOIN ONLY pg_catalog.pg_class c2     ON c2.oid = c.confrelid\n"
-                + "    JOIN ONLY pg_catalog.pg_namespace n2 ON n2.oid = c2.relnamespace\n"
-                + "    WHERE c.conrelid ="
-                + " (( '\"' || schemaname || '\".\"' || tablename || '\"'"
-                + " )::regclass)::oid\n"
-                + "    AND c1.relkind = 'r'\n"
-                + "    AND c.contype = 'f'\n"
-                + " ) AS {5}, \n"
-                + (
-                    (dbversion.intValue() >= 10)
-                        ? " pg_get_partkeydef((\n"
-                          + "    SELECT oid \n"
-                          + "    FROM pg_class \n"
-                          + "    WHERE relname = tablename \n"
-                          + "    AND relnamespace = (select oid from pg_namespace where nspname = schemaname )\n"
-                          + " )) AS {6}, \n"
-                          + " pg_get_expr(child.relpartbound, child.oid) AS {7}, \n"
-                        : " '' AS {6},\n '' AS {7},\n"
-                )
-                + " parent.relname AS {8} \n"
-                + "FROM pg_tables \n"
-                + "LEFT OUTER JOIN pg_inherits \n"
-                + "ON (\n"
-                + "     SELECT oid FROM pg_class \n"
-                + "     WHERE relname = tablename\n"
-                + "     AND relnamespace = (select oid from pg_namespace where nspname = schemaname)\n"
-                + ") = pg_inherits.inhrelid \n"
-                + "LEFT OUTER JOIN pg_class parent ON pg_inherits.inhparent = parent.oid \n"
-                + "LEFT OUTER JOIN pg_class child ON pg_inherits.inhrelid = child.oid \n"
-                + "WHERE schemaname not in ('pg_catalog', 'information_schema')"
+            new TextOfScalar(
+                () -> {
+                    final boolean partitions = dbversion.intValue() >= new NumberOf("10").intValue();
+                    return
+                        "SELECT \n"
+                        + " schemaname AS {0},\n"
+                        + " tablename AS {1},\n"
+                        + " tableowner AS {2},\n"
+                        + " tablespace AS {3}, \n"
+                        + " obj_description(\n"
+                        + "    (('\"' || schemaname || '\".\"' || tablename || '\"')::regclass)::oid \n"
+                        + " ) AS {4},\n"
+                        + " (\n"
+                        + "    SELECT "
+                        + "        array_agg( distinct n2.nspname || '" + new FullNameDelimiter() + "' || c2.relname )\n"
+                        + "        AS dependencies\n"
+                        + "    FROM pg_catalog.pg_constraint c \n"
+                        + "    JOIN ONLY pg_catalog.pg_class c1     ON c1.oid = c.conrelid\n"
+                        + "    JOIN ONLY pg_catalog.pg_class c2     ON c2.oid = c.confrelid\n"
+                        + "    JOIN ONLY pg_catalog.pg_namespace n2 ON n2.oid = c2.relnamespace\n"
+                        + "    WHERE c.conrelid =(( '\"' || schemaname || '\".\"' || tablename || '\"')::regclass)::oid\n"
+                        + "    AND c1.relkind = 'r'\n"
+                        + "    AND c.contype = 'f'\n"
+                        + " ) AS {5}, \n"
+                        + (
+                            partitions
+                                ? " pg_get_partkeydef((\n"
+                                + "    SELECT oid \n"
+                                + "    FROM pg_class \n"
+                                + "    WHERE relname = tablename \n"
+                                + "    AND relnamespace = ("
+                                + "select oid from pg_namespace where nspname = schemaname)\n"
+                                + " )) AS {6}, \n"
+                                + " pg_get_expr(child.relpartbound, child.oid) AS {7}, \n"
+                                : " '' AS {6},\n '' AS {7},\n"
+                        )
+                        + " parent.relname AS {8} \n"
+                        + "FROM pg_tables \n"
+                        + "LEFT OUTER JOIN pg_inherits \n"
+                        + "ON (\n"
+                        + "     SELECT oid FROM pg_class \n"
+                        + "     WHERE relname = tablename\n"
+                        + "     AND relnamespace = (select oid from pg_namespace where nspname = schemaname)\n"
+                        + ") = pg_inherits.inhrelid \n"
+                        + "LEFT OUTER JOIN pg_class parent ON pg_inherits.inhparent = parent.oid \n"
+                        + "LEFT OUTER JOIN pg_class child ON pg_inherits.inhrelid = child.oid \n"
+                        + "WHERE schemaname not in ('pg_catalog', 'information_schema')";
+                }
             ),
             DbdTableFields.SCHEMA,
             DbdTableFields.TABLE,

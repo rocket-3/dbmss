@@ -17,6 +17,11 @@ package org.fusionsoft.database.snapshot.query;
 
 import org.cactoos.Text;
 
+/**
+ * The interface Query representing sql SELECT query text and its outcomes.
+ * @param <E>  The type of outcomes enumeration parameter.
+ * @since 0.1
+ */
 public interface Query<E extends Text> extends Text {
 
     /**
@@ -24,6 +29,6 @@ public interface Query<E extends Text> extends Text {
      * @param prop The prop for which type the query was created for.
      * @return The string.
      */
-    String outcomeFor(final E prop);
+    String outcomeFor(E prop);
 
 }

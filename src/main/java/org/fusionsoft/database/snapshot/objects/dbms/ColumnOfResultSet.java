@@ -26,6 +26,11 @@ import org.fusionsoft.lib.text.TextOfResultSet;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalarsNested;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The type of {@link DbdColumnMapping} that can be constructed
+ *  of {@link Query} and {@link ResultSet}.
+ * @since 0.1
+ */
 public class ColumnOfResultSet extends DbdColumnMapping {
 
     /**

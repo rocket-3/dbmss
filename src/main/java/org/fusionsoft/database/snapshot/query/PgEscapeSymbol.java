@@ -17,10 +17,14 @@ package org.fusionsoft.database.snapshot.query;
 
 import org.cactoos.Text;
 
+/**
+ * The Text of symbol, used in Postgres to escape names.
+ * @since 0.1
+ */
 public class PgEscapeSymbol implements Text {
 
     @Override
-    public String asString() {
+    public final String asString() {
         return "\"";
     }
 

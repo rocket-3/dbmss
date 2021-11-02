@@ -13,17 +13,28 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.query;
 
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.scalar.Unchecked;
 
-public class QueryOfScalar<E extends Text> implements Query<E>{
+/**
+ * The type of {@link Query} that can be constructed of {@link Scalar}.
+ * @param <E> The E type of Query parameter.
+ * @since 0.1
+ */
+public class QueryOfScalar<E extends Text> implements Query<E> {
 
+    /**
+     * The Scalar of Query encapsulated.
+     */
     private final Unchecked<Query<E>> scalar;
 
+    /**
+     * Instantiates a new Query of scalar.
+     * @param scalar The Scalar of Query to be encapsulated.
+     */
     public QueryOfScalar(final Scalar<Query<E>> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
