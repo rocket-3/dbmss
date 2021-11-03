@@ -29,7 +29,7 @@ import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
  * @since 0.1
  */
 public class EntriesOfYamlRepresentative
-    extends IterableEnvelope<Map.Entry<Text, ? extends YamlNode>> {
+    extends IterableEnvelope<Map.Entry<? extends Text, ? extends YamlNode>> {
 
     /**
      * Instantiates a new Entries of yaml representative.

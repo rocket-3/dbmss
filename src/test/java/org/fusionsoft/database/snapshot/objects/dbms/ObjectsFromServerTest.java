@@ -16,16 +16,23 @@
 package org.fusionsoft.database.snapshot.objects.dbms;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Mapped;
+import org.cactoos.map.MapOf;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.mapping.dbd.DbdSchemasMappingOfObjects;
 import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.StickyObjects;
+import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
+import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
+import org.llorllale.cactoos.matchers.HasValues;
 
 /**
  * The test for {@link ObjectsFromServer}.
@@ -70,7 +77,7 @@ class ObjectsFromServerTest {
     @Test
     @Disabled
     @SuppressWarnings("PMD")
-    public void createsCorrectDbd() {
+    public void showDbd() {
         System.out.println(
             new DbdSchemasMappingOfObjects(
                 new StickyObjects(
@@ -83,6 +90,60 @@ class ObjectsFromServerTest {
                 )
             ).toString()
         );
+    }
+
+    /**
+     * The Dbd created can be rendered.
+     */
+    @Test
+    public void canBeRendered() {
+        new DbdSchemasMappingOfObjects(
+            new StickyObjects(
+                new ObjectsFromServer(
+                    new DbdServerMappingWithCredentials(
+                        new UrlOfPgGitLabDatabaseV11(this.database),
+                        new CredsOfPgTestDatabase()
+                    )
+                )
+            )
+        ).toString();
+    }
+
+    /**
+     * The Dbd created has expected nodes.
+     */
+    @Test
+    @SuppressWarnings("PMD")
+    public void createsCorrectDbd() {
+        new Assertion<>(
+            "Has tables and sequences second-level nodes",
+            new Mapped<String>(
+                Text::asString,
+                new MapOf<>(
+                    new EntriesOfYamlMapping(
+                        new YamlMappingOfPath(
+                            new DbdSchemasMappingOfObjects(
+                                new StickyObjects(
+                                    new ObjectsFromServer(
+                                        new DbdServerMappingWithCredentials(
+                                            new UrlOfPgGitLabDatabaseV11(this.database),
+                                            new CredsOfPgTestDatabase()
+                                        )
+                                    )
+                                )
+                            ),
+                            "public"
+                        )
+                    )
+                ).keySet()
+            ),
+            new HasValues<>(
+                new IterableOf<String>(
+                    "tables",
+                    "sequences"
+                )
+            )
+        ).affirm();
     }
 
     /**

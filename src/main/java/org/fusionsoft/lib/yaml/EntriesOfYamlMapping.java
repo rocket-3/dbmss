@@ -28,7 +28,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * The MapEntries of Text and YamlNode constructed of {@link YamlMapping}.
  * @since 0.1
  */
-public class EntriesOfYamlMapping extends IterableEnvelope<Map.Entry<Text, ? extends YamlNode>> {
+public class EntriesOfYamlMapping extends IterableEnvelope<Map.Entry<? extends Text, ? extends YamlNode>> {
 
     /**
      * Ctor.

@@ -29,7 +29,7 @@ import org.cactoos.set.SetOf;
  * The type of that can be constructed of.
  * @since 0.1
  */
-public class EntriesWithKeys extends IterableEnvelope<Map.Entry<Text, ? extends YamlNode>> {
+public class EntriesWithKeys extends IterableEnvelope<Map.Entry<? extends Text, ? extends YamlNode>> {
 
     /**
      * Ctor.
@@ -37,7 +37,7 @@ public class EntriesWithKeys extends IterableEnvelope<Map.Entry<Text, ? extends 
      * @param keys The Set of String keys to include.
      */
     public EntriesWithKeys(
-        final Iterable<Map.Entry<Text, ? extends YamlNode>> entries,
+        final Iterable<Map.Entry<? extends Text, ? extends YamlNode>> entries,
         final Set<String> keys
     ) {
         super(
@@ -54,7 +54,7 @@ public class EntriesWithKeys extends IterableEnvelope<Map.Entry<Text, ? extends 
      * @param keys The Iterable of Text keys to include.
      */
     public EntriesWithKeys(
-        final Iterable<Map.Entry<Text, ? extends YamlNode>> entries,
+        final Iterable<Map.Entry<? extends Text, ? extends YamlNode>> entries,
         final Iterable<Text> keys
     ) {
         this(
@@ -74,7 +74,7 @@ public class EntriesWithKeys extends IterableEnvelope<Map.Entry<Text, ? extends 
      * @param keys The Text... keys to include.
      */
     public EntriesWithKeys(
-        final Iterable<Map.Entry<Text, ? extends YamlNode>> entries,
+        final Iterable<Map.Entry<? extends Text, ? extends YamlNode>> entries,
         final Text... keys
     ) {
         this(entries, new IterableOf<Text>(keys));
