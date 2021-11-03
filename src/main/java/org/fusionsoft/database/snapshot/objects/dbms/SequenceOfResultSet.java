@@ -25,6 +25,7 @@ import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
+import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 public class SequenceOfResultSet extends SimpleDbObject<DbdSequenceMapping> {
@@ -35,18 +36,71 @@ public class SequenceOfResultSet extends SimpleDbObject<DbdSequenceMapping> {
     ) {
         super(
             new DbdSequenceMapping(
-                new YamlMappingOfEntries(
-                    new ScalarEntry(
-                        DbdSequenceFields.DUMMY,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdSequenceFields.DUMMY),
-                            rset
+                new MappingWithoutNullScalars(
+                    new YamlMappingOfEntries(
+                        new ScalarEntry(
+                            DbdSequenceFields.OWNER,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdSequenceFields.OWNER),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdSequenceFields.START,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdSequenceFields.START),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdSequenceFields.INCREMENT,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdSequenceFields.INCREMENT),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdSequenceFields.MIN,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdSequenceFields.MIN),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdSequenceFields.MAX,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdSequenceFields.MAX),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdSequenceFields.CYCLE,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdSequenceFields.CYCLE),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdSequenceFields.DEP_TABLE,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdSequenceFields.DEP_TABLE),
+                                rset
+                            )
                         )
                     )
                 )
             ),
             new SimpleObjectSignature(
-                new FullObjectName(""),
+                new FullObjectName(
+                    new TextOfResultSet(
+                        query.outcomeFor(DbdSequenceFields.SCHEMA),
+                        rset
+                    ),
+                    new TextOfResultSet(
+                        query.outcomeFor(DbdSequenceFields.SEQUENCE),
+                        rset
+                    )
+                ),
                 ObjectType.SEQUENCE
             )
         );

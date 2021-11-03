@@ -14,19 +14,16 @@
  * and limitations under the License.
  */
 
-package org.fusionsoft.database.mapping.dbd;
+package org.fusionsoft.database.snapshot.query;
 
-import com.amihaiemil.eoyaml.YamlMapping;
-import org.fusionsoft.database.mapping.fields.DbdSequenceFields;
-import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-public class DbdSequenceMapping extends YamlMappingHasKeys {
+class PgSequencesQueryTest {
 
-    public DbdSequenceMapping(final YamlMapping mapping) {
-        super(
-            mapping,
-            DbdSequenceFields.necessary()
-        );
+    @Test
+    @Disabled
+    public void showMe() throws Exception {
+        System.out.println(new PgSequencesQuery().asString());
     }
-
 }

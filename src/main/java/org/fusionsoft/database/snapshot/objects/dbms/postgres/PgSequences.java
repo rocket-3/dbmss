@@ -25,15 +25,13 @@ import org.fusionsoft.database.snapshot.query.PgSequencesQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
- * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of sequence {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Adapt query for sequences from DbGit.
- * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class PgSequences extends ObjectsOfScalar {
 
     /**
-     * Instantiates a new Postgres ... .
+     * Instantiates a new Postgres sequences.
      * @param connection The Connection to be encapsulated.
      */
     public PgSequences(final Connection connection) {

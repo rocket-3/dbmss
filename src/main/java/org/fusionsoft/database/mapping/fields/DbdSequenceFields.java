@@ -13,13 +13,22 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.fields;
 
+import java.util.Set;
 import org.cactoos.Text;
+import org.cactoos.set.SetOf;
 
-public enum  DbdSequenceFields implements Text {
-    DUMMY("dummy");
+public enum DbdSequenceFields implements Text {
+    SCHEMA("schema"),
+    SEQUENCE("sequence"),
+    OWNER("owner"),
+    START("start"),
+    MIN("minimum"),
+    MAX("maximum"),
+    INCREMENT("increment"),
+    CYCLE("cycle"),
+    DEP_TABLE("dependant");
 
     private final String string;
 
@@ -30,5 +39,16 @@ public enum  DbdSequenceFields implements Text {
     @Override
     public String asString() {
         return this.string;
+    }
+
+    public static Set<DbdSequenceFields> necessary() {
+        return new SetOf<DbdSequenceFields>(
+            OWNER,
+            START,
+            MIN,
+            MAX,
+            INCREMENT,
+            CYCLE
+        );
     }
 }

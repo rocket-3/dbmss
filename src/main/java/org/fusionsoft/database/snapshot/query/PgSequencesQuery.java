@@ -22,8 +22,35 @@ public class PgSequencesQuery extends PgMessageFormatQuery<DbdSequenceFields>{
 
     public PgSequencesQuery() {
         super(
-            "",
-            DbdSequenceFields.DUMMY
+            "select \n"
+            + "    s.sequence_schema AS {0}, \n"
+            + "    s.sequence_name AS {1}, \n"
+            + "    rol.rolname AS {2}, \n"
+            + "    s.start_value AS {3}, \n"
+            + "    s.minimum_value AS {4}, \n"
+            + "    s.maximum_value AS {5}, \n"
+            + "    s.increment AS {6}, \n"
+            + "    s.cycle_option AS {7}, \n"
+            + "    cl.relname AS {8} \n"
+            + "from pg_class cls \n"
+            + "  join pg_roles rol on rol.oid = cls.relowner  \n"
+            + "  join pg_namespace nsp on nsp.oid = cls.relnamespace \n"
+            + "  join information_schema.sequences s on cls.relname = s.sequence_name \n"
+            + "  left join pg_depend d on d.objid=cls.oid and d.classid='pg_class'::regclass \n"
+            + "  and d.refclassid='pg_class'::regclass\n"
+            + "  left join pg_class cl on cl.oid = d.refobjid and d.deptype='a'  \n"
+            + "where nsp.nspname not in ('information_schema', 'pg_catalog')\n"
+            + "  and nsp.nspname not like 'pg_toast%' \n"
+            + "  and cls.relkind = 'S'",
+            DbdSequenceFields.SCHEMA,
+            DbdSequenceFields.SEQUENCE,
+            DbdSequenceFields.OWNER,
+            DbdSequenceFields.START,
+            DbdSequenceFields.MIN,
+            DbdSequenceFields.MAX,
+            DbdSequenceFields.INCREMENT,
+            DbdSequenceFields.CYCLE,
+            DbdSequenceFields.DEP_TABLE
         );
     }
 
