@@ -63,11 +63,7 @@ class MappingWithoutNullScalarsNestedTest {
             new IsText(
                 new TextOfYamlNode(
                     new YamlMappingOfEntries(
-                        scalar,
-                        new MapEntry<>(
-                            key,
-                            new MappingEmpty()
-                        )
+                        scalar
                     )
                 )
             )
