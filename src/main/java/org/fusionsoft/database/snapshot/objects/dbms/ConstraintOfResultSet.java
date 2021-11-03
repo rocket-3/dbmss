@@ -16,7 +16,10 @@
 package org.fusionsoft.database.snapshot.objects.dbms;
 
 import java.sql.ResultSet;
+import org.cactoos.Text;
 import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
+import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdConstraintFields;
@@ -26,72 +29,101 @@ import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
+import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
 public class ConstraintOfResultSet extends SimpleDbObject<DbdConstraintMapping> {
 
+    public ConstraintOfResultSet(
+        final ResultSet rset,
+        final Query<DbdConstraintFields> query
+    ) {
+        this(
+            rset,
+            query,
+            new TextOfResultSet(
+                query.outcomeFor(DbdConstraintFields.TYPE),
+                rset
+            )
+        );
+    }
+
     /**
      * Instantiates a new simple db object.
      */
-    public ConstraintOfResultSet(final ResultSet rset, final Query<DbdConstraintFields> query) {
+    public ConstraintOfResultSet(
+        final ResultSet rset,
+        final Query<DbdConstraintFields> query,
+        final Text type
+    ) {
         super(
             new DbdConstraintMapping(
-                new YamlMappingOfEntries(
-                    new MapEntry<>(
-                        DbdConstraintFields.SRC_PK_COL,
-                        new YamlScalarSequenceOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.SRC_PK_COL),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdConstraintFields.SRC_FK_COL,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.SRC_FK_COL),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdConstraintFields.TGT_SCHEMA,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.TGT_SCHEMA),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdConstraintFields.TGT_TABLE,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.TGT_TABLE),
-                            rset
-                        )
-                    ),
-                    new MapEntry<>(
-                        DbdConstraintFields.TGT_COL,
-                        new YamlScalarSequenceOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.TGT_COL),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdConstraintFields.TYPE,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.TYPE),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdConstraintFields.ON_DELETE,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.ON_DELETE),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdConstraintFields.ON_UPDATE,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdConstraintFields.ON_UPDATE),
-                            rset
+                new MappingWithoutNullScalars(
+                    new YamlMappingOfEntries(
+                        new MapEntry<>(
+                            new TextOfScalar(
+                                () -> new MapOf<Boolean, Text>(
+                                    new MapEntry<>(
+                                        true,
+                                        DbdConstraintFields.SRC_FK_COL
+                                    ),
+                                    new MapEntry<>(
+                                        false,
+                                        DbdConstraintFields.SRC_PK_COL
+                                    )
+                                ).get(type.asString().equals("FK")).asString()
+                            ),
+                            new YamlScalarSequenceOfResultSet(
+                                query.outcomeFor(DbdConstraintFields.SRC_PK_COL),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdConstraintFields.TGT_SCHEMA,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdConstraintFields.TGT_SCHEMA),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdConstraintFields.TGT_TABLE,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdConstraintFields.TGT_TABLE),
+                                rset
+                            )
+                        ),
+                        new MapEntry<>(
+                            DbdConstraintFields.TGT_COL,
+                            new YamlScalarSequenceOfResultSet(
+                                query.outcomeFor(DbdConstraintFields.TGT_COL),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdConstraintFields.TYPE,
+                            type
+                        ),
+                        new ScalarEntry(
+                            DbdConstraintFields.ON_DELETE,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdConstraintFields.ON_DELETE),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdConstraintFields.ON_UPDATE,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdConstraintFields.ON_UPDATE),
+                                rset
+                            )
+                        ),
+                        new ScalarEntry(
+                            DbdConstraintFields.DDL,
+                            new TextOfResultSet(
+                                query.outcomeFor(DbdConstraintFields.DDL),
+                                rset
+                            )
                         )
                     )
                 )
@@ -111,7 +143,7 @@ public class ConstraintOfResultSet extends SimpleDbObject<DbdConstraintMapping> 
                         rset
                     )
                 ),
-                ObjectType.INDEX
+                ObjectType.CONSTRAINT
             )
         );
     }

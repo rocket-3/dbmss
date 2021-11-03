@@ -28,6 +28,10 @@ public enum DbdConstraintFields implements Text {
      */
     TYPE("dbConstraintType"),
     /**
+     *Owner dbd constraint fields.
+     */
+    OWNER("owner"),
+    /**
      *Src schema dbd constraint fields.
      */
     SCHEMA("schema"),
@@ -66,7 +70,11 @@ public enum DbdConstraintFields implements Text {
     /**
      *On delete dbd constraint fields.
      */
-    ON_DELETE("dbRefDelete");
+    ON_DELETE("dbRefDelete"),
+    /**
+     *On delete dbd constraint fields.
+     */
+    DDL("ddl");
 
     /**
      * The String encapsulated.
