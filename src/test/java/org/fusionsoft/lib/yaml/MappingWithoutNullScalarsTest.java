@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.lib.yaml;
 
+import com.amihaiemil.eoyaml.YamlSequence;
 import org.cactoos.map.MapEntry;
 import org.cactoos.text.TextOf;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
@@ -48,6 +49,10 @@ class MappingWithoutNullScalarsTest {
             new TextOf("c"),
             new YamlMappingOfEntries(nullable)
         );
+        final MapEntry<TextOf, YamlSequence> sequence = new MapEntry<>(
+            new TextOf("d"),
+            new YamlSequenceOfNodes()
+        );
         new Assertion<>(
             "Should not contain null scalar entry",
             new TextOfYamlNode(
@@ -55,7 +60,8 @@ class MappingWithoutNullScalarsTest {
                     new YamlMappingOfEntries(
                         nullable,
                         scalar,
-                        mapping
+                        mapping,
+                        sequence
                     )
                 )
             ),
