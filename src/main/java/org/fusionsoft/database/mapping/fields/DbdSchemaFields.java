@@ -28,7 +28,11 @@ public enum DbdSchemaFields implements Text {
     /**
      *The dbd/schema/tables field.
      */
-    TABLES("tables");
+    TABLES("tables"),
+    /**
+     *The dbd/schema/tables field.
+     */
+    SEQUENCES("sequences");
 
     /**
      * The String encapsulated.

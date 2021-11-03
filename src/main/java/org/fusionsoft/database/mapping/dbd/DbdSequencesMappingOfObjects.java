@@ -24,36 +24,36 @@ import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
- * The type of {@link YamlMappingOfEntries} with {@link DbdTableMapping}'s
- *  that can be constructed of {@link Objects}
+ * The type of {@link DbdSequenceMapping} that can be constructed of {@link Objects}
  *  and filtered by schema.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class DbdTablesMappingOfObjects extends YamlMappingOfEntries {
+public class DbdSequencesMappingOfObjects extends YamlMappingOfEntries {
 
     /**
      * Instantiates a new Dbd tables mapping of objects.
      * @param objects The all Objects to be encapsulated.
      * @param schema The parent schema DbObject to be encapsulated.
      */
-    public DbdTablesMappingOfObjects(
+    public DbdSequencesMappingOfObjects(
         final Objects objects,
         final DbObject<?> schema
     ) {
         super(
-            new UnwrapEntriesOfObjects<>(
+            new UnwrapEntriesOfObjects<DbdSequenceMapping>(
                 objects,
                 new ObjectsWithParent(
                     schema,
                     new ObjectsWithType(
-                        ObjectType.TABLE,
+                        ObjectType.SEQUENCE,
                         objects
                     )
                 ),
-                DbdTableMappingOfObjects::new
+                DbdSequenceMappingOfObjects::new
             )
         );
     }
 
 }
+
