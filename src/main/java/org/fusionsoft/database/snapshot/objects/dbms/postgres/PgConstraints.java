@@ -26,7 +26,6 @@ import org.fusionsoft.lib.collection.ListOfResultSet;
 /**
  * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Adapt query for constraints from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class PgConstraints extends ObjectsOfScalar {
