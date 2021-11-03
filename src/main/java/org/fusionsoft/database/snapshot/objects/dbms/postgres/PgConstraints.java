@@ -19,6 +19,8 @@ import java.sql.Connection;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.objects.dbms.ConstraintOfResultSet;
+import org.fusionsoft.database.snapshot.query.PgConstraintsQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
@@ -37,10 +39,12 @@ public class PgConstraints extends ObjectsOfScalar {
         super(
             () ->
                 new ListOfResultSet<DbObject<?>>(
-                    PostgresSchemaOfResultSet::new,
-                    () -> connection.createStatement().executeQuery(
-                        ""
-                    )
+                    rset -> new ConstraintOfResultSet(
+                        rset,
+                        new PgConstraintsQuery()
+                    ),
+                    new PgConstraintsQuery(),
+                    connection
                 )
         );
     }

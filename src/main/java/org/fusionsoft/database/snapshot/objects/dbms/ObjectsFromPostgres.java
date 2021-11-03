@@ -16,6 +16,7 @@
 package org.fusionsoft.database.snapshot.objects.dbms;
 
 import java.sql.Connection;
+import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgConstraints;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgIndexes;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSchemas;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTables;
@@ -36,7 +37,8 @@ public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
             connection,
             PgSchemas::new,
             PgTables::new,
-            PgIndexes::new
+            PgIndexes::new,
+            PgConstraints::new
         );
     }
 
