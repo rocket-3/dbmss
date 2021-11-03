@@ -22,10 +22,18 @@ import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The tests for {@link PgConstraints}.
+ * @since 0.1
+ */
 class PgConstraintsTest {
 
+    /**
+     * Show me.
+     */
     @Test
     @Disabled
+    @SuppressWarnings("PMD.SystemPrintln")
     public void showMe() {
         new PgConstraints(
             new ConnectionOfDbdServerMapping(

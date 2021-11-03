@@ -13,13 +13,21 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.query;
 
 import org.fusionsoft.database.mapping.fields.DbdConstraintFields;
 
+/**
+ * The only type of {@link PgMessageFormatQuery} of {@link DbdConstraintFields}.
+ * @since 0.1
+ * @checkstyle StringLiteralsConcatenationCheck (128 lines)
+ */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class PgConstraintsQuery extends PgMessageFormatQuery<DbdConstraintFields> {
 
+    /**
+     * Instantiates a new Pg constraints query.
+     */
     public PgConstraintsQuery() {
         super(
             "SELECT \n"

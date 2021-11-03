@@ -43,7 +43,7 @@ public class YamlScalarSequenceOfResultSet extends YamlSequenceOfNodes {
                     new Unchecked<>(
                         () -> {
                             String[] value = new String[0];
-                            if(rset.getArray(key) != null) {
+                            if (rset.getArray(key) != null) {
                                 value = (String[]) rset.getArray(key).getArray();
                             }
                             return value;
