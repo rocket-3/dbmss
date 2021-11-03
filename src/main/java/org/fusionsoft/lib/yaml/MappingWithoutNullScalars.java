@@ -62,6 +62,16 @@ public class MappingWithoutNullScalars extends YamlMappingOfEntries {
                             new Not(
                                 () -> entry.getValue().asSequence().size() == 0
                             )
+                        ),
+                        new Or(
+                            new Not(
+                                () -> entry.getValue().type().equals(
+                                    Node.MAPPING
+                                )
+                            ),
+                            new Not(
+                                () -> entry.getValue().asMapping().keys().size() == 0
+                            )
                         )
                     ).value(),
                 new EntriesOfYamlMapping(mapping)

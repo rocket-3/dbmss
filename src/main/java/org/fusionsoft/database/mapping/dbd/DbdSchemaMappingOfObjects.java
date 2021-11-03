@@ -24,6 +24,7 @@ import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
+import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
@@ -36,28 +37,33 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
     /**
      * Instantiates a new Yaml mapping envelope.
      * @param objects The Objects to be used.
-     * @param schema The DbObject<? extends YamlNode> to be encapsulated.
+     * @param schema The DbObject of YamlNode to be encapsulated.
      */
     public DbdSchemaMappingOfObjects(
         final Objects objects,
         final DbObject<? extends YamlNode> schema
     ) {
         super(
-            new YamlMappingOfEntries(
-                new Joined<>(
-                    new EntriesOfYamlMapping(
-                        new MappingOfRepresentative(schema)
-                    ),
-                    new IterableOf<>(
-                        new MapEntry<>(
-                            DbdSchemaFields.TABLES,
-                            new DbdTablesMappingOfObjects(objects, schema)
-                        )
-                    ),
-                    new IterableOf<>(
-                        new MapEntry<>(
-                            DbdSchemaFields.SEQUENCES,
-                            new DbdSequencesMappingOfObjects(objects, schema)
+            new MappingWithoutNullScalars(
+                new YamlMappingOfEntries(
+                    new Joined<>(
+                        new EntriesOfYamlMapping(
+                            new MappingOfRepresentative(schema)
+                        ),
+                        new IterableOf<>(
+                            new MapEntry<>(
+                                DbdSchemaFields.TABLES,
+                                new DbdTablesMappingOfObjects(objects, schema)
+                            )
+                        ),
+                        new IterableOf<>(
+                            new MapEntry<>(
+                                DbdSchemaFields.SEQUENCES,
+                                new DbdSequencesMappingOfObjects(
+                                    objects,
+                                    schema
+                                )
+                            )
                         )
                     )
                 )
