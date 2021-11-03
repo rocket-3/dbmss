@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
@@ -23,11 +22,19 @@ import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The test for {@link PgSequences} class.
+ * @since 0.1
+ */
 class PgSequencesTest {
 
+    /**
+     * Show me.
+     */
     @Test
     @Disabled
-    public void showMe(){
+    @SuppressWarnings("PMD.SystemPrintln")
+    public void showMe() {
         new PgSequences(
             new ConnectionOfDbdServerMapping(
                 new DbdServerMappingWithCredentials(
@@ -41,4 +48,5 @@ class PgSequencesTest {
             }
         );
     }
+
 }

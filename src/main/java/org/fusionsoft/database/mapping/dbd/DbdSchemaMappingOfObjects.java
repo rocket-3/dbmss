@@ -29,6 +29,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 /**
  * The DBD/schemas/#schema mapping of {@link Objects}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
 

@@ -13,13 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.query;
 
 import org.fusionsoft.database.mapping.fields.DbdSequenceFields;
 
-public class PgSequencesQuery extends PgMessageFormatQuery<DbdSequenceFields>{
+/**
+ * The only type of {@link MessageFormatQuery} of {@link DbdSequenceFields}.
+ * @since 0.1
+ */
+public class PgSequencesQuery extends PgMessageFormatQuery<DbdSequenceFields> {
 
+    /**
+     * Instantiates a new Pg sequences query.
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     */
     public PgSequencesQuery() {
         super(
             "select \n"

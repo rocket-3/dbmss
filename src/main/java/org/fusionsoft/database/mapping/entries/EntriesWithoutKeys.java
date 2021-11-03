@@ -29,7 +29,8 @@ import org.cactoos.set.SetOf;
  * The type of that can be constructed of.
  * @since 0.1
  */
-public class EntriesWithoutKeys extends IterableEnvelope<Map.Entry<? extends Text, ? extends YamlNode>> {
+public class EntriesWithoutKeys
+    extends IterableEnvelope<Map.Entry<? extends Text, ? extends YamlNode>> {
 
     /**
      * Ctor.
