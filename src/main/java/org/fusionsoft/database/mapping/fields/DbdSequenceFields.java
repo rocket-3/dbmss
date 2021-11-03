@@ -19,19 +19,56 @@ import java.util.Set;
 import org.cactoos.Text;
 import org.cactoos.set.SetOf;
 
+/**
+ * The enum of {@link org.fusionsoft.database.mapping.dbd.DbdSequenceMapping} fields.
+ */
 public enum DbdSequenceFields implements Text {
+    /**
+     *Schema dbd sequence fields.
+     */
     SCHEMA("schema"),
+    /**
+     *Sequence dbd sequence fields.
+     */
     SEQUENCE("sequence"),
+    /**
+     *Owner dbd sequence fields.
+     */
     OWNER("owner"),
+    /**
+     *Start dbd sequence fields.
+     */
     START("start"),
+    /**
+     *Min dbd sequence fields.
+     */
     MIN("minimum"),
+    /**
+     *Max dbd sequence fields.
+     */
     MAX("maximum"),
+    /**
+     *Increment dbd sequence fields.
+     */
     INCREMENT("increment"),
+    /**
+     *Cycle dbd sequence fields.
+     */
     CYCLE("cycle"),
+    /**
+     *Dependant table dbd sequence fields.
+     */
     DEP_TABLE("dependant");
 
+    /**
+     * The String encapsulated.
+     */
     private final String string;
 
+    /**
+     * Instantiates a new Dbd sequence fields.
+     * @param string The String to be encapsulated.
+     */
     DbdSequenceFields(final String string) {
         this.string = string;
     }
@@ -41,6 +78,11 @@ public enum DbdSequenceFields implements Text {
         return this.string;
     }
 
+    /**
+     * Necessary set.
+     * @return The set.
+     */
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
     public static Set<DbdSequenceFields> necessary() {
         return new SetOf<DbdSequenceFields>(
             OWNER,

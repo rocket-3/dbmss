@@ -13,17 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.query;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The tests for {@link PgSequencesQuery}.
+ * @since 0.1
+ */
 class PgSequencesQueryTest {
 
+    /**
+     * Show me.
+     * @throws Exception When can't.
+     */
     @Test
     @Disabled
+    @SuppressWarnings("PMD.SystemPrintln")
     public void showMe() throws Exception {
         System.out.println(new PgSequencesQuery().asString());
     }
+
 }

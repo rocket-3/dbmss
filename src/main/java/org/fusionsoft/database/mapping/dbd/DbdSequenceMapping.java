@@ -13,15 +13,23 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.mapping.fields.DbdSequenceFields;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
+/**
+ * The type of {@link org.fusionsoft.lib.yaml.YamlMappingOf}
+ *  of DBD/schemas/#schema/sequences/#sequence document node.
+ * @since 0.1
+ */
 public class DbdSequenceMapping extends YamlMappingHasKeys {
 
+    /**
+     * Instantiates a new Dbd sequence mapping.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
     public DbdSequenceMapping(final YamlMapping mapping) {
         super(
             mapping,

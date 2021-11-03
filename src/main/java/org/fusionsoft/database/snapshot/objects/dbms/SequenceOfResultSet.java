@@ -28,8 +28,18 @@ import org.fusionsoft.lib.text.TextOfResultSet;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The type of {@link SimpleDbObject} of {@link DbdSequenceMapping}
+ *  that can be constructed of {@link ResultSet} and {@link Query} of {@link DbdSequenceFields}.
+ * @since 0.1
+ */
 public class SequenceOfResultSet extends SimpleDbObject<DbdSequenceMapping> {
 
+    /**
+     * Instantiates a new Sequence of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdSequenceFields to be encapsulated.
+     */
     public SequenceOfResultSet(
         final ResultSet rset,
         final Query<DbdSequenceFields> query

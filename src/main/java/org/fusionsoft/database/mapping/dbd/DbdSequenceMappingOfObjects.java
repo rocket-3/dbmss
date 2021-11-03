@@ -19,8 +19,19 @@ import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
+/**
+ * The type of {@link DbdSequenceMapping} that can be constructed
+ *  of sequence {@link DbObject}.
+ * @since 0.1
+ */
 public class DbdSequenceMappingOfObjects extends DbdSequenceMapping {
 
+    /**
+     * Instantiates a new Dbd sequence mapping of objects.
+     * @param objects The Objects to be encapsulated.
+     * @param sequence The sequence DbObject to be encapsulated.
+     */
+    @SuppressWarnings("PMD.UnusedFormalParameter")
     public DbdSequenceMappingOfObjects(final Objects objects, final DbObject<?> sequence) {
         super(
             new MappingOfRepresentative(sequence)
