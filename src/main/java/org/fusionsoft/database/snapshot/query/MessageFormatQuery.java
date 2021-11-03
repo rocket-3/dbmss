@@ -83,7 +83,9 @@ public class MessageFormatQuery<T extends Text> extends BasicQuery<T> {
         super(
             new TextOfScalar(
                 () -> MessageFormat.format(
-                    text.asString().replace("'", "''"),
+                    text.asString()
+                        .replace("'", "''")
+                        .replace("{}", "'{'}"),
                     new ListOf<>(
                         new Mapped<String>(
                             x -> new EscapedText(x, quotes).asString(),

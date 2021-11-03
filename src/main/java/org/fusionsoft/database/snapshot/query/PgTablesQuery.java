@@ -21,10 +21,10 @@ import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.objectsignature.FullNameDelimiter;
 
 /**
- * The only type of {@link PgSimpleQuery} of {@link DbdTableFields}.
+ * The only type of {@link PgMessageFormatQuery} of {@link DbdTableFields}.
  * @since 0.1
  */
-public class PgTablesQuery extends PgSimpleQuery<DbdTableFields> {
+public class PgTablesQuery extends PgMessageFormatQuery<DbdTableFields> {
 
     /**
      * Ctor of PgIndexesQuery with default outcomes.

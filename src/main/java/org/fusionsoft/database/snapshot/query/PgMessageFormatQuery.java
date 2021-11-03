@@ -22,7 +22,7 @@ import org.cactoos.Text;
  * @param <T> The type of fields to query parameter.
  * @since 0.1
  */
-public class PgSimpleQuery<T extends Text> extends MessageFormatQuery<T> {
+public class PgMessageFormatQuery<T extends Text> extends MessageFormatQuery<T> {
 
     /**
      * Instantiates a new Pg simple query.
@@ -30,7 +30,7 @@ public class PgSimpleQuery<T extends Text> extends MessageFormatQuery<T> {
      * @param keys The Text array of outcomes keys to be encapsulated.
      */
     @SafeVarargs
-    public PgSimpleQuery(final Text text, final T... keys) {
+    public PgMessageFormatQuery(final Text text, final T... keys) {
         super(text, new PgEscapeSymbol(), keys);
     }
 
@@ -40,7 +40,7 @@ public class PgSimpleQuery<T extends Text> extends MessageFormatQuery<T> {
      * @param keys The Text array of outcomes keys to be encapsulated.
      */
     @SafeVarargs
-    public PgSimpleQuery(final String text, final T... keys) {
+    public PgMessageFormatQuery(final String text, final T... keys) {
         super(text, new PgEscapeSymbol().asString(), keys);
     }
 
