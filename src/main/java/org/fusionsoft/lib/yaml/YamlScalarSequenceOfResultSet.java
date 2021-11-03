@@ -41,7 +41,13 @@ public class YamlScalarSequenceOfResultSet extends YamlSequenceOfNodes {
                 x -> Yaml.createYamlScalarBuilder().addLine(x).buildPlainScalar(),
                 new IterableOf<>(
                     new Unchecked<>(
-                        () -> (String[]) rset.getArray(key).getArray()
+                        () -> {
+                            String[] value = new String[0];
+                            if(rset.getArray(key) != null) {
+                                value = (String[]) rset.getArray(key).getArray();
+                            }
+                            return value;
+                        }
                     ).value()
                 )
             )
