@@ -16,9 +16,12 @@
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
 import java.sql.Connection;
+import org.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.objects.dbms.SequenceOfResultSet;
+import org.fusionsoft.database.snapshot.query.PgSequencesQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
@@ -36,11 +39,10 @@ public class PgSequences extends ObjectsOfScalar {
     public PgSequences(final Connection connection) {
         super(
             () ->
-                new ListOfResultSet<DbObject<?>>(
-                    PostgresSchemaOfResultSet::new,
-                    () -> connection.createStatement().executeQuery(
-                        ""
-                    )
+                new ListOfResultSet<DbObject<DbdSequenceMapping>>(
+                    rset -> new SequenceOfResultSet(rset, new PgSequencesQuery()),
+                    new PgSequencesQuery(),
+                    connection
                 )
         );
     }
