@@ -21,6 +21,7 @@ import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Map;
 import org.cactoos.Text;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.scalar.And;
 import org.cactoos.scalar.Not;
 import org.cactoos.scalar.Or;
 import org.fusionsoft.lib.text.JsonUndefinedText;
@@ -38,18 +39,31 @@ public class MappingWithoutNullScalars extends YamlMappingOfEntries {
     public MappingWithoutNullScalars(final YamlMapping mapping) {
         super(
             new Filtered<Map.Entry<? extends Text, ? extends YamlNode>>(
-                entry -> new Or(
-                    new Not(
-                        () -> entry.getValue().type().equals(
-                            Node.SCALAR
+                entry ->
+                    new And(
+                        new Or(
+                            new Not(
+                                () -> entry.getValue().type().equals(
+                                    Node.SCALAR
+                                )
+                            ),
+                            new Not(
+                                () -> entry.getValue().asScalar().value().equals(
+                                    new JsonUndefinedText().asString()
+                                )
+                            )
+                        ),
+                        new Or(
+                            new Not(
+                                () -> entry.getValue().type().equals(
+                                    Node.SEQUENCE
+                                )
+                            ),
+                            new Not(
+                                () -> entry.getValue().asSequence().size() == 0
+                            )
                         )
-                    ),
-                    new Not(
-                        () -> entry.getValue().asScalar().value().equals(
-                            new JsonUndefinedText().asString()
-                        )
-                    )
-                ).value(),
+                    ).value(),
                 new EntriesOfYamlMapping(mapping)
             )
         );
