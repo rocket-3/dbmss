@@ -27,7 +27,7 @@ import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  * @checkstyle BracketsStructureCheck (100 lines)
  */
-public class PgColumnsQuery extends PgSimpleQuery<DbdColumnFields> {
+public class PgColumnsQuery extends PgMessageFormatQuery<DbdColumnFields> {
 
     /**
      * Instantiates a new Pg columns query.
