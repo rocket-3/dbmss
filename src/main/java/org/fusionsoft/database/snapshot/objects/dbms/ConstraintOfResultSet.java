@@ -33,8 +33,19 @@ import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
+/**
+ * The type of {@link SimpleDbObject} that can be constructed
+ *  of {@link ResultSet} and {@link Query} of {@link DbdConstraintFields}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 public class ConstraintOfResultSet extends SimpleDbObject<DbdConstraintMapping> {
 
+    /**
+     * Instantiates a new Constraint of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdConstraintFields to be encapsulated.
+     */
     public ConstraintOfResultSet(
         final ResultSet rset,
         final Query<DbdConstraintFields> query
@@ -51,8 +62,11 @@ public class ConstraintOfResultSet extends SimpleDbObject<DbdConstraintMapping> 
 
     /**
      * Instantiates a new simple db object.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdConstraintFields to be encapsulated.
+     * @param type The Text of constraint type to be encapsulated.
      */
-    public ConstraintOfResultSet(
+    private ConstraintOfResultSet(
         final ResultSet rset,
         final Query<DbdConstraintFields> query,
         final Text type
@@ -64,14 +78,8 @@ public class ConstraintOfResultSet extends SimpleDbObject<DbdConstraintMapping> 
                         new MapEntry<>(
                             new TextOfScalar(
                                 () -> new MapOf<Boolean, Text>(
-                                    new MapEntry<>(
-                                        true,
-                                        DbdConstraintFields.SRC_FK_COL
-                                    ),
-                                    new MapEntry<>(
-                                        false,
-                                        DbdConstraintFields.SRC_PK_COL
-                                    )
+                                    new MapEntry<>(true, DbdConstraintFields.SRC_FK_COL),
+                                    new MapEntry<>(false, DbdConstraintFields.SRC_PK_COL)
                                 ).get(type.asString().equals("FK")).asString()
                             ),
                             new YamlScalarSequenceOfResultSet(
