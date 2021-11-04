@@ -18,7 +18,6 @@ package org.fusionsoft.database.mapping.dbd;
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
-import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
 /**
@@ -34,11 +33,7 @@ public class DbdSchemaMapping extends YamlMappingHasKeys {
     public DbdSchemaMapping(final YamlMapping mapping) {
         super(
             mapping,
-            new IterableOf<Text>(
-                DbdSchemaFields.TABLES,
-                DbdSchemaFields.SEQUENCES,
-                DbdSchemaFields.VIEWS
-            )
+            new IterableOf<Text>()
         );
     }
 
