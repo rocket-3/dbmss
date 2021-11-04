@@ -28,10 +28,9 @@ public class DbdViewMappingOfObjects extends DbdViewMapping {
 
     /**
      * Instantiates a new Dbd view mapping.
-     * @param objects The Objects to be encapsulated.
      * @param view The DbObject to be encapsulated.
      */
-    public DbdViewMappingOfObjects(final Objects objects, final DbObject<?> view) {
+    public DbdViewMappingOfObjects(final DbObject<?> view) {
         super(new MappingOfRepresentative(view));
     }
 

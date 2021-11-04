@@ -20,6 +20,7 @@ import org.fusionsoft.database.mapping.fields.DbdViewFields;
 /**
  * The only type of {@link PgMessageFormatQuery} of {@link DbdViewFields}.
  * @since 0.1
+ * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class PgViewsQuery extends PgMessageFormatQuery<DbdViewFields> {
 
@@ -51,7 +52,8 @@ public class PgViewsQuery extends PgMessageFormatQuery<DbdViewFields> {
             + "    join pg_attribute \n"
             + "        on pg_attribute.attrelid  = pg_depend.refobjid \n"
             + "        and pg_attribute.attnum = pg_depend.refobjsubid  \n"
-            + "    join pg_namespace dependent_ns on dependent_ns.oid = dependent_view.relnamespace\n"
+            + "    join pg_namespace dependent_ns \n"
+            + "        on dependent_ns.oid = dependent_view.relnamespace\n"
             + "    join pg_namespace source_ns on source_ns.oid = source_table.relnamespace\n"
             + "    where pg_attribute.attnum > 0 \n"
             + "    and dependent_view.relname = cls.relname\n"

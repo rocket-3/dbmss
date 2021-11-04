@@ -33,6 +33,7 @@ import org.llorllale.cactoos.matchers.HasValues;
 /**
  * The tests for {@link DbdSchemasMappingOfObjects}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (255 lines)
  */
 class DbdSchemasMappingOfObjectsTest {
 
