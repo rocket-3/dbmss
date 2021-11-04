@@ -64,6 +64,17 @@ public class DbdTableMappingOfObjects extends DbdTableMapping {
                     (objs, obj) -> new DbdConstraintMapping(
                         new MappingOfRepresentative(obj)
                     )
+                ),
+                new UnwrapEntriesOfObjects<>(
+                    objects,
+                    new ObjectsWithParentAndType(
+                        table,
+                        ObjectType.TRIGGER,
+                        objects
+                    ),
+                    (objs, obj) -> new DbdTriggerMapping(
+                        new MappingOfRepresentative(obj)
+                    )
                 )
             )
         );

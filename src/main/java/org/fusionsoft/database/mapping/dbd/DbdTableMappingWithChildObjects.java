@@ -24,6 +24,7 @@ import org.fusionsoft.database.mapping.entries.EntriesWithKeys;
 import org.fusionsoft.database.mapping.entries.EntriesWithoutKeys;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
+import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
@@ -41,31 +42,38 @@ public class DbdTableMappingWithChildObjects extends DbdTableMapping {
     public DbdTableMappingWithChildObjects(
         final DbdTableMapping table,
         final Iterable<MapEntry<Text, DbdIndexMapping>> indexes,
-        final Iterable<MapEntry<Text, DbdConstraintMapping>> constraints
+        final Iterable<MapEntry<Text, DbdConstraintMapping>> constraints,
+        final Iterable<MapEntry<Text, DbdTriggerMapping>> triggers
     ) {
         super(
-            new YamlMappingOfEntries(
-                new Joined<>(
-                    new EntriesWithoutKeys(
-                        new EntriesOfYamlMapping(table),
-                        DbdTableFields.all()
-                    ),
-                    new EntriesWithKeys(
-                        new EntriesOfYamlMapping(table),
-                        DbdTableFields.COLUMNS
-                    ),
-                    new EntriesWithKeys(
-                        new EntriesOfYamlMapping(table),
-                        DbdTableFields.DATA
-                    ),
-                    new IterableOf<MapEntry<? extends Text, ? extends YamlNode>>(
-                        new MapEntry<>(
-                            DbdTableFields.CONSTRAINTS,
-                            new YamlMappingOfEntries(constraints)
+            new MappingWithoutNullScalars(
+                new YamlMappingOfEntries(
+                    new Joined<>(
+                        new EntriesWithoutKeys(
+                            new EntriesOfYamlMapping(table),
+                            DbdTableFields.all()
                         ),
-                        new MapEntry<>(
-                            DbdTableFields.INDEXES,
-                            new YamlMappingOfEntries(indexes)
+                        new EntriesWithKeys(
+                            new EntriesOfYamlMapping(table),
+                            DbdTableFields.COLUMNS
+                        ),
+                        new EntriesWithKeys(
+                            new EntriesOfYamlMapping(table),
+                            DbdTableFields.DATA
+                        ),
+                        new IterableOf<MapEntry<? extends Text, ? extends YamlNode>>(
+                            new MapEntry<>(
+                                DbdTableFields.CONSTRAINTS,
+                                new YamlMappingOfEntries(constraints)
+                            ),
+                            new MapEntry<>(
+                                DbdTableFields.INDEXES,
+                                new YamlMappingOfEntries(indexes)
+                            ),
+                            new MapEntry<>(
+                                DbdTableFields.TRIGGERS,
+                                new YamlMappingOfEntries(triggers)
+                            )
                         )
                     )
                 )

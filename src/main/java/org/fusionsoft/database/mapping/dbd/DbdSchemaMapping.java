@@ -35,7 +35,9 @@ public class DbdSchemaMapping extends YamlMappingHasKeys {
         super(
             mapping,
             new IterableOf<Text>(
-                DbdSchemaFields.TABLES
+                DbdSchemaFields.TABLES,
+                DbdSchemaFields.SEQUENCES,
+                DbdSchemaFields.VIEWS
             )
         );
     }

@@ -21,6 +21,7 @@ import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgIndexes;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSchemas;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSequences;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTables;
+import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTriggers;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgViews;
 
 /**
@@ -42,7 +43,8 @@ public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
             PgIndexes::new,
             PgConstraints::new,
             PgSequences::new,
-            PgViews::new
+            PgViews::new,
+            PgTriggers::new
         );
     }
 
