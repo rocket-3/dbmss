@@ -15,11 +15,20 @@
  */
 package org.fusionsoft.database.mapping.dbd;
 
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Mapped;
+import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
+import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
+import org.fusionsoft.database.snapshot.objects.StickyObjects;
 import org.fusionsoft.database.snapshot.objects.dbd.ObjectsOfDbdRootMapping;
+import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromServer;
+import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasValues;
 
 /**
  * The tests for {@link DbdSchemasMappingOfObjects}.
@@ -43,6 +52,37 @@ class DbdSchemasMappingOfObjectsTest {
                 )
             ).toString()
         );
+    }
+
+    /**
+     * Has all possible entries from pagilla.
+     */
+    @Test
+    void hasEntriesFromPagilla() {
+        new Assertion<>(
+            "should have tables, sequences, views nodes",
+            new Mapped<String>(
+                entry -> entry.getKey().asString(),
+                new EntriesOfYamlMapping(
+                    new YamlMappingOfPath(
+                        new DbdSchemasMappingOfObjects(
+                            new StickyObjects(
+                                new ObjectsFromServer(
+                                    new DbdServerMappingWithCredentials(
+                                        new UrlOfPgGitLabDatabaseV11("pagilla"),
+                                        new CredsOfPgTestDatabase()
+                                    )
+                                )
+                            )
+                        ),
+                        "public"
+                    )
+                )
+            ),
+            new HasValues<>(
+                new IterableOf<String>("tables", "sequences", "views")
+            )
+        ).affirm();
     }
 
 }
