@@ -20,6 +20,7 @@ import org.fusionsoft.database.mapping.fields.DbdTriggerFields;
 /**
  * The only type of {@link PgMessageFormatQuery} of {@link DbdTriggerFields}.
  * @since 0.1
+ * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class PgTriggersQuery extends PgMessageFormatQuery<DbdTriggerFields> {
 

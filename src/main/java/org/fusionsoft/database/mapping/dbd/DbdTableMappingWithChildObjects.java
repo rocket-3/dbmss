@@ -30,14 +30,20 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 /**
  * The DBD/sequences/#sequence/tables/#table node mapping.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class DbdTableMappingWithChildObjects extends DbdTableMapping {
 
     /**
      * Instantiates a new Dbd table mapping of entries.
      * @param table The table DbObject entry to take data from.
-     * @param indexes The Iterable of YamlMapping to be encapsulated.
-     * @param constraints The Iterable of YamlMapping to be encapsulated.
+     * @param indexes The Iterable of Text -> {@link DbdIndexMapping}
+     *  entries to be encapsulated.
+     * @param constraints The Iterable of Text -> {@link DbdConstraintMapping}
+     *  entries to be encapsulated.
+     * @param triggers The Iterable of Text -> {@link DbdTriggerMapping}
+     *  entries to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
      */
     public DbdTableMappingWithChildObjects(
         final DbdTableMapping table,

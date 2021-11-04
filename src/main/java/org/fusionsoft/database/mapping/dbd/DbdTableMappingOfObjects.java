@@ -26,6 +26,7 @@ import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndTyp
  * The The DBD/schemas/#schema/tables/#table node mapping of
  *  Objects context and table DbObject.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class DbdTableMappingOfObjects extends DbdTableMapping {
 
