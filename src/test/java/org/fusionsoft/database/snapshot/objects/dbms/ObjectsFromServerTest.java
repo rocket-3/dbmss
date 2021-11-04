@@ -24,6 +24,7 @@ import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.mapping.dbd.DbdSchemasMappingOfObjects;
 import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
+import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.StickyObjects;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
@@ -58,7 +59,7 @@ class ObjectsFromServerTest {
      */
     @Test
     public void works() {
-        final int size = 140;
+        final int size = 155;
         new Assertion<>(
             "Has expected size",
             new ObjectsFromServer(
@@ -138,9 +139,9 @@ class ObjectsFromServerTest {
                 ).keySet()
             ),
             new HasValues<>(
-                new IterableOf<String>(
-                    "tables",
-                    "sequences"
+                new Mapped<String>(
+                    Text::asString,
+                    new IterableOf<Text>(DbdSchemaFields.values())
                 )
             )
         ).affirm();
