@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.entries;
 
 import com.amihaiemil.eoyaml.Yaml;
@@ -27,6 +26,11 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The {@link Map.Entry} of {@link Text}, {@link YamlNode} with text that should
+ *  be rendered as multiline text.
+ * @since 0.1
+ */
 public class MultilineScalarEntry implements Map.Entry<Text, YamlNode> {
 
     /**
@@ -61,11 +65,8 @@ public class MultilineScalarEntry implements Map.Entry<Text, YamlNode> {
                 new TextOfScalar(
                     () -> {
                         String txt = value.asString();
-                        if(!txt.contains(System.lineSeparator())){
-                            txt = txt.replace(
-                                "\n",
-                                System.lineSeparator()
-                            );
+                        if (!txt.contains(System.lineSeparator())) {
+                            txt = txt.replace("\n", System.lineSeparator());
                         }
                         return txt;
                     }
@@ -84,17 +85,17 @@ public class MultilineScalarEntry implements Map.Entry<Text, YamlNode> {
     }
 
     @Override
-    public Text getKey() {
+    public final Text getKey() {
         return this.text;
     }
 
     @Override
-    public YamlNode getValue() {
+    public final YamlNode getValue() {
         return this.node.value();
     }
 
     @Override
-    public YamlNode setValue(final YamlNode value) {
+    public final YamlNode setValue(final YamlNode value) {
         throw new NotImplemented();
     }
 

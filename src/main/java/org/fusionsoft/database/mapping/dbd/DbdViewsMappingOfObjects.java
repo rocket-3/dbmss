@@ -49,7 +49,7 @@ public class DbdViewsMappingOfObjects extends YamlMappingOfEntries {
                     ObjectType.VIEW,
                     objects
                 ),
-                DbdViewMappingOfObjects::new
+                (objs, view) -> new DbdViewMappingOfObjects(view)
             )
         );
     }

@@ -36,6 +36,7 @@ import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
  *  that can be constructed of {@link ResultSet} and {@link Query}.
  * @since 0.1
  * @todo #40:60min Fix eo-yaml block scalars rendering
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class ViewOfResultSet extends SimpleDbObject<DbdViewMapping> {
 
