@@ -16,12 +16,15 @@
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
 import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.objects.dbms.ViewOfResultSet;
+import org.fusionsoft.database.snapshot.query.PgViewsQuery;
+import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
- * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of view {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
  * @todo #101:30min Adapt query for views from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
@@ -35,7 +38,12 @@ public class PgViews extends ObjectsOfScalar {
      */
     public PgViews(final Connection connection) {
         super(
-            () -> new IterableOf<>()
+            () ->
+                new ListOfResultSet<DbObject<?>>(
+                    rset -> new ViewOfResultSet(rset, new PgViewsQuery()),
+                    new PgViewsQuery(),
+                    connection
+                )
         );
     }
 
