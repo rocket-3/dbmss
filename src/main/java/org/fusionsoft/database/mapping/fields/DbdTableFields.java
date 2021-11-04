@@ -69,6 +69,10 @@ public enum DbdTableFields implements Text {
      */
     INDEXES("indexes"),
     /**
+     *The dbd/schemas/#schema/tables/#table/indexes node.
+     */
+    TRIGGERS("triggers"),
+    /**
      *The dbd/schemas/#schema/tables/#table/constraints node.
      */
     CONSTRAINTS("constraints"),
