@@ -18,6 +18,7 @@ package org.fusionsoft.database.snapshot.objects.dbms;
 import java.sql.ResultSet;
 import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
+import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdIndexFields;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
@@ -74,7 +75,7 @@ public class IndexOfResultSet extends SimpleDbObject<DbdIndexMapping> {
                             rset
                         )
                     ),
-                    new ScalarEntry(
+                    new MultilineScalarEntry(
                         DbdIndexFields.DDL,
                         new TextOfResultSet(
                             query.outcomeFor(DbdIndexFields.DDL),
