@@ -26,8 +26,6 @@ import org.fusionsoft.lib.collection.ListOfResultSet;
 /**
  * The type of view {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Adapt query for views from DbGit.
- * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @SuppressWarnings("PMD")
 public class PgViews extends ObjectsOfScalar {
