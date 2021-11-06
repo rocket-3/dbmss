@@ -13,24 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects.dbms.postgres;
+package org.fusionsoft.database.snapshot.query.pg;
 
-import java.sql.ResultSet;
-import org.fusionsoft.database.snapshot.objects.dbms.IndexOfResultSet;
-import org.fusionsoft.database.snapshot.query.pg.PgIndexesQuery;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
- * The {@link IndexOfResultSet} with {@link PgIndexesQuery}.
+ * The tests for {@link PgSequencesQuery}.
  * @since 0.1
  */
-public class PgIndexOfResultSet extends IndexOfResultSet {
+class PgSequencesQueryTest {
 
     /**
-     * Instantiates a new Postgres IndexOfResultSet.
-     * @param rset The ResultSet to be encapsulated.
+     * Show me.
+     * @throws Exception When can't.
      */
-    public PgIndexOfResultSet(final ResultSet rset) {
-        super(rset, new PgIndexesQuery());
+    @Test
+    @Disabled
+    @SuppressWarnings("PMD.SystemPrintln")
+    public void showMe() throws Exception {
+        System.out.println(new PgSequencesQuery().asString());
     }
 
 }

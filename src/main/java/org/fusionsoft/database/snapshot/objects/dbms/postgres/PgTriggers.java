@@ -19,8 +19,8 @@ import java.sql.Connection;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.database.snapshot.objects.dbms.TriggerOfResultSet;
-import org.fusionsoft.database.snapshot.query.PgTriggersQuery;
+import org.fusionsoft.database.snapshot.objects.dbms.resultset.TriggerOfResultSet;
+import org.fusionsoft.database.snapshot.query.pg.PgTriggersQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**

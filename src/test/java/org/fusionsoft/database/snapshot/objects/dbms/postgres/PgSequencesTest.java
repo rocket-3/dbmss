@@ -18,7 +18,7 @@ package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
-import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
+import org.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

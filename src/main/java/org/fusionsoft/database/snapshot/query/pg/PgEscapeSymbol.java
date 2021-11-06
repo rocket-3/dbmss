@@ -13,24 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects.dbms.postgres;
+package org.fusionsoft.database.snapshot.query.pg;
 
-import java.sql.ResultSet;
-import org.fusionsoft.database.snapshot.objects.dbms.IndexOfResultSet;
-import org.fusionsoft.database.snapshot.query.pg.PgIndexesQuery;
+import org.cactoos.Text;
 
 /**
- * The {@link IndexOfResultSet} with {@link PgIndexesQuery}.
+ * The Text of symbol, used in Postgres to escape names.
  * @since 0.1
  */
-public class PgIndexOfResultSet extends IndexOfResultSet {
+public class PgEscapeSymbol implements Text {
 
-    /**
-     * Instantiates a new Postgres IndexOfResultSet.
-     * @param rset The ResultSet to be encapsulated.
-     */
-    public PgIndexOfResultSet(final ResultSet rset) {
-        super(rset, new PgIndexesQuery());
+    @Override
+    public final String asString() {
+        return "\"";
     }
 
 }

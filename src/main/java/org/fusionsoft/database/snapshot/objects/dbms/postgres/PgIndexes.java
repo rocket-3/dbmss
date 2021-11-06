@@ -19,7 +19,7 @@ import java.sql.Connection;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.database.snapshot.query.PgIndexesQuery;
+import org.fusionsoft.database.snapshot.query.pg.PgIndexesQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**

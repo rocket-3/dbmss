@@ -17,7 +17,7 @@ package org.fusionsoft.database.snapshot.objects.composite;
 
 import org.cactoos.Text;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.mapping.dbd.DbdServerEntryOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.extracted.DbdServerEntryOfDbdFile;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;

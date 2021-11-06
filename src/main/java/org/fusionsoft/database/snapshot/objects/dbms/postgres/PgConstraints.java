@@ -19,8 +19,8 @@ import java.sql.Connection;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.database.snapshot.objects.dbms.ConstraintOfResultSet;
-import org.fusionsoft.database.snapshot.query.PgConstraintsQuery;
+import org.fusionsoft.database.snapshot.objects.dbms.resultset.ConstraintOfResultSet;
+import org.fusionsoft.database.snapshot.query.pg.PgConstraintsQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**

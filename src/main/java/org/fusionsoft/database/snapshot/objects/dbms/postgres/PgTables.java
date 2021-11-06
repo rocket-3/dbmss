@@ -20,9 +20,9 @@ import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.dbms.DbmsVersionOfConnection;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.database.snapshot.objects.dbms.TableOfResultSet;
-import org.fusionsoft.database.snapshot.query.PgColumnsQuery;
-import org.fusionsoft.database.snapshot.query.PgTablesQuery;
+import org.fusionsoft.database.snapshot.objects.dbms.resultset.TableOfResultSet;
+import org.fusionsoft.database.snapshot.query.pg.PgColumnsQuery;
+import org.fusionsoft.database.snapshot.query.pg.PgTablesQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
