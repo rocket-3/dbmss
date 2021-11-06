@@ -19,7 +19,7 @@ import org.cactoos.scalar.NumberOf;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsFromPgMvnDProps;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
-import org.fusionsoft.database.mapping.dbd.DbdServerMappingWithCredentials;
+import org.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsNumber;

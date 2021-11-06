@@ -13,32 +13,41 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.dbdfile;
+package org.fusionsoft.database.mapping.dbd.ofobjects;
 
+import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import org.fusionsoft.database.mapping.dbd.DbdServerEntry;
-import org.fusionsoft.database.mapping.dbd.ofobjects.DbdRootMappingOfSnapshotObjects;
+import org.fusionsoft.database.mapping.dbd.DbdServersMapping;
+import org.fusionsoft.database.mapping.dbd.built.DbdRootMappingBuilt;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The {@link org.fusionsoft.database.DbdFile} can be constructed of
- *  'server', 'info' and objects descriptions.
+ * The {@link DbdRootMappingBuilt} of database snapshot objects.
  * @since 0.1
  */
-public class DbdFileOfSnapshotObjects extends DbdFileOfRootMapping {
+public class DbdRootMappingOfSnapshotObjects extends DbdRootMappingBuilt {
 
     /**
-     * Instantiates a new Dbd file of snapshot objects.
-     * @param server The DbdServerEntry to be encapsulated.
+     * Instantiates a new DbdRootMappingOfSnapshotObjects.
+     * @param server The Iterable of DatabaseInfo to be encapsulated.
      * @param info The DbdInfoMapping to be encapsulated.
      * @param objects The Objects to be encapsulated.
      */
-    public DbdFileOfSnapshotObjects(
+    public DbdRootMappingOfSnapshotObjects(
         final DbdServerEntry server,
         final DbdInfoMapping info,
         final Objects objects
     ) {
-        super(new DbdRootMappingOfSnapshotObjects(server, info, objects));
+        super(
+            new DbdServersMapping(
+                new IterableOf<>(
+                    server
+                )
+            ),
+            info,
+            objects
+        );
     }
 
 }

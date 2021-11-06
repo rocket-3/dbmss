@@ -13,24 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects.dbms.postgres;
-
-import java.sql.ResultSet;
-import org.fusionsoft.database.snapshot.objects.dbms.IndexOfResultSet;
-import org.fusionsoft.database.snapshot.query.pg.PgIndexesQuery;
-
 /**
- * The {@link IndexOfResultSet} with {@link PgIndexesQuery}.
- * @since 0.1
+ * Tests for {@link org.fusionsoft.database.mapping.dbd.built} package classes.
  */
-public class PgIndexOfResultSet extends IndexOfResultSet {
-
-    /**
-     * Instantiates a new Postgres IndexOfResultSet.
-     * @param rset The ResultSet to be encapsulated.
-     */
-    public PgIndexOfResultSet(final ResultSet rset) {
-        super(rset, new PgIndexesQuery());
-    }
-
-}
+package org.fusionsoft.database.mapping.dbd.built;

@@ -20,8 +20,8 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.mapping.dbd.DbdInfoMappingOfDbdFile;
-import org.fusionsoft.database.mapping.dbd.DbdServerEntryOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.extracted.DbdInfoMappingOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.extracted.DbdServerEntryOfDbdFile;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
 import org.fusionsoft.database.snapshot.objects.composite.ObjectsFromServerMentionedInDbd;
 
