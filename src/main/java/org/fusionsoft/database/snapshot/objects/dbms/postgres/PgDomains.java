@@ -16,14 +16,18 @@
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
 import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.mapping.dbd.DbdDomainMapping;
+import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.objects.dbms.resultset.DomainOfResultSet;
+import org.fusionsoft.database.snapshot.query.pg.PgDomainConstraintsQuery;
+import org.fusionsoft.database.snapshot.query.pg.PgDomainsQuery;
+import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
  * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Adapt query for domains from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @SuppressWarnings("PMD")
@@ -35,7 +39,16 @@ public class PgDomains extends ObjectsOfScalar {
      */
     public PgDomains(final Connection connection) {
         super(
-            () -> new IterableOf<>()
+            () -> new ListOfResultSet<DbObject<DbdDomainMapping>>(
+                rset -> new DomainOfResultSet(
+                    rset,
+                    connection,
+                    new PgDomainsQuery(),
+                    PgDomainConstraintsQuery::new
+                ),
+                new PgDomainsQuery(),
+                connection
+            )
         );
     }
 
