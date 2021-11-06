@@ -16,47 +16,49 @@
 package org.fusionsoft.database.mapping.fields;
 
 import org.cactoos.Text;
+import org.fusionsoft.database.mapping.dbd.DbdDomainConstraintMapping;
 
 /**
- * The enum of DBD/schemas/#schema mapping fields.
+ * The enum of {@link DbdDomainConstraintMapping}'s fields.
  */
-public enum DbdSchemaFields implements Text {
+public enum DbdDomainConstraintFields implements Text {
+
     /**
-     *The dbd/schema/owner field.
+     *Schema dbd domain constraint fields.
      */
-    OWNER("owner"),
+    SCHEMA("schema"),
     /**
-     *The dbd/schema/tables field.
+     *Domain dbd domain constraint fields.
      */
-    TABLES("tables"),
+    DOMAIN("domain"),
     /**
-     *The dbd/schema/sequences field.
+     *Constraint dbd domain constraint fields.
      */
-    SEQUENCES("sequences"),
+    CONSTRAINT("constraint"),
     /**
-     *The dbd/schema/views field.
+     *Validated dbd domain constraint fields.
      */
-    VIEWS("views"),
+    VALIDATED("validated"),
     /**
-     *The dbd/schema/domains field.
+     *Condition dbd domain constraint fields.
      */
-    DOMAINS("domains");
+    CONDITION("condition");
 
     /**
      * The String encapsulated.
      */
-    private final String value;
+    private final String text;
 
     /**
-     * Instantiates a new DbdSchemaFields.
-     * @param string The String to be encapsulated.
+     * Instantiates a new Dbd domain constraint fields.
+     * @param text The String to be encapsulated.
      */
-    DbdSchemaFields(final String string) {
-        this.value = string;
+    DbdDomainConstraintFields(final String text) {
+        this.text = text;
     }
 
     @Override
     public String asString() {
-        return this.value;
+        return this.text;
     }
 }
