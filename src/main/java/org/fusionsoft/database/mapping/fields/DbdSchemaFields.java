@@ -38,6 +38,10 @@ public enum DbdSchemaFields implements Text {
      */
     VIEWS("views"),
     /**
+     *The dbd/schema/functions field.
+     */
+    FUNCTIONS("functions"),
+    /**
      *The dbd/schema/domains field.
      */
     DOMAINS("domains");
