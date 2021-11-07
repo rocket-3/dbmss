@@ -77,6 +77,15 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
                         ),
                         new IterableOf<>(
                             new MapEntry<>(
+                                DbdSchemaFields.FUNCTIONS,
+                                new DbdFunctionsMappingOfObjects(
+                                    objects,
+                                    schema
+                                )
+                            )
+                        ),
+                        new IterableOf<>(
+                            new MapEntry<>(
                                 DbdSchemaFields.DOMAINS,
                                 new DbdDomainsMappingOfObjects(
                                     objects,

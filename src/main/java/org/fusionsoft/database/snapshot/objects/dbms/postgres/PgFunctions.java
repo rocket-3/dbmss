@@ -16,31 +16,50 @@
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
 import java.sql.Connection;
+import org.fusionsoft.database.mapping.fields.DbdFunctionFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.dbms.DbmsVersionOfConnection;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.objects.dbms.FunctionOfResultSet;
+import org.fusionsoft.database.snapshot.query.Query;
+import org.fusionsoft.database.snapshot.query.pg.PgFunctionsQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
- * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of functions {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Adapt query for functions from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class PgFunctions extends ObjectsOfScalar {
 
     /**
-     * Instantiates a new Postgres ... .
+     * Instantiates a new Postgres functions.
      * @param connection The Connection to be encapsulated.
      */
     public PgFunctions(final Connection connection) {
+        this(
+            connection,
+            new PgFunctionsQuery(
+                new DbmsVersionOfConnection(connection)
+            )
+        );
+    }
+
+    /**
+     * Instantiates a new Postgres functions.
+     * @param connection The Connection to be encapsulated.
+     */
+    public PgFunctions(final Connection connection, final Query<DbdFunctionFields> query) {
         super(
             () ->
                 new ListOfResultSet<DbObject<?>>(
-                    PostgresSchemaOfResultSet::new,
-                    () -> connection.createStatement().executeQuery(
-                        ""
-                    )
+                    rset -> new FunctionOfResultSet(
+                        rset,
+                        query
+                    ),
+                    query,
+                    connection
                 )
         );
     }
