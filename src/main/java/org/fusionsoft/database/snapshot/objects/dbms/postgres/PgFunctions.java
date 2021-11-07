@@ -49,6 +49,7 @@ public class PgFunctions extends ObjectsOfScalar {
     /**
      * Instantiates a new Postgres functions.
      * @param connection The Connection to be encapsulated.
+     * @param query The Query of DbdFunctionFields to be encapsulated.
      */
     public PgFunctions(final Connection connection, final Query<DbdFunctionFields> query) {
         super(

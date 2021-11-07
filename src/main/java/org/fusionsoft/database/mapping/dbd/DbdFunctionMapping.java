@@ -19,8 +19,17 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.mapping.fields.DbdFunctionFields;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
+/**
+ * The type of {@link YamlMappingHasKeys} with {@link DbdFunctionFields} of
+ *  DBD/schemas/#schema/functions/#function document node.
+ * @since 0.1
+ */
 public class DbdFunctionMapping extends YamlMappingHasKeys {
 
+    /**
+     * Instantiates a new Dbd function mapping.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
     public DbdFunctionMapping(final YamlMapping mapping) {
         super(
             mapping,
