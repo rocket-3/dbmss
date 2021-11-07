@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects.dbms.resultset;
+package org.fusionsoft.database.snapshot.objects.resultset;
 
 import java.sql.ResultSet;
 import org.cactoos.Text;
