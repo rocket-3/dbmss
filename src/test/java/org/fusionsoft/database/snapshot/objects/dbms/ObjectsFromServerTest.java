@@ -59,7 +59,7 @@ class ObjectsFromServerTest {
      */
     @Test
     public void works() {
-        final int size = 156;
+        final int size = 166;
         new Assertion<>(
             "Has expected size",
             new ObjectsFromServer(
