@@ -13,24 +13,10 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.query.pg;
-
-import org.junit.jupiter.api.Test;
 
 /**
- * The tests for {@link PgDomainsQuery}.
- * @since 0.1
+ * The package with classes that helps you build
+ *  {@link org.fusionsoft.database.snapshot.Objects} of {@link java.sql.ResultSet},
+ *  {@link org.fusionsoft.database.snapshot.query.Query} and {@link java.sql.Connection}.
  */
-class PgDomainsQueryTest {
-
-    /**
-     * Show.
-     * @throws Exception When can't.
-     */
-    @Test
-    @SuppressWarnings("PMD.SystemPrintln")
-    public void show() throws Exception {
-        System.out.println(new PgDomainsQuery().asString());
-    }
-
-}
+package org.fusionsoft.database.snapshot.objects.dbms.resultset;

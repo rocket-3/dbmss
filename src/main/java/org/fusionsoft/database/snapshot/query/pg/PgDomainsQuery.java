@@ -17,8 +17,16 @@ package org.fusionsoft.database.snapshot.query.pg;
 
 import org.fusionsoft.database.mapping.fields.DbdDomainFields;
 
+/**
+ * The only type of {@link PgMessageFormatQuery} of {@link DbdDomainFields}.
+ * @since 0.1
+ */
 public class PgDomainsQuery extends PgMessageFormatQuery<DbdDomainFields> {
 
+    /**
+     * Instantiates a new Pg domains query.
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     */
     public PgDomainsQuery() {
         super(
             "SELECT \n"

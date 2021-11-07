@@ -13,24 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.query.pg;
-
-import org.junit.jupiter.api.Test;
 
 /**
- * The tests for {@link PgDomainsQuery}.
- * @since 0.1
+ * Classes that helps you build parts of DBD document mappings.
  */
-class PgDomainsQueryTest {
-
-    /**
-     * Show.
-     * @throws Exception When can't.
-     */
-    @Test
-    @SuppressWarnings("PMD.SystemPrintln")
-    public void show() throws Exception {
-        System.out.println(new PgDomainsQuery().asString());
-    }
-
-}
+package org.fusionsoft.database.mapping.dbd.built;

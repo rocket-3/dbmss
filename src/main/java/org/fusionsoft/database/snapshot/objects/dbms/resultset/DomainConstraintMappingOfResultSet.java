@@ -25,10 +25,20 @@ import org.fusionsoft.lib.text.TextOfResultSet;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The type of {@link DbdDomainConstraintMapping}
+ *  that can be constructed of {@link ResultSet} and {@link Query}.
+ * @since 0.1
+ */
 public class DomainConstraintMappingOfResultSet extends DbdDomainConstraintMapping {
 
+    /**
+     * Instantiates a new Domain constraint mapping of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdDomainConstraintFields to be encapsulated.
+     */
     public DomainConstraintMappingOfResultSet(
-        final ResultSet rs,
+        final ResultSet rset,
         final Query<DbdDomainConstraintFields> query
     ) {
         super(
@@ -38,21 +48,21 @@ public class DomainConstraintMappingOfResultSet extends DbdDomainConstraintMappi
                         DbdDomainConstraintFields.CONSTRAINT,
                         new TextOfResultSet(
                             query.outcomeFor(DbdDomainConstraintFields.CONSTRAINT),
-                            rs
+                            rset
                         )
                     ),
                     new ScalarEntry(
                         DbdDomainConstraintFields.VALIDATED,
                         new TextOfResultSet(
                             query.outcomeFor(DbdDomainConstraintFields.VALIDATED),
-                            rs
+                            rset
                         )
                     ),
                     new MultilineScalarEntry(
                         DbdDomainConstraintFields.CONDITION,
                         new TextOfResultSet(
                             query.outcomeFor(DbdDomainConstraintFields.CONDITION),
-                            rs
+                            rset
                         )
                     )
                 )
