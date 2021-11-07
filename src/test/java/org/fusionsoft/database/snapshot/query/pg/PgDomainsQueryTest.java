@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.query.pg;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,6 +29,7 @@ class PgDomainsQueryTest {
      * @throws Exception When can't.
      */
     @Test
+    @Disabled
     @SuppressWarnings("PMD.SystemPrintln")
     public void show() throws Exception {
         System.out.println(new PgDomainsQuery().asString());
