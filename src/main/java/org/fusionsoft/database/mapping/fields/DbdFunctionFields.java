@@ -17,16 +17,44 @@ package org.fusionsoft.database.mapping.fields;
 
 import org.cactoos.Text;
 
+/**
+ * The enum of DBD/schemas/#schema/functions/#function document node field.
+ */
 public enum DbdFunctionFields implements Text {
+    /**
+     *Schema dbd function fields.
+     */
     SCHEMA("schema"),
+    /**
+     *Owner dbd function fields.
+     */
     OWNER("owner"),
+    /**
+     *Function dbd function fields.
+     */
     FUNCTION("function"),
+    /**
+     *Arguments dbd function fields.
+     */
     ARGUMENTS("arguments"),
+    /**
+     *Ddl dbd function fields.
+     */
     DDL("ddl"),
+    /**
+     *Aggregate dbd function fields.
+     */
     AGGREGATE("aggregate");
 
+    /**
+     * The String encapsulated.
+     */
     private final String text;
 
+    /**
+     * Instantiates a new Dbd function fields.
+     * @param text The String to be encapsulated.
+     */
     DbdFunctionFields(final String text) {
         this.text = text;
     }

@@ -30,11 +30,18 @@ import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
- * The type of that can be constructed of.
+ * The type of {@link SimpleDbObject} of {@link DbdFunctionMapping} can be
+ *  constructed of {@link ResultSet} and {@link Query} of {@link DbdFunctionFields}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class FunctionOfResultSet extends SimpleDbObject<DbdFunctionMapping> {
 
+    /**
+     * Instantiates a new Function of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdFunctionFields to be encapsulated.
+     */
     public FunctionOfResultSet(final ResultSet rset, final Query<DbdFunctionFields> query) {
         super(
             new DbdFunctionMapping(

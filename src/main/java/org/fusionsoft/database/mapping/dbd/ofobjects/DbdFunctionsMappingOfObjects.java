@@ -24,8 +24,18 @@ import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The mapping of DBD/schemas/#schema/functions document node, that can be
+ *  constructed of all context {@link Objects} and current schema {@link DbObject}.
+ * @since 0.1
+ */
 public class DbdFunctionsMappingOfObjects extends YamlMappingOfEntries {
 
+    /**
+     * Instantiates a new Dbd functions mapping of objects.
+     * @param objects The all context {@link Objects} to be encapsulated.
+     * @param schema The schema {@link DbObject} to be encapsulated.
+     */
     public DbdFunctionsMappingOfObjects(
         final Objects objects,
         final DbObject<?> schema
