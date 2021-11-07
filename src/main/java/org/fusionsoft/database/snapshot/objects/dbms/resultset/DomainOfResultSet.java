@@ -40,9 +40,19 @@ import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
  * The type of {@link SimpleDbObject} of {@link DbdDomainMapping}
  *  that can be constructed of {@link ResultSet} and {@link Query} of {@link DbdDomainMapping}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
 
+    /**
+     * Instantiates a new Domain of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param connection The Connection to be encapsulated.
+     * @param query The Query of DbdDomainFields to be encapsulated.
+     * @param constraints The Func of FullObjectName -> Query of DbdDomainConstraintFields
+     *  to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
     public DomainOfResultSet(
         final ResultSet rset,
         final Connection connection,
@@ -67,6 +77,16 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
         );
     }
 
+    /**
+     * Instantiates a new Domain of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param connection The Connection to be encapsulated.
+     * @param query The Query of DbdDomainFields to be encapsulated.
+     * @param constraints The Func of FullObjectName -> Query of DbdDomainConstraintFields
+     *  to be encapsulated.
+     * @param domain The FullObjectName of domain to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
     private DomainOfResultSet(
         final ResultSet rset,
         final Connection connection,
@@ -83,6 +103,15 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
         );
     }
 
+    /**
+     * Instantiates a new Domain of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param connection The Connection to be encapsulated.
+     * @param query The Query of DbdDomainFields to be encapsulated.
+     * @param constraints The Query of DbdDomainConstraintFields to be encapsulated.
+     * @param domain The FullObjectName of domain to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
     private DomainOfResultSet(
         final ResultSet rset,
         final Connection connection,

@@ -18,8 +18,17 @@ package org.fusionsoft.database.snapshot.query.pg;
 import org.fusionsoft.database.mapping.fields.DbdDomainConstraintFields;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 
+/**
+ * The only type of {@link PgMessageFormatQuery} of {@link DbdDomainConstraintFields}.
+ * @since 0.1
+ */
 public class PgDomainConstraintsQuery extends PgMessageFormatQuery<DbdDomainConstraintFields> {
 
+    /**
+     * Instantiates a new Pg domain constraints query.
+     * @param domain The FullObjectName to be encapsulated.
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     */
     public PgDomainConstraintsQuery(final FullObjectName domain) {
         super(
             "SELECT \n"

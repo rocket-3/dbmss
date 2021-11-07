@@ -24,8 +24,18 @@ import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The {@link YamlMappingOfEntries} of DBD/schemas/#schema/domains document node built
+ *  of objects context.
+ * @since 0.1
+ */
 public class DbdDomainsMappingOfObjects extends YamlMappingOfEntries {
 
+    /**
+     * Instantiates a new Dbd domains mapping of objects.
+     * @param objects The whole Objects context to be encapsulated.
+     * @param schema The parent DbObject to be encapsulated.
+     */
     public DbdDomainsMappingOfObjects(
         final Objects objects,
         final DbObject<?> schema
