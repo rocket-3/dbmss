@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.database.snapshot.objects.dbms.resultset.SequenceOfResultSet;
+import org.fusionsoft.database.snapshot.objects.resultset.SequenceOfResultSet;
 import org.fusionsoft.database.snapshot.query.pg.PgSequencesQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 

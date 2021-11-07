@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.database.snapshot.objects.dbms.resultset.DomainOfResultSet;
+import org.fusionsoft.database.snapshot.objects.resultset.DomainOfResultSet;
 import org.fusionsoft.database.snapshot.query.pg.PgDomainConstraintsQuery;
 import org.fusionsoft.database.snapshot.query.pg.PgDomainsQuery;
 import org.fusionsoft.lib.collection.ListOfResultSet;

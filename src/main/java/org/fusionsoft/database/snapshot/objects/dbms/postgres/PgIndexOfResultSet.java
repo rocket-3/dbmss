@@ -16,7 +16,7 @@
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
 import java.sql.ResultSet;
-import org.fusionsoft.database.snapshot.objects.dbms.IndexOfResultSet;
+import org.fusionsoft.database.snapshot.objects.resultset.IndexOfResultSet;
 import org.fusionsoft.database.snapshot.query.pg.PgIndexesQuery;
 
 /**

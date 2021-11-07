@@ -19,4 +19,4 @@
  *  {@link org.fusionsoft.database.snapshot.Objects} of {@link java.sql.ResultSet},
  *  {@link org.fusionsoft.database.snapshot.query.Query} and {@link java.sql.Connection}.
  */
-package org.fusionsoft.database.snapshot.objects.dbms.resultset;
+package org.fusionsoft.database.snapshot.objects.resultset;
