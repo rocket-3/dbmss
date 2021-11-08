@@ -42,6 +42,10 @@ public enum DbdSchemaFields implements Text {
      */
     FUNCTIONS("functions"),
     /**
+     *The dbd/schema/procedures field.
+     */
+    PROCEDURES("procedures"),
+    /**
      *The dbd/schema/domains field.
      */
     DOMAINS("domains");

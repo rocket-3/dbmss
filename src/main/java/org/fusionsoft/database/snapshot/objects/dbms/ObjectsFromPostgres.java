@@ -20,6 +20,7 @@ import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgConstraints;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgDomains;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgFunctions;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgIndexes;
+import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgProcedures;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSchemas;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSequences;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTables;
@@ -47,6 +48,7 @@ public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
             PgSequences::new,
             PgViews::new,
             PgFunctions::new,
+            PgProcedures::new,
             PgTriggers::new,
             PgDomains::new
         );
