@@ -16,47 +16,38 @@
 package org.fusionsoft.database.snapshot.objects.resultset;
 
 import java.sql.ResultSet;
+import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.mapping.dbd.DbdProcedureMapping;
 import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.pg.DbdProcedureFields;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
-public class ProcedureOfResultSet extends SimpleDbObject<DbdProcedureMapping> {
+public class ProcedureOfResultSet extends ObjectOfEntries<DbdProcedureMapping> {
 
     public ProcedureOfResultSet(final ResultSet rset, final Query<DbdProcedureFields> query) {
         super(
-            new DbdProcedureMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new ScalarEntry(
-                            DbdProcedureFields.OWNER,
-                            new TextOfResultSet(DbdProcedureFields.OWNER, rset)
-                        ),
-                        new ScalarEntry(
-                            DbdProcedureFields.ARGUMENTS,
-                            new TextOfResultSet(DbdProcedureFields.ARGUMENTS, rset)
-                        ),
-                        new MultilineScalarEntry(
-                            DbdProcedureFields.DDL,
-                            new TextOfResultSet(DbdProcedureFields.DDL, rset)
-                        )
-                    )
-                )
+            ObjectType.PROCEDURE,
+            DbdProcedureMapping::new,
+            new IterableOf<>(
+                new TextOfResultSet(DbdProcedureFields.SCHEMA, rset),
+                new TextOfResultSet(DbdProcedureFields.PROCEDURE, rset)
             ),
-            new SimpleObjectSignature(
-                new FullObjectName(
-                    new TextOfResultSet(DbdProcedureFields.SCHEMA, rset),
-                    new TextOfResultSet(DbdProcedureFields.PROCEDURE, rset)
+            new IterableOf<>(
+                new ScalarEntry(
+                    DbdProcedureFields.OWNER,
+                    new TextOfResultSet(DbdProcedureFields.OWNER, rset)
                 ),
-                ObjectType.PROCEDURE
+                new ScalarEntry(
+                    DbdProcedureFields.ARGUMENTS,
+                    new TextOfResultSet(DbdProcedureFields.ARGUMENTS, rset)
+                ),
+                new MultilineScalarEntry(
+                    DbdProcedureFields.DDL,
+                    new TextOfResultSet(DbdProcedureFields.DDL, rset)
+                )
             )
         );
     }
