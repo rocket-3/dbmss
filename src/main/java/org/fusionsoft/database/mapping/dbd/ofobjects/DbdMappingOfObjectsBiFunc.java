@@ -30,7 +30,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * The {@link BiFunc} creating {@link T} subtype of {@link YamlMapping}
  *  of all {@link Objects} context, parent {@link DbObject}
  *  and {@link Func} of {@link YamlMapping} in object, returning {@link T}.
- * @param <T> The type of YamlMapping subclass instance created parameter.
+ * @param <T>  The type of YamlMapping subclass instance created parameter.
  * @since 0.1
  */
 public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
@@ -44,7 +44,7 @@ public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
     /**
      * The Unwrapping function encapsulated.
      */
-    BiFunc<Objects, DbObject<?>, T> unwrapping;
+    private final BiFunc<Objects, DbObject<?>, T> unwrapping;
 
     /**
      * Instantiates a new Dbd mapping of objects bi func.

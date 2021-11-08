@@ -24,7 +24,7 @@ import org.fusionsoft.database.snapshot.objects.resultset.ProcedureOfResultSet;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.pg.DbdProcedureFields;
 import org.fusionsoft.database.snapshot.query.pg.PgProceduresQuery;
-import org.fusionsoft.lib.collection.ListOfResultSet;
+import org.fusionsoft.lib.collection.ListOfConnection;
 
 /**
  * The type of procedures {@link Objects} that can be constructed of connection to Postgres DBMS.
@@ -54,13 +54,10 @@ public class PgProcedures extends ObjectsOfScalar {
     public PgProcedures(final Connection connection, final Query<DbdProcedureFields> query) {
         super(
             () ->
-                new ListOfResultSet<DbObject<?>>(
-                    rset -> new ProcedureOfResultSet(
-                        rset,
-                        query
-                    ),
-                    query,
-                    connection
+                new ListOfConnection<DbObject<?>>(
+                    ProcedureOfResultSet::new,
+                    connection,
+                    query
                 )
         );
     }
