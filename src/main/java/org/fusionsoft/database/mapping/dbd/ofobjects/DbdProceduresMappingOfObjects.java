@@ -21,14 +21,24 @@ import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
+/**
+ * The type of {@link DbdProcedureMapping} that can be extracted
+ *  of all {@link Objects} context and parent schema {@link DbObject}.
+ * @since 0.1
+ */
 public class DbdProceduresMappingOfObjects extends YamlMappingOfScalar {
 
-    public DbdProceduresMappingOfObjects(final Objects objects, final DbObject<?> object) {
+    /**
+     * Instantiates a new Dbd procedures mapping of objects.
+     * @param objects The Objects to be encapsulated.
+     * @param parent The DbObject to be encapsulated.
+     */
+    public DbdProceduresMappingOfObjects(final Objects objects, final DbObject<?> parent) {
         super(
             () -> new DbdMappingOfObjectsBiFunc<>(
                 ObjectType.PROCEDURE,
                 DbdProcedureMapping::new
-            ).apply(objects, object)
+            ).apply(objects, parent)
         );
     }
 

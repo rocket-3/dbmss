@@ -26,13 +26,31 @@ import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The {@link BiFunc} creating {@link T} subtype of {@link YamlMapping}
+ *  of all {@link Objects} context, parent {@link DbObject}
+ *  and {@link Func} of {@link YamlMapping} in object, returning {@link T}.
+ * @param <T> The type of YamlMapping subclass instance created parameter.
+ * @since 0.1
+ */
 public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
     implements BiFunc<Objects, DbObject<?>, YamlMapping> {
 
+    /**
+     * The ObjectType encapsulated.
+     */
     private final ObjectType type;
 
+    /**
+     * The Unwrapping function encapsulated.
+     */
     BiFunc<Objects, DbObject<?>, T> unwrapping;
 
+    /**
+     * Instantiates a new Dbd mapping of objects bi func.
+     * @param type The ObjectType to be encapsulated.
+     * @param unwraping The BiFunc of Objects, DbObject -> T to be encapsulated.
+     */
     public DbdMappingOfObjectsBiFunc(
         final ObjectType type,
         final BiFunc<Objects, DbObject<?>, T> unwraping
@@ -41,17 +59,22 @@ public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
         this.unwrapping = unwraping;
     }
 
+    /**
+     * Instantiates a new Dbd mapping of objects bi func.
+     * @param type The ObjectType to be encapsulated.
+     * @param ctor The Func of YamlMapping -> T to be encapsulated.
+     */
     public DbdMappingOfObjectsBiFunc(final ObjectType type, final Func<YamlMapping, T> ctor) {
         this(
             type,
-            (objs, obj) -> ctor.apply(
-                new MappingOfRepresentative(obj)
+            (objs, parent) -> ctor.apply(
+                new MappingOfRepresentative(parent)
             )
         );
     }
 
     @Override
-    public YamlMapping apply(final Objects all, final DbObject<?> parent) {
+    public final YamlMapping apply(final Objects all, final DbObject<?> parent) {
         return new YamlMappingOfEntries(
             new UnwrapEntriesOfObjects<T>(
                 all,
@@ -60,7 +83,7 @@ public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
                     this.type,
                     all
                 ),
-                (objs, object) -> unwrapping.apply(
+                (objs, object) -> this.unwrapping.apply(
                     objs, object
                 )
             )

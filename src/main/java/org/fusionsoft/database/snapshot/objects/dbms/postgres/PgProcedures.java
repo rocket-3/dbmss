@@ -49,6 +49,7 @@ public class PgProcedures extends ObjectsOfScalar {
     /**
      * Instantiates a new Postgres procedures.
      * @param connection The Connection to be encapsulated.
+     * @param query The Query of DbdProcedureFields to be encapsulated.
      */
     public PgProcedures(final Connection connection, final Query<DbdProcedureFields> query) {
         super(

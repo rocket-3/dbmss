@@ -17,15 +17,40 @@ package org.fusionsoft.database.snapshot.query.pg;
 
 import org.cactoos.Text;
 
+/**
+ * The enum of DBD/schemas/#schema/procedures/#procedure document node fields.
+ */
 public enum DbdProcedureFields implements Text {
+    /**
+     *Schema dbd procedure fields.
+     */
     SCHEMA("schema"),
+    /**
+     *Owner dbd procedure fields.
+     */
     OWNER("owner"),
+    /**
+     *Procedure dbd procedure fields.
+     */
     PROCEDURE("procedure"),
+    /**
+     *Arguments dbd procedure fields.
+     */
     ARGUMENTS("arguments"),
+    /**
+     *Ddl dbd procedure fields.
+     */
     DDL("ddl");
 
+    /**
+     * The String encapsulated.
+     */
     private final String text;
 
+    /**
+     * Instantiates a new Dbd procedure fields.
+     * @param text The String to be encapsulated.
+     */
     DbdProcedureFields(final String text) {
         this.text = text;
     }
