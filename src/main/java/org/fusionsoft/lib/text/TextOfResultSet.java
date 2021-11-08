@@ -51,6 +51,7 @@ public class TextOfResultSet extends TextEnvelope {
      * @param label The Text subtype of key to be encapsulated.
      * @param rset The ResultSet to be encapsulated.
      * @param query The Query of Text subtype to be encapsulated.
+     * @param <T> The subtype of {@link Text} of {@link Query} outcome fields.
      */
     public <T extends Text> TextOfResultSet(
         final T label,
