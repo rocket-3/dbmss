@@ -25,28 +25,38 @@ import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.pg.DbdProcedureFields;
 import org.fusionsoft.lib.text.TextOfResultSet;
 
+/**
+ * The type of {@link ObjectOfEntries} of {@link DbdProcedureMapping}, can
+ *  be constructed of {@link ResultSet} and {@link Query} of {@link DbdProcedureFields}.
+ * @since 0.1
+ */
 public class ProcedureOfResultSet extends ObjectOfEntries<DbdProcedureMapping> {
 
+    /**
+     * Instantiates a new Procedure of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdProcedureFields to be encapsulated.
+     */
     public ProcedureOfResultSet(final ResultSet rset, final Query<DbdProcedureFields> query) {
         super(
             ObjectType.PROCEDURE,
             DbdProcedureMapping::new,
             new IterableOf<>(
-                new TextOfResultSet(DbdProcedureFields.SCHEMA, rset),
-                new TextOfResultSet(DbdProcedureFields.PROCEDURE, rset)
+                new TextOfResultSet(DbdProcedureFields.SCHEMA, rset, query),
+                new TextOfResultSet(DbdProcedureFields.PROCEDURE, rset, query)
             ),
             new IterableOf<>(
                 new ScalarEntry(
                     DbdProcedureFields.OWNER,
-                    new TextOfResultSet(DbdProcedureFields.OWNER, rset)
+                    new TextOfResultSet(DbdProcedureFields.OWNER, rset, query)
                 ),
                 new ScalarEntry(
                     DbdProcedureFields.ARGUMENTS,
-                    new TextOfResultSet(DbdProcedureFields.ARGUMENTS, rset)
+                    new TextOfResultSet(DbdProcedureFields.ARGUMENTS, rset, query)
                 ),
                 new MultilineScalarEntry(
                     DbdProcedureFields.DDL,
-                    new TextOfResultSet(DbdProcedureFields.DDL, rset)
+                    new TextOfResultSet(DbdProcedureFields.DDL, rset, query)
                 )
             )
         );

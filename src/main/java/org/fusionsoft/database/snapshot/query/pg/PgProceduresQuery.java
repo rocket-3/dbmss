@@ -19,8 +19,17 @@ import org.cactoos.Text;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOfScalar;
 
+/**
+ * The only type of {@link PgMessageFormatQuery} of {@link DbdProcedureFields}.
+ * @since 0.1
+ */
 public class PgProceduresQuery extends PgMessageFormatQuery<DbdProcedureFields> {
 
+    /**
+     * Instantiates a new Pg procedures query.
+     * @param dbmsversion The Number of DBMS used to be encapsulated.
+     * @checkstyle MagicNumberCheck (16 lines)
+     */
     public PgProceduresQuery(final Number dbmsversion) {
         this(
             new TextOfScalar(
@@ -33,6 +42,11 @@ public class PgProceduresQuery extends PgMessageFormatQuery<DbdProcedureFields> 
         );
     }
 
+    /**
+     * Instantiates a new Pg procedures query.
+     * @param filter The Text of WHERE filter to be encapsulated.
+     * @checkstyle StringLiteralsConcatenationCheck (100 lines)
+     */
     public PgProceduresQuery(final Text filter) {
         super(
             new TextOfScalar(

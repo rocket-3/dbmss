@@ -19,8 +19,17 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.snapshot.query.pg.DbdProcedureFields;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
+/**
+ * The {@link YamlMappingHasKeys} with {@link DbdProcedureFields}
+ *  of DBD/schemas/#schema/procedures/#procedure document node.
+ * @since 0.1
+ */
 public class DbdProcedureMapping extends YamlMappingHasKeys {
 
+    /**
+     * Instantiates a new Dbd procedure mapping.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
     public DbdProcedureMapping(final YamlMapping mapping) {
         super(
             mapping,

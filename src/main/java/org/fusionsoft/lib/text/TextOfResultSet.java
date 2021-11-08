@@ -21,6 +21,7 @@ import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfString;
 import org.cactoos.text.UncheckedText;
+import org.fusionsoft.database.snapshot.query.Query;
 
 /**
  * The type of {@link Text} that can be constructed of {@link ResultSet} and some key.
@@ -43,6 +44,20 @@ public class TextOfResultSet extends TextEnvelope {
                 ).asString()
             )
         );
+    }
+
+    /**
+     * Ctor.
+     * @param label The Text subtype of key to be encapsulated.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of Text subtype to be encapsulated.
+     */
+    public <T extends Text> TextOfResultSet(
+        final T label,
+        final ResultSet rset,
+        final Query<T> query
+    ) {
+        this(query.outcomeFor(label), rset);
     }
 
     /**

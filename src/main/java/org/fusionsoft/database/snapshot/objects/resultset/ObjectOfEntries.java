@@ -28,10 +28,20 @@ import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The shorthand constructor of {@link SimpleDbObject}.
+ * @param <T> The type parameter.
+ * @since 0.1
+ */
 public class ObjectOfEntries<T extends YamlMapping> extends SimpleDbObject<T> {
 
     /**
      * Instantiates a new simple db object.
+     * @param type The ObjectType to be encapsulated.
+     * @param ctor The Func of YamlMapping -> T to be encapsulated.
+     * @param signature The Iterable of Text to be encapsulated.
+     * @param entries The Iterable of Entries of Text, YamlNode to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
      */
     public ObjectOfEntries(
         final ObjectType type,
