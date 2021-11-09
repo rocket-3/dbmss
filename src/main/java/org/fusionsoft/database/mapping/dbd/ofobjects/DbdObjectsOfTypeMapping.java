@@ -27,13 +27,12 @@ import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndTyp
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
- * The {@link BiFunc} creating {@link T} subtype of {@link YamlMapping}
- *  of all {@link Objects} context, parent {@link DbObject}
- *  and {@link Func} of {@link YamlMapping} in object, returning {@link T}.
+ * The {@link BiFunc} creating mapping with {@link T} type mappings, extracted from
+ *  {@link Objects}, filtered by some {@link ObjectType} and {@link DbObject} parent.
  * @param <T>  The type of YamlMapping subclass instance created parameter.
  * @since 0.1
  */
-public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
+public class DbdObjectsOfTypeMapping<T extends YamlMapping>
     implements BiFunc<Objects, DbObject<?>, YamlMapping> {
 
     /**
@@ -51,7 +50,7 @@ public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
      * @param type The ObjectType to be encapsulated.
      * @param unwraping The BiFunc of Objects, DbObject -> T to be encapsulated.
      */
-    public DbdMappingOfObjectsBiFunc(
+    private DbdObjectsOfTypeMapping(
         final ObjectType type,
         final BiFunc<Objects, DbObject<?>, T> unwraping
     ) {
@@ -64,7 +63,7 @@ public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
      * @param type The ObjectType to be encapsulated.
      * @param ctor The Func of YamlMapping -> T to be encapsulated.
      */
-    public DbdMappingOfObjectsBiFunc(final ObjectType type, final Func<YamlMapping, T> ctor) {
+    public DbdObjectsOfTypeMapping(final ObjectType type, final Func<YamlMapping, T> ctor) {
         this(
             type,
             (objs, parent) -> ctor.apply(
@@ -83,9 +82,7 @@ public class DbdMappingOfObjectsBiFunc<T extends YamlMapping>
                     this.type,
                     all
                 ),
-                (objs, object) -> this.unwrapping.apply(
-                    objs, object
-                )
+                this.unwrapping
             )
         );
     }

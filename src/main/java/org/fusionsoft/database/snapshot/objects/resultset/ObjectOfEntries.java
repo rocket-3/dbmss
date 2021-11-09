@@ -49,6 +49,27 @@ public class ObjectOfEntries<T extends YamlMapping> extends SimpleDbObject<T> {
         final Iterable<Text> signature,
         final Iterable<? extends Map.Entry<? extends Text, ? extends YamlNode>> entries
     ) {
+        this(
+            type,
+            ctor,
+            new FullObjectName(signature),
+            entries
+        );
+    }
+    /**
+     * Instantiates a new simple db object.
+     * @param type The ObjectType to be encapsulated.
+     * @param ctor The Func of YamlMapping -> T to be encapsulated.
+     * @param signature The Iterable of Text to be encapsulated.
+     * @param entries The Iterable of Entries of Text, YamlNode to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
+    public ObjectOfEntries(
+        final ObjectType type,
+        final Func<YamlMapping, T> ctor,
+        final FullObjectName signature,
+        final Iterable<? extends Map.Entry<? extends Text, ? extends YamlNode>> entries
+    ) {
         super(
             new UncheckedFunc<>(ctor).apply(
                 new MappingWithoutNullScalars(
@@ -57,7 +78,7 @@ public class ObjectOfEntries<T extends YamlMapping> extends SimpleDbObject<T> {
                     )
                 )
             ),
-            new SimpleObjectSignature(new FullObjectName(signature), type)
+            new SimpleObjectSignature(signature, type)
         );
     }
 
