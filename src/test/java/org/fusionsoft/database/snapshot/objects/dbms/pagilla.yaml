@@ -2306,3 +2306,12 @@ public:
           validated: true
           condition: |
             ((VALUE >= 1901) AND (VALUE <= 2155))
+  enums:
+    mpaa_rating:
+      owner: postgres
+      elements:
+        - G
+        - PG
+        - "PG-13"
+        - R
+        - "NC-17"

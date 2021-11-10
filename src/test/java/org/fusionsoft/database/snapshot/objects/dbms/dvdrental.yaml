@@ -1730,3 +1730,12 @@ public:
           type: smallint
           iutype: number
           order: 3
+  enums:
+    mpaa_rating:
+      owner: postgres
+      elements:
+        - G
+        - PG
+        - "PG-13"
+        - R
+        - "NC-17"
