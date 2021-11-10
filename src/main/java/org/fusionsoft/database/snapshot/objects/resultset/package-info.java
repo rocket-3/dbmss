@@ -18,5 +18,6 @@
  * The package with classes that helps you build
  *  {@link org.fusionsoft.database.snapshot.Objects} of {@link java.sql.ResultSet},
  *  {@link org.fusionsoft.database.snapshot.query.Query} and {@link java.sql.Connection}.
+ * @todo #101:60min Refactor the package, extract new SchemaOfResultSet.
  */
 package org.fusionsoft.database.snapshot.objects.resultset;

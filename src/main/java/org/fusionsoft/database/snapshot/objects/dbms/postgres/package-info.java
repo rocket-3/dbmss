@@ -16,5 +16,6 @@
 
 /**
  * Postgres DBMS's objects, constructed from different sources.
+ * @todo #101:60min Refactor classes of the package.
  */
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
