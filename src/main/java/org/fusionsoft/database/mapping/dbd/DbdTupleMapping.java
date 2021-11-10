@@ -19,8 +19,17 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.mapping.fields.DbdTupleField;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
+/**
+ * The {@link YamlMappingHasKeys} with {@link DbdTupleField}
+ *  of DBD/schemas/#schema/tuples/#tuple document node.
+ * @since 0.1
+ */
 public class DbdTupleMapping extends YamlMappingHasKeys {
 
+    /**
+     * Instantiates a new Dbd tuple mapping.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
     public DbdTupleMapping(final YamlMapping mapping) {
         super(
             mapping,

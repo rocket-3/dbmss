@@ -58,6 +58,11 @@ public class YamlScalarSequenceOfResultSet extends YamlSequenceOfNodes {
 
     /**
      * Instantiates a new Yaml scalar sequence of result set.
+     * @param label The {@link T} label to take from
+     *  {@link ResultSet} and {@link Query} of {@link T}'s to be encapsulated.
+     * @param query The {@link Query} of {@link T} to be encapsulated.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param <T> The {@link Text} subtype, the instances of which to expect in {@link Query}
      */
     public <T extends Text> YamlScalarSequenceOfResultSet(
         final T label,

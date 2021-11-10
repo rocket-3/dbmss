@@ -36,8 +36,22 @@ import org.fusionsoft.database.snapshot.query.QueryOfScalar;
 import org.fusionsoft.lib.collection.ListOfConnection;
 import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
 
+/**
+ * The type of {@link ObjectOfEntries} of {@link ResultSet}, {@link Connection},
+ * {@link DbdTupleField} and {@link DbdTupleAttributeField} {@link Query}'s.
+ * @since 0.1
+ * @checkstyle ParameterNumberCheck (200 lines)
+ */
 public class TupleOfResultSet extends ObjectOfEntries<DbdTupleMapping> {
 
+    /**
+     * Instantiates a new Tuple of result set.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param query The {@link Query} of {@link DbdTupleField} to be encapsulated.
+     * @param attributes The {@link Func} of {@link FullObjectName} ->
+     *  {@link Query} of {@link DbdTupleAttributeField} to be encapsulated.
+     */
     public TupleOfResultSet(
         final ResultSet rset,
         final Connection connection,
@@ -57,6 +71,15 @@ public class TupleOfResultSet extends ObjectOfEntries<DbdTupleMapping> {
         );
     }
 
+    /**
+     * Instantiates a new Tuple of result set.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param query The {@link Query} of {@link DbdTupleField} to be encapsulated.
+     * @param attributes The {@link Func} of {@link FullObjectName} ->
+     *  {@link Query} of {@link DbdTupleAttributeField} to be encapsulated.
+     * @param tuple The {@link FullObjectName} of the tuple to be encapsulated.
+     */
     private TupleOfResultSet(
         final ResultSet rset,
         final Connection connection,
@@ -73,6 +96,14 @@ public class TupleOfResultSet extends ObjectOfEntries<DbdTupleMapping> {
         );
     }
 
+    /**
+     * Instantiates a new Tuple of result set.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param query The {@link Query} of {@link DbdTupleField} to be encapsulated.
+     * @param tuples The {@link Query} of {@link DbdTupleAttributeField} to be encapsulated.
+     * @param tuple The {@link FullObjectName} of the tuple to be encapsulated.
+     */
     private TupleOfResultSet(
         final ResultSet rset,
         final Connection connection,

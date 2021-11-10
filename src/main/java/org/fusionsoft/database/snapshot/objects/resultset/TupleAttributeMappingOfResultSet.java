@@ -23,8 +23,18 @@ import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The type of {@link DbdTupleAttributeMapping} that can be constructed
+ *  of {@link ResultSet} and {@link Query} of {@link DbdTupleAttributeField}.
+ * @since 0.1
+ */
 public class TupleAttributeMappingOfResultSet extends DbdTupleAttributeMapping {
 
+    /**
+     * Instantiates a new Tuple attribute mapping of result set.
+     * @param rset The {@link ResultSet} to be used eagerly (immediately).
+     * @param query The {@link Query} of {@link DbdTupleAttributeField} to be encapsulated.
+     */
     public TupleAttributeMappingOfResultSet(
         final ResultSet rset,
         final Query<DbdTupleAttributeField> query

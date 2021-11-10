@@ -13,20 +13,45 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.fields;
 
 import org.cactoos.Text;
 
+/**
+ * The enum of fields of
+ * DBD/schemas/#schema/tuples/#tuple document nodes.
+ */
 public enum DbdTupleField implements Text {
+    /**
+     *Schema dbd tuple field.
+     */
     SCHEMA("schema"),
+    /**
+     *Tuple dbd tuple field.
+     */
     TUPLE("tuple"),
+    /**
+     *Owner dbd tuple field.
+     */
     OWNER("owner"),
+    /**
+     *Description dbd tuple field.
+     */
     DESCRIPTION("description"),
+    /**
+     *Attributes dbd tuple field.
+     */
     ATTRIBUTES("attributes");
 
+    /**
+     * The String encapsulated.
+     */
     private final String text;
 
+    /**
+     * Instantiates a new Dbd tuple field.
+     * @param text The String to be encapsulated.
+     */
     DbdTupleField(final String text) {
         this.text = text;
     }

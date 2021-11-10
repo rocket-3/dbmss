@@ -56,6 +56,7 @@ public class ObjectOfEntries<T extends YamlMapping> extends SimpleDbObject<T> {
             entries
         );
     }
+
     /**
      * Instantiates a new simple db object.
      * @param type The ObjectType to be encapsulated.
