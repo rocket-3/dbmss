@@ -65,7 +65,14 @@ public class DbdTableMappingWithChildObjects extends DbdTableMapping {
                         ),
                         new EntriesWithKeys(
                             new EntriesOfYamlMapping(table),
-                            DbdTableFields.COLUMNS
+                            DbdTableFields.DESCRIPTION,
+                            DbdTableFields.COLUMNS,
+                            DbdTableFields.OWNER,
+                            DbdTableFields.TABLESPACE,
+                            DbdTableFields.PARENT,
+                            DbdTableFields.PARTKEYDEFINITION,
+                            DbdTableFields.PARTKEYRANGE,
+                            DbdTableFields.DEPENDENCIES
                         ),
                         new EntriesWithKeys(
                             new EntriesOfYamlMapping(table),

@@ -1,0 +1,1732 @@
+public:
+  owner: postgres
+  tables:
+    accounts:
+      owner: postgres
+      columns:
+        - dbName: id
+          pgType: integer
+          dbNullable: false
+          type: number
+          order: 1
+        - dbName: name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: balance
+          pgType: numeric
+          dbNullable: false
+          type: number
+          order: 3
+      constraints:
+        accounts_pkey:
+          dbColumn:
+            - id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (id)
+      indexes:
+        accounts_pkey:
+          dbColumn:
+            - id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX accounts_pkey ON public.accounts USING btree (id)
+    actor:
+      owner: postgres
+      columns:
+        - dbName: actor_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('actor_actor_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: first_name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: last_name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 3
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 4
+      constraints:
+        actor_pkey:
+          dbColumn:
+            - actor_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (actor_id)
+      indexes:
+        actor_pkey:
+          dbColumn:
+            - actor_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX actor_pkey ON public.actor USING btree (actor_id)
+        idx_actor_last_name:
+          dbColumn:
+            - last_name
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_actor_last_name ON public.actor USING btree (last_name)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.actor FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    address:
+      owner: postgres
+      dependencies:
+        - "public (->) city"
+      columns:
+        - dbName: address_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('address_address_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: address
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: address2
+          pgType: character varying
+          dbNullable: true
+          type: string
+          order: 3
+        - dbName: district
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 4
+        - dbName: city_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 5
+        - dbName: postal_code
+          pgType: character varying
+          dbNullable: true
+          type: string
+          order: 6
+        - dbName: phone
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 7
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 8
+      constraints:
+        address_pkey:
+          dbColumn:
+            - address_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (address_id)
+        fk_address_city:
+          dbFKColumn:
+            - city_id
+          dbRefSchema: public
+          dbRefTable: city
+          dbRefColumn:
+            - city_id
+          dbConstraintType: FK
+          dbRefDelete: NO ACTION
+          dbRefUpdate: NO ACTION
+          ddl: |
+            FOREIGN KEY (city_id) REFERENCES city(city_id)
+      indexes:
+        address_pkey:
+          dbColumn:
+            - address_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX address_pkey ON public.address USING btree (address_id)
+        idx_fk_city_id:
+          dbColumn:
+            - city_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_city_id ON public.address USING btree (city_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.address FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    category:
+      owner: postgres
+      columns:
+        - dbName: category_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('category_category_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 3
+      constraints:
+        category_pkey:
+          dbColumn:
+            - category_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (category_id)
+      indexes:
+        category_pkey:
+          dbColumn:
+            - category_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX category_pkey ON public.category USING btree (category_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.category FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    city:
+      owner: postgres
+      dependencies:
+        - "public (->) country"
+      columns:
+        - dbName: city_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('city_city_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: city
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: country_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 3
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 4
+      constraints:
+        city_pkey:
+          dbColumn:
+            - city_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (city_id)
+        fk_city:
+          dbFKColumn:
+            - country_id
+          dbRefSchema: public
+          dbRefTable: country
+          dbRefColumn:
+            - country_id
+          dbConstraintType: FK
+          dbRefDelete: NO ACTION
+          dbRefUpdate: NO ACTION
+          ddl: |
+            FOREIGN KEY (country_id) REFERENCES country(country_id)
+      indexes:
+        city_pkey:
+          dbColumn:
+            - city_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX city_pkey ON public.city USING btree (city_id)
+        idx_fk_country_id:
+          dbColumn:
+            - country_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_country_id ON public.city USING btree (country_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.city FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    country:
+      owner: postgres
+      columns:
+        - dbName: country_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('country_country_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: country
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 3
+      constraints:
+        country_pkey:
+          dbColumn:
+            - country_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (country_id)
+      indexes:
+        country_pkey:
+          dbColumn:
+            - country_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX country_pkey ON public.country USING btree (country_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.country FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    customer:
+      owner: postgres
+      dependencies:
+        - "public (->) address"
+      columns:
+        - dbName: customer_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('customer_customer_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: store_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 2
+        - dbName: first_name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 3
+        - dbName: last_name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 4
+        - dbName: email
+          pgType: character varying
+          dbNullable: true
+          type: string
+          order: 5
+        - dbName: address_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 6
+        - dbName: activebool
+          pgType: boolean
+          dbNullable: false
+          dbLocalIdMethod: true
+          type: boolean
+          order: 7
+        - dbName: create_date
+          pgType: date
+          dbNullable: false
+          dbLocalIdMethod: "('now'::text)::date"
+          type: date
+          order: 8
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: true
+          dbLocalIdMethod: now()
+          type: date
+          order: 9
+        - dbName: active
+          pgType: integer
+          dbNullable: true
+          type: number
+          order: 10
+      constraints:
+        customer_address_id_fkey:
+          dbFKColumn:
+            - address_id
+          dbRefSchema: public
+          dbRefTable: address
+          dbRefColumn:
+            - address_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (address_id) REFERENCES address(address_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        customer_pkey:
+          dbColumn:
+            - customer_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (customer_id)
+      indexes:
+        customer_pkey:
+          dbColumn:
+            - customer_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX customer_pkey ON public.customer USING btree (customer_id)
+        idx_fk_address_id:
+          dbColumn:
+            - address_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_address_id ON public.customer USING btree (address_id)
+        idx_fk_store_id:
+          dbColumn:
+            - store_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_store_id ON public.customer USING btree (store_id)
+        idx_last_name:
+          dbColumn:
+            - last_name
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_last_name ON public.customer USING btree (last_name)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.customer FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    film:
+      owner: postgres
+      dependencies:
+        - "public (->) language"
+      columns:
+        - dbName: film_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('film_film_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: title
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: description
+          pgType: text
+          dbNullable: true
+          type: string
+          order: 3
+        - dbName: release_year
+          pgType: integer
+          dbNullable: true
+          type: number
+          order: 4
+        - dbName: language_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 5
+        - dbName: rental_duration
+          pgType: smallint
+          dbNullable: false
+          dbLocalIdMethod: 3
+          type: number
+          order: 6
+        - dbName: rental_rate
+          pgType: numeric
+          dbNullable: false
+          dbLocalIdMethod: 4.99
+          type: number
+          order: 7
+        - dbName: length
+          pgType: smallint
+          dbNullable: true
+          type: number
+          order: 8
+        - dbName: replacement_cost
+          pgType: numeric
+          dbNullable: false
+          dbLocalIdMethod: 19.99
+          type: number
+          order: 9
+        - dbName: rating
+          pgType: mpaa_rating
+          dbNullable: true
+          dbLocalIdMethod: "'G'::mpaa_rating"
+          type: native
+          order: 10
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 11
+        - dbName: special_features
+          pgType: "text[]"
+          dbNullable: true
+          type: array
+          order: 12
+        - dbName: fulltext
+          pgType: tsvector
+          dbNullable: false
+          type: native
+          order: 13
+      constraints:
+        film_language_id_fkey:
+          dbFKColumn:
+            - language_id
+          dbRefSchema: public
+          dbRefTable: language
+          dbRefColumn:
+            - language_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (language_id) REFERENCES language(language_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        film_pkey:
+          dbColumn:
+            - film_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (film_id)
+      indexes:
+        film_fulltext_idx:
+          dbColumn:
+            - fulltext
+          pgIndexType: gist
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX film_fulltext_idx ON public.film USING gist (fulltext)
+        film_pkey:
+          dbColumn:
+            - film_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX film_pkey ON public.film USING btree (film_id)
+        idx_fk_language_id:
+          dbColumn:
+            - language_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_language_id ON public.film USING btree (language_id)
+        idx_title:
+          dbColumn:
+            - title
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_title ON public.film USING btree (title)
+      triggers:
+        film_fulltext_trigger:
+          ddl: |
+            CREATE TRIGGER film_fulltext_trigger BEFORE INSERT OR UPDATE ON public.film FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('fulltext', 'pg_catalog.english', 'title', 'description')
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.film FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    film_actor:
+      owner: postgres
+      dependencies:
+        - "public (->) actor"
+        - "public (->) film"
+      columns:
+        - dbName: actor_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 1
+        - dbName: film_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 2
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 3
+      constraints:
+        film_actor_actor_id_fkey:
+          dbFKColumn:
+            - actor_id
+          dbRefSchema: public
+          dbRefTable: actor
+          dbRefColumn:
+            - actor_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (actor_id) REFERENCES actor(actor_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        film_actor_film_id_fkey:
+          dbFKColumn:
+            - film_id
+          dbRefSchema: public
+          dbRefTable: film
+          dbRefColumn:
+            - film_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (film_id) REFERENCES film(film_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        film_actor_pkey:
+          dbColumn:
+            - actor_id
+            - film_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (actor_id, film_id)
+      indexes:
+        film_actor_pkey:
+          dbColumn:
+            - actor_id
+            - film_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX film_actor_pkey ON public.film_actor USING btree (actor_id, film_id)
+        idx_fk_film_id:
+          dbColumn:
+            - film_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_film_id ON public.film_actor USING btree (film_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.film_actor FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    film_category:
+      owner: postgres
+      dependencies:
+        - "public (->) category"
+        - "public (->) film"
+      columns:
+        - dbName: film_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 1
+        - dbName: category_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 2
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 3
+      constraints:
+        film_category_category_id_fkey:
+          dbFKColumn:
+            - category_id
+          dbRefSchema: public
+          dbRefTable: category
+          dbRefColumn:
+            - category_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        film_category_film_id_fkey:
+          dbFKColumn:
+            - film_id
+          dbRefSchema: public
+          dbRefTable: film
+          dbRefColumn:
+            - film_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (film_id) REFERENCES film(film_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        film_category_pkey:
+          dbColumn:
+            - category_id
+            - film_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (film_id, category_id)
+      indexes:
+        film_category_pkey:
+          dbColumn:
+            - film_id
+            - category_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX film_category_pkey ON public.film_category USING btree (film_id, category_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.film_category FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    inventory:
+      owner: postgres
+      dependencies:
+        - "public (->) film"
+      columns:
+        - dbName: inventory_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('inventory_inventory_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: film_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 2
+        - dbName: store_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 3
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 4
+      constraints:
+        inventory_film_id_fkey:
+          dbFKColumn:
+            - film_id
+          dbRefSchema: public
+          dbRefTable: film
+          dbRefColumn:
+            - film_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (film_id) REFERENCES film(film_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        inventory_pkey:
+          dbColumn:
+            - inventory_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (inventory_id)
+      indexes:
+        idx_store_id_film_id:
+          dbColumn:
+            - store_id
+            - film_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_store_id_film_id ON public.inventory USING btree (store_id, film_id)
+        inventory_pkey:
+          dbColumn:
+            - inventory_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX inventory_pkey ON public.inventory USING btree (inventory_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.inventory FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    language:
+      owner: postgres
+      columns:
+        - dbName: language_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('language_language_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: name
+          pgType: character
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 3
+      constraints:
+        language_pkey:
+          dbColumn:
+            - language_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (language_id)
+      indexes:
+        language_pkey:
+          dbColumn:
+            - language_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX language_pkey ON public.language USING btree (language_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.language FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    payment:
+      owner: postgres
+      dependencies:
+        - "public (->) customer"
+        - "public (->) rental"
+        - "public (->) staff"
+      columns:
+        - dbName: payment_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('payment_payment_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: customer_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 2
+        - dbName: staff_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 3
+        - dbName: rental_id
+          pgType: integer
+          dbNullable: false
+          type: number
+          order: 4
+        - dbName: amount
+          pgType: numeric
+          dbNullable: false
+          type: number
+          order: 5
+        - dbName: payment_date
+          pgType: timestamp without time zone
+          dbNullable: false
+          type: date
+          order: 6
+      constraints:
+        payment_customer_id_fkey:
+          dbFKColumn:
+            - customer_id
+          dbRefSchema: public
+          dbRefTable: customer
+          dbRefColumn:
+            - customer_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        payment_pkey:
+          dbColumn:
+            - payment_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (payment_id)
+        payment_rental_id_fkey:
+          dbFKColumn:
+            - rental_id
+          dbRefSchema: public
+          dbRefTable: rental
+          dbRefColumn:
+            - rental_id
+          dbConstraintType: FK
+          dbRefDelete: SET NULL
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (rental_id) REFERENCES rental(rental_id) ON UPDATE CASCADE ON DELETE SET NULL
+        payment_staff_id_fkey:
+          dbFKColumn:
+            - staff_id
+          dbRefSchema: public
+          dbRefTable: staff
+          dbRefColumn:
+            - staff_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (staff_id) REFERENCES staff(staff_id) ON UPDATE CASCADE ON DELETE RESTRICT
+      indexes:
+        idx_fk_customer_id:
+          dbColumn:
+            - customer_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_customer_id ON public.payment USING btree (customer_id)
+        idx_fk_rental_id:
+          dbColumn:
+            - rental_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_rental_id ON public.payment USING btree (rental_id)
+        idx_fk_staff_id:
+          dbColumn:
+            - staff_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_staff_id ON public.payment USING btree (staff_id)
+        payment_pkey:
+          dbColumn:
+            - payment_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX payment_pkey ON public.payment USING btree (payment_id)
+    rental:
+      owner: postgres
+      dependencies:
+        - "public (->) customer"
+        - "public (->) inventory"
+        - "public (->) staff"
+      columns:
+        - dbName: rental_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('rental_rental_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: rental_date
+          pgType: timestamp without time zone
+          dbNullable: false
+          type: date
+          order: 2
+        - dbName: inventory_id
+          pgType: integer
+          dbNullable: false
+          type: number
+          order: 3
+        - dbName: customer_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 4
+        - dbName: return_date
+          pgType: timestamp without time zone
+          dbNullable: true
+          type: date
+          order: 5
+        - dbName: staff_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 6
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 7
+      constraints:
+        rental_customer_id_fkey:
+          dbFKColumn:
+            - customer_id
+          dbRefSchema: public
+          dbRefTable: customer
+          dbRefColumn:
+            - customer_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        rental_inventory_id_fkey:
+          dbFKColumn:
+            - inventory_id
+          dbRefSchema: public
+          dbRefTable: inventory
+          dbRefColumn:
+            - inventory_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        rental_pkey:
+          dbColumn:
+            - rental_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (rental_id)
+        rental_staff_id_key:
+          dbFKColumn:
+            - staff_id
+          dbRefSchema: public
+          dbRefTable: staff
+          dbRefColumn:
+            - staff_id
+          dbConstraintType: FK
+          dbRefDelete: NO ACTION
+          dbRefUpdate: NO ACTION
+          ddl: |
+            FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+      indexes:
+        idx_fk_inventory_id:
+          dbColumn:
+            - inventory_id
+          pgIndexType: btree
+          dbUnique: f
+          owner: postgres
+          ddl: |
+            CREATE INDEX idx_fk_inventory_id ON public.rental USING btree (inventory_id)
+        idx_unq_rental_rental_date_inventory_id_customer_id:
+          dbColumn:
+            - rental_date
+            - inventory_id
+            - customer_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX idx_unq_rental_rental_date_inventory_id_customer_id ON public.rental USING btree (rental_date, inventory_id, customer_id)
+        rental_pkey:
+          dbColumn:
+            - rental_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX rental_pkey ON public.rental USING btree (rental_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.rental FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    staff:
+      owner: postgres
+      dependencies:
+        - "public (->) address"
+      columns:
+        - dbName: staff_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('staff_staff_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: first_name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 2
+        - dbName: last_name
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 3
+        - dbName: address_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 4
+        - dbName: email
+          pgType: character varying
+          dbNullable: true
+          type: string
+          order: 5
+        - dbName: store_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 6
+        - dbName: active
+          pgType: boolean
+          dbNullable: false
+          dbLocalIdMethod: true
+          type: boolean
+          order: 7
+        - dbName: username
+          pgType: character varying
+          dbNullable: false
+          type: string
+          order: 8
+        - dbName: password
+          pgType: character varying
+          dbNullable: true
+          type: string
+          order: 9
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 10
+        - dbName: picture
+          pgType: bytea
+          dbNullable: true
+          type: binary
+          order: 11
+      constraints:
+        staff_address_id_fkey:
+          dbFKColumn:
+            - address_id
+          dbRefSchema: public
+          dbRefTable: address
+          dbRefColumn:
+            - address_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (address_id) REFERENCES address(address_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        staff_pkey:
+          dbColumn:
+            - staff_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (staff_id)
+      indexes:
+        staff_pkey:
+          dbColumn:
+            - staff_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX staff_pkey ON public.staff USING btree (staff_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.staff FOR EACH ROW EXECUTE PROCEDURE last_updated()
+    store:
+      owner: postgres
+      dependencies:
+        - "public (->) address"
+        - "public (->) staff"
+      columns:
+        - dbName: store_id
+          pgType: integer
+          dbNullable: false
+          dbLocalIdMethod: "nextval('store_store_id_seq'::regclass)"
+          type: number
+          order: 1
+        - dbName: manager_staff_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 2
+        - dbName: address_id
+          pgType: smallint
+          dbNullable: false
+          type: number
+          order: 3
+        - dbName: last_update
+          pgType: timestamp without time zone
+          dbNullable: false
+          dbLocalIdMethod: now()
+          type: date
+          order: 4
+      constraints:
+        store_address_id_fkey:
+          dbFKColumn:
+            - address_id
+          dbRefSchema: public
+          dbRefTable: address
+          dbRefColumn:
+            - address_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (address_id) REFERENCES address(address_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        store_manager_staff_id_fkey:
+          dbFKColumn:
+            - manager_staff_id
+          dbRefSchema: public
+          dbRefTable: staff
+          dbRefColumn:
+            - staff_id
+          dbConstraintType: FK
+          dbRefDelete: RESTRICT
+          dbRefUpdate: CASCADE
+          ddl: |
+            FOREIGN KEY (manager_staff_id) REFERENCES staff(staff_id) ON UPDATE CASCADE ON DELETE RESTRICT
+        store_pkey:
+          dbColumn:
+            - store_id
+          dbConstraintType: PK
+          ddl: |
+            PRIMARY KEY (store_id)
+      indexes:
+        idx_unq_manager_staff_id:
+          dbColumn:
+            - manager_staff_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX idx_unq_manager_staff_id ON public.store USING btree (manager_staff_id)
+        store_pkey:
+          dbColumn:
+            - store_id
+          pgIndexType: btree
+          dbUnique: t
+          owner: postgres
+          ddl: |
+            CREATE UNIQUE INDEX store_pkey ON public.store USING btree (store_id)
+      triggers:
+        last_updated:
+          ddl: |
+            CREATE TRIGGER last_updated BEFORE UPDATE ON public.store FOR EACH ROW EXECUTE PROCEDURE last_updated()
+  sequences:
+    actor_actor_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    address_address_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    category_category_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    city_city_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    country_country_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    customer_customer_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    film_film_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    inventory_inventory_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    language_language_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    payment_payment_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    rental_rental_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    staff_staff_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+    store_store_id_seq:
+      owner: postgres
+      start: 1
+      increment: 1
+      minimum: 1
+      maximum: 9223372036854775807
+      cycle: NO
+  views:
+    actor_info:
+      owner: postgres
+      ddl: |
+        create or replace view public.actor_info as  SELECT a.actor_id,
+            a.first_name,
+            a.last_name,
+            group_concat(DISTINCT (((c.name)::text || ': '::text) || ( SELECT group_concat((f.title)::text) AS group_concat
+                   FROM ((film f
+                     JOIN film_category fc_1 ON ((f.film_id = fc_1.film_id)))
+                     JOIN film_actor fa_1 ON ((f.film_id = fa_1.film_id)))
+                  WHERE ((fc_1.category_id = c.category_id) AND (fa_1.actor_id = a.actor_id))
+                  GROUP BY fa_1.actor_id))) AS film_info
+           FROM (((actor a
+             LEFT JOIN film_actor fa ON ((a.actor_id = fa.actor_id)))
+             LEFT JOIN film_category fc ON ((fa.film_id = fc.film_id)))
+             LEFT JOIN category c ON ((fc.category_id = c.category_id)))
+          GROUP BY a.actor_id, a.first_name, a.last_name;
+    customer_list:
+      owner: postgres
+      ddl: |
+        create or replace view public.customer_list as  SELECT cu.customer_id AS id,
+            (((cu.first_name)::text || ' '::text) || (cu.last_name)::text) AS name,
+            a.address,
+            a.postal_code AS "zip code",
+            a.phone,
+            city.city,
+            country.country,
+                CASE
+                    WHEN cu.activebool THEN 'active'::text
+                    ELSE ''::text
+                END AS notes,
+            cu.store_id AS sid
+           FROM (((customer cu
+             JOIN address a ON ((cu.address_id = a.address_id)))
+             JOIN city ON ((a.city_id = city.city_id)))
+             JOIN country ON ((city.country_id = country.country_id)));
+    film_list:
+      owner: postgres
+      ddl: |
+        create or replace view public.film_list as  SELECT film.film_id AS fid,
+            film.title,
+            film.description,
+            category.name AS category,
+            film.rental_rate AS price,
+            film.length,
+            film.rating,
+            group_concat((((actor.first_name)::text || ' '::text) || (actor.last_name)::text)) AS actors
+           FROM ((((category
+             LEFT JOIN film_category ON ((category.category_id = film_category.category_id)))
+             LEFT JOIN film ON ((film_category.film_id = film.film_id)))
+             JOIN film_actor ON ((film.film_id = film_actor.film_id)))
+             JOIN actor ON ((film_actor.actor_id = actor.actor_id)))
+          GROUP BY film.film_id, film.title, film.description, category.name, film.rental_rate, film.length, film.rating;
+    nicer_but_slower_film_list:
+      owner: postgres
+      ddl: |
+        create or replace view public.nicer_but_slower_film_list as  SELECT film.film_id AS fid,
+            film.title,
+            film.description,
+            category.name AS category,
+            film.rental_rate AS price,
+            film.length,
+            film.rating,
+            group_concat((((upper("substring"((actor.first_name)::text, 1, 1)) || lower("substring"((actor.first_name)::text, 2))) || upper("substring"((actor.last_name)::text, 1, 1))) || lower("substring"((actor.last_name)::text, 2)))) AS actors
+           FROM ((((category
+             LEFT JOIN film_category ON ((category.category_id = film_category.category_id)))
+             LEFT JOIN film ON ((film_category.film_id = film.film_id)))
+             JOIN film_actor ON ((film.film_id = film_actor.film_id)))
+             JOIN actor ON ((film_actor.actor_id = actor.actor_id)))
+          GROUP BY film.film_id, film.title, film.description, category.name, film.rental_rate, film.length, film.rating;
+    sales_by_film_category:
+      owner: postgres
+      ddl: |
+        create or replace view public.sales_by_film_category as  SELECT c.name AS category,
+            sum(p.amount) AS total_sales
+           FROM (((((payment p
+             JOIN rental r ON ((p.rental_id = r.rental_id)))
+             JOIN inventory i ON ((r.inventory_id = i.inventory_id)))
+             JOIN film f ON ((i.film_id = f.film_id)))
+             JOIN film_category fc ON ((f.film_id = fc.film_id)))
+             JOIN category c ON ((fc.category_id = c.category_id)))
+          GROUP BY c.name
+          ORDER BY (sum(p.amount)) DESC;
+    sales_by_store:
+      owner: postgres
+      ddl: |
+        create or replace view public.sales_by_store as  SELECT (((c.city)::text || ','::text) || (cy.country)::text) AS store,
+            (((m.first_name)::text || ' '::text) || (m.last_name)::text) AS manager,
+            sum(p.amount) AS total_sales
+           FROM (((((((payment p
+             JOIN rental r ON ((p.rental_id = r.rental_id)))
+             JOIN inventory i ON ((r.inventory_id = i.inventory_id)))
+             JOIN store s ON ((i.store_id = s.store_id)))
+             JOIN address a ON ((s.address_id = a.address_id)))
+             JOIN city c ON ((a.city_id = c.city_id)))
+             JOIN country cy ON ((c.country_id = cy.country_id)))
+             JOIN staff m ON ((s.manager_staff_id = m.staff_id)))
+          GROUP BY cy.country, c.city, s.store_id, m.first_name, m.last_name
+          ORDER BY cy.country, c.city;
+    staff_list:
+      owner: postgres
+      ddl: |
+        create or replace view public.staff_list as  SELECT s.staff_id AS id,
+            (((s.first_name)::text || ' '::text) || (s.last_name)::text) AS name,
+            a.address,
+            a.postal_code AS "zip code",
+            a.phone,
+            city.city,
+            country.country,
+            s.store_id AS sid
+           FROM (((staff s
+             JOIN address a ON ((s.address_id = a.address_id)))
+             JOIN city ON ((a.city_id = city.city_id)))
+             JOIN country ON ((city.country_id = country.country_id)));
+  functions:
+    _group_concat:
+      owner: postgres
+      arguments: text, text
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public._group_concat(text, text)
+         RETURNS text
+         LANGUAGE sql
+         IMMUTABLE
+        AS $function$
+        SELECT CASE
+          WHEN $2 IS NULL THEN $1
+          WHEN $1 IS NULL THEN $2
+          ELSE $1 || ', ' || $2
+        END
+        $function$
+    film_in_stock:
+      owner: postgres
+      arguments: p_film_id integer, p_store_id integer, OUT p_film_count integer
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.film_in_stock(p_film_id integer, p_store_id integer, OUT p_film_count integer)
+         RETURNS SETOF integer
+         LANGUAGE sql
+        AS $function$
+             SELECT inventory_id
+             FROM inventory
+             WHERE film_id = $1
+             AND store_id = $2
+             AND inventory_in_stock(inventory_id);
+        $function$
+    film_not_in_stock:
+      owner: postgres
+      arguments: p_film_id integer, p_store_id integer, OUT p_film_count integer
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.film_not_in_stock(p_film_id integer, p_store_id integer, OUT p_film_count integer)
+         RETURNS SETOF integer
+         LANGUAGE sql
+        AS $function$
+            SELECT inventory_id
+            FROM inventory
+            WHERE film_id = $1
+            AND store_id = $2
+            AND NOT inventory_in_stock(inventory_id);
+        $function$
+    get_customer_balance:
+      owner: postgres
+      arguments: p_customer_id integer, p_effective_date timestamp without time zone
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.get_customer_balance(p_customer_id integer, p_effective_date timestamp without time zone)
+         RETURNS numeric
+         LANGUAGE plpgsql
+        AS $function$
+               --#OK, WE NEED TO CALCULATE THE CURRENT BALANCE GIVEN A CUSTOMER_ID AND A DATE
+               --#THAT WE WANT THE BALANCE TO BE EFFECTIVE FOR. THE BALANCE IS:
+               --#   1) RENTAL FEES FOR ALL PREVIOUS RENTALS
+               --#   2) ONE DOLLAR FOR EVERY DAY THE PREVIOUS RENTALS ARE OVERDUE
+               --#   3) IF A FILM IS MORE THAN RENTAL_DURATION * 2 OVERDUE, CHARGE THE REPLACEMENT_COST
+               --#   4) SUBTRACT ALL PAYMENTS MADE BEFORE THE DATE SPECIFIED
+        DECLARE
+            v_rentfees DECIMAL(5,2); --#FEES PAID TO RENT THE VIDEOS INITIALLY
+            v_overfees INTEGER;      --#LATE FEES FOR PRIOR RENTALS
+            v_payments DECIMAL(5,2); --#SUM OF PAYMENTS MADE PREVIOUSLY
+        BEGIN
+            SELECT COALESCE(SUM(film.rental_rate),0) INTO v_rentfees
+            FROM film, inventory, rental
+            WHERE film.film_id = inventory.film_id
+              AND inventory.inventory_id = rental.inventory_id
+              AND rental.rental_date <= p_effective_date
+              AND rental.customer_id = p_customer_id;
+
+            SELECT COALESCE(SUM(IF((rental.return_date - rental.rental_date) > (film.rental_duration * '1 day'::interval),
+                ((rental.return_date - rental.rental_date) - (film.rental_duration * '1 day'::interval)),0)),0) INTO v_overfees
+            FROM rental, inventory, film
+            WHERE film.film_id = inventory.film_id
+              AND inventory.inventory_id = rental.inventory_id
+              AND rental.rental_date <= p_effective_date
+              AND rental.customer_id = p_customer_id;
+
+            SELECT COALESCE(SUM(payment.amount),0) INTO v_payments
+            FROM payment
+            WHERE payment.payment_date <= p_effective_date
+            AND payment.customer_id = p_customer_id;
+
+            RETURN v_rentfees + v_overfees - v_payments;
+        END
+        $function$
+    group_concat:
+      owner: postgres
+      arguments: text
+      aggregate: true
+      ddl: |
+        CREATE AGGREGATE public.group_concat(pg_catalog.text) (
+          SFUNC = _group_concat,
+          STYPE = text
+        );
+    inventory_held_by_customer:
+      owner: postgres
+      arguments: p_inventory_id integer
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.inventory_held_by_customer(p_inventory_id integer)
+         RETURNS integer
+         LANGUAGE plpgsql
+        AS $function$
+        DECLARE
+            v_customer_id INTEGER;
+        BEGIN
+
+          SELECT customer_id INTO v_customer_id
+          FROM rental
+          WHERE return_date IS NULL
+          AND inventory_id = p_inventory_id;
+
+          RETURN v_customer_id;
+        END $function$
+    inventory_in_stock:
+      owner: postgres
+      arguments: p_inventory_id integer
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.inventory_in_stock(p_inventory_id integer)
+         RETURNS boolean
+         LANGUAGE plpgsql
+        AS $function$
+        DECLARE
+            v_rentals INTEGER;
+            v_out     INTEGER;
+        BEGIN
+            -- AN ITEM IS IN-STOCK IF THERE ARE EITHER NO ROWS IN THE rental TABLE
+            -- FOR THE ITEM OR ALL ROWS HAVE return_date POPULATED
+
+            SELECT count(*) INTO v_rentals
+            FROM rental
+            WHERE inventory_id = p_inventory_id;
+
+            IF v_rentals = 0 THEN
+              RETURN TRUE;
+            END IF;
+
+            SELECT COUNT(rental_id) INTO v_out
+            FROM inventory LEFT JOIN rental USING(inventory_id)
+            WHERE inventory.inventory_id = p_inventory_id
+            AND rental.return_date IS NULL;
+
+            IF v_out > 0 THEN
+              RETURN FALSE;
+            ELSE
+              RETURN TRUE;
+            END IF;
+        END $function$
+    last_day:
+      owner: postgres
+      arguments: timestamp without time zone
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.last_day(timestamp without time zone)
+         RETURNS date
+         LANGUAGE sql
+         IMMUTABLE STRICT
+        AS $function$
+          SELECT CASE
+            WHEN EXTRACT(MONTH FROM $1) = 12 THEN
+              (((EXTRACT(YEAR FROM $1) + 1) operator(pg_catalog.||) '-01-01')::date - INTERVAL '1 day')::date
+            ELSE
+              ((EXTRACT(YEAR FROM $1) operator(pg_catalog.||) '-' operator(pg_catalog.||) (EXTRACT(MONTH FROM $1) + 1) operator(pg_catalog.||) '-01')::date - INTERVAL '1 day')::date
+            END
+        $function$
+    last_updated:
+      owner: postgres
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.last_updated()
+         RETURNS trigger
+         LANGUAGE plpgsql
+        AS $function$
+        BEGIN
+            NEW.last_update = CURRENT_TIMESTAMP;
+            RETURN NEW;
+        END $function$
+    rewards_report:
+      owner: postgres
+      arguments: min_monthly_purchases integer, min_dollar_amount_purchased numeric
+      aggregate: false
+      ddl: |
+        CREATE OR REPLACE FUNCTION public.rewards_report(min_monthly_purchases integer, min_dollar_amount_purchased numeric)
+         RETURNS SETOF customer
+         LANGUAGE plpgsql
+         SECURITY DEFINER
+        AS $function$
+        DECLARE
+            last_month_start DATE;
+            last_month_end DATE;
+        rr RECORD;
+        tmpSQL TEXT;
+        BEGIN
+
+            /* Some sanity checks... */
+            IF min_monthly_purchases = 0 THEN
+                RAISE EXCEPTION 'Minimum monthly purchases parameter must be > 0';
+            END IF;
+            IF min_dollar_amount_purchased = 0.00 THEN
+                RAISE EXCEPTION 'Minimum monthly dollar amount purchased parameter must be > $0.00';
+            END IF;
+
+            last_month_start := CURRENT_DATE - '3 month'::interval;
+            last_month_start := to_date((extract(YEAR FROM last_month_start) || '-' || extract(MONTH FROM last_month_start) || '-01'),'YYYY-MM-DD');
+            last_month_end := LAST_DAY(last_month_start);
+
+            /*
+            Create a temporary storage area for Customer IDs.
+            */
+            CREATE TEMPORARY TABLE tmpCustomer (customer_id INTEGER NOT NULL PRIMARY KEY);
+
+            /*
+            Find all customers meeting the monthly purchase requirements
+            */
+
+            tmpSQL := 'INSERT INTO tmpCustomer (customer_id)
+                SELECT p.customer_id
+                FROM payment AS p
+                WHERE DATE(p.payment_date) BETWEEN '||quote_literal(last_month_start) ||' AND '|| quote_literal(last_month_end) || '
+                GROUP BY customer_id
+                HAVING SUM(p.amount) > '|| min_dollar_amount_purchased || '
+                AND COUNT(customer_id) > ' ||min_monthly_purchases ;
+
+            EXECUTE tmpSQL;
+
+            /*
+            Output ALL customer information of matching rewardees.
+            Customize output as needed.
+            */
+            FOR rr IN EXECUTE 'SELECT c.* FROM tmpCustomer AS t INNER JOIN customer AS c ON t.customer_id = c.customer_id' LOOP
+                RETURN NEXT rr;
+            END LOOP;
+
+            /* Clean up */
+            tmpSQL := 'DROP TABLE tmpCustomer';
+            EXECUTE tmpSQL;
+
+        RETURN;
+        END
+        $function$
+  procedures:
+    transfer:
+      owner: postgres
+      arguments: sender integer, receiver integer, amount numeric
+      ddl: |
+        CREATE OR REPLACE PROCEDURE public.transfer(sender integer, receiver integer, amount numeric)
+         LANGUAGE plpgsql
+        AS $procedure$
+        begin
+            -- subtracting the amount from the sender's account
+            update accounts
+            set balance = balance - amount
+            where id = sender;
+
+            -- adding the amount to the receiver's account
+            update accounts
+            set balance = balance + amount
+            where id = receiver;
+
+            commit;
+        end;$procedure$
+  domains:
+    year:
+      type: integer
+      owner: postgres
+      constraints:
+        - constraint: year_check
+          validated: true
+          condition: |
+            ((VALUE >= 1901) AND (VALUE <= 2155))
+  tuples:
+    film_summary:
+      owner: postgres
+      attributes:
+        - attribute: film_id
+          type: integer
+          iutype: number
+          order: 1
+        - attribute: title
+          type: character varying
+          iutype: string
+          order: 2
+        - attribute: release_year
+          type: smallint
+          iutype: number
+          order: 3
