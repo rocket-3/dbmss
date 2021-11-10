@@ -17,8 +17,15 @@ package org.fusionsoft.database.snapshot.query.pg;
 
 import org.fusionsoft.database.mapping.fields.DbdEnumField;
 
+/**
+ * The only type of {@link PgMessageFormatQuery} of {@link DbdEnumField}.
+ * @since 0.1
+ */
 public class PgEnumsQuery extends PgMessageFormatQuery<DbdEnumField> {
 
+    /**
+     * Instantiates a new Pg enums query.
+     */
     public PgEnumsQuery() {
         super(
             String.join(

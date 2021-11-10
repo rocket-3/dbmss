@@ -22,8 +22,18 @@ import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
+/**
+ * The {@link YamlMappingOfScalar} of all {@link Objects} and schema {@link DbObject}
+ *  of DBD/schemas/#schema/enums document node.
+ * @since 0.1
+ */
 public class DbdEnumsMappingOfObjects extends YamlMappingOfScalar {
 
+    /**
+     * Instantiates a new Dbd enums mapping of objects.
+     * @param objects The Objects to be encapsulated.
+     * @param schema The DbObject to be encapsulated.
+     */
     public DbdEnumsMappingOfObjects(
         final Objects objects,
         final DbObject<? extends YamlNode> schema
