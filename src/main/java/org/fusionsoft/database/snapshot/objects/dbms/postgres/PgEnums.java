@@ -15,16 +15,18 @@
  */
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import org.fusionsoft.lib.collection.ListOfResultSet;
+import org.fusionsoft.database.snapshot.objects.resultset.EnumOfResultSet;
+import org.fusionsoft.database.snapshot.query.pg.PgEnumsQuery;
+import org.fusionsoft.lib.collection.ListOfConnection;
 
 /**
  * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Adapt query for enums from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class PgEnums extends ObjectsOfScalar {
@@ -36,11 +38,10 @@ public class PgEnums extends ObjectsOfScalar {
     public PgEnums(final Connection connection) {
         super(
             () ->
-                new ListOfResultSet<DbObject<?>>(
-                    PostgresSchemaOfResultSet::new,
-                    () -> connection.createStatement().executeQuery(
-                        ""
-                    )
+                new ListOfConnection<DbObject<? extends YamlMapping>>(
+                    EnumOfResultSet::new,
+                    connection,
+                    new PgEnumsQuery()
                 )
         );
     }

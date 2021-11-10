@@ -18,6 +18,7 @@ package org.fusionsoft.database.snapshot.objects.dbms;
 import java.sql.Connection;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgConstraints;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgDomains;
+import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgEnums;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgFunctions;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgIndexes;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgProcedures;
@@ -52,7 +53,8 @@ public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
             PgProcedures::new,
             PgTriggers::new,
             PgDomains::new,
-            PgTuples::new
+            PgTuples::new,
+            PgEnums::new
         );
     }
 
