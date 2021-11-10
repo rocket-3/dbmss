@@ -13,27 +13,30 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.objectsignature;
 
 import java.sql.ResultSet;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.list.ListOf;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
 
 public class FullObjectNameOfResultSet extends FullObjectName {
 
+    @SafeVarargs
     public <T extends Text> FullObjectNameOfResultSet(
         final ResultSet rset,
         final Query<T> query,
         final T... fields
     ) {
         super(
-            new Mapped<>(
-                x -> new TextOfResultSet(x, rset, query),
-                new IterableOf<T>(fields)
+            new ListOf<Text>(
+                new Mapped<>(
+                    x -> new TextOfResultSet(x, rset, query),
+                    new IterableOf<T>(fields)
+                )
             )
         );
     }

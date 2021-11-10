@@ -55,16 +55,34 @@ class ObjectsFromServerTest {
     }
 
     /**
-     * Works.
+     * Works with pagilla.
      */
     @Test
-    public void works() {
+    public void worksWithPagilla() {
         final int size = 170;
         new Assertion<>(
             "Has expected size",
             new ObjectsFromServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11(this.database),
+                    new CredsOfPgTestDatabase()
+                )
+            ),
+            new HasSize(size)
+        ).affirm();
+    }
+
+    /**
+     * Works with dvdrental.
+     */
+    @Test
+    public void worksWithDvdRental() {
+        final int size = 132;
+        new Assertion<>(
+            "Has expected size",
+            new ObjectsFromServer(
+                new DbdServerMappingWithCredentials(
+                    new UrlOfPgGitLabDatabaseV11("dvdrental"),
                     new CredsOfPgTestDatabase()
                 )
             ),
