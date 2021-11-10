@@ -110,6 +110,15 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
                                     schema
                                 )
                             )
+                        ),
+                        new IterableOf<>(
+                            new MapEntry<>(
+                                DbdSchemaFields.ENUMS,
+                                new DbdEnumsMappingOfObjects(
+                                    objects,
+                                    schema
+                                )
+                            )
                         )
                     )
                 )
