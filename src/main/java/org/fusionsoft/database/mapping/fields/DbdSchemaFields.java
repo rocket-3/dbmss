@@ -52,7 +52,11 @@ public enum DbdSchemaFields implements Text {
     /**
      *The dbd/schema/tuples field.
      */
-    TUPLES("tuples");
+    TUPLES("tuples"),
+    /**
+     *The dbd/schema/tuples field.
+     */
+    ENUMS("enums");
 
     /**
      * The String encapsulated.
