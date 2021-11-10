@@ -48,7 +48,11 @@ public enum DbdSchemaFields implements Text {
     /**
      *The dbd/schema/domains field.
      */
-    DOMAINS("domains");
+    DOMAINS("domains"),
+    /**
+     *The dbd/schema/tuples field.
+     */
+    TUPLES("tuples");
 
     /**
      * The String encapsulated.

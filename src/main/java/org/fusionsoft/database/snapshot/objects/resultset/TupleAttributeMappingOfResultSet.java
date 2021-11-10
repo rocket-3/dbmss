@@ -32,8 +32,9 @@ public class TupleAttributeMappingOfResultSet extends DbdTupleAttributeMapping {
         super(
             new MappingWithoutNullScalars(
                 new YamlMappingOfEntries(
-                    new ScalarEntryOfResultSet(DbdTupleAttributeField.NAME, query, rset),
+                    new ScalarEntryOfResultSet(DbdTupleAttributeField.ATTRIBUTE, query, rset),
                     new ScalarEntryOfResultSet(DbdTupleAttributeField.TYPE, query, rset),
+                    new ScalarEntryOfResultSet(DbdTupleAttributeField.IUTYPE, query, rset),
                     new ScalarEntryOfResultSet(DbdTupleAttributeField.ORDER, query, rset)
                 )
             )
