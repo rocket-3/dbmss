@@ -16,14 +16,18 @@
 package org.fusionsoft.database.snapshot.objects.dbms.postgres;
 
 import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.mapping.dbd.DbdTupleMapping;
+import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
+import org.fusionsoft.database.snapshot.objects.resultset.TupleOfResultSet;
+import org.fusionsoft.database.snapshot.query.PgTupleAttributesQuery;
+import org.fusionsoft.database.snapshot.query.pg.PgTuplesQuery;
+import org.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
  * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
- * @todo #101:30min Adapt query for UDT's (tuples) from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 @SuppressWarnings("PMD")
@@ -35,7 +39,16 @@ public class PgTuples extends ObjectsOfScalar {
      */
     public PgTuples(final Connection connection) {
         super(
-            () -> new IterableOf<>()
+            () -> new ListOfResultSet<DbObject<DbdTupleMapping>>(
+                rset -> new TupleOfResultSet(
+                    rset,
+                    connection,
+                    new PgTuplesQuery(),
+                    PgTupleAttributesQuery::new
+                ),
+                new PgTuplesQuery(),
+                connection
+            )
         );
     }
 

@@ -25,6 +25,7 @@ import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSchemas;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgSequences;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTables;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTriggers;
+import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgTuples;
 import org.fusionsoft.database.snapshot.objects.dbms.postgres.PgViews;
 
 /**
@@ -50,7 +51,8 @@ public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
             PgFunctions::new,
             PgProcedures::new,
             PgTriggers::new,
-            PgDomains::new
+            PgDomains::new,
+            PgTuples::new
         );
     }
 
