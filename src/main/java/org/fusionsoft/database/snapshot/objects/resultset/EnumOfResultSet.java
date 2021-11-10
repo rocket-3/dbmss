@@ -27,8 +27,17 @@ import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
+/**
+ * The {@link ObjectOfEntries} from {@link Query} of {@link DbdEnumField} and {@link ResultSet}.
+ * @since 0.1
+ */
 public class EnumOfResultSet extends ObjectOfEntries<DbdEnumMapping> {
 
+    /**
+     * Instantiates a new Enum of result set.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdEnumField to be encapsulated.
+     */
     public EnumOfResultSet(final ResultSet rset, final Query<DbdEnumField> query) {
         super(
             ObjectType.UDT_ENUM,

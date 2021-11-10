@@ -17,16 +17,41 @@ package org.fusionsoft.database.mapping.fields;
 
 import org.cactoos.Text;
 
+/**
+ * The enum of fields of DBD/schemas/#schema/enums/#enum document node.
+ */
 public enum DbdEnumField implements Text {
 
+    /**
+     *Schema dbd enum field.
+     */
     SCHEMA("schema"),
+    /**
+     *Enum dbd enum field.
+     */
     ENUM("enum"),
+    /**
+     *Owner dbd enum field.
+     */
     OWNER("owner"),
+    /**
+     *Description dbd enum field.
+     */
     DESCRIPTION("description"),
+    /**
+     *Elements dbd enum field.
+     */
     ELEMENTS("elements");
 
+    /**
+     * The String encapsulated.
+     */
     private final String text;
 
+    /**
+     * Instantiates a new Dbd enum field.
+     * @param text The String to be encapsulated.
+     */
     DbdEnumField(final String text) {
         this.text = text;
     }

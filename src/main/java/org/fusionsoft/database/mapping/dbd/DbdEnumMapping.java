@@ -19,8 +19,17 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.mapping.fields.DbdEnumField;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
+/**
+ * The {@link YamlMappingHasKeys} with {@link DbdEnumField} of
+ *  DBD/schemas/#schema/enums/#enum document node.
+ * @since 0.1
+ */
 public class DbdEnumMapping extends YamlMappingHasKeys {
 
+    /**
+     * Instantiates a new Dbd enum mapping.
+     * @param mapping The YamlMapping to be encapsulated.
+     */
     public DbdEnumMapping(final YamlMapping mapping) {
         super(
             mapping,
