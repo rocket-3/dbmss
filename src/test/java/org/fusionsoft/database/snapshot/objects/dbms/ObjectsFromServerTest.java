@@ -59,7 +59,7 @@ class ObjectsFromServerTest {
      */
     @Test
     public void worksWithPagilla() {
-        final int size = 170;
+        final int size = 171;
         new Assertion<>(
             "Has expected object list size from 'pagilla' database",
             new ObjectsFromServer(
@@ -77,7 +77,7 @@ class ObjectsFromServerTest {
      */
     @Test
     public void worksWithDvdRental() {
-        final int size = 132;
+        final int size = 133;
         new Assertion<>(
             "Has expected object list size from 'dvdrental' database",
             new ObjectsFromServer(
