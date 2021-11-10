@@ -16,7 +16,7 @@
 package org.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.fusionsoft.database.mapping.fields.DbdTupleField;
+import org.fusionsoft.database.mapping.fields.DbdTupleAttributeField;
 import org.fusionsoft.lib.yaml.YamlMappingHasKeys;
 
 public class DbdTupleAttributeMapping extends YamlMappingHasKeys {
@@ -24,8 +24,10 @@ public class DbdTupleAttributeMapping extends YamlMappingHasKeys {
     public DbdTupleAttributeMapping(final YamlMapping mapping) {
         super(
             mapping,
-            DbdTupleField.OWNER,
-            DbdTupleField.ATTRIBUTES
+            DbdTupleAttributeField.ATTRIBUTE,
+            DbdTupleAttributeField.TYPE,
+            DbdTupleAttributeField.IUTYPE,
+            DbdTupleAttributeField.ORDER
         );
     }
 

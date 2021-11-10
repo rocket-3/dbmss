@@ -19,8 +19,9 @@ package org.fusionsoft.database.mapping.fields;
 import org.cactoos.Text;
 
 public enum DbdTupleAttributeField implements Text {
-    NAME("name"),
+    ATTRIBUTE("attribute"),
     TYPE("type"),
+    IUTYPE("iutype"),
     ORDER("order");
 
     private final String text;

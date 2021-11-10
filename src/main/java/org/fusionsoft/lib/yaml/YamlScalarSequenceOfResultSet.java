@@ -18,9 +18,11 @@ package org.fusionsoft.lib.yaml;
 import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.ResultSet;
+import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Unchecked;
+import org.fusionsoft.database.snapshot.query.Query;
 
 /**
  * The type of {@link com.amihaiemil.eoyaml.BaseYamlSequence}
@@ -51,6 +53,20 @@ public class YamlScalarSequenceOfResultSet extends YamlSequenceOfNodes {
                     ).value()
                 )
             )
+        );
+    }
+
+    /**
+     * Instantiates a new Yaml scalar sequence of result set.
+     */
+    public <T extends Text> YamlScalarSequenceOfResultSet(
+        final T label,
+        final Query<T> query,
+        final ResultSet rset
+    ) {
+        this(
+            query.outcomeFor(label),
+            rset
         );
     }
 

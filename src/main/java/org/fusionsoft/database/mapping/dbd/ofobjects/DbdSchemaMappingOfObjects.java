@@ -101,6 +101,15 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
                                     schema
                                 )
                             )
+                        ),
+                        new IterableOf<>(
+                            new MapEntry<>(
+                                DbdSchemaFields.TUPLES,
+                                new DbdTuplesMappingOfObjects(
+                                    objects,
+                                    schema
+                                )
+                            )
                         )
                     )
                 )
