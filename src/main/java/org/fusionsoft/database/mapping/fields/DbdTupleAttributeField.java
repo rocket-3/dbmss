@@ -13,19 +13,41 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.fields;
 
 import org.cactoos.Text;
 
+/**
+ * The enum of fields of
+ *  DBD/schemas/#schema/tuples/#tuple/attributes/-attribute document nodes.
+ */
 public enum DbdTupleAttributeField implements Text {
+    /**
+     *Attribute dbd tuple attribute field.
+     */
     ATTRIBUTE("attribute"),
+    /**
+     *Type dbd tuple attribute field.
+     */
     TYPE("type"),
+    /**
+     *Iutype dbd tuple attribute field.
+     */
     IUTYPE("iutype"),
+    /**
+     *Order dbd tuple attribute field.
+     */
     ORDER("order");
 
+    /**
+     * The String encapsulated.
+     */
     private final String text;
 
+    /**
+     * Instantiates a new Dbd tuple attribute field.
+     * @param text The String to be encapsulated.
+     */
     DbdTupleAttributeField(final String text) {
         this.text = text;
     }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.entries;
 
 import java.sql.ResultSet;
@@ -21,8 +20,19 @@ import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
 
+/**
+ * The type of {@link ScalarEntry} ctor shorthand with {@link Query} param specified.
+ * @since 0.1
+ */
 public class ScalarEntryOfResultSet extends ScalarEntry {
 
+    /**
+     * Instantiates a new Scalar entry of result set.
+     * @param label The {@link T} to be encapsulated.
+     * @param query The {@link Query} of {@link T} fields to be encapsulated.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param <T> The {@link Text} subtype, the instances of which to expect in {@link Query}
+     */
     public <T extends Text> ScalarEntryOfResultSet(
         final T label,
         final Query<T> query,
@@ -31,6 +41,13 @@ public class ScalarEntryOfResultSet extends ScalarEntry {
         super(label, new TextOfResultSet(label, rset, query));
     }
 
+    /**
+     * Instantiates a new Scalar entry of result set.
+     * @param label The {@link T} to be encapsulated.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param query The {@link Query} of {@link T} fields to be encapsulated.
+     * @param <T> The {@link Text} subtype, the instances of which to expect in {@link Query}
+     */
     public <T extends Text> ScalarEntryOfResultSet(
         final T label,
         final ResultSet rset,

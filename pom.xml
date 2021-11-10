@@ -78,6 +78,7 @@
                 <configuration>
                     <license>file:${basedir}/LICENSE</license>
                     <excludes>
+                        <exclude>checkstyle:.*yaml$</exclude>
                         <exclude>findbugs:.*</exclude>
                         <exclude>duplicatefinder:.*</exclude>
                     </excludes>

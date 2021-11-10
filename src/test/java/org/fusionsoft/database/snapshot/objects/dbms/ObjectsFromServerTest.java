@@ -61,7 +61,7 @@ class ObjectsFromServerTest {
     public void worksWithPagilla() {
         final int size = 170;
         new Assertion<>(
-            "Has expected size",
+            "Has expected object list size from 'pagilla' database",
             new ObjectsFromServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11(this.database),
@@ -79,7 +79,7 @@ class ObjectsFromServerTest {
     public void worksWithDvdRental() {
         final int size = 132;
         new Assertion<>(
-            "Has expected size",
+            "Has expected object list size from 'dvdrental' database",
             new ObjectsFromServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11("dvdrental"),

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
 import org.fusionsoft.database.mapping.dbd.DbdTupleMapping;
@@ -22,10 +21,17 @@ import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
+/**
+ * The {@link YamlMappingOfScalar} of DBD/schemas/#schema/tuples document node,
+ *  can be created of all {@link Objects} and current parent schema {@link DbObject}.
+ * @since 0.1
+ */
 public class DbdTuplesMappingOfObjects extends YamlMappingOfScalar {
 
     /**
      * Instantiates a new Yaml mapping of scalar.
+     * @param objects The {@link Objects} to be encapsulated.
+     * @param schema The schema {@link DbObject} to be encapsulated.
      */
     public DbdTuplesMappingOfObjects(final Objects objects, final DbObject<?> schema) {
         super(

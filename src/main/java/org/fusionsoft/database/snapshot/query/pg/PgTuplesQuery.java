@@ -17,8 +17,15 @@ package org.fusionsoft.database.snapshot.query.pg;
 
 import org.fusionsoft.database.mapping.fields.DbdTupleField;
 
+/**
+ * The only type of {@link PgMessageFormatQuery} of {@link DbdTupleField}.
+ * @since 0.1
+ */
 public class PgTuplesQuery extends PgMessageFormatQuery<DbdTupleField> {
 
+    /**
+     * Instantiates a new Pg tuples query.
+     */
     public PgTuplesQuery() {
         super(
             String.join(
