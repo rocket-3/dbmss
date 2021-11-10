@@ -159,7 +159,14 @@ class ObjectsFromServerTest {
             new HasValues<>(
                 new Mapped<String>(
                     Text::asString,
-                    new IterableOf<Text>(DbdSchemaFields.values())
+                    new IterableOf<Text>(
+                        DbdSchemaFields.VIEWS,
+                        DbdSchemaFields.SEQUENCES,
+                        DbdSchemaFields.TABLES,
+                        DbdSchemaFields.DOMAINS,
+                        DbdSchemaFields.FUNCTIONS,
+                        DbdSchemaFields.PROCEDURES
+                    )
                 )
             )
         ).affirm();

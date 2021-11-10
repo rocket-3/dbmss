@@ -16,18 +16,14 @@
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
 import com.amihaiemil.eoyaml.YamlNode;
-import java.util.Comparator;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
-import org.cactoos.iterable.Sorted;
 import org.cactoos.map.MapEntry;
-import org.cactoos.text.ComparableText;
 import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.mapping.dbd.DbdSchemaMapping;
 import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
@@ -46,30 +42,6 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
      */
     public DbdSchemaMappingOfObjects(
         final Objects objects,
-        final DbObject<? extends YamlNode> schema
-    ) {
-        this(
-            new ObjectsEnvelope(
-                new Sorted<>(
-                    Comparator.comparing(
-                        x -> new ComparableText(
-                            x.signature()
-                        )
-                    ),
-                    objects
-                )
-            ),
-            schema
-        );
-    }
-
-    /**
-     * Instantiates a new Yaml mapping envelope.
-     * @param objects The Objects to be used.
-     * @param schema The DbObject of YamlNode to be encapsulated.
-     */
-    private DbdSchemaMappingOfObjects(
-        final ObjectsEnvelope objects,
         final DbObject<? extends YamlNode> schema
     ) {
         super(
