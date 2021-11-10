@@ -21,7 +21,7 @@ import org.cactoos.Func;
 import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import org.fusionsoft.database.mapping.entries.ScalarEntry;
+import org.fusionsoft.database.mapping.entries.ScalarEntryOfResultSet;
 import org.fusionsoft.database.mapping.fields.DbdColumnFields;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
@@ -32,7 +32,9 @@ import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.QueryOfScalar;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 import org.fusionsoft.lib.text.TextOfResultSet;
+import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
+import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
 
 /**
@@ -117,22 +119,56 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
     ) {
         super(
             new DbdTableMapping(
-                new YamlMappingOfEntries(
-                    new MapEntry<>(
-                        DbdTableFields.COLUMNS,
-                        new YamlSequenceOfNodes(
-                            new ListOfResultSet<DbdColumnMapping>(
-                                rs -> new DbdColumnMappingOfResultSet(rs, columns),
-                                columns,
-                                connection
-                            )
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdTableFields.OWNER,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdTableFields.OWNER),
+                new MappingWithoutNullScalars(
+                    new YamlMappingOfEntries(
+                        new ScalarEntryOfResultSet(
+                            DbdTableFields.DESCRIPTION,
+                            query,
                             rset
+                        ),
+                        new ScalarEntryOfResultSet(
+                            DbdTableFields.OWNER,
+                            query,
+                            rset
+                        ),
+                        new ScalarEntryOfResultSet(
+                            DbdTableFields.TABLESPACE,
+                            query,
+                            rset
+                        ),
+                        new ScalarEntryOfResultSet(
+                            DbdTableFields.PARENT,
+                            query,
+                            rset
+                        ),
+                        new ScalarEntryOfResultSet(
+                            DbdTableFields.PARTKEYDEFINITION,
+                            query,
+                            rset
+                        ),
+                        new ScalarEntryOfResultSet(
+                            DbdTableFields.PARTKEYRANGE,
+                            query,
+                            rset
+                        ),
+                        new MapEntry<>(
+                            DbdTableFields.DEPENDENCIES,
+                            new YamlScalarSequenceOfResultSet(
+                                DbdTableFields.DEPENDENCIES, query, rset
+                            )
+                        ),
+                        new MapEntry<>(
+                            DbdTableFields.COLUMNS,
+                            new YamlSequenceOfNodes(
+                                new ListOfResultSet<DbdColumnMapping>(
+                                    rs -> new DbdColumnMappingOfResultSet(
+                                        rs,
+                                        columns
+                                    ),
+                                    columns,
+                                    connection
+                                )
+                            )
                         )
                     )
                 )
