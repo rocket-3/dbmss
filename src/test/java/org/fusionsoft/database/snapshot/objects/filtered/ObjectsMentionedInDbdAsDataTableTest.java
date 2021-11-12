@@ -26,7 +26,6 @@ import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objects.composite.ObjectsMentionedInDbdAsDataTable;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.MappingEmpty;
@@ -34,7 +33,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * The tests for {@link ObjectsMentionedInDbdAsDataTable}.
+ * The tests for {@link ObjectsAreDataTablesInDbd}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -54,7 +53,7 @@ class ObjectsMentionedInDbdAsDataTableTest {
                 ObjectType.TABLE
             )
         );
-        final Objects filtered = new ObjectsMentionedInDbdAsDataTable(
+        final Objects filtered = new ObjectsAreDataTablesInDbd(
             new ObjectsEnvelope(
                 new IterableOf<>(
                     object.apply(datatable),

@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
-import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromMssql;
+import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMssql;
 
 /**
  * The MS SQL Server {@link Dbms}.

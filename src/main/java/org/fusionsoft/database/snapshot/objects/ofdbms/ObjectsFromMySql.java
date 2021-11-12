@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.dbms;
+package org.fusionsoft.database.snapshot.objects.ofdbms;
 
-import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
+import java.sql.Connection;
+import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The MySQL Server {@link Dbms}.
+ * The Objects of {@link Connection} of MySql dbms.
  * @since 0.1
  */
-public class MySqlDbms extends AnyDbms {
+@SuppressWarnings("PMD")
+public class ObjectsFromMySql extends ObjectsEnvelope {
 
     /**
-     * Instantiates a new My sql dbms.
+     * Ctor.
+     * @param connection The connection used
      */
-    public MySqlDbms() {
-        super(
-            "MYSQL",
-            "MySQL",
-            ObjectsFromMySql::new
-        );
+    public ObjectsFromMySql(final Connection connection) {
+        super(new IterableOf<>());
     }
 
 }

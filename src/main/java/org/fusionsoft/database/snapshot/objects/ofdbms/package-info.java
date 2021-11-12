@@ -13,25 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.dbms;
-
-import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
-
 /**
- * The MySQL Server {@link Dbms}.
- * @since 0.1
+ * {@link org.fusionsoft.database.snapshot.Objects} of database of some DBMS.
  */
-public class MySqlDbms extends AnyDbms {
-
-    /**
-     * Instantiates a new My sql dbms.
-     */
-    public MySqlDbms() {
-        super(
-            "MYSQL",
-            "MySQL",
-            ObjectsFromMySql::new
-        );
-    }
-
-}
+package org.fusionsoft.database.snapshot.objects.ofdbms;

@@ -20,10 +20,10 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.mapping.dbd.extracted.DbdInfoMappingOfDbdFile;
-import org.fusionsoft.database.mapping.dbd.extracted.DbdServerEntryOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.ofdbdfile.DbdInfoMappingOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerEntryOfDbdFile;
 import org.fusionsoft.database.snapshot.AstronomicalTime;
-import org.fusionsoft.database.snapshot.objects.composite.ObjectsFromServerMentionedInDbd;
+import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
 
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.
@@ -54,7 +54,7 @@ public class SnapshotWritable extends CombinedWritable {
                 new SnapshotDbdDocument(
                     new DbdServerEntryOfDbdFile(dbd, server),
                     new DbdInfoMappingOfDbdFile(dbd),
-                    new ObjectsFromServerMentionedInDbd(dbd, server)
+                    new ObjectsOfServerFromDbd(dbd, server)
                 ),
                 new Unchecked<>(
                     new Ternary<>(

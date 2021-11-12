@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
-import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromPostgres;
+import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromPostgres;
 
 /**
  * The Postgres {@link Dbms}.

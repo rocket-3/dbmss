@@ -13,25 +13,11 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.dbms;
-
-import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
 
 /**
- * The MySQL Server {@link Dbms}.
- * @since 0.1
+ * The package with classes that helps you build
+ *  {@link org.fusionsoft.database.snapshot.Objects} of {@link java.sql.ResultSet},
+ *  {@link org.fusionsoft.database.snapshot.query.Query} and {@link java.sql.Connection}.
+ * @todo #101:60min Refactor the package, extract new SchemaOfResultSet.
  */
-public class MySqlDbms extends AnyDbms {
-
-    /**
-     * Instantiates a new My sql dbms.
-     */
-    public MySqlDbms() {
-        super(
-            "MYSQL",
-            "MySQL",
-            ObjectsFromMySql::new
-        );
-    }
-
-}
+package org.fusionsoft.database.snapshot.objects.ofresultset;

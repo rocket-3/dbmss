@@ -13,25 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.dbms;
+package org.fusionsoft.database.snapshot.objects.ofdbms.postgres;
 
-import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
+import java.sql.ResultSet;
+import org.fusionsoft.database.snapshot.objects.ofresultset.IndexOfResultSet;
+import org.fusionsoft.database.snapshot.query.pg.PgIndexesQuery;
 
 /**
- * The MySQL Server {@link Dbms}.
+ * The {@link IndexOfResultSet} with {@link PgIndexesQuery}.
  * @since 0.1
  */
-public class MySqlDbms extends AnyDbms {
+public class PgIndexOfResultSet extends IndexOfResultSet {
 
     /**
-     * Instantiates a new My sql dbms.
+     * Instantiates a new Postgres IndexOfResultSet.
+     * @param rset The ResultSet to be encapsulated.
      */
-    public MySqlDbms() {
-        super(
-            "MYSQL",
-            "MySQL",
-            ObjectsFromMySql::new
-        );
+    public PgIndexOfResultSet(final ResultSet rset) {
+        super(rset, new PgIndexesQuery());
     }
 
 }

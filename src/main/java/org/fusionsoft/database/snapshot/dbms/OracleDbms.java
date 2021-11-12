@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
-import org.fusionsoft.database.snapshot.objects.dbms.ObjectsFromOracle;
+import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromOracle;
 
 /**
  * The Oracle {@link Dbms}.

@@ -13,24 +13,31 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.objects.predicate;
+package org.fusionsoft.database.mapping.dbd.ofdbdfile;
 
+import org.cactoos.Text;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.DbdServerEntry;
 
 /**
- * The predicate of {@link DbObject} which tests it presents in DBD file.
+ * The type of DbdServerMapping that can be constructed of {@link DbdFile}.
  * @since 0.1
  */
-public class ObjectMentionedInDbdFilePredicate extends ObjectMentionedInPredicate {
+public class DbdServerEntryOfDbdFile extends DbdServerEntry {
 
     /**
-     * Instantiates a new Objects in dbd predicate.
+     * Instantiates a new Dbd server mapping of dbd file.
      * @param file The DbdFile to be encapsulated.
+     * @param name The String of server's name to be used.
      */
-    public ObjectMentionedInDbdFilePredicate(final DbdFile file) {
-        super(new ObjectsOfDbdFile(file));
+    public DbdServerEntryOfDbdFile(final DbdFile file, final Text name) {
+        super(
+            name,
+            new DbdServerMappingOfDbdFile(
+                file,
+                name
+            )
+        );
     }
 
 }

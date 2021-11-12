@@ -13,24 +13,29 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.dbms;
+package org.fusionsoft.database.mapping.dbd.ofdbdfile;
 
-import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
+import org.fusionsoft.database.DbdFile;
+import org.fusionsoft.database.mapping.dbd.DbdInfoMapping;
+import org.fusionsoft.database.mapping.fields.DbdRootFields;
+import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
- * The MySQL Server {@link Dbms}.
+ * The ctor of {@link DbdInfoMapping} from {@link DbdFile}.
  * @since 0.1
  */
-public class MySqlDbms extends AnyDbms {
+public class DbdInfoMappingOfDbdFile extends DbdInfoMapping {
 
     /**
-     * Instantiates a new My sql dbms.
+     * Instantiates a new DbdInfoMapping of DbdFile.
+     * @param file The YamlMapping to be encapsulated.
      */
-    public MySqlDbms() {
+    public DbdInfoMappingOfDbdFile(final DbdFile file) {
         super(
-            "MYSQL",
-            "MySQL",
-            ObjectsFromMySql::new
+            new YamlMappingOfPath(
+                file.asYaml(),
+                DbdRootFields.SERVERS
+            )
         );
     }
 

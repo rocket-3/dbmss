@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.dbms;
+package org.fusionsoft.database.snapshot.objects.ofdbd;
 
-import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
+import org.fusionsoft.database.DbdFile;
+import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 
 /**
- * The MySQL Server {@link Dbms}.
+ * The type of Objects that can be constructed of {@link DbdFile}.
  * @since 0.1
  */
-public class MySqlDbms extends AnyDbms {
+public class ObjectsOfDbdFile extends ObjectsOfDbdRootMapping {
 
     /**
-     * Instantiates a new My sql dbms.
+     * Instantiates a new Objects of dbd file.
+     * @param mapping The DbdFile to be encapsulated.
      */
-    public MySqlDbms() {
+    public ObjectsOfDbdFile(final DbdFile mapping) {
         super(
-            "MYSQL",
-            "MySQL",
-            ObjectsFromMySql::new
+            new DbdRootMapping(mapping::asYaml)
         );
     }
 
