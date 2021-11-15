@@ -17,6 +17,7 @@ package org.fusionsoft.database.mapping.dbd.ofobjects;
 
 import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
+import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
@@ -44,7 +45,7 @@ public class DbdTableMappingOfObjects extends DbdTableMapping {
         final DbObject<?> table
     ) {
         super(
-            new DbdTableMappingWithChildObjects(
+            new DbdTableMappingOfEntries(
                 new DbdTableMapping(
                     new MappingOfRepresentative(table)
                 ),
@@ -56,6 +57,17 @@ public class DbdTableMappingOfObjects extends DbdTableMapping {
                         objects
                     ),
                     (objs, obj) -> new DbdIndexMapping(
+                        new MappingOfRepresentative(obj)
+                    )
+                ),
+                new UnwrapEntriesOfObjects<DbdDataMapping>(
+                    objects,
+                    new ObjectsWithParentAndType(
+                        table,
+                        ObjectType.DATA,
+                        objects
+                    ),
+                    (objs, obj) -> new DbdDataMapping(
                         new MappingOfRepresentative(obj)
                     )
                 ),

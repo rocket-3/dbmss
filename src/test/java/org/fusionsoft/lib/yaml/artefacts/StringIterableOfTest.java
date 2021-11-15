@@ -15,9 +15,14 @@
  */
 package org.fusionsoft.lib.yaml.artefacts;
 
+import java.io.IOException;
+import org.cactoos.Text;
+import org.cactoos.map.MapEntry;
 import org.cactoos.set.SetOf;
+import org.cactoos.text.TextOf;
 import org.fusionsoft.lib.yaml.YamlInputOf;
 import org.fusionsoft.lib.yaml.YamlMappingOf;
+import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +32,20 @@ import org.junit.jupiter.api.Test;
  */
 @SuppressWarnings("PMD")
 class StringIterableOfTest {
+
+    @Test
+    public void canUseScalarOfText() throws IOException {
+        final Text key = new TextOf("0");
+        final String chars = "[0, 1, \"ACTIVE\", \"ACTIVE\",null, null]";
+        System.out.println(
+            new YamlMappingOfEntries(
+                new MapEntry<>(
+                    key,
+                    new YamlInputOf(chars).readPlainScalar().asScalar()
+                )
+            ).toString()
+        );
+    }
 
     /**
      * Can parse YAML array sequence of {@link com.amihaiemil.eoyaml.Scalar}.
@@ -39,22 +58,22 @@ class StringIterableOfTest {
                     new YamlMappingOf(
                         new YamlInputOf(
                             new StringBuilder()
-                            .append("data:\n")
-                            .append("  \"instanceStatus~ACTIVE\": ")
-                            .append(
-                                "[0, 1, \"ACTIVE\", \"ACTIVE\",null, null]\n"
-                            )
-                            .append("  \"instanceStatus~DELETED\": ")
-                            .append(
-                                "[0, 2, \"DELETED\", \"DELETED\", null, null]"
-                            )
-                            .toString()
+                                .append("data:\n")
+                                .append("  \"instanceStatus~ACTIVE\": ")
+                                .append(
+                                    "[0, 1, \"ACTIVE\", \"ACTIVE\",null, null]\n"
+                                )
+                                .append("  \"instanceStatus~DELETED\": ")
+                                .append(
+                                    "[0, 2, \"DELETED\", \"DELETED\", null, null]"
+                                )
+                                .toString()
                         )
                     )
-                    .value("data")
-                    .asMapping()
-                    .value("\"instanceStatus~DELETED\"")
-                    .asScalar()
+                        .value("data")
+                        .asMapping()
+                        .value("\"instanceStatus~DELETED\"")
+                        .asScalar()
                 )
             ).containsAll(
                 new SetOf<String>(

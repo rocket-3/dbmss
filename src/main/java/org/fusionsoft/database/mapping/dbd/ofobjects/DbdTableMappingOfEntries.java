@@ -16,11 +16,14 @@
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
 import com.amihaiemil.eoyaml.YamlNode;
+import java.util.Map;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.map.MapEntry;
+import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
+import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
@@ -30,13 +33,14 @@ import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
+import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
  * The DBD/sequences/#sequence/tables/#table node mapping.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class DbdTableMappingWithChildObjects extends DbdTableMapping {
+public class DbdTableMappingOfEntries extends DbdTableMapping {
 
     /**
      * Instantiates a new Dbd table mapping of entries.
@@ -49,11 +53,40 @@ public class DbdTableMappingWithChildObjects extends DbdTableMapping {
      *  entries to be encapsulated.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
-    public DbdTableMappingWithChildObjects(
+    public DbdTableMappingOfEntries(
         final DbdTableMapping table,
-        final Iterable<MapEntry<Text, DbdIndexMapping>> indexes,
-        final Iterable<MapEntry<Text, DbdConstraintMapping>> constraints,
-        final Iterable<MapEntry<Text, DbdTriggerMapping>> triggers
+        final Iterable<? extends Map.Entry<Text, DbdIndexMapping>> indexes,
+        final Iterable<? extends Map.Entry<Text, DbdConstraintMapping>> constraints,
+        final Iterable<? extends Map.Entry<Text, DbdTriggerMapping>> triggers
+    ) {
+        this(
+            table,
+            indexes,
+            new IterableOf<>(),
+            constraints,
+            triggers
+        );
+    }
+
+    /**
+     * Instantiates a new Dbd table mapping of entries.
+     * @param table The table DbObject entry to take data from.
+     * @param indexes The Iterable of Text -> {@link DbdIndexMapping}
+     *  entries to be encapsulated.
+     * @param data The Iterable of Text -> {@link DbdDataMapping}
+     *  entries to be encapsulated.
+     * @param constraints The Iterable of Text -> {@link DbdConstraintMapping}
+     *  entries to be encapsulated.
+     * @param triggers The Iterable of Text -> {@link DbdTriggerMapping}
+     *  entries to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
+    public DbdTableMappingOfEntries(
+        final DbdTableMapping table,
+        final Iterable<? extends Map.Entry<Text, DbdIndexMapping>> indexes,
+        final Iterable<? extends Map.Entry<Text, DbdDataMapping>> data,
+        final Iterable<? extends Map.Entry<Text, DbdConstraintMapping>> constraints,
+        final Iterable<? extends Map.Entry<Text, DbdTriggerMapping>> triggers
     ) {
         super(
             new MappingWithoutNullScalars(
@@ -74,11 +107,15 @@ public class DbdTableMappingWithChildObjects extends DbdTableMapping {
                             DbdTableFields.PARTKEYRANGE,
                             DbdTableFields.DEPENDENCIES
                         ),
-                        new EntriesWithKeys(
-                            new EntriesOfYamlMapping(table),
-                            DbdTableFields.DATA
-                        ),
-                        new IterableOf<MapEntry<? extends Text, ? extends YamlNode>>(
+                        new IterableOf<Map.Entry<? extends Text, ? extends YamlNode>>(
+                            new MapEntry<>(
+                                new TextOfScalar(
+                                    () -> data.iterator().next().getKey().asString()
+                                ),
+                                new YamlMappingOfScalar(
+                                    () -> data.iterator().next().getValue()
+                                )
+                            ),
                             new MapEntry<>(
                                 DbdTableFields.CONSTRAINTS,
                                 new YamlMappingOfEntries(constraints)

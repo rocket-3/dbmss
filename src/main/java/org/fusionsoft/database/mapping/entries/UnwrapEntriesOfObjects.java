@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.mapping.entries;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.BiFunc;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
@@ -31,7 +31,7 @@ import org.fusionsoft.database.snapshot.Objects;
  * @param <M> The type of YamlMapping parameter.
  * @since 0.1
  */
-public class UnwrapEntriesOfObjects<M extends YamlMapping>
+public class UnwrapEntriesOfObjects<M extends YamlNode>
     extends IterableEnvelope<MapEntry<Text, M>> {
 
     /**

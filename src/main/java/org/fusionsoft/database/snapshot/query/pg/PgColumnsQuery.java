@@ -17,6 +17,7 @@ package org.fusionsoft.database.snapshot.query.pg;
 
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.fields.DbdColumnFields;
+import org.fusionsoft.database.mapping.value.IuTypeValues;
 import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
 import org.fusionsoft.database.snapshot.query.Query;
 
@@ -49,14 +50,21 @@ public class PgColumnsQuery extends PgMessageFormatQuery<DbdColumnFields> {
                 + "    col.ordinal_position AS {5},\n"
                 + "    case when pkeys.ispk is null then false else pkeys.ispk end isPk,\n"
                 + "    case\n"
-                + "        when lower(data_type) in ('integer', 'numeric', 'smallint', 'double precision', 'bigint', 'oid') then 'number' \n"
-                + "        when lower(data_type) in ('character varying', 'char', 'character', 'varchar', 'text', 'name') then 'string'\n"
-                + "        when lower(data_type) in ('timestamp without time zone', 'timestamp with time zone', 'date') then 'date'\n"
-                + "        when lower(data_type) in ('boolean') then 'boolean'\n"
-                + "        when lower(data_type) in ('bytea') then 'binary'\n"
-                + "        when lower(data_type) in ('array') then 'array'\n"
-                + "        when lower(data_type) like '%json%' then 'json'\n"
-                + "        else 'native'\n"
+                + "        when lower(data_type) in ("
+                + "'integer', 'numeric', 'smallint', 'double precision', 'bigint', 'oid'"
+                + ") then '" + IuTypeValues.NUMBER
+                + "' \n"
+                + "        when lower(data_type) in ("
+                + "'character varying', 'char', 'character', 'varchar', 'text', 'name'"
+                + ") then '" + IuTypeValues.STRING + "'\n"
+                + "        when lower(data_type) in ("
+                + "'timestamp without time zone', 'timestamp with time zone', 'date'"
+                + ") then '"+IuTypeValues.DATE+"'\n"
+                + "        when lower(data_type) in ('boolean') then '"+IuTypeValues.BOOLEAN+"'\n"
+                + "        when lower(data_type) in ('bytea') then '"+IuTypeValues.BINARY+"'\n"
+                + "        when lower(data_type) in ('array') then '"+IuTypeValues.ARRAY+"'\n"
+                + "        when lower(data_type) like '%json%' then '"+IuTypeValues.JSON+"'\n"
+                + "        else '"+IuTypeValues.NATIVE+"'\n"
                 + "    end {6}, \n"
                 + "    case when lower(data_type) in ('char', 'character') then true else false \n"
                 + "    end fixed\n"

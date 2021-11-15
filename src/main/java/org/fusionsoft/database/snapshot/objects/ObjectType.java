@@ -58,6 +58,15 @@ public enum ObjectType implements Text {
         }
     },
     /**
+     * The db table objectType constant.
+     */
+    DATA() {
+        @Override
+        public String asString() {
+            return "data";
+        }
+    },
+    /**
      * The db sequence objectType constant.
      */
     SEQUENCE() {
