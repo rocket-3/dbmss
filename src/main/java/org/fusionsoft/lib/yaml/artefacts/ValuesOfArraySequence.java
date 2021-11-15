@@ -13,37 +13,28 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.data;
+package org.fusionsoft.lib.yaml.artefacts;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableEnvelope;
+import org.cactoos.text.Split;
+import org.cactoos.text.Sub;
+import org.cactoos.text.TextOfScalar;
 
-public class SimpleColumn implements Column {
+public class ValuesOfArraySequence extends IterableEnvelope<Text> {
 
-    private final Text text;
-
-    private final Number number;
-
-    private final ValueFormat tformat;
-
-    public SimpleColumn(final Text name, final Number order, final ValueFormat format) {
-        this.text = name;
-        this.number = order;
-        this.tformat = format;
-    }
-
-    @Override
-    public Text name() {
-        return this.text;
-    }
-
-    @Override
-    public Number order() {
-        return this.number;
-    }
-
-    @Override
-    public ValueFormat format() {
-        return this.tformat;
+    public ValuesOfArraySequence(final YamlNode node) {
+        super(
+            new Split(
+                new Sub(
+                    new TextOfScalar(() -> node.asScalar().value()),
+                    1,
+                    str -> str.length() - 1
+                ),
+                ",[ ]?"
+            )
+        );
     }
 
 }

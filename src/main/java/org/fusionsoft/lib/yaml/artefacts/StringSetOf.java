@@ -19,10 +19,11 @@ import com.amihaiemil.eoyaml.Scalar;
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.set.SetEnvelope;
 import org.cactoos.set.SetOf;
+import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
  * The type Set of that can be constructed of different Yaml artifacts.
- * @see StringIterableOf
+ * @see ValuesOfYamlSequence
  * @since 0.1
  */
 public class StringSetOf extends SetEnvelope<String> {
@@ -35,7 +36,10 @@ public class StringSetOf extends SetEnvelope<String> {
     public StringSetOf(final YamlMapping mapping, final String key) {
         super(
             new SetOf<>(
-                new StringIterableOf(mapping, key)
+                new ValuesOfYamlSequence<String>(
+                    new YamlMappingOfPath(mapping, key),
+                    x->x.asScalar().value()
+                )
             )
         );
     }
@@ -46,8 +50,8 @@ public class StringSetOf extends SetEnvelope<String> {
      */
     public StringSetOf(final Scalar scalar) {
         super(
-            new SetOf<String>(
-                new StringIterableOf(scalar)
+            new SetOf<>(
+                new ValuesOfYamlSequence<>(scalar, x -> x.asScalar().value())
             )
         );
     }

@@ -24,7 +24,7 @@ public class ColumnOfDbdColumnMapping extends ColumnOfScalar {
 
     public ColumnOfDbdColumnMapping(final DbdColumnMapping column) {
         super(
-            () -> new SimpleColumn(
+            () -> new ColumnSimple(
                 new TextOfMappingValue(column, DbdColumnFields.DBNAME),
                 new NumberOf(
                     new TextOfMappingValue(column, DbdColumnFields.ORDER)

@@ -13,20 +13,28 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package org.fusionsoft.database.snapshot.objects;
 
-package org.fusionsoft.database.snapshot.data;
-
-import java.sql.ResultSet;
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.cactoos.Func;
 import org.cactoos.iterable.IterableEnvelope;
+import org.cactoos.iterable.Mapped;
+import org.fusionsoft.database.snapshot.DbObject;
 
-public class IterableOfResultSet extends IterableEnvelope<ResultSet> {
+public class ObjectsCasted<T extends YamlMapping>
+    extends IterableEnvelope<DbObject<T>> {
 
     /**
      * Ctor.
      * @param iterable The wrapped iterable
      */
-    public IterableOfResultSet(final Iterable<ResultSet> iterable) {
-        super(iterable);
+    public ObjectsCasted(final Func<YamlMapping, T> cast, final Iterable<? extends DbObject<?>> iterable) {
+        super(
+            new Mapped<DbObject<T>>(
+                object -> new ObjectCasted<>(cast, object),
+                iterable
+            )
+        );
     }
 
 }

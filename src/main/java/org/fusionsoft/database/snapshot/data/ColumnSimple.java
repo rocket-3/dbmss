@@ -16,27 +16,34 @@
 package org.fusionsoft.database.snapshot.data;
 
 import org.cactoos.Text;
-import org.cactoos.text.TextOf;
 
-public class ArrayRow implements Row {
+public class ColumnSimple implements Column {
 
-    private final long num;
+    private final Text text;
 
-    private final String[] array;
+    private final Number number;
 
-    public ArrayRow(final long num, final String[] array) {
-        this.num = num;
-        this.array = array;
+    private final ValueFormat tformat;
+
+    public ColumnSimple(final Text name, final Number order, final ValueFormat format) {
+        this.text = name;
+        this.number = order;
+        this.tformat = format;
     }
 
     @Override
-    public Text textOf(final Column column) {
-        return new TextOf(array[column.order().intValue()]);
+    public Text name() {
+        return this.text;
     }
 
     @Override
-    public long number() {
-        return this.num;
+    public Number order() {
+        return this.number;
+    }
+
+    @Override
+    public ValueFormat format() {
+        return this.tformat;
     }
 
 }

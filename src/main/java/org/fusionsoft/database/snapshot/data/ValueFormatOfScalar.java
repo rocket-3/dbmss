@@ -49,4 +49,9 @@ public class ValueFormatOfScalar implements ValueFormat {
         return this.scalar.value().ofResultSet(rset, ordinal);
     }
 
+    @Override
+    public String ofResultSet(final ResultSet rset, final String key) {
+        return this.scalar.value().ofResultSet(rset, key);
+    }
+
 }

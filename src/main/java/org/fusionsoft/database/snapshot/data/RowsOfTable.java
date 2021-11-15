@@ -30,25 +30,26 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.query.DataQuery;
 
-public class TableDataResultSets extends IterableEnvelope<ResultSet> implements AutoCloseable {
+public class RowsOfTable extends IterableEnvelope<Row> implements AutoCloseable {
 
     private final Sticky<Statement> stmt;
 
     private final Sticky<ResultSet> rset;
 
-    public TableDataResultSets(
+    private RowsOfTable(
         final Sticky<Statement> stmt,
         final Sticky<ResultSet> rset,
-        final Scalar<Iterator<? extends ResultSet>> iterator
+        final Scalar<Iterator<? extends Row>> iterator
     ) {
         super(new IterableOf<>(iterator));
         this.stmt = stmt;
         this.rset = rset;
     }
 
-    public TableDataResultSets(
+    private RowsOfTable(
         final Sticky<Statement> stmt,
         final Sticky<ResultSet> rset,
+        final Iterable<Column> cols,
         final Number rows
     ) {
         this(
@@ -57,20 +58,20 @@ public class TableDataResultSets extends IterableEnvelope<ResultSet> implements 
             new ScalarOf<>(() -> {
                 final Unchecked<Long> all = new Unchecked<>(new Sticky<>(rows::longValue));
                 final Unchecked<ResultSet> data = new Unchecked<>(rset);
-                final Long[] row = {0L};
-                return new Iterator<ResultSet>() {
+                final long[] row = {0L};
+                return new Iterator<Row>() {
                     @Override
                     public boolean hasNext() {
-                        return row[0] <= all.value();
+                        return row[0] < all.value();
                     }
 
                     @Override
-                    public ResultSet next() {
-                        return new UncheckedFunc<ResultSet, ResultSet>(
+                    public Row next() {
+                        return new UncheckedFunc<ResultSet, Row>(
                             previous -> {
                                 previous.next();
                                 row[0]++;
-                                return previous;
+                                return new RowOfResultSet(row[0], previous, cols);
                             }
                         ).apply(data.value());
                     }
@@ -79,19 +80,21 @@ public class TableDataResultSets extends IterableEnvelope<ResultSet> implements 
         );
     }
 
-    public TableDataResultSets(
+    private RowsOfTable(
         final DataQuery query,
         final Scalar<Statement> stmt,
+        final Iterable<Column> cols,
         final Number rows
     ) {
         this(
-            new Sticky<Statement>(stmt),
-            new Sticky<ResultSet>(() -> stmt.value().executeQuery(query.asString())),
+            new Sticky<>(stmt),
+            new Sticky<>(() -> stmt.value().executeQuery(query.asString())),
+            cols,
             rows
         );
     }
 
-    public TableDataResultSets(
+    public RowsOfTable(
         final Connection connection,
         final DbObject<DbdTableMapping> table
     ) {
@@ -102,6 +105,7 @@ public class TableDataResultSets extends IterableEnvelope<ResultSet> implements 
                 stmt.setFetchSize(5000);
                 return stmt;
             },
+            new ColumnsOfTable(table),
             new RowsCount(table, connection)
         );
     }

@@ -20,14 +20,18 @@ import java.sql.ResultSet;
 import org.cactoos.func.UncheckedBiFunc;
 import org.cactoos.list.ListOf;
 
-public class RowOfResultSet extends ArrayRow {
+public class RowOfResultSet extends RowOfArray {
 
     public RowOfResultSet(final long num, final ResultSet rset, final Iterable<Column> columns) {
         super(
-            num, new UncheckedBiFunc<>(
+            num,
+            new UncheckedBiFunc<>(
                 (ResultSet data, Iterable<Column> cols) -> {
-                    final String[] value = new String[ new ListOf<Column>(cols).size()];
-
+                    final String[] value = new String[new ListOf<>(cols).size()];
+                    for (final Column col : cols) {
+                        final int index = col.order().intValue();
+                        value[index-1] = col.format().ofResultSet(data, index);
+                    }
                     return value;
                 }
             ).apply(rset, columns)

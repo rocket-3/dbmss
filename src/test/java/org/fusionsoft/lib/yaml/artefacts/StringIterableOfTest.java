@@ -54,7 +54,7 @@ class StringIterableOfTest {
     public void canParseArraySequence() {
         Assertions.assertTrue(
             new SetOf<>(
-                new StringIterableOf(
+                new StringSetOf(
                     new YamlMappingOf(
                         new YamlInputOf(
                             new StringBuilder()

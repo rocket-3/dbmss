@@ -28,35 +28,35 @@ public class ValueFormatOfIuType extends ValueFormatOfScalar {
                 new MapOf<String, ValueFormat>(
                     new MapEntry<>(
                         IuTypeValues.ARRAY.asString(),
-                        new NotImplementedTextFormat()
+                        new ValueFormatDummy()
                     ),
                     new MapEntry<>(
                         IuTypeValues.NATIVE.asString(),
-                        new NotImplementedTextFormat()
+                        new ValueFormatDummy()
                     ),
                     new MapEntry<>(
                         IuTypeValues.NUMBER.asString(),
-                        new NumberValueFormat()
+                        new ValueFormatOfNumber()
                     ),
                     new MapEntry<>(
                         IuTypeValues.JSON.asString(),
-                        new NotImplementedTextFormat()
+                        new ValueFormatDummy()
                     ),
                     new MapEntry<>(
                         IuTypeValues.BINARY.asString(),
-                        new NotImplementedTextFormat()
+                        new ValueFormatDummy()
                     ),
                     new MapEntry<>(
                         IuTypeValues.BOOLEAN.asString(),
-                        new NotImplementedTextFormat()
+                        new ValueFormatDummy()
                     ),
                     new MapEntry<>(
                         IuTypeValues.DATE.asString(),
-                        new NotImplementedTextFormat()
+                        new ValueFormatDummy()
                     ),
                     new MapEntry<>(
                         IuTypeValues.STRING.asString(),
-                        new NotImplementedTextFormat()
+                        new ValueFormatDummy()
                     )
                 ).get(type.asString())
         );

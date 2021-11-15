@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.data;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import org.cactoos.Text;
-import org.fusionsoft.lib.exception.NotImplemented;
+import org.cactoos.scalar.NumberOf;
+import org.cactoos.scalar.Unchecked;
 
-public class NotImplementedTextFormat implements ValueFormat {
+public class ValueFormatOfNumber implements ValueFormat {
 
     @Override
     public Text storableRepresentationOf(final Text text) {
-        throw new NotImplemented();
+        return text;
     }
 
     @Override
@@ -33,7 +34,30 @@ public class NotImplementedTextFormat implements ValueFormat {
         final int ordinal,
         final Text text
     ) {
-        throw new NotImplemented();
+        new Unchecked<Void>(
+            () -> {
+                stmt.setLong(ordinal, new NumberOf(text).longValue());
+                return null;
+            }
+        ).value();
+    }
+
+    @Override
+    public String ofResultSet(final ResultSet rset, final int ordinal) {
+        return new Unchecked<String>(
+            () -> {
+                return String.valueOf(rset.getLong(ordinal));
+            }
+        ).value();
+    }
+
+    @Override
+    public String ofResultSet(final ResultSet rset, final String key) {
+        return new Unchecked<String>(
+            () -> {
+                return String.valueOf(rset.getLong(key));
+            }
+        ).value();
     }
 
 }

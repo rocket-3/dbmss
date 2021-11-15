@@ -16,41 +16,15 @@
 package org.fusionsoft.database.mapping.entries;
 
 import com.amihaiemil.eoyaml.Yaml;
-import com.amihaiemil.eoyaml.YamlNode;
-import java.util.Map;
-import org.cactoos.Scalar;
 import org.cactoos.Text;
-import org.cactoos.scalar.Sticky;
-import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.TextOf;
-import org.fusionsoft.lib.exception.NotImplemented;
 
 /**
  * The type of Map.Entry of Text -> YamlNode that can be constructed of
  *  Text and Scalar of YamlNode.
  * @since 0.1
  */
-public class ScalarEntry implements Map.Entry<Text, YamlNode> {
-
-    /**
-     * The Text encapsulated.
-     */
-    private final Text text;
-
-    /**
-     * The Scalar of YamlNode encapsulated.
-     */
-    private final Unchecked<YamlNode> node;
-
-    /**
-     * Instantiates a new Scalar entry.
-     * @param text The Text to be encapsulated.
-     * @param node The Scalar of YamlNode to be encapsulated.
-     */
-    private ScalarEntry(final Text text, final Scalar<YamlNode> node) {
-        this.text = text;
-        this.node = new Unchecked<>(new Sticky<>(node));
-    }
+public class ScalarEntry extends MappingEntryOfScalar {
 
     /**
      * Instantiates a new Scalar entry.
@@ -58,7 +32,7 @@ public class ScalarEntry implements Map.Entry<Text, YamlNode> {
      * @param value The Text to be encapsulated.
      */
     public ScalarEntry(final Text key, final Text value) {
-        this(
+        super(
             key,
             () -> Yaml.createYamlScalarBuilder().addLine(value.asString()).buildPlainScalar()
         );
@@ -71,21 +45,6 @@ public class ScalarEntry implements Map.Entry<Text, YamlNode> {
      */
     public ScalarEntry(final String key, final String value) {
         this(new TextOf(key), new TextOf(value));
-    }
-
-    @Override
-    public final Text getKey() {
-        return this.text;
-    }
-
-    @Override
-    public final YamlNode getValue() {
-        return this.node.value();
-    }
-
-    @Override
-    public final YamlNode setValue(final YamlNode value) {
-        throw new NotImplemented();
     }
 
 }

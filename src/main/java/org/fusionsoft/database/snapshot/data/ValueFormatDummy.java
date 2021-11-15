@@ -18,14 +18,14 @@ package org.fusionsoft.database.snapshot.data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import org.cactoos.Text;
-import org.cactoos.scalar.NumberOf;
 import org.cactoos.scalar.Unchecked;
+import org.fusionsoft.lib.exception.NotImplemented;
 
-public class NumberValueFormat implements ValueFormat {
+public class ValueFormatDummy implements ValueFormat {
 
     @Override
     public Text storableRepresentationOf(final Text text) {
-        return text;
+        throw new NotImplemented();
     }
 
     @Override
@@ -34,21 +34,17 @@ public class NumberValueFormat implements ValueFormat {
         final int ordinal,
         final Text text
     ) {
-        new Unchecked<Void>(
-            () -> {
-                stmt.setLong(ordinal, new NumberOf(text).longValue());
-                return null;
-            }
-        ).value();
+        throw new NotImplemented();
     }
 
     @Override
     public String ofResultSet(final ResultSet rset, final int ordinal) {
-        return new Unchecked<String>(
-            () -> {
-                return String.valueOf(rset.getLong(ordinal));
-            }
-        ).value();
+        return new Unchecked<>(() -> String.valueOf(rset.getString(ordinal))).value();
+    }
+
+    @Override
+    public String ofResultSet(final ResultSet rset, final String key) {
+        return new Unchecked<>(() -> String.valueOf(rset.getString(key))).value();
     }
 
 }

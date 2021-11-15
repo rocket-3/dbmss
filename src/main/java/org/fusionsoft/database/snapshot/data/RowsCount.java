@@ -40,10 +40,11 @@ public class RowsCount extends NumberEnvelope {
                         )
                     )
                 ) {
+                    rs.next();
                     return Double.parseDouble(
                         MessageFormat.format(
                             "{0}.0",
-                            rs.getString(0)
+                            rs.getString(1)
                         )
                     );
                 }

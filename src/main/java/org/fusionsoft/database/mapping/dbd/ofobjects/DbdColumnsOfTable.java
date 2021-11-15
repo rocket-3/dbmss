@@ -15,32 +15,29 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
-import com.amihaiemil.eoyaml.StrictYamlMapping;
-import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterator.Mapped;
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.lib.yaml.YamlNodeOfPath;
+import org.fusionsoft.lib.yaml.artefacts.ValuesOfYamlSequence;
 
-public class DbdColumnsOfTable extends IterableEnvelope<DbdColumnMapping> {
+public class DbdColumnsOfTable extends ValuesOfYamlSequence<DbdColumnMapping> {
 
     public DbdColumnsOfTable(final DbObject<DbdTableMapping> object) {
-        this(object.asYaml());
+        this(new MappingOfRepresentative(object));
+    }
+
+    private DbdColumnsOfTable(final YamlMapping mapping) {
+        this(new DbdTableMapping(mapping));
     }
 
     public DbdColumnsOfTable(final DbdTableMapping mapping) {
         super(
-            new IterableOf<>(
-                () -> new Mapped<>(
-                    x -> new DbdColumnMapping(x.asMapping()),
-                    new StrictYamlMapping(mapping)
-                        .value(DbdTableFields.COLUMNS.asString())
-                        .asSequence()
-                        .iterator()
-                )
-            )
+            new YamlNodeOfPath(mapping, DbdTableFields.COLUMNS),
+            x -> new DbdColumnMapping(x.asMapping())
         );
     }
 

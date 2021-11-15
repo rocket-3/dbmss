@@ -15,18 +15,28 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import org.cactoos.Text;
+import org.cactoos.text.TextOf;
 
-public interface ValueFormat {
+public class RowOfArray implements Row {
 
-    Text storableRepresentationOf(Text text);
+    private final long num;
 
-    void passInPrepareStatement(PreparedStatement stmt, int ordinal, Text text);
+    private final String[] array;
 
-    String ofResultSet(ResultSet rset, int ordinal);
+    public RowOfArray(final long num, final String[] array) {
+        this.num = num;
+        this.array = array;
+    }
 
-    String ofResultSet(ResultSet rset, String key);
+    @Override
+    public Text textOf(final Column column) {
+        return new TextOf(array[column.order().intValue()]);
+    }
+
+    @Override
+    public long number() {
+        return this.num;
+    }
 
 }
