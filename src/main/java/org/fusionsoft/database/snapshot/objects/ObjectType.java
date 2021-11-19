@@ -19,6 +19,7 @@ import org.cactoos.Text;
 
 /**
  * The enum ObjectType.
+ * @todo #106:30min Embed mapping type behaviour in values.
  */
 public enum ObjectType implements Text {
     /**

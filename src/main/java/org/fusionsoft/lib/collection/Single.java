@@ -42,7 +42,7 @@ public class Single<T> implements Scalar<T> {
     }
 
     @Override
-    public final T value() throws Exception {
+    public final T value() {
         final int size = new SetOf<T>(this.iterable).size();
         if (size != 1) {
             throw new ValidationException(

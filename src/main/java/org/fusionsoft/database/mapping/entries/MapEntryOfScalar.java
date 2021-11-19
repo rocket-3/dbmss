@@ -13,30 +13,34 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.data;
 
-import org.cactoos.Text;
-import org.cactoos.text.TextOf;
+package org.fusionsoft.database.mapping.entries;
 
-public class RowOfArray implements Row {
+import java.util.Map;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.Unchecked;
 
-    private final long num;
+public class MapEntryOfScalar<K,V> implements Map.Entry<K,V> {
 
-    private final String[] array;
+    private final Unchecked<? extends Map.Entry<K,V>> scalar;
 
-    public RowOfArray(final long num, final String[] array) {
-        this.num = num;
-        this.array = array;
+    public MapEntryOfScalar(final Scalar<? extends Map.Entry<K, V>> scalar) {
+        this.scalar = new Unchecked<>(scalar);
     }
 
     @Override
-    public Text textOf(final Column column) {
-        return new TextOf(array[column.order().intValue()-1]);
+    public K getKey() {
+        return this.scalar.value().getKey();
     }
 
     @Override
-    public long number() {
-        return this.num;
+    public V getValue() {
+        return this.scalar.value().getValue();
+    }
+
+    @Override
+    public V setValue(final V value) {
+        return this.scalar.value().setValue(value);
     }
 
 }

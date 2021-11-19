@@ -21,74 +21,79 @@ import java.sql.Statement;
 import java.util.Iterator;
 import org.cactoos.Scalar;
 import org.cactoos.func.UncheckedFunc;
-import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.scalar.ScalarOf;
+import org.cactoos.list.ListEnvelope;
+import org.cactoos.list.ListOf;
 import org.cactoos.scalar.Sticky;
-import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.query.DataQuery;
+import org.fusionsoft.lib.connection.ResultSetOfScalar;
+import org.fusionsoft.lib.connection.StatementOfScalar;
 
-public class RowsOfTable extends IterableEnvelope<Row> implements AutoCloseable {
-
-    private final Sticky<Statement> stmt;
-
-    private final Sticky<ResultSet> rset;
+public class RowsOfTable extends ListEnvelope<Row> {
 
     private RowsOfTable(
-        final Sticky<Statement> stmt,
-        final Sticky<ResultSet> rset,
+        final Statement stmt,
+        final ResultSet rset,
         final Scalar<Iterator<? extends Row>> iterator
     ) {
-        super(new IterableOf<>(iterator));
-        this.stmt = stmt;
-        this.rset = rset;
+        super(new ListOf<>(new IterableOf<>(iterator)));
+        new UncheckedFunc<Void, Void>(
+            x -> {
+                rset.close();
+                stmt.close();
+                return null;
+            }
+        ).apply(null);
     }
 
     private RowsOfTable(
-        final Sticky<Statement> stmt,
-        final Sticky<ResultSet> rset,
+        final Statement stmt,
+        final ResultSet rset,
         final Iterable<Column> cols,
         final Number rows
     ) {
         this(
             stmt,
             rset,
-            new ScalarOf<>(() -> {
-                final Unchecked<Long> all = new Unchecked<>(new Sticky<>(rows::longValue));
-                final Unchecked<ResultSet> data = new Unchecked<>(rset);
-                final long[] row = {0L};
-                return new Iterator<Row>() {
-                    @Override
-                    public boolean hasNext() {
-                        return row[0] < all.value();
-                    }
+            () -> new Iterator<Row>() {
+                final Long all = rows.longValue();
 
-                    @Override
-                    public Row next() {
-                        return new UncheckedFunc<ResultSet, Row>(
-                            previous -> {
-                                previous.next();
-                                row[0]++;
-                                return new RowOfResultSet(row[0], previous, cols);
-                            }
-                        ).apply(data.value());
-                    }
-                };
-            })
+                Long row = 0L;
+
+                @Override
+                public boolean hasNext() {
+                    return row < all;
+                }
+
+                @Override
+                public Row next() {
+                    return new UncheckedFunc<ResultSet, Row>(
+                        previous -> {
+                            previous.next();
+                            row++;
+                            return new RowOfResultSet(row, previous, cols);
+                        }
+                    ).apply(rset);
+                }
+            }
         );
     }
 
     private RowsOfTable(
         final DataQuery query,
-        final Scalar<Statement> stmt,
+        final Statement stmt,
         final Iterable<Column> cols,
         final Number rows
     ) {
         this(
-            new Sticky<>(stmt),
-            new Sticky<>(() -> stmt.value().executeQuery(query.asString())),
+            stmt,
+            new ResultSetOfScalar(
+                new Sticky<>(
+                    () -> stmt.executeQuery(query.asString())
+                )
+            ),
             cols,
             rows
         );
@@ -100,20 +105,18 @@ public class RowsOfTable extends IterableEnvelope<Row> implements AutoCloseable 
     ) {
         this(
             new DataQuery(table),
-            () -> {
-                final Statement stmt = connection.createStatement();
-                stmt.setFetchSize(5000);
-                return stmt;
-            },
+            new StatementOfScalar(
+                new Sticky<>(
+                    () -> {
+                        final Statement stmt = connection.createStatement();
+                        stmt.setFetchSize(5000);
+                        return stmt;
+                    }
+                )
+            ),
             new ColumnsOfTable(table),
             new RowsCount(table, connection)
         );
-    }
-
-    @Override
-    public void close() throws Exception {
-        this.rset.value().close();
-        this.stmt.value().close();
     }
 
 }

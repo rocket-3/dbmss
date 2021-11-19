@@ -36,7 +36,7 @@ public class ValueFormatOfIuType extends ValueFormatOfScalar {
                     ),
                     new MapEntry<>(
                         IuTypeValues.NUMBER.asString(),
-                        new ValueFormatOfNumber()
+                        new ValueFormatNumber()
                     ),
                     new MapEntry<>(
                         IuTypeValues.JSON.asString(),

@@ -19,43 +19,45 @@ import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import java.util.Map;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.iterable.Sticky;
-import org.cactoos.list.ListEnvelope;
 import org.cactoos.list.ListOf;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 
-public class DbdDataEntriesOfTable extends ListEnvelope<Map.Entry<Text, YamlNode>> {
+public class DbdDataEntriesOfTable extends IterableEnvelope<Map.Entry<Text, YamlNode>> {
 
     public DbdDataEntriesOfTable(
         final Connection connection,
         final DbObject<DbdTableMapping> table
     ) {
+        this(
+            connection,
+            table,
+            new Sticky<>(
+                new ColumnsOfTable(table)
+            )
+        );
+    }
+
+    public DbdDataEntriesOfTable(
+        final Connection connection,
+        final DbObject<DbdTableMapping> table,
+        final Iterable<Column> columns
+    ) {
         super(
-            new ListOf<>(
-                new IterableOf<>(
-                    () -> {
-//                        try(
-//
-//                        ) {
-                            final RowsOfTable rows = new RowsOfTable(
-                                connection,
-                                table
-                            );
-                            final Iterable<Column> cols = new Sticky<>(
-                                new ColumnsOfTable(
-                                    table
-                                )
-                            );
-                            return new Mapped<Map.Entry<Text, YamlNode>>(
-                                x -> new DbdDataEntryOfRow(x, cols),
-                                rows
-                            ).iterator();
-//                        }
-                    }
-                )
+            new IterableOf<>(
+                () -> new ListOf<>(
+                    new Mapped<Map.Entry<Text, YamlNode>>(
+                        x -> new DbdDataEntryOfRow(x, columns),
+                        new RowsOfTable(
+                            connection,
+                            table
+                        )
+                    )
+                ).iterator()
             )
         );
     }

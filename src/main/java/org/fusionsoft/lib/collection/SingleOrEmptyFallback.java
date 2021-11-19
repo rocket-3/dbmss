@@ -13,30 +13,28 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.data;
 
-import org.cactoos.Text;
-import org.cactoos.text.TextOf;
+package org.fusionsoft.lib.collection;
 
-public class RowOfArray implements Row {
+import org.cactoos.Scalar;
 
-    private final long num;
+public class SingleOrEmptyFallback<T> implements Scalar<T> {
 
-    private final String[] array;
+    private final Iterable<? extends T> iterable;
+    private final T fallback;
 
-    public RowOfArray(final long num, final String[] array) {
-        this.num = num;
-        this.array = array;
+    public SingleOrEmptyFallback(final Iterable<? extends T> iterable, final T fallback) {
+        this.iterable = iterable;
+        this.fallback = fallback;
     }
 
     @Override
-    public Text textOf(final Column column) {
-        return new TextOf(array[column.order().intValue()-1]);
-    }
-
-    @Override
-    public long number() {
-        return this.num;
+    public T value() {
+        T value = fallback;
+        if(this.iterable.iterator().hasNext()){
+            value = new Single<>(this.iterable).value();
+        };
+        return value;
     }
 
 }

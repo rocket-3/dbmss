@@ -26,17 +26,9 @@ import org.fusionsoft.database.snapshot.DbObject;
 
 public class ColumnsOfTable extends IterableEnvelope<Column> {
 
-    public ColumnsOfTable(final DbObject<DbdTableMapping> table) {
-        this(new DbdColumnsOfTable(table));
-    }
-
-    public ColumnsOfTable(final DbdTableMapping mapping) {
-        this(new DbdColumnsOfTable(mapping));
-    }
-
     public ColumnsOfTable(final Iterable<DbdColumnMapping> cols) {
         super(
-            new Sorted<Column>(
+            new Sorted<>(
                 Comparator.comparing(x -> x.order().intValue()),
                 new Mapped<Column>(
                     ColumnOfDbdColumnMapping::new,
@@ -44,6 +36,14 @@ public class ColumnsOfTable extends IterableEnvelope<Column> {
                 )
             )
         );
+    }
+
+    public ColumnsOfTable(final DbObject<DbdTableMapping> table) {
+        this(new DbdColumnsOfTable(table));
+    }
+
+    public ColumnsOfTable(final DbdTableMapping mapping) {
+        this(new DbdColumnsOfTable(mapping));
     }
 
 }

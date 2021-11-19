@@ -19,6 +19,10 @@ package org.fusionsoft.database.mapping.dbd;
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.lib.yaml.YamlMappingEnvelope;
 
+/**
+ * The DBD/schemas/#schema/tables/#table/data/# document node {@link YamlMapping}.
+ * @since 0.1
+ */
 public class DbdDataMapping extends YamlMappingEnvelope {
 
     /**

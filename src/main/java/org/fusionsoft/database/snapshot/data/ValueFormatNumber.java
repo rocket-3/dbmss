@@ -21,7 +21,7 @@ import org.cactoos.Text;
 import org.cactoos.scalar.NumberOf;
 import org.cactoos.scalar.Unchecked;
 
-public class ValueFormatOfNumber implements ValueFormat {
+public class ValueFormatNumber implements ValueFormat {
 
     @Override
     public Text storableRepresentationOf(final Text text) {

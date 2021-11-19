@@ -16,17 +16,23 @@
 package org.fusionsoft.database.snapshot.objects.ofdbms;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import java.io.File;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapOf;
+import org.cactoos.text.TextOf;
+import org.fusionsoft.database.Folder;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
+import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import org.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import org.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingOfObjects;
 import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import org.fusionsoft.database.snapshot.objects.StickyObjects;
+import org.fusionsoft.database.writable.WritableYamlDocument;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.junit.jupiter.api.Disabled;
@@ -88,27 +94,6 @@ class ObjectsFromServerTest {
             ),
             new HasSize(size)
         ).affirm();
-    }
-
-    /**
-     * The Dbd created can be rendered.
-     */
-    @Test
-    @Disabled
-    @SuppressWarnings("PMD")
-    public void showDbd() {
-        System.out.println(
-            new DbdSchemasMappingOfObjects(
-                new StickyObjects(
-                    new ObjectsFromServer(
-                        new DbdServerMappingWithCredentials(
-                            new UrlOfPgGitLabDatabaseV11(this.database),
-                            new CredsOfPgTestDatabase()
-                        )
-                    )
-                )
-            ).toString()
-        );
     }
 
     /**
@@ -187,6 +172,41 @@ class ObjectsFromServerTest {
         )) {
             System.out.println(object.toString());
         }
+    }
+
+    /**
+     * The Dbd created can be rendered.
+     */
+    @Test
+    @Disabled
+    @SuppressWarnings("PMD")
+    public void showDbd() {
+        final Folder test = () -> new File(
+            "src/test/java/org/fusionsoft/database/snapshot/objects/ofdbms"
+        ).toPath();
+        final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(
+            new DbdServerMappingWithCredentials(
+                new UrlOfPgGitLabDatabaseV11(this.database),
+                new CredsOfPgTestDatabase()
+            )
+        );
+        new WritableYamlDocument(
+            new DbdSchemasMappingOfObjects(
+                new StickyObjects(
+                    new ObjectsFiltered(
+                        x -> true,
+                        //! x.signature().type().equals(ObjectType.DATA),
+                        new ObjectsWithInlineDataAdded(
+                            new ObjectsFromServer(
+                                connection
+                            ),
+                            connection
+                        )
+                    )
+                )
+            ),
+            new TextOf("pagillaWithData.yaml")
+        ).writeTo(test);
     }
 
 }

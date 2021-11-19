@@ -25,7 +25,7 @@ public class ValueFormatDummy implements ValueFormat {
 
     @Override
     public Text storableRepresentationOf(final Text text) {
-        throw new NotImplemented();
+        return text;
     }
 
     @Override

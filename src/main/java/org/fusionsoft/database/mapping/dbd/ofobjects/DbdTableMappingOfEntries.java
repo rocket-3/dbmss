@@ -21,7 +21,6 @@ import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.map.MapEntry;
-import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
@@ -30,7 +29,9 @@ import org.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
 import org.fusionsoft.database.mapping.entries.EntriesWithKeys;
 import org.fusionsoft.database.mapping.entries.EntriesWithoutKeys;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
+import org.fusionsoft.lib.collection.SingleOrEmptyFallback;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
+import org.fusionsoft.lib.yaml.MappingEmpty;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
@@ -109,11 +110,15 @@ public class DbdTableMappingOfEntries extends DbdTableMapping {
                         ),
                         new IterableOf<Map.Entry<? extends Text, ? extends YamlNode>>(
                             new MapEntry<>(
-                                new TextOfScalar(
-                                    () -> data.iterator().next().getKey().asString()
-                                ),
+                                DbdTableFields.DATA,
                                 new YamlMappingOfScalar(
-                                    () -> data.iterator().next().getValue()
+                                    () -> new SingleOrEmptyFallback<>(
+                                        data,
+                                        new MapEntry<>(
+                                            DbdTableFields.DATA,
+                                            new MappingEmpty()
+                                        )
+                                    ).value().getValue()
                                 )
                             ),
                             new MapEntry<>(

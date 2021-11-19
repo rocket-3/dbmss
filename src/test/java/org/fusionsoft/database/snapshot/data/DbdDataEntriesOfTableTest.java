@@ -25,6 +25,7 @@ import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.ObjectsCasted;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.junit.jupiter.api.Test;
 
 class DbdDataEntriesOfTableTest {
@@ -37,8 +38,8 @@ class DbdDataEntriesOfTableTest {
                 new CredsOfPgTestDatabase()
             )
         );
-        final Mapped<String> datas = new Mapped<>(
-            x -> x.signature().asString() + ": " + new DbdDataEntriesOfTable(connection, x).size(),
+        final Mapped<DbdDataEntriesOfTable> datas = new Mapped<>(
+            x -> new DbdDataEntriesOfTable(connection, x),
             new ObjectsCasted<>(
                 DbdTableMapping::new,
                 new ObjectsWithType(
@@ -47,8 +48,8 @@ class DbdDataEntriesOfTableTest {
                 )
             )
         );
-        for (final String data : datas) {
-            System.out.println(data);
+        for (final DbdDataEntriesOfTable data : datas) {
+            System.out.println(new YamlMappingOfEntries(data).toString());
         }
     }
 
