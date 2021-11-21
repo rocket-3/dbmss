@@ -15,7 +15,6 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
-import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
@@ -25,20 +24,6 @@ import org.fusionsoft.database.snapshot.objects.ObjectType;
  * @since 0.1
  */
 public class ObjectsWithParentAndType extends ObjectsWithParent {
-
-    /**
-     * Instantiates a new Objects with parent and type.
-     * @param parent The Text to be encapsulated.
-     * @param type The ObjectType to be encapsulated.
-     * @param objects The Objects to be encapsulated.
-     */
-    public ObjectsWithParentAndType(
-        final Text parent,
-        final ObjectType type,
-        final Objects objects
-    ) {
-        super(parent, new ObjectsWithType(type, objects));
-    }
 
     /**
      * Instantiates a new Objects with parent and type.

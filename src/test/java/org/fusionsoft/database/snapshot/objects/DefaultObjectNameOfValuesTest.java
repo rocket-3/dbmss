@@ -15,16 +15,20 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
-import org.fusionsoft.database.snapshot.objectsignature.ParentName;
+import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
+import org.cactoos.iterable.Mapped;
+import org.cactoos.text.TextOf;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * The test for {@link ParentName}.
+ * The test for {@link SimpleObjectNameOfValues}.
  * @since 0.1
  */
-class ParentNameTest {
+class DefaultObjectNameOfValuesTest {
 
     /**
      * Represents expected name of parent.
@@ -32,11 +36,20 @@ class ParentNameTest {
      */
     @Test
     public void works() throws Exception {
+        final Iterable<Text> parent = new Mapped<>(
+            TextOf::new,
+            new IterableOf<>("a", "b", "c")
+        );
         Assertions.assertEquals(
-            "c",
-            new ParentName(
-                new FullObjectName("a", "b", "c", "d")
-            ).asString()
+            new SimpleObjectNameOfValues(parent).asString(),
+            new SimpleObjectNameOfValues(
+                new Joined<Text>(
+                    parent,
+                    new IterableOf<>(new TextOf("d"))
+                )
+            )
+            .parent()
+            .asString()
         );
     }
 

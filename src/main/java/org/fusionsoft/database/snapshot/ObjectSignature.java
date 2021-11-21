@@ -17,7 +17,7 @@ package org.fusionsoft.database.snapshot;
 
 import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
 
 /**
  * The interface ObjectSignature representing identifier of object in DBMS .
@@ -29,7 +29,7 @@ public interface ObjectSignature extends Text {
      * The name of object in DBMS text.
      * @return The text.
      */
-    FullObjectName name();
+    ObjectName name();
 
     /**
      * The DBMS type of object text.

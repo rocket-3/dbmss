@@ -26,7 +26,7 @@ import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.MappingEmpty;
 import org.junit.jupiter.api.Assertions;
@@ -49,7 +49,7 @@ class ObjectsMentionedInDbdAsDataTableTest {
         final Func<String, DbObject<?>> object = name -> new SimpleDbObject<>(
             new MappingEmpty(),
             new SimpleObjectSignature(
-                new FullObjectName("mts", name),
+                new SimpleObjectNameOfValues("mts", name),
                 ObjectType.TABLE
             )
         );

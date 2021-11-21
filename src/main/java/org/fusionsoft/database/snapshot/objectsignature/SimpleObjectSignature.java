@@ -29,7 +29,7 @@ public class SimpleObjectSignature implements ObjectSignature {
     /**
      * The Text encapsulated.
      */
-    private final FullObjectName nam;
+    private final ObjectName nam;
 
     /**
      * The ObjectType encapsulated.
@@ -41,13 +41,13 @@ public class SimpleObjectSignature implements ObjectSignature {
      * @param name The Text to be encapsulated.
      * @param type The ObjectType to be encapsulated.
      */
-    public SimpleObjectSignature(final FullObjectName name, final ObjectType type) {
+    public SimpleObjectSignature(final ObjectName name, final ObjectType type) {
         this.nam = name;
         this.typ = type;
     }
 
     @Override
-    public final FullObjectName name() {
+    public final ObjectName name() {
         return this.nam;
     }
 

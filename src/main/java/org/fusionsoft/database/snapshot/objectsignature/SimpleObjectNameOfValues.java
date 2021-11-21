@@ -16,32 +16,38 @@
 package org.fusionsoft.database.snapshot.objectsignature;
 
 import org.cactoos.Text;
+import org.cactoos.iterable.HeadOf;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.iterable.NoNulls;
+import org.cactoos.iterable.TailOf;
+import org.cactoos.set.SetOf;
 import org.cactoos.text.Joined;
-import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
+import org.cactoos.text.TextOfScalar;
+import org.cactoos.text.UncheckedText;
 
 /**
- * The Text of db object names joined.
+ * The Text of db object names joined by {@link SimpleObjectNameDelimiter}.
  * @since 0.1
  */
-public class FullObjectName extends TextEnvelope {
+public class SimpleObjectNameOfValues implements ObjectName {
+
+    private final Iterable<Text> names;
 
     /**
      * Ctor.
      * @param names The names to be joined.
      */
-    public FullObjectName(final Iterable<Text> names) {
-        super(new Joined(new FullNameDelimiter(), new NoNulls<>(names)));
+    public SimpleObjectNameOfValues(final Iterable<Text> names) {
+        this.names = names;
     }
 
     /**
      * Ctor.
      * @param names The names to be joined.
      */
-    public FullObjectName(final Text... names) {
+    public SimpleObjectNameOfValues(final Text... names) {
         this(new IterableOf<Text>(names));
     }
 
@@ -49,7 +55,7 @@ public class FullObjectName extends TextEnvelope {
      * Ctor.
      * @param names The names to be joined.
      */
-    public FullObjectName(final CharSequence... names) {
+    public SimpleObjectNameOfValues(final CharSequence... names) {
         this(new Mapped<Text>(TextOf::new, names));
     }
 
@@ -57,16 +63,36 @@ public class FullObjectName extends TextEnvelope {
      * First name of object.
      * @return The first name.
      */
-    public final FirstName first() {
-        return new FirstName(this);
+    public final Text first() {
+        return new TextOfScalar(
+            () -> new TailOf<Text>(
+                1,
+                this.names
+            ).iterator().next().asString()
+        );
     }
 
     /**
      * Parent name of object.
      * @return The parent name.
      */
-    public final ParentName parent() {
-        return new ParentName(this);
+    public final SimpleObjectNameOfValues parent() {
+        return new SimpleObjectNameOfValues(
+            new HeadOf<>(
+                new SetOf<>(this.names).size() - 1,
+                this.names
+            )
+        );
+    }
+
+    @Override
+    public String asString() {
+        return new UncheckedText(
+            new Joined(
+                new SimpleObjectNameDelimiter(),
+                new NoNulls<>(names)
+            )
+        ).asString();
     }
 
 }

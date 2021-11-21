@@ -23,7 +23,8 @@ import org.cactoos.Text;
 import org.cactoos.func.UncheckedFunc;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
@@ -52,7 +53,7 @@ public class ObjectOfEntries<T extends YamlMapping> extends SimpleDbObject<T> {
         this(
             type,
             ctor,
-            new FullObjectName(signature),
+            new SimpleObjectNameOfValues(signature),
             entries
         );
     }
@@ -68,7 +69,7 @@ public class ObjectOfEntries<T extends YamlMapping> extends SimpleDbObject<T> {
     public ObjectOfEntries(
         final ObjectType type,
         final Func<YamlMapping, T> ctor,
-        final FullObjectName signature,
+        final ObjectName signature,
         final Iterable<? extends Map.Entry<? extends Text, ? extends YamlNode>> entries
     ) {
         super(

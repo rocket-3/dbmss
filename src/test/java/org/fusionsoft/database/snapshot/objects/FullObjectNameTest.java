@@ -16,13 +16,13 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import java.text.MessageFormat;
-import org.fusionsoft.database.snapshot.objectsignature.FullNameDelimiter;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameDelimiter;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * The tests for {@link FullObjectName}.
+ * The tests for {@link SimpleObjectNameOfValues}.
  * @since 0.1
  */
 class FullObjectNameTest {
@@ -36,7 +36,7 @@ class FullObjectNameTest {
         final String name = "name";
         Assertions.assertEquals(
             name,
-            new FullObjectName(name).asString()
+            new SimpleObjectNameOfValues(name).asString()
         );
     }
 
@@ -50,9 +50,9 @@ class FullObjectNameTest {
         final String child = "child";
         Assertions.assertEquals(
             MessageFormat.format(
-                "{0}{1}{2}", parent, new FullNameDelimiter().asString(), child
+                "{0}{1}{2}", parent, new SimpleObjectNameDelimiter().asString(), child
             ),
-            new FullObjectName(parent, child).asString()
+            new SimpleObjectNameOfValues(parent, child).asString()
         );
     }
 

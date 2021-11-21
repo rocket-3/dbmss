@@ -15,11 +15,11 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
-import org.cactoos.Text;
-import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 
 /**
  * The Objects filtered by parent name.
@@ -32,21 +32,25 @@ public class ObjectsWithParent extends ObjectsFiltered {
      * @param parent The Text name of parent to be encapsulated.
      * @param objects The Objects to be encapsulated.
      */
-    public ObjectsWithParent(final Text parent, final Objects objects) {
+    public ObjectsWithParent(final DbObject<?> parent, final Objects objects) {
         super(
-            obj -> obj.signature().name().parent().asString().equals(parent.asString()),
+            obj -> obj.signature().name().parent().asString().equals(
+                parent.signature().asString()
+            ),
             objects
         );
     }
 
     /**
      * Ctor.
-     * @param parent The DbObject of parent to be encapsulated.
+     * @param name The {@link SimpleObjectNameOfValues} of parent to be encapsulated.
      * @param objects The Objects to be encapsulated.
      */
-    public ObjectsWithParent(final DbObject<?> parent, final Objects objects) {
-        this(
-            new TextOfScalar(() -> parent.signature().name().first().asString()),
+    public ObjectsWithParent(final ObjectName name, final Objects objects) {
+        super(
+            obj -> obj.signature().name().parent().asString().equals(
+                name.asString()
+            ),
             objects
         );
     }

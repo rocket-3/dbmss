@@ -23,7 +23,7 @@ import org.cactoos.Text;
 import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
 
 public class RowsCount extends NumberEnvelope {
 
@@ -52,7 +52,7 @@ public class RowsCount extends NumberEnvelope {
         );
     }
 
-    public RowsCount(final FullObjectName table, final Connection connection) {
+    public RowsCount(final ObjectName table, final Connection connection) {
         this(
             new TextOfScalar(() -> table.parent().asString()),
             new TextOfScalar(() -> table.first().asString()),

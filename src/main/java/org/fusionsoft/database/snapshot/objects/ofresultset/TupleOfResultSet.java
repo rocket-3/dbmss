@@ -29,8 +29,9 @@ import org.fusionsoft.database.mapping.entries.ScalarEntryOfResultSet;
 import org.fusionsoft.database.mapping.fields.DbdTupleAttributeField;
 import org.fusionsoft.database.mapping.fields.DbdTupleField;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.QueryOfScalar;
 import org.fusionsoft.lib.collection.ListOfConnection;
@@ -49,21 +50,21 @@ public class TupleOfResultSet extends ObjectOfEntries<DbdTupleMapping> {
      * @param rset The {@link ResultSet} to be encapsulated.
      * @param connection The {@link Connection} to be encapsulated.
      * @param query The {@link Query} of {@link DbdTupleField} to be encapsulated.
-     * @param attributes The {@link Func} of {@link FullObjectName} ->
+     * @param attributes The {@link Func} of {@link SimpleObjectNameOfValues} ->
      *  {@link Query} of {@link DbdTupleAttributeField} to be encapsulated.
      */
     public TupleOfResultSet(
         final ResultSet rset,
         final Connection connection,
         final Query<DbdTupleField> query,
-        final Func<FullObjectName, Query<DbdTupleAttributeField>> attributes
+        final Func<ObjectName, Query<DbdTupleAttributeField>> attributes
     ) {
         this(
             rset,
             connection,
             query,
             attributes,
-            new FullObjectNameOfResultSet(
+            new SimpleObjectNameOfResultSet(
                 rset, query,
                 DbdTupleField.SCHEMA,
                 DbdTupleField.TUPLE
@@ -76,16 +77,16 @@ public class TupleOfResultSet extends ObjectOfEntries<DbdTupleMapping> {
      * @param rset The {@link ResultSet} to be encapsulated.
      * @param connection The {@link Connection} to be encapsulated.
      * @param query The {@link Query} of {@link DbdTupleField} to be encapsulated.
-     * @param attributes The {@link Func} of {@link FullObjectName} ->
+     * @param attributes The {@link Func} of {@link SimpleObjectNameOfValues} ->
      *  {@link Query} of {@link DbdTupleAttributeField} to be encapsulated.
-     * @param tuple The {@link FullObjectName} of the tuple to be encapsulated.
+     * @param tuple The {@link ObjectName} of the tuple to be encapsulated.
      */
     private TupleOfResultSet(
         final ResultSet rset,
         final Connection connection,
         final Query<DbdTupleField> query,
-        final Func<FullObjectName, Query<DbdTupleAttributeField>> attributes,
-        final FullObjectName tuple
+        final Func<ObjectName, Query<DbdTupleAttributeField>> attributes,
+        final ObjectName tuple
     ) {
         this(
             rset,
@@ -102,14 +103,14 @@ public class TupleOfResultSet extends ObjectOfEntries<DbdTupleMapping> {
      * @param connection The {@link Connection} to be encapsulated.
      * @param query The {@link Query} of {@link DbdTupleField} to be encapsulated.
      * @param tuples The {@link Query} of {@link DbdTupleAttributeField} to be encapsulated.
-     * @param tuple The {@link FullObjectName} of the tuple to be encapsulated.
+     * @param tuple The {@link ObjectName} of the tuple to be encapsulated.
      */
     private TupleOfResultSet(
         final ResultSet rset,
         final Connection connection,
         final Query<DbdTupleField> query,
         final Query<DbdTupleAttributeField> tuples,
-        final FullObjectName tuple
+        final ObjectName tuple
     ) {
         super(
             ObjectType.UDT_TUPLE,

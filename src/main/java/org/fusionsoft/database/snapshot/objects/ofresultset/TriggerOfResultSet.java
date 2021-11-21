@@ -21,7 +21,7 @@ import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdTriggerFields;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
@@ -56,7 +56,7 @@ public class TriggerOfResultSet extends SimpleDbObject<DbdTriggerMapping> {
                 )
             ),
             new SimpleObjectSignature(
-                new FullObjectName(
+                new SimpleObjectNameOfValues(
                     new TextOfResultSet(
                         query.outcomeFor(DbdTriggerFields.SCHEMA),
                         rset

@@ -26,13 +26,14 @@ import org.fusionsoft.database.snapshot.Objects;
  * The iterable of {@link ObjectSignature} from {@link Objects}.
  * @since 0.1
  */
-public class NamesOfObjects extends IterableEnvelope<ObjectSignature> implements ObjectSignatures {
+public class SignaturesOfObjects
+    extends IterableEnvelope<ObjectSignature> implements ObjectSignatures {
 
     /**
      * Ctor.
      * @param objects The wrapped objects.
      */
-    public NamesOfObjects(final Objects objects) {
+    public SignaturesOfObjects(final Objects objects) {
         super(
             new Mapped<ObjectSignature>(
                 DbObject::signature,

@@ -16,7 +16,7 @@
 package org.fusionsoft.database.snapshot.query;
 
 import org.fusionsoft.database.mapping.fields.DbdTupleAttributeField;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
 import org.fusionsoft.database.snapshot.query.pg.PgMessageFormatQuery;
 
 /**
@@ -30,7 +30,7 @@ public class PgTupleAttributesQuery extends PgMessageFormatQuery<DbdTupleAttribu
      * @param tuple The FullObjectName to be encapsulated.
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public PgTupleAttributesQuery(final FullObjectName tuple) {
+    public PgTupleAttributesQuery(final ObjectName tuple) {
         super(
             () -> String.join(
                 "",

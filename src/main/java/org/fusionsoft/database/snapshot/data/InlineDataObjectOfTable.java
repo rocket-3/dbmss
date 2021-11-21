@@ -22,7 +22,7 @@ import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
@@ -45,7 +45,7 @@ public class InlineDataObjectOfTable extends SimpleDbObject<DbdDataMapping> {
                 )
             ),
             new SimpleObjectSignature(
-                new FullObjectName(
+                new SimpleObjectNameOfValues(
                     table.signature().name().parent(),
                     table.signature().name().first(),
                     DbdTableFields.DATA

@@ -26,7 +26,8 @@ import org.fusionsoft.database.mapping.fields.DbdColumnFields;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.QueryOfScalar;
@@ -52,20 +53,20 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
      * @param rset The ResultSet to be encapsulated.
      * @param connection The Connection to be encapsulated.
      * @param query The Query of DbdTableFields to be encapsulated.
-     * @param columns The Func of FullObjectName -> Query of DbdColumnFields to be encapsulated.
+     * @param columns The Func of {@link ObjectName} -> Query of DbdColumnFields to be encapsulated.
      */
     public TableOfResultSet(
         final ResultSet rset,
         final Connection connection,
         final Query<DbdTableFields> query,
-        final Func<FullObjectName, Query<DbdColumnFields>> columns
+        final Func<ObjectName, Query<DbdColumnFields>> columns
     ) {
         this(
             rset,
             connection,
             query,
             columns,
-            new FullObjectName(
+            new SimpleObjectNameOfValues(
                 new TextOfResultSet(
                     query.outcomeFor(DbdTableFields.SCHEMA),
                     rset
@@ -83,15 +84,15 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
      * @param rset The ResultSet to be encapsulated.
      * @param connection The Connection to be encapsulated.
      * @param query The Query of DbdIndexFields to be encapsulated.
-     * @param columns The Func of FullObjectName -> Query of DbdColumnFields to be encapsulated.
-     * @param tablename The FullObjectName to be encapsulated.
+     * @param columns The Func of {@link ObjectName} -> Query of DbdColumnFields to be encapsulated.
+     * @param tablename The {@link ObjectName} to be encapsulated.
      */
     private TableOfResultSet(
         final ResultSet rset,
         final Connection connection,
         final Query<DbdTableFields> query,
-        final Func<FullObjectName, Query<DbdColumnFields>> columns,
-        final FullObjectName tablename
+        final Func<ObjectName, Query<DbdColumnFields>> columns,
+        final ObjectName tablename
     ) {
         this(
             rset,
@@ -108,14 +109,14 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
      * @param connection The Connection to be encapsulated.
      * @param query The Query of DbdTableFields to be encapsulated.
      * @param columns The Query of DbdColumnFields to be encapsulated.
-     * @param tablename The FullObjectName to be encapsulated.
+     * @param tablename The {@link ObjectName} to be encapsulated.
      */
     private TableOfResultSet(
         final ResultSet rset,
         final Connection connection,
         final Query<DbdTableFields> query,
         final Query<DbdColumnFields> columns,
-        final FullObjectName tablename
+        final ObjectName tablename
     ) {
         super(
             new DbdTableMapping(

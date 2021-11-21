@@ -24,21 +24,21 @@ import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
 
 /**
- * The shorthand of {@link FullObjectName} ctor of
+ * The shorthand of {@link SimpleObjectNameOfValues} ctor of
  * {@link ResultSet}, {@link Query} and array of fields to take by them.
  * @since 0.1
  */
-public class FullObjectNameOfResultSet extends FullObjectName {
+public class SimpleObjectNameOfResultSet extends SimpleObjectNameOfValues {
 
     /**
-     * Instantiates a new {@link FullObjectName} of result set.
+     * Instantiates a new {@link SimpleObjectNameOfValues} of result set.
      * @param rset The {@link ResultSet} to be encapsulated.
      * @param query The {@link Query} of {@link T} to be encapsulated.
      * @param fields The {@link T}... to be encapsulated.
      * @param <T> The {@link Text} subtype, the instances of which to expect in {@link Query}
      */
     @SafeVarargs
-    public <T extends Text> FullObjectNameOfResultSet(
+    public <T extends Text> SimpleObjectNameOfResultSet(
         final ResultSet rset,
         final Query<T> query,
         final T... fields

@@ -13,23 +13,13 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+
 package org.fusionsoft.database.snapshot.objectsignature;
 
-import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOf;
+import org.cactoos.Text;
 
-/**
- * The text that used as delimiter for names in
- *  {@link org.fusionsoft.database.snapshot.DbObject}.
- * @since 0.1
- */
-public class FullNameDelimiter extends TextEnvelope {
-
-    /**
-     * Ctor.
-     */
-    public FullNameDelimiter() {
-        super(new TextOf(" (->) "));
-    }
-
+public interface ObjectName extends Text{
+    String asString();
+    ObjectName parent();
+    Text first();
 }

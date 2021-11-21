@@ -26,7 +26,7 @@ import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
@@ -53,7 +53,7 @@ public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
     ) {
         this(
             new YamlMappingOfScalar(() -> parent.value(key).asMapping()),
-            new FullObjectName(schema, new TextOfScalarNode(key))
+            new SimpleObjectNameOfValues(schema, new TextOfScalarNode(key))
         );
     }
 
@@ -79,7 +79,7 @@ public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
                         )
                     ),
                     new SimpleObjectSignature(
-                        new FullObjectName(name),
+                        new SimpleObjectNameOfValues(name),
                         ObjectType.TABLE
                     )
                 ),

@@ -20,7 +20,7 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
@@ -45,7 +45,7 @@ public class ObjectOfDbdConstraintMapping extends SimpleDbObject<YamlMapping> {
     ) {
         this(
             new YamlMappingOfScalar(() -> map.value(key).asMapping()),
-            new FullObjectName(table, new TextOfScalarNode(key))
+            new SimpleObjectNameOfValues(table, new TextOfScalarNode(key))
         );
     }
 
@@ -61,7 +61,7 @@ public class ObjectOfDbdConstraintMapping extends SimpleDbObject<YamlMapping> {
         super(
             map,
             new SimpleObjectSignature(
-                new FullObjectName(name),
+                new SimpleObjectNameOfValues(name),
                 ObjectType.CONSTRAINT
             )
         );

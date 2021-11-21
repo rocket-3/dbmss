@@ -13,37 +13,23 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
+
 package org.fusionsoft.database.snapshot.objectsignature;
 
 import org.cactoos.Text;
-import org.cactoos.iterable.TailOf;
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.text.Split;
-import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.lib.text.RegexpPatternLiteralEscaped;
 
-/**
- * The text of dbms object name with {@link FullObjectName} origin.
- * @since 0.1
- */
-public class FirstName extends TextEnvelope {
+public class SimpleObjectNameValuesOfText extends IterableEnvelope<Text> {
 
-    /**
-     * Ctor.
-     * @param joined The joined text value.
-     */
-    public FirstName(final FullObjectName joined) {
+    public SimpleObjectNameValuesOfText(final Text text) {
         super(
-            new TextOfScalar(
-                () -> new TailOf<Text>(
-                    1,
-                    new Split(
-                        joined,
-                        new RegexpPatternLiteralEscaped(
-                            new FullNameDelimiter()
-                        )
-                    )
-                ).iterator().next().asString()
+            new Split(
+                text,
+                new RegexpPatternLiteralEscaped(
+                    new SimpleObjectNameDelimiter()
+                )
             )
         );
     }

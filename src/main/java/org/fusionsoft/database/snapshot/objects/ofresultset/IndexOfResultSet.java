@@ -23,7 +23,7 @@ import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdIndexFields;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
@@ -85,7 +85,7 @@ public class IndexOfResultSet extends SimpleDbObject<DbdIndexMapping> {
                 )
             ),
             new SimpleObjectSignature(
-                new FullObjectName(
+                new SimpleObjectNameOfValues(
                     new TextOfResultSet(
                         query.outcomeFor(DbdIndexFields.SCHEMA),
                         rset

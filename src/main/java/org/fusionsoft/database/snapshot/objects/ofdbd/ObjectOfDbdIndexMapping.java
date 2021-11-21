@@ -20,7 +20,7 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
@@ -44,7 +44,7 @@ public class ObjectOfDbdIndexMapping extends SimpleDbObject<YamlMapping> {
     ) {
         this(
             new YamlMappingOfPath(root, key),
-            new FullObjectName(table, new TextOfScalarNode(key))
+            new SimpleObjectNameOfValues(table, new TextOfScalarNode(key))
         );
     }
 
@@ -57,7 +57,7 @@ public class ObjectOfDbdIndexMapping extends SimpleDbObject<YamlMapping> {
         super(
             mapping,
             new SimpleObjectSignature(
-                new FullObjectName(name),
+                new SimpleObjectNameOfValues(name),
                 ObjectType.INDEX
             )
         );

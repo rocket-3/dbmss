@@ -21,7 +21,7 @@ import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdSequenceFields;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
@@ -101,7 +101,7 @@ public class SequenceOfResultSet extends SimpleDbObject<DbdSequenceMapping> {
                 )
             ),
             new SimpleObjectSignature(
-                new FullObjectName(
+                new SimpleObjectNameOfValues(
                     new TextOfResultSet(
                         query.outcomeFor(DbdSequenceFields.SCHEMA),
                         rset

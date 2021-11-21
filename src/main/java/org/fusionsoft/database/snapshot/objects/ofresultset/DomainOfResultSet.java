@@ -26,7 +26,8 @@ import org.fusionsoft.database.mapping.fields.DbdDomainConstraintFields;
 import org.fusionsoft.database.mapping.fields.DbdDomainFields;
 import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.FullObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
 import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.QueryOfScalar;
@@ -49,7 +50,7 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
      * @param rset The ResultSet to be encapsulated.
      * @param connection The Connection to be encapsulated.
      * @param query The Query of DbdDomainFields to be encapsulated.
-     * @param constraints The Func of FullObjectName -> Query of DbdDomainConstraintFields
+     * @param constraints The Func of {@link ObjectName} -> Query of DbdDomainConstraintFields
      *  to be encapsulated.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
@@ -57,14 +58,14 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
         final ResultSet rset,
         final Connection connection,
         final Query<DbdDomainFields> query,
-        final Func<FullObjectName, Query<DbdDomainConstraintFields>> constraints
+        final Func<ObjectName, Query<DbdDomainConstraintFields>> constraints
     ) {
         this(
             rset,
             connection,
             query,
             constraints,
-            new FullObjectName(
+            new SimpleObjectNameOfValues(
                 new TextOfResultSet(
                     query.outcomeFor(DbdDomainFields.SCHEMA),
                     rset
@@ -82,7 +83,7 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
      * @param rset The ResultSet to be encapsulated.
      * @param connection The Connection to be encapsulated.
      * @param query The Query of DbdDomainFields to be encapsulated.
-     * @param constraints The Func of FullObjectName -> Query of DbdDomainConstraintFields
+     * @param constraints The Func of {@link ObjectName} -> Query of DbdDomainConstraintFields
      *  to be encapsulated.
      * @param domain The FullObjectName of domain to be encapsulated.
      * @checkstyle ParameterNumberCheck (100 lines)
@@ -91,8 +92,8 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
         final ResultSet rset,
         final Connection connection,
         final Query<DbdDomainFields> query,
-        final Func<FullObjectName, Query<DbdDomainConstraintFields>> constraints,
-        final FullObjectName domain
+        final Func<ObjectName, Query<DbdDomainConstraintFields>> constraints,
+        final ObjectName domain
     ) {
         this(
             rset,
@@ -109,7 +110,7 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
      * @param connection The Connection to be encapsulated.
      * @param query The Query of DbdDomainFields to be encapsulated.
      * @param constraints The Query of DbdDomainConstraintFields to be encapsulated.
-     * @param domain The FullObjectName of domain to be encapsulated.
+     * @param domain The {@link ObjectName} of domain to be encapsulated.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
     private DomainOfResultSet(
@@ -117,7 +118,7 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
         final Connection connection,
         final Query<DbdDomainFields> query,
         final Query<DbdDomainConstraintFields> constraints,
-        final FullObjectName domain
+        final ObjectName domain
     ) {
         super(
             new DbdDomainMapping(
