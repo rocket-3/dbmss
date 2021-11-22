@@ -20,7 +20,7 @@ import org.cactoos.Text;
 
 public enum IuTypeValues implements Text {
     NUMBER("number"),
-    STRING("sting"),
+    STRING("string"),
     DATE("date"),
     BOOLEAN("boolean"),
     BINARY("binary"),

@@ -22,9 +22,9 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.lib.yaml.YamlNodeOfPath;
-import org.fusionsoft.lib.yaml.artefacts.ValuesOfYamlSequence;
+import org.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
 
-public class DbdColumnsOfTable extends ValuesOfYamlSequence<DbdColumnMapping> {
+public class DbdColumnsOfTable extends IterableOfYamlSequence<DbdColumnMapping> {
 
     public DbdColumnsOfTable(final DbObject<DbdTableMapping> object) {
         this(new MappingOfRepresentative(object));

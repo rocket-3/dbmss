@@ -31,7 +31,7 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsOfTable;
 import org.fusionsoft.database.mapping.fields.DbdColumnFields;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
 public class DataQuery extends BasicQuery<Text> {

@@ -16,12 +16,9 @@
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
 import org.fusionsoft.database.mapping.dbd.DbdViewMapping;
-import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeView;
 
 /**
  * DBD/schemas/#schema/views node.
@@ -31,7 +28,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class DbdViewsMappingOfObjects extends YamlMappingOfEntries {
+public class DbdViewsMappingOfObjects extends MappingOfObjectsOfParentAndType {
 
     /**
      * Instantiates a new Dbd views mapping of objects.
@@ -39,19 +36,13 @@ public class DbdViewsMappingOfObjects extends YamlMappingOfEntries {
      * @param schema The parent schema DbObject to be encapsulated.
      */
     public DbdViewsMappingOfObjects(
-        final Objects objects,
+        final Objects<?>objects,
         final DbObject<?> schema
     ) {
         super(
-            new UnwrapEntriesOfObjects<DbdViewMapping>(
-                objects,
-                new ObjectsWithParentAndType(
-                    schema,
-                    ObjectType.VIEW,
-                    objects
-                ),
-                (objs, view) -> new DbdViewMappingOfObjects(view)
-            )
+            objects,
+            schema,
+            new ObjectTypeView()
         );
     }
 

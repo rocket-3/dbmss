@@ -25,9 +25,7 @@ import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The iterable of Text -> Mapping pairs unwrapped of
- *  all scope and top-level (mapped){@link Objects} by function, creating mapping
- *  of specific kind.
+ * The iterable of Text -> {@link M} entries of origin and scope {@link Objects}.
  * @param <M> The type of YamlMapping parameter.
  * @since 0.1
  */
@@ -36,22 +34,23 @@ public class UnwrapEntriesOfObjects<M extends YamlNode>
 
     /**
      * Ctor.
-     * @param scope The scope objects to take in unwrapping
-     * @param mapped The objects to map
-     * @param unwrapping The Func to unwrap objects  in current object context as mapping
+     * @param scope The scope objects to take in ctor
+     * @param origin The objects to map
+     * @param ctor The Func to construct {@link M} of origin {@link Objects}
+     *  and {@link Objects} to take in scope.
      */
     public UnwrapEntriesOfObjects(
-        final Objects scope,
-        final Objects mapped,
-        final BiFunc<Objects, DbObject<?>, ? extends M> unwrapping
+        final Objects<?> scope,
+        final Objects<?> origin,
+        final BiFunc<Objects<?>, DbObject<?>, ? extends M> ctor
     ) {
         super(
             new Mapped<>(
                 object -> new MapEntry<>(
                     object.signature().name().first(),
-                    unwrapping.apply(scope, object)
+                    ctor.apply(scope, object)
                 ),
-                mapped
+                origin
             )
         );
     }

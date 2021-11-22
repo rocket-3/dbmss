@@ -21,13 +21,11 @@ import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdIndexFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeIndex;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
 /**
@@ -36,7 +34,7 @@ import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (128 lines)
  */
-public class IndexOfResultSet extends SimpleDbObject<DbdIndexMapping> {
+public class IndexOfResultSet extends SimpleDbObjectOfEntries<DbdIndexMapping> {
 
     /**
      * Instantiates a new Simple db object.
@@ -45,61 +43,48 @@ public class IndexOfResultSet extends SimpleDbObject<DbdIndexMapping> {
      */
     public IndexOfResultSet(final ResultSet rset, final Query<DbdIndexFields> query) {
         super(
-            new DbdIndexMapping(
-                new YamlMappingOfEntries(
-                    new MapEntry<>(
-                        DbdIndexFields.DBCOLUMN,
-                        new YamlScalarSequenceOfResultSet(
-                            query.outcomeFor(DbdIndexFields.DBCOLUMN),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdIndexFields.DBMSTYPE,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdIndexFields.DBMSTYPE),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdIndexFields.DBUNIQUE,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdIndexFields.DBUNIQUE),
-                            rset
-                        )
-                    ),
-                    new ScalarEntry(
-                        DbdIndexFields.OWNER,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdIndexFields.OWNER),
-                            rset
-                        )
-                    ),
-                    new MultilineScalarEntry(
-                        DbdIndexFields.DDL,
-                        new TextOfResultSet(
-                            query.outcomeFor(DbdIndexFields.DDL),
-                            rset
-                        )
-                    )
+            new ObjectTypeIndex(),
+            new SimpleObjectNameOfResultSet(
+                rset,
+                query,
+                DbdIndexFields.SCHEMA,
+                DbdIndexFields.TABLE,
+                DbdIndexFields.INDEX
+            ),
+            new MapEntry<>(
+                DbdIndexFields.DBCOLUMN,
+                new YamlScalarSequenceOfResultSet(
+                    query.outcomeFor(DbdIndexFields.DBCOLUMN),
+                    rset
                 )
             ),
-            new SimpleObjectSignature(
-                new SimpleObjectNameOfValues(
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdIndexFields.SCHEMA),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdIndexFields.TABLE),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdIndexFields.INDEX),
-                        rset
-                    )
-                ),
-                ObjectType.INDEX
+            new ScalarEntry(
+                DbdIndexFields.DBMSTYPE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdIndexFields.DBMSTYPE),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdIndexFields.DBUNIQUE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdIndexFields.DBUNIQUE),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdIndexFields.OWNER,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdIndexFields.OWNER),
+                    rset
+                )
+            ),
+            new MultilineScalarEntry(
+                DbdIndexFields.DDL,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdIndexFields.DDL),
+                    rset
+                )
             )
         );
     }

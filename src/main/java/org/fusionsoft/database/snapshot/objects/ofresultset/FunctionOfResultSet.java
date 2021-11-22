@@ -20,14 +20,12 @@ import org.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
 import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdFunctionFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeFunction;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The type of {@link SimpleDbObject} of {@link DbdFunctionMapping} can be
@@ -35,7 +33,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class FunctionOfResultSet extends SimpleDbObject<DbdFunctionMapping> {
+public class FunctionOfResultSet extends SimpleDbObjectOfEntries<DbdFunctionMapping> {
 
     /**
      * Instantiates a new Function of result set.
@@ -44,52 +42,40 @@ public class FunctionOfResultSet extends SimpleDbObject<DbdFunctionMapping> {
      */
     public FunctionOfResultSet(final ResultSet rset, final Query<DbdFunctionFields> query) {
         super(
-            new DbdFunctionMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new ScalarEntry(
-                            DbdFunctionFields.OWNER,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdFunctionFields.OWNER),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdFunctionFields.ARGUMENTS,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdFunctionFields.ARGUMENTS),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdFunctionFields.AGGREGATE,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdFunctionFields.AGGREGATE),
-                                rset
-                            )
-                        ),
-                        new MultilineScalarEntry(
-                            DbdFunctionFields.DDL,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdFunctionFields.DDL),
-                                rset
-                            )
-                        )
-                    )
+            new ObjectTypeFunction(),
+            new SimpleObjectNameOfResultSet(
+                rset,
+                query,
+                DbdFunctionFields.SCHEMA,
+                DbdFunctionFields.FUNCTION
+            ),
+            new ScalarEntry(
+                DbdFunctionFields.OWNER,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdFunctionFields.OWNER),
+                    rset
                 )
             ),
-            new SimpleObjectSignature(
-                new SimpleObjectNameOfValues(
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdFunctionFields.SCHEMA),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdFunctionFields.FUNCTION),
-                        rset
-                    )
-                ),
-                ObjectType.FUNCTION
+            new ScalarEntry(
+                DbdFunctionFields.ARGUMENTS,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdFunctionFields.ARGUMENTS),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdFunctionFields.AGGREGATE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdFunctionFields.AGGREGATE),
+                    rset
+                )
+            ),
+            new MultilineScalarEntry(
+                DbdFunctionFields.DDL,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdFunctionFields.DDL),
+                    rset
+                )
             )
         );
     }

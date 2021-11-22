@@ -127,7 +127,7 @@ class ObjectsFromServerTest {
                     new EntriesOfYamlMapping(
                         new YamlMappingOfPath(
                             new DbdSchemasMappingOfObjects(
-                                new StickyObjects(
+                                new StickyObjects<>(
                                     new ObjectsFromServer(
                                         new DbdServerMappingWithCredentials(
                                             new UrlOfPgGitLabDatabaseV11(this.database),
@@ -192,8 +192,8 @@ class ObjectsFromServerTest {
         );
         new WritableYamlDocument(
             new DbdSchemasMappingOfObjects(
-                new StickyObjects(
-                    new ObjectsFiltered(
+                new StickyObjects<>(
+                    new ObjectsFiltered<>(
                         x -> true,
                         //! x.signature().type().equals(ObjectType.DATA),
                         new ObjectsWithInlineDataAdded(

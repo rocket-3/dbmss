@@ -15,8 +15,9 @@
  */
 package org.fusionsoft.database.snapshot.query.pg;
 
+import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.fields.DbdDomainConstraintFields;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 
 /**
  * The only type of {@link PgMessageFormatQuery} of {@link DbdDomainConstraintFields}.
@@ -31,18 +32,25 @@ public class PgDomainConstraintsQuery extends PgMessageFormatQuery<DbdDomainCons
      */
     public PgDomainConstraintsQuery(final ObjectName domain) {
         super(
-            "SELECT \n"
-            + " con.conname AS {0},\n"
-            + " CASE WHEN con.convalidated = 't' THEN 'true' ELSE 'false' END AS {1},\n"
-            + " con.consrc AS {2}\n"
-            + "FROM information_schema.domains dom\n"
-            + "INNER JOIN information_schema.domain_constraints dcon \n"
-            + "ON dcon.domain_schema = dom.domain_schema \n"
-            + "AND dcon.domain_name = dom.domain_name\n"
-            + "INNER JOIN pg_catalog.pg_constraint con \n"
-            + "ON dcon.constraint_name = con.conname\n"
-            + "WHERE dom.domain_schema = '" + domain.parent() + "'\n"
-            + "AND dom.domain_name = '" + domain.first() + "'",
+            new TextOfScalar(() -> String.join(
+                "",
+                "SELECT \n",
+                " con.conname AS {0},\n",
+                " CASE WHEN con.convalidated = 't' THEN 'true' ELSE 'false' END AS {1},\n",
+                " con.consrc AS {2}\n",
+                "FROM information_schema.domains dom\n",
+                "INNER JOIN information_schema.domain_constraints dcon \n",
+                "ON dcon.domain_schema = dom.domain_schema \n",
+                "AND dcon.domain_name = dom.domain_name\n",
+                "INNER JOIN pg_catalog.pg_constraint con \n",
+                "ON dcon.constraint_name = con.conname\n",
+                "WHERE dom.domain_schema = '",
+                domain.parent().asString(),
+                "'\n",
+                "AND dom.domain_name = '",
+                domain.first().asString(),
+                "'"
+            )),
             DbdDomainConstraintFields.CONSTRAINT,
             DbdDomainConstraintFields.VALIDATED,
             DbdDomainConstraintFields.CONDITION

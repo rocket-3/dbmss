@@ -18,7 +18,7 @@ package org.fusionsoft.database.snapshot.query.pg;
 import org.cactoos.scalar.NumberOf;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameDelimiter;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameDelimiter;
 
 /**
  * The only type of {@link PgMessageFormatQuery} of {@link DbdTableFields}.

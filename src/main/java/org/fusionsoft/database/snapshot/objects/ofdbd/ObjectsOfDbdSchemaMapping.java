@@ -17,18 +17,13 @@ package org.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
-import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Joined;
 import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
-import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
-import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
-import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
 /**
@@ -37,7 +32,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * @todo 40:90min Implement parsing all of objects from DbdSchemaMapping
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ObjectsOfDbdSchemaMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdSchemaMapping extends DefaultObjectsJoined {
 
     /**
      * Instantiates a new Objects of dbd schema mapping.
@@ -49,39 +44,38 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsEnvelope {
         final YamlNode key
     ) {
         this(
-            new YamlMappingOfScalar(() -> parent.value(key).asMapping()),
-            new TextOfScalarNode(key)
+            new YamlMappingOfPath(
+                parent,
+                key
+            ),
+            new SimpleObjectName(
+                new TextOfScalarNode(key)
+            )
         );
     }
 
     /**
      * Instantiates a new Objects of dbd schema mapping.
      * @param mapping The YamlMapping to be encapsulated.
-     * @param key The Text to be encapsulated.
+     * @param schema The {@link ObjectName} to be encapsulated.
      */
     public ObjectsOfDbdSchemaMapping(
         final YamlMapping mapping,
-        final Text key
+        final ObjectName schema
     ) {
         super(
-            new Joined<>(
-                new SimpleDbObject<>(
-                    new MappingFromMappingIgnoreKeys(
-                        mapping,
-                        new IterableOf<>(DbdSchemaFields.TABLES)
-                    ),
-                    new SimpleObjectSignature(
-                        new SimpleObjectNameOfValues(key),
-                        ObjectType.SCHEMA
-                    )
-                ),
-                new ObjectsOfDbdTablesMapping(
-                    new YamlMappingOfPath(
-                        mapping,
-                        DbdSchemaFields.TABLES.asString()
-                    ),
-                    key
+            new IterableOf<DbObject<? extends YamlMapping>>(
+                new SchemaOfDbdMapping(
+                    mapping,
+                    schema
                 )
+            ),
+            new ObjectsOfDbdTablesMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.TABLES.asString()
+                ),
+                schema
             )
         );
     }

@@ -19,21 +19,19 @@ import java.sql.ResultSet;
 import org.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdSequenceFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSequence;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The type of {@link SimpleDbObject} of {@link DbdSequenceMapping}
  *  that can be constructed of {@link ResultSet} and {@link Query} of {@link DbdSequenceFields}.
  * @since 0.1
  */
-public class SequenceOfResultSet extends SimpleDbObject<DbdSequenceMapping> {
+public class SequenceOfResultSet extends SimpleDbObjectOfEntries<DbdSequenceMapping> {
 
     /**
      * Instantiates a new Sequence of result set.
@@ -45,73 +43,61 @@ public class SequenceOfResultSet extends SimpleDbObject<DbdSequenceMapping> {
         final Query<DbdSequenceFields> query
     ) {
         super(
-            new DbdSequenceMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new ScalarEntry(
-                            DbdSequenceFields.OWNER,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdSequenceFields.OWNER),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdSequenceFields.START,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdSequenceFields.START),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdSequenceFields.INCREMENT,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdSequenceFields.INCREMENT),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdSequenceFields.MIN,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdSequenceFields.MIN),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdSequenceFields.MAX,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdSequenceFields.MAX),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdSequenceFields.CYCLE,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdSequenceFields.CYCLE),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdSequenceFields.DEP_TABLE,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdSequenceFields.DEP_TABLE),
-                                rset
-                            )
-                        )
-                    )
+            new ObjectTypeSequence(),
+            new SimpleObjectNameOfResultSet(
+                rset,
+                query,
+                DbdSequenceFields.SCHEMA,
+                DbdSequenceFields.SEQUENCE
+            ),
+            new ScalarEntry(
+                DbdSequenceFields.OWNER,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdSequenceFields.OWNER),
+                    rset
                 )
             ),
-            new SimpleObjectSignature(
-                new SimpleObjectNameOfValues(
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdSequenceFields.SCHEMA),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdSequenceFields.SEQUENCE),
-                        rset
-                    )
-                ),
-                ObjectType.SEQUENCE
+            new ScalarEntry(
+                DbdSequenceFields.START,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdSequenceFields.START),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdSequenceFields.INCREMENT,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdSequenceFields.INCREMENT),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdSequenceFields.MIN,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdSequenceFields.MIN),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdSequenceFields.MAX,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdSequenceFields.MAX),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdSequenceFields.CYCLE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdSequenceFields.CYCLE),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdSequenceFields.DEP_TABLE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdSequenceFields.DEP_TABLE),
+                    rset
+                )
             )
         );
     }

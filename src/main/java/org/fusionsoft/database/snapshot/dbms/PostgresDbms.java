@@ -15,13 +15,14 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
+import org.fusionsoft.database.snapshot.Dbms;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromPostgres;
 
 /**
  * The Postgres {@link Dbms}.
  * @since 0.1
  */
-public class PostgresDbms extends AnyDbms {
+public class PostgresDbms extends SimpleDbms {
 
     /**
      * Instantiates a new Postgres dbms.

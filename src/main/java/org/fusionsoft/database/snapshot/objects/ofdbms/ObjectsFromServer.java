@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.ofdbms;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import org.fusionsoft.database.mapping.dbd.DbdServerMapping;
@@ -24,8 +25,7 @@ import org.fusionsoft.database.snapshot.dbms.DbmsOfConnection;
  * The DbObjects from {@link DbdServerMapping}.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromServer extends ObjectsOfConnection {
+public class ObjectsFromServer extends ObjectsOfConnection<YamlMapping> {
 
     /**
      * Ctor.
@@ -42,7 +42,7 @@ public class ObjectsFromServer extends ObjectsOfConnection {
     public ObjectsFromServer(final Connection connection) {
         super(
             connection,
-            c -> new DbmsOfConnection(connection).objects().apply(c)
+            new DbmsOfConnection(connection).objects()
         );
     }
 

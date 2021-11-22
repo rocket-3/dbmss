@@ -15,13 +15,14 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
+import org.fusionsoft.database.snapshot.Dbms;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
 
 /**
  * The MySQL Server {@link Dbms}.
  * @since 0.1
  */
-public class MySqlDbms extends AnyDbms {
+public class MySqlDbms extends SimpleDbms {
 
     /**
      * Instantiates a new My sql dbms.

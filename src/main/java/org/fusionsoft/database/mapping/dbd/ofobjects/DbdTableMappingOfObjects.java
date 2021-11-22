@@ -15,25 +15,27 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
+import org.cactoos.iterable.Mapped;
+import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.MappingOfRepresentative;
-import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
-import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import org.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
-import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeConstraint;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeIndex;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTrigger;
+import org.fusionsoft.lib.collection.SingleOrEmptyFallback;
+import org.fusionsoft.lib.yaml.MappingEmpty;
+import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
  * The The DBD/schemas/#schema/tables/#table node mapping of
  *  Objects context and table DbObject.
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class DbdTableMappingOfObjects extends DbdTableMapping {
+public class DbdTableMappingOfObjects extends DbdTableMappingOfEntries {
 
     /**
      * Instantiates a new DbdTableMapping.
@@ -41,56 +43,40 @@ public class DbdTableMappingOfObjects extends DbdTableMapping {
      * @param table The DbObject<?> to be encapsulated.
      */
     public DbdTableMappingOfObjects(
-        final Objects objects,
+        final Objects<?> objects,
         final DbObject<?> table
     ) {
         super(
-            new DbdTableMappingOfEntries(
-                new DbdTableMapping(
-                    new MappingOfRepresentative(table)
-                ),
-                new UnwrapEntriesOfObjects<>(
-                    objects,
-                    new ObjectsWithParentAndType(
-                        table,
-                        ObjectType.INDEX,
-                        objects
-                    ),
-                    (objs, obj) -> new DbdIndexMapping(
-                        new MappingOfRepresentative(obj)
-                    )
-                ),
-                new UnwrapEntriesOfObjects<DbdDataMapping>(
-                    objects,
-                    new ObjectsWithParentAndType(
-                        table,
-                        ObjectType.DATA,
-                        objects
-                    ),
-                    (objs, obj) -> new DbdDataMapping(
-                        new MappingOfRepresentative(obj)
-                    )
-                ),
-                new UnwrapEntriesOfObjects<>(
-                    objects,
-                    new ObjectsWithParentAndType(
-                        table,
-                        ObjectType.CONSTRAINT,
-                        objects
-                    ),
-                    (objs, obj) -> new DbdConstraintMapping(
-                        new MappingOfRepresentative(obj)
-                    )
-                ),
-                new UnwrapEntriesOfObjects<>(
-                    objects,
-                    new ObjectsWithParentAndType(
-                        table,
-                        ObjectType.TRIGGER,
-                        objects
-                    ),
-                    (objs, obj) -> new DbdTriggerMapping(
-                        new MappingOfRepresentative(obj)
+            new DbdTableMapping(
+                new MappingOfRepresentative(table)
+            ),
+            new EntriesOfObjectsOfParentAndType<>(
+                objects,
+                table,
+                new ObjectTypeIndex()
+            ),
+            new EntriesOfObjectsOfParentAndType<>(
+                objects,
+                table,
+                new ObjectTypeConstraint()
+            ),
+            new EntriesOfObjectsOfParentAndType<>(
+                objects,
+                table,
+                new ObjectTypeTrigger()
+            ),
+            new DbdDataMapping(
+                new YamlMappingOfScalar(
+                    new SingleOrEmptyFallback<>(
+                        new Mapped<>(
+                            MapEntry::getValue,
+                            new EntriesOfObjectsOfParentAndType<>(
+                                objects,
+                                table,
+                                new ObjectTypeData()
+                            )
+                        ),
+                        new MappingEmpty()
                     )
                 )
             )

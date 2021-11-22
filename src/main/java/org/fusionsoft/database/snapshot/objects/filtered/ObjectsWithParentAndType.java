@@ -15,15 +15,16 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
  * The Objects filtered by their parent and type given.
  * @since 0.1
  */
-public class ObjectsWithParentAndType extends ObjectsWithParent {
+public class ObjectsWithParentAndType<M extends YamlMapping> extends ObjectsWithType<M> {
 
     /**
      * Instantiates a new Objects with parent and type.
@@ -33,10 +34,16 @@ public class ObjectsWithParentAndType extends ObjectsWithParent {
      */
     public ObjectsWithParentAndType(
         final DbObject<?> parent,
-        final ObjectType type,
-        final Objects objects
+        final ObjectType<M> type,
+        final Objects<?> objects
     ) {
-        super(parent, new ObjectsWithType(type, objects));
+        super(
+            type,
+            new ObjectsWithParent(
+                parent,
+                objects
+            )
+        );
     }
 
 }

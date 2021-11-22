@@ -15,27 +15,28 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 
 /**
  * The Objects filtered by parent name.
  * @since 0.1
  */
-public class ObjectsWithParent extends ObjectsFiltered {
+public class ObjectsWithParent<T extends YamlMapping> extends ObjectsFiltered<T> {
 
     /**
      * Ctor.
      * @param parent The Text name of parent to be encapsulated.
      * @param objects The Objects to be encapsulated.
      */
-    public ObjectsWithParent(final DbObject<?> parent, final Objects objects) {
+    public ObjectsWithParent(final DbObject<?> parent, final Objects<T> objects) {
         super(
-            obj -> obj.signature().name().parent().asString().equals(
-                parent.signature().asString()
+            obj -> obj.signature().name().parent().equals(
+                parent.signature().name()
             ),
             objects
         );
@@ -43,14 +44,12 @@ public class ObjectsWithParent extends ObjectsFiltered {
 
     /**
      * Ctor.
-     * @param name The {@link SimpleObjectNameOfValues} of parent to be encapsulated.
+     * @param name The {@link SimpleObjectName} of parent to be encapsulated.
      * @param objects The Objects to be encapsulated.
      */
-    public ObjectsWithParent(final ObjectName name, final Objects objects) {
+    public ObjectsWithParent(final ObjectName name, final Objects<T> objects) {
         super(
-            obj -> obj.signature().name().parent().asString().equals(
-                name.asString()
-            ),
+            obj -> obj.signature().name().parent().equals(name),
             objects
         );
     }

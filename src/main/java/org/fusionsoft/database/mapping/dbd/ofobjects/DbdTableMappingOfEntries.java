@@ -29,12 +29,9 @@ import org.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
 import org.fusionsoft.database.mapping.entries.EntriesWithKeys;
 import org.fusionsoft.database.mapping.entries.EntriesWithoutKeys;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
-import org.fusionsoft.lib.collection.SingleOrEmptyFallback;
 import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
-import org.fusionsoft.lib.yaml.MappingEmpty;
 import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
-import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
  * The DBD/sequences/#sequence/tables/#table node mapping.
@@ -42,32 +39,6 @@ import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class DbdTableMappingOfEntries extends DbdTableMapping {
-
-    /**
-     * Instantiates a new Dbd table mapping of entries.
-     * @param table The table DbObject entry to take data from.
-     * @param indexes The Iterable of Text -> {@link DbdIndexMapping}
-     *  entries to be encapsulated.
-     * @param constraints The Iterable of Text -> {@link DbdConstraintMapping}
-     *  entries to be encapsulated.
-     * @param triggers The Iterable of Text -> {@link DbdTriggerMapping}
-     *  entries to be encapsulated.
-     * @checkstyle ParameterNumberCheck (100 lines)
-     */
-    public DbdTableMappingOfEntries(
-        final DbdTableMapping table,
-        final Iterable<? extends Map.Entry<Text, DbdIndexMapping>> indexes,
-        final Iterable<? extends Map.Entry<Text, DbdConstraintMapping>> constraints,
-        final Iterable<? extends Map.Entry<Text, DbdTriggerMapping>> triggers
-    ) {
-        this(
-            table,
-            indexes,
-            new IterableOf<>(),
-            constraints,
-            triggers
-        );
-    }
 
     /**
      * Instantiates a new Dbd table mapping of entries.
@@ -85,9 +56,9 @@ public class DbdTableMappingOfEntries extends DbdTableMapping {
     public DbdTableMappingOfEntries(
         final DbdTableMapping table,
         final Iterable<? extends Map.Entry<Text, DbdIndexMapping>> indexes,
-        final Iterable<? extends Map.Entry<Text, DbdDataMapping>> data,
         final Iterable<? extends Map.Entry<Text, DbdConstraintMapping>> constraints,
-        final Iterable<? extends Map.Entry<Text, DbdTriggerMapping>> triggers
+        final Iterable<? extends Map.Entry<Text, DbdTriggerMapping>> triggers,
+        final DbdDataMapping data
     ) {
         super(
             new MappingWithoutNullScalars(
@@ -111,15 +82,7 @@ public class DbdTableMappingOfEntries extends DbdTableMapping {
                         new IterableOf<Map.Entry<? extends Text, ? extends YamlNode>>(
                             new MapEntry<>(
                                 DbdTableFields.DATA,
-                                new YamlMappingOfScalar(
-                                    () -> new SingleOrEmptyFallback<>(
-                                        data,
-                                        new MapEntry<>(
-                                            DbdTableFields.DATA,
-                                            new MappingEmpty()
-                                        )
-                                    ).value().getValue()
-                                )
+                                data
                             ),
                             new MapEntry<>(
                                 DbdTableFields.CONSTRAINTS,

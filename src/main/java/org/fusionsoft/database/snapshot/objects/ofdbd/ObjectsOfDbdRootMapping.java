@@ -16,15 +16,14 @@
 package org.fusionsoft.database.snapshot.objects.ofdbd;
 
 import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import org.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
  * The type of Objects that can be constructed of DbdRootMapping.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsOfDbdRootMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdRootMapping extends DefaultObjectsJoined {
 
     /**
      * Instantiates a new Objects of dbd root mapping.

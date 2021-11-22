@@ -69,7 +69,7 @@ class DbdSchemasMappingOfObjectsTest {
                 new EntriesOfYamlMapping(
                     new YamlMappingOfPath(
                         new DbdSchemasMappingOfObjects(
-                            new StickyObjects(
+                            new StickyObjects<>(
                                 new ObjectsFromServer(
                                     new DbdServerMappingWithCredentials(
                                         new UrlOfPgGitLabDatabaseV11("pagilla"),

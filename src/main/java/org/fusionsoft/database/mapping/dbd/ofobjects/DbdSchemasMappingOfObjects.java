@@ -15,10 +15,11 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
+import org.fusionsoft.database.mapping.dbd.DbdSchemaMapping;
 import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSchema;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
@@ -31,11 +32,14 @@ public class DbdSchemasMappingOfObjects extends YamlMappingOfEntries {
      * Instantiates a new Dbd schemas mapping of objects.
      * @param objects The Objects to be encapsulated.
      */
-    public DbdSchemasMappingOfObjects(final Objects objects) {
+    public DbdSchemasMappingOfObjects(final Objects<?> objects) {
         super(
-            new UnwrapEntriesOfObjects<>(
+            new UnwrapEntriesOfObjects<DbdSchemaMapping>(
                 objects,
-                new ObjectsWithType(ObjectType.SCHEMA, objects),
+                new ObjectsWithType<>(
+                    new ObjectTypeSchema(),
+                    objects
+                ),
                 DbdSchemaMappingOfObjects::new
             )
         );

@@ -22,6 +22,10 @@ import org.cactoos.Text;
  */
 public enum DbdSchemaFields implements Text {
     /**
+     *The dbd/schema key field.
+     */
+    SCHEMA("schema"),
+    /**
      *The dbd/schema/owner field.
      */
     OWNER("owner"),

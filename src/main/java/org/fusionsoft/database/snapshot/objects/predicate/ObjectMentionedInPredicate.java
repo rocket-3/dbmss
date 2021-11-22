@@ -22,11 +22,10 @@ import org.cactoos.iterable.Mapped;
 import org.cactoos.set.SetOf;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectSignature;
-import org.fusionsoft.database.snapshot.ObjectSignatures;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of {@link Objects} that are filtered by {@link ObjectSignatures}.
+ * The type of {@link Objects} that are filtered by {@link ObjectSignature}.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
@@ -56,7 +55,7 @@ public class ObjectMentionedInPredicate implements Func<DbObject<?>, Boolean> {
      * Instantiates a new Objects with names.
      * @param mentions The objects with names to pass.
      */
-    public ObjectMentionedInPredicate(final Objects mentions) {
+    public ObjectMentionedInPredicate(final Objects<?> mentions) {
         this(new Mapped<ObjectSignature>(DbObject::signature, mentions));
     }
 

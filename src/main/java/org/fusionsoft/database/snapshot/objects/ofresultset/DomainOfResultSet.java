@@ -21,20 +21,19 @@ import org.cactoos.Func;
 import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.dbd.DbdDomainConstraintMapping;
 import org.fusionsoft.database.mapping.dbd.DbdDomainMapping;
+import org.fusionsoft.database.mapping.dbd.ofresultset.DomainConstraintMappingOfResultSet;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdDomainConstraintFields;
 import org.fusionsoft.database.mapping.fields.DbdDomainFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeDomain;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.QueryOfScalar;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
 
 /**
@@ -43,7 +42,7 @@ import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
-public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
+public class DomainOfResultSet extends SimpleDbObjectOfEntries<DbdDomainMapping> {
 
     /**
      * Instantiates a new Domain of result set.
@@ -65,15 +64,11 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
             connection,
             query,
             constraints,
-            new SimpleObjectNameOfValues(
-                new TextOfResultSet(
-                    query.outcomeFor(DbdDomainFields.SCHEMA),
-                    rset
-                ),
-                new TextOfResultSet(
-                    query.outcomeFor(DbdDomainFields.DOMAIN),
-                    rset
-                )
+            new SimpleObjectNameOfResultSet(
+                rset,
+                query,
+                DbdDomainFields.SCHEMA,
+                DbdDomainFields.DOMAIN
             )
         );
     }
@@ -121,56 +116,48 @@ public class DomainOfResultSet extends SimpleDbObject<DbdDomainMapping> {
         final ObjectName domain
     ) {
         super(
-            new DbdDomainMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new ScalarEntry(
-                            DbdDomainFields.TYPE,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdDomainFields.TYPE),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdDomainFields.DEFAULT,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdDomainFields.DEFAULT),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdDomainFields.DESCRIPTION,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdDomainFields.DESCRIPTION),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdDomainFields.ONWER,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdDomainFields.ONWER),
-                                rset
-                            )
-                        ),
-                        new MapEntry<>(
-                            DbdDomainFields.CONSTRAINTS,
-                            new YamlSequenceOfNodes(
-                                new ListOfResultSet<DbdDomainConstraintMapping>(
-                                    (ResultSet rs) -> new DomainConstraintMappingOfResultSet(
-                                        rs,
-                                        constraints
-                                    ),
-                                    constraints,
-                                    connection
-                                )
-                            )
-                        )
-                    )
+            new ObjectTypeDomain(),
+            domain,
+            new ScalarEntry(
+                DbdDomainFields.TYPE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdDomainFields.TYPE),
+                    rset
                 )
             ),
-            new SimpleObjectSignature(
-                domain,
-                ObjectType.UDT_DOMAIN
+            new ScalarEntry(
+                DbdDomainFields.DEFAULT,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdDomainFields.DEFAULT),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdDomainFields.DESCRIPTION,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdDomainFields.DESCRIPTION),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdDomainFields.ONWER,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdDomainFields.ONWER),
+                    rset
+                )
+            ),
+            new MapEntry<>(
+                DbdDomainFields.CONSTRAINTS,
+                new YamlSequenceOfNodes(
+                    new ListOfResultSet<DbdDomainConstraintMapping>(
+                        (ResultSet rs) -> new DomainConstraintMappingOfResultSet(
+                            rs,
+                            constraints
+                        ),
+                        constraints,
+                        connection
+                    )
+                )
             )
         );
     }

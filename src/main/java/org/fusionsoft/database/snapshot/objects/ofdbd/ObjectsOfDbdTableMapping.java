@@ -17,20 +17,11 @@ package org.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
-import org.cactoos.Text;
-import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Joined;
-import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
-import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
-import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
-import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
-import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
 /**
@@ -38,7 +29,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdTableMapping extends DefaultObjectsJoined {
 
     /**
      * Instantiates a new Objects of dbd table mapping.
@@ -49,56 +40,50 @@ public class ObjectsOfDbdTableMapping extends ObjectsEnvelope {
     public ObjectsOfDbdTableMapping(
         final YamlMapping parent,
         final YamlNode key,
-        final Text schema
+        final ObjectName schema
     ) {
         this(
-            new YamlMappingOfScalar(() -> parent.value(key).asMapping()),
-            new SimpleObjectNameOfValues(schema, new TextOfScalarNode(key))
+            new YamlMappingOfPath(
+                parent,
+                key
+            ),
+            new SimpleObjectName(
+                schema,
+                new TextOfScalarNode(key)
+            )
         );
     }
 
     /**
      * Instantiates a new Objects of dbd schema mapping.
      * @param mapping The YamlMapping to be encapsulated.
-     * @param name The fully qualified name of table to be encapsulated.
+     * @param table The fully qualified {@link ObjectName} of table to be encapsulated.
      */
     public ObjectsOfDbdTableMapping(
         final YamlMapping mapping,
-        final Text name
+        final ObjectName table
     ) {
         super(
-            new Joined<>(
-                new SimpleDbObject<>(
-                    new DbdTableMapping(
-                        new MappingFromMappingIgnoreKeys(
-                            mapping,
-                            new IterableOf<>(
-                                DbdTableFields.CONSTRAINTS,
-                                DbdTableFields.INDEXES
-                            )
-                        )
-                    ),
-                    new SimpleObjectSignature(
-                        new SimpleObjectNameOfValues(name),
-                        ObjectType.TABLE
-                    )
-                ),
-                new Joined<DbObject<? extends YamlMapping>>(
-                    new ObjectsOfDbdIndexesMapping(
-                        new YamlMappingOfPath(
-                            mapping,
-                            DbdTableFields.INDEXES.asString()
-                        ),
-                        name
-                    ),
-                    new ObjectsOfDbdConstraintsMapping(
-                        new YamlMappingOfPath(
-                            mapping,
-                            DbdTableFields.CONSTRAINTS.asString()
-                        ),
-                        name
-                    )
-                )
+            new TableOfDbdMapping(mapping, table),
+            new ObjectsOfDbdIndexesMapping(
+                mapping,
+                DbdTableFields.INDEXES,
+                table
+            ),
+            new ObjectsOfDbdConstraintsMapping(
+                mapping,
+                DbdTableFields.CONSTRAINTS,
+                table
+            ),
+            new ObjectsOfDbdTriggersMapping(
+                mapping,
+                DbdTableFields.TRIGGERS,
+                table
+            ),
+            new ObjectsOfDbdDataMapping(
+                mapping,
+                DbdTableFields.DATA,
+                table
             )
         );
     }

@@ -16,18 +16,14 @@
 package org.fusionsoft.database.snapshot.objects.ofdbms;
 
 import java.sql.Connection;
-import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Mapped;
-import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.data.InlineDataObjectOfTable;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.ObjectsCasted;
+import org.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
-public class ObjectsWithInlineDataAdded extends IterableEnvelope<DbObject<?>> implements Objects {
+public class ObjectsWithInlineDataAdded extends DefaultObjectsJoined {
 
     /**
      * Ctor.
@@ -38,17 +34,12 @@ public class ObjectsWithInlineDataAdded extends IterableEnvelope<DbObject<?>> im
         final Connection connection
     ) {
         super(
-            new Joined<DbObject<?>>(
-                iterable,
-                new Mapped<>(
-                    x -> new InlineDataObjectOfTable(x, connection),
-                    new ObjectsCasted<>(
-                        DbdTableMapping::new,
-                        new ObjectsWithType(
-                            ObjectType.TABLE,
-                            new ObjectsFromServer(connection)
-                        )
-                    )
+            iterable,
+            new Mapped<>(
+                x -> new InlineDataObjectOfTable(x, connection),
+                new ObjectsWithType<>(
+                    new ObjectTypeTable(),
+                    new ObjectsFromServer(connection)
                 )
             )
         );

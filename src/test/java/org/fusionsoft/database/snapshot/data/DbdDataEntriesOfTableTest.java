@@ -19,18 +19,18 @@ import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
-import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.ObjectsCasted;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class DbdDataEntriesOfTableTest {
 
     @Test
+    @Disabled
     public void works() {
         final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(
             new DbdServerMappingWithCredentials(
@@ -40,12 +40,9 @@ class DbdDataEntriesOfTableTest {
         );
         final Mapped<DbdDataEntriesOfTable> datas = new Mapped<>(
             x -> new DbdDataEntriesOfTable(connection, x),
-            new ObjectsCasted<>(
-                DbdTableMapping::new,
-                new ObjectsWithType(
-                    ObjectType.TABLE,
-                    new ObjectsFromServer(connection)
-                )
+            new ObjectsWithType<>(
+                new ObjectTypeTable(),
+                new ObjectsFromServer(connection)
             )
         );
         for (final DbdDataEntriesOfTable data : datas) {

@@ -18,8 +18,9 @@ package org.fusionsoft.database.snapshot.objects;
 import org.fusionsoft.database.dbdfile.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeConstraint;
 import org.fusionsoft.lib.yaml.MappingEmpty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -44,12 +45,12 @@ class ObjectsInDbdPredicateTest {
                 new SimpleDbObject<>(
                     new MappingEmpty(),
                     new SimpleObjectSignature(
-                        new SimpleObjectNameOfValues(
+                        new SimpleObjectName(
                             "mts",
                             "domains",
                             "pk_domains"
                         ),
-                        ObjectType.CONSTRAINT
+                        new ObjectTypeConstraint()
                     )
                 )
             )

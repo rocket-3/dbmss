@@ -15,12 +15,12 @@
  */
 package org.fusionsoft.database.snapshot.objects.ofdbd;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
 import org.fusionsoft.database.DbdFile;
-import org.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerEntryOfDbdFile;
+import org.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdFile;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 
@@ -30,7 +30,7 @@ import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFi
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsOfServerFromDbd extends ObjectsFiltered {
+public class ObjectsOfServerFromDbd extends ObjectsFiltered<YamlMapping> {
 
     /**
      * Instantiates a new Objects from server mentioned in dbd.
@@ -42,10 +42,8 @@ public class ObjectsOfServerFromDbd extends ObjectsFiltered {
         final Text server
     ) {
         super(
-            new ObjectsOfScalar(
-                () -> new ObjectsFromServer(
-                    new DbdServerEntryOfDbdFile(file, server).getValue()
-                )
+            new ObjectsFromServer(
+                new DbdServerMappingOfDbdFile(file, server)
             ),
             new ObjectMentionedInDbdFilePredicate(file)
         );

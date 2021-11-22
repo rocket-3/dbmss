@@ -21,20 +21,18 @@ import org.cactoos.Func;
 import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import org.fusionsoft.database.mapping.dbd.ofresultset.DbdColumnMappingOfResultSet;
 import org.fusionsoft.database.mapping.entries.ScalarEntryOfResultSet;
 import org.fusionsoft.database.mapping.fields.DbdColumnFields;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.QueryOfScalar;
 import org.fusionsoft.lib.collection.ListOfResultSet;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
 
@@ -46,7 +44,7 @@ import org.fusionsoft.lib.yaml.YamlSequenceOfNodes;
  * @checkstyle ClassDataAbstractionCouplingCheck (256 lines)
  * @checkstyle ParameterNumberCheck (256 lines)
  */
-public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
+public class TableOfResultSet extends SimpleDbObjectOfEntries<DbdTableMapping> {
 
     /**
      * Instantiates a new Simple db object.
@@ -66,7 +64,7 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
             connection,
             query,
             columns,
-            new SimpleObjectNameOfValues(
+            new SimpleObjectName(
                 new TextOfResultSet(
                     query.outcomeFor(DbdTableFields.SCHEMA),
                     rset
@@ -119,64 +117,56 @@ public class TableOfResultSet extends SimpleDbObject<DbdTableMapping> {
         final ObjectName tablename
     ) {
         super(
-            new DbdTableMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new ScalarEntryOfResultSet(
-                            DbdTableFields.DESCRIPTION,
-                            query,
-                            rset
-                        ),
-                        new ScalarEntryOfResultSet(
-                            DbdTableFields.OWNER,
-                            query,
-                            rset
-                        ),
-                        new ScalarEntryOfResultSet(
-                            DbdTableFields.TABLESPACE,
-                            query,
-                            rset
-                        ),
-                        new ScalarEntryOfResultSet(
-                            DbdTableFields.PARENT,
-                            query,
-                            rset
-                        ),
-                        new ScalarEntryOfResultSet(
-                            DbdTableFields.PARTKEYDEFINITION,
-                            query,
-                            rset
-                        ),
-                        new ScalarEntryOfResultSet(
-                            DbdTableFields.PARTKEYRANGE,
-                            query,
-                            rset
-                        ),
-                        new MapEntry<>(
-                            DbdTableFields.DEPENDENCIES,
-                            new YamlScalarSequenceOfResultSet(
-                                DbdTableFields.DEPENDENCIES, query, rset
-                            )
-                        ),
-                        new MapEntry<>(
-                            DbdTableFields.COLUMNS,
-                            new YamlSequenceOfNodes(
-                                new ListOfResultSet<DbdColumnMapping>(
-                                    rs -> new DbdColumnMappingOfResultSet(
-                                        rs,
-                                        columns
-                                    ),
-                                    columns,
-                                    connection
-                                )
-                            )
-                        )
-                    )
+            new ObjectTypeTable(),
+            tablename,
+            new ScalarEntryOfResultSet(
+                DbdTableFields.DESCRIPTION,
+                query,
+                rset
+            ),
+            new ScalarEntryOfResultSet(
+                DbdTableFields.OWNER,
+                query,
+                rset
+            ),
+            new ScalarEntryOfResultSet(
+                DbdTableFields.TABLESPACE,
+                query,
+                rset
+            ),
+            new ScalarEntryOfResultSet(
+                DbdTableFields.PARENT,
+                query,
+                rset
+            ),
+            new ScalarEntryOfResultSet(
+                DbdTableFields.PARTKEYDEFINITION,
+                query,
+                rset
+            ),
+            new ScalarEntryOfResultSet(
+                DbdTableFields.PARTKEYRANGE,
+                query,
+                rset
+            ),
+            new MapEntry<>(
+                DbdTableFields.DEPENDENCIES,
+                new YamlScalarSequenceOfResultSet(
+                    DbdTableFields.DEPENDENCIES, query, rset
                 )
             ),
-            new SimpleObjectSignature(
-                tablename,
-                ObjectType.TABLE
+            new MapEntry<>(
+                DbdTableFields.COLUMNS,
+                new YamlSequenceOfNodes(
+                    new ListOfResultSet<DbdColumnMapping>(
+                        rs -> new DbdColumnMappingOfResultSet(
+                            rs,
+                            columns
+                        ),
+                        columns,
+                        connection
+                    )
+                )
             )
         );
     }

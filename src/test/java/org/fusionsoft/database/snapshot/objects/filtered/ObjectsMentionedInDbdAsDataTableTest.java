@@ -23,11 +23,11 @@ import org.fusionsoft.database.dbdfile.DbdFileOfMapping;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import org.fusionsoft.database.snapshot.objects.DefaultObjects;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import org.fusionsoft.lib.yaml.MappingEmpty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -49,12 +49,12 @@ class ObjectsMentionedInDbdAsDataTableTest {
         final Func<String, DbObject<?>> object = name -> new SimpleDbObject<>(
             new MappingEmpty(),
             new SimpleObjectSignature(
-                new SimpleObjectNameOfValues("mts", name),
-                ObjectType.TABLE
+                new SimpleObjectName("mts", name),
+                new ObjectTypeTable()
             )
         );
-        final Objects filtered = new ObjectsAreDataTablesInDbd(
-            new ObjectsEnvelope(
+        final Objects<?> filtered = new ObjectsAreDataTablesInDbd<>(
+            new DefaultObjects(
                 new IterableOf<>(
                     object.apply(datatable),
                     object.apply("vendors")

@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
+import com.amihaiemil.eoyaml.Scalar;
 import com.amihaiemil.eoyaml.Yaml;
 import java.text.MessageFormat;
 import org.cactoos.Text;
@@ -22,9 +23,9 @@ import org.cactoos.iterable.Mapped;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
-import org.fusionsoft.database.mapping.entries.MappingEntryOfScalar;
+import org.fusionsoft.database.mapping.entries.YamlMappingEntryOfScalar;
 
-public class DbdDataEntryOfRow extends MappingEntryOfScalar {
+public class DbdDataEntryOfRow extends YamlMappingEntryOfScalar<Scalar> {
 
     public DbdDataEntryOfRow(final Row row, final Iterable<Column> cols) {
         super(

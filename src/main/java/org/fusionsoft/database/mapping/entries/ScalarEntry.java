@@ -16,6 +16,7 @@
 package org.fusionsoft.database.mapping.entries;
 
 import com.amihaiemil.eoyaml.Yaml;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.cactoos.text.TextOf;
 
@@ -24,7 +25,7 @@ import org.cactoos.text.TextOf;
  *  Text and Scalar of YamlNode.
  * @since 0.1
  */
-public class ScalarEntry extends MappingEntryOfScalar {
+public class ScalarEntry extends YamlMappingEntryOfScalar<YamlNode> {
 
     /**
      * Instantiates a new Scalar entry.

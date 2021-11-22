@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInPredicate;
@@ -23,14 +24,14 @@ import org.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInPredi
  * The {@link ObjectsFiltered} by being mentioned in anothe {@link Objects}.
  * @since 0.1
  */
-public class ObjectsMentionedIn extends ObjectsFiltered {
+public class ObjectsMentionedIn<T extends YamlMapping> extends ObjectsFiltered<T> {
 
     /**
      * Instantiates a new Objects mentioned in.
      * @param mentions The Objects to be mentioned in.
      * @param origin The Objects to be filtered.
      */
-    public ObjectsMentionedIn(final Objects mentions, final Objects origin) {
+    public ObjectsMentionedIn(final Objects<?> mentions, final Objects<T> origin) {
         super(origin, new ObjectMentionedInPredicate(mentions));
     }
 

@@ -19,21 +19,18 @@ import java.sql.ResultSet;
 import org.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
 import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdTriggerFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTrigger;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The type of {@link DbdTriggerMapping},
  *  can be constructed of {@link ResultSet} and {@link Query} of {@link DbdTriggerFields}.
  * @since 0.1
  */
-public class TriggerOfResultSet extends SimpleDbObject<DbdTriggerMapping> {
+public class TriggerOfResultSet extends SimpleDbObjectOfEntries<DbdTriggerMapping> {
 
     /**
      * Instantiates a new Trigger of result set.
@@ -42,35 +39,20 @@ public class TriggerOfResultSet extends SimpleDbObject<DbdTriggerMapping> {
      */
     public TriggerOfResultSet(final ResultSet rset, final Query<DbdTriggerFields> query) {
         super(
-            new DbdTriggerMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new MultilineScalarEntry(
-                            DbdTriggerFields.DDL,
-                            new TextOfResultSet(
-                                DbdTriggerFields.DDL,
-                                rset
-                            )
-                        )
-                    )
-                )
+            new ObjectTypeTrigger(),
+            new SimpleObjectNameOfResultSet(
+                rset,
+                query,
+                DbdTriggerFields.SCHEMA,
+                DbdTriggerFields.TABLE,
+                DbdTriggerFields.TRIGGER
             ),
-            new SimpleObjectSignature(
-                new SimpleObjectNameOfValues(
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdTriggerFields.SCHEMA),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdTriggerFields.TABLE),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdTriggerFields.TRIGGER),
-                        rset
-                    )
-                ),
-                ObjectType.TRIGGER
+            new MultilineScalarEntry(
+                DbdTriggerFields.DDL,
+                new TextOfResultSet(
+                    DbdTriggerFields.DDL,
+                    rset
+                )
             )
         );
     }

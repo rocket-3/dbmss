@@ -18,27 +18,25 @@ package org.fusionsoft.database.mapping.dbd.ofobjects;
 import org.fusionsoft.database.mapping.dbd.DbdProcedureMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeProcedure;
 
 /**
  * The type of {@link DbdProcedureMapping} that can be extracted
  *  of all {@link Objects} context and parent schema {@link DbObject}.
  * @since 0.1
  */
-public class DbdProceduresMappingOfObjects extends YamlMappingOfScalar {
+public class DbdProceduresMappingOfObjects extends MappingOfObjectsOfParentAndType {
 
     /**
      * Instantiates a new Dbd procedures mapping of objects.
      * @param objects The Objects to be encapsulated.
-     * @param parent The DbObject to be encapsulated.
+     * @param schema The DbObject to be encapsulated.
      */
-    public DbdProceduresMappingOfObjects(final Objects objects, final DbObject<?> parent) {
+    public DbdProceduresMappingOfObjects(final Objects<?> objects, final DbObject<?> schema) {
         super(
-            () -> new DbdObjectsOfTypeMapping<>(
-                ObjectType.PROCEDURE,
-                DbdProcedureMapping::new
-            ).apply(objects, parent)
+            objects,
+            schema,
+            new ObjectTypeProcedure()
         );
     }
 

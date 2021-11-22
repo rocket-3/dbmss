@@ -15,13 +15,14 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
+import org.fusionsoft.database.snapshot.Dbms;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromOracle;
 
 /**
  * The Oracle {@link Dbms}.
  * @since 0.1
  */
-public class OracleDbms extends AnyDbms {
+public class OracleDbms extends SimpleDbms {
 
     /**
      * Instantiates a new Oracle dbms.

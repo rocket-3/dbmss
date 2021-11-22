@@ -20,12 +20,12 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.text.TextOf;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * The test for {@link SimpleObjectNameOfValues}.
+ * The test for {@link SimpleObjectName}.
  * @since 0.1
  */
 class DefaultObjectNameOfValuesTest {
@@ -41,8 +41,8 @@ class DefaultObjectNameOfValuesTest {
             new IterableOf<>("a", "b", "c")
         );
         Assertions.assertEquals(
-            new SimpleObjectNameOfValues(parent).asString(),
-            new SimpleObjectNameOfValues(
+            new SimpleObjectName(parent).asString(),
+            new SimpleObjectName(
                 new Joined<Text>(
                     parent,
                     new IterableOf<>(new TextOf("d"))

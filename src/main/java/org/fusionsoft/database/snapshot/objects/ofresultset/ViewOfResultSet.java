@@ -21,14 +21,12 @@ import org.fusionsoft.database.mapping.dbd.DbdViewMapping;
 import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdViewFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeView;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
 /**
@@ -38,7 +36,7 @@ import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
  * @todo #40:60min Fix eo-yaml block scalars rendering
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ViewOfResultSet extends SimpleDbObject<DbdViewMapping> {
+public class ViewOfResultSet extends SimpleDbObjectOfEntries<DbdViewMapping> {
 
     /**
      * Instantiates a new View of result set.
@@ -47,45 +45,33 @@ public class ViewOfResultSet extends SimpleDbObject<DbdViewMapping> {
      */
     public ViewOfResultSet(final ResultSet rset, final Query<DbdViewFields> query) {
         super(
-            new DbdViewMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new ScalarEntry(
-                            DbdViewFields.OWNER,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdViewFields.OWNER),
-                                rset
-                            )
-                        ),
-                        new MultilineScalarEntry(
-                            DbdViewFields.DDL,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdViewFields.DDL),
-                                rset
-                            )
-                        ),
-                        new MapEntry<>(
-                            DbdViewFields.DEPENDENCIES,
-                            new YamlScalarSequenceOfResultSet(
-                                query.outcomeFor(DbdViewFields.DEPENDENCIES),
-                                rset
-                            )
-                        )
-                    )
+            new ObjectTypeView(),
+            new SimpleObjectNameOfResultSet(
+                rset,
+                query,
+                DbdViewFields.SCHEMA,
+                DbdViewFields.VIEW
+            ),
+            new ScalarEntry(
+                DbdViewFields.OWNER,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdViewFields.OWNER),
+                    rset
                 )
             ),
-            new SimpleObjectSignature(
-                new SimpleObjectNameOfValues(
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdViewFields.SCHEMA),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdViewFields.VIEW),
-                        rset
-                    )
-                ),
-                ObjectType.VIEW
+            new MultilineScalarEntry(
+                DbdViewFields.DDL,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdViewFields.DDL),
+                    rset
+                )
+            ),
+            new MapEntry<>(
+                DbdViewFields.DEPENDENCIES,
+                new YamlScalarSequenceOfResultSet(
+                    query.outcomeFor(DbdViewFields.DEPENDENCIES),
+                    rset
+                )
             )
         );
     }

@@ -20,17 +20,18 @@ import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.mapping.dbd.DbdProcedureMapping;
 import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeProcedure;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.database.snapshot.query.pg.DbdProcedureFields;
 import org.fusionsoft.lib.text.TextOfResultSet;
 
 /**
- * The type of {@link ObjectOfEntries} of {@link DbdProcedureMapping}, can
+ * The type of {@link SimpleDbObjectOfEntries} of {@link DbdProcedureMapping}, can
  *  be constructed of {@link ResultSet} and {@link Query} of {@link DbdProcedureFields}.
  * @since 0.1
  */
-public class ProcedureOfResultSet extends ObjectOfEntries<DbdProcedureMapping> {
+public class ProcedureOfResultSet extends SimpleDbObjectOfEntries<DbdProcedureMapping> {
 
     /**
      * Instantiates a new Procedure of result set.
@@ -39,8 +40,7 @@ public class ProcedureOfResultSet extends ObjectOfEntries<DbdProcedureMapping> {
      */
     public ProcedureOfResultSet(final ResultSet rset, final Query<DbdProcedureFields> query) {
         super(
-            ObjectType.PROCEDURE,
-            DbdProcedureMapping::new,
+            new ObjectTypeProcedure(),
             new IterableOf<>(
                 new TextOfResultSet(DbdProcedureFields.SCHEMA, rset, query),
                 new TextOfResultSet(DbdProcedureFields.PROCEDURE, rset, query)

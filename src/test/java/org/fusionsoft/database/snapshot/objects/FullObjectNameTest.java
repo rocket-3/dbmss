@@ -16,13 +16,15 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import java.text.MessageFormat;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameDelimiter;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
+import org.cactoos.Text;
+import org.cactoos.text.TextOf;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameDelimiter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * The tests for {@link SimpleObjectNameOfValues}.
+ * The tests for {@link SimpleObjectName}.
  * @since 0.1
  */
 class FullObjectNameTest {
@@ -36,7 +38,7 @@ class FullObjectNameTest {
         final String name = "name";
         Assertions.assertEquals(
             name,
-            new SimpleObjectNameOfValues(name).asString()
+            new SimpleObjectName(name).asString()
         );
     }
 
@@ -50,9 +52,34 @@ class FullObjectNameTest {
         final String child = "child";
         Assertions.assertEquals(
             MessageFormat.format(
-                "{0}{1}{2}", parent, new SimpleObjectNameDelimiter().asString(), child
+                "{0}{1}{2}",
+                parent,
+                new SimpleObjectNameDelimiter().asString(),
+                child
             ),
-            new SimpleObjectNameOfValues(parent, child).asString()
+            new SimpleObjectName(parent, child).asString()
+        );
+    }
+
+    /**
+     * Represents delimited words from several arguments.
+     */
+    @Test
+    public void doubleNamesWorks() {
+        final Text parent = new TextOf("parent");
+        final Text child = new TextOf("child");
+        Assertions.assertEquals(
+            new SimpleObjectName(
+                parent,
+                child,
+                child,
+                parent
+            ).asString(),
+            new SimpleObjectName(
+                parent,
+                child,
+                new SimpleObjectName(child, parent)
+            ).asString()
         );
     }
 

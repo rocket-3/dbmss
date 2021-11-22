@@ -23,6 +23,7 @@ import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdRootMapping;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,7 @@ class ObjectsOfDbdRootMappingTest {
             new Unchecked<>(
                 new And(
                     new Filtered<>(
-                        o -> o.signature().type().equals(ObjectType.TABLE),
+                        o -> o.signature().type().equals(new ObjectTypeTable()),
                         new ObjectsOfDbdRootMapping(
                             new DbdRootMapping(
                                 new MappingOfExampleYaml()

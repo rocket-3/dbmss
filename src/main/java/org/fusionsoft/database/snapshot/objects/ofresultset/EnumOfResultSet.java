@@ -16,22 +16,22 @@
 package org.fusionsoft.database.snapshot.objects.ofresultset;
 
 import java.sql.ResultSet;
-import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.dbd.DbdEnumMapping;
 import org.fusionsoft.database.mapping.entries.ScalarEntryOfResultSet;
 import org.fusionsoft.database.mapping.fields.DbdEnumField;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeEnum;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
 /**
- * The {@link ObjectOfEntries} from {@link Query} of {@link DbdEnumField} and {@link ResultSet}.
+ * The {@link SimpleDbObjectOfEntries} from {@link Query} of {@link DbdEnumField} and {@link ResultSet}.
  * @since 0.1
  */
-public class EnumOfResultSet extends ObjectOfEntries<DbdEnumMapping> {
+public class EnumOfResultSet extends SimpleDbObjectOfEntries<DbdEnumMapping> {
 
     /**
      * Instantiates a new Enum of result set.
@@ -40,9 +40,8 @@ public class EnumOfResultSet extends ObjectOfEntries<DbdEnumMapping> {
      */
     public EnumOfResultSet(final ResultSet rset, final Query<DbdEnumField> query) {
         super(
-            ObjectType.UDT_ENUM,
-            DbdEnumMapping::new,
-            new IterableOf<Text>(
+            new ObjectTypeEnum(),
+            new IterableOf<>(
                 new TextOfResultSet(DbdEnumField.SCHEMA, rset, query),
                 new TextOfResultSet(DbdEnumField.ENUM, rset, query)
             ),

@@ -24,14 +24,12 @@ import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import org.fusionsoft.database.mapping.entries.MultilineScalarEntry;
 import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdConstraintFields;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectNameOfValues;
-import org.fusionsoft.database.snapshot.objectsignature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeConstraint;
 import org.fusionsoft.database.snapshot.query.Query;
 import org.fusionsoft.lib.text.TextOfResultSet;
-import org.fusionsoft.lib.yaml.MappingWithoutNullScalars;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
 /**
@@ -40,7 +38,88 @@ import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ConstraintOfResultSet extends SimpleDbObject<DbdConstraintMapping> {
+public class ConstraintOfResultSet extends SimpleDbObjectOfEntries<DbdConstraintMapping> {
+
+    /**
+     * Instantiates a new simple db object.
+     * @param rset The ResultSet to be encapsulated.
+     * @param query The Query of DbdConstraintFields to be encapsulated.
+     * @param type The Text of constraint type to be encapsulated.
+     */
+    private ConstraintOfResultSet(
+        final ResultSet rset,
+        final Query<DbdConstraintFields> query,
+        final Text type
+    ) {
+        super(
+            new ObjectTypeConstraint(),
+            new SimpleObjectNameOfResultSet(
+                rset,
+                query,
+                DbdConstraintFields.SCHEMA,
+                DbdConstraintFields.TABLE,
+                DbdConstraintFields.CONSTRAINT
+            ),
+            new MapEntry<>(
+                new TextOfScalar(
+                    () -> new MapOf<Boolean, Text>(
+                        new MapEntry<>(true, DbdConstraintFields.SRC_FK_COL),
+                        new MapEntry<>(false, DbdConstraintFields.SRC_PK_COL)
+                    ).get(type.asString().equals("FK")).asString()
+                ),
+                new YamlScalarSequenceOfResultSet(
+                    query.outcomeFor(DbdConstraintFields.SRC_PK_COL),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdConstraintFields.TGT_SCHEMA,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdConstraintFields.TGT_SCHEMA),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdConstraintFields.TGT_TABLE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdConstraintFields.TGT_TABLE),
+                    rset
+                )
+            ),
+            new MapEntry<>(
+                DbdConstraintFields.TGT_COL,
+                new YamlScalarSequenceOfResultSet(
+                    query.outcomeFor(DbdConstraintFields.TGT_COL),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdConstraintFields.TYPE,
+                type
+            ),
+            new ScalarEntry(
+                DbdConstraintFields.ON_DELETE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdConstraintFields.ON_DELETE),
+                    rset
+                )
+            ),
+            new ScalarEntry(
+                DbdConstraintFields.ON_UPDATE,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdConstraintFields.ON_UPDATE),
+                    rset
+                )
+            ),
+            new MultilineScalarEntry(
+                DbdConstraintFields.DDL,
+                new TextOfResultSet(
+                    query.outcomeFor(DbdConstraintFields.DDL),
+                    rset
+                )
+            )
+        );
+    }
 
     /**
      * Instantiates a new Constraint of result set.
@@ -57,102 +136,6 @@ public class ConstraintOfResultSet extends SimpleDbObject<DbdConstraintMapping> 
             new TextOfResultSet(
                 query.outcomeFor(DbdConstraintFields.TYPE),
                 rset
-            )
-        );
-    }
-
-    /**
-     * Instantiates a new simple db object.
-     * @param rset The ResultSet to be encapsulated.
-     * @param query The Query of DbdConstraintFields to be encapsulated.
-     * @param type The Text of constraint type to be encapsulated.
-     */
-    private ConstraintOfResultSet(
-        final ResultSet rset,
-        final Query<DbdConstraintFields> query,
-        final Text type
-    ) {
-        super(
-            new DbdConstraintMapping(
-                new MappingWithoutNullScalars(
-                    new YamlMappingOfEntries(
-                        new MapEntry<>(
-                            new TextOfScalar(
-                                () -> new MapOf<Boolean, Text>(
-                                    new MapEntry<>(true, DbdConstraintFields.SRC_FK_COL),
-                                    new MapEntry<>(false, DbdConstraintFields.SRC_PK_COL)
-                                ).get(type.asString().equals("FK")).asString()
-                            ),
-                            new YamlScalarSequenceOfResultSet(
-                                query.outcomeFor(DbdConstraintFields.SRC_PK_COL),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdConstraintFields.TGT_SCHEMA,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdConstraintFields.TGT_SCHEMA),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdConstraintFields.TGT_TABLE,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdConstraintFields.TGT_TABLE),
-                                rset
-                            )
-                        ),
-                        new MapEntry<>(
-                            DbdConstraintFields.TGT_COL,
-                            new YamlScalarSequenceOfResultSet(
-                                query.outcomeFor(DbdConstraintFields.TGT_COL),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdConstraintFields.TYPE,
-                            type
-                        ),
-                        new ScalarEntry(
-                            DbdConstraintFields.ON_DELETE,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdConstraintFields.ON_DELETE),
-                                rset
-                            )
-                        ),
-                        new ScalarEntry(
-                            DbdConstraintFields.ON_UPDATE,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdConstraintFields.ON_UPDATE),
-                                rset
-                            )
-                        ),
-                        new MultilineScalarEntry(
-                            DbdConstraintFields.DDL,
-                            new TextOfResultSet(
-                                query.outcomeFor(DbdConstraintFields.DDL),
-                                rset
-                            )
-                        )
-                    )
-                )
-            ),
-            new SimpleObjectSignature(
-                new SimpleObjectNameOfValues(
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdConstraintFields.SCHEMA),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdConstraintFields.TABLE),
-                        rset
-                    ),
-                    new TextOfResultSet(
-                        query.outcomeFor(DbdConstraintFields.CONSTRAINT),
-                        rset
-                    )
-                ),
-                ObjectType.CONSTRAINT
             )
         );
     }

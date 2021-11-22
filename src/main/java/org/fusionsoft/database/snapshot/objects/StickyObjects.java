@@ -17,29 +17,20 @@ package org.fusionsoft.database.snapshot.objects;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.iterable.Sticky;
-import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
  * The type of Objects that are 'sticky' -> queried only one time.
  * @since 0.1
  */
-public class StickyObjects extends ObjectsEnvelope {
+public class StickyObjects<T extends YamlMapping> extends ObjectsEnvelope<T> {
 
     /**
      * Ctor.
-     * @param iterable The wrapped iterable
+     * @param objects The wrapped {@link Objects}
      */
-    public StickyObjects(final Iterable<DbObject<? extends YamlMapping>> iterable) {
-        super(new Sticky<>(iterable));
-    }
-
-    /**
-     * Ctor.
-     * @param objects The wrapped objects
-     */
-    public StickyObjects(final Objects objects) {
-        this((Iterable<DbObject<? extends YamlMapping>>) objects);
+    public StickyObjects(final Objects<T> objects) {
+        super(new Sticky<>(objects));
     }
 
 }

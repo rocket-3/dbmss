@@ -20,6 +20,7 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
+import org.fusionsoft.database.snapshot.Dbms;
 
 /**
  * The type of {@link Dbms} that can be constructed of Scalar.

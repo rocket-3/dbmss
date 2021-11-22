@@ -15,26 +15,34 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
+import org.fusionsoft.database.snapshot.objects.ObjectsCasted;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import org.fusionsoft.database.snapshot.objects.predicate.ObjectHasTypePredicate;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
  * The {@link Objects} filtered by {@link ObjectType}.
  * @since 0.1
  */
-public class ObjectsWithType extends ObjectsFiltered {
+public class ObjectsWithType<M extends YamlMapping> extends ObjectsCasted<M> {
 
     /**
      * Instantiates a new Objects with type.
      * @param type The ObjectType to be encapsulated.
      * @param origin The Objects to be encapsulated.
      */
-    public ObjectsWithType(final ObjectType type, final Objects origin) {
+    public ObjectsWithType(
+        final ObjectType<M> type,
+        final Objects<?> origin
+    ) {
         super(
-            new ObjectHasTypePredicate(type),
-            origin
+            type::mapping,
+            new ObjectsFiltered<>(
+                new ObjectHasTypePredicate(type),
+                origin
+            )
         );
     }
 

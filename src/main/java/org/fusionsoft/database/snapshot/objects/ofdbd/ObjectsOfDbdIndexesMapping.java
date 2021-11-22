@@ -17,15 +17,31 @@ package org.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
-import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.lib.yaml.YamlMappingOfPath;
+import org.fusionsoft.lib.yaml.YamlMappingOrEmptyWhenNoValueNotFound;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
  * The db index objects of DBD/schemas/#schema/tables/#table/indexes mapping.
  * @since 0.1
  */
-public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope<DbdIndexMapping> {
+
+    public ObjectsOfDbdIndexesMapping(
+        final YamlMapping mapping,
+        final Text key,
+        final ObjectName table
+    ) {
+        this(
+            new YamlMappingOrEmptyWhenNoValueNotFound(
+                new YamlMappingOfPath(mapping, key)
+            ),
+            table
+        );
+    }
 
     /**
      * Instantiates a new Objects of dbd indexes mapping.
@@ -34,11 +50,11 @@ public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope {
      */
     public ObjectsOfDbdIndexesMapping(
         final YamlMapping indexes,
-        final Text table
+        final ObjectName table
     ) {
         super(
-            new IterableOfClassFromYamlNode<DbObject<? extends YamlMapping>>(
-                (map, node) -> new ObjectOfDbdIndexMapping(map, node, table),
+            new IterableOfClassFromYamlNode<>(
+                (map, node) -> new IndexOfDbdMapping(map, node, table),
                 indexes
             )
         );

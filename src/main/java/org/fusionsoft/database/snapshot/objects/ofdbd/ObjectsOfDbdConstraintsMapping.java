@@ -17,7 +17,11 @@ package org.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
+import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.lib.yaml.YamlMappingOfPath;
+import org.fusionsoft.lib.yaml.YamlMappingOrEmptyWhenNoValueNotFound;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
@@ -25,8 +29,20 @@ import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  *  of DBD/schemas/#schema/tables/#table/constraints mapping.
  * @since 0.1
  */
-public class ObjectsOfDbdConstraintsMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdConstraintsMapping extends ObjectsEnvelope<DbdConstraintMapping> {
 
+    public ObjectsOfDbdConstraintsMapping(
+        final YamlMapping mapping,
+        final Text key,
+        final ObjectName table
+    ) {
+        this(
+            new YamlMappingOrEmptyWhenNoValueNotFound(
+                new YamlMappingOfPath(mapping, key)
+            ),
+            table
+        );
+    }
     /**
      * Instantiates a new Objects of dbd constraints mapping.
      * @param constraints The YamlMapping to be encapsulated.
@@ -34,13 +50,11 @@ public class ObjectsOfDbdConstraintsMapping extends ObjectsEnvelope {
      */
     public ObjectsOfDbdConstraintsMapping(
         final YamlMapping constraints,
-        final Text table
+        final ObjectName table
     ) {
         super(
             new IterableOfClassFromYamlNode<>(
-                (map, node) -> new ObjectOfDbdConstraintMapping(
-                    map, node, table
-                ),
+                (map, node) -> new ConstraintOfDbdMapping(map, node, table),
                 constraints
             )
         );

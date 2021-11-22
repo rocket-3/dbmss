@@ -16,33 +16,28 @@
 package org.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.Text;
 import org.cactoos.iterable.Joined;
-import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
  * The db table objects of DBD/schemas/#schema/tables/#table node.
  * @since 0.1
  */
-public class ObjectsOfDbdTablesMapping extends ObjectsEnvelope {
+public class ObjectsOfDbdTablesMapping extends ObjectsEnvelope<YamlMapping> {
 
     /**
-     * Instantiates a new Objects of dbd tables mapping.
-     * @param tables The YamlMapping to be encapsulated.
+     * Instantiates a new Objects of mapping.
+     * @param mapping The YamlMapping to be encapsulated.
      * @param schema The Text to be encapsulated.
      */
-    public ObjectsOfDbdTablesMapping(final YamlMapping tables, final Text schema) {
+    public ObjectsOfDbdTablesMapping(final YamlMapping mapping, final ObjectName schema) {
         super(
-            new Joined<DbObject<? extends YamlMapping>>(
+            new Joined<>(
                 new IterableOfClassFromYamlNode<>(
-                    (map, node) -> new ObjectsOfDbdTableMapping(
-                        map,
-                        node,
-                        schema
-                    ),
-                    tables
+                    (map, node) -> new ObjectsOfDbdTableMapping(map, node, schema),
+                    mapping
                 )
             )
         );

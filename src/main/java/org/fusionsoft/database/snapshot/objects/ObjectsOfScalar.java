@@ -24,16 +24,20 @@ import org.fusionsoft.database.snapshot.DbObject;
  * The Objects of scalar.
  * @since 0.1
  */
-public class ObjectsOfScalar extends ObjectsEnvelope {
+public class ObjectsOfScalar<T extends YamlMapping> extends ObjectsEnvelope<T> {
 
     /**
      * Ctor.
      * @param scalar The Scalar of Iterable of DbObject to be encapsulated.
      */
     public ObjectsOfScalar(
-        final Scalar<? extends Iterable<? extends DbObject<? extends YamlMapping>>> scalar
+        final Scalar<Iterable<DbObject<T>>> scalar
     ) {
-        super(new IterableOf<>(() -> scalar.value().iterator()));
+        super(
+            new IterableOf<>(
+                () -> scalar.value().iterator()
+            )
+        );
     }
 
 }

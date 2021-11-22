@@ -39,9 +39,9 @@ public class ListOfConnection<T> extends ListOfResultSet<T> {
      * @param <F> The subtype of {@link Text} for {@link Query} outcomes.
      */
     public <F extends Text> ListOfConnection(
-        final BiFunc<ResultSet, Query<F>, T> func,
         final Connection connection,
-        final Query<F> query
+        final Query<F> query,
+        final BiFunc<ResultSet, Query<F>, T> func
     ) {
         super(
             rset -> func.apply(rset, query),

@@ -16,18 +16,18 @@
 package org.fusionsoft.database.snapshot.objects.ofdbms;
 
 import java.sql.Connection;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgConstraints;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgDomains;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgEnums;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgFunctions;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgIndexes;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgProcedures;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgSchemas;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgSequences;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgTables;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgTriggers;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgTuples;
-import org.fusionsoft.database.snapshot.objects.ofdbms.postgres.PgViews;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgConstraints;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgDomains;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgEnums;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgFunctions;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgIndexes;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgProcedures;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgSchemas;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgSequences;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgTables;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgTriggers;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgTuples;
+import org.fusionsoft.database.snapshot.objects.ofdbms.pg.PgViews;
 
 /**
  * The Objects of {@link Connection} of Postgres dbms.

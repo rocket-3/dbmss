@@ -17,7 +17,7 @@ package org.fusionsoft.database.snapshot.objects.predicate;
 
 import org.cactoos.Func;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
  * The Func of DbObject -> Boolean, that checks {@link DbObject}
@@ -29,19 +29,23 @@ public class ObjectHasTypePredicate implements Func<DbObject<?>, Boolean> {
     /**
      * The ObjectType encapsulated.
      */
-    private final ObjectType type;
+    private final ObjectType<?> type;
 
     /**
      * Instantiates a new Object has type predicate.
      * @param type The ObjectType to be encapsulated.
      */
-    public ObjectHasTypePredicate(final ObjectType type) {
+    public ObjectHasTypePredicate(final ObjectType<?> type) {
         this.type = type;
     }
 
     @Override
     public final Boolean apply(final DbObject<?> input) {
-        return input.signature().type().equals(this.type);
+        return input.signature().type()
+            .asString()
+            .equals(
+                this.type.asString()
+            );
     }
 
 }

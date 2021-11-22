@@ -18,8 +18,9 @@ package org.fusionsoft.database.snapshot.objects;
 import org.cactoos.list.ListOf;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdRootMapping;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdRootMapping;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -38,8 +39,8 @@ class ObjectsWithTypeTest {
         Assertions.assertEquals(
             tables,
             new ListOf<>(
-                new ObjectsWithType(
-                    ObjectType.TABLE,
+                new ObjectsWithType<>(
+                    new ObjectTypeTable(),
                     new ObjectsOfDbdRootMapping(
                         new DbdRootMapping(
                             new MappingOfExampleYaml()

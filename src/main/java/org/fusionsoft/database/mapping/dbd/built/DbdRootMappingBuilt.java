@@ -41,7 +41,7 @@ public class DbdRootMappingBuilt extends DbdRootMapping {
     public DbdRootMappingBuilt(
         final DbdServersMapping databases,
         final DbdInfoMapping info,
-        final Objects objects
+        final Objects<?>objects
     ) {
         super(
             new YamlMappingOfEntries(

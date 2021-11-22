@@ -15,13 +15,14 @@
  */
 package org.fusionsoft.database.snapshot.dbms;
 
+import org.fusionsoft.database.snapshot.Dbms;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMssql;
 
 /**
  * The MS SQL Server {@link Dbms}.
  * @since 0.1
  */
-public class MsSqlDbms extends AnyDbms {
+public class MsSqlDbms extends SimpleDbms {
 
     /**
      * Instantiates a new Ms sql dbms.

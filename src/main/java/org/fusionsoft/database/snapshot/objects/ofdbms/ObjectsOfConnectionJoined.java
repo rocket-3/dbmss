@@ -37,7 +37,7 @@ public class ObjectsOfConnectionJoined extends ObjectsEnvelope {
      */
     public ObjectsOfConnectionJoined(
         final Connection connection,
-        final Iterable<Func<Connection, Objects>> funcs
+        final Iterable<Func<Connection, Objects<?>>> funcs
     ) {
         super(
             new Joined<>(
@@ -57,7 +57,7 @@ public class ObjectsOfConnectionJoined extends ObjectsEnvelope {
     @SafeVarargs
     public ObjectsOfConnectionJoined(
         final Connection connection,
-        final Func<Connection, Objects>... funcs
+        final Func<Connection, Objects<?>>... funcs
     ) {
         this(connection, new IterableOf<>(funcs));
     }

@@ -16,12 +16,9 @@
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParent;
-import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
@@ -31,7 +28,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class DbdTablesMappingOfObjects extends YamlMappingOfEntries {
+public class DbdTablesMappingOfObjects extends MappingOfObjectsOfParentAndType {
 
     /**
      * Instantiates a new Dbd tables mapping of objects.
@@ -39,21 +36,14 @@ public class DbdTablesMappingOfObjects extends YamlMappingOfEntries {
      * @param schema The parent schema DbObject to be encapsulated.
      */
     public DbdTablesMappingOfObjects(
-        final Objects objects,
+        final Objects<?>objects,
         final DbObject<?> schema
     ) {
         super(
-            new UnwrapEntriesOfObjects<>(
-                objects,
-                new ObjectsWithParent(
-                    schema,
-                    new ObjectsWithType(
-                        ObjectType.TABLE,
-                        objects
-                    )
-                ),
-                DbdTableMappingOfObjects::new
-            )
+            objects,
+            schema,
+            new ObjectTypeTable(),
+            DbdTableMappingOfObjects::new
         );
     }
 

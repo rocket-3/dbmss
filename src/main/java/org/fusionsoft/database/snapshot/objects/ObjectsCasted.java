@@ -20,15 +20,20 @@ import org.cactoos.Func;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.Objects;
 
 public class ObjectsCasted<T extends YamlMapping>
-    extends IterableEnvelope<DbObject<T>> {
+    extends IterableEnvelope<DbObject<T>>
+    implements Objects<T> {
 
     /**
      * Ctor.
      * @param iterable The wrapped iterable
      */
-    public ObjectsCasted(final Func<YamlMapping, T> cast, final Iterable<? extends DbObject<?>> iterable) {
+    public ObjectsCasted(
+        final Func<YamlMapping, T> cast,
+        final Iterable<? extends DbObject<?>> iterable
+    ) {
         super(
             new Mapped<DbObject<T>>(
                 object -> new ObjectCasted<>(cast, object),

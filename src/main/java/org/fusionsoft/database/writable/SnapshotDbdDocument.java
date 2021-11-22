@@ -39,7 +39,7 @@ public class SnapshotDbdDocument extends WritableYamlDocument {
     public SnapshotDbdDocument(
         final DbdServerEntry server,
         final DbdInfoMapping info,
-        final Objects objects
+        final Objects<?> objects
     ) {
         super(
             new DbdFileOfSnapshotObjects(server, info, objects),

@@ -24,14 +24,14 @@ import org.fusionsoft.database.snapshot.Objects;
  * The Objects implementation that can be constructed of Iterable of DbObjects.
  * @since 0.1
  */
-public class ObjectsEnvelope
-    extends IterableEnvelope<DbObject<? extends YamlMapping>> implements Objects {
+public class ObjectsEnvelope<T extends YamlMapping>
+    extends IterableEnvelope<DbObject<T>> implements Objects<T> {
 
     /**
      * Ctor.
      * @param iterable The wrapped iterable
      */
-    public ObjectsEnvelope(final Iterable<DbObject<? extends YamlMapping>> iterable) {
+    public ObjectsEnvelope(final Iterable<DbObject<T>> iterable) {
         super(iterable);
     }
 

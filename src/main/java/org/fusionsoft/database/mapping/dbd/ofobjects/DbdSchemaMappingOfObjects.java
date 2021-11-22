@@ -41,7 +41,7 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
      * @param schema The DbObject of YamlNode to be encapsulated.
      */
     public DbdSchemaMappingOfObjects(
-        final Objects objects,
+        final Objects<?>objects,
         final DbObject<? extends YamlNode> schema
     ) {
         super(

@@ -23,7 +23,7 @@ import org.cactoos.Text;
 import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 
 public class RowsCount extends NumberEnvelope {
 

@@ -15,21 +15,16 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
-import org.fusionsoft.database.mapping.MappingOfRepresentative;
-import org.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
-import org.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeFunction;
 
 /**
  * The mapping of DBD/schemas/#schema/functions document node, that can be
  *  constructed of all context {@link Objects} and current schema {@link DbObject}.
  * @since 0.1
  */
-public class DbdFunctionsMappingOfObjects extends YamlMappingOfEntries {
+public class DbdFunctionsMappingOfObjects extends MappingOfObjectsOfParentAndType {
 
     /**
      * Instantiates a new Dbd functions mapping of objects.
@@ -37,21 +32,13 @@ public class DbdFunctionsMappingOfObjects extends YamlMappingOfEntries {
      * @param schema The schema {@link DbObject} to be encapsulated.
      */
     public DbdFunctionsMappingOfObjects(
-        final Objects objects,
+        final Objects<?> objects,
         final DbObject<?> schema
     ) {
         super(
-            new UnwrapEntriesOfObjects<DbdFunctionMapping>(
-                objects,
-                new ObjectsWithParentAndType(
-                    schema,
-                    ObjectType.FUNCTION,
-                    objects
-                ),
-                (objs, object) -> new DbdFunctionMapping(
-                    new MappingOfRepresentative(object)
-                )
-            )
+            objects,
+            schema,
+            new ObjectTypeFunction()
         );
     }
 

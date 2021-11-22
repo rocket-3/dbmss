@@ -27,7 +27,7 @@ import org.fusionsoft.lib.yaml.artefacts.KeysFromYamlNode;
 public class ObjectHasDataNodePredicate implements Func<DbObject<?>, Boolean> {
 
     @Override
-    public final Boolean apply(final DbObject<?> input) throws Exception {
+    public final Boolean apply(final DbObject<?> input) {
         return new KeysFromYamlNode(input.asYaml()).contains(
             DbdTableFields.DATA.asString()
         );

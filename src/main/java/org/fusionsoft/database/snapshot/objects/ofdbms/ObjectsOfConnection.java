@@ -15,11 +15,11 @@
  */
 package org.fusionsoft.database.snapshot.objects.ofdbms;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
 import org.cactoos.Func;
 import org.cactoos.scalar.ScalarOf;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 
 /**
@@ -27,16 +27,19 @@ import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
  *  and function that returns {@link Objects} of {@link Connection}.
  * @since 0.1
  */
-public class ObjectsOfConnection extends ObjectsEnvelope {
+public class ObjectsOfConnection<T extends YamlMapping> extends ObjectsOfScalar<T> {
 
     /**
      * Instantiates a new Objects of connection.
      * @param connection The Connection to be encapsulated.
      * @param func The Func of Connection returns Objects to be encapsulated.
      */
-    public ObjectsOfConnection(final Connection connection, final Func<Connection, Objects> func) {
+    public ObjectsOfConnection(final Connection connection, final Func<Connection, Objects<T>> func) {
         super(
-            new ObjectsOfScalar(new ScalarOf<>(func, connection))
+            new ScalarOf<>(
+                func,
+                connection
+            )
         );
     }
 

@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.util.Locale;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.IterableOf;
+import org.fusionsoft.database.snapshot.Dbms;
 import org.fusionsoft.lib.collection.Single;
 
 /**

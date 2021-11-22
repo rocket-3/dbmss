@@ -16,8 +16,8 @@
 package org.fusionsoft.database.snapshot;
 
 import org.cactoos.Text;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
-import org.fusionsoft.database.snapshot.objectsignature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
  * The interface ObjectSignature representing identifier of object in DBMS .
@@ -35,12 +35,14 @@ public interface ObjectSignature extends Text {
      * The DBMS type of object text.
      * @return The object type.
      */
-    ObjectType type();
+    ObjectType<?> type();
 
     /**
      * Overridden contract of {@link Text} w/0 exception thrown.
      * @return The String representation of the signature.
      */
     String asString();
+
+    boolean equals(ObjectSignature other);
 
 }

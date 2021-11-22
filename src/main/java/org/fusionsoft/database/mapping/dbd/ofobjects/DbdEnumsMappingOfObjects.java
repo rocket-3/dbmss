@@ -16,10 +16,9 @@
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
 import com.amihaiemil.eoyaml.YamlNode;
-import org.fusionsoft.database.mapping.dbd.DbdEnumMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectType;
+import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeEnum;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
@@ -27,7 +26,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
  *  of DBD/schemas/#schema/enums document node.
  * @since 0.1
  */
-public class DbdEnumsMappingOfObjects extends YamlMappingOfScalar {
+public class DbdEnumsMappingOfObjects extends MappingOfObjectsOfParentAndType {
 
     /**
      * Instantiates a new Dbd enums mapping of objects.
@@ -35,14 +34,13 @@ public class DbdEnumsMappingOfObjects extends YamlMappingOfScalar {
      * @param schema The DbObject to be encapsulated.
      */
     public DbdEnumsMappingOfObjects(
-        final Objects objects,
+        final Objects<?>objects,
         final DbObject<? extends YamlNode> schema
     ) {
         super(
-            () -> new DbdObjectsOfTypeMapping<>(
-                ObjectType.UDT_ENUM,
-                DbdEnumMapping::new
-            ).apply(objects, schema)
+            objects,
+            schema,
+            new ObjectTypeEnum()
         );
     }
 
