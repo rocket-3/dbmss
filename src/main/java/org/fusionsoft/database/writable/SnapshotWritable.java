@@ -30,7 +30,7 @@ import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class SnapshotWritable extends CombinedWritable {
+public class SnapshotWritable extends JoinedWritable {
 
     /**
      * Instantiates a new Snapshot create procedure.

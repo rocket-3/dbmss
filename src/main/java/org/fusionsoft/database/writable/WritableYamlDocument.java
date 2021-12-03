@@ -15,14 +15,17 @@
  */
 package org.fusionsoft.database.writable;
 
+import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.ScalarOf;
+import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.Folder;
 import org.fusionsoft.database.SimpleYamlRepresentative;
 import org.fusionsoft.database.Writable;
-import org.fusionsoft.database.WriteTo;
 import org.fusionsoft.database.YamlRepresentative;
 
 /**
@@ -80,7 +83,18 @@ public class WritableYamlDocument implements Writable {
 
     @Override
     public final void writeTo(final Folder folder) {
-        new WriteTo(this.yaml, folder, this.name).run();
+        new Unchecked<>(
+            () -> {
+                Yaml.createYamlPrinter(
+                    new WriterTo(
+                        folder.path().resolve(
+                            new UncheckedText(this.name).asString()
+                        )
+                    )
+                ).print(this.yaml.asYaml());
+                return true;
+            }
+        ).value();
     }
 
 }

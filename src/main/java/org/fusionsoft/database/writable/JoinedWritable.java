@@ -23,7 +23,7 @@ import org.fusionsoft.database.Writable;
  * The {@link Writable} that represents an iterable of writeables.
  * @since 0.1
  */
-public class CombinedWritable implements Writable {
+public class JoinedWritable implements Writable {
 
     /**
      * The Iterable of Writable encapsulated.
@@ -34,7 +34,7 @@ public class CombinedWritable implements Writable {
      * Instantiates a new Combined writable.
      * @param writeable The Iterable of Writable to be encapsulated.
      */
-    public CombinedWritable(final Iterable<Writable> writeable) {
+    public JoinedWritable(final Iterable<Writable> writeable) {
         this.writables = writeable;
     }
 
