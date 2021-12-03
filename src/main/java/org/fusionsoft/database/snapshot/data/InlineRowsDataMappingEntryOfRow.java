@@ -15,32 +15,24 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import com.amihaiemil.eoyaml.Scalar;
 import com.amihaiemil.eoyaml.Yaml;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.text.MessageFormat;
-import org.cactoos.Text;
-import org.cactoos.iterable.Mapped;
 import org.cactoos.text.Joined;
-import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.entries.YamlMappingEntryOfScalar;
 
-public class DbdDataEntryOfRow extends YamlMappingEntryOfScalar<Scalar> {
+public class InlineRowsDataMappingEntryOfRow extends YamlMappingEntryOfScalar<YamlNode> {
 
-    public DbdDataEntryOfRow(final Row row, final Iterable<Column> cols) {
+    public InlineRowsDataMappingEntryOfRow(final Row row, final Iterable<Column> cols) {
         super(
-            new TextOfScalar(() -> String.valueOf(row.number())),
+            new TextOfScalar(row::label),
             () -> Yaml.createYamlInput(
                 MessageFormat.format(
                     "[{0}]",
                     new Joined(
-                        new TextOf(", "),
-                        new Mapped<Text>(
-                            col -> col.format().storableRepresentationOf(
-                                row.textOf(col)
-                            ),
-                            cols
-                        )
+                        ", ",
+                        new StorableFormattedValuesOfRow(row, cols)
                     ).asString()
                 )
             ).readPlainScalar()

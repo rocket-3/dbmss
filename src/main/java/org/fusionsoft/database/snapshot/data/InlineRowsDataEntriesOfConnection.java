@@ -22,27 +22,24 @@ import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
-import org.cactoos.iterable.Sticky;
 import org.cactoos.list.ListOf;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 
-public class DbdDataEntriesOfTable extends IterableEnvelope<Map.Entry<Text, YamlNode>> {
+public class InlineRowsDataEntriesOfConnection extends IterableEnvelope<Map.Entry<Text, YamlNode>> {
 
-    public DbdDataEntriesOfTable(
+    public InlineRowsDataEntriesOfConnection(
         final Connection connection,
         final DbObject<DbdTableMapping> table
     ) {
         this(
             connection,
             table,
-            new Sticky<>(
-                new ColumnsOfTable(table)
-            )
+            new ColumnsOfTable(table)
         );
     }
 
-    public DbdDataEntriesOfTable(
+    public InlineRowsDataEntriesOfConnection(
         final Connection connection,
         final DbObject<DbdTableMapping> table,
         final Iterable<Column> columns
@@ -51,7 +48,7 @@ public class DbdDataEntriesOfTable extends IterableEnvelope<Map.Entry<Text, Yaml
             new IterableOf<>(
                 () -> new ListOf<>(
                     new Mapped<Map.Entry<Text, YamlNode>>(
-                        x -> new DbdDataEntryOfRow(x, columns),
+                        row -> new InlineRowsDataMappingEntryOfRow(row, columns),
                         new RowsOfTable(
                             connection,
                             table
