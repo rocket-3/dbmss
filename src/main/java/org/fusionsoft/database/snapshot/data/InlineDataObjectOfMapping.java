@@ -15,7 +15,6 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import java.sql.Connection;
 import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
@@ -24,26 +23,15 @@ import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
-public class InlineDataObjectOfTable extends SimpleDbObject<DbdDataMapping> {
+public class InlineDataObjectOfMapping extends SimpleDbObject<DbdDataMapping> {
 
-    /**
-     * Instantiates a new simple db object.
-     */
-    public InlineDataObjectOfTable(
-        final DbObject<DbdTableMapping> table,
-        final Connection connection
+    public InlineDataObjectOfMapping(
+        final DbdDataMapping mapping,
+        final DbObject<DbdTableMapping> table
     ) {
         super(
-            new DbdDataMapping(
-                new YamlMappingOfEntries(
-                    new DbdDataEntriesOfTable(
-                        connection,
-                        table
-                    )
-                )
-            ),
+            mapping,
             new SimpleObjectSignature(
                 new SimpleObjectName(
                     table.signature().name().parent(),
