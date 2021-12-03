@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 
 public class ValueFormatOfScalar implements ValueFormat {
@@ -27,11 +28,11 @@ public class ValueFormatOfScalar implements ValueFormat {
     private final Unchecked<? extends ValueFormat> scalar;
 
     public ValueFormatOfScalar(final Scalar<? extends ValueFormat> scalar) {
-        this.scalar = new Unchecked<>(scalar);
+        this.scalar = new Unchecked<>(new Sticky<>(scalar));
     }
 
     @Override
-    public Text storableRepresentationOf(final Text text) {
+    public String storableRepresentationOf(final String text) {
         return this.scalar.value().storableRepresentationOf(text);
     }
 

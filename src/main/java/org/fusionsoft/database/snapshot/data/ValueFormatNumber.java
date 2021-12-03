@@ -21,10 +21,13 @@ import org.cactoos.Text;
 import org.cactoos.scalar.NumberOf;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * @todo #106:60min Split into float and integer formats
+ */
 public class ValueFormatNumber implements ValueFormat {
 
     @Override
-    public Text storableRepresentationOf(final Text text) {
+    public String storableRepresentationOf(final String text) {
         return text;
     }
 

@@ -13,26 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.lib.yaml.artefacts;
+package org.fusionsoft.database.snapshot.data;
 
-import com.amihaiemil.eoyaml.YamlNode;
-import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.text.Split;
-import org.cactoos.text.Sub;
-import org.cactoos.text.TextOfScalar;
+import org.cactoos.iterable.Mapped;
 
-public class ValuesOfArraySequence extends IterableEnvelope<Text> {
+public class StorableFormattedValuesOfRow extends IterableEnvelope<String> {
 
-    public ValuesOfArraySequence(final YamlNode node) {
+    public StorableFormattedValuesOfRow(final Row row, final Iterable<Column> cols) {
         super(
-            new Split(
-                new Sub(
-                    new TextOfScalar(() -> node.asScalar().value()),
-                    1,
-                    str -> str.length() - 1
+            new Mapped<>(
+                col -> col.format().storableRepresentationOf(
+                    row.textOf(col)
                 ),
-                ",[ ]?"
+                cols
             )
         );
     }

@@ -24,17 +24,17 @@ import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.lib.yaml.YamlNodeOfPath;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
 
-public class DbdColumnsOfTable extends IterableOfYamlSequence<DbdColumnMapping> {
+public class DbdColumnMappingsOfTable extends IterableOfYamlSequence<DbdColumnMapping> {
 
-    public DbdColumnsOfTable(final DbObject<DbdTableMapping> object) {
+    public DbdColumnMappingsOfTable(final DbObject<DbdTableMapping> object) {
         this(new MappingOfRepresentative(object));
     }
 
-    private DbdColumnsOfTable(final YamlMapping mapping) {
+    private DbdColumnMappingsOfTable(final YamlMapping mapping) {
         this(new DbdTableMapping(mapping));
     }
 
-    public DbdColumnsOfTable(final DbdTableMapping mapping) {
+    public DbdColumnMappingsOfTable(final DbdTableMapping mapping) {
         super(
             new YamlNodeOfPath(mapping, DbdTableFields.COLUMNS),
             x -> new DbdColumnMapping(x.asMapping())

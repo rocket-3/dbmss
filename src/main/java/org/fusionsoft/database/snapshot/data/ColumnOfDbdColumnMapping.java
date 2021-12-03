@@ -25,12 +25,21 @@ public class ColumnOfDbdColumnMapping extends ColumnOfScalar {
     public ColumnOfDbdColumnMapping(final DbdColumnMapping column) {
         super(
             () -> new ColumnSimple(
-                new TextOfMappingValue(column, DbdColumnFields.DBNAME),
+                new TextOfMappingValue(
+                    column,
+                    DbdColumnFields.DBNAME
+                ),
                 new NumberOf(
-                    new TextOfMappingValue(column, DbdColumnFields.ORDER)
+                    new TextOfMappingValue(
+                        column,
+                        DbdColumnFields.ORDER
+                    )
                 ),
                 new ValueFormatOfIuType(
-                    new TextOfMappingValue(column, DbdColumnFields.IUTYPE)
+                    new TextOfMappingValue(
+                        column,
+                        DbdColumnFields.IUTYPE
+                    )
                 )
             )
         );

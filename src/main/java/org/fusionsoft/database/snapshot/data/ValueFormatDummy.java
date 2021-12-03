@@ -24,7 +24,7 @@ import org.fusionsoft.lib.exception.NotImplemented;
 public class ValueFormatDummy implements ValueFormat {
 
     @Override
-    public Text storableRepresentationOf(final Text text) {
+    public String storableRepresentationOf(final String text) {
         return text;
     }
 

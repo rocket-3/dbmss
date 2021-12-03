@@ -23,7 +23,7 @@ import org.cactoos.Text;
 public class ValueFormatDate implements ValueFormat {
 
     @Override
-    public Text storableRepresentationOf(final Text text) {
+    public String storableRepresentationOf(final String text) {
         return null;
     }
 

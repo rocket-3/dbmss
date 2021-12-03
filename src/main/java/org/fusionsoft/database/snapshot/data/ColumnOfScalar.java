@@ -18,6 +18,7 @@ package org.fusionsoft.database.snapshot.data;
 
 import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 
 public class ColumnOfScalar implements Column {
@@ -25,7 +26,7 @@ public class ColumnOfScalar implements Column {
     private final Unchecked<? extends Column> scalar;
 
     public ColumnOfScalar(final Scalar<? extends Column> scalar) {
-        this.scalar = new Unchecked<>(scalar);
+        this.scalar = new Unchecked<>(new Sticky<>(scalar));
     }
 
     @Override

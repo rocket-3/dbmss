@@ -19,31 +19,42 @@ import java.util.Comparator;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.iterable.Sorted;
+import org.cactoos.iterable.Sticky;
 import org.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import org.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsOfTable;
+import org.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
 import org.fusionsoft.database.snapshot.DbObject;
 
 public class ColumnsOfTable extends IterableEnvelope<Column> {
 
     public ColumnsOfTable(final Iterable<DbdColumnMapping> cols) {
         super(
-            new Sorted<>(
-                Comparator.comparing(x -> x.order().intValue()),
-                new Mapped<Column>(
-                    ColumnOfDbdColumnMapping::new,
-                    cols
+            new Sticky<>(
+                new Sorted<>(
+                    Comparator.comparing(x -> x.order().intValue()),
+                    new Mapped<Column>(
+                        ColumnOfDbdColumnMapping::new,
+                        cols
+                    )
                 )
             )
         );
     }
 
     public ColumnsOfTable(final DbObject<DbdTableMapping> table) {
-        this(new DbdColumnsOfTable(table));
+        this(
+            new DbdColumnMappingsOfTable(
+                table
+            )
+        );
     }
 
     public ColumnsOfTable(final DbdTableMapping mapping) {
-        this(new DbdColumnsOfTable(mapping));
+        this(
+            new DbdColumnMappingsOfTable(
+                mapping
+            )
+        );
     }
 
 }

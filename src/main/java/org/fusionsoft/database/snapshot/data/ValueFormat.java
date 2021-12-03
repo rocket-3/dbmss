@@ -21,7 +21,7 @@ import org.cactoos.Text;
 
 public interface ValueFormat {
 
-    Text storableRepresentationOf(Text text);
+    String storableRepresentationOf(String text);
 
     void passInPrepareStatement(PreparedStatement stmt, int ordinal, Text text);
 
