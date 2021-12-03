@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.mapping.dbd.ofobjects;
+package org.fusionsoft.database.mapping.dbd.built;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Map;
@@ -79,11 +79,8 @@ public class DbdTableMappingOfEntries extends DbdTableMapping {
                             DbdTableFields.PARTKEYRANGE,
                             DbdTableFields.DEPENDENCIES
                         ),
+                        new EntriesOfYamlMapping(data),
                         new IterableOf<Map.Entry<? extends Text, ? extends YamlNode>>(
-                            new MapEntry<>(
-                                DbdTableFields.DATA,
-                                data
-                            ),
                             new MapEntry<>(
                                 DbdTableFields.CONSTRAINTS,
                                 new YamlMappingOfEntries(constraints)

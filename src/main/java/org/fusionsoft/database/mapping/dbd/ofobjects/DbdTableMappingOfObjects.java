@@ -20,6 +20,7 @@ import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.MappingOfRepresentative;
 import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import org.fusionsoft.database.mapping.dbd.built.DbdTableMappingOfEntries;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeConstraint;
