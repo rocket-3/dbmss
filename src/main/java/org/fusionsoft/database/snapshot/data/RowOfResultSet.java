@@ -24,7 +24,7 @@ public class RowOfResultSet extends RowOfArray {
 
     public RowOfResultSet(final long num, final ResultSet rset, final Iterable<Column> columns) {
         super(
-            num,
+            String.valueOf(num),
             new UncheckedBiFunc<>(
                 (ResultSet data, Iterable<Column> cols) -> {
                     final String[] value = new String[new ListOf<>(cols).size()];

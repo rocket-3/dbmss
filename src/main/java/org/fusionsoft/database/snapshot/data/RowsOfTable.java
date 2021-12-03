@@ -22,30 +22,29 @@ import java.util.Iterator;
 import org.cactoos.Scalar;
 import org.cactoos.func.UncheckedFunc;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.list.ListEnvelope;
-import org.cactoos.list.ListOf;
 import org.cactoos.scalar.Sticky;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.query.DataQuery;
+import org.fusionsoft.lib.collection.IterableAutoCloseable;
 import org.fusionsoft.lib.connection.ResultSetOfScalar;
 import org.fusionsoft.lib.connection.StatementOfScalar;
 
-public class RowsOfTable extends ListEnvelope<Row> {
+public class RowsOfTable extends IterableAutoCloseable<Row> {
 
     private RowsOfTable(
         final Statement stmt,
         final ResultSet rset,
         final Scalar<Iterator<? extends Row>> iterator
     ) {
-        super(new ListOf<>(new IterableOf<>(iterator)));
-        new UncheckedFunc<Void, Void>(
-            x -> {
-                rset.close();
-                stmt.close();
-                return null;
-            }
-        ).apply(null);
+        super(
+            new IterableOf<Row>(
+                new Sticky<>(
+                    iterator
+                )
+            ),
+            stmt
+        );
     }
 
     private RowsOfTable(
@@ -108,7 +107,12 @@ public class RowsOfTable extends ListEnvelope<Row> {
             new StatementOfScalar(
                 new Sticky<>(
                     () -> {
-                        final Statement stmt = connection.createStatement();
+                        connection.setAutoCommit(false);
+                        final Statement stmt = connection.createStatement(
+                            ResultSet.TYPE_FORWARD_ONLY,
+                            ResultSet.CONCUR_READ_ONLY
+                        );
+                        stmt.setFetchDirection(ResultSet.FETCH_FORWARD);
                         stmt.setFetchSize(5000);
                         return stmt;
                     }

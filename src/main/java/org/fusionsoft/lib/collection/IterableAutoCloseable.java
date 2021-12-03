@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package org.fusionsoft.database.snapshot.data;
 
-public class RowOfArray implements Row {
+package org.fusionsoft.lib.collection;
 
-    private final String label;
+import org.cactoos.iterable.IterableEnvelope;
 
-    private final String[] array;
+public class IterableAutoCloseable<T> extends IterableEnvelope<T> implements AutoCloseable {
 
-    public RowOfArray(final String label, final String[] array) {
-        this.label = label;
-        this.array = array;
+    private final AutoCloseable closeable;
+
+    public IterableAutoCloseable(final Iterable<T> iterable, final AutoCloseable closeable) {
+        super(iterable);
+        this.closeable = closeable;
+    }
+
+    public IterableAutoCloseable(final Iterable<T> iterable, final AutoCloseable... closeables) {
+        this(iterable, new JoinedAutoCloseable(closeables));
     }
 
     @Override
-    public String textOf(final Column column) {
-        return array[column.order().intValue() - 1];
-    }
-
-    @Override
-    public String label() {
-        return this.label;
+    public void close() throws Exception {
+        this.closeable.close();
     }
 
 }

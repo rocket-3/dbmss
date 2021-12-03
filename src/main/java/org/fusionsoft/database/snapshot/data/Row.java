@@ -15,12 +15,10 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import org.cactoos.Text;
-
 public interface Row {
 
-    Text textOf(Column column);
+    String textOf(Column column);
 
-    long number();
+    String label();
 
 }

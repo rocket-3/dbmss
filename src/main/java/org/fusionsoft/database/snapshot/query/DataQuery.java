@@ -28,7 +28,7 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import org.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsOfTable;
+import org.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
 import org.fusionsoft.database.mapping.fields.DbdColumnFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
@@ -39,7 +39,7 @@ public class DataQuery extends BasicQuery<Text> {
     public DataQuery(final DbObject<DbdTableMapping> table) {
         this(
             table.signature().name(),
-            new DbdColumnsOfTable(table)
+            new DbdColumnMappingsOfTable(table)
         );
     }
     public DataQuery(
@@ -50,17 +50,17 @@ public class DataQuery extends BasicQuery<Text> {
             new TextOfScalar(
                 () -> MessageFormat.format(
                     "SELECT\n {2}\nFROM {0}.{1}",
-                    table.parent(),
-                    table.first(),
+                    table.parent().asString(),
+                    table.first().asString(),
                     new Joined(
                         new TextOf(",\n "),
                         new Mapped<Text>(
                             x -> new TextOfMappingValue(
                                 x, DbdColumnFields.DBNAME
                             ),
-                            new Sorted<DbdColumnMapping>(
+                            new Sorted<>(
                                 Comparator.comparing(
-                                    x->new NumberOf(
+                                    x -> new NumberOf(
                                         new TextOfMappingValue(
                                             x,
                                             DbdColumnFields.ORDER
