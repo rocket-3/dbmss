@@ -15,31 +15,27 @@
  */
 package org.fusionsoft.database.snapshot.objects.ofdbms;
 
-import java.sql.Connection;
-import org.cactoos.iterable.Mapped;
-import org.fusionsoft.database.snapshot.DbObject;
-import org.fusionsoft.database.snapshot.data.InlineDataObjectOfTable;
+import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.data.InlineLinkDataObjectsOfTables;
 import org.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
-public class ObjectsWithInlineDataAdded extends DefaultObjectsJoined {
+public class ObjectsWithInlineLinkDataAdded extends DefaultObjectsJoined {
 
     /**
      * Ctor.
-     * @param iterable The wrapped iterable
+     * @param objects The wrapped objects
      */
-    public ObjectsWithInlineDataAdded(
-        final Iterable<? extends DbObject<?>> iterable,
-        final Connection connection
+    public ObjectsWithInlineLinkDataAdded(
+        final Objects<?> objects
     ) {
         super(
-            iterable,
-            new Mapped<>(
-                x -> new InlineDataObjectOfTable(x, connection),
+            objects,
+            new InlineLinkDataObjectsOfTables(
                 new ObjectsWithType<>(
                     new ObjectTypeTable(),
-                    new ObjectsFromServer(connection)
+                    objects
                 )
             )
         );

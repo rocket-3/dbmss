@@ -36,7 +36,7 @@ public class DbdFileOfSnapshotObjects extends DbdFileOfRootMapping {
     public DbdFileOfSnapshotObjects(
         final DbdServerEntry server,
         final DbdInfoMapping info,
-        final Objects objects
+        final Objects<?> objects
     ) {
         super(new DbdRootMappingOfSnapshotObjects(server, info, objects));
     }

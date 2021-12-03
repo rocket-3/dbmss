@@ -15,39 +15,47 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import org.cactoos.iterable.Mapped;
+import java.sql.Connection;
+import org.cactoos.scalar.Sticky;
+import org.fusionsoft.database.Folder;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
+import org.fusionsoft.database.folder.FolderOfScalar;
 import org.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
-import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
-import org.junit.jupiter.api.Disabled;
+import org.fusionsoft.lib.path.CurrentWorkingDirectory;
+import org.fusionsoft.lib.path.TempFolder;
 import org.junit.jupiter.api.Test;
 
-class DbdDataEntriesOfTableTest {
+class DataWritableOfObjectTest {
 
     @Test
-    @Disabled
-    public void works() {
-        final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(
+    public void writesFilesFast() {
+        final Folder folder = new FolderOfScalar(
+            new Sticky<>(
+                new TempFolder(
+                    new CurrentWorkingDirectory().value().resolve("temp")
+                )
+            )
+        );
+        final Connection connection = new ConnectionOfDbdServerMapping(
             new DbdServerMappingWithCredentials(
-                new UrlOfPgGitLabDatabaseV11("dvdrental"),
+                new UrlOfPgGitLabDatabaseV11("pagilla"),
                 new CredsOfPgTestDatabase()
             )
         );
-        final Mapped<InlineRowsDataEntriesOfConnection> datas = new Mapped<>(
-            x -> new InlineRowsDataEntriesOfConnection(connection, x),
+        new SeparateDataFilesOfTablesWritable(
+            connection,
             new ObjectsWithType<>(
                 new ObjectTypeTable(),
-                new ObjectsFromServer(connection)
+                new ObjectsFromServer(
+                    connection
+                )
             )
-        );
-        for (final InlineRowsDataEntriesOfConnection data : datas) {
-            System.out.println(new YamlMappingOfEntries(data).toString());
-        }
+        ).writeTo(folder);
     }
 
 }

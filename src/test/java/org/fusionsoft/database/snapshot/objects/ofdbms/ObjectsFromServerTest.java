@@ -194,13 +194,11 @@ class ObjectsFromServerTest {
             new DbdSchemasMappingOfObjects(
                 new StickyObjects<>(
                     new ObjectsFiltered<>(
-                        x -> true,
-                        //! x.signature().type().equals(ObjectType.DATA),
-                        new ObjectsWithInlineDataAdded(
+                        x -> !x.signature().name().parent().first().asString().contains("million"),
+                        new ObjectsWithInlineLinkDataAdded(
                             new ObjectsFromServer(
                                 connection
-                            ),
-                            connection
+                            )
                         )
                     )
                 )
