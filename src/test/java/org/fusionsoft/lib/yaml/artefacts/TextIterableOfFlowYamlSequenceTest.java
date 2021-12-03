@@ -17,22 +17,24 @@ package org.fusionsoft.lib.yaml.artefacts;
 
 import java.io.IOException;
 import org.cactoos.Text;
+import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
-import org.cactoos.set.SetOf;
 import org.cactoos.text.TextOf;
 import org.fusionsoft.lib.yaml.YamlInputOf;
 import org.fusionsoft.lib.yaml.YamlMappingOf;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
-import org.junit.jupiter.api.Assertions;
+import org.fusionsoft.lib.yaml.YamlNodeOfPath;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasValues;
 
 /**
- * StringIterableOf tests.
+ * Tests for {@link TextIterableOfFlowYamlSequence} tests.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-class StringIterableOfTest {
+class TextIterableOfFlowYamlSequenceTest {
 
     @Test
     @Disabled
@@ -50,41 +52,42 @@ class StringIterableOfTest {
     }
 
     /**
-     * Can parse YAML array sequence of {@link com.amihaiemil.eoyaml.Scalar}.
+     * Can parse YAML flow sequence of {@link com.amihaiemil.eoyaml.Scalar}.
      */
     @Test
     public void canParseArraySequence() {
-        Assertions.assertTrue(
-            new SetOf<>(
-                new StringSetOfYamlSequence(
-                    new YamlMappingOf(
-                        new YamlInputOf(
-                            String.join(
-                                "",
-                                "data:\n",
-                                "  \"instanceStatus~ACTIVE\": ",
-                                "[0, 1, \"ACTIVE\", \"ACTIVE\",null, null]\n",
-                                "  \"instanceStatus~DELETED\": ",
-                                "[0, 2, \"DELETED\", \"DELETED\", null, null]"
+        new Assertion<>(
+            "Should have exact list of unescaped values",
+            new Mapped<String>(
+                Text::asString,
+                new TextIterableOfFlowYamlSequence(
+                    new YamlNodeOfPath(
+                        new YamlMappingOf(
+                            new YamlInputOf(
+                                String.join(
+                                    "",
+                                    "data:\n",
+                                    "  \"instanceStatus~ACTIVE\": ",
+                                    "[0, 1, \"ACTIVE\", \"ACTIVE\",null, null]\n",
+                                    "  \"instanceStatus~DELETED\": ",
+                                    "[0, 2, \"D\\nELE\\TED,\", \"DEL\"\",\"\"ETED\", null, null]"
+                                )
                             )
-                        )
+                        ),
+                        "data",
+                        "\"instanceStatus~DELETED\""
                     )
-                        .value("data")
-                        .asMapping()
-                        .value("\"instanceStatus~DELETED\"")
-                        .asSequence()
                 )
-            ).containsAll(
-                new SetOf<>(
-                    "0",
-                    "2",
-                    "\"DELETED\"",
-                    "\"DELETED\"",
-                    "null",
-                    "null"
-                )
+            ),
+            new HasValues<>(
+                "0",
+                "2",
+                "D\nELE\\TED,",
+                "DEL\",\"ETED",
+                "null",
+                "null"
             )
-        );
+        ).affirm();
     }
 
 }
