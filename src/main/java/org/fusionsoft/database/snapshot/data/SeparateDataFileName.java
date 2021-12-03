@@ -15,20 +15,22 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import org.cactoos.Text;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOf;
+import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.lib.yaml.FileExtension;
 
-public class NameOfDataFile extends TextEnvelope {
+public class SeparateDataFileName extends TextEnvelope {
 
-    public NameOfDataFile(final Text schema, final Text table) {
+    public SeparateDataFileName(final DbObject<DbdTableMapping> table) {
         super(
             new Joined(
                 ".",
-                schema,
-                table,
-                new TextOf("yaml")
+                table.signature().name().parent().first(),
+                table.signature().name().first(),
+                new SeparateDataFileNameSuffix(),
+                new FileExtension()
             )
         );
     }
