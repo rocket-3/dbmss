@@ -22,6 +22,7 @@ import java.util.Map;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
+import org.cactoos.scalar.Sticky;
 
 /**
  * The type of YamlMapping that can be constructed of map entries.
@@ -37,7 +38,7 @@ public class YamlMappingOfEntries extends YamlMappingOfScalar {
         final Iterable<? extends Map.Entry<? extends Text, ? extends YamlNode>> entries
     ) {
         super(
-            () -> {
+            new Sticky<>(() -> {
                 YamlMappingBuilder yaml = Yaml.createYamlMappingBuilder();
                 for (final Map.Entry<? extends Text, ? extends YamlNode> entry : entries) {
                     yaml = yaml.add(
@@ -47,7 +48,7 @@ public class YamlMappingOfEntries extends YamlMappingOfScalar {
                 }
                 return yaml.build();
             }
-        );
+            ));
     }
 
     /**
