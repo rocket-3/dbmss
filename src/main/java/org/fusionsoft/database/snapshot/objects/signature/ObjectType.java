@@ -15,15 +15,15 @@
  */
 package org.fusionsoft.database.snapshot.objects.signature;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 
 /**
  * The enum ObjectType.
  */
-public interface ObjectType<M extends YamlMapping> extends Text {
+public interface ObjectType<T extends YamlNode> extends Text {
 
-    M mapping(YamlMapping mapping);
+    T node(YamlNode mapping);
 
     String asString();
 

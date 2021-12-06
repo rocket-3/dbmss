@@ -46,7 +46,7 @@ public class SimpleDbObjectOfEntries<T extends YamlMapping> extends SimpleDbObje
         final Iterable<? extends Map.Entry<? extends Text, ? extends YamlNode>> entries
     ) {
         super(
-            type.mapping(
+            type.node(
                 new MappingWithoutNullScalars(
                     new YamlMappingOfEntries(
                         entries

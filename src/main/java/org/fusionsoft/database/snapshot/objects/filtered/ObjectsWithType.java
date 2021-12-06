@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsCasted;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
@@ -26,7 +26,7 @@ import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
  * The {@link Objects} filtered by {@link ObjectType}.
  * @since 0.1
  */
-public class ObjectsWithType<M extends YamlMapping> extends ObjectsCasted<M> {
+public class ObjectsWithType<M extends YamlNode> extends ObjectsCasted<M> {
 
     /**
      * Instantiates a new Objects with type.
@@ -38,7 +38,7 @@ public class ObjectsWithType<M extends YamlMapping> extends ObjectsCasted<M> {
         final Objects<?> origin
     ) {
         super(
-            type::mapping,
+            type::node,
             new ObjectsFiltered<>(
                 new ObjectHasTypePredicate(type),
                 origin

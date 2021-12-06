@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
@@ -26,7 +26,7 @@ import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
  * The Objects filtered by parent name.
  * @since 0.1
  */
-public class ObjectsWithParent<T extends YamlMapping> extends ObjectsFiltered<T> {
+public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
 
     /**
      * Ctor.

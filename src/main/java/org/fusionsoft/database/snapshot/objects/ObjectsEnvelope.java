@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableEnvelope;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
@@ -24,7 +24,7 @@ import org.fusionsoft.database.snapshot.Objects;
  * The Objects implementation that can be constructed of Iterable of DbObjects.
  * @since 0.1
  */
-public class ObjectsEnvelope<T extends YamlMapping>
+public class ObjectsEnvelope<T extends YamlNode>
     extends IterableEnvelope<DbObject<T>> implements Objects<T> {
 
     /**

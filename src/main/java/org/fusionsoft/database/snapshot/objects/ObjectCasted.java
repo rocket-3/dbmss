@@ -15,19 +15,19 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.func.UncheckedFunc;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectSignature;
 
-public class ObjectCasted<T extends YamlMapping> implements DbObject<T> {
+public class ObjectCasted<T extends YamlNode> implements DbObject<T> {
 
-    private final DbObject<? extends YamlMapping> object;
+    private final DbObject<?> object;
 
-    private final UncheckedFunc<? super YamlMapping, T> cast;
+    private final UncheckedFunc<? super YamlNode, T> cast;
 
-    public ObjectCasted(final Func<? super YamlMapping, T> cast, final DbObject<?> object) {
+    public ObjectCasted(final Func<? super YamlNode, T> cast, final DbObject<?> object) {
         this.object = object;
         this.cast = new UncheckedFunc<>(cast);
     }

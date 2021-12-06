@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
 public class ObjectTypeFunction extends SimpleObjectType<DbdFunctionMapping> {
 
     public ObjectTypeFunction() {
-        super(DbdFunctionMapping::new, "function");
+        super(x -> new DbdFunctionMapping(x.asMapping()), "function");
     }
 
 }

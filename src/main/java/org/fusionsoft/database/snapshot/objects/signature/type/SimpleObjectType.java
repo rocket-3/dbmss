@@ -15,25 +15,25 @@
  */
 package org.fusionsoft.database.snapshot.objects.signature.type;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.func.UncheckedFunc;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
-public class SimpleObjectType<M extends YamlMapping> implements ObjectType<M> {
+public class SimpleObjectType<T extends YamlNode> implements ObjectType<T> {
 
-    private final UncheckedFunc<? super YamlMapping, M> mapping;
+    private final UncheckedFunc<? super YamlNode, T> ctor;
 
     private final String text;
 
-    public SimpleObjectType(final Func<? super YamlMapping, M> mapping, final String text) {
-        this.mapping = new UncheckedFunc<>(mapping);
+    public SimpleObjectType(final Func<? super YamlNode, T> ctor, final String text) {
+        this.ctor = new UncheckedFunc<>(ctor);
         this.text = text;
     }
 
     @Override
-    public M mapping(final YamlMapping mapping) {
-        return this.mapping.apply(mapping);
+    public T node(final YamlNode node) {
+        return this.ctor.apply(node);
     }
 
     @Override

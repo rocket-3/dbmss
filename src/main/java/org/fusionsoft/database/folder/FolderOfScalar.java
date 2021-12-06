@@ -20,16 +20,27 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.database.Folder;
 
+/**
+ * The {@link Folder} that creates of {@link Scalar}/{@link java.util.function.Supplier}.
+ * @since 0.1
+ */
 public class FolderOfScalar implements Folder {
 
+    /**
+     * The of {@link Path} encapsulated.
+     */
     private final Scalar<Path> scalar;
 
+    /**
+     * Instantiates a new Folder of scalar.
+     * @param scalar The of {@link Path} to be encapsulated.
+     */
     public FolderOfScalar(final Scalar<Path> scalar) {
         this.scalar = scalar;
     }
 
     @Override
-    public Path path() {
+    public final Path path() {
         return new Unchecked<>(this.scalar).value();
     }
 

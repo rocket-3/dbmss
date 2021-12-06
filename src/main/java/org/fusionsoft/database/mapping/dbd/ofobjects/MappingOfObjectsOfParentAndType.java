@@ -31,12 +31,12 @@ public class MappingOfObjectsOfParentAndType extends YamlMappingOfEntries {
         final Objects<?> all,
         final DbObject<?> parent,
         final ObjectType<T> type,
-        final BiFunc<Objects<?>, DbObject<?>, T> ctor
+        final BiFunc<Objects<?>, DbObject<T>, ? extends T> ctor
     ) {
         super(
             new UnwrapEntriesOfObjects<T>(
                 all,
-                new ObjectsWithParentAndType(
+                new ObjectsWithParentAndType<>(
                     parent,
                     type,
                     all
@@ -55,7 +55,7 @@ public class MappingOfObjectsOfParentAndType extends YamlMappingOfEntries {
             all,
             parent,
             type,
-            (Objects<?> objects, DbObject<?> object) -> type.mapping(
+            (Objects<?> objects, DbObject<T> object) -> type.node(
                 new MappingOfRepresentative(object)
             )
         );

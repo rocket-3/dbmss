@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectSignature;
 
-public class DefaultObject implements DbObject<YamlMapping> {
+public class DefaultObject implements DbObject<YamlNode> {
 
-    private final DbObject<? extends YamlMapping> object;
+    private final DbObject<? extends YamlNode> object;
 
-    public DefaultObject(final DbObject<? extends YamlMapping> object) {
+    public DefaultObject(final DbObject<? extends YamlNode> object) {
         this.object = object;
     }
 
@@ -34,7 +33,7 @@ public class DefaultObject implements DbObject<YamlMapping> {
     }
 
     @Override
-    public YamlMapping asYaml() {
+    public YamlNode asYaml() {
         return this.object.asYaml();
     }
 

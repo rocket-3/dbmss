@@ -15,7 +15,6 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
-import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.map.MapEntry;
@@ -37,12 +36,12 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
 
     /**
      * Instantiates a new Yaml mapping envelope.
-     * @param objects The Objects to be used.
-     * @param schema The DbObject of YamlNode to be encapsulated.
+     * @param objects The {@link Objects} to be used.
+     * @param schema The {@link DbObject} of YamlNode to be encapsulated.
      */
     public DbdSchemaMappingOfObjects(
-        final Objects<?>objects,
-        final DbObject<? extends YamlNode> schema
+        final Objects<?> objects,
+        final DbObject<DbdSchemaMapping> schema
     ) {
         super(
             new MappingWithoutNullScalars(

@@ -39,7 +39,7 @@ public class ObjectsWithParentAndType<M extends YamlMapping> extends ObjectsWith
     ) {
         super(
             type,
-            new ObjectsWithParent(
+            new ObjectsWithParent<>(
                 parent,
                 objects
             )

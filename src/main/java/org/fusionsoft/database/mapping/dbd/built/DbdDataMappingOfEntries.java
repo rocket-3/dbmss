@@ -23,10 +23,17 @@ import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The type of {@link DbdDataMapping} with data: \n key: [value1, value2] \n form.
+ * @since 0.1
+ */
 public class DbdDataMappingOfEntries extends DbdDataMapping {
 
     /**
-     * Instantiates a new Yaml entries envelope.
+     * Instantiates a new {@link DbdDataMapping}
+     * of {@link Iterable}
+     * of {@link Map.Entry}
+     * of {@link Text} and {@link YamlNode}.
      * @param entries The YamlMapping to be encapsulated.
      */
     public DbdDataMappingOfEntries(final Iterable<Map.Entry<Text, YamlNode>> entries) {

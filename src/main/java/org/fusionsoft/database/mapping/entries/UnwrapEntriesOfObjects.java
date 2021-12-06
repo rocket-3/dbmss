@@ -41,8 +41,8 @@ public class UnwrapEntriesOfObjects<M extends YamlNode>
      */
     public UnwrapEntriesOfObjects(
         final Objects<?> scope,
-        final Objects<?> origin,
-        final BiFunc<Objects<?>, DbObject<?>, ? extends M> ctor
+        final Objects<M> origin,
+        final BiFunc<Objects<?>, DbObject<M>, ? extends M> ctor
     ) {
         super(
             new Mapped<>(

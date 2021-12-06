@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdViewMapping;
 public class ObjectTypeView extends SimpleObjectType<DbdViewMapping> {
 
     public ObjectTypeView() {
-        super(DbdViewMapping::new, "view");
+        super(x -> new DbdViewMapping(x.asMapping()), "view");
     }
 
 }

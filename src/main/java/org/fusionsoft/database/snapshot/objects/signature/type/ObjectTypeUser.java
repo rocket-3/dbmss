@@ -16,11 +16,20 @@
 package org.fusionsoft.database.snapshot.objects.signature.type;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 
+/**
+ * The {@link org.fusionsoft.database.snapshot.objects.signature.ObjectType} of 'user' object.
+ * @todo #40:30min Implement fetching of users
+ * @since 0.1
+ */
 public class ObjectTypeUser extends SimpleObjectType<YamlMapping> {
 
+    /**
+     * Instantiates a new Object type user.
+     */
     public ObjectTypeUser() {
-        super(x -> x, "user");
+        super(YamlNode::asMapping, "user");
     }
 
 }

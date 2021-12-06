@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.fusionsoft.database.YamlRepresentative;
 
 /**
@@ -23,7 +23,7 @@ import org.fusionsoft.database.YamlRepresentative;
  * @param <Y> The type of YamlNode representation parameter.
  * @since 0.1
  */
-public interface DbObject<Y extends YamlMapping> extends YamlRepresentative<Y> {
+public interface DbObject<Y extends YamlNode> extends YamlRepresentative<Y> {
 
     /**
      * Signature object signature.

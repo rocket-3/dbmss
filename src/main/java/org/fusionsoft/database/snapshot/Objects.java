@@ -15,12 +15,12 @@
  */
 package org.fusionsoft.database.snapshot;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 
 /**
  * The type representing database objects data we can obtain from DBMS.
  * @since 0.1
  */
-public interface Objects<T extends YamlMapping> extends Iterable<DbObject<T>> {
+public interface Objects<T extends YamlNode> extends Iterable<DbObject<T>> {
 
 }

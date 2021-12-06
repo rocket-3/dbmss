@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 public class ObjectTypeIndex extends SimpleObjectType<DbdIndexMapping> {
 
     public ObjectTypeIndex() {
-        super(DbdIndexMapping::new, "index");
+        super(x -> new DbdIndexMapping(x.asMapping()), "index");
     }
 
 }

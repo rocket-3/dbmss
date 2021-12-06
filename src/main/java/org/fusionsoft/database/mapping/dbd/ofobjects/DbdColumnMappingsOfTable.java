@@ -24,16 +24,33 @@ import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.lib.yaml.YamlNodeOfPath;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
 
+/**
+ * The {@link Iterable} of {@link DbdColumnMapping},
+ *  constructed of artifacts with {@link DbdTableMapping}.
+ * @since 0.1
+ */
 public class DbdColumnMappingsOfTable extends IterableOfYamlSequence<DbdColumnMapping> {
 
+    /**
+     * Instantiates a new Dbd column mappings of table.
+     * @param object The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
     public DbdColumnMappingsOfTable(final DbObject<DbdTableMapping> object) {
         this(new MappingOfRepresentative(object));
     }
 
+    /**
+     * Instantiates a new Dbd column mappings of table.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
+     */
     private DbdColumnMappingsOfTable(final YamlMapping mapping) {
         this(new DbdTableMapping(mapping));
     }
 
+    /**
+     * Instantiates a new Dbd column mappings of table.
+     * @param mapping The {@link DbdTableMapping} to be encapsulated.
+     */
     public DbdColumnMappingsOfTable(final DbdTableMapping mapping) {
         super(
             new YamlNodeOfPath(mapping, DbdTableFields.COLUMNS),

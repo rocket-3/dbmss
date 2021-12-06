@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.iterable.Filtered;
 import org.fusionsoft.database.snapshot.DbObject;
@@ -25,7 +25,7 @@ import org.fusionsoft.database.snapshot.Objects;
  * The type of DbObjects that was filtered by some predicate.
  * @since 0.1
  */
-public class ObjectsFiltered<T extends YamlMapping> extends ObjectsEnvelope<T> {
+public class ObjectsFiltered<T extends YamlNode> extends ObjectsEnvelope<T> {
 
     /**
      * Ctor.

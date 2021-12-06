@@ -30,11 +30,11 @@ public class DbdEnumsMappingOfObjects extends MappingOfObjectsOfParentAndType {
 
     /**
      * Instantiates a new Dbd enums mapping of objects.
-     * @param objects The Objects to be encapsulated.
-     * @param schema The DbObject to be encapsulated.
+     * @param objects The {@link Objects} to be encapsulated.
+     * @param schema The {@link DbObject} to be encapsulated.
      */
     public DbdEnumsMappingOfObjects(
-        final Objects<?>objects,
+        final Objects<?> objects,
         final DbObject<? extends YamlNode> schema
     ) {
         super(

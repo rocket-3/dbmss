@@ -24,23 +24,23 @@ import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
-public class EntriesOfObjectsOfParentAndType<M extends YamlMapping>
-    extends UnwrapEntriesOfObjects<M> {
+public class EntriesOfObjectsOfParentAndType<T extends YamlMapping>
+    extends UnwrapEntriesOfObjects<T> {
 
     /**
      * Ctor.
-     * @param ctor The Func to construct {@link M} of origin {@link Objects}
+     * @param ctor The Func to construct {@link T} of origin {@link Objects}
      *  and {@link Objects} to take in scope.
      */
     public EntriesOfObjectsOfParentAndType(
         final Objects<?> objects,
         final DbObject<?> parent,
-        final ObjectType<M> type,
-        final BiFunc<Objects<?>, DbObject<?>, M> ctor
+        final ObjectType<T> type,
+        final BiFunc<Objects<?>, DbObject<T>, T> ctor
         ) {
         super(
             objects,
-            new ObjectsWithParentAndType(parent, type, objects),
+            new ObjectsWithParentAndType<>(parent, type, objects),
             ctor
         );
     }
@@ -48,12 +48,12 @@ public class EntriesOfObjectsOfParentAndType<M extends YamlMapping>
     public EntriesOfObjectsOfParentAndType(
         final Objects<?> objects,
         final DbObject<?> parent,
-        final ObjectType<M> type
+        final ObjectType<T> type
     ) {
         super(
             objects,
-            new ObjectsWithParentAndType(parent, type, objects),
-            (Objects<?> all, DbObject<?> object) -> type.mapping(
+            new ObjectsWithParentAndType<>(parent, type, objects),
+            (Objects<?> all, DbObject<T> object) -> type.node(
                 new MappingOfRepresentative(object)
             )
         );

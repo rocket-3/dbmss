@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.Sticky;
 import org.fusionsoft.database.snapshot.Objects;
 
@@ -23,7 +23,7 @@ import org.fusionsoft.database.snapshot.Objects;
  * The type of Objects that are 'sticky' -> queried only one time.
  * @since 0.1
  */
-public class StickyObjects<T extends YamlMapping> extends ObjectsEnvelope<T> {
+public class StickyObjects<T extends YamlNode> extends ObjectsEnvelope<T> {
 
     /**
      * Ctor.

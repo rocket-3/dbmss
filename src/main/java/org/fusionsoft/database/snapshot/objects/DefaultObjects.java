@@ -13,17 +13,16 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
-public class DefaultObjects extends IterableEnvelope<DbObject<YamlMapping>>
-    implements Objects<YamlMapping> {
+public class DefaultObjects extends IterableEnvelope<DbObject<YamlNode>>
+    implements Objects<YamlNode> {
 
     /**
      * Ctor.

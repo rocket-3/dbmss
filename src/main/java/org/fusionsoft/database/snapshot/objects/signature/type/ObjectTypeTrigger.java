@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
 public class ObjectTypeTrigger extends SimpleObjectType<DbdTriggerMapping> {
 
     public ObjectTypeTrigger() {
-        super(DbdTriggerMapping::new, "trigger");
+        super(x -> new DbdTriggerMapping(x.asMapping()), "trigger");
     }
 
 }

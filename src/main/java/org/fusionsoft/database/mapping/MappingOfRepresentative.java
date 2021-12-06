@@ -15,7 +15,6 @@
  */
 package org.fusionsoft.database.mapping;
 
-import com.amihaiemil.eoyaml.YamlMapping;
 import org.fusionsoft.database.YamlRepresentative;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
@@ -31,7 +30,7 @@ public class MappingOfRepresentative extends YamlMappingOfScalar {
      * @param representative The Scalar of YamlMapping to be encapsulated.
      */
     public MappingOfRepresentative(
-        final YamlRepresentative<? extends YamlMapping> representative
+        final YamlRepresentative<?> representative
     ) {
         super(() -> representative.asYaml().asMapping());
     }

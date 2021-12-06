@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdSchemaMapping;
 public class ObjectTypeSchema extends SimpleObjectType<DbdSchemaMapping> {
 
     public ObjectTypeSchema() {
-        super(DbdSchemaMapping::new, "schema");
+        super(x -> new DbdSchemaMapping(x.asMapping()), "schema");
     }
 
 }

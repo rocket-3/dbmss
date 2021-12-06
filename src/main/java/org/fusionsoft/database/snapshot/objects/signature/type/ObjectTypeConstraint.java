@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 public class ObjectTypeConstraint extends SimpleObjectType<DbdConstraintMapping> {
 
     public ObjectTypeConstraint() {
-        super(DbdConstraintMapping::new, "constraint");
+        super(x -> new DbdConstraintMapping(x.asMapping()), "constraint");
     }
 
 }

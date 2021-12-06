@@ -45,12 +45,11 @@ public class DbdTableMappingOfEntries extends DbdTableMapping {
      * @param table The table DbObject entry to take data from.
      * @param indexes The Iterable of Text -> {@link DbdIndexMapping}
      *  entries to be encapsulated.
-     * @param data The Iterable of Text -> {@link DbdDataMapping}
-     *  entries to be encapsulated.
      * @param constraints The Iterable of Text -> {@link DbdConstraintMapping}
      *  entries to be encapsulated.
      * @param triggers The Iterable of Text -> {@link DbdTriggerMapping}
      *  entries to be encapsulated.
+     * @param data The {@link DbdDataMapping} to embed into.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
     public DbdTableMappingOfEntries(

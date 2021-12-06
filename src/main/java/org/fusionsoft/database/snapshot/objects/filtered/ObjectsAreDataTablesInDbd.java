@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.fusionsoft.database.DbdFile;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
@@ -26,7 +26,7 @@ import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
  *  mentioned as configuration tables in {@link DbdFile}.
  * @since 0.1
  */
-public class ObjectsAreDataTablesInDbd<T extends YamlMapping> extends ObjectsOfScalar<T> {
+public class ObjectsAreDataTablesInDbd<T extends YamlNode> extends ObjectsOfScalar<T> {
 
     /**
      * Instantiates a new Configuration tables of dbd.

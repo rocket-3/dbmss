@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdTupleMapping;
 public class ObjectTypeTuple extends SimpleObjectType<DbdTupleMapping> {
 
     public ObjectTypeTuple() {
-        super(DbdTupleMapping::new, "tuple");
+        super(x -> new DbdTupleMapping(x.asMapping()), "tuple");
     }
 
 }

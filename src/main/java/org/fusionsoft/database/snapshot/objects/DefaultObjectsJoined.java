@@ -16,20 +16,20 @@
 
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.snapshot.DbObject;
 
-public class DefaultObjectsJoined extends ObjectsEnvelope<YamlMapping> {
+public class DefaultObjectsJoined extends ObjectsEnvelope<YamlNode> {
 
     /**
      * Ctor.
      * @param iterable The wrapped iterable
      */
     public DefaultObjectsJoined(
-        final Iterable<Iterable<? extends DbObject<? extends YamlMapping>>> iterable
+        final Iterable<Iterable<? extends DbObject<? extends YamlNode>>> iterable
     ) {
         super(
             new Joined<>(
@@ -43,7 +43,7 @@ public class DefaultObjectsJoined extends ObjectsEnvelope<YamlMapping> {
 
     @SafeVarargs
     public DefaultObjectsJoined(
-        final Iterable<? extends DbObject<? extends YamlMapping>>... iterables
+        final Iterable<? extends DbObject<? extends YamlNode>>... iterables
     ) {
         this(new IterableOf<>(iterables));
     }
@@ -51,7 +51,7 @@ public class DefaultObjectsJoined extends ObjectsEnvelope<YamlMapping> {
     @SafeVarargs
     public DefaultObjectsJoined(
         final DbObject<?> object,
-        final Iterable<? extends DbObject<? extends YamlMapping>>... iterables
+        final Iterable<? extends DbObject<? extends YamlNode>>... iterables
     ) {
         this(
             new Joined<>(

@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableOf;
 import org.fusionsoft.database.snapshot.DbObject;
@@ -24,7 +24,7 @@ import org.fusionsoft.database.snapshot.DbObject;
  * The Objects of scalar.
  * @since 0.1
  */
-public class ObjectsOfScalar<T extends YamlMapping> extends ObjectsEnvelope<T> {
+public class ObjectsOfScalar<T extends YamlNode> extends ObjectsEnvelope<T> {
 
     /**
      * Ctor.

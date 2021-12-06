@@ -16,11 +16,20 @@
 package org.fusionsoft.database.snapshot.objects.signature.type;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 
+/**
+ * The {@link org.fusionsoft.database.snapshot.objects.signature.ObjectType} of 'role' objects.
+ * @todo #40:30min Implement fetching of roles
+ * @since 0.1
+ */
 public class ObjectTypeRole extends SimpleObjectType<YamlMapping> {
 
+    /**
+     * Instantiates a new Object type role.
+     */
     public ObjectTypeRole() {
-        super(x -> x, "role");
+        super(YamlNode::asMapping, "role");
     }
 
 }

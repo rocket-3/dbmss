@@ -16,11 +16,20 @@
 package org.fusionsoft.database.snapshot.objects.signature.type;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 
+/**
+ * The {@link org.fusionsoft.database.snapshot.objects.signature.ObjectType} of 'tablespace' object.
+ * @todo #40:30min Implement fetching of tablespaces
+ * @since 0.1
+ */
 public class ObjectTypeTablespace extends SimpleObjectType<YamlMapping> {
 
+    /**
+     * Instantiates a new Object type tablespace.
+     */
     public ObjectTypeTablespace() {
-        super(x -> x, "tablespace");
+        super(YamlNode::asMapping, "tablespace");
     }
 
 }

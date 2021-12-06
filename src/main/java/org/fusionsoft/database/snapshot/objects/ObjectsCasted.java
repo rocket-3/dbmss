@@ -15,15 +15,13 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
-import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
-public class ObjectsCasted<T extends YamlMapping>
-    extends IterableEnvelope<DbObject<T>>
+public class ObjectsCasted<T extends YamlNode> extends ObjectsEnvelope<T>
     implements Objects<T> {
 
     /**
@@ -31,11 +29,11 @@ public class ObjectsCasted<T extends YamlMapping>
      * @param iterable The wrapped iterable
      */
     public ObjectsCasted(
-        final Func<YamlMapping, T> cast,
+        final Func<YamlNode, T> cast,
         final Iterable<? extends DbObject<?>> iterable
     ) {
         super(
-            new Mapped<DbObject<T>>(
+            new Mapped<>(
                 object -> new ObjectCasted<>(cast, object),
                 iterable
             )

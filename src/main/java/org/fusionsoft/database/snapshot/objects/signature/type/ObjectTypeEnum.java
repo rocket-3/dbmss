@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdEnumMapping;
 public class ObjectTypeEnum extends SimpleObjectType<DbdEnumMapping> {
 
     public ObjectTypeEnum() {
-        super(DbdEnumMapping::new, "enum");
+        super(x -> new DbdEnumMapping(x.asMapping()), "enum");
     }
 
 }

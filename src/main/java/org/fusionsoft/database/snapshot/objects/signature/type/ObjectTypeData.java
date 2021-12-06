@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 public class ObjectTypeData extends SimpleObjectType<DbdDataMapping> {
 
     public ObjectTypeData() {
-        super(DbdDataMapping::new, "data");
+        super(x -> new DbdDataMapping(x.asMapping()), "data");
     }
 
 }

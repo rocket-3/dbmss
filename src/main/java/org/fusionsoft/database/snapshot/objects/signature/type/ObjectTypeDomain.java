@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 public class ObjectTypeDomain extends SimpleObjectType<DbdDomainMapping> {
 
     public ObjectTypeDomain() {
-        super(DbdDomainMapping::new, "domain");
+        super(x -> new DbdDomainMapping(x.asMapping()), "domain");
     }
 
 }

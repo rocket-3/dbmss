@@ -21,8 +21,16 @@ import org.fusionsoft.database.mapping.entries.ScalarEntry;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The type of {@link DbdDataMapping} with 'data: "scalarValue"' form.
+ * @since 0.1
+ */
 public class DbdDataMappingOfValue extends DbdDataMapping {
 
+    /**
+     * Instantiates a new Dbd data mapping of {@link Text} value.
+     * @param value The {@link Text} to be encapsulated.
+     */
     public DbdDataMappingOfValue(final Text value) {
         super(
             new YamlMappingOfEntries(

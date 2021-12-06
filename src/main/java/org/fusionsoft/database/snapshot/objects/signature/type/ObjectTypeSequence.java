@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
 public class ObjectTypeSequence extends SimpleObjectType<DbdSequenceMapping> {
 
     public ObjectTypeSequence() {
-        super(DbdSequenceMapping::new, "sequence");
+        super(x -> new DbdSequenceMapping(x.asMapping()), "sequence");
     }
 
 }

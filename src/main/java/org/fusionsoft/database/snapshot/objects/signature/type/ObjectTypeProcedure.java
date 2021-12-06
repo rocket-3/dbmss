@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdProcedureMapping;
 public class ObjectTypeProcedure extends SimpleObjectType<DbdProcedureMapping> {
 
     public ObjectTypeProcedure() {
-        super(DbdProcedureMapping::new, "procedure");
+        super(x -> new DbdProcedureMapping(x.asMapping()), "procedure");
     }
 
 }

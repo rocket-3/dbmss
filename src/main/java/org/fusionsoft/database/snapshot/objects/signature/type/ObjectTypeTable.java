@@ -20,7 +20,7 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 public class ObjectTypeTable extends SimpleObjectType<DbdTableMapping> {
 
     public ObjectTypeTable() {
-        super(DbdTableMapping::new, "table");
+        super(x -> new DbdTableMapping(x.asMapping()), "table");
     }
 
 }
