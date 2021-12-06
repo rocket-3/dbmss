@@ -102,7 +102,7 @@ class ObjectsFromServerTest {
     @Test
     public void canBeRendered() {
         new DbdSchemasMappingOfObjects(
-            new StickyObjects(
+            new StickyObjects<>(
                 new ObjectsFromServer(
                     new DbdServerMappingWithCredentials(
                         new UrlOfPgGitLabDatabaseV11(this.database),

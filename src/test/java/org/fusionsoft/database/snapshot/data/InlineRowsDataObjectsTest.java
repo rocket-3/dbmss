@@ -15,47 +15,57 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import java.sql.Connection;
-import org.cactoos.scalar.Sticky;
-import org.fusionsoft.database.Folder;
+import org.cactoos.scalar.LengthOf;
 import org.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import org.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import org.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
-import org.fusionsoft.database.folder.FolderOfScalar;
 import org.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
+import org.fusionsoft.database.mapping.fields.DbdTableFields;
+import org.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
-import org.fusionsoft.lib.path.CurrentWorkingDirectory;
-import org.fusionsoft.lib.path.TempFolder;
+import org.fusionsoft.lib.yaml.EntriesOfYamlMapping;
+import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasValuesMatching;
 
-class DataWritableOfObjectTest {
+public class InlineRowsDataObjectsTest {
 
     @Test
-    public void writesFilesFast() {
-        final Folder folder = new FolderOfScalar(
-            new Sticky<>(
-                new TempFolder(
-                    new CurrentWorkingDirectory().value().resolve("temp")
-                )
-            )
-        );
-        final Connection connection = new ConnectionOfDbdServerMapping(
+    public void createsExpectedRows() {
+        final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(
             new DbdServerMappingWithCredentials(
                 new UrlOfPgGitLabDatabaseV11("pagilla"),
                 new CredsOfPgTestDatabase()
             )
         );
-        new SeparateDataFilesOfTablesWritable(
+        final InlineRowsDataObjectsOfConnection data = new InlineRowsDataObjectsOfConnection(
             connection,
-            new ObjectsWithType<>(
-                new ObjectTypeTable(),
-                new ObjectsFromServer(
-                    connection
+            new ObjectsFiltered<>(
+                x -> !x.signature().name().first().asString().contains("million"),
+                new ObjectsWithType<>(
+                    new ObjectTypeTable(),
+                    new ObjectsFromServer(connection)
                 )
             )
-        ).writeTo(folder);
+        );
+        new Assertion<>(
+            "Should render non empty data rows for each table",
+            data,
+            new HasValuesMatching<>(
+                obj -> new LengthOf(
+                    new EntriesOfYamlMapping(
+                        new YamlMappingOfPath(
+                            obj.asYaml(),
+                            DbdTableFields.DATA
+                        )
+                    )
+                ).value() > 1
+            )
+        ).affirm();
     }
 
 }
+
