@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -24,9 +24,19 @@ import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
 
-public class InlineDataObjectOfMapping extends SimpleDbObject<DbdDataMapping> {
+/**
+ * The {@link DbObject} of {@link DbdDataMapping}, can be constructed of {@link DbdDataMapping}
+ *  and parent table {@link DbObject}.
+ * @since 0.1
+ */
+public class DataObjectOfMapping extends SimpleDbObject<DbdDataMapping> {
 
-    public InlineDataObjectOfMapping(
+    /**
+     * Instantiates a new Inline data object of mapping.
+     * @param mapping The {@link DbdDataMapping} to be encapsulated.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
+    public DataObjectOfMapping(
         final DbdDataMapping mapping,
         final DbObject<DbdTableMapping> table
     ) {

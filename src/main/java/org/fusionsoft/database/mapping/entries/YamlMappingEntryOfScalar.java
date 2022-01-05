@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -23,6 +23,12 @@ import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The type of {@link Text} -> {@link YamlNode} {@link Map.Entry},
+ *  can be created of {@link Scalar}.
+ * @param <T> The type of value {@link YamlNode} subtype parameter.
+ * @since 0.1
+ */
 public class YamlMappingEntryOfScalar<T extends YamlNode> implements Map.Entry<Text, T> {
 
     /**
@@ -37,8 +43,8 @@ public class YamlMappingEntryOfScalar<T extends YamlNode> implements Map.Entry<T
 
     /**
      * Instantiates a new Scalar entry.
-     * @param text The Text to be encapsulated.
-     * @param node The Scalar of YamlNode to be encapsulated.
+     * @param text The {@link Text} of ket to be encapsulated.
+     * @param node The {@link Scalar} of {@link YamlNode} value to be encapsulated.
      */
     public YamlMappingEntryOfScalar(final Text text, final Scalar<T> node) {
         this.text = text;

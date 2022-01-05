@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -16,12 +16,15 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import com.amihaiemil.eoyaml.YamlNode;
-import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
-public class DefaultObjects extends IterableEnvelope<DbObject<YamlNode>>
+/**
+ * The {@link Objects} of {@link YamlNode}, that uses an another one as delegate.
+ * @since 0.1
+ */
+public class DefaultObjects extends ObjectsEnvelope<YamlNode>
     implements Objects<YamlNode> {
 
     /**

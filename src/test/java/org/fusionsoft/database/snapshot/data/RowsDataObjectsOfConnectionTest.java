@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -31,8 +31,16 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasValuesMatching;
 
-public class InlineRowsDataObjectsTest {
+/**
+ * The tests for {@link RowsDataObjectsOfConnection}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
+public class RowsDataObjectsOfConnectionTest {
 
+    /**
+     * Creates expected rows.
+     */
     @Test
     public void createsExpectedRows() {
         final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(
@@ -41,7 +49,7 @@ public class InlineRowsDataObjectsTest {
                 new CredsOfPgTestDatabase()
             )
         );
-        final InlineRowsDataObjectsOfConnection data = new InlineRowsDataObjectsOfConnection(
+        final RowsDataObjectsOfConnection data = new RowsDataObjectsOfConnection(
             connection,
             new ObjectsFiltered<>(
                 x -> !x.signature().name().first().asString().contains("million"),

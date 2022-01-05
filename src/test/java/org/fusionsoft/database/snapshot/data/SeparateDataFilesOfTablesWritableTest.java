@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -33,10 +33,18 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsNumber;
 
+/**
+ * The test for {@link SeparateDataFilesOfTablesWritable}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 class SeparateDataFilesOfTablesWritableTest {
 
+    /**
+     * Writes big files fast.
+     */
     @Test
-    public void writesFilesFast() {
+    public void writesBigFilesFast() {
         final Folder folder = new FolderOfScalar(
             new Sticky<>(
                 new TempFolder(

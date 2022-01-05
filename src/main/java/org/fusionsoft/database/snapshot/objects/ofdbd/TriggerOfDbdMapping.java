@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -26,8 +26,18 @@ import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTrigger
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
+/**
+ * The {@link SimpleDbObject}, can be constructed of {@link DbdTriggerMapping}.
+ * @since 0.1
+ */
 public class TriggerOfDbdMapping extends SimpleDbObject<DbdTriggerMapping> {
 
+    /**
+     * Instantiates a new Trigger of dbd mapping.
+     * @param root The {@link YamlMapping} to be encapsulated.
+     * @param key The {@link YamlNode} to be encapsulated.
+     * @param name The {@link ObjectName} to be encapsulated.
+     */
     public TriggerOfDbdMapping(final YamlMapping root, final YamlNode key, final ObjectName name) {
         this(
             new DbdTriggerMapping(new YamlMappingOfPath(root, key)),

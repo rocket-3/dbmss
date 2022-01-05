@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -20,8 +20,16 @@ import org.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import org.fusionsoft.database.mapping.fields.DbdColumnFields;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
+/**
+ * The type of {@link Column} can be constructed of {@link DbdColumnMapping}.
+ * @since 0.1
+ */
 public class ColumnOfDbdColumnMapping extends ColumnOfScalar {
 
+    /**
+     * Instantiates a new Column of dbd column mapping.
+     * @param column The DbdColumnMapping to be encapsulated.
+     */
     public ColumnOfDbdColumnMapping(final DbdColumnMapping column) {
         super(
             () -> new ColumnSimple(

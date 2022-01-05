@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.objects.signature.name;
 
 import org.cactoos.Scalar;
@@ -21,31 +20,42 @@ import org.cactoos.Text;
 import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 
+/**
+ * The {@link ObjectName}, that uses {@link Scalar} of {@link ObjectName} as delegate.
+ * @since 0.1
+ */
 public class ObjectNameOfScalar implements ObjectName {
 
+    /**
+     * The scalar of {@link ObjectName} encapsulated.
+     */
     private final Unchecked<ObjectName> scalar;
 
+    /**
+     * Instantiates a new Object name of scalar.
+     * @param scalar The {@link Scalar<ObjectName>} to be encapsulated.
+     */
     public ObjectNameOfScalar(final Scalar<ObjectName> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return this.scalar.value().asString();
     }
 
     @Override
-    public ObjectName parent() {
+    public final ObjectName parent() {
         return this.scalar.value().parent();
     }
 
     @Override
-    public Text first() {
+    public final Text first() {
         return this.scalar.value().first();
     }
 
     @Override
-    public boolean equals(final ObjectName other) {
+    public final boolean equals(final ObjectName other) {
         return this.scalar.value().equals(other);
     }
 

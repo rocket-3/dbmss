@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -25,9 +25,23 @@ import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndTyp
 import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
-public class MappingOfObjectsOfParentAndType extends YamlMappingOfEntries {
+/**
+ * The {@link YamlMappingOfEntries} which constructs of {@link Objects} and their names entries from
+ *  some parent {@link DbObject} and {@link ObjectType} perspective.
+ * @param <T> The {@link Objects} included mapping type parameter.
+ * @since 0.1
+ */
+public class MappingOfObjectsOfParentAndType<T extends YamlMapping> extends YamlMappingOfEntries {
 
-    public <T extends YamlMapping> MappingOfObjectsOfParentAndType(
+    /**
+     * Instantiates a new Mapping of objects of parent and type.
+     * @param all The {@link Objects} to be encapsulated.
+     * @param parent The {@link DbObject} to be encapsulated.
+     * @param type The {@link ObjectType} to be encapsulated.
+     * @param ctor The {@link BiFunc} of mapping ctor to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
+    public MappingOfObjectsOfParentAndType(
         final Objects<?> all,
         final DbObject<?> parent,
         final ObjectType<T> type,
@@ -46,7 +60,13 @@ public class MappingOfObjectsOfParentAndType extends YamlMappingOfEntries {
         );
     }
 
-    public <T extends YamlMapping> MappingOfObjectsOfParentAndType(
+    /**
+     * Instantiates a new Mapping of objects of parent and type.
+     * @param all The {@link Objects} to be encapsulated.
+     * @param parent The {@link DbObject} to be encapsulated.
+     * @param type The {@link ObjectType} to be encapsulated.
+     */
+    public MappingOfObjectsOfParentAndType(
         final Objects<?> all,
         final DbObject<?> parent,
         final ObjectType<T> type

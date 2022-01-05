@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -32,25 +32,27 @@ public class PgDomainConstraintsQuery extends PgMessageFormatQuery<DbdDomainCons
      */
     public PgDomainConstraintsQuery(final ObjectName domain) {
         super(
-            new TextOfScalar(() -> String.join(
-                "",
-                "SELECT \n",
-                " con.conname AS {0},\n",
-                " CASE WHEN con.convalidated = 't' THEN 'true' ELSE 'false' END AS {1},\n",
-                " con.consrc AS {2}\n",
-                "FROM information_schema.domains dom\n",
-                "INNER JOIN information_schema.domain_constraints dcon \n",
-                "ON dcon.domain_schema = dom.domain_schema \n",
-                "AND dcon.domain_name = dom.domain_name\n",
-                "INNER JOIN pg_catalog.pg_constraint con \n",
-                "ON dcon.constraint_name = con.conname\n",
-                "WHERE dom.domain_schema = '",
-                domain.parent().asString(),
-                "'\n",
-                "AND dom.domain_name = '",
-                domain.first().asString(),
-                "'"
-            )),
+            new TextOfScalar(
+                () -> String.join(
+                    "",
+                    "SELECT \n",
+                    " con.conname AS {0},\n",
+                    " CASE WHEN con.convalidated = 't' THEN 'true' ELSE 'false' END AS {1},\n",
+                    " con.consrc AS {2}\n",
+                    "FROM information_schema.domains dom\n",
+                    "INNER JOIN information_schema.domain_constraints dcon \n",
+                    "ON dcon.domain_schema = dom.domain_schema \n",
+                    "AND dcon.domain_name = dom.domain_name\n",
+                    "INNER JOIN pg_catalog.pg_constraint con \n",
+                    "ON dcon.constraint_name = con.conname\n",
+                    "WHERE dom.domain_schema = '",
+                    domain.parent().asString(),
+                    "'\n",
+                    "AND dom.domain_name = '",
+                    domain.first().asString(),
+                    "'"
+                )
+            ),
             DbdDomainConstraintFields.CONSTRAINT,
             DbdDomainConstraintFields.VALIDATED,
             DbdDomainConstraintFields.CONDITION

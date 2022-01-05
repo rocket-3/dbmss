@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,24 +15,39 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
+/**
+ * The {@link Row} iface implementation based on array of column values.
+ * @since 0.1
+ */
 public class RowOfArray implements Row {
 
+    /**
+     * The label encapsulated.
+     */
     private final String label;
 
+    /**
+     * The array encapsulated.
+     */
     private final String[] array;
 
+    /**
+     * Instantiates a new Row of array.
+     * @param label The label {@link String} to be encapsulated.
+     * @param array The array of {@link String} to be encapsulated.
+     */
     public RowOfArray(final String label, final String[] array) {
         this.label = label;
         this.array = array;
     }
 
     @Override
-    public String textOf(final Column column) {
-        return array[column.order().intValue() - 1];
+    public final String textOf(final Column column) {
+        return this.array[column.order().intValue() - 1];
     }
 
     @Override
-    public String label() {
+    public final String label() {
         return this.label;
     }
 

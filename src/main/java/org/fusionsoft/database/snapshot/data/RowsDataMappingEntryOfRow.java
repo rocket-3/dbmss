@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -22,9 +22,19 @@ import org.cactoos.text.Joined;
 import org.cactoos.text.TextOfScalar;
 import org.fusionsoft.database.mapping.entries.YamlMappingEntryOfScalar;
 
-public class InlineRowsDataMappingEntryOfRow extends YamlMappingEntryOfScalar<YamlNode> {
+/**
+ * The entries for {@link org.fusionsoft.database.mapping.dbd.DbdDataMapping}
+ *  with '"key" : ["value1", "value2"]' format.
+ * @since 0.1
+ */
+public class RowsDataMappingEntryOfRow extends YamlMappingEntryOfScalar<YamlNode> {
 
-    public InlineRowsDataMappingEntryOfRow(final Row row, final Iterable<Column> cols) {
+    /**
+     * Instantiates a new Rows data mapping entry of row.
+     * @param row The {@link Row} to be encapsulated.
+     * @param cols The {@link Iterable} of {@link Column} to be encapsulated.
+     */
+    public RowsDataMappingEntryOfRow(final Row row, final Iterable<Column> cols) {
         super(
             new TextOfScalar(row::label),
             () -> Yaml.createYamlInput(

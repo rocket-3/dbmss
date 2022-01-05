@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -25,8 +25,18 @@ import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSchema;
 import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
 
+/**
+ * The {@link SimpleDbObject} of {@link DbdSchemaMapping}
+ *  that can be constructed of {@link DbdSchemaMapping} and {@link ObjectName}.
+ * @since 0.1
+ */
 public class SchemaOfDbdMapping extends SimpleDbObject<DbdSchemaMapping> {
 
+    /**
+     * Instantiates a new Schema of dbd mapping.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
+     * @param schema The {@link ObjectName} to be encapsulated.
+     */
     public SchemaOfDbdMapping(
         final YamlMapping mapping,
         final ObjectName schema

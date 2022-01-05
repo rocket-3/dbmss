@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,8 +21,16 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.lib.yaml.FileExtension;
 
+/**
+ * The name of separate data file name {@link org.cactoos.Text}.
+ * @since 0.1
+ */
 public class SeparateDataFileName extends TextEnvelope {
 
+    /**
+     * Instantiates a new Separate data file name.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
     public SeparateDataFileName(final DbObject<DbdTableMapping> table) {
         super(
             new Joined(

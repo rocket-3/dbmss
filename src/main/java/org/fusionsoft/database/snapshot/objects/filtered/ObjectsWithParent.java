@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 
 /**
  * The Objects filtered by parent name.
+ * @param <T> The type of {@link DbObject} parameter.
  * @since 0.1
  */
 public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
@@ -31,7 +32,7 @@ public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
     /**
      * Ctor.
      * @param parent The Text name of parent to be encapsulated.
-     * @param objects The Objects to be encapsulated.
+     * @param objects The {@link Objects} to be encapsulated.
      */
     public ObjectsWithParent(final DbObject<?> parent, final Objects<T> objects) {
         super(
@@ -45,7 +46,7 @@ public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
     /**
      * Ctor.
      * @param name The {@link SimpleObjectName} of parent to be encapsulated.
-     * @param objects The Objects to be encapsulated.
+     * @param objects The {@link Objects} to be encapsulated.
      */
     public ObjectsWithParent(final ObjectName name, final Objects<T> objects) {
         super(

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -22,17 +22,19 @@ import org.cactoos.scalar.NumberOf;
 import org.cactoos.scalar.Unchecked;
 
 /**
- * @todo #106:60min Split into float and integer formats
+ * The {@link ValueFormat} of a number.
+ * @since 0.1
+ * @todo #106:60min Split into float and integer formats.
  */
 public class ValueFormatNumber implements ValueFormat {
 
     @Override
-    public String storableRepresentationOf(final String text) {
+    public final String yamlRepresentationOf(final String text) {
         return text;
     }
 
     @Override
-    public void passInPrepareStatement(
+    public final void passInPrepareStatement(
         final PreparedStatement stmt,
         final int ordinal,
         final Text text
@@ -46,7 +48,7 @@ public class ValueFormatNumber implements ValueFormat {
     }
 
     @Override
-    public String ofResultSet(final ResultSet rset, final int ordinal) {
+    public final String ofResultSet(final ResultSet rset, final int ordinal) {
         return new Unchecked<String>(
             () -> {
                 return String.valueOf(rset.getLong(ordinal));
@@ -55,7 +57,7 @@ public class ValueFormatNumber implements ValueFormat {
     }
 
     @Override
-    public String ofResultSet(final ResultSet rset, final String key) {
+    public final String ofResultSet(final ResultSet rset, final String key) {
         return new Unchecked<String>(
             () -> {
                 return String.valueOf(rset.getLong(key));

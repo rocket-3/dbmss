@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -20,9 +20,16 @@ import org.cactoos.Text;
 
 /**
  * The enum ObjectType.
+ * @param <T> The subtype of {@link YamlNode} representation parameter.
+ * @since 0.1
  */
 public interface ObjectType<T extends YamlNode> extends Text {
 
+    /**
+     * Node t.
+     * @param mapping The mapping being casted to {@link T}.
+     * @return The {@link T} instance.
+     */
     T node(YamlNode mapping);
 
     String asString();

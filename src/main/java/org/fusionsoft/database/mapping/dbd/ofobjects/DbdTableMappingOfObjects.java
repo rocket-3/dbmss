@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,21 +15,14 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
-import org.cactoos.iterable.Mapped;
-import org.cactoos.map.MapEntry;
 import org.fusionsoft.database.mapping.MappingOfRepresentative;
-import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.dbd.built.DbdTableMappingOfEntries;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeConstraint;
-import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeIndex;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTrigger;
-import org.fusionsoft.lib.collection.SingleOrEmptyFallback;
-import org.fusionsoft.lib.yaml.MappingEmpty;
-import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
  * The The DBD/schemas/#schema/tables/#table node mapping of
@@ -45,7 +38,7 @@ public class DbdTableMappingOfObjects extends DbdTableMappingOfEntries {
      */
     public DbdTableMappingOfObjects(
         final Objects<?> objects,
-        final DbObject<?> table
+        final DbObject<DbdTableMapping> table
     ) {
         super(
             new DbdTableMapping(
@@ -66,20 +59,9 @@ public class DbdTableMappingOfObjects extends DbdTableMappingOfEntries {
                 table,
                 new ObjectTypeTrigger()
             ),
-            new DbdDataMapping(
-                new YamlMappingOfScalar(
-                    new SingleOrEmptyFallback<>(
-                        new Mapped<>(
-                            MapEntry::getValue,
-                            new EntriesOfObjectsOfParentAndType<>(
-                                objects,
-                                table,
-                                new ObjectTypeData()
-                            )
-                        ),
-                        new MappingEmpty()
-                    )
-                )
+            new DbdDataMappingOfObjectsOrEmpty(
+                objects,
+                table
             )
         );
     }

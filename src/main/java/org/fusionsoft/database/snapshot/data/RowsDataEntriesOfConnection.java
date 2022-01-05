@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -26,9 +26,19 @@ import org.cactoos.list.ListOf;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 
-public class InlineRowsDataEntriesOfConnection extends IterableEnvelope<Map.Entry<Text, YamlNode>> {
+/**
+ * The {@link Iterable} of {@link RowsDataMappingEntryOfRow},
+ *  can be constructed of {@link Connection} and {@link DbObject} of {@link DbdTableMapping}.
+ * @since 0.1
+ */
+public class RowsDataEntriesOfConnection extends IterableEnvelope<Map.Entry<Text, YamlNode>> {
 
-    public InlineRowsDataEntriesOfConnection(
+    /**
+     * Instantiates a new Inline rows data entries of connection.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
+    public RowsDataEntriesOfConnection(
         final Connection connection,
         final DbObject<DbdTableMapping> table
     ) {
@@ -39,7 +49,13 @@ public class InlineRowsDataEntriesOfConnection extends IterableEnvelope<Map.Entr
         );
     }
 
-    public InlineRowsDataEntriesOfConnection(
+    /**
+     * Instantiates a new Inline rows data entries of connection.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     * @param columns The {@link Iterable} of {@link Column} to be encapsulated.
+     */
+    public RowsDataEntriesOfConnection(
         final Connection connection,
         final DbObject<DbdTableMapping> table,
         final Iterable<Column> columns
@@ -48,7 +64,7 @@ public class InlineRowsDataEntriesOfConnection extends IterableEnvelope<Map.Entr
             new IterableOf<>(
                 () -> new ListOf<>(
                     new Mapped<Map.Entry<Text, YamlNode>>(
-                        row -> new InlineRowsDataMappingEntryOfRow(row, columns),
+                        row -> new RowsDataMappingEntryOfRow(row, columns),
                         new RowsOfTable(
                             connection,
                             table

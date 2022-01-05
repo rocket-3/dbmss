@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,14 +21,30 @@ import java.nio.file.Path;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * The auto deleting temp file {@link Path} {@link Scalar}.
+ * @since 0.1
+ * @checkstyle MagicNumberCheck (100 lines)
+ */
 public class AutoDeletingPath implements Scalar<Path>, AutoCloseable {
 
+    /**
+     * The scalar of Path encapsulated.
+     */
     private final Unchecked<Path> scalar;
 
+    /**
+     * Instantiates a new Auto deleting path.
+     * @param origin The {@link Scalar} to be encapsulated.
+     */
     public AutoDeletingPath(final Scalar<Path> origin) {
         this.scalar = new Unchecked<>(origin);
     }
 
+    /**
+     * Instantiates a new Auto deleting path.
+     * @param origin The {@link Path} to be encapsulated.
+     */
     public AutoDeletingPath(final Path origin) {
         this(() -> origin);
     }
@@ -39,7 +55,7 @@ public class AutoDeletingPath implements Scalar<Path>, AutoCloseable {
     }
 
     @Override
-    public Path value() {
+    public final Path value() {
         return this.scalar.value();
     }
 

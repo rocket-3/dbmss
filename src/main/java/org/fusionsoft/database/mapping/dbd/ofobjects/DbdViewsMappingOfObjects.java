@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeView;
  *  and filtered by schema.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
 public class DbdViewsMappingOfObjects extends MappingOfObjectsOfParentAndType {
 
     /**
@@ -36,7 +35,7 @@ public class DbdViewsMappingOfObjects extends MappingOfObjectsOfParentAndType {
      * @param schema The parent schema DbObject to be encapsulated.
      */
     public DbdViewsMappingOfObjects(
-        final Objects<?>objects,
+        final Objects<?> objects,
         final DbObject<?> schema
     ) {
         super(

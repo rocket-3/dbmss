@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -22,18 +22,19 @@ import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
 
 /**
- * The type of {@link Objects} that represents objects that are
- *  mentioned as configuration tables in {@link DbdFile}.
+ * The type of {@link Objects} that represents objects filtered by being
+ *  mentioned as configuration tables in {@link DbdFile} presented.
+ * @param <T> The type parameter.
  * @since 0.1
  */
-public class ObjectsAreDataTablesInDbd<T extends YamlNode> extends ObjectsOfScalar<T> {
+public class ObjectsAreDataTablesInDbdFile<T extends YamlNode> extends ObjectsOfScalar<T> {
 
     /**
      * Instantiates a new Configuration tables of dbd.
-     * @param origin The original Objects to be encapsulated.
-     * @param file The DbdFile to be encapsulated.
+     * @param origin The original {@link Objects} to be encapsulated.
+     * @param file The {@link DbdFile} to be encapsulated.
      */
-    public ObjectsAreDataTablesInDbd(final Objects<T> origin, final DbdFile file) {
+    public ObjectsAreDataTablesInDbdFile(final Objects<T> origin, final DbdFile file) {
         super(
             () -> new ObjectsMentionedIn<>(
                 new DataTablesOfObjects(

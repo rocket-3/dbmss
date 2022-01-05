@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -20,12 +20,28 @@ import org.cactoos.Func;
 import org.cactoos.func.UncheckedFunc;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
+/**
+ * The type of that can be constructed of.
+ * @param <T> The subtype of {@link YamlNode} representation parameter.
+ * @since 0.1
+ */
 public class SimpleObjectType<T extends YamlNode> implements ObjectType<T> {
 
+    /**
+     * The {@link UncheckedFunc} of {@link YamlNode}, {@link T} encapsulated.
+     */
     private final UncheckedFunc<? super YamlNode, T> ctor;
 
+    /**
+     * The String encapsulated.
+     */
     private final String text;
 
+    /**
+     * Instantiates a new Simple object type.
+     * @param ctor The {@link Func} of {@link YamlNode} {@link T} to be encapsulated.
+     * @param text The {@link String} representation to be encapsulated.
+     */
     public SimpleObjectType(final Func<? super YamlNode, T> ctor, final String text) {
         this.ctor = new UncheckedFunc<>(ctor);
         this.text = text;

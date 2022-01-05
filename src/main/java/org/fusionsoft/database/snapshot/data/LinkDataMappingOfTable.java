@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -16,14 +16,26 @@
 package org.fusionsoft.database.snapshot.data;
 
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import org.fusionsoft.database.mapping.dbd.built.DbdDataMappingOfValue;
 import org.fusionsoft.database.snapshot.DbObject;
 
-public class InlineLinkDataObjectOfTable extends InlineDataObjectOfMapping {
+/**
+ * The type of {@link DbdDataMappingOfValue} with relative separate data file url.
+ * @since 0.1
+ */
+public class LinkDataMappingOfTable extends DbdDataMappingOfValue {
 
-    public InlineLinkDataObjectOfTable(final DbObject<DbdTableMapping> table) {
+    /**
+     * Instantiates a new Inline link data mapping of table.
+     * @param table The {@link DbObject} {@link DbdTableMapping} to be encapsulated.
+     */
+    public LinkDataMappingOfTable(
+        final DbObject<DbdTableMapping> table
+    ) {
         super(
-            new InlineLinkDataMappingOfTable(table),
-            table
+            new SeparateDataFilePathRelativeToDbd(
+                new SeparateDataFileName(table)
+            )
         );
     }
 

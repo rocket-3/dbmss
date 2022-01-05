@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -27,25 +27,33 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class DbdDataEntriesOfTableTest {
+/**
+ * The tests for {@link RowsDataEntriesOfConnection}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
+class RowsDataEntriesOfConnectionTest {
 
+    /**
+     * Just show.
+     */
     @Test
     @Disabled
-    public void works() {
+    public void show() {
         final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(
             new DbdServerMappingWithCredentials(
                 new UrlOfPgGitLabDatabaseV11("dvdrental"),
                 new CredsOfPgTestDatabase()
             )
         );
-        final Mapped<InlineRowsDataEntriesOfConnection> datas = new Mapped<>(
-            x -> new InlineRowsDataEntriesOfConnection(connection, x),
+        final Mapped<RowsDataEntriesOfConnection> datas = new Mapped<>(
+            x -> new RowsDataEntriesOfConnection(connection, x),
             new ObjectsWithType<>(
                 new ObjectTypeTable(),
                 new ObjectsFromServer(connection)
             )
         );
-        for (final InlineRowsDataEntriesOfConnection data : datas) {
+        for (final RowsDataEntriesOfConnection data : datas) {
             System.out.println(new YamlMappingOfEntries(data).toString());
         }
     }

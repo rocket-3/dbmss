@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -22,11 +22,15 @@ import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.snapshot.DbObject;
 
+/**
+ * The type of {@link ObjectsEnvelope} that joins iterables of {@link DbObject}s.
+ * @since 0.1
+ */
 public class DefaultObjectsJoined extends ObjectsEnvelope<YamlNode> {
 
     /**
      * Ctor.
-     * @param iterable The wrapped iterable
+     * @param iterable The wrapped iterable of iterables of {@link DbObject}
      */
     public DefaultObjectsJoined(
         final Iterable<Iterable<? extends DbObject<? extends YamlNode>>> iterable
@@ -41,6 +45,10 @@ public class DefaultObjectsJoined extends ObjectsEnvelope<YamlNode> {
         );
     }
 
+    /**
+     * Instantiates a new Default objects joined.
+     * @param iterables The iterables array to be consumed.
+     */
     @SafeVarargs
     public DefaultObjectsJoined(
         final Iterable<? extends DbObject<? extends YamlNode>>... iterables
@@ -48,6 +56,11 @@ public class DefaultObjectsJoined extends ObjectsEnvelope<YamlNode> {
         this(new IterableOf<>(iterables));
     }
 
+    /**
+     * Instantiates a new Default objects joined.
+     * @param object The {@link DbObject} to be prepended.
+     * @param iterables The iterable of {@link DbObject}s to be encapsulated.
+     */
     @SafeVarargs
     public DefaultObjectsJoined(
         final DbObject<?> object,

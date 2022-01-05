@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -30,8 +30,20 @@ import org.fusionsoft.lib.collection.IterableAutoCloseable;
 import org.fusionsoft.lib.connection.ResultSetOfScalar;
 import org.fusionsoft.lib.connection.StatementOfScalar;
 
+/**
+ * The {@link IterableAutoCloseable} of {@link Row}, can be constructed
+ *  of {@link Connection} and {@link DbObject} of {@link DbdTableMapping}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
+ */
 public class RowsOfTable extends IterableAutoCloseable<Row> {
 
+    /**
+     * Instantiates a new Rows of table.
+     * @param stmt The {@link Statement} to be encapsulated.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param iterator The {@link Scalar} of {@link Iterator} of {@link Row} to be encapsulated.
+     */
     private RowsOfTable(
         final Statement stmt,
         final ResultSet rset,
@@ -47,6 +59,14 @@ public class RowsOfTable extends IterableAutoCloseable<Row> {
         );
     }
 
+    /**
+     * Instantiates a new Rows of table.
+     * @param stmt The {@link Statement} to be encapsulated.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param cols The {@link Iterable} of {@link Column} to be encapsulated.
+     * @param rows The {@link Number} to be encapsulated.
+     * @checkstyle ParameterNumberCheck (200 lines)
+     */
     private RowsOfTable(
         final Statement stmt,
         final ResultSet rset,
@@ -57,13 +77,12 @@ public class RowsOfTable extends IterableAutoCloseable<Row> {
             stmt,
             rset,
             () -> new Iterator<Row>() {
-                final Long all = rows.longValue();
-
-                Long row = 0L;
+                private final Long all = rows.longValue();
+                private Long row = 0L;
 
                 @Override
                 public boolean hasNext() {
-                    return row < all;
+                    return this.row < this.all;
                 }
 
                 @Override
@@ -71,8 +90,8 @@ public class RowsOfTable extends IterableAutoCloseable<Row> {
                     return new UncheckedFunc<ResultSet, Row>(
                         previous -> {
                             previous.next();
-                            row++;
-                            return new RowOfResultSet(row, previous, cols);
+                            this.row = this.row + 1;
+                            return new RowOfResultSet(this.row, previous, cols);
                         }
                     ).apply(rset);
                 }
@@ -80,6 +99,14 @@ public class RowsOfTable extends IterableAutoCloseable<Row> {
         );
     }
 
+    /**
+     * Instantiates a new Rows of table.
+     * @param query The {@link DataQuery} to be encapsulated.
+     * @param stmt The {@link Statement} to be encapsulated.
+     * @param cols The {@link Iterable} of {@link Column} to be encapsulated.
+     * @param rows The {@link Number} of rows count to be encapsulated.
+     * @checkstyle ParameterNumberCheck (200 lines)
+     */
     private RowsOfTable(
         final DataQuery query,
         final Statement stmt,
@@ -98,6 +125,12 @@ public class RowsOfTable extends IterableAutoCloseable<Row> {
         );
     }
 
+    /**
+     * Instantiates a new Rows of table.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     * @checkstyle MagicNumberCheck (100 lines)
+     */
     public RowsOfTable(
         final Connection connection,
         final DbObject<DbdTableMapping> table

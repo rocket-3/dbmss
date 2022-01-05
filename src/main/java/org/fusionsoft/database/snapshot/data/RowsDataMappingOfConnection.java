@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -17,23 +17,30 @@ package org.fusionsoft.database.snapshot.data;
 
 import java.sql.Connection;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import org.fusionsoft.database.mapping.dbd.built.DbdDataMappingOfEntries;
 import org.fusionsoft.database.snapshot.DbObject;
 
-public class InlineRowsDataObjectOfConnection extends InlineDataObjectOfMapping {
+/**
+ * The {@link DbdDataMappingOfEntries} with '"key" : ["value1", "value2"]' format,
+ *  can be constructed of {@link Connection} and parent {@link DbObject} {@link DbdTableMapping}.
+ * @since 0.1
+ */
+public class RowsDataMappingOfConnection extends DbdDataMappingOfEntries {
 
     /**
-     * Instantiates a new simple db object.
+     * Instantiates a new Rows data mapping of connection.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param table The {@link DbObject} {@link DbdTableMapping} to be encapsulated.
      */
-    public InlineRowsDataObjectOfConnection(
+    public RowsDataMappingOfConnection(
         final Connection connection,
         final DbObject<DbdTableMapping> table
     ) {
         super(
-            new InlineRowsDataMappingOfConnection(
+            new RowsDataEntriesOfConnection(
                 connection,
                 table
-            ),
-            table
+            )
         );
     }
 

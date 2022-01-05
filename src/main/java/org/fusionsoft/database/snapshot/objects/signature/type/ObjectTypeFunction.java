@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -17,8 +17,15 @@ package org.fusionsoft.database.snapshot.objects.signature.type;
 
 import org.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
 
+/**
+ * The only {@link SimpleObjectType} of {@link DbdFunctionMapping} implementation.
+ * @since 0.1
+ */
 public class ObjectTypeFunction extends SimpleObjectType<DbdFunctionMapping> {
 
+    /**
+     * Instantiates a new Object type function.
+     */
     public ObjectTypeFunction() {
         super(x -> new DbdFunctionMapping(x.asMapping()), "function");
     }

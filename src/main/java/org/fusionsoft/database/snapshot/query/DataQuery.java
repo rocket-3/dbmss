@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.query;
 
 import java.text.MessageFormat;
@@ -34,17 +33,32 @@ import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import org.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
+/**
+ * The {@link BasicQuery} for table data rows.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 public class DataQuery extends BasicQuery<Text> {
 
+    /**
+     * Instantiates a new Data query.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
     public DataQuery(final DbObject<DbdTableMapping> table) {
         this(
             table.signature().name(),
             new DbdColumnMappingsOfTable(table)
         );
     }
+
+    /**
+     * Instantiates a new Data query.
+     * @param table The {@link ObjectName} to be encapsulated.
+     * @param cols The {@link Iterable} of {@link DbdColumnMapping} to be encapsulated.
+     */
     public DataQuery(
         final ObjectName table,
-        final Iterable<DbdColumnMapping> columnsMappings
+        final Iterable<DbdColumnMapping> cols
     ) {
         super(
             new TextOfScalar(
@@ -61,13 +75,10 @@ public class DataQuery extends BasicQuery<Text> {
                             new Sorted<>(
                                 Comparator.comparing(
                                     x -> new NumberOf(
-                                        new TextOfMappingValue(
-                                            x,
-                                            DbdColumnFields.ORDER
-                                        )
+                                        new TextOfMappingValue(x, DbdColumnFields.ORDER)
                                     ).intValue()
                                 ),
-                                columnsMappings
+                                cols
                             )
                         )
                     ).asString()

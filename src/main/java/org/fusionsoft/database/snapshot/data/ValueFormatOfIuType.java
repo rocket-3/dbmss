@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -20,8 +20,17 @@ import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.fusionsoft.database.mapping.value.IuTypeValues;
 
+/**
+ * The {@link ValueFormatOfScalar} which uses different {@link ValueFormat}s inside,
+ *  can be constructed from any {@link IuTypeValues}'s {@link Text}.
+ * @since 0.1
+ */
 public class ValueFormatOfIuType extends ValueFormatOfScalar {
 
+    /**
+     * Instantiates a new Value format of iu type.
+     * @param type The {@link Text} to be encapsulated.
+     */
     public ValueFormatOfIuType(final Text type) {
         super(
             () ->

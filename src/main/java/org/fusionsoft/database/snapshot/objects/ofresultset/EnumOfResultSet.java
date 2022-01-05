@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ import org.fusionsoft.lib.text.TextOfResultSet;
 import org.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
 
 /**
- * The {@link SimpleDbObjectOfEntries} from {@link Query} of {@link DbdEnumField} and {@link ResultSet}.
+ * The {@link SimpleDbObjectOfEntries}, can be constructed from
+ *  {@link Query} of {@link DbdEnumField} and {@link ResultSet}.
  * @since 0.1
  */
 public class EnumOfResultSet extends SimpleDbObjectOfEntries<DbdEnumMapping> {

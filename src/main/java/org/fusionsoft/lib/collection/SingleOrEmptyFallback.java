@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -13,16 +13,32 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.lib.collection;
 
 import org.cactoos.Scalar;
 
+/**
+ * The {@link Scalar} of single {@link T} element from collection or fallback {@link T} on empty.
+ * @param <T> The type parameter.
+ * @since 0.1
+ */
 public class SingleOrEmptyFallback<T> implements Scalar<T> {
 
+    /**
+     * The Iterable<? extends T> encapsulated.
+     */
     private final Iterable<? extends T> iterable;
+
+    /**
+     * The T encapsulated.
+     */
     private final T fallback;
 
+    /**
+     * Instantiates a new Single or empty fallback.
+     * @param iterable The {@link Iterable} to be encapsulated.
+     * @param fallback The fallback {@link T} entity to be encapsulated.
+     */
     public SingleOrEmptyFallback(final Iterable<? extends T> iterable, final T fallback) {
         this.iterable = iterable;
         this.fallback = fallback;
@@ -31,9 +47,9 @@ public class SingleOrEmptyFallback<T> implements Scalar<T> {
     @Override
     public T value() {
         T value = fallback;
-        if(this.iterable.iterator().hasNext()){
+        if (this.iterable.iterator().hasNext()) {
             value = new Single<>(this.iterable).value();
-        };
+        } ;
         return value;
     }
 

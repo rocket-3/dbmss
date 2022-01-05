@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -13,25 +13,39 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.lib.collection;
 
 import org.cactoos.iterable.IterableOf;
 
+/**
+ * The type of that can be constructed of.
+ * @since 0.1
+ */
 public class JoinedAutoCloseable implements AutoCloseable {
 
+    /**
+     * The Iterable of AutoCloseable encapsulated.
+     */
     private final Iterable<AutoCloseable> iterable;
 
+    /**
+     * Instantiates a new Joined auto closeable.
+     * @param iterable The {@link Iterable} of {@link AutoCloseable} to be encapsulated.
+     */
     public JoinedAutoCloseable(final Iterable<AutoCloseable> iterable) {
         this.iterable = iterable;
     }
 
+    /**
+     * Instantiates a new Joined auto closeable.
+     * @param values The {@link AutoCloseable} array to be encapsulated.
+     */
     public JoinedAutoCloseable(final AutoCloseable... values) {
         this(new IterableOf<>(values));
     }
 
     @Override
-    public void close() throws Exception {
+    public final void close() throws Exception {
         for (final AutoCloseable closeable : this.iterable) {
             closeable.close();
         }

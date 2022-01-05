@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -13,33 +13,45 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.mapping.entries;
 
 import java.util.Map;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
-public class MapEntryOfScalar<K,V> implements Map.Entry<K,V> {
+/**
+ * The {@link Map.Entry} of {@link Scalar}.
+ * @param <K> The type of key parameter.
+ * @param <V> The type of value parameter.
+ * @since 0.1
+ */
+public class MapEntryOfScalar<K, V> implements Map.Entry<K, V> {
 
-    private final Unchecked<? extends Map.Entry<K,V>> scalar;
+    /**
+     * The {@link Unchecked} {@link Scalar} encapsulated.
+     */
+    private final Unchecked<? extends Map.Entry<K, V>> scalar;
 
+    /**
+     * Instantiates a new Map entry of scalar.
+     * @param scalar The {@link Scalar} of {@link Map.Entry} to be encapsulated.
+     */
     public MapEntryOfScalar(final Scalar<? extends Map.Entry<K, V>> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
     @Override
-    public K getKey() {
+    public final K getKey() {
         return this.scalar.value().getKey();
     }
 
     @Override
-    public V getValue() {
+    public final V getValue() {
         return this.scalar.value().getValue();
     }
 
     @Override
-    public V setValue(final V value) {
+    public final V setValue(final V value) {
         return this.scalar.value().setValue(value);
     }
 

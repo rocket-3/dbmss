@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,17 +15,23 @@
  */
 package org.fusionsoft.database.snapshot.objects;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
-public class ObjectsCasted<T extends YamlNode> extends ObjectsEnvelope<T>
-    implements Objects<T> {
+/**
+ * The type of {@link Objects}, with yaml representation casted to some {@link YamlMapping}.
+ * @param <T> The type of {@link YamlNode} parameter.
+ * @since 0.1
+ */
+public class ObjectsCasted<T extends YamlNode> extends ObjectsEnvelope<T> implements Objects<T> {
 
     /**
      * Ctor.
+     * @param cast The cast {@link Func} of {@link YamlNode}, {@link T} to be encapsulated.
      * @param iterable The wrapped iterable
      */
     public ObjectsCasted(

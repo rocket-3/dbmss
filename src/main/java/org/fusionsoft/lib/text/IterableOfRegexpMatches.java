@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -26,8 +26,18 @@ import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.TextOfString;
 
+/**
+ * The iterable of RegExp matches from {@link Text}.
+ * @since 0.1
+ */
 public class IterableOfRegexpMatches extends IterableEnvelope<Text> {
 
+    /**
+     * Instantiates a new Iterable of regexp matches.
+     * @param pattern The {@link Scalar} of {@link Pattern} to be encapsulated.
+     * @param group The func for each group to be encapsulated.
+     * @param origin The {@link Text} to be encapsulated.
+     */
     public IterableOfRegexpMatches(
         final Scalar<Pattern> pattern,
         final Func<Matcher, String> group,
@@ -36,7 +46,7 @@ public class IterableOfRegexpMatches extends IterableEnvelope<Text> {
         super(
             new IterableOf<>(
                 () -> {
-                    final List<Text> matches = new ArrayList<>();
+                    final List<Text> matches = new ArrayList<>(0);
                     final Matcher matcher = pattern.value().matcher(origin.asString());
                     while (matcher.find()) {
                         matches.add(new TextOfString(group.apply(matcher)));
@@ -47,6 +57,12 @@ public class IterableOfRegexpMatches extends IterableEnvelope<Text> {
         );
     }
 
+    /**
+     * Instantiates a new Iterable of regexp matches.
+     * @param regexp The RegExp's {@link Text} to be encapsulated.
+     * @param group The func for each group to be encapsulated.
+     * @param origin The {@link Text} to be encapsulated.
+     */
     public IterableOfRegexpMatches(
         final Text regexp,
         final Func<Matcher, String> group,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -23,9 +23,21 @@ import org.cactoos.text.Replaced;
 import org.cactoos.text.Sub;
 import org.fusionsoft.lib.text.IterableOfRegexpMatches;
 
+/**
+ * The iterable of {@link RegexpOfFlowYamlSequenceValues} matches from {@link Text}.
+ * @since 0.1
+ */
 public class TextIterableOfFlowYamlSequence extends IterableEnvelope<Text> {
 
-    public TextIterableOfFlowYamlSequence(final Text text, final RegexpOfFlowYamlSequenceValues regexp) {
+    /**
+     * Instantiates a new Text iterable of flow yaml sequence.
+     * @param text The {@link Text} to be encapsulated.
+     * @param regexp The {@link RegexpOfFlowYamlSequenceValues} to be encapsulated.
+     */
+    public TextIterableOfFlowYamlSequence(
+        final Text text,
+        final RegexpOfFlowYamlSequenceValues regexp
+    ) {
         super(
             new Mapped<Text>(
                 x -> new Replaced(x, "\"\"", "\""),
@@ -42,10 +54,18 @@ public class TextIterableOfFlowYamlSequence extends IterableEnvelope<Text> {
         );
     }
 
+    /**
+     * Instantiates a new Text iterable of flow yaml sequence.
+     * @param text The {@link Text} to be encapsulated.
+     */
     public TextIterableOfFlowYamlSequence(final Text text) {
         this(text, new RegexpOfFlowYamlSequenceValues());
     }
 
+    /**
+     * Instantiates a new Text iterable of flow yaml sequence.
+     * @param node The {@link YamlNode} to be encapsulated.
+     */
     public TextIterableOfFlowYamlSequence(final YamlNode node) {
         this(new TextOfScalarNode(node));
     }

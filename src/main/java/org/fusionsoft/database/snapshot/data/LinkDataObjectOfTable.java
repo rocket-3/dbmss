@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,20 +15,24 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import org.cactoos.iterable.Mapped;
-import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import org.fusionsoft.database.snapshot.DbObject;
 
-public class InlineLinkDataObjectsOfTables extends ObjectsEnvelope<DbdDataMapping> {
+/**
+ * The {@link DataObjectOfMapping} of {@link LinkDataMappingOfTable},
+ *  can be created from parent {@link DbObject} of {@link DbdTableMapping}.
+ * @since 0.1
+ */
+public class LinkDataObjectOfTable extends DataObjectOfMapping {
 
-    public InlineLinkDataObjectsOfTables(final Objects<DbdTableMapping> tables) {
+    /**
+     * Instantiates a new Inline link data object of table.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
+    public LinkDataObjectOfTable(final DbObject<DbdTableMapping> table) {
         super(
-            new Mapped<>(
-                InlineLinkDataObjectOfTable::new,
-                tables
-            )
+            new LinkDataMappingOfTable(table),
+            table
         );
     }
 

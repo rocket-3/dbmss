@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,7 +21,9 @@ import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 
 /**
- * The Objects implementation that can be constructed of Iterable of DbObjects.
+ * The {@link Objects} implementation
+ *  that can be constructed of {@link Iterable} of {@link DbObject}s.
+ * @param <T> The subtype of {@link YamlNode} parameter.
  * @since 0.1
  */
 public class ObjectsEnvelope<T extends YamlNode>

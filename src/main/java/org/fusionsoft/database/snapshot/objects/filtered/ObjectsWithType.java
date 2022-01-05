@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -24,17 +24,18 @@ import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
  * The {@link Objects} filtered by {@link ObjectType}.
+ * @param <T> The type of {@link ObjectType} parameter.
  * @since 0.1
  */
-public class ObjectsWithType<M extends YamlNode> extends ObjectsCasted<M> {
+public class ObjectsWithType<T extends YamlNode> extends ObjectsCasted<T> {
 
     /**
      * Instantiates a new Objects with type.
-     * @param type The ObjectType to be encapsulated.
-     * @param origin The Objects to be encapsulated.
+     * @param type The {@link ObjectType} to be encapsulated.
+     * @param origin The {@link Objects} to be encapsulated.
      */
     public ObjectsWithType(
-        final ObjectType<M> type,
+        final ObjectType<T> type,
         final Objects<?> origin
     ) {
         super(

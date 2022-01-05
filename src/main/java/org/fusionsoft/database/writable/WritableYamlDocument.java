@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.fusionsoft.database.Writable;
 import org.fusionsoft.database.YamlRepresentative;
 
 /**
- * The type of that can be constructed of.
+ * The {@link Writable} of {@link YamlRepresentative}/{@link YamlNode}.
  * @since 0.1
  */
 public class WritableYamlDocument implements Writable {

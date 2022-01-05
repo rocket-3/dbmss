@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -13,31 +13,37 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.data;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import org.cactoos.Text;
 
+/**
+ * The type of that can be constructed of.
+ * @since 0.1
+ */
 public class ValueFormatDate implements ValueFormat {
 
     @Override
-    public String storableRepresentationOf(final String text) {
+    public final String yamlRepresentationOf(final String text) {
         return null;
     }
 
     @Override
-    public void passInPrepareStatement(final PreparedStatement stmt, final int ordinal, final Text text) {
+    public final void passInPrepareStatement(
+        final PreparedStatement stmt,
+        final int ordinal, final Text text
+    ) {
     }
 
     @Override
-    public String ofResultSet(final ResultSet rset, final int ordinal) {
+    public final String ofResultSet(final ResultSet rset, final int ordinal) {
         return null;
     }
 
     @Override
-    public String ofResultSet(final ResultSet rset, final String key) {
+    public final String ofResultSet(final ResultSet rset, final String key) {
         return null;
     }
 

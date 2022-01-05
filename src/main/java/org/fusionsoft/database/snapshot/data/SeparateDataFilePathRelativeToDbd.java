@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -16,11 +16,20 @@
 package org.fusionsoft.database.snapshot.data;
 
 import java.text.MessageFormat;
+import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOfScalar;
 
+/**
+ * The {@link Text} of separate data file name as path, relative to DBD document path.
+ * @since 0.1
+ */
 public class SeparateDataFilePathRelativeToDbd extends TextEnvelope {
 
+    /**
+     * Instantiates a new Separate data file path relative to dbd.
+     * @param name The {@link SeparateDataFileName} to be encapsulated.
+     */
     public SeparateDataFilePathRelativeToDbd(final SeparateDataFileName name) {
         super(
             new TextOfScalar(

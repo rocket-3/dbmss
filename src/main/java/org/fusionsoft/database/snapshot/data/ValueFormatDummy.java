@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,15 +21,19 @@ import org.cactoos.Text;
 import org.cactoos.scalar.Unchecked;
 import org.fusionsoft.lib.exception.NotImplemented;
 
+/**
+ * The type of that can be constructed of.
+ * @since 0.1
+ */
 public class ValueFormatDummy implements ValueFormat {
 
     @Override
-    public String storableRepresentationOf(final String text) {
+    public final String yamlRepresentationOf(final String text) {
         return text;
     }
 
     @Override
-    public void passInPrepareStatement(
+    public final void passInPrepareStatement(
         final PreparedStatement stmt,
         final int ordinal,
         final Text text
@@ -38,12 +42,12 @@ public class ValueFormatDummy implements ValueFormat {
     }
 
     @Override
-    public String ofResultSet(final ResultSet rset, final int ordinal) {
+    public final String ofResultSet(final ResultSet rset, final int ordinal) {
         return new Unchecked<>(() -> String.valueOf(rset.getString(ordinal))).value();
     }
 
     @Override
-    public String ofResultSet(final ResultSet rset, final String key) {
+    public final String ofResultSet(final ResultSet rset, final String key) {
         return new Unchecked<>(() -> String.valueOf(rset.getString(key))).value();
     }
 

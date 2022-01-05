@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -19,21 +19,32 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectSignature;
 
+/**
+ * The {@link DbObject} of {@link YamlNode} that wraps another {@link DbObject}.
+ * @since 0.1
+ */
 public class DefaultObject implements DbObject<YamlNode> {
 
+    /**
+     * The {@link DbObject} encapsulated.
+     */
     private final DbObject<? extends YamlNode> object;
 
+    /**
+     * Instantiates a new Default object.
+     * @param object The {@link DbObject} to be encapsulated.
+     */
     public DefaultObject(final DbObject<? extends YamlNode> object) {
         this.object = object;
     }
 
     @Override
-    public ObjectSignature signature() {
+    public final ObjectSignature signature() {
         return this.object.signature();
     }
 
     @Override
-    public YamlNode asYaml() {
+    public final YamlNode asYaml() {
         return this.object.asYaml();
     }
 

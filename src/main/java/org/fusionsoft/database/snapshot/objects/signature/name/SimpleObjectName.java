@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -31,11 +31,19 @@ import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 /**
  * The Text of db object names joined by {@link SimpleObjectNameDelimiter}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class SimpleObjectName implements ObjectName {
 
+    /**
+     * The UncheckedText encapsulated.
+     */
     private final UncheckedText text;
 
+    /**
+     * Instantiates a new Simple object name.
+     * @param text The {@link Text} to be encapsulated.
+     */
     public SimpleObjectName(final Text text) {
         this.text = new UncheckedText(text);
     }
@@ -83,12 +91,12 @@ public class SimpleObjectName implements ObjectName {
     }
 
     @Override
-    public boolean equals(final ObjectName other) {
+    public final boolean equals(final ObjectName other) {
         return this.asString().equals(other.asString());
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return this.text.asString();
     }
 

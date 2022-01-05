@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,12 +21,25 @@ import org.cactoos.Fallback;
 import org.cactoos.scalar.ScalarOf;
 import org.cactoos.scalar.ScalarWithFallback;
 
+/**
+ * The decorator of {@link YamlMapping} that uses {@link MappingEmpty} as delegate instead of
+ *  original, when unchecked {@link YamlNodeNotFoundException} occurs.
+ * @since 0.1
+ */
 public class YamlMappingOrEmptyWhenNoValueNotFound extends YamlMappingOfScalar {
 
+    /**
+     * Instantiates a new Yaml mapping or empty when no value not found.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
+     */
     public YamlMappingOrEmptyWhenNoValueNotFound(final YamlMapping mapping) {
         super(
             new ScalarWithFallback<>(
-                new ScalarOf<>(()-> { mapping.keys(); return mapping; } ),
+                new ScalarOf<>(
+                    () -> {
+                        mapping.keys(); return mapping;
+                    }
+                ),
                 new Fallback.From<>(
                     YamlNodeNotFoundException.class,
                     e -> new MappingEmpty()

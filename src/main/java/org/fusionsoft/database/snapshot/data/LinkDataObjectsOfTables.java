@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,22 +15,27 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
-import java.sql.Connection;
 import org.cactoos.iterable.Mapped;
 import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
-public class InlineRowsDataObjectsOfConnection extends ObjectsEnvelope<DbdDataMapping> {
+/**
+ * The Iterable of {@link LinkDataObjectOfTable},
+ *  can be constructed from {@link Objects} of {@link DbdTableMapping}.
+ * @since 0.1
+ */
+public class LinkDataObjectsOfTables extends ObjectsEnvelope<DbdDataMapping> {
 
-    public InlineRowsDataObjectsOfConnection(
-        final Connection connection,
-        final Objects<DbdTableMapping> tables
-    ) {
+    /**
+     * Instantiates a new Link data objects of tables.
+     * @param tables The {@link Objects} of {@link DbdTableMapping} to be encapsulated.
+     */
+    public LinkDataObjectsOfTables(final Objects<DbdTableMapping> tables) {
         super(
             new Mapped<>(
-                table -> new InlineRowsDataObjectOfConnection(connection, table),
+                LinkDataObjectOfTable::new,
                 tables
             )
         );

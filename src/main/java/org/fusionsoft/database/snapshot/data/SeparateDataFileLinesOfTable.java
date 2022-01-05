@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,8 +21,18 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.lib.collection.IterableAutoCloseable;
 
+/**
+ * The {@link IterableAutoCloseable} of {@link SeparateDataFileLineOfRow},
+ *  can be constructed of {@link Connection} and parent {@link DbObject} of {@link DbdTableMapping}.
+ * @since 0.1
+ */
 public class SeparateDataFileLinesOfTable extends IterableAutoCloseable<String> {
 
+    /**
+     * Instantiates a new Separate data file lines of table.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param table The parent {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
     public SeparateDataFileLinesOfTable(
         final Connection connection,
         final DbObject<DbdTableMapping> table
@@ -34,6 +44,12 @@ public class SeparateDataFileLinesOfTable extends IterableAutoCloseable<String> 
         );
     }
 
+    /**
+     * Instantiates a new Separate data file lines of table.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param table The parent {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     * @param columns The {@link Iterable} of {@link Column} to be encapsulated.
+     */
     public SeparateDataFileLinesOfTable(
         final Connection connection,
         final DbObject<DbdTableMapping> table,
@@ -48,6 +64,11 @@ public class SeparateDataFileLinesOfTable extends IterableAutoCloseable<String> 
         );
     }
 
+    /**
+     * Instantiates a new Separate data file lines of table.
+     * @param columns The {@link Iterable} of {@link Column} to be encapsulated.
+     * @param rows The {@link RowsOfTable} to be encapsulated.
+     */
     private SeparateDataFileLinesOfTable(
         final Iterable<Column> columns,
         final RowsOfTable rows

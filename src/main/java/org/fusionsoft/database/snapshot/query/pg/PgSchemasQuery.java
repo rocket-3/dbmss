@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -17,8 +17,15 @@ package org.fusionsoft.database.snapshot.query.pg;
 
 import org.fusionsoft.database.mapping.fields.DbdSchemaFields;
 
+/**
+ * The only {@link PgMessageFormatQuery} of {@link DbdSchemaFields}.
+ * @since 0.1
+ */
 public class PgSchemasQuery extends PgMessageFormatQuery<DbdSchemaFields> {
 
+    /**
+     * Instantiates a new Pg schemas query.
+     */
     public PgSchemasQuery() {
         super(
             "select nspname AS {0}, usename AS {1}\n"

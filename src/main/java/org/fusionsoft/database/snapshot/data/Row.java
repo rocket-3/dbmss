@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,10 +15,23 @@
  */
 package org.fusionsoft.database.snapshot.data;
 
+/**
+ * The interface representing a row in a DBMS data table.
+ * @since 0.1
+ */
 public interface Row {
 
+    /**
+     * Text representation of a specific column in a row.
+     * @param column The column.
+     * @return The string representation of data.
+     */
     String textOf(Column column);
 
+    /**
+     * Label of row, identity of an unique row in specific table.
+     * @return The string representation of row ID.
+     */
     String label();
 
 }

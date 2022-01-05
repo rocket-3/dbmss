@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,25 +21,41 @@ import org.cactoos.func.UncheckedFunc;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectSignature;
 
+/**
+ * The type of that can be constructed of.
+ * @param <T> The type of {@link YamlNode} parameter.
+ * @since 0.1
+ */
 public class ObjectCasted<T extends YamlNode> implements DbObject<T> {
 
+    /**
+     * The {@link DbObject} encapsulated.
+     */
     private final DbObject<?> object;
 
+    /**
+     * The {@link UncheckedFunc} of {@link YamlNode}, {@link T} encapsulated.
+     */
     private final UncheckedFunc<? super YamlNode, T> cast;
 
+    /**
+     * Instantiates a new Object casted.
+     * @param cast The cast {@link Func} of {@link YamlNode}, {@link T} to be encapsulated.
+     * @param object The {@link DbObject} to be encapsulated.
+     */
     public ObjectCasted(final Func<? super YamlNode, T> cast, final DbObject<?> object) {
         this.object = object;
         this.cast = new UncheckedFunc<>(cast);
     }
 
     @Override
-    public ObjectSignature signature() {
+    public final ObjectSignature signature() {
         return this.object.signature();
     }
 
     @Override
-    public T asYaml() {
-        return cast.apply(object.asYaml());
+    public final T asYaml() {
+        return this.cast.apply(this.object.asYaml());
     }
 
 }

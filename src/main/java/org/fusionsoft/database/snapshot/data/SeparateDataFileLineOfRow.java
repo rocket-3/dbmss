@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -18,25 +18,41 @@ package org.fusionsoft.database.snapshot.data;
 import java.text.MessageFormat;
 import org.cactoos.Text;
 
+/**
+ * The {@link Text} of a line in a separate data file,
+ *  scan be constructed of {@link Row} and {@link Iterable} of {@link Column}.
+ * @since 0.1
+ */
 public class SeparateDataFileLineOfRow implements Text {
 
+    /**
+     * The Row encapsulated.
+     */
     private final Row row;
 
+    /**
+     * The Iterable of {@link Column} encapsulated.
+     */
     private final Iterable<Column> cols;
 
+    /**
+     * Instantiates a new Separate data file line of row.
+     * @param row The {@link Row} to be encapsulated.
+     * @param cols The {@link Iterable} of {@link Column} to be encapsulated.
+     */
     public SeparateDataFileLineOfRow(final Row row, final Iterable<Column> cols) {
         this.row = row;
         this.cols = cols;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return MessageFormat.format(
             "{0}: [{1}]",
             this.row.label(),
             String.join(
                 ", ",
-                new StorableFormattedValuesOfRow(row, cols)
+                new StorableFormattedValuesOfRow(this.row, this.cols)
             )
         );
     }

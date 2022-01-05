@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -33,10 +33,20 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
 
+/**
+ * The test for {@link ObjectsWithParent}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
 class ObjectsWithParentTest {
 
+    /**
+     * Works.
+     * @throws Exception When can't.
+     */
     @Test
     public void works() throws Exception {
+        final int size = 3;
         final Func<Iterable<String>, DbObject<YamlMapping>> func = iterable -> new SimpleDbObject<>(
             new MappingEmpty(),
             new SimpleObjectSignature(
@@ -65,7 +75,7 @@ class ObjectsWithParentTest {
                     )
                 )
             ),
-            new HasSize(3)
+            new HasSize(size)
         );
     }
 

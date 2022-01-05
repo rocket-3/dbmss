@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -32,8 +32,16 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 
-class InlineLinkDataObjectOfTableTest {
+/**
+ * The tests for {@link LinkDataObjectOfTable}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
+class LinkDataObjectOfTableTest {
 
+    /**
+     * Renders link.
+     */
     @Test
     public void rendersLink() {
         final DbObject<DbdTableMapping> table = new Single<>(
@@ -55,7 +63,7 @@ class InlineLinkDataObjectOfTableTest {
         new Assertion<>(
             "Should render non empty data rows for each table",
             new TextOfMappingValue(
-                new InlineLinkDataObjectOfTable(table).asYaml(),
+                new LinkDataObjectOfTable(table).asYaml(),
                 DbdTableFields.DATA
             ),
             new HasString(

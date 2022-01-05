@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.ofdbms;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import org.cactoos.Func;
 import org.cactoos.scalar.ScalarOf;
@@ -25,16 +25,20 @@ import org.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 /**
  * The type of {@link Objects} that can be constructed of {@link Connection}
  *  and function that returns {@link Objects} of {@link Connection}.
+ * @param <T> The subtype of {@link YamlNode} parameter.
  * @since 0.1
  */
-public class ObjectsOfConnection<T extends YamlMapping> extends ObjectsOfScalar<T> {
+public class ObjectsOfConnection<T extends YamlNode> extends ObjectsOfScalar<T> {
 
     /**
      * Instantiates a new Objects of connection.
      * @param connection The Connection to be encapsulated.
      * @param func The Func of Connection returns Objects to be encapsulated.
      */
-    public ObjectsOfConnection(final Connection connection, final Func<Connection, Objects<T>> func) {
+    public ObjectsOfConnection(
+        final Connection connection,
+        final Func<Connection, Objects<T>> func
+    ) {
         super(
             new ScalarOf<>(
                 func,

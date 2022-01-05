@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -24,8 +24,18 @@ import org.fusionsoft.lib.yaml.YamlMappingOfPath;
 import org.fusionsoft.lib.yaml.YamlMappingOrEmptyWhenNoValueNotFound;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
+/**
+ * The objects of {@link DbdTriggerMapping}, extracted of DBD/schemas/#schema/triggers node.
+ * @since 0.1
+ */
 public class ObjectsOfDbdTriggersMapping extends ObjectsEnvelope<DbdTriggerMapping> {
 
+    /**
+     * Instantiates a new Objects of dbd triggers mapping.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
+     * @param key The {@link Text} to be encapsulated.
+     * @param table The {@link ObjectName} to be encapsulated.
+     */
     public ObjectsOfDbdTriggersMapping(
         final YamlMapping mapping,
         final Text key,
@@ -39,6 +49,11 @@ public class ObjectsOfDbdTriggersMapping extends ObjectsEnvelope<DbdTriggerMappi
         );
     }
 
+    /**
+     * Instantiates a new Objects of dbd triggers mapping.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
+     * @param table The {@link ObjectName} to be encapsulated.
+     */
     public ObjectsOfDbdTriggersMapping(final YamlMapping mapping, final ObjectName table) {
         super(
             new IterableOfClassFromYamlNode<>(

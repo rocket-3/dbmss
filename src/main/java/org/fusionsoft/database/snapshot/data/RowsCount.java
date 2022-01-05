@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -22,11 +22,22 @@ import java.text.MessageFormat;
 import org.cactoos.Text;
 import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.text.TextOfScalar;
+import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 
+/**
+ * The {@link NumberEnvelope} of rows count of table from {@link Connection}.
+ * @since 0.1
+ */
 public class RowsCount extends NumberEnvelope {
 
+    /**
+     * Instantiates a new Rows count.
+     * @param schema The {@link Text} of schema name to be encapsulated.
+     * @param table The {@link Text} of table name to be encapsulated.
+     * @param connection The {@link Connection} to be encapsulated.
+     */
     public RowsCount(final Text schema, final Text table, final Connection connection) {
         super(
             () -> {
@@ -52,6 +63,11 @@ public class RowsCount extends NumberEnvelope {
         );
     }
 
+    /**
+     * Instantiates a new Rows count.
+     * @param table The {@link ObjectName} to be encapsulated.
+     * @param connection The {@link Connection} to be encapsulated.
+     */
     public RowsCount(final ObjectName table, final Connection connection) {
         this(
             new TextOfScalar(() -> table.parent().asString()),
@@ -60,7 +76,12 @@ public class RowsCount extends NumberEnvelope {
         );
     }
 
-    public RowsCount(final DbObject<?> table, final Connection connection) {
+    /**
+     * Instantiates a new Rows count.
+     * @param table The parent {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     * @param connection The {@link Connection} to be encapsulated.
+     */
+    public RowsCount(final DbObject<DbdTableMapping> table, final Connection connection) {
         this(
             new TextOfScalar(() -> table.signature().name().parent().asString()),
             new TextOfScalar(() -> table.signature().name().first().asString()),

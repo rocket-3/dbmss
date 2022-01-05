@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,14 +21,30 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.Concatenated;
 
+/**
+ * The scalar of temp file random {@link Path}, resolved from some root {@link Path}.
+ * @since 0.1
+ */
 public class TempFilePath implements Scalar<Path> {
 
+    /**
+     * The scalar of Path encapsulated.
+     */
     private final Unchecked<Path> scalar;
 
+    /**
+     * Instantiates a new Temp file path.
+     * @param scalar The {@link Scalar} to be encapsulated.
+     */
     private TempFilePath(final Scalar<Path> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
+    /**
+     * Instantiates a new Temp file path.
+     * @param inside The root path {@link Scalar} to be encapsulated.
+     * @param prefix The prefix {@link CharSequence} to be encapsulated.
+     */
     public TempFilePath(final Scalar<Path> inside, final CharSequence prefix) {
         this(
             () -> {
@@ -44,6 +60,12 @@ public class TempFilePath implements Scalar<Path> {
             }
         );
     }
+
+    /**
+     * Instantiates a new Temp file path.
+     * @param inside The root {@link Path} to be encapsulated.
+     * @param prefix The prefix {@link CharSequence} to be encapsulated.
+     */
     public TempFilePath(final Path inside, final CharSequence prefix) {
         this(
             () -> inside,

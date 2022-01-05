@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -21,10 +21,20 @@ import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * The RegExp of yaml array sequence pattern and extract from matcher function.
+ * @since 0.1
+ */
 public class RegexpOfFlowYamlSequenceValues {
 
+    /**
+     * The scalar of Pattern encapsulated.
+     */
     private final Unchecked<Pattern> scalar;
 
+    /**
+     * Instantiates a new Regexp of flow yaml sequence values.
+     */
     public RegexpOfFlowYamlSequenceValues() {
         this.scalar = new Unchecked<>(
             new Sticky<>(
@@ -35,10 +45,19 @@ public class RegexpOfFlowYamlSequenceValues {
         );
     }
 
+    /**
+     * Pattern.
+     * @return The pattern.
+     */
     public final Pattern pattern() {
         return scalar.value();
     }
 
+    /**
+     * Extract string.
+     * @param matcher The {@link Matcher}.
+     * @return The string.
+     */
     public final String extract(final Matcher matcher) {
         return new Unchecked<>(
             new Ternary<>(

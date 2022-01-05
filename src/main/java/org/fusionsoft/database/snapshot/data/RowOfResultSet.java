@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -13,15 +13,25 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package org.fusionsoft.database.snapshot.data;
 
 import java.sql.ResultSet;
 import org.cactoos.func.UncheckedBiFunc;
 import org.cactoos.list.ListOf;
 
+/**
+ * The {@link RowOfArray} extension, can be constructed
+ *  of {@link ResultSet} and {@link Iterable} of {@link Column}.
+ * @since 0.1
+ */
 public class RowOfResultSet extends RowOfArray {
 
+    /**
+     * Instantiates a new Row of result set.
+     * @param num The {@link long} to be encapsulated.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param columns The {@link Iterable} {@link Column} to be encapsulated.
+     */
     public RowOfResultSet(final long num, final ResultSet rset, final Iterable<Column> columns) {
         super(
             String.valueOf(num),
@@ -30,7 +40,7 @@ public class RowOfResultSet extends RowOfArray {
                     final String[] value = new String[new ListOf<>(cols).size()];
                     for (final Column col : cols) {
                         final int index = col.order().intValue();
-                        value[index-1] = col.format().ofResultSet(data, index);
+                        value[index - 1] = col.format().ofResultSet(data, index);
                     }
                     return value;
                 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -31,6 +31,12 @@ import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  */
 public class ObjectsOfDbdConstraintsMapping extends ObjectsEnvelope<DbdConstraintMapping> {
 
+    /**
+     * Instantiates a new Objects of dbd constraints mapping.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
+     * @param key The key's {@link Text} to be encapsulated.
+     * @param table The {@link ObjectName} to be encapsulated.
+     */
     public ObjectsOfDbdConstraintsMapping(
         final YamlMapping mapping,
         final Text key,
@@ -43,10 +49,11 @@ public class ObjectsOfDbdConstraintsMapping extends ObjectsEnvelope<DbdConstrain
             table
         );
     }
+
     /**
      * Instantiates a new Objects of dbd constraints mapping.
-     * @param constraints The YamlMapping to be encapsulated.
-     * @param table The Text to be encapsulated.
+     * @param constraints The {@link YamlMapping} to be encapsulated.
+     * @param table The {@link ObjectName} to be encapsulated.
      */
     public ObjectsOfDbdConstraintsMapping(
         final YamlMapping constraints,

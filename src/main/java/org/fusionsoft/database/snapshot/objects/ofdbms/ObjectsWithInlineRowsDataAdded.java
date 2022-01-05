@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -17,16 +17,21 @@ package org.fusionsoft.database.snapshot.objects.ofdbms;
 
 import java.sql.Connection;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.data.InlineRowsDataObjectsOfConnection;
+import org.fusionsoft.database.snapshot.data.RowsDataObjectsOfConnection;
 import org.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
+/**
+ * The {@link DefaultObjectsJoined} with {@link RowsDataObjectsOfConnection} added.
+ * @since 0.1
+ */
 public class ObjectsWithInlineRowsDataAdded extends DefaultObjectsJoined {
 
     /**
      * Ctor.
      * @param objects The wrapped objects
+     * @param connection The {@link Connection} to be encapsulated.
      */
     public ObjectsWithInlineRowsDataAdded(
         final Objects<?> objects,
@@ -34,7 +39,7 @@ public class ObjectsWithInlineRowsDataAdded extends DefaultObjectsJoined {
     ) {
         super(
             objects,
-            new InlineRowsDataObjectsOfConnection(
+            new RowsDataObjectsOfConnection(
                 connection,
                 new ObjectsWithType<>(
                     new ObjectTypeTable(),
@@ -44,6 +49,11 @@ public class ObjectsWithInlineRowsDataAdded extends DefaultObjectsJoined {
         );
     }
 
+    /**
+     * Instantiates a new Objects with inline rows data added.
+     * @param connection The {@link Connection} to be encapsulated.
+     * @param objects The {@link Objects} to be encapsulated.
+     */
     public ObjectsWithInlineRowsDataAdded(
         final Connection connection,
         final Objects<?> objects

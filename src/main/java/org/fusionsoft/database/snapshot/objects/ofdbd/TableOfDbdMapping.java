@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -25,9 +25,18 @@ import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
 
+/**
+ * The {@link SimpleDbObject}, can be constructed of {@link DbdTableMapping}.
+ * @since 0.1
+ */
 public class TableOfDbdMapping extends SimpleDbObject<DbdTableMapping> {
 
-    public TableOfDbdMapping(final YamlMapping mapping, final ObjectName table) {
+    /**
+     * Instantiates a new Table of dbd mapping.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
+     * @param name The {@link ObjectName} to be encapsulated.
+     */
+    public TableOfDbdMapping(final YamlMapping mapping, final ObjectName name) {
         this(
             new DbdTableMapping(
                 new MappingFromMappingIgnoreKeys(
@@ -39,20 +48,20 @@ public class TableOfDbdMapping extends SimpleDbObject<DbdTableMapping> {
                     )
                 )
             ),
-            table
+            name
         );
     }
 
     /**
      * Instantiates a new simple db object.
      * @param mapping The {@link DbdTableMapping} to be encapsulated.
-     * @param table The {@link ObjectName} to be encapsulated.
+     * @param name The {@link ObjectName} to be encapsulated.
      */
-    public TableOfDbdMapping(final DbdTableMapping mapping, final ObjectName table) {
+    public TableOfDbdMapping(final DbdTableMapping mapping, final ObjectName name) {
         super(
             mapping,
             new SimpleObjectSignature(
-                table,
+                name,
                 new ObjectTypeTable()
             )
         );

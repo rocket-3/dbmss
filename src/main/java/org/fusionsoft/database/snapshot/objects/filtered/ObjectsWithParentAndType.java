@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -15,26 +15,27 @@
  */
 package org.fusionsoft.database.snapshot.objects.filtered;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
  * The Objects filtered by their parent and type given.
+ * @param <T> The type of {@link YamlNode} parameter.
  * @since 0.1
  */
-public class ObjectsWithParentAndType<M extends YamlMapping> extends ObjectsWithType<M> {
+public class ObjectsWithParentAndType<T extends YamlNode> extends ObjectsWithType<T> {
 
     /**
      * Instantiates a new Objects with parent and type.
-     * @param parent The DbObject<?> to be encapsulated.
-     * @param type The ObjectType to be encapsulated.
-     * @param objects The Objects to be encapsulated.
+     * @param parent The {@link DbObject} of parent to be encapsulated.
+     * @param type The {@link ObjectType} to be encapsulated.
+     * @param objects The {@link Objects} to be used.
      */
     public ObjectsWithParentAndType(
         final DbObject<?> parent,
-        final ObjectType<M> type,
+        final ObjectType<T> type,
         final Objects<?> objects
     ) {
         super(

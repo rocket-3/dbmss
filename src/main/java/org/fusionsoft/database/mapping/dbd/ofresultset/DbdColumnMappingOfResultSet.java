@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -35,8 +35,8 @@ public class DbdColumnMappingOfResultSet extends DbdColumnMapping {
 
     /**
      * Instantiates a new Simple db object.
-     * @param rset The ResultSet to be encapsulated.
-     * @param query The Query of DbdIndexFields to be encapsulated.
+     * @param rset The {@link ResultSet} to be encapsulated.
+     * @param query The {@link Query} of {@link DbdColumnFields} to be encapsulated.
      */
     public DbdColumnMappingOfResultSet(final ResultSet rset, final Query<DbdColumnFields> query) {
         super(
