@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.fusionsoft.database.snapshot.query.Query;
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  * @checkstyle BracketsStructureCheck (100 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class PgColumnsQuery extends PgMessageFormatQuery<DbdColumnFields> {
 
     /**

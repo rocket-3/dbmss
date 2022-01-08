@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.fusionsoft.database.snapshot.objects.signature;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.snapshot.ObjectSignature;
 
@@ -65,8 +66,22 @@ public class SimpleObjectSignature implements ObjectSignature {
     }
 
     @Override
-    public boolean equals(final ObjectSignature other) {
+    public final boolean equals(final Object other) {
+        boolean equ = false;
+        if (other instanceof ObjectSignature) {
+            equ = this.equalsTo((ObjectSignature) other);
+        }
+        return equ;
+    }
+
+    @Override
+    public final boolean equalsTo(final ObjectSignature other) {
         return this.asString().equals(other.asString());
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.asString());
     }
 
 }

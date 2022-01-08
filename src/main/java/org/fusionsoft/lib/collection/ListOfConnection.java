@@ -35,6 +35,7 @@ public class ListOfConnection<T> extends ListOfResultSet<T> {
      * @param connection The {@link Connection} to be encapsulated.
      * @param query The Query of {@link F} to be encapsulated.
      * @param func The unwrap {@link BiFunc} to be used.
+     * @param <F> the text enum type of fields outcomes to be used.
      */
     public <F extends Text> ListOfConnection(
         final Connection connection,

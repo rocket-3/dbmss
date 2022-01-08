@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -30,6 +30,12 @@ import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  */
 public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope<DbdIndexMapping> {
 
+    /**
+     * Instantiates a new Objects of dbd indexes mapping.
+     * @param mapping The root's {@link YamlMapping} to be encapsulated.
+     * @param key The key's {@link Text} to be encapsulated.
+     * @param table The table's {@link ObjectName} to be encapsulated.
+     */
     public ObjectsOfDbdIndexesMapping(
         final YamlMapping mapping,
         final Text key,

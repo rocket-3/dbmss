@@ -22,8 +22,8 @@ import org.fusionsoft.database.snapshot.DbObject;
 
 /**
  * The Objects of scalar.
- * @since 0.1
  * @param <T> The subtype of {@link YamlNode} parameter.
+ * @since 0.1
  */
 public class ObjectsOfScalar<T extends YamlNode> extends ObjectsEnvelope<T> {
 

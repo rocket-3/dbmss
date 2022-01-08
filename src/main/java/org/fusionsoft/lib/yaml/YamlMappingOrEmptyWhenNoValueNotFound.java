@@ -37,7 +37,8 @@ public class YamlMappingOrEmptyWhenNoValueNotFound extends YamlMappingOfScalar {
             new ScalarWithFallback<>(
                 new ScalarOf<>(
                     () -> {
-                        mapping.keys(); return mapping;
+                        mapping.keys();
+                        return mapping;
                     }
                 ),
                 new Fallback.From<>(

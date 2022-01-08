@@ -30,18 +30,18 @@ public class JoinedAutoCloseable implements AutoCloseable {
 
     /**
      * Instantiates a new Joined auto closeable.
-     * @param iterable The {@link Iterable} of {@link AutoCloseable} to be encapsulated.
-     */
-    public JoinedAutoCloseable(final Iterable<AutoCloseable> iterable) {
-        this.iterable = iterable;
-    }
-
-    /**
-     * Instantiates a new Joined auto closeable.
      * @param values The {@link AutoCloseable} array to be encapsulated.
      */
     public JoinedAutoCloseable(final AutoCloseable... values) {
         this(new IterableOf<>(values));
+    }
+
+    /**
+     * Instantiates a new Joined auto closeable.
+     * @param iterable The {@link Iterable} of {@link AutoCloseable} to be encapsulated.
+     */
+    public JoinedAutoCloseable(final Iterable<AutoCloseable> iterable) {
+        this.iterable = iterable;
     }
 
     @Override

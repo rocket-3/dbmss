@@ -48,12 +48,12 @@ public class SimpleObjectType<T extends YamlNode> implements ObjectType<T> {
     }
 
     @Override
-    public T node(final YamlNode node) {
+    public final T node(final YamlNode node) {
         return this.ctor.apply(node);
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return this.text;
     }
 

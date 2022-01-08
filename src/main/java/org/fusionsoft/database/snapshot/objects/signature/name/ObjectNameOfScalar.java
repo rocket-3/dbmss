@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.signature.name;
 
+import java.util.Objects;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.scalar.Unchecked;
@@ -33,7 +34,7 @@ public class ObjectNameOfScalar implements ObjectName {
 
     /**
      * Instantiates a new Object name of scalar.
-     * @param scalar The {@link Scalar<ObjectName>} to be encapsulated.
+     * @param scalar The {@link Scalar} of {@link ObjectName} to be encapsulated.
      */
     public ObjectNameOfScalar(final Scalar<ObjectName> scalar) {
         this.scalar = new Unchecked<>(scalar);
@@ -55,8 +56,22 @@ public class ObjectNameOfScalar implements ObjectName {
     }
 
     @Override
-    public final boolean equals(final ObjectName other) {
-        return this.scalar.value().equals(other);
+    public final boolean equalsTo(final ObjectName other) {
+        return this.scalar.value().equalsTo(other);
+    }
+
+    @Override
+    public final boolean equals(final Object obj) {
+        boolean equ = false;
+        if (obj instanceof ObjectName) {
+            equ = this.equalsTo((ObjectName) obj);
+        }
+        return equ;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.asString());
     }
 
 }

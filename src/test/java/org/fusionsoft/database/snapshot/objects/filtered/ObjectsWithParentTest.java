@@ -47,6 +47,7 @@ class ObjectsWithParentTest {
     @Test
     public void works() throws Exception {
         final int size = 3;
+        final String schema = "public";
         final Func<Iterable<String>, DbObject<YamlMapping>> func = iterable -> new SimpleDbObject<>(
             new MappingEmpty(),
             new SimpleObjectSignature(
@@ -64,13 +65,13 @@ class ObjectsWithParentTest {
             new SetOf<>(
                 new ObjectsWithParent<>(
                     func.apply(
-                        new IterableOf<String>("public")
+                        new IterableOf<String>(schema)
                     ),
                     new DefaultObjects(
                         new IterableOf<DbObject<?>>(
-                            func.apply(new IterableOf<String>("public", "1")),
-                            func.apply(new IterableOf<String>("public", "2")),
-                            func.apply(new IterableOf<String>("public", "3"))
+                            func.apply(new IterableOf<String>(schema, "1")),
+                            func.apply(new IterableOf<String>(schema, "2")),
+                            func.apply(new IterableOf<String>(schema, "3"))
                         )
                     )
                 )

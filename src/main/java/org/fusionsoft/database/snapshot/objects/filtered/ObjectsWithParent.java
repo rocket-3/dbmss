@@ -36,7 +36,7 @@ public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
      */
     public ObjectsWithParent(final DbObject<?> parent, final Objects<T> objects) {
         super(
-            obj -> obj.signature().name().parent().equals(
+            obj -> obj.signature().name().parent().equalsTo(
                 parent.signature().name()
             ),
             objects
@@ -50,7 +50,7 @@ public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
      */
     public ObjectsWithParent(final ObjectName name, final Objects<T> objects) {
         super(
-            obj -> obj.signature().name().parent().equals(name),
+            obj -> obj.signature().name().parent().equalsTo(name),
             objects
         );
     }

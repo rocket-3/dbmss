@@ -18,9 +18,10 @@ package org.fusionsoft.database.snapshot.data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import org.cactoos.Text;
+import org.fusionsoft.lib.exception.NotImplemented;
 
 /**
- * The type of that can be constructed of.
+ * The {@link ValueFormat} of date.
  * @since 0.1
  */
 public class ValueFormatDate implements ValueFormat {
@@ -35,16 +36,17 @@ public class ValueFormatDate implements ValueFormat {
         final PreparedStatement stmt,
         final int ordinal, final Text text
     ) {
+        throw new NotImplemented();
     }
 
     @Override
     public final String ofResultSet(final ResultSet rset, final int ordinal) {
-        return null;
+        throw new NotImplemented();
     }
 
     @Override
     public final String ofResultSet(final ResultSet rset, final String key) {
-        return null;
+        throw new NotImplemented();
     }
 
 }

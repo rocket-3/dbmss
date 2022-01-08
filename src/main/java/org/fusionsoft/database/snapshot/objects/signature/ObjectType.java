@@ -32,6 +32,10 @@ public interface ObjectType<T extends YamlNode> extends Text {
      */
     T node(YamlNode mapping);
 
+    /**
+     * As string.
+     * @return The string.
+     */
     String asString();
 
 }

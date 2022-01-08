@@ -16,6 +16,7 @@
 package org.fusionsoft.database.snapshot.data;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import org.cactoos.scalar.NumberOf;
 import org.cactoos.scalar.Sticky;
 import org.fusionsoft.database.Folder;
@@ -44,7 +45,7 @@ class SeparateDataFilesOfTablesWritableTest {
      * Writes big files fast.
      */
     @Test
-    public void writesBigFilesFast() {
+    public void writesBigFilesFast() throws SQLException {
         final Folder folder = new FolderOfScalar(
             new Sticky<>(
                 new TempFolder(
@@ -52,26 +53,29 @@ class SeparateDataFilesOfTablesWritableTest {
                 )
             )
         );
-        final Connection connection = new ConnectionOfDbdServerMapping(
-            new DbdServerMappingWithCredentials(
-                new UrlOfPgGitLabDatabaseV11("pagilla"),
-                new CredsOfPgTestDatabase()
-            )
-        );
-        new SeparateDataFilesOfTablesWritable(
-            connection,
-            new ObjectsWithType<>(
-                new ObjectTypeTable(),
-                new ObjectsFromServer(
-                    connection
+        try (
+            Connection connection = new ConnectionOfDbdServerMapping(
+                new DbdServerMappingWithCredentials(
+                    new UrlOfPgGitLabDatabaseV11("pagilla"),
+                    new CredsOfPgTestDatabase()
                 )
             )
-        ).writeTo(folder);
-        new Assertion<>(
-            "the biggest data file has expected size",
-            folder.path().resolve("public.million.data.yaml").toFile().length(),
-            new IsNumber(new NumberOf("236778131"))
-        ).affirm();
+        ) {
+            new SeparateDataFilesOfTablesWritable(
+                connection,
+                new ObjectsWithType<>(
+                    new ObjectTypeTable(),
+                    new ObjectsFromServer(
+                        connection
+                    )
+                )
+            ).writeTo(folder);
+            new Assertion<>(
+                "the biggest data file has expected size",
+                folder.path().resolve("public.million.data.yaml").toFile().length(),
+                new IsNumber(new NumberOf("236778131"))
+            ).affirm();
+        }
     }
 
 }

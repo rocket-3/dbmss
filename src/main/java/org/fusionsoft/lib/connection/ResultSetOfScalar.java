@@ -41,13 +41,16 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
 /**
- * {@link ResultSet} implementation of {@link Scalar}
+ * {@link ResultSet} implementation of {@link Scalar}.
  * @since 0.1
  * @checkstyle ParameterNameCheck (4000 lines)
  * @checkstyle LineLengthCheck (4000 lines)
  * @checkstyle ParameterNumberCheck (4000 lines)
- * @checkstyle (4000 lines)
+ * @checkstyle JavadocStyleCheck (4000 lines)
+ * @checkstyle MethodCountCheck (4000 lines)
+ * @checkstyle MissingDeprecatedCheck (4000 lines)
  */
+@SuppressWarnings("PMD")
 public class ResultSetOfScalar implements ResultSet {
 
     /**

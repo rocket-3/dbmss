@@ -28,13 +28,16 @@ public class PgSchemasQuery extends PgMessageFormatQuery<DbdSchemaFields> {
      */
     public PgSchemasQuery() {
         super(
-            "select nspname AS {0}, usename AS {1}\n"
-            + " from pg_namespace,pg_user\n"
-            + " where nspname!='pg_toast' and nspname!='pg_temp_1'\n"
-            + " and nspname!='pg_toast_temp_1' and nspname!='pg_catalog'\n"
-            + " and nspname!='information_schema' and nspname!='pgagent'\n"
-            + " and nspname!='pg_temp_3' and nspname!='pg_toast_temp_3'\n"
-            + " and usesysid = nspowner\n",
+            String.join(
+                "",
+                "select nspname AS {0}, usename AS {1}\n",
+                " from pg_namespace,pg_user\n",
+                " where nspname!='pg_toast' and nspname!='pg_temp_1'\n",
+                " and nspname!='pg_toast_temp_1' and nspname!='pg_catalog'\n",
+                " and nspname!='information_schema' and nspname!='pgagent'\n",
+                " and nspname!='pg_temp_3' and nspname!='pg_toast_temp_3'\n",
+                " and usesysid = nspowner\n"
+            ),
             DbdSchemaFields.SCHEMA,
             DbdSchemaFields.OWNER
         );

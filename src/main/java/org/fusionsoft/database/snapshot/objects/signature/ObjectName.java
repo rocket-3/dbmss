@@ -23,6 +23,10 @@ import org.cactoos.Text;
  */
 public interface ObjectName extends Text {
 
+    /**
+     * As string.
+     * @return The string.
+     */
     String asString();
 
     /**
@@ -42,6 +46,6 @@ public interface ObjectName extends Text {
      * @param other The another {@link ObjectName}.
      * @return The boolean.
      */
-    boolean equals(ObjectName other);
+    boolean equalsTo(ObjectName other);
 
 }

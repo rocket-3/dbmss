@@ -24,6 +24,7 @@ import org.cactoos.text.Concatenated;
 /**
  * The scalar of temp file random {@link Path}, resolved from some root {@link Path}.
  * @since 0.1
+ * @checkstyle MagicNumberCheck (100 lines)
  */
 public class TempFilePath implements Scalar<Path> {
 
@@ -74,7 +75,7 @@ public class TempFilePath implements Scalar<Path> {
     }
 
     @Override
-    public Path value() {
+    public final Path value() {
         return this.scalar.value();
     }
 

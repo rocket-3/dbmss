@@ -39,6 +39,7 @@ class RowsDataEntriesOfConnectionTest {
      */
     @Test
     @Disabled
+    @SuppressWarnings("PMD.SystemPrintln")
     public void show() {
         final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(
             new DbdServerMappingWithCredentials(

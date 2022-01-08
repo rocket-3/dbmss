@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
  * The test for {@link ObjectsOfDbdRootMapping} class.
  * @since 0.1
  * @checkstyle MagicNumberCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 class ObjectsOfDbdRootMappingTest {
 

@@ -25,7 +25,7 @@ import org.cactoos.Scalar;
 public class SingleOrEmptyFallback<T> implements Scalar<T> {
 
     /**
-     * The Iterable<? extends T> encapsulated.
+     * The Iterable encapsulated.
      */
     private final Iterable<? extends T> iterable;
 
@@ -45,11 +45,11 @@ public class SingleOrEmptyFallback<T> implements Scalar<T> {
     }
 
     @Override
-    public T value() {
-        T value = fallback;
+    public final T value() {
+        T value = this.fallback;
         if (this.iterable.iterator().hasNext()) {
             value = new Single<>(this.iterable).value();
-        } ;
+        }
         return value;
     }
 

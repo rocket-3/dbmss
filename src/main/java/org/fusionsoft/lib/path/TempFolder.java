@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2021 FusionSoft
+ * Copyright (C) 2018-2022 FusionSoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,24 @@ package org.fusionsoft.lib.path;
 import java.nio.file.Path;
 import org.cactoos.Scalar;
 
+/**
+ * The type of that can be constructed of.
+ * @since 0.1
+ */
 public class TempFolder extends AutoDeletingPath {
 
+    /**
+     * Instantiates a new Temp folder.
+     * @param inside The {@link Path} to be encapsulated.
+     */
     public TempFolder(final Path inside) {
         this(() -> inside);
     }
 
+    /**
+     * Instantiates a new Temp folder.
+     * @param inside The {@link Scalar} to be encapsulated.
+     */
     public TempFolder(final Scalar<Path> inside) {
         super(
             new TempFilePath(

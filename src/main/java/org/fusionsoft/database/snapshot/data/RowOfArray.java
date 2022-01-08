@@ -24,7 +24,7 @@ public class RowOfArray implements Row {
     /**
      * The label encapsulated.
      */
-    private final String label;
+    private final String text;
 
     /**
      * The array encapsulated.
@@ -36,8 +36,9 @@ public class RowOfArray implements Row {
      * @param label The label {@link String} to be encapsulated.
      * @param array The array of {@link String} to be encapsulated.
      */
-    public RowOfArray(final String label, final String[] array) {
-        this.label = label;
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    public RowOfArray(final String label, final String... array) {
+        this.text = label;
         this.array = array;
     }
 
@@ -48,7 +49,7 @@ public class RowOfArray implements Row {
 
     @Override
     public final String label() {
-        return this.label;
+        return this.text;
     }
 
 }

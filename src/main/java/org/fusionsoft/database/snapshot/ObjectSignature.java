@@ -48,6 +48,6 @@ public interface ObjectSignature extends Text {
      * @param other The other {@link ObjectSignature}.
      * @return The boolean.
      */
-    boolean equals(ObjectSignature other);
+    boolean equalsTo(ObjectSignature other);
 
 }

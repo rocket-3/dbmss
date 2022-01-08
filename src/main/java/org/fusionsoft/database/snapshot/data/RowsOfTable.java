@@ -44,6 +44,7 @@ public class RowsOfTable extends IterableAutoCloseable<Row> {
      * @param rset The {@link ResultSet} to be encapsulated.
      * @param iterator The {@link Scalar} of {@link Iterator} of {@link Row} to be encapsulated.
      */
+    @SuppressWarnings("PMD.UnusedFormalParameter")
     private RowsOfTable(
         final Statement stmt,
         final ResultSet rset,

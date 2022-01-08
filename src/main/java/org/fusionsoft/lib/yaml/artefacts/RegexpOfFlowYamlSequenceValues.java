@@ -17,6 +17,8 @@ package org.fusionsoft.lib.yaml.artefacts;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.cactoos.Func;
+import org.cactoos.func.UncheckedFunc;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
@@ -33,6 +35,11 @@ public class RegexpOfFlowYamlSequenceValues {
     private final Unchecked<Pattern> scalar;
 
     /**
+     * The {@link Func} to extract string value from matcher.
+     */
+    private final UncheckedFunc<Matcher, String> func;
+
+    /**
      * Instantiates a new Regexp of flow yaml sequence values.
      */
     public RegexpOfFlowYamlSequenceValues() {
@@ -43,6 +50,13 @@ public class RegexpOfFlowYamlSequenceValues {
                 )
             )
         );
+        this.func = new UncheckedFunc<>(
+            matcher -> new Ternary<>(
+                () -> matcher.group(1) == null,
+                () -> matcher.group(2),
+                () -> matcher.group(1)
+            ).value()
+        );
     }
 
     /**
@@ -50,7 +64,7 @@ public class RegexpOfFlowYamlSequenceValues {
      * @return The pattern.
      */
     public final Pattern pattern() {
-        return scalar.value();
+        return this.scalar.value();
     }
 
     /**
@@ -59,13 +73,7 @@ public class RegexpOfFlowYamlSequenceValues {
      * @return The string.
      */
     public final String extract(final Matcher matcher) {
-        return new Unchecked<>(
-            new Ternary<>(
-                () -> matcher.group(1) == null,
-                () -> matcher.group(2),
-                () -> matcher.group(1)
-            )
-        ).value();
+        return this.func.apply(matcher);
     }
 
 }

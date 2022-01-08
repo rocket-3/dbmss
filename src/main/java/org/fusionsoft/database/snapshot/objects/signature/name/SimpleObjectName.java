@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.snapshot.objects.signature.name;
 
+import java.util.Objects;
 import org.cactoos.Text;
 import org.cactoos.iterable.HeadOf;
 import org.cactoos.iterable.IterableOf;
@@ -66,7 +67,7 @@ public class SimpleObjectName implements ObjectName {
      * @param names The names to be joined.
      */
     public SimpleObjectName(final Text... names) {
-        this(new IterableOf<Text>(names));
+        this(new IterableOf<>(names));
     }
 
     /**
@@ -90,16 +91,6 @@ public class SimpleObjectName implements ObjectName {
         );
     }
 
-    @Override
-    public final boolean equals(final ObjectName other) {
-        return this.asString().equals(other.asString());
-    }
-
-    @Override
-    public final String asString() {
-        return this.text.asString();
-    }
-
     /**
      * Parent name of object.
      * @return The parent name.
@@ -114,6 +105,30 @@ public class SimpleObjectName implements ObjectName {
                 names
             )
         );
+    }
+
+    @Override
+    public final String asString() {
+        return this.text.asString();
+    }
+
+    @Override
+    public final boolean equalsTo(final ObjectName other) {
+        return this.asString().equals(other.asString());
+    }
+
+    @Override
+    public final boolean equals(final Object obj) {
+        boolean equ = false;
+        if (obj instanceof ObjectName) {
+            equ = this.equalsTo((ObjectName) obj);
+        }
+        return equ;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.asString());
     }
 
 }

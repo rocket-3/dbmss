@@ -23,8 +23,8 @@ import org.fusionsoft.database.snapshot.Objects;
 
 /**
  * The type of DbObjects that was filtered by some predicate.
- * @since 0.1
  * @param <T> The subtype of {@link YamlNode} parameter.
+ * @since 0.1
  */
 public class ObjectsFiltered<T extends YamlNode> extends ObjectsEnvelope<T> {
 

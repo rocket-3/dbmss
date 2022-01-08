@@ -49,7 +49,7 @@ public class IterableAutoCloseable<T> extends IterableEnvelope<T> implements Aut
     }
 
     @Override
-    public void close() throws Exception {
+    public final void close() throws Exception {
         this.closeable.close();
     }
 
