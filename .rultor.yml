@@ -9,4 +9,4 @@ merge:
     pdd -f /dev/null
     java -version --batch-mode
     mvn -version --batch-mode
-    mvn clean install -Pqulice --batch-mode
+    mvn clean install -Pqulice --batch-mode -Dstyle.color=never
