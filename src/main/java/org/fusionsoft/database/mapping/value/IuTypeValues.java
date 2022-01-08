@@ -21,7 +21,7 @@ import org.cactoos.Text;
  * The enum of 'iuType' field values
  *  of {@link org.fusionsoft.database.mapping.fields.DbdColumnFields}.
  * @since 0.1
- * @todo 40:30min Refactor of class, split 'number' types.
+ * @todo #40:30min Refactor of class, split 'number' types.
  */
 public enum IuTypeValues implements Text {
     /**

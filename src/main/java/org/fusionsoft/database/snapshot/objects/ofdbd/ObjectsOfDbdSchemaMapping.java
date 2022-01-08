@@ -29,7 +29,7 @@ import org.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 /**
  * The type of db schema Objects of DBD/schemas/#schema node.
  * @since 0.1
- * @todo 40:90min Implement parsing all of objects from DbdSchemaMapping
+ * @todo #40:90min Implement parsing all of objects from DbdSchemaMapping
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public class ObjectsOfDbdSchemaMapping extends DefaultObjectsJoined {

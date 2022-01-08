@@ -22,7 +22,7 @@ import org.cactoos.Text;
 /**
  * The interface representing how to interchange column data of some type.
  * @since 0.1
- * @todo 106:60min Finish implementing classes of ValueFormat iface.
+ * @todo #106:60min Finish implementing classes of ValueFormat iface.
  */
 public interface ValueFormat {
 
