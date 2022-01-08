@@ -25,7 +25,8 @@ import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeProcedu
  *  of all {@link Objects} context and parent schema {@link DbObject}.
  * @since 0.1
  */
-public class DbdProceduresMappingOfObjects extends MappingOfObjectsOfParentAndType {
+public class DbdProceduresMappingOfObjects
+    extends MappingOfObjectsOfParentAndType<DbdProcedureMapping> {
 
     /**
      * Instantiates a new Dbd procedures mapping of objects.

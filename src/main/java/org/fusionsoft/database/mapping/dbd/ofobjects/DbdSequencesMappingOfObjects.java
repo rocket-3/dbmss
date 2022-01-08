@@ -27,7 +27,8 @@ import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSequenc
  *  and filtered by schema.
  * @since 0.1
  */
-public class DbdSequencesMappingOfObjects extends MappingOfObjectsOfParentAndType {
+public class DbdSequencesMappingOfObjects
+    extends MappingOfObjectsOfParentAndType<DbdSequenceMapping> {
 
     /**
      * Instantiates a new Dbd sequences mapping of objects.

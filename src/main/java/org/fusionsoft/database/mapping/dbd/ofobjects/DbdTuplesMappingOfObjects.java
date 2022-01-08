@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
+import org.fusionsoft.database.mapping.dbd.DbdTupleMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTuple;
@@ -25,14 +26,14 @@ import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
  *  can be created of all {@link Objects} and current parent schema {@link DbObject}.
  * @since 0.1
  */
-public class DbdTuplesMappingOfObjects extends MappingOfObjectsOfParentAndType {
+public class DbdTuplesMappingOfObjects extends MappingOfObjectsOfParentAndType<DbdTupleMapping> {
 
     /**
      * Instantiates a new Yaml mapping of scalar.
      * @param objects The {@link Objects} to be encapsulated.
      * @param schema The schema {@link DbObject} to be encapsulated.
      */
-    public DbdTuplesMappingOfObjects(final Objects objects, final DbObject<?> schema) {
+    public DbdTuplesMappingOfObjects(final Objects<?> objects, final DbObject<?> schema) {
         super(
             objects,
             schema,

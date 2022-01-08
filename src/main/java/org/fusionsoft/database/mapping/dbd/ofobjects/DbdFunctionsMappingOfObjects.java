@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
+import org.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeFunction;
@@ -24,7 +25,7 @@ import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeFunctio
  *  constructed of all context {@link Objects} and current schema {@link DbObject}.
  * @since 0.1
  */
-public class DbdFunctionsMappingOfObjects extends MappingOfObjectsOfParentAndType {
+public class DbdFunctionsMappingOfObjects extends MappingOfObjectsOfParentAndType<DbdFunctionMapping> {
 
     /**
      * Instantiates a new Dbd functions mapping of objects.

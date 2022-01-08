@@ -15,6 +15,7 @@
  */
 package org.fusionsoft.database.mapping.dbd.ofobjects;
 
+import org.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.Objects;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeDomain;
@@ -25,7 +26,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  *  of objects context.
  * @since 0.1
  */
-public class DbdDomainsMappingOfObjects extends MappingOfObjectsOfParentAndType {
+public class DbdDomainsMappingOfObjects extends MappingOfObjectsOfParentAndType<DbdDomainMapping> {
 
     /**
      * Instantiates a new Dbd domains mapping of objects.

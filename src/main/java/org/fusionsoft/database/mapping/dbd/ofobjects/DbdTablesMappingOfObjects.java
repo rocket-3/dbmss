@@ -28,7 +28,7 @@ import org.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class DbdTablesMappingOfObjects extends MappingOfObjectsOfParentAndType {
+public class DbdTablesMappingOfObjects extends MappingOfObjectsOfParentAndType<DbdTableMapping> {
 
     /**
      * Instantiates a new Dbd tables mapping of objects.

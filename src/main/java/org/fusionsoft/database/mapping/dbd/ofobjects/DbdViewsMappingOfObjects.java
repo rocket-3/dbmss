@@ -27,7 +27,7 @@ import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeView;
  *  and filtered by schema.
  * @since 0.1
  */
-public class DbdViewsMappingOfObjects extends MappingOfObjectsOfParentAndType {
+public class DbdViewsMappingOfObjects extends MappingOfObjectsOfParentAndType<DbdViewMapping> {
 
     /**
      * Instantiates a new Dbd views mapping of objects.
