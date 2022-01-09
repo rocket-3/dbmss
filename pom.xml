@@ -158,6 +158,11 @@
                 runtime
             </scope>
         </dependency>
+        <dependency>
+            <groupId>ru.fusionsoft</groupId>
+            <artifactId>unescaped-string</artifactId>
+            <version>0.5</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -39,8 +39,10 @@ public class TextIterableOfFlowYamlSequence extends IterableEnvelope<Text> {
         final RegexpOfFlowYamlSequenceValues regexp
     ) {
         super(
-            new Mapped<Text>(
-                x -> new Replaced(x, "\"\"", "\""),
+            new Mapped<>(
+                x -> new TextOfUnescapedYamlQuotedScalar(
+                    new Replaced(x, "\"\"", "\"")
+                ),
                 new IterableOfRegexpMatches(
                     regexp::pattern,
                     regexp::extract,
