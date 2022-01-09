@@ -27,14 +27,14 @@ import org.fusionsoft.database.mapping.entries.YamlMappingEntryOfScalar;
  *  with '"key" : ["value1", "value2"]' format.
  * @since 0.1
  */
-public class RowsDataMappingEntryOfRow extends YamlMappingEntryOfScalar<YamlNode> {
+public class InlineRowsDataMappingEntryOfRow extends YamlMappingEntryOfScalar<YamlNode> {
 
     /**
      * Instantiates a new Rows data mapping entry of row.
      * @param row The {@link Row} to be encapsulated.
      * @param cols The {@link Iterable} of {@link Column} to be encapsulated.
      */
-    public RowsDataMappingEntryOfRow(final Row row, final Iterable<Column> cols) {
+    public InlineRowsDataMappingEntryOfRow(final Row row, final Iterable<Column> cols) {
         super(
             new TextOfScalar(row::label),
             () -> Yaml.createYamlInput(

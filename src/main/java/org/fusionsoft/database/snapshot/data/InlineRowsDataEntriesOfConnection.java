@@ -27,18 +27,18 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The {@link Iterable} of {@link RowsDataMappingEntryOfRow},
+ * The {@link Iterable} of {@link InlineRowsDataMappingEntryOfRow},
  *  can be constructed of {@link Connection} and {@link DbObject} of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class RowsDataEntriesOfConnection extends IterableEnvelope<Map.Entry<Text, YamlNode>> {
+public class InlineRowsDataEntriesOfConnection extends IterableEnvelope<Map.Entry<Text, YamlNode>> {
 
     /**
      * Instantiates a new Inline rows data entries of connection.
      * @param connection The {@link Connection} to be encapsulated.
      * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
      */
-    public RowsDataEntriesOfConnection(
+    public InlineRowsDataEntriesOfConnection(
         final Connection connection,
         final DbObject<DbdTableMapping> table
     ) {
@@ -55,7 +55,7 @@ public class RowsDataEntriesOfConnection extends IterableEnvelope<Map.Entry<Text
      * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
      * @param columns The {@link Iterable} of {@link Column} to be encapsulated.
      */
-    public RowsDataEntriesOfConnection(
+    public InlineRowsDataEntriesOfConnection(
         final Connection connection,
         final DbObject<DbdTableMapping> table,
         final Iterable<Column> columns
@@ -64,7 +64,7 @@ public class RowsDataEntriesOfConnection extends IterableEnvelope<Map.Entry<Text
             new IterableOf<>(
                 () -> new ListOf<>(
                     new Mapped<Map.Entry<Text, YamlNode>>(
-                        row -> new RowsDataMappingEntryOfRow(row, columns),
+                        row -> new InlineRowsDataMappingEntryOfRow(row, columns),
                         new RowsOfTable(
                             connection,
                             table

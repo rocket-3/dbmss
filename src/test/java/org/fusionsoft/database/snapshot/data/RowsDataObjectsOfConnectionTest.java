@@ -32,7 +32,7 @@ import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasValuesMatching;
 
 /**
- * The tests for {@link RowsDataObjectsOfConnection}.
+ * The tests for {@link InlineRowsDataObjectsOfConnection}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -49,7 +49,7 @@ public class RowsDataObjectsOfConnectionTest {
                 new CredsOfPgTestDatabase()
             )
         );
-        final RowsDataObjectsOfConnection data = new RowsDataObjectsOfConnection(
+        final InlineRowsDataObjectsOfConnection data = new InlineRowsDataObjectsOfConnection(
             connection,
             new ObjectsFiltered<>(
                 x -> !x.signature().name().first().asString().contains("million"),

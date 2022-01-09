@@ -23,23 +23,23 @@ import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
-import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
+import org.fusionsoft.lib.yaml.artefacts.MappingOfMappingIgnoreKeys;
 
 /**
  * The {@link SimpleDbObject}, can be constructed of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class TableOfDbdMapping extends SimpleDbObject<DbdTableMapping> {
+public class TableObjectOfDbdTableMapping extends SimpleDbObject<DbdTableMapping> {
 
     /**
      * Instantiates a new Table of dbd mapping.
      * @param mapping The {@link YamlMapping} to be encapsulated.
      * @param name The {@link ObjectName} to be encapsulated.
      */
-    public TableOfDbdMapping(final YamlMapping mapping, final ObjectName name) {
+    public TableObjectOfDbdTableMapping(final YamlMapping mapping, final ObjectName name) {
         this(
             new DbdTableMapping(
-                new MappingFromMappingIgnoreKeys(
+                new MappingOfMappingIgnoreKeys(
                     mapping,
                     new IterableOf<>(
                         DbdTableFields.CONSTRAINTS,
@@ -57,7 +57,7 @@ public class TableOfDbdMapping extends SimpleDbObject<DbdTableMapping> {
      * @param mapping The {@link DbdTableMapping} to be encapsulated.
      * @param name The {@link ObjectName} to be encapsulated.
      */
-    public TableOfDbdMapping(final DbdTableMapping mapping, final ObjectName name) {
+    public TableObjectOfDbdTableMapping(final DbdTableMapping mapping, final ObjectName name) {
         super(
             mapping,
             new SimpleObjectSignature(

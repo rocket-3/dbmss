@@ -19,11 +19,11 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The {@link DataObjectOfMapping} of {@link LinkDataMappingOfTable},
+ * The {@link DataObjectOfMappingAndTable} of {@link LinkDataMappingOfTable},
  *  can be created from parent {@link DbObject} of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class LinkDataObjectOfTable extends DataObjectOfMapping {
+public class LinkDataObjectOfTable extends DataObjectOfMappingAndTable {
 
     /**
      * Instantiates a new Inline link data object of table.

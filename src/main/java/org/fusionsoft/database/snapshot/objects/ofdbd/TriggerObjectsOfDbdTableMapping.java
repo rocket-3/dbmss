@@ -28,7 +28,7 @@ import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  * The objects of {@link DbdTriggerMapping}, extracted of DBD/schemas/#schema/triggers node.
  * @since 0.1
  */
-public class ObjectsOfDbdTriggersMapping extends ObjectsEnvelope<DbdTriggerMapping> {
+public class TriggerObjectsOfDbdTableMapping extends ObjectsEnvelope<DbdTriggerMapping> {
 
     /**
      * Instantiates a new Objects of dbd triggers mapping.
@@ -36,7 +36,7 @@ public class ObjectsOfDbdTriggersMapping extends ObjectsEnvelope<DbdTriggerMappi
      * @param key The {@link Text} to be encapsulated.
      * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ObjectsOfDbdTriggersMapping(
+    public TriggerObjectsOfDbdTableMapping(
         final YamlMapping mapping,
         final Text key,
         final ObjectName table
@@ -54,7 +54,7 @@ public class ObjectsOfDbdTriggersMapping extends ObjectsEnvelope<DbdTriggerMappi
      * @param mapping The {@link YamlMapping} to be encapsulated.
      * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ObjectsOfDbdTriggersMapping(final YamlMapping mapping, final ObjectName table) {
+    public TriggerObjectsOfDbdTableMapping(final YamlMapping mapping, final ObjectName table) {
         super(
             new IterableOfClassFromYamlNode<>(
                 (map, node) -> new TriggerOfDbdMapping(map, node, table),

@@ -21,6 +21,7 @@ import com.amihaiemil.eoyaml.YamlMappingBuilder;
 import java.util.Set;
 import org.cactoos.Text;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.set.SetOf;
 import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
@@ -28,20 +29,20 @@ import org.fusionsoft.lib.yaml.YamlMappingOfScalar;
  * The YamlMapping constructed from other but w/0 some keys ignored.
  * @since 0.1
  */
-public class MappingFromMappingIgnoreKeys extends YamlMappingOfScalar {
+public class MappingOfMappingIgnoreKeys extends YamlMappingOfScalar {
 
     /**
      * Instantiates a new Mapping from mapping ignore keys.
      * @param mapping The YamlMapping to be encapsulated.
      * @param ignore The Iterable of Text to be encapsulated.
      */
-    public MappingFromMappingIgnoreKeys(
+    public MappingOfMappingIgnoreKeys(
         final YamlMapping mapping,
         final Iterable<Text> ignore
     ) {
         this(
             mapping,
-            new SetOf<String>(new Mapped<String>(Text::asString, ignore))
+            new SetOf<String>(new Mapped<>(Text::asString, ignore))
         );
     }
 
@@ -50,20 +51,22 @@ public class MappingFromMappingIgnoreKeys extends YamlMappingOfScalar {
      * @param mapping The YamlMapping to be encapsulated.
      * @param ignores The Set of String to be encapsulated.
      */
-    public MappingFromMappingIgnoreKeys(
+    public MappingOfMappingIgnoreKeys(
         final YamlMapping mapping,
         final Set<String> ignores
     ) {
         super(
-            () -> {
-                YamlMappingBuilder yml = Yaml.createYamlMappingBuilder();
-                for (final String key : new KeysFromYamlNode(mapping)) {
-                    if (!ignores.contains(key)) {
-                        yml = yml.add(key, mapping.value(key));
+            new Sticky<>(
+                () -> {
+                    YamlMappingBuilder yml = Yaml.createYamlMappingBuilder();
+                    for (final String key : new KeysFromYamlNode(mapping)) {
+                        if (!ignores.contains(key)) {
+                            yml = yml.add(key, mapping.value(key));
+                        }
                     }
+                    return yml.build();
                 }
-                return yml.build();
-            }
+            )
         );
     }
 

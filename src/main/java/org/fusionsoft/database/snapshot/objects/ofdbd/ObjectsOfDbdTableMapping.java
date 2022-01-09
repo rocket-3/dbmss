@@ -64,23 +64,23 @@ public class ObjectsOfDbdTableMapping extends DefaultObjectsJoined {
         final ObjectName table
     ) {
         super(
-            new TableOfDbdMapping(mapping, table),
-            new ObjectsOfDbdIndexesMapping(
+            new TableObjectOfDbdTableMapping(mapping, table),
+            new IndexObjectsOfDbdTableMapping(
                 mapping,
                 DbdTableFields.INDEXES,
                 table
             ),
-            new ObjectsOfDbdConstraintsMapping(
+            new ConstraintsOfDbdTableMapping(
                 mapping,
                 DbdTableFields.CONSTRAINTS,
                 table
             ),
-            new ObjectsOfDbdTriggersMapping(
+            new TriggerObjectsOfDbdTableMapping(
                 mapping,
                 DbdTableFields.TRIGGERS,
                 table
             ),
-            new ObjectsOfDbdDataMapping(
+            new DataObjectsOfDbdTableMapping(
                 mapping,
                 DbdTableFields.DATA,
                 table

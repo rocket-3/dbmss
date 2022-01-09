@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * The tests for {@link RowsDataEntriesOfConnection}.
+ * The tests for {@link InlineRowsDataEntriesOfConnection}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -47,14 +47,14 @@ class RowsDataEntriesOfConnectionTest {
                 new CredsOfPgTestDatabase()
             )
         );
-        final Mapped<RowsDataEntriesOfConnection> datas = new Mapped<>(
-            x -> new RowsDataEntriesOfConnection(connection, x),
+        final Mapped<InlineRowsDataEntriesOfConnection> datas = new Mapped<>(
+            x -> new InlineRowsDataEntriesOfConnection(connection, x),
             new ObjectsWithType<>(
                 new ObjectTypeTable(),
                 new ObjectsFromServer(connection)
             )
         );
-        for (final RowsDataEntriesOfConnection data : datas) {
+        for (final InlineRowsDataEntriesOfConnection data : datas) {
             System.out.println(new YamlMappingOfEntries(data).toString());
         }
     }

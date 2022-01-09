@@ -16,30 +16,32 @@
 package org.fusionsoft.database.snapshot.data;
 
 import java.sql.Connection;
+import org.cactoos.iterable.Mapped;
+import org.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import org.fusionsoft.database.mapping.dbd.built.DbdDataMappingOfEntries;
-import org.fusionsoft.database.snapshot.DbObject;
+import org.fusionsoft.database.snapshot.Objects;
+import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The {@link DbdDataMappingOfEntries} with '"key" : ["value1", "value2"]' format,
- *  can be constructed of {@link Connection} and parent {@link DbObject} {@link DbdTableMapping}.
+ * The {@link Objects} of {@link DbdDataMapping} with '"key": ["value1", "value2"]' format,
+ *  can be constructed of {@link Connection} and {@link Objects} of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class RowsDataMappingOfConnection extends DbdDataMappingOfEntries {
+public class InlineRowsDataObjectsOfConnection extends ObjectsEnvelope<DbdDataMapping> {
 
     /**
-     * Instantiates a new Rows data mapping of connection.
+     * Instantiates a new Inline rows data objects of connection.
      * @param connection The {@link Connection} to be encapsulated.
-     * @param table The {@link DbObject} {@link DbdTableMapping} to be encapsulated.
+     * @param tables The {@link Objects} of {@link DbdTableMapping} to be encapsulated.
      */
-    public RowsDataMappingOfConnection(
+    public InlineRowsDataObjectsOfConnection(
         final Connection connection,
-        final DbObject<DbdTableMapping> table
+        final Objects<DbdTableMapping> tables
     ) {
         super(
-            new RowsDataEntriesOfConnection(
-                connection,
-                table
+            new Mapped<>(
+                table -> new InlineRowsDataObjectOfConnection(connection, table),
+                tables
             )
         );
     }

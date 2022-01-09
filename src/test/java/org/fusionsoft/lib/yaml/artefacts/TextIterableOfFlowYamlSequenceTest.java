@@ -17,6 +17,7 @@ package org.fusionsoft.lib.yaml.artefacts;
 
 import java.io.IOException;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
 import org.cactoos.text.TextOf;
@@ -81,12 +82,14 @@ class TextIterableOfFlowYamlSequenceTest {
                 )
             ),
             new HasValues<>(
-                "0",
-                "2",
-                "D\nELE\\TED,",
-                "DEL\",\"ETED",
-                "null",
-                "null"
+                new IterableOf<String>(
+                    "0",
+                    "2",
+                    "D\nELE\\TED,",
+                    "DEL\",\"ETED",
+                    "null",
+                    "null"
+                )
             )
         ).affirm();
     }

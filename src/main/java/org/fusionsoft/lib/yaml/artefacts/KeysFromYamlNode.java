@@ -22,14 +22,14 @@ import org.cactoos.set.SetEnvelope;
 import org.cactoos.set.SetOf;
 
 /**
- * The type of String Iterable that extracts all nested keys from YamlNode.
+ * The type of String Iterable that extracts all keys from YamlNode.
  * @since 0.1
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */
 public class KeysFromYamlNode extends SetEnvelope<String> {
 
     /**
-     * Instantiates a new Keys from yaml node.
+     * Instantiates a set of keys from yaml node.
      * @param mapping The YamlMapping to be used.
      */
     public KeysFromYamlNode(final YamlNode mapping) {

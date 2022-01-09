@@ -23,7 +23,7 @@ import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSchema;
-import org.fusionsoft.lib.yaml.artefacts.MappingFromMappingIgnoreKeys;
+import org.fusionsoft.lib.yaml.artefacts.MappingOfMappingIgnoreKeys;
 
 /**
  * The {@link SimpleDbObject} of {@link DbdSchemaMapping}
@@ -43,7 +43,7 @@ public class SchemaOfDbdMapping extends SimpleDbObject<DbdSchemaMapping> {
     ) {
         this(
             new DbdSchemaMapping(
-                new MappingFromMappingIgnoreKeys(
+                new MappingOfMappingIgnoreKeys(
                     mapping,
                     new IterableOf<>(DbdSchemaFields.TABLES)
                 )

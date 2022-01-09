@@ -17,7 +17,7 @@ package org.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
-import org.fusionsoft.database.mapping.dbd.DbdIndexMapping;
+import org.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import org.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import org.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -25,18 +25,19 @@ import org.fusionsoft.lib.yaml.YamlMappingOrEmptyWhenNoValueNotFound;
 import org.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
- * The db index objects of DBD/schemas/#schema/tables/#table/indexes mapping.
+ * The db constraint objects
+ *  of DBD/schemas/#schema/tables/#table/constraints mapping.
  * @since 0.1
  */
-public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope<DbdIndexMapping> {
+public class ConstraintsOfDbdTableMapping extends ObjectsEnvelope<DbdConstraintMapping> {
 
     /**
-     * Instantiates a new Objects of dbd indexes mapping.
-     * @param mapping The root's {@link YamlMapping} to be encapsulated.
+     * Instantiates a new Objects of dbd constraints mapping.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
      * @param key The key's {@link Text} to be encapsulated.
-     * @param table The table's {@link ObjectName} to be encapsulated.
+     * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ObjectsOfDbdIndexesMapping(
+    public ConstraintsOfDbdTableMapping(
         final YamlMapping mapping,
         final Text key,
         final ObjectName table
@@ -50,18 +51,18 @@ public class ObjectsOfDbdIndexesMapping extends ObjectsEnvelope<DbdIndexMapping>
     }
 
     /**
-     * Instantiates a new Objects of dbd indexes mapping.
-     * @param indexes The YamlMapping to be encapsulated.
-     * @param table The Text to be encapsulated.
+     * Instantiates a new Objects of dbd constraints mapping.
+     * @param constraints The {@link YamlMapping} to be encapsulated.
+     * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ObjectsOfDbdIndexesMapping(
-        final YamlMapping indexes,
+    public ConstraintsOfDbdTableMapping(
+        final YamlMapping constraints,
         final ObjectName table
     ) {
         super(
             new IterableOfClassFromYamlNode<>(
-                (map, node) -> new IndexOfDbdMapping(map, node, table),
-                indexes
+                (map, node) -> new ConstraintOfDbdMapping(map, node, table),
+                constraints
             )
         );
     }

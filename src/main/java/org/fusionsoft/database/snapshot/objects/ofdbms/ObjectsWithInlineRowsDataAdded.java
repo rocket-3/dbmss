@@ -17,13 +17,13 @@ package org.fusionsoft.database.snapshot.objects.ofdbms;
 
 import java.sql.Connection;
 import org.fusionsoft.database.snapshot.Objects;
-import org.fusionsoft.database.snapshot.data.RowsDataObjectsOfConnection;
+import org.fusionsoft.database.snapshot.data.InlineRowsDataObjectsOfConnection;
 import org.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
 import org.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The {@link DefaultObjectsJoined} with {@link RowsDataObjectsOfConnection} added.
+ * The {@link DefaultObjectsJoined} with {@link InlineRowsDataObjectsOfConnection} added.
  * @since 0.1
  */
 public class ObjectsWithInlineRowsDataAdded extends DefaultObjectsJoined {
@@ -39,7 +39,7 @@ public class ObjectsWithInlineRowsDataAdded extends DefaultObjectsJoined {
     ) {
         super(
             objects,
-            new RowsDataObjectsOfConnection(
+            new InlineRowsDataObjectsOfConnection(
                 connection,
                 new ObjectsWithType<>(
                     new ObjectTypeTable(),

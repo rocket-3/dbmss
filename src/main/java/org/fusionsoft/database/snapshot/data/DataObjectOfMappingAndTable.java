@@ -20,7 +20,9 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.mapping.fields.DbdTableFields;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.SimpleDbObject;
+import org.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import org.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
+import org.fusionsoft.database.snapshot.objects.signature.name.ObjectNameOfScalar;
 import org.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
 
@@ -29,28 +31,40 @@ import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
  *  and parent table {@link DbObject}.
  * @since 0.1
  */
-public class DataObjectOfMapping extends SimpleDbObject<DbdDataMapping> {
+public class DataObjectOfMappingAndTable extends SimpleDbObject<DbdDataMapping> {
 
     /**
      * Instantiates a new Inline data object of mapping.
      * @param mapping The {@link DbdDataMapping} to be encapsulated.
      * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
      */
-    public DataObjectOfMapping(
+    public DataObjectOfMappingAndTable(
         final DbdDataMapping mapping,
-        final DbObject<DbdTableMapping> table
+        final ObjectName table
     ) {
         super(
             mapping,
             new SimpleObjectSignature(
                 new SimpleObjectName(
-                    table.signature().name().parent(),
-                    table.signature().name().first(),
+                    table.parent(),
+                    table.first(),
                     DbdTableFields.DATA
                 ),
                 new ObjectTypeData()
             )
         );
+    }
+
+    /**
+     * Instantiates a new Inline data object of mapping.
+     * @param mapping The {@link DbdDataMapping} to be encapsulated.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
+    public DataObjectOfMappingAndTable(
+        final DbdDataMapping mapping,
+        final DbObject<DbdTableMapping> table
+    ) {
+        this(mapping, new ObjectNameOfScalar(()->table.signature().name()));
     }
 
 }
