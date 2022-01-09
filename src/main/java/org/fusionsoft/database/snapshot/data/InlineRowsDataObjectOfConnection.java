@@ -20,8 +20,8 @@ import org.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import org.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The {@link DataObjectOfMappingAndTable} with {@link InlineRowsDataMappingOfConnection}, can be constructed of
- *  {@link Connection} and parent {@link DbObject} of {@link DbdTableMapping}.
+ * The {@link DataObjectOfMappingAndTable} with {@link InlineRowsDataMappingOfConnection},
+ *  can be constructed of {@link Connection} and parent {@link DbObject} of {@link DbdTableMapping}.
  * @since 0.1
  */
 public class InlineRowsDataObjectOfConnection extends DataObjectOfMappingAndTable {

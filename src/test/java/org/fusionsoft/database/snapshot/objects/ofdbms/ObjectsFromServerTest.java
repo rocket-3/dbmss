@@ -17,9 +17,11 @@ package org.fusionsoft.database.snapshot.objects.ofdbms;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import java.io.File;
+import java.util.Comparator;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.iterable.Sorted;
 import org.cactoos.map.MapOf;
 import org.cactoos.text.TextOf;
 import org.fusionsoft.database.Folder;
@@ -65,7 +67,7 @@ class ObjectsFromServerTest {
      */
     @Test
     public void worksWithPagilla() {
-        final int size = 171;
+        final int size = 174;
         new Assertion<>(
             "Has expected object list size from 'pagilla' database",
             new ObjectsFromServer(
@@ -158,12 +160,12 @@ class ObjectsFromServerTest {
     }
 
     /**
-     * Show me.
+     * Show me individual object's data.
      */
     @Test
     @Disabled
     @SuppressWarnings("PMD")
-    public void showMe() {
+    public void showIndividual() {
         for (final DbObject<? extends YamlMapping> object : new ObjectsFromServer(
             new DbdServerMappingWithCredentials(
                 new UrlOfPgGitLabDatabaseV11(this.database),
@@ -171,6 +173,26 @@ class ObjectsFromServerTest {
             )
         )) {
             System.out.println(object.toString());
+        }
+    }
+
+    /**
+     * Show me the names only.
+     */
+    @Test
+    @Disabled
+    @SuppressWarnings("PMD")
+    public void showNames() {
+        for (final DbObject<? extends YamlMapping> object : new Sorted<>(
+            Comparator.comparing(x -> x.signature().name().asString()),
+            new ObjectsFromServer(
+                new DbdServerMappingWithCredentials(
+                    new UrlOfPgGitLabDatabaseV11(this.database),
+                    new CredsOfPgTestDatabase()
+                )
+            )
+        )) {
+            System.out.println(object.signature().asString());
         }
     }
 

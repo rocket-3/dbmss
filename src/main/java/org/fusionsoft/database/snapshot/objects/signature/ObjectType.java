@@ -38,4 +38,11 @@ public interface ObjectType<T extends YamlNode> extends Text {
      */
     String asString();
 
+    /**
+     * Equality of types.
+     * @param other The other {@link ObjectType}.
+     * @return The boolean.
+     */
+    boolean equalsTo(ObjectType<?> other);
+
 }

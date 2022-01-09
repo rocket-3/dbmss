@@ -64,7 +64,7 @@ public class DataObjectOfMappingAndTable extends SimpleDbObject<DbdDataMapping> 
         final DbdDataMapping mapping,
         final DbObject<DbdTableMapping> table
     ) {
-        this(mapping, new ObjectNameOfScalar(()->table.signature().name()));
+        this(mapping, new ObjectNameOfScalar(() -> table.signature().name()));
     }
 
 }

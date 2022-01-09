@@ -59,7 +59,7 @@ public class SimpleObjectSignature implements ObjectSignature {
     @Override
     public final String asString() {
         return MessageFormat.format(
-            "{1} {0}",
+            "{0}: {1}",
             new UncheckedText(this.name()).asString(),
             new UncheckedText(this.type()).asString()
         );

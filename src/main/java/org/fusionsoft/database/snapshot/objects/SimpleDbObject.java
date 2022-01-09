@@ -17,6 +17,8 @@ package org.fusionsoft.database.snapshot.objects;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import java.text.MessageFormat;
+import org.cactoos.text.Repeated;
+import org.cactoos.text.UncheckedText;
 import org.fusionsoft.database.SimpleYamlRepresentative;
 import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.ObjectSignature;
@@ -52,10 +54,13 @@ public class SimpleDbObject<Y extends YamlMapping>
 
     @Override
     public final String toString() {
+        final int length = 10;
         return MessageFormat.format(
-            "\n=   =   =   =\n{0}\n-   -   -   -\n{1}",
+            "\n{2}\n{0}\n{3}\n{1}",
             this.sig.asString(),
-            this.asYaml().toString()
+            this.asYaml().toString(),
+            new UncheckedText(new Repeated("=  ", length)).asString(),
+            new UncheckedText(new Repeated("-  ", length)).asString()
         );
     }
 

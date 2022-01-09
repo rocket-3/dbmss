@@ -16,6 +16,7 @@
 package org.fusionsoft.database.snapshot.objects.signature.type;
 
 import com.amihaiemil.eoyaml.YamlNode;
+import java.util.Objects;
 import org.cactoos.Func;
 import org.cactoos.func.UncheckedFunc;
 import org.fusionsoft.database.snapshot.objects.signature.ObjectType;
@@ -55,6 +56,27 @@ public class SimpleObjectType<T extends YamlNode> implements ObjectType<T> {
     @Override
     public final String asString() {
         return this.text;
+    }
+
+    @Override
+    public final boolean equalsTo(final ObjectType<?> other) {
+        return this.asString().equals(other.asString());
+    }
+
+    @Override
+    public final boolean equals(final Object other) {
+        boolean equal = false;
+        if (this == other) {
+            equal = true;
+        } else if (other instanceof ObjectType) {
+            equal = this.equalsTo((SimpleObjectType<?>) other);
+        }
+        return equal;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.text);
     }
 
 }

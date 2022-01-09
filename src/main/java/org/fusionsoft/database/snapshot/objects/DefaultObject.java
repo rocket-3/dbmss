@@ -48,4 +48,19 @@ public class DefaultObject implements DbObject<YamlNode> {
         return this.object.asYaml();
     }
 
+    @Override
+    public final boolean equals(final Object other) {
+        return this.object.equals(other);
+    }
+
+    @Override
+    public final int hashCode() {
+        return this.object.hashCode();
+    }
+
+    @Override
+    public final String toString() {
+        return this.object.toString();
+    }
+
 }

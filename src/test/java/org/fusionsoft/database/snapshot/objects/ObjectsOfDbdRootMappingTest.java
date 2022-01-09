@@ -16,16 +16,14 @@
 package org.fusionsoft.database.snapshot.objects;
 
 import org.cactoos.iterable.Filtered;
-import org.cactoos.scalar.And;
-import org.cactoos.scalar.Unchecked;
-import org.cactoos.set.SetOf;
 import org.fusionsoft.database.mapping.MappingOfExampleYaml;
 import org.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import org.fusionsoft.database.snapshot.DbObject;
 import org.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdRootMapping;
 import org.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasSize;
+import org.llorllale.cactoos.matchers.HasValuesMatching;
 
 /**
  * The test for {@link ObjectsOfDbdRootMapping} class.
@@ -40,25 +38,39 @@ class ObjectsOfDbdRootMappingTest {
      */
     @Test
     public void getsFourTablesOfExampleYaml() {
-        Assertions.assertTrue(
-            new Unchecked<>(
-                new And(
-                    new Filtered<>(
-                        o -> o.signature().type().equals(new ObjectTypeTable()),
-                        new ObjectsOfDbdRootMapping(
-                            new DbdRootMapping(
-                                new MappingOfExampleYaml()
-                            )
-                        )
-                    ),
-                    (Iterable<DbObject<?>> itrb) -> new SetOf<>(itrb).size() == 4,
-                    (Iterable<DbObject<?>> itrb) -> new And(
-                        item -> !item.asYaml().toString().isEmpty(),
-                        itrb
-                    ).value()
+        new Assertion<>(
+            "Should get 4 tables of example DBD yaml",
+            new Filtered<>(
+                o -> o.signature().type().equals(new ObjectTypeTable()),
+                new ObjectsOfDbdRootMapping(
+                    new DbdRootMapping(
+                        new MappingOfExampleYaml()
+                    )
                 )
-            ).value()
-        );
+            ),
+            new HasSize(4)
+        ).affirm();
+    }
+
+    /**
+     * Returns four tables of example yaml.
+     */
+    @Test
+    public void getsCorrectTablesOfExampleYaml() {
+        new Assertion<>(
+            "Should get non-empty tables of example DBD yaml",
+            new Filtered<>(
+                o -> o.signature().type().equals(new ObjectTypeTable()),
+                new ObjectsOfDbdRootMapping(
+                    new DbdRootMapping(
+                        new MappingOfExampleYaml()
+                    )
+                )
+            ),
+            new HasValuesMatching<>(
+                val -> !val.asYaml().toString().isEmpty()
+            )
+        ).affirm();
     }
 
 }
