@@ -15,6 +15,6 @@
  */
 
 /**
- * Artefacts of {@link org.fusionsoft.database.snapshot.DbmsSignature}.
+ * Artefacts of {@link ru.fusionsoft.database.snapshot.DbmsSignature}.
  */
 package ru.fusionsoft.database.snapshot.dbms;

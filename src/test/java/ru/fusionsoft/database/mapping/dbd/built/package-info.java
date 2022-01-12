@@ -14,6 +14,6 @@
  * and limitations under the License.
  */
 /**
- * Tests for {@link org.fusionsoft.database.mapping.dbd.built} package classes.
+ * Tests for {@link ru.fusionsoft.database.mapping.dbd.built} package classes.
  */
 package ru.fusionsoft.database.mapping.dbd.built;

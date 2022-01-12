@@ -15,6 +15,6 @@
  */
 
 /**
- * Tests for {@link org.fusionsoft.database.snapshot.objects.ofdbms.pg} package.
+ * Tests for {@link ru.fusionsoft.database.snapshot.objects.ofdbms.pg} package.
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms.pg;

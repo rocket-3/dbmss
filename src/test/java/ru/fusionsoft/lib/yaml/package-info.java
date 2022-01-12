@@ -15,6 +15,6 @@
  */
 
 /**
- * Tests for {@link org.fusionsoft.lib.yaml} package.
+ * Tests for {@link ru.fusionsoft.lib.yaml} package.
  */
 package ru.fusionsoft.lib.yaml;

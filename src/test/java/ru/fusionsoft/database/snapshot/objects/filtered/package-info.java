@@ -15,6 +15,6 @@
  */
 
 /**
- * Test for {@link org.fusionsoft.database.snapshot.objects.filtered} package.
+ * Test for {@link ru.fusionsoft.database.snapshot.objects.filtered} package.
  */
 package ru.fusionsoft.database.snapshot.objects.filtered;

@@ -14,6 +14,6 @@
  * and limitations under the License.
  */
 /**
- * Tests for {@link org.fusionsoft.database.snapshot.data} package.
+ * Tests for {@link ru.fusionsoft.database.snapshot.data} package.
  */
 package ru.fusionsoft.database.snapshot.data;

@@ -15,6 +15,6 @@
  */
 
 /**
- * Tests for {@link org.fusionsoft.database.snapshot.dbms} package.
+ * Tests for {@link ru.fusionsoft.database.snapshot.dbms} package.
  */
 package ru.fusionsoft.database.snapshot.dbms;
