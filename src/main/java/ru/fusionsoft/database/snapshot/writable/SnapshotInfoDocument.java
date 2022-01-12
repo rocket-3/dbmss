@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.writable;
+package ru.fusionsoft.database.snapshot.writable;
 
 import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.Writable;
 import ru.fusionsoft.database.snapshot.AstronomicalTime;
+import ru.fusionsoft.database.writable.WritableYamlDocument;
 import ru.fusionsoft.lib.yaml.MappingEmpty;
 
 /**

@@ -18,7 +18,7 @@ package ru.fusionsoft.database;
 import org.cactoos.Text;
 import ru.fusionsoft.database.snapshot.AstronomicalTime;
 import ru.fusionsoft.database.snapshot.CreatingSnapshotFolder;
-import ru.fusionsoft.database.writable.SnapshotWritable;
+import ru.fusionsoft.database.snapshot.writable.SnapshotWritable;
 
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.

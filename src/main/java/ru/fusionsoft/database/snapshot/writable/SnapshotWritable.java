@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.writable;
+package ru.fusionsoft.database.snapshot.writable;
 
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
@@ -24,6 +24,8 @@ import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdInfoMappingOfDbdFile;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerEntryOfDbdFile;
 import ru.fusionsoft.database.snapshot.AstronomicalTime;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
+import ru.fusionsoft.database.writable.EmptyWritable;
+import ru.fusionsoft.database.writable.JoinedWritable;
 
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.
@@ -49,7 +51,7 @@ public class SnapshotWritable extends JoinedWritable {
         super(
             new IterableOf<>(
                 new SnapshotInfoDocument(
-                    time, false
+                    time, alldata
                 ),
                 new SnapshotDbdDocument(
                     new DbdServerEntryOfDbdFile(dbd, server),

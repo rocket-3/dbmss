@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.writable;
+package ru.fusionsoft.database.snapshot.writable;
 
 import org.cactoos.Text;
 import ru.fusionsoft.database.DbdFile;
