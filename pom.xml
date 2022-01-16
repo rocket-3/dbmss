@@ -117,6 +117,54 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <!--
+            Static quality analysis with Qulice and other tools.
+            This profile is supposed to be activated in continuous
+            integration environment, right before the final approval
+            of the build. It runs a number of static code analysis
+            tools to validate and approve the quality of source
+            code and the SCM repository.
+            @see http://www.jcabi.com/jcabi-parent/profile-qulice.html
+            @see https://github.com/jcabi/jcabi-parent/blob/master/pom.xml
+            -->
+            <id>api</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>appassembler-maven-plugin</artifactId>
+                        <version>2.1.0</version>
+                        <configuration>
+                            <repositoryName>lib</repositoryName>
+                            <repositoryLayout>flat</repositoryLayout>
+                            <assembleDirectory>${project.build.directory}/api</assembleDirectory>
+                            <binFolder>bin</binFolder>
+                            <programs>
+                                <program>
+                                    <mainClass>ru.fusionsoft.database.api.FetchDbd</mainClass>
+                                    <name>dbdsnap</name>
+                                    <jvmSettings>
+                                        <extraArguments>
+                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
+                                        </extraArguments>
+                                    </jvmSettings>
+                                </program>
+                            </programs>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>assemble</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>assemble</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
     <dependencies>
         <dependency>
