@@ -18,7 +18,7 @@ package ru.fusionsoft.database.mapping.dbd.ofobjects;
 import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
-import ru.fusionsoft.database.mapping.dbd.DbdServersMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdServersMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.built.DbdRootMappingBuilt;
 import ru.fusionsoft.database.snapshot.Objects;
 
@@ -40,7 +40,7 @@ public class DbdRootMappingOfSnapshotObjects extends DbdRootMappingBuilt {
         final Objects<?> objects
     ) {
         super(
-            new DbdServersMapping(
+            new DbdServersMappingOfEntries(
                 new IterableOf<>(
                     server
                 )

@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.path;
+package ru.fusionsoft.database.folder;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.cactoos.Scalar;
+import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
 
 /**
- * The {@link Scalar} of {@link Path} that represents current working directory.
+ * The {@link ru.fusionsoft.database.Folder} of {@link CurrentWorkingDirectory}.
  * @since 0.1
  */
-public class CurrentWorkingDirectory implements Scalar<Path> {
+public class CurrentWorkingDirectoryFolder extends FolderOfScalar {
 
-    @Override
-    public final Path value() {
-        return Paths.get("").toAbsolutePath();
+    /**
+     * Instantiates a new Folder of current working directory.
+     */
+    public CurrentWorkingDirectoryFolder() {
+        super(new CurrentWorkingDirectory());
     }
 
 }

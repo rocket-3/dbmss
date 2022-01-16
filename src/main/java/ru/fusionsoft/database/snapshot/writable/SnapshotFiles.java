@@ -13,21 +13,23 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.path;
+package ru.fusionsoft.database.snapshot.writable;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.cactoos.Scalar;
+import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
+import ru.fusionsoft.database.writable.JoinedWritable;
 
-/**
- * The {@link Scalar} of {@link Path} that represents current working directory.
- * @since 0.1
- */
-public class CurrentWorkingDirectory implements Scalar<Path> {
+public class SnapshotFiles extends JoinedWritable {
 
-    @Override
-    public final Path value() {
-        return Paths.get("").toAbsolutePath();
+    public SnapshotFiles(
+        final SnapshotInfoDocument info,
+        final SnapshotDbdDocument dbd,
+        final SeparateDataFilesOfTables data
+    ) {
+        super(
+            info,
+            dbd,
+            data
+        );
     }
 
 }

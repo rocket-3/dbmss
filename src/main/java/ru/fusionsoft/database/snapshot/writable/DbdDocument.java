@@ -13,21 +13,27 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.path;
+package ru.fusionsoft.database.snapshot.writable;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.cactoos.Scalar;
+import org.cactoos.text.TextOf;
+import ru.fusionsoft.database.DbdFile;
+import ru.fusionsoft.database.dbdfile.DbdFileOfMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import ru.fusionsoft.database.writable.YamlDocument;
 
-/**
- * The {@link Scalar} of {@link Path} that represents current working directory.
- * @since 0.1
- */
-public class CurrentWorkingDirectory implements Scalar<Path> {
+public class DbdDocument extends YamlDocument {
 
-    @Override
-    public final Path value() {
-        return Paths.get("").toAbsolutePath();
+    public DbdDocument(final DbdFile file) {
+        super(
+            file,
+            new TextOf("DBD.yaml")
+        );
+    }
+
+    public DbdDocument(final DbdRootMapping mapping) {
+        this(
+            new DbdFileOfMapping(mapping)
+        );
     }
 
 }

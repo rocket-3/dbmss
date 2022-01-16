@@ -32,7 +32,7 @@ import ru.fusionsoft.database.YamlRepresentative;
  * The {@link Writable} of {@link YamlRepresentative}/{@link YamlNode}.
  * @since 0.1
  */
-public class WritableYamlDocument implements Writable {
+public class YamlDocument implements Writable {
 
     /**
      * The YamlRepresentative encapsulated.
@@ -49,7 +49,7 @@ public class WritableYamlDocument implements Writable {
      * @param yaml The YamlRepresentative to be encapsulated.
      * @param name The Text of file name to be encapsulated.
      */
-    public WritableYamlDocument(
+    public YamlDocument(
         final YamlRepresentative<?> yaml,
         final Text name
     ) {
@@ -62,7 +62,7 @@ public class WritableYamlDocument implements Writable {
      * @param scalar The Scalar of YamlNode to be encapsulated.
      * @param name The Text to be encapsulated.
      */
-    public WritableYamlDocument(
+    public YamlDocument(
         final Scalar<YamlNode> scalar,
         final Text name
     ) {
@@ -74,7 +74,7 @@ public class WritableYamlDocument implements Writable {
      * @param yaml The YamlNode to be encapsulated.
      * @param name The Text to be encapsulated.
      */
-    public WritableYamlDocument(
+    public YamlDocument(
         final YamlNode yaml,
         final Text name
     ) {

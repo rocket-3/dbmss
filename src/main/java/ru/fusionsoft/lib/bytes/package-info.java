@@ -13,21 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.path;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.cactoos.Scalar;
 
 /**
- * The {@link Scalar} of {@link Path} that represents current working directory.
- * @since 0.1
+ * Classes of {@link org.cactoos.Bytes} interface.
  */
-public class CurrentWorkingDirectory implements Scalar<Path> {
-
-    @Override
-    public final Path value() {
-        return Paths.get("").toAbsolutePath();
-    }
-
-}
+package ru.fusionsoft.lib.bytes;

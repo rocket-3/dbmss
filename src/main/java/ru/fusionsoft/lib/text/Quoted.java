@@ -15,35 +15,32 @@
  */
 package ru.fusionsoft.lib.text;
 
+import java.text.MessageFormat;
 import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 
 /**
- * The Regexp pattern of text being escaped for matching.
+ * The type of {@link Text} decorator that is quoted by some char sequence.
  * @since 0.1
  */
-public class RegexpPatternLiteralEscaped extends TextEnvelope {
+public class Quoted extends TextEnvelope {
 
     /**
      * Ctor.
-     * @param text Text to be quoted.
+     * @param text Text representing the text value.
+     * @param quotes The Text to be encapsulated.
      */
-    public RegexpPatternLiteralEscaped(final Text text) {
+    public Quoted(final Text text, final Text quotes) {
         super(
             new TextOfScalar(
-                () -> text.asString().replaceAll("[\\W]", "\\\\$0")
+                () -> MessageFormat.format(
+                    "{0}{1}{0}",
+                    quotes.asString(),
+                    text.asString()
+                )
             )
         );
-    }
-
-    /**
-     * Ctor.
-     * @param text Text to be quoted.
-     */
-    public RegexpPatternLiteralEscaped(final CharSequence text) {
-        this(new TextOf(text));
     }
 
 }

@@ -13,34 +13,32 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot;
 
-import java.text.MessageFormat;
+package ru.fusionsoft.lib.text;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
-import ru.fusionsoft.lib.text.HexOfLong;
+import org.cactoos.text.TextOf;
 import ru.fusionsoft.lib.time.UTC;
 
-/**
- * The type of {@link org.cactoos.Text} that represents name of snapshot created
- *  at some {@link UTC} moment.
- * @since 0.1
- */
-public class SnapshotCatalogName extends TextEnvelope {
+public class DateTextOfUTC extends TextEnvelope {
 
-    /**
-     * Instantiates a new Snapshot name.
-     * @param time The AstronomicalTime to be encapsulated.
-     */
-    public SnapshotCatalogName(final UTC time) {
+    public DateTextOfUTC(final UTC utc, final Text pattern) {
         super(
-            new TextOfScalar(
-                () -> MessageFormat.format(
-                    "{0} {1}",
-                    "Snapshot",
-                    new HexOfLong(time::millis).asString()
+            new TextOf(
+                () -> new SimpleDateFormat(pattern.asString()).format(
+                    new Date(utc.millis())
                 )
             )
+        );
+    }
+
+    public DateTextOfUTC(final UTC utc) {
+        this(
+            utc,
+            new TextOf("dd.MM.yyyy HH:mm.ss")
         );
     }
 

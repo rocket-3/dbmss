@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package ru.fusionsoft.database.writable;
 
+import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.Folder;
 import ru.fusionsoft.database.Writable;
 
@@ -32,10 +32,18 @@ public class JoinedWritable implements Writable {
 
     /**
      * Instantiates a new Combined writable.
-     * @param writeable The Iterable of Writable to be encapsulated.
+     * @param writeables The Iterable of Writable to be encapsulated.
      */
-    public JoinedWritable(final Iterable<Writable> writeable) {
-        this.writables = writeable;
+    public JoinedWritable(final Iterable<Writable> writeables) {
+        this.writables = writeables;
+    }
+
+    /**
+     * Instantiates a new Combined writable.
+     * @param writeables The Iterable of Writable to be encapsulated.
+     */
+    public JoinedWritable(final Writable... writeables) {
+        this(new IterableOf<Writable>(writeables));
     }
 
     @Override

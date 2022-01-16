@@ -17,23 +17,27 @@ package ru.fusionsoft.database.snapshot.data;
 
 import java.sql.Connection;
 import org.cactoos.iterable.Mapped;
+import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.database.writable.JoinedWritable;
 
 /**
- * The {@link JoinedWritable} of {@link SeparateDataFilesOfTablesWritable}, can be constructed from
+ * The {@link JoinedWritable} of {@link SeparateDataFilesOfTables}, can be constructed from
  *  {@link Connection} and {@link Objects} of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class SeparateDataFilesOfTablesWritable extends JoinedWritable {
+public class SeparateDataFilesOfTables extends JoinedWritable {
 
     /**
      * Instantiates a new Separate data files of tables writable.
      * @param connection The {@link Connection} to be encapsulated.
      * @param tables The {@link Objects} of {@link DbdTableMapping} to be encapsulated.
      */
-    public SeparateDataFilesOfTablesWritable(
+    public SeparateDataFilesOfTables(
         final Connection connection,
         final Objects<DbdTableMapping> tables
     ) {
@@ -41,6 +45,24 @@ public class SeparateDataFilesOfTablesWritable extends JoinedWritable {
             new Mapped<>(
                 table -> new SeparateDataFileOfTableWritable(connection, table),
                 tables
+            )
+        );
+    }
+
+    /**
+     * Instantiates a new Separate data files of tables writable.
+     * @param server The {@link DbdServerMapping} to be encapsulated.
+     * @param objects The {@link Objects} to be encapsulated.
+     */
+    public SeparateDataFilesOfTables(
+        final DbdServerMapping server,
+        final Objects<?> objects
+    ) {
+        this(
+            new ConnectionOfDbdServerMapping(server),
+            new ObjectsWithType<>(
+                new ObjectTypeTable(),
+                objects
             )
         );
     }

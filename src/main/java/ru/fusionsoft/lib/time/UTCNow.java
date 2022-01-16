@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.path;
+package ru.fusionsoft.lib.time;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.cactoos.Scalar;
+import java.util.Date;
 
 /**
- * The {@link Scalar} of {@link Path} that represents current working directory.
+ * The class representing Coordinated Universal Time, i.e. 'Astronomical type'
+ *  at the moment of current access.
  * @since 0.1
  */
-public class CurrentWorkingDirectory implements Scalar<Path> {
+public class UTCNow implements UTC {
 
     @Override
-    public final Path value() {
-        return Paths.get("").toAbsolutePath();
+    public final Long millis() {
+        return new Date().getTime();
     }
 
 }

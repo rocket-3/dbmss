@@ -15,31 +15,21 @@
  */
 package ru.fusionsoft.database.mapping.dbd;
 
-import java.util.Map;
-import org.cactoos.Text;
-import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
+import com.amihaiemil.eoyaml.YamlMapping;
+import ru.fusionsoft.lib.yaml.YamlMappingEnvelope;
 
 /**
- * The DBD/servers mapping that can be constructed of {@link DbdServerMapping}'s.
+ * The DBD/servers mapping.
  * @since 0.1
  */
-public class DbdServersMapping extends YamlMappingOfEntries {
+public class DbdServersMapping extends YamlMappingEnvelope {
 
     /**
-     * Instantiates a new Dbd servers mapping.
-     * @param entries The Iterable of DbdServerMapping to be encapsulated.
+     * Instantiates a new {@link DbdServersMapping}.
+     * @param mapping The YamlMapping to be encapsulated.
      */
-    public DbdServersMapping(final Iterable<Map.Entry<Text, DbdServerMapping>> entries) {
-        super(entries);
-    }
-
-    /**
-     * Instantiates a new Dbd servers mapping.
-     * @param entries The DbdServerMapping array to be encapsulated.
-     */
-    @SafeVarargs
-    public DbdServersMapping(final Map.Entry<Text, DbdServerMapping>... entries) {
-        super(entries);
+    public DbdServersMapping(final YamlMapping mapping) {
+        super(mapping);
     }
 
 }

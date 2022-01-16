@@ -22,6 +22,7 @@ import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.UncheckedText;
 import ru.fusionsoft.database.Folder;
 import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
+import ru.fusionsoft.lib.time.UTC;
 
 /**
  * The type representing folder of some Snapshot by given name.
@@ -55,7 +56,7 @@ public class CreatingSnapshotFolder implements Folder {
      * Instantiates a new Snapshot folder.
      * @param time The AstronomicalTime of creation to be encapsulated.
      */
-    public CreatingSnapshotFolder(final AstronomicalTime time) {
+    public CreatingSnapshotFolder(final UTC time) {
         this(
             new CurrentWorkingDirectory(),
             new SnapshotCatalogName(time)

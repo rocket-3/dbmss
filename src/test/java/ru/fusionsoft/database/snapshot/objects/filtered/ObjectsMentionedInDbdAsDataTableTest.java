@@ -33,7 +33,7 @@ import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.yaml.MappingEmpty;
 
 /**
- * The tests for {@link ObjectsAreDataTablesInDbdFile}.
+ * The tests for {@link ObjectsWithTableDataInDbdFile}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -46,18 +46,18 @@ class ObjectsMentionedInDbdAsDataTableTest {
     @Test
     public void retrievesExpectedTablesOfExampleYaml() throws Exception {
         final String datatable = "domains";
-        final Func<String, DbObject<?>> object = name -> new SimpleDbObject<>(
+        final Func<String, DbObject<?>> mktable = name -> new SimpleDbObject<>(
             new MappingEmpty(),
             new SimpleObjectSignature(
                 new SimpleObjectName("mts", name),
                 new ObjectTypeTable()
             )
         );
-        final Objects<?> filtered = new ObjectsAreDataTablesInDbdFile<>(
+        final Objects<?> filtered = new ObjectsWithTableDataInDbdFile(
             new DefaultObjects(
                 new IterableOf<>(
-                    object.apply(datatable),
-                    object.apply("vendors")
+                    mktable.apply(datatable),
+                    mktable.apply("vendors")
                 )
             ),
             new DbdFileOfMapping(new MappingOfExampleYaml())
@@ -66,7 +66,7 @@ class ObjectsMentionedInDbdAsDataTableTest {
             new And(
                 () -> new ListOf<>(filtered).size() == 1,
                 () -> filtered.iterator().next().signature().asString().equals(
-                    object.apply(datatable).signature().asString()
+                    mktable.apply(datatable).signature().asString()
                 )
             ).value()
         );

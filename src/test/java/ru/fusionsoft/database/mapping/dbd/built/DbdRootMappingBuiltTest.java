@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import ru.fusionsoft.database.dbdfile.DbdFileOfMapping;
 import ru.fusionsoft.database.mapping.MappingOfExampleYaml;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
-import ru.fusionsoft.database.mapping.dbd.DbdServersMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdServersMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerEntryOfDbdFile;
 import ru.fusionsoft.database.mapping.fields.DbdRootFields;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
@@ -44,7 +44,7 @@ public class DbdRootMappingBuiltTest {
         Assertions.assertEquals(
             yaml.toString(),
             new DbdRootMappingBuilt(
-                new DbdServersMapping(
+                new DbdServersMappingOfEntries(
                     new DbdServerEntryOfDbdFile(
                         file,
                         new TextOf("fs-mts")

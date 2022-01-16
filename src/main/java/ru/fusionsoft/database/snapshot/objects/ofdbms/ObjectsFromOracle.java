@@ -15,6 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
 import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
@@ -24,7 +25,7 @@ import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromOracle extends ObjectsEnvelope {
+public class ObjectsFromOracle extends ObjectsEnvelope<YamlMapping> {
 
     /**
      * Ctor.

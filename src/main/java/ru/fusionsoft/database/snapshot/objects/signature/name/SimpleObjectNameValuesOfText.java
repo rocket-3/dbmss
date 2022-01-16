@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.objects.signature.name;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.text.Split;
-import ru.fusionsoft.lib.text.RegexpPatternLiteralEscaped;
+import ru.fusionsoft.lib.text.RegexpLiteralEscaped;
 
 /**
  * The iterable of names, splitted by {@link SimpleObjectNameDelimiter} of {@link Text}.
@@ -34,7 +34,7 @@ public class SimpleObjectNameValuesOfText extends IterableEnvelope<Text> {
         super(
             new Split(
                 text,
-                new RegexpPatternLiteralEscaped(
+                new RegexpLiteralEscaped(
                     new SimpleObjectNameDelimiter()
                 )
             )

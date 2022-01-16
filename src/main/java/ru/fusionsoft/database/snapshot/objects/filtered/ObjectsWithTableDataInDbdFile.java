@@ -15,31 +15,31 @@
  */
 package ru.fusionsoft.database.snapshot.objects.filtered;
 
-import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.DbdFile;
+import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
+import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
  * The type of {@link Objects} that represents objects filtered by being
  *  mentioned as configuration tables in {@link DbdFile} presented.
- * @param <T> The type parameter.
  * @since 0.1
  */
-public class ObjectsAreDataTablesInDbdFile<T extends YamlNode> extends ObjectsOfScalar<T> {
+public class ObjectsWithTableDataInDbdFile extends ObjectsMentionedIn<DbdTableMapping> {
 
     /**
      * Instantiates a new Configuration tables of dbd.
      * @param origin The original {@link Objects} to be encapsulated.
      * @param file The {@link DbdFile} to be encapsulated.
      */
-    public ObjectsAreDataTablesInDbdFile(final Objects<T> origin, final DbdFile file) {
+    public ObjectsWithTableDataInDbdFile(final Objects<?> origin, final DbdFile file) {
         super(
-            () -> new ObjectsMentionedIn<>(
-                new DataTablesOfObjects(
-                    new ObjectsOfDbdFile(file)
-                ),
+            new ObjectsWithTableData(
+                new ObjectsOfDbdFile(file)
+            ),
+            new ObjectsWithType<>(
+                new ObjectTypeTable(),
                 origin
             )
         );

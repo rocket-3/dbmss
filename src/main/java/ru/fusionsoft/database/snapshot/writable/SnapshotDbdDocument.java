@@ -15,13 +15,11 @@
  */
 package ru.fusionsoft.database.snapshot.writable;
 
-import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.Writable;
 import ru.fusionsoft.database.dbdfile.DbdFileOfSnapshotObjects;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.writable.WritableYamlDocument;
 
 /**
  * The type of {@link Writable} representing Dbd yaml file,
@@ -29,7 +27,7 @@ import ru.fusionsoft.database.writable.WritableYamlDocument;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class SnapshotDbdDocument extends WritableYamlDocument {
+public class SnapshotDbdDocument extends DbdDocument {
 
     /**
      * Instantiates a new Dbd yaml of objects.
@@ -43,8 +41,7 @@ public class SnapshotDbdDocument extends WritableYamlDocument {
         final Objects<?> objects
     ) {
         super(
-            new DbdFileOfSnapshotObjects(server, info, objects),
-            new TextOf("DBD.yaml")
+            new DbdFileOfSnapshotObjects(server, info, objects)
         );
     }
 

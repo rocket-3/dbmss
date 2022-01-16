@@ -25,7 +25,7 @@ import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
-import ru.fusionsoft.lib.text.EscapedText;
+import ru.fusionsoft.lib.text.Quoted;
 
 /**
  * The type of {@link BasicQuery} that can be constructed
@@ -88,7 +88,7 @@ public class MessageFormatQuery<T extends Text> extends BasicQuery<T> {
                         .replace("{}", "'{'}"),
                     new ListOf<>(
                         new Mapped<String>(
-                            x -> new EscapedText(x, quotes).asString(),
+                            x -> new Quoted(x, quotes).asString(),
                             keys
                         )
                     ).toArray()

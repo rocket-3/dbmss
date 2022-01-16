@@ -26,7 +26,7 @@ import ru.fusionsoft.database.snapshot.Objects;
  *  'server', 'info' and objects descriptions.
  * @since 0.1
  */
-public class DbdFileOfSnapshotObjects extends DbdFileOfRootMapping {
+public class DbdFileOfSnapshotObjects extends DbdFileYamlOfRootMapping {
 
     /**
      * Instantiates a new Dbd file of snapshot objects.

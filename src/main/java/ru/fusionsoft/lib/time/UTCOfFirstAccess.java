@@ -13,21 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.path;
+package ru.fusionsoft.lib.time;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.cactoos.Scalar;
+import org.cactoos.scalar.Sticky;
 
 /**
- * The {@link Scalar} of {@link Path} that represents current working directory.
+ * The {@link UTCOfScalar} of first access to value, latter accesses will receive the same value,
+ *  see {@link Sticky}.
  * @since 0.1
  */
-public class CurrentWorkingDirectory implements Scalar<Path> {
+public class UTCOfFirstAccess extends UTCOfScalar {
 
-    @Override
-    public final Path value() {
-        return Paths.get("").toAbsolutePath();
+    /**
+     * Instantiates a new UTC of first access to value.
+     */
+    public UTCOfFirstAccess() {
+        super(
+            new Sticky<>(
+                () -> new UTCNow().millis()
+            )
+        );
     }
 
 }

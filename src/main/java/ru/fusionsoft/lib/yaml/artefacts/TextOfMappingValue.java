@@ -17,15 +17,24 @@ package ru.fusionsoft.lib.yaml.artefacts;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
-import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
-import org.cactoos.text.TextOfScalar;
+import org.cactoos.text.UncheckedText;
 
 /**
  * The type of Text that can be constructed of {@link YamlMapping} and its key.
  * @since 0.1
  */
-public class TextOfMappingValue extends TextEnvelope {
+public class TextOfMappingValue implements Text {
+
+    /**
+     * The YamlMapping encapsulated.
+     */
+    private final YamlMapping mapping;
+
+    /**
+     * The UncheckedText encapsulated.
+     */
+    private final UncheckedText key;
 
     /**
      * Instantiates a new Text of mapping value.
@@ -33,11 +42,8 @@ public class TextOfMappingValue extends TextEnvelope {
      * @param key The String of key to be encapsulated.
      */
     public TextOfMappingValue(final YamlMapping mapping, final Text key) {
-        super(
-            new TextOfScalar(
-                () -> mapping.value(key.asString()).asScalar().value()
-            )
-        );
+        this.mapping = mapping;
+        this.key = new UncheckedText(key);
     }
 
     /**
@@ -47,6 +53,11 @@ public class TextOfMappingValue extends TextEnvelope {
      */
     public TextOfMappingValue(final YamlMapping mapping, final String key) {
         this(mapping, new TextOf(key));
+    }
+
+    @Override
+    public String asString() {
+        return mapping.value(key.asString()).asScalar().value();
     }
 
 }

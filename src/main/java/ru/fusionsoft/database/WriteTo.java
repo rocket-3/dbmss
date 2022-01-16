@@ -79,9 +79,11 @@ public class WriteTo implements Runnable {
     public final void run() {
         new UncheckedProc<Input>(
             inp -> {
-                new WriterTo(this.opt).write(
+                final WriterTo writer = new WriterTo(this.opt);
+                writer.write(
                     new TextOf(inp).asString()
                 );
+                writer.flush();
             }
         ).exec(this.ipt);
     }

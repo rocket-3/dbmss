@@ -13,28 +13,41 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.connection;
+package ru.fusionsoft.database.snapshot;
 
+import java.text.MessageFormat;
+import org.cactoos.Text;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.fields.DbdServerFields;
-import ru.fusionsoft.lib.connection.ConnectionOfTextArgs;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 
 /**
- * The type of {@link java.sql.Connection} of {@link DbdServerMapping}.
+ * The default description of bare snapshot {@link Text} representation.
  * @since 0.1
  */
-public class ConnectionOfDbdServerMapping extends ConnectionOfTextArgs {
+public class SnapshotDefaultDescription implements Text {
 
     /**
-     * Instantiates a new Connection of scalar.
-     * @param mapping The mapping to use.
+     * The DbdServerMapping encapsulated.
      */
-    public ConnectionOfDbdServerMapping(final DbdServerMapping mapping) {
-        super(
-            new TextOfMappingValue(mapping, DbdServerFields.URL),
-            new TextOfMappingValue(mapping, DbdServerFields.USER),
-            new TextOfMappingValue(mapping, DbdServerFields.PWD)
+    private final DbdServerMapping mapping;
+
+    /**
+     * Instantiates a new Snapshot default description.
+     * @param mapping The {@link DbdServerMapping} to be encapsulated.
+     */
+    public SnapshotDefaultDescription(final DbdServerMapping mapping) {
+        this.mapping = mapping;
+    }
+
+    @Override
+    public String asString() {
+        return MessageFormat.format(
+            "Clean snapshot of database at {0}",
+            new TextOfMappingValue(
+                this.mapping,
+                DbdServerFields.URL
+            ).asString()
         );
     }
 

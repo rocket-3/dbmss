@@ -35,7 +35,7 @@ import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
 import ru.fusionsoft.lib.path.TempFolder;
 
 /**
- * The test for {@link SeparateDataFilesOfTablesWritable}.
+ * The test for {@link SeparateDataFilesOfTables}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -61,7 +61,7 @@ class SeparateDataFilesOfTablesWritableTest {
                 )
             )
         ) {
-            new SeparateDataFilesOfTablesWritable(
+            new SeparateDataFilesOfTables(
                 connection,
                 new ObjectsWithType<>(
                     new ObjectTypeTable(),

@@ -13,31 +13,31 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.text;
+package ru.fusionsoft.lib.connection;
 
-import java.text.MessageFormat;
+import java.sql.DriverManager;
 import org.cactoos.Text;
-import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
+import org.cactoos.scalar.Sticky;
 
 /**
- * The type of {@link Text} decorator that is escaped by some char sequence.
+ * The {@link ConnectionOfScalar} of url, user and pass {@link Text} arguments.
  * @since 0.1
  */
-public class EscapedText extends TextEnvelope {
+public class ConnectionOfTextArgs extends ConnectionOfScalar {
 
     /**
-     * Ctor.
-     * @param text Text representing the text value.
-     * @param quotes The Text to be encapsulated.
+     * Instantiates a new Connection of scalar.
+     * @param url The {@link Text} to be encapsulated.
+     * @param user The {@link Text} to be encapsulated.
+     * @param pass The {@link Text} to be encapsulated.
      */
-    public EscapedText(final Text text, final Text quotes) {
+    public ConnectionOfTextArgs(final Text url, final Text user, final Text pass) {
         super(
-            new TextOfScalar(
-                () -> MessageFormat.format(
-                    "{0}{1}{0}",
-                    quotes.asString(),
-                    text.asString()
+            new Sticky<>(
+                () -> DriverManager.getConnection(
+                    url.asString(),
+                    user.asString(),
+                    pass.asString()
                 )
             )
         );

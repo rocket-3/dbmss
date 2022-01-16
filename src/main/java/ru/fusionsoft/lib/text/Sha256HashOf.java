@@ -13,27 +13,29 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot;
+package ru.fusionsoft.lib.text;
 
-import org.cactoos.Bytes;
 import org.cactoos.Input;
 import org.cactoos.Text;
 import org.cactoos.bytes.Sha256DigestOf;
 import org.cactoos.io.InputOf;
 import org.cactoos.text.HexOf;
 import org.cactoos.text.TextEnvelope;
+import ru.fusionsoft.lib.bytes.BytesOfLong;
+import ru.fusionsoft.lib.time.UTC;
+import ru.fusionsoft.lib.time.UTCNow;
 
 /**
- * The type of Text that is a hash of {@link AstronomicalTime}.
+ * The type of Text that is a hash of {@link UTCNow}.
  * @since 0.1
  */
-public class HashTextOf extends TextEnvelope {
+public class Sha256HashOf extends TextEnvelope {
 
     /**
      * Instantiates a new Hash text of time.
      * @param input The Input to be used.
      */
-    private HashTextOf(final Input input) {
+    public Sha256HashOf(final Input input) {
         super(
             new HexOf(new Sha256DigestOf(input))
         );
@@ -43,7 +45,7 @@ public class HashTextOf extends TextEnvelope {
      * Instantiates a new Hash text of time.
      * @param text The Text to be hashed.
      */
-    public HashTextOf(final Text text) {
+    public Sha256HashOf(final Text text) {
         this(new InputOf(text));
     }
 
@@ -51,8 +53,12 @@ public class HashTextOf extends TextEnvelope {
      * Instantiates a new Hash text of time.
      * @param time The Text to be hashed.
      */
-    public HashTextOf(final AstronomicalTime time) {
-        this(new InputOf((Bytes) time));
+    public Sha256HashOf(final UTC time) {
+        this(
+            new InputOf(
+                new BytesOfLong(time::millis)
+            )
+        );
     }
 
 }

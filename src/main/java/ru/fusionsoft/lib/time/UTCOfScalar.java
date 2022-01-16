@@ -13,21 +13,33 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.path;
+package ru.fusionsoft.lib.time;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.cactoos.Scalar;
+import org.cactoos.scalar.Unchecked;
 
 /**
- * The {@link Scalar} of {@link Path} that represents current working directory.
+ * The {@link UTC}, that can be constructed of {@link Scalar} of {@link Long}.
  * @since 0.1
  */
-public class CurrentWorkingDirectory implements Scalar<Path> {
+public class UTCOfScalar implements UTC {
+
+    /**
+     * The Unchecked<Long> encapsulated.
+     */
+    private final Unchecked<Long> scalar;
+
+    /**
+     * Instantiates a new Utc of scalar.
+     * @param scalar The {@link Scalar<Long>} to be encapsulated.
+     */
+    public UTCOfScalar(final Scalar<Long> scalar) {
+        this.scalar = new Unchecked<>(scalar);
+    }
 
     @Override
-    public final Path value() {
-        return Paths.get("").toAbsolutePath();
+    public Long millis() {
+        return this.scalar.value();
     }
 
 }

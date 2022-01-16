@@ -15,12 +15,15 @@
  */
 package ru.fusionsoft.database.mapping.dbd.built;
 
+import java.sql.Connection;
+import java.text.MessageFormat;
 import org.cactoos.Text;
 import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdServerFields;
 import ru.fusionsoft.lib.ci.credentials.Credentials;
+import ru.fusionsoft.lib.connection.ConnectionOfTextArgs;
 import ru.fusionsoft.lib.yaml.MappingWithEntries;
 import ru.fusionsoft.lib.yaml.MappingWithKeys;
 
@@ -40,6 +43,7 @@ public class DbdServerMappingWithCredentials extends DbdServerMapping {
      */
     public DbdServerMappingWithCredentials(
         final DbdServerMapping mapping,
+        final Connection connection,
         final Text url,
         final Text user,
         final Text password
@@ -55,6 +59,18 @@ public class DbdServerMappingWithCredentials extends DbdServerMapping {
                 ),
                 new ScalarEntry(
                     DbdServerFields.PWD, password
+                ),
+                new ScalarEntry(
+                    DbdServerFields.DBTYPE,
+                    () -> connection.getMetaData().getDatabaseProductName()
+                ),
+                new ScalarEntry(
+                    DbdServerFields.DBVERSION,
+                    () -> MessageFormat.format(
+                        "{0}.{1}",
+                        connection.getMetaData().getDatabaseMajorVersion(),
+                        connection.getMetaData().getDatabaseMinorVersion()
+                    )
                 )
             )
         );
@@ -77,6 +93,7 @@ public class DbdServerMappingWithCredentials extends DbdServerMapping {
                     DbdServerFields.values()
                 )
             ),
+            new ConnectionOfTextArgs(url, user, password),
             url, user, password
         );
     }

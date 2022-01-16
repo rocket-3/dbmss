@@ -16,10 +16,8 @@
 package ru.fusionsoft.database;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
-import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import ru.fusionsoft.database.snapshot.CreatingSnapshotFolder;
-import ru.fusionsoft.database.snapshot.writable.SnapshotOfServerFiles;
+import ru.fusionsoft.database.snapshot.writable.SnapshotOfDbdFiles;
 import ru.fusionsoft.lib.time.UTC;
 import ru.fusionsoft.lib.time.UTCOfFirstAccess;
 
@@ -28,7 +26,7 @@ import ru.fusionsoft.lib.time.UTCOfFirstAccess;
  * @since 0.1
  * @checkstyle ParameterNumberCheck (100 lines)
  */
-public class SnapshotCreateProcedure implements Runnable {
+public class SnapshotUpdateProcedure implements Runnable {
 
     /**
      * The Writable encapsulated.
@@ -45,70 +43,46 @@ public class SnapshotCreateProcedure implements Runnable {
      * @param writable The Writable to be encapsulated.
      * @param folder The Folder to be encapsulated.
      */
-    private SnapshotCreateProcedure(final Writable writable, final Folder folder) {
+    private SnapshotUpdateProcedure(final Writable writable, final Folder folder) {
         this.writable = writable;
         this.folder = folder;
     }
 
     /**
      * Instantiates a new Snapshot create procedure.
-     * @param time The AstronomicalTime to be encapsulated.
+     * @param file The DbdFile to be encapsulated.
+     * @param database The String to be encapsulated.
+     * @param alldata The Boolean of to fetch all tables data or not to be encapsulated.
      */
-    public SnapshotCreateProcedure(
-        final UTC time,
-        final DbdServerMapping server
+    public SnapshotUpdateProcedure(
+        final DbdFile file,
+        final Text database,
+        final Boolean alldata
     ) {
         this(
-            new SnapshotOfServerFiles(time, server),
+            new UTCOfFirstAccess(),
+            file,
+            database,
+            alldata
+        );
+    }
+
+    /**
+     * Instantiates a new Snapshot create procedure.
+     * @param time The AstronomicalTime to be encapsulated.
+     * @param dbd The DbdFile to be encapsulated.
+     * @param server The Text of server name to be encapsulated.
+     * @param alldata The Boolean of to fetch all tables data or not to be encapsulated.
+     */
+    public SnapshotUpdateProcedure(
+        final UTC time,
+        final DbdFile dbd,
+        final Text server,
+        final Boolean alldata
+    ) {
+        this(
+            new SnapshotOfDbdFiles(time, dbd, server, alldata),
             new CreatingSnapshotFolder(time)
-        );
-    }
-
-    /**
-     * Instantiates a new Snapshot create procedure.
-     */
-    public SnapshotCreateProcedure(
-        final DbdServerMapping server
-    ) {
-        this(
-            new UTCOfFirstAccess(),
-            server
-        );
-    }
-
-    /**
-     * Instantiates a new Snapshot create procedure.
-     * @param time The AstronomicalTime to be encapsulated.
-     */
-    public SnapshotCreateProcedure(
-        final UTC time,
-        final Text url,
-        final Text user,
-        final Text password
-    ) {
-        this(
-            time,
-            new DbdServerMappingWithCredentials(
-                url,
-                user,
-                password
-            )
-        );
-    }
-
-    /**
-     * Instantiates a new Snapshot create procedure.
-     */
-    public SnapshotCreateProcedure(
-        final Text url,
-        final Text user,
-        final Text password
-    ) {
-        this(
-            new UTCOfFirstAccess(),
-            url,
-            user,
-            password
         );
     }
 

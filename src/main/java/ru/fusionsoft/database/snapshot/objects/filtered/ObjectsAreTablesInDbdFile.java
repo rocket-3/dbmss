@@ -15,25 +15,30 @@
  */
 package ru.fusionsoft.database.snapshot.objects.filtered;
 
+import ru.fusionsoft.database.DbdFile;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import ru.fusionsoft.database.snapshot.objects.predicate.ObjectHasDataNodePredicate;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The {@link ObjectsFiltered} that has {@link ObjectTypeTable} and 'data' node.
+ * The type of {@link Objects} that represents objects filtered by being
+ *  mentioned as tables in {@link DbdFile} presented.
  * @since 0.1
  */
-public class DataTablesOfObjects extends ObjectsFiltered<DbdTableMapping> {
+public class ObjectsAreTablesInDbdFile extends ObjectsMentionedIn<DbdTableMapping> {
 
     /**
-     * Instantiates a new Objects are data tables.
-     * @param origin The Objects to be encapsulated.
+     * Instantiates a new objects are tables in dbd file.
+     * @param origin The original {@link Objects} to be encapsulated.
+     * @param file The {@link DbdFile} to be encapsulated.
      */
-    public DataTablesOfObjects(final Objects<?> origin) {
+    public ObjectsAreTablesInDbdFile(final Objects<?> origin, final DbdFile file) {
         super(
-            new ObjectHasDataNodePredicate(),
+            new ObjectsWithType<>(
+                new ObjectTypeTable(),
+                new ObjectsOfDbdFile(file)
+            ),
             new ObjectsWithType<>(
                 new ObjectTypeTable(),
                 origin

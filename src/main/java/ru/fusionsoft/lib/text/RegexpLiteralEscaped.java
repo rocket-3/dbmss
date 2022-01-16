@@ -13,35 +13,37 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot;
+package ru.fusionsoft.lib.text;
 
-import java.text.MessageFormat;
+import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
+import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
-import ru.fusionsoft.lib.text.HexOfLong;
-import ru.fusionsoft.lib.time.UTC;
 
 /**
- * The type of {@link org.cactoos.Text} that represents name of snapshot created
- *  at some {@link UTC} moment.
+ * The Regexp pattern of text being escaped for matching.
  * @since 0.1
  */
-public class SnapshotCatalogName extends TextEnvelope {
+public class RegexpLiteralEscaped extends TextEnvelope {
 
     /**
-     * Instantiates a new Snapshot name.
-     * @param time The AstronomicalTime to be encapsulated.
+     * Ctor.
+     * @param text Text to be quoted.
      */
-    public SnapshotCatalogName(final UTC time) {
+    public RegexpLiteralEscaped(final Text text) {
         super(
             new TextOfScalar(
-                () -> MessageFormat.format(
-                    "{0} {1}",
-                    "Snapshot",
-                    new HexOfLong(time::millis).asString()
-                )
+                () -> text.asString().replaceAll("[\\W]", "\\\\$0")
             )
         );
+    }
+
+    /**
+     * Ctor.
+     * @param text Text to be quoted.
+     */
+    public RegexpLiteralEscaped(final CharSequence text) {
+        this(new TextOf(text));
     }
 
 }

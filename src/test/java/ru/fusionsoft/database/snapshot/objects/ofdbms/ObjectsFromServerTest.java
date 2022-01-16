@@ -39,7 +39,7 @@ import ru.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.StickyObjects;
-import ru.fusionsoft.database.writable.WritableYamlDocument;
+import ru.fusionsoft.database.writable.YamlDocument;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
@@ -212,7 +212,7 @@ class ObjectsFromServerTest {
                 new CredsOfPgTestDatabase()
             )
         );
-        new WritableYamlDocument(
+        new YamlDocument(
             new DbdSchemasMappingOfObjects(
                 new StickyObjects<>(
                     new ObjectsFiltered<>(

@@ -16,10 +16,14 @@
 package ru.fusionsoft.database.snapshot.writable;
 
 import org.cactoos.text.TextOf;
+import org.cactoos.text.TextOfScalar;
+import ru.fusionsoft.database.SimpleYamlRepresentative;
 import ru.fusionsoft.database.Writable;
-import ru.fusionsoft.database.snapshot.AstronomicalTime;
-import ru.fusionsoft.database.writable.WritableYamlDocument;
-import ru.fusionsoft.lib.yaml.MappingEmpty;
+import ru.fusionsoft.database.mapping.entries.ScalarEntry;
+import ru.fusionsoft.database.writable.YamlDocument;
+import ru.fusionsoft.lib.text.DateTextOfUTC;
+import ru.fusionsoft.lib.time.UTC;
+import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The type {@link Writable} that represents db objects snapshot info data.
@@ -29,7 +33,7 @@ import ru.fusionsoft.lib.yaml.MappingEmpty;
  * @todo #40:60min Implement `SnapshotInfo` `Writable`.
  */
 @SuppressWarnings("PMD")
-public class SnapshotInfoDocument extends WritableYamlDocument {
+public class SnapshotInfoDocument extends YamlDocument {
 
     /**
      * Instantiates a new Snapshot info.
@@ -38,10 +42,24 @@ public class SnapshotInfoDocument extends WritableYamlDocument {
      *  or configuration data only.
      */
     public SnapshotInfoDocument(
-        final AstronomicalTime time,
+        final UTC time,
         final Boolean withOperationalData
     ) {
-        super(new MappingEmpty(), new TextOf(".snapshot.yml"));
+        super(
+            new SimpleYamlRepresentative<>(
+                new YamlMappingOfEntries(
+                    new ScalarEntry(
+                        new TextOf("createdAt"),
+                        new DateTextOfUTC(time)
+                    ),
+                    new ScalarEntry(
+                        new TextOf("withOperationalData"),
+                        new TextOfScalar(() -> String.valueOf(withOperationalData))
+                    )
+                )
+            ),
+            new TextOf(".snapshot.yml")
+        );
     }
 
 }
