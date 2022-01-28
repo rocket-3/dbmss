@@ -151,6 +151,33 @@
                                         </extraArguments>
                                     </jvmSettings>
                                 </program>
+                                <program>
+                                    <mainClass>ru.fusionsoft.database.application.DbdMerge</mainClass>
+                                    <name>dbdmerge</name>
+                                    <jvmSettings>
+                                        <extraArguments>
+                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
+                                        </extraArguments>
+                                    </jvmSettings>
+                                </program>
+                                <program>
+                                    <mainClass>ru.fusionsoft.database.application.DbdLink</mainClass>
+                                    <name>dbdlink</name>
+                                    <jvmSettings>
+                                        <extraArguments>
+                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
+                                        </extraArguments>
+                                    </jvmSettings>
+                                </program>
+                                <program>
+                                    <mainClass>ru.fusionsoft.database.application.DbdSnapshot</mainClass>
+                                    <name>dbdsnap</name>
+                                    <jvmSettings>
+                                        <extraArguments>
+                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
+                                        </extraArguments>
+                                    </jvmSettings>
+                                </program>
                             </programs>
                         </configuration>
                         <executions>

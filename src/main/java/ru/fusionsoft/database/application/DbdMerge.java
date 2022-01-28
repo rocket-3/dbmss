@@ -17,44 +17,37 @@ package ru.fusionsoft.database.application;
 
 import org.cactoos.io.InputOf;
 import org.cactoos.io.Stdout;
+import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.WriteTo;
-import ru.fusionsoft.database.api.DbdCreateProcedure;
+import ru.fusionsoft.database.api.DbdMergeProcedure;
 import ru.fusionsoft.database.folder.CurrentWorkingDirectoryFolder;
-import ru.fusionsoft.database.snapshot.writable.SnapshotFilesOfServerDefault;
 
 /**
- * The application class of just creating a bare snapshot with a new DBD and fetching all the data.
+ * The application class of updating DBD files in current directory from server, mentioned in DBD.
  * @since 0.1
- * @checkstyle HideUtilityClassConstructorCheck (100 lines)
  */
-@SuppressWarnings("PMD")
-public final class DbdNew {
+public final class DbdMerge {
 
     /**
      * Main.
-     * @param args The array of {@link String} args, which are:
-     *  {connectionString} {user} {password}.
+     * @param args The array of {@link String} args, which are: {server name}.
      */
-    public static void main(final String[] args) {
-        final int arguments = 3;
-        if (args.length != arguments) {
-            new WriteTo(
+    public static void main(final String[] args) throws Exception {
+        final int arguments = 1;
+        new Ternary<Runnable>(
+            () -> args.length == arguments,
+            () -> new WriteTo(
                 new InputOf(
-                    "Wrong arguments, need {jdbc:<dbms>://<url>:<port>/<catalog>} {user} {pass}"
+                    "Wrong arguments, need {server name from DBD}"
                 ),
                 new Stdout()
-            ).run();
-        } else {
-            new DbdCreateProcedure(
-                new SnapshotFilesOfServerDefault(
-                    new TextOf(args[0]),
-                    new TextOf(args[1]),
-                    new TextOf(args[2])
-                ),
+            ),
+            () -> new DbdMergeProcedure(
+                new TextOf(args[0]),
                 new CurrentWorkingDirectoryFolder()
-            ).run();
-        }
+            )
+        ).value().run();
     }
 
 }
