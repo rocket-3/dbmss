@@ -28,13 +28,17 @@ import ru.fusionsoft.database.folder.CurrentWorkingDirectoryFolder;
  * The application class of creating a DBD snapshot from server mentioned in DBD
  *  in new folder in the current directory.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ * @checkstyle HideUtilityClassConstructorCheck (100 lines)
  */
+@SuppressWarnings("PMD")
 public final class DbdSnapshot {
 
     /**
      * Main.
      * @param args The array of {@link String} args, which are:
      *  {server name} {with op data true/false}.
+     * @throws Exception when can't.
      */
     public static void main(final String[] args) throws Exception {
         final int arguments = 1;

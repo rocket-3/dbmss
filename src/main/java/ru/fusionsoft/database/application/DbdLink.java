@@ -29,13 +29,17 @@ import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
  * The application class of adding a server to DBD file in current directory.
  * @since 0.1
  * @checkstyle HideUtilityClassConstructorCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
+@SuppressWarnings("PMD")
 public final class DbdLink {
 
     /**
      * Main.
      * @param args The array of {@link String} args, which are:
-     * {server name} {connectionString} {user} {password}.
+     *  {server name} {connectionString} {user} {password}.
+     * @throws Exception when can't.
+     * @checkstyle MagicNumberCheck (100 lines)
      */
     public static void main(final String[] args) throws Exception {
         final int arguments = 4;
