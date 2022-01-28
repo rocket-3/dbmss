@@ -24,7 +24,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
  * The type of {@link DbdFile} can be constructed of {@link DbdRootMapping}.
  * @since 0.1
  */
-public class DbdFileYamlOfRootMapping implements DbdFile {
+public class DbdFileOfRootMapping implements DbdFile {
 
     /**
      * The Scalar of DbdRootMapping encapsulated.
@@ -35,7 +35,7 @@ public class DbdFileYamlOfRootMapping implements DbdFile {
      * Instantiates a new Dbd file of dbd root mapping.
      * @param mapping The Scalar of DbdRootMapping to be encapsulated.
      */
-    public DbdFileYamlOfRootMapping(final Scalar<DbdRootMapping> mapping) {
+    public DbdFileOfRootMapping(final Scalar<DbdRootMapping> mapping) {
         this.mapping = mapping;
     }
 
@@ -43,7 +43,7 @@ public class DbdFileYamlOfRootMapping implements DbdFile {
      * Instantiates a new Dbd file of dbd root mapping.
      * @param mapping The DbdRootMapping to be encapsulated.
      */
-    public DbdFileYamlOfRootMapping(final DbdRootMapping mapping) {
+    public DbdFileOfRootMapping(final DbdRootMapping mapping) {
         this(() -> mapping);
     }
 

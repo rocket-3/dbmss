@@ -27,7 +27,7 @@ import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.collection.Single;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
@@ -49,7 +49,7 @@ class LinkDataObjectOfTableTest {
                 x -> x.signature().name().first().asString().contains("million"),
                 new ObjectsWithType<>(
                     new ObjectTypeTable(),
-                    new ObjectsFromServer(
+                    new ObjectsOfServer(
                         new ConnectionOfDbdServerMapping(
                             new DbdServerMappingWithCredentials(
                                 new UrlOfPgGitLabDatabaseV11("pagilla"),

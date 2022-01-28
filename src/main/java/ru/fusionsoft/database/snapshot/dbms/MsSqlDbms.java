@@ -16,7 +16,7 @@
 package ru.fusionsoft.database.snapshot.dbms;
 
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMssql;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfMssql;
 
 /**
  * The MS SQL Server {@link Dbms}.
@@ -31,7 +31,7 @@ public class MsSqlDbms extends SimpleDbms {
         super(
             "MSSQL",
             "Microsoft SQL Server",
-            ObjectsFromMssql::new
+            ObjectsOfMssql::new
         );
     }
 

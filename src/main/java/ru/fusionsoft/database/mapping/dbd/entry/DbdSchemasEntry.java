@@ -13,25 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.time;
+package ru.fusionsoft.database.mapping.dbd.entry;
 
-import org.cactoos.scalar.Sticky;
+import ru.fusionsoft.database.mapping.dbd.DbdSchemasMapping;
+import ru.fusionsoft.database.mapping.entries.YamlMappingEntryOfScalar;
+import ru.fusionsoft.database.mapping.fields.DbdRootFields;
 
 /**
- * The {@link UTCOfScalar} of first access to value, latter accesses will receive the same value,
- *  see {@link Sticky}.
+ * The {@link DbdSchemasMapping} {@link java.util.Map.Entry} of DBD file.
  * @since 0.1
  */
-public class UTCOfFirstAccess extends UTCOfScalar {
+public class DbdSchemasEntry extends YamlMappingEntryOfScalar<DbdSchemasMapping> {
 
     /**
-     * Instantiates a new UTC of first access to value.
+     * Instantiates a new Scalar entry.
+     * @param mapping The {@link DbdSchemasMapping} to be encapsulated.
      */
-    public UTCOfFirstAccess() {
+    public DbdSchemasEntry(final DbdSchemasMapping mapping) {
         super(
-            new Sticky<>(
-                () -> new UTCNow().millis()
-            )
+            DbdRootFields.SCHEMAS,
+            () -> mapping
         );
     }
 

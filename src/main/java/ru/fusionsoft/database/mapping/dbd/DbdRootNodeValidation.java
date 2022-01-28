@@ -15,9 +15,11 @@
  */
 package ru.fusionsoft.database.mapping.dbd;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Proc;
 import ru.fusionsoft.database.mapping.fields.DbdInfoFields;
+import ru.fusionsoft.database.mapping.fields.DbdRootFields;
 import ru.fusionsoft.lib.exception.ValidationException;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
@@ -29,13 +31,14 @@ import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
 public class DbdRootNodeValidation implements Proc<YamlNode> {
 
     @Override
-    public final void exec(final YamlNode input) throws Exception {
+    public final void exec(final YamlNode input) {
+        final YamlMapping mapping = input.asMapping();
         if (!"db".equals(
             new TextOfMappingValue(
                 new DbdInfoMapping(
                     new YamlMappingOfPath(
-                        input.asMapping(),
-                        "info"
+                        mapping,
+                        DbdRootFields.INFO
                     )
                 ),
                 DbdInfoFields.TYPE.asString()

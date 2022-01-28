@@ -22,11 +22,11 @@ import org.cactoos.io.InputOf;
 import org.cactoos.text.HexOf;
 import org.cactoos.text.TextEnvelope;
 import ru.fusionsoft.lib.bytes.BytesOfLong;
-import ru.fusionsoft.lib.time.UTC;
-import ru.fusionsoft.lib.time.UTCNow;
+import ru.fusionsoft.lib.time.Utc;
+import ru.fusionsoft.lib.time.UtcNow;
 
 /**
- * The type of Text that is a hash of {@link UTCNow}.
+ * The type of Text that is a hash of {@link UtcNow}.
  * @since 0.1
  */
 public class Sha256HashOf extends TextEnvelope {
@@ -53,7 +53,7 @@ public class Sha256HashOf extends TextEnvelope {
      * Instantiates a new Hash text of time.
      * @param time The Text to be hashed.
      */
-    public Sha256HashOf(final UTC time) {
+    public Sha256HashOf(final Utc time) {
         this(
             new InputOf(
                 new BytesOfLong(time::millis)

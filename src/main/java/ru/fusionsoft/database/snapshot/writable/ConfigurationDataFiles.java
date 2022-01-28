@@ -20,22 +20,65 @@ import ru.fusionsoft.database.DbdFile;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdFile;
 import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
+import ru.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsArePartitionsOf;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTableDataInDbdFile;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
 
+/**
+ * The {@link SeparateDataFilesOfTables} for given objects, which are mentioned in specific
+ *  DBD document as tables with 'data' node specified.
+ * @since 0.1
+ */
 public class ConfigurationDataFiles extends SeparateDataFilesOfTables {
 
-    public ConfigurationDataFiles(
+    /**
+     * Instantiates a new Configuration data files.
+     * @param datatables The {@link ObjectsWithTableDataInDbdFile} to be encapsulated.
+     * @param objects The {@link Objects} to be encapsulated.
+     * @param dbdfile The {@link DbdFile} to be encapsulated.
+     * @param server The {@link Text} to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
+    private ConfigurationDataFiles(
+        final ObjectsWithTableDataInDbdFile datatables,
         final Objects<?> objects,
         final DbdFile dbdfile,
         final Text server
     ) {
         super(
             new DbdServerMappingOfDbdFile(dbdfile, server),
-            new ObjectsWithTableDataInDbdFile(objects, dbdfile)
+            new DefaultObjectsJoined(
+                datatables,
+                new ObjectsArePartitionsOf<>(objects, datatables)
+            )
         );
     }
 
+    /**
+     * Instantiates a new Configuration data files.
+     * @param objects The {@link Objects} to be filtered.
+     * @param dbdfile The {@link DbdFile} to filter by.
+     * @param server The {@link Text} to be encapsulated.
+     */
+    public ConfigurationDataFiles(
+        final Objects<?> objects,
+        final DbdFile dbdfile,
+        final Text server
+    ) {
+        this(
+            new ObjectsWithTableDataInDbdFile(objects, dbdfile),
+            objects,
+            dbdfile,
+            server
+        );
+    }
+
+    /**
+     * Instantiates a new Configuration data files.
+     * @param dbdfile The {@link DbdFile} to be encapsulated.
+     * @param server The {@link Text} to be encapsulated.
+     */
     public ConfigurationDataFiles(
         final DbdFile dbdfile,
         final Text server

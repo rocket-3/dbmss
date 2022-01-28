@@ -21,7 +21,7 @@ import ru.fusionsoft.database.DbdFile;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdFile;
 import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 
 /**
@@ -43,7 +43,7 @@ public class ObjectsOfServerFromDbd extends ObjectsFiltered<YamlMapping> {
         final Text server
     ) {
         super(
-            new ObjectsFromServer(
+            new ObjectsOfServer(
                 new DbdServerMappingOfDbdFile(file, server)
             ),
             new ObjectMentionedInDbdFilePredicate(file)

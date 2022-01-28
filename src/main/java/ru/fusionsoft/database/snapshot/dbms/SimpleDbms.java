@@ -19,6 +19,7 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
 import org.cactoos.Func;
 import org.cactoos.Text;
+import org.cactoos.func.UncheckedFunc;
 import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.snapshot.Objects;
@@ -85,8 +86,8 @@ public class SimpleDbms implements Dbms {
     }
 
     @Override
-    public final Func<Connection, Objects<YamlMapping>> objects() {
-        return this.objectsf;
+    public final Objects<YamlMapping> objects(final Connection connection) {
+        return new UncheckedFunc<>(this.objectsf).apply(connection);
     }
 
 }

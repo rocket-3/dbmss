@@ -17,7 +17,7 @@ package ru.fusionsoft.database.snapshot.objects.ofresultset;
 
 import java.sql.ResultSet;
 import ru.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
-import ru.fusionsoft.database.mapping.entries.MultilineScalarEntry;
+import ru.fusionsoft.database.mapping.entries.MultilineSqlScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdTriggerFields;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
@@ -47,7 +47,7 @@ public class TriggerOfResultSet extends SimpleDbObjectOfEntries<DbdTriggerMappin
                 DbdTriggerFields.TABLE,
                 DbdTriggerFields.TRIGGER
             ),
-            new MultilineScalarEntry(
+            new MultilineSqlScalarEntry(
                 DbdTriggerFields.DDL,
                 new TextOfResultSet(
                     DbdTriggerFields.DDL,

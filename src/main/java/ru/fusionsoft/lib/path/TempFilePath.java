@@ -76,7 +76,9 @@ public class TempFilePath implements Scalar<Path> {
 
     @Override
     public final Path value() {
-        return this.scalar.value();
+        final Path path = this.scalar.value();
+        path.toFile().mkdirs();
+        return path;
     }
 
 }

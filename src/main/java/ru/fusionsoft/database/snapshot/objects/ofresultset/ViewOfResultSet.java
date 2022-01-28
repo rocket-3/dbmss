@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.objects.ofresultset;
 import java.sql.ResultSet;
 import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdViewMapping;
-import ru.fusionsoft.database.mapping.entries.MultilineScalarEntry;
+import ru.fusionsoft.database.mapping.entries.MultilineSqlScalarEntry;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdViewFields;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
@@ -59,7 +59,7 @@ public class ViewOfResultSet extends SimpleDbObjectOfEntries<DbdViewMapping> {
                     rset
                 )
             ),
-            new MultilineScalarEntry(
+            new MultilineSqlScalarEntry(
                 DbdViewFields.DDL,
                 new TextOfResultSet(
                     query.outcomeFor(DbdViewFields.DDL),

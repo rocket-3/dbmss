@@ -17,13 +17,11 @@ package ru.fusionsoft.lib.yaml.artefacts;
 
 import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlMapping;
-import com.amihaiemil.eoyaml.YamlNodeNotFoundException;
-import org.cactoos.Fallback;
+import java.util.Set;
 import org.cactoos.Text;
 import org.cactoos.scalar.ScalarOf;
-import org.cactoos.scalar.ScalarWithFallback;
-import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
+import org.cactoos.text.UncheckedText;
 
 /**
  * The type of Text that can be constructed of value from
@@ -31,7 +29,12 @@ import org.cactoos.text.TextOf;
  *   returned in that case.
  * @since 0.1
  */
-public class MaybeEmptyTextOfYamlMapping extends TextEnvelope {
+public class MaybeEmptyTextOfYamlMapping implements Text {
+
+    /**
+     * The {@link UncheckedText} encapsulated.
+     */
+    private final UncheckedText text;
 
     /**
      * Instantiates a new Maybe empty text of.
@@ -42,16 +45,17 @@ public class MaybeEmptyTextOfYamlMapping extends TextEnvelope {
         final StrictYamlMapping mapping,
         final Text key
     ) {
-        super(
+        this.text = new UncheckedText(
             new TextOf(
-                new ScalarWithFallback<>(
-                    new ScalarOf<>(
-                        () -> mapping.value(key.asString()).asScalar().value()
-                    ),
-                    new Fallback.From<>(
-                        YamlNodeNotFoundException.class,
-                        e -> ""
-                    )
+                new ScalarOf<>(
+                    () -> {
+                        String value = "";
+                        final Set<String> keys = new KeysFromYamlNode(mapping);
+                        if (keys.contains(key.asString())) {
+                            value = mapping.value(key.asString()).asScalar().value();
+                        }
+                        return value;
+                    }
                 )
             )
         );
@@ -67,6 +71,11 @@ public class MaybeEmptyTextOfYamlMapping extends TextEnvelope {
         final Text key
     ) {
         this(new StrictYamlMapping(mapping), key);
+    }
+
+    @Override
+    public final String asString() {
+        return this.text.asString();
     }
 
 }

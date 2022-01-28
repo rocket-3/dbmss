@@ -15,6 +15,6 @@
  */
 
 /**
- * The package concentrate common use cases and expose them in application level.
+ * The package concentrate common use cases and expose them in api level.
  */
 package ru.fusionsoft.database.api;

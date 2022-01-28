@@ -16,7 +16,7 @@
 package ru.fusionsoft.database.snapshot.dbms;
 
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromOracle;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfOracle;
 
 /**
  * The Oracle {@link Dbms}.
@@ -31,7 +31,7 @@ public class OracleDbms extends SimpleDbms {
         super(
             "ORACLE",
             "Oracle",
-            ObjectsFromOracle::new
+            ObjectsOfOracle::new
         );
     }
 

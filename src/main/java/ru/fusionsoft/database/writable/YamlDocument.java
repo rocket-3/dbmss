@@ -17,6 +17,7 @@ package ru.fusionsoft.database.writable;
 
 import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlNode;
+import java.nio.file.Path;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.io.WriterTo;
@@ -85,13 +86,9 @@ public class YamlDocument implements Writable {
     public final void writeTo(final Folder folder) {
         new Unchecked<>(
             () -> {
-                Yaml.createYamlPrinter(
-                    new WriterTo(
-                        folder.path().resolve(
-                            new UncheckedText(this.name).asString()
-                        )
-                    )
-                ).print(this.yaml.asYaml());
+                final Path path = folder.path().resolve(new UncheckedText(this.name).asString());
+                final YamlNode node = this.yaml.asYaml();
+                Yaml.createYamlPrinter(new WriterTo(path)).print(node);
                 return true;
             }
         ).value();

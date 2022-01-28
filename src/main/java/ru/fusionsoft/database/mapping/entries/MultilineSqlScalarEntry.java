@@ -17,21 +17,29 @@ package ru.fusionsoft.database.mapping.entries;
 
 import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlNode;
+import com.amihaiemil.eoyaml.YamlScalarBuilder;
 import java.util.Map;
+import org.cactoos.Func;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.func.Chained;
+import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.Replaced;
+import org.cactoos.text.Split;
 import org.cactoos.text.TextOf;
-import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.lib.exception.NotImplemented;
 
 /**
  * The {@link Map.Entry} of {@link Text}, {@link YamlNode} with text that should
  *  be rendered as multiline text.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (256 lines)
+ * @checkstyle RegexpSinglelineJava (256 lines)
  */
-public class MultilineScalarEntry implements Map.Entry<Text, YamlNode> {
+public class MultilineSqlScalarEntry implements Map.Entry<Text, YamlNode> {
 
     /**
      * The Text encapsulated.
@@ -48,7 +56,7 @@ public class MultilineScalarEntry implements Map.Entry<Text, YamlNode> {
      * @param text The Text to be encapsulated.
      * @param node The Scalar of YamlNode to be encapsulated.
      */
-    private MultilineScalarEntry(final Text text, final Scalar<YamlNode> node) {
+    private MultilineSqlScalarEntry(final Text text, final Scalar<YamlNode> node) {
         this.text = text;
         this.node = new Unchecked<>(new Sticky<>(node));
     }
@@ -58,20 +66,31 @@ public class MultilineScalarEntry implements Map.Entry<Text, YamlNode> {
      * @param key The Text to be encapsulated.
      * @param value The Text to be encapsulated.
      */
-    public MultilineScalarEntry(final Text key, final Text value) {
+    public MultilineSqlScalarEntry(final Text key, final Text value) {
         this(
             key,
-            () -> Yaml.createYamlScalarBuilder().addLine(
-                new TextOfScalar(
-                    () -> {
-                        String txt = value.asString();
-                        if (!txt.contains(System.lineSeparator())) {
-                            txt = txt.replace("\n", System.lineSeparator());
-                        }
-                        return txt;
-                    }
-                ).asString()
-            ).buildLiteralBlockScalar()
+            () -> {
+                final Func<Text, String> building = new Ternary<Func<Text, String>>(
+                    () -> value.asString().contains("\n"),
+                    () -> line -> new Replaced(line, "^", "/**/  ").asString(),
+                    () -> line -> line.asString()
+                ).value();
+                return new Chained<YamlScalarBuilder, YamlScalarBuilder, YamlScalarBuilder>(
+                    scalar -> scalar,
+                    new Mapped<>(
+                        line -> scalar -> scalar.addLine(building.apply(line)),
+                        new Split(
+                            new Replaced(
+                                new Replaced(value, "\r", ""),
+                                "--(.+)",
+                                "/*$1*/"
+                            ),
+                            "\n"
+                        )
+                    ),
+                    scalar -> scalar
+                ).apply(Yaml.createYamlScalarBuilder()).buildLiteralBlockScalar();
+            }
         );
     }
 
@@ -80,7 +99,7 @@ public class MultilineScalarEntry implements Map.Entry<Text, YamlNode> {
      * @param key The String to be encapsulated.
      * @param value The String to be encapsulated.
      */
-    public MultilineScalarEntry(final String key, final String value) {
+    public MultilineSqlScalarEntry(final String key, final String value) {
         this(new TextOf(key), new TextOf(value));
     }
 

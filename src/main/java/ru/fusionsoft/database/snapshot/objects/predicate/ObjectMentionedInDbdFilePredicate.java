@@ -15,22 +15,58 @@
  */
 package ru.fusionsoft.database.snapshot.objects.predicate;
 
+import org.cactoos.Func;
+import org.cactoos.scalar.Or;
+import org.cactoos.scalar.Unchecked;
 import ru.fusionsoft.database.DbdFile;
 import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.objects.StickyObjects;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
 
 /**
- * The predicate of {@link DbObject} which tests it presents in DBD file.
+ * The predicate of {@link DbObject} which tests it presents in DBD file
+ *  or is a partition of one of its table.
  * @since 0.1
  */
-public class ObjectMentionedInDbdFilePredicate extends ObjectMentionedInPredicate {
+public class ObjectMentionedInDbdFilePredicate implements Func<DbObject<?>, Boolean> {
+
+    /**
+     * The {@link ObjectMentionedInPredicate} encapsulated.
+     */
+    private final ObjectMentionedInPredicate mentioned;
+
+    /**
+     * The {@link ObjectHasParentMentionedInPredicate} encapsulated.
+     */
+    private final ObjectHasParentMentionedInPredicate parent;
+
+    /**
+     * Instantiates a new Objects in dbd predicate.
+     * @param filter The {@link Objects} to match by, encapsulated.
+     */
+    public ObjectMentionedInDbdFilePredicate(final Objects<?> filter) {
+        this.mentioned = new ObjectMentionedInPredicate(filter);
+        this.parent = new ObjectHasParentMentionedInPredicate(filter);
+    }
 
     /**
      * Instantiates a new Objects in dbd predicate.
      * @param file The DbdFile to be encapsulated.
      */
     public ObjectMentionedInDbdFilePredicate(final DbdFile file) {
-        super(new ObjectsOfDbdFile(file));
+        this(new StickyObjects<>(new ObjectsOfDbdFile(file)));
+    }
+
+    @Override
+    public final Boolean apply(final DbObject<?> input) {
+        return new Unchecked<>(
+            new Or(
+                input,
+                this.mentioned,
+                this.parent
+            )
+        ).value();
     }
 
 }

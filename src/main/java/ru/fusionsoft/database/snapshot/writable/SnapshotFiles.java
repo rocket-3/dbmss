@@ -18,11 +18,21 @@ package ru.fusionsoft.database.snapshot.writable;
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
 import ru.fusionsoft.database.writable.JoinedWritable;
 
+/**
+ * The {@link ru.fusionsoft.database.Writable} of snapshot files.
+ * @since 0.1
+ */
 public class SnapshotFiles extends JoinedWritable {
 
+    /**
+     * Instantiates a new Snapshot files.
+     * @param info The {@link SnapshotInfoDocument} to be encapsulated.
+     * @param dbd The {@link DbdDocument} to be encapsulated.
+     * @param data The {@link SeparateDataFilesOfTables} to be encapsulated.
+     */
     public SnapshotFiles(
         final SnapshotInfoDocument info,
-        final SnapshotDbdDocument dbd,
+        final DbdDocument dbd,
         final SeparateDataFilesOfTables data
     ) {
         super(

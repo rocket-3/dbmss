@@ -16,6 +16,7 @@
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
 import ru.fusionsoft.database.mapping.dbd.DbdSchemaMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdSchemasMapping;
 import ru.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
@@ -26,7 +27,7 @@ import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * The DBD/schemas mapping of {@link Objects}.
  * @since 0.1
  */
-public class DbdSchemasMappingOfObjects extends YamlMappingOfEntries {
+public class DbdSchemasMappingOfObjects extends DbdSchemasMapping {
 
     /**
      * Instantiates a new Dbd schemas mapping of objects.
@@ -34,13 +35,15 @@ public class DbdSchemasMappingOfObjects extends YamlMappingOfEntries {
      */
     public DbdSchemasMappingOfObjects(final Objects<?> objects) {
         super(
-            new UnwrapEntriesOfObjects<DbdSchemaMapping>(
-                objects,
-                new ObjectsWithType<>(
-                    new ObjectTypeSchema(),
-                    objects
-                ),
-                DbdSchemaMappingOfObjects::new
+            new YamlMappingOfEntries(
+                new UnwrapEntriesOfObjects<DbdSchemaMapping>(
+                    objects,
+                    new ObjectsWithType<>(
+                        new ObjectTypeSchema(),
+                        objects
+                    ),
+                    DbdSchemaMappingOfObjects::new
+                )
             )
         );
     }

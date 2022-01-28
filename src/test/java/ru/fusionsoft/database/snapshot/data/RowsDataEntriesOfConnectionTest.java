@@ -23,7 +23,7 @@ import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
@@ -51,7 +51,7 @@ class RowsDataEntriesOfConnectionTest {
             x -> new InlineRowsDataEntriesOfConnection(connection, x),
             new ObjectsWithType<>(
                 new ObjectTypeTable(),
-                new ObjectsFromServer(connection)
+                new ObjectsOfServer(connection)
             )
         );
         for (final InlineRowsDataEntriesOfConnection data : datas) {

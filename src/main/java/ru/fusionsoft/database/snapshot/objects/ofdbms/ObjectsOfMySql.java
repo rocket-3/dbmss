@@ -15,22 +15,23 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
+import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
 import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The Objects of {@link Connection} of MS SQL Server dbms.
+ * The Objects of {@link Connection} of MySql dbms.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromMssql extends ObjectsEnvelope {
+public class ObjectsOfMySql extends ObjectsEnvelope<YamlMapping> {
 
     /**
      * Ctor.
-     * @param connection The wrapped connection
+     * @param connection The connection used
      */
-    public ObjectsFromMssql(final Connection connection) {
+    public ObjectsOfMySql(final Connection connection) {
         super(new IterableOf<>());
     }
 

@@ -31,6 +31,12 @@ import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
 @SuppressWarnings("PMD")
 public class OperationalDataFiles extends SeparateDataFilesOfTables {
 
+    /**
+     * Instantiates a new Operational data files.
+     * @param objects The {@link Objects} to be encapsulated.
+     * @param dbdfile The {@link DbdFile} to be encapsulated.
+     * @param server The {@link Text} of server to be encapsulated.
+     */
     public OperationalDataFiles(
         final Objects<?> objects,
         final DbdFile dbdfile,
@@ -48,6 +54,11 @@ public class OperationalDataFiles extends SeparateDataFilesOfTables {
         );
     }
 
+    /**
+     * Instantiates a new Operational data files.
+     * @param dbdfile The {@link DbdFile} to be encapsulated.
+     * @param server The {@link Text} of server to be encapsulated.
+     */
     public OperationalDataFiles(
         final DbdFile dbdfile,
         final Text server
@@ -61,6 +72,5 @@ public class OperationalDataFiles extends SeparateDataFilesOfTables {
             server
         );
     }
-
 
 }

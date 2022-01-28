@@ -13,26 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot.objects.ofdbms;
-
-import com.amihaiemil.eoyaml.YamlMapping;
-import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The Objects of {@link Connection} of Oracle dbms.
- * @since 0.1
+ * Tests for {@link ru.fusionsoft.database.api} package.
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromOracle extends ObjectsEnvelope<YamlMapping> {
-
-    /**
-     * Ctor.
-     * @param connection The connection used
-     */
-    public ObjectsFromOracle(final Connection connection) {
-        super(new IterableOf<>());
-    }
-
-}
+package ru.fusionsoft.database.api;

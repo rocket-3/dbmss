@@ -44,7 +44,7 @@ import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
- * The test for {@link ObjectsFromServer}.
+ * The test for {@link ObjectsOfServer}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -70,7 +70,7 @@ class ObjectsFromServerTest {
         final int size = 174;
         new Assertion<>(
             "Has expected object list size from 'pagilla' database",
-            new ObjectsFromServer(
+            new ObjectsOfServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11(this.database),
                     new CredsOfPgTestDatabase()
@@ -88,7 +88,7 @@ class ObjectsFromServerTest {
         final int size = 133;
         new Assertion<>(
             "Has expected object list size from 'dvdrental' database",
-            new ObjectsFromServer(
+            new ObjectsOfServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11("dvdrental"),
                     new CredsOfPgTestDatabase()
@@ -105,7 +105,7 @@ class ObjectsFromServerTest {
     public void canBeRendered() {
         new DbdSchemasMappingOfObjects(
             new StickyObjects<>(
-                new ObjectsFromServer(
+                new ObjectsOfServer(
                     new DbdServerMappingWithCredentials(
                         new UrlOfPgGitLabDatabaseV11(this.database),
                         new CredsOfPgTestDatabase()
@@ -130,7 +130,7 @@ class ObjectsFromServerTest {
                         new YamlMappingOfPath(
                             new DbdSchemasMappingOfObjects(
                                 new StickyObjects<>(
-                                    new ObjectsFromServer(
+                                    new ObjectsOfServer(
                                         new DbdServerMappingWithCredentials(
                                             new UrlOfPgGitLabDatabaseV11(this.database),
                                             new CredsOfPgTestDatabase()
@@ -166,7 +166,7 @@ class ObjectsFromServerTest {
     @Disabled
     @SuppressWarnings("PMD")
     public void showIndividual() {
-        for (final DbObject<? extends YamlMapping> object : new ObjectsFromServer(
+        for (final DbObject<? extends YamlMapping> object : new ObjectsOfServer(
             new DbdServerMappingWithCredentials(
                 new UrlOfPgGitLabDatabaseV11(this.database),
                 new CredsOfPgTestDatabase()
@@ -185,7 +185,7 @@ class ObjectsFromServerTest {
     public void showNames() {
         for (final DbObject<? extends YamlMapping> object : new Sorted<>(
             Comparator.comparing(x -> x.signature().name().asString()),
-            new ObjectsFromServer(
+            new ObjectsOfServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11(this.database),
                     new CredsOfPgTestDatabase()
@@ -218,7 +218,7 @@ class ObjectsFromServerTest {
                     new ObjectsFiltered<>(
                         x -> !x.signature().name().parent().first().asString().contains("million"),
                         new ObjectsWithInlineLinkDataAdded(
-                            new ObjectsFromServer(
+                            new ObjectsOfServer(
                                 connection
                             )
                         )

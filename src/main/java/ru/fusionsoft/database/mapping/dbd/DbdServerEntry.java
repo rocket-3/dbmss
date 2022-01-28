@@ -56,7 +56,7 @@ public class DbdServerEntry implements Map.Entry<Text, DbdServerMapping> {
     }
 
     @Override
-    public final    DbdServerMapping setValue(final DbdServerMapping value) {
+    public final DbdServerMapping setValue(final DbdServerMapping value) {
         throw new NotImplemented();
     }
 

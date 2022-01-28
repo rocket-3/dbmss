@@ -14,17 +14,7 @@
  * and limitations under the License.
  */
 
-package ru.fusionsoft.lib.time;
-
 /**
- * The interface representing an UTC +0 timestamp.
- * @since 0.1
+ * {@link java.util.Map.Entry} implementations of DBD document mapping.
  */
-public interface UTC {
-
-    /**
-     * Millis long.
-     * @return The long.
-     */
-    Long millis();
-}
+package ru.fusionsoft.database.mapping.dbd.entry;

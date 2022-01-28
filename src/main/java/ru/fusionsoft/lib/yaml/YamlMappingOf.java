@@ -17,6 +17,7 @@ package ru.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlInput;
 import com.amihaiemil.eoyaml.YamlNode;
+import java.nio.file.Path;
 import org.cactoos.scalar.Sticky;
 
 /**
@@ -51,6 +52,14 @@ public class YamlMappingOf extends YamlMappingEnvelope {
                 )
             )
         );
+    }
+
+    /**
+     * Instantiates a new YamlMapping of YamlInput, that is used on demand.
+     * @param path The {@link Path} to be used.
+     */
+    public YamlMappingOf(final Path path) {
+        this(new YamlInputOf(path));
     }
 
 }

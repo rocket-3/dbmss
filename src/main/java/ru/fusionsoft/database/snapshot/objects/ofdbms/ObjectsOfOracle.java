@@ -13,20 +13,26 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.time;
+package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
-import java.util.Date;
+import com.amihaiemil.eoyaml.YamlMapping;
+import java.sql.Connection;
+import org.cactoos.iterable.IterableOf;
+import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 
 /**
- * The class representing Coordinated Universal Time, i.e. 'Astronomical type'
- *  at the moment of current access.
+ * The Objects of {@link Connection} of Oracle dbms.
  * @since 0.1
  */
-public class UTCNow implements UTC {
+@SuppressWarnings("PMD")
+public class ObjectsOfOracle extends ObjectsEnvelope<YamlMapping> {
 
-    @Override
-    public final Long millis() {
-        return new Date().getTime();
+    /**
+     * Ctor.
+     * @param connection The connection used
+     */
+    public ObjectsOfOracle(final Connection connection) {
+        super(new IterableOf<>());
     }
 
 }

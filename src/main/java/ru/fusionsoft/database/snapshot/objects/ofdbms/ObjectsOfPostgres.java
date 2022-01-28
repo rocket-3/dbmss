@@ -34,13 +34,13 @@ import ru.fusionsoft.database.snapshot.objects.ofdbms.pg.PgViews;
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsFromPostgres extends ObjectsOfConnectionJoined {
+public class ObjectsOfPostgres extends ObjectsOfConnectionJoined {
 
     /**
      * Ctor.
      * @param connection The wrapped connection.
      */
-    public ObjectsFromPostgres(final Connection connection) {
+    public ObjectsOfPostgres(final Connection connection) {
         super(
             connection,
             PgSchemas::new,

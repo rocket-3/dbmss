@@ -16,8 +16,10 @@
 package ru.fusionsoft.database.ci;
 
 import java.text.MessageFormat;
+import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOfScalar;
+import org.cactoos.text.UncheckedText;
 
 /**
  * The {@link org.cactoos.Text} of url of pg v.11 test instance.
@@ -37,6 +39,16 @@ public class UrlOfPgGitLabDatabaseV11 extends TextEnvelope {
                     database
                 )
             )
+        );
+    }
+
+    /**
+     * Instantiates a new Url of pg test database v.11.
+     * @param database The String of database name to be encapsulated.
+     */
+    public UrlOfPgGitLabDatabaseV11(final Text database) {
+        this(
+            new UncheckedText(database).asString()
         );
     }
 

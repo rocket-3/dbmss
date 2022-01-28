@@ -47,7 +47,7 @@ public class HexOfLong implements Text {
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return Long.toHexString(this.scalar.value());
     }
 

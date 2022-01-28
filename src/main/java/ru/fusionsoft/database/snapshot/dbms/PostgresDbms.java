@@ -16,7 +16,7 @@
 package ru.fusionsoft.database.snapshot.dbms;
 
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromPostgres;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfPostgres;
 
 /**
  * The Postgres {@link Dbms}.
@@ -31,7 +31,7 @@ public class PostgresDbms extends SimpleDbms {
         super(
             "POSTGRES",
             "PostgreSQL",
-            ObjectsFromPostgres::new
+            ObjectsOfPostgres::new
         );
     }
 

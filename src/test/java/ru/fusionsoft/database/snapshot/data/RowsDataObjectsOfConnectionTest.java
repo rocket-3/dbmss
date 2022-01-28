@@ -26,7 +26,7 @@ import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -55,7 +55,7 @@ public class RowsDataObjectsOfConnectionTest {
                 x -> !x.signature().name().first().asString().contains("million"),
                 new ObjectsWithType<>(
                     new ObjectTypeTable(),
-                    new ObjectsFromServer(connection)
+                    new ObjectsOfServer(connection)
                 )
             )
         );

@@ -20,7 +20,6 @@ import org.cactoos.Proc;
 import org.cactoos.Text;
 import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
-import ru.fusionsoft.lib.yaml.YamlMappingHasKeys;
 import ru.fusionsoft.lib.yaml.YamlMappingOf;
 import ru.fusionsoft.lib.yaml.artefacts.FirstNotEmptyTextOf;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
@@ -36,9 +35,7 @@ public class DbdColumnValidation implements Proc<YamlNode> {
         new FirstNotEmptyTextOf(
             new Mapped<Text>(
                 key -> new MaybeEmptyTextOfYamlMapping(
-                    new YamlMappingHasKeys(
-                        new YamlMappingOf(node)
-                    ),
+                    new YamlMappingOf(node),
                     key
                 ),
                 DbdColumnFields.identity()

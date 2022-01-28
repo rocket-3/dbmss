@@ -21,8 +21,8 @@ import ru.fusionsoft.database.SimpleYamlRepresentative;
 import ru.fusionsoft.database.Writable;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.writable.YamlDocument;
-import ru.fusionsoft.lib.text.DateTextOfUTC;
-import ru.fusionsoft.lib.time.UTC;
+import ru.fusionsoft.lib.text.TextOfUtcDate;
+import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
@@ -42,7 +42,7 @@ public class SnapshotInfoDocument extends YamlDocument {
      *  or configuration data only.
      */
     public SnapshotInfoDocument(
-        final UTC time,
+        final Utc time,
         final Boolean withOperationalData
     ) {
         super(
@@ -50,7 +50,7 @@ public class SnapshotInfoDocument extends YamlDocument {
                 new YamlMappingOfEntries(
                     new ScalarEntry(
                         new TextOf("createdAt"),
-                        new DateTextOfUTC(time)
+                        new TextOfUtcDate(time)
                     ),
                     new ScalarEntry(
                         new TextOf("withOperationalData"),

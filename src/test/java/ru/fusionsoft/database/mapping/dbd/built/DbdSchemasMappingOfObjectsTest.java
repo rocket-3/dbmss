@@ -28,7 +28,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
 import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingOfObjects;
 import ru.fusionsoft.database.snapshot.objects.StickyObjects;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdRootMapping;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
@@ -70,7 +70,7 @@ class DbdSchemasMappingOfObjectsTest {
                     new YamlMappingOfPath(
                         new DbdSchemasMappingOfObjects(
                             new StickyObjects<>(
-                                new ObjectsFromServer(
+                                new ObjectsOfServer(
                                     new DbdServerMappingWithCredentials(
                                         new UrlOfPgGitLabDatabaseV11("pagilla"),
                                         new CredsOfPgTestDatabase()

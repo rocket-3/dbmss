@@ -23,8 +23,8 @@ import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdInfoMappingOfDbdFile;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerEntryOfDbdFile;
 import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
-import ru.fusionsoft.lib.time.UTC;
-import ru.fusionsoft.lib.time.UTCOfFirstAccess;
+import ru.fusionsoft.lib.time.Utc;
+import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
 /**
  * The procedure to create database snapshot by guidance of {@link DbdFile}.
@@ -46,7 +46,7 @@ public class SnapshotOfDbdFiles extends SnapshotFiles {
         final Boolean alldata
     ) {
         this(
-            new UTCOfFirstAccess(),
+            new UtcOfFirstAccess(),
             dbd,
             server,
             new ObjectsOfServerFromDbd(dbd, server),
@@ -56,13 +56,14 @@ public class SnapshotOfDbdFiles extends SnapshotFiles {
 
     /**
      * Instantiates a new Snapshot create procedure.
+     * @param time The {@link Utc} to be encapsulated.
      * @param dbd The {@link DbdFile} to be encapsulated.
      * @param server The Text of server name to be encapsulated.
      * @param alldata The Boolean of to fetch all tables data or not to be encapsulated.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
     public SnapshotOfDbdFiles(
-        final UTC time,
+        final Utc time,
         final DbdFile dbd,
         final Text server,
         final Boolean alldata
@@ -78,14 +79,15 @@ public class SnapshotOfDbdFiles extends SnapshotFiles {
 
     /**
      * Instantiates a new Snapshot create procedure.
-     * @param time The {@link UTC} of creation to be encapsulated.
+     * @param time The {@link Utc} of creation to be encapsulated.
      * @param dbd The {@link DbdFile} to be encapsulated.
      * @param server The Text of server name to be encapsulated.
+     * @param objects The {@link Objects} to be encapsulated.
      * @param alldata The Boolean of to fetch all tables data or not to be encapsulated.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
     private SnapshotOfDbdFiles(
-        final UTC time,
+        final Utc time,
         final DbdFile dbd,
         final Text server,
         final Objects<?> objects,

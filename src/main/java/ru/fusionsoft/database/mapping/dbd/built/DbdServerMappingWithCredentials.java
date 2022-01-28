@@ -28,7 +28,7 @@ import ru.fusionsoft.lib.yaml.MappingWithEntries;
 import ru.fusionsoft.lib.yaml.MappingWithKeys;
 
 /**
- * The type of {@link DbdServerMapping} with {@link Credentials} values merged into.
+ * The type of {@link DbdServerMapping} with url and {@link Credentials} values merged into.
  * @since 0.1
  */
 public class DbdServerMappingWithCredentials extends DbdServerMapping {
@@ -36,12 +36,13 @@ public class DbdServerMappingWithCredentials extends DbdServerMapping {
     /**
      * Instantiates a new Dbd server mapping with credentials.
      * @param mapping The DbdServerMapping to merge into.
+     * @param connection The {@link Connection} to be encapsulated.
      * @param url The Text to be encapsulated.
      * @param user The Text to be encapsulated.
      * @param password The Text to be encapsulated.
      * @checkstyle ParameterNumberCheck (20 lines)
      */
-    public DbdServerMappingWithCredentials(
+    private DbdServerMappingWithCredentials(
         final DbdServerMapping mapping,
         final Connection connection,
         final Text url,
@@ -73,6 +74,29 @@ public class DbdServerMappingWithCredentials extends DbdServerMapping {
                     )
                 )
             )
+        );
+    }
+
+    /**
+     * Instantiates a new Dbd server mapping with credentials.
+     * @param mapping The DbdServerMapping to merge into.
+     * @param url The Text to be encapsulated.
+     * @param user The Text to be encapsulated.
+     * @param password The Text to be encapsulated.
+     * @checkstyle ParameterNumberCheck (20 lines)
+     */
+    public DbdServerMappingWithCredentials(
+        final DbdServerMapping mapping,
+        final Text url,
+        final Text user,
+        final Text password
+    ) {
+        this(
+            mapping,
+            new ConnectionOfTextArgs(url, user, password),
+            url,
+            user,
+            password
         );
     }
 

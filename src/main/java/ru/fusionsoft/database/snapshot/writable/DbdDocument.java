@@ -15,21 +15,33 @@
  */
 package ru.fusionsoft.database.snapshot.writable;
 
-import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.DbdFile;
 import ru.fusionsoft.database.dbdfile.DbdFileOfMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import ru.fusionsoft.database.text.DbdFileName;
 import ru.fusionsoft.database.writable.YamlDocument;
 
+/**
+ * The {@link ru.fusionsoft.database.Writable} of {@link DbdFile} to {@link DbdFileName}.
+ * @since 0.1
+ */
 public class DbdDocument extends YamlDocument {
 
+    /**
+     * Instantiates a new Dbd document.
+     * @param file The {@link DbdFile} to be encapsulated.
+     */
     public DbdDocument(final DbdFile file) {
         super(
             file,
-            new TextOf("DBD.yaml")
+            new DbdFileName()
         );
     }
 
+    /**
+     * Instantiates a new Dbd document.
+     * @param mapping The {@link DbdRootMapping} to be encapsulated.
+     */
     public DbdDocument(final DbdRootMapping mapping) {
         this(
             new DbdFileOfMapping(mapping)

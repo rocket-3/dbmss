@@ -25,13 +25,13 @@ import ru.fusionsoft.database.snapshot.dbms.DbmsOfConnection;
  * The DbObjects from {@link DbdServerMapping}.
  * @since 0.1
  */
-public class ObjectsFromServer extends ObjectsOfConnection<YamlMapping> {
+public class ObjectsOfServer extends ObjectsOfConnection<YamlMapping> {
 
     /**
      * Ctor.
      * @param server The server used to extract data.
      */
-    public ObjectsFromServer(final DbdServerMapping server) {
+    public ObjectsOfServer(final DbdServerMapping server) {
         this(new ConnectionOfDbdServerMapping(server));
     }
 
@@ -39,10 +39,10 @@ public class ObjectsFromServer extends ObjectsOfConnection<YamlMapping> {
      * Ctor.
      * @param connection The connection used to extract data.
      */
-    public ObjectsFromServer(final Connection connection) {
+    public ObjectsOfServer(final Connection connection) {
         super(
             connection,
-            new DbmsOfConnection(connection).objects()
+            c -> new DbmsOfConnection(c).objects(c)
         );
     }
 

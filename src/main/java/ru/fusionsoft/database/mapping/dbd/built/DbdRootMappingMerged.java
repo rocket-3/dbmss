@@ -13,25 +13,28 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
-import java.sql.Connection;
-import org.cactoos.iterable.IterableOf;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+package ru.fusionsoft.database.mapping.dbd.built;
+
+import com.amihaiemil.eoyaml.YamlMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import ru.fusionsoft.lib.yaml.MappingMerged;
 
 /**
- * The Objects of {@link Connection} of MySql dbms.
+ * The type of that can be constructed of.
  * @since 0.1
  */
-@SuppressWarnings("PMD")
-public class ObjectsFromMySql extends ObjectsEnvelope {
+public class DbdRootMappingMerged extends DbdRootMapping {
 
     /**
-     * Ctor.
-     * @param connection The connection used
+     * Instantiates a new Dbd root mapping merged.
+     * @param origin The {@link DbdRootMapping} to be encapsulated.
+     * @param target The {@link YamlMapping} to be encapsulated.
      */
-    public ObjectsFromMySql(final Connection connection) {
-        super(new IterableOf<>());
+    public DbdRootMappingMerged(final DbdRootMapping origin, final YamlMapping target) {
+        super(
+            new MappingMerged(origin, target)
+        );
     }
 
 }

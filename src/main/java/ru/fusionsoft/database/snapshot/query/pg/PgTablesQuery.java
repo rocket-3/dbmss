@@ -72,7 +72,7 @@ public class PgTablesQuery extends PgMessageFormatQuery<DbdTableFields> {
                                 + " pg_get_expr(child.relpartbound, child.oid) AS {7}, \n"
                                 : " '' AS {6},\n '' AS {7},\n"
                         )
-                        + " parent.relname AS {8} \n"
+                        + " parentnsp.nspname || '" + new SimpleObjectNameDelimiter().asString() + "' || parent.relname AS {8} \n"
                         + "FROM pg_tables \n"
                         + "LEFT OUTER JOIN pg_inherits \n"
                         + "ON (\n"
@@ -82,6 +82,7 @@ public class PgTablesQuery extends PgMessageFormatQuery<DbdTableFields> {
                         + ") = pg_inherits.inhrelid \n"
                         + "LEFT OUTER JOIN pg_class parent ON pg_inherits.inhparent = parent.oid \n"
                         + "LEFT OUTER JOIN pg_class child ON pg_inherits.inhrelid = child.oid \n"
+                        + "LEFT OUTER JOIN pg_namespace parentnsp on parentnsp.oid = parent.relnamespace  \n"
                         + "WHERE schemaname not in ('pg_catalog', 'information_schema')";
                 }
             ),

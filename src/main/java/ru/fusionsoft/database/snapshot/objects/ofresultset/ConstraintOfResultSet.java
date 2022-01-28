@@ -21,7 +21,7 @@ import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
-import ru.fusionsoft.database.mapping.entries.MultilineScalarEntry;
+import ru.fusionsoft.database.mapping.entries.MultilineSqlScalarEntry;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdConstraintFields;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
@@ -111,7 +111,7 @@ public class ConstraintOfResultSet extends SimpleDbObjectOfEntries<DbdConstraint
                     rset
                 )
             ),
-            new MultilineScalarEntry(
+            new MultilineSqlScalarEntry(
                 DbdConstraintFields.DDL,
                 new TextOfResultSet(
                     query.outcomeFor(DbdConstraintFields.DDL),

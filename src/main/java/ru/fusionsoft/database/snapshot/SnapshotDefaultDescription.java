@@ -41,7 +41,7 @@ public class SnapshotDefaultDescription implements Text {
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return MessageFormat.format(
             "Clean snapshot of database at {0}",
             new TextOfMappingValue(

@@ -17,23 +17,24 @@ package ru.fusionsoft.database.snapshot.writable;
 
 import org.cactoos.Text;
 import ru.fusionsoft.database.DbdFile;
-import ru.fusionsoft.database.mapping.MappingOfRepresentative;
-import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import ru.fusionsoft.database.mapping.dbd.built.DbdRootMappingBuilt;
-import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdInfoMappingOfDbdFile;
-import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServersMappingOfDbdFile;
+import ru.fusionsoft.database.dbdfile.DbdFileMerged;
+import ru.fusionsoft.database.mapping.dbd.entry.DbdSchemasEntry;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingOfObjects;
 import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.objects.StickyObjects;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.database.writable.JoinedWritable;
-import ru.fusionsoft.lib.yaml.MappingMerged;
+import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The DBD repository of existing one, being merged with data, coming from specific server of
  *  current DBD file, with configuration data only.
  * @since 0.1
+ * @todo #40:30min Add deleting previous data files Writable in primary ctor.
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class MergedDbdFiles extends JoinedWritable {
+public class MergedWithServerDbdFiles extends JoinedWritable {
 
     /**
      * Instantiates a new Merged dbd files.
@@ -41,16 +42,18 @@ public class MergedDbdFiles extends JoinedWritable {
      * @param server The {@link Text} to be encapsulated.
      * @param objects The {@link Objects} to be encapsulated.
      */
-    private MergedDbdFiles(final DbdFile dbdfile, final Text server, final Objects<?> objects) {
+    private MergedWithServerDbdFiles(
+        final DbdFile dbdfile,
+        final Text server,
+        final Objects<?> objects
+    ) {
         super(
             new DbdDocument(
-                new DbdRootMapping(
-                    new MappingMerged(
-                        new MappingOfRepresentative(dbdfile),
-                        new DbdRootMappingBuilt(
-                            new DbdServersMappingOfDbdFile(dbdfile),
-                            new DbdInfoMappingOfDbdFile(dbdfile),
-                            objects
+                new DbdFileMerged(
+                    dbdfile,
+                    new YamlMappingOfEntries(
+                        new DbdSchemasEntry(
+                            new DbdSchemasMappingOfObjects(objects)
                         )
                     )
                 )
@@ -64,14 +67,16 @@ public class MergedDbdFiles extends JoinedWritable {
      * @param dbdfile The {@link DbdFile} to be encapsulated.
      * @param server The {@link Text} to be encapsulated.
      */
-    public MergedDbdFiles(final DbdFile dbdfile, final Text server) {
+    public MergedWithServerDbdFiles(final DbdFile dbdfile, final Text server) {
         this(
             dbdfile,
             server,
-            new ObjectsWithInlineLinkDataAdded(
-                new ObjectsOfServerFromDbd(
-                    dbdfile,
-                    server
+            new StickyObjects<>(
+                new ObjectsWithInlineLinkDataAdded(
+                    new ObjectsOfServerFromDbd(
+                        dbdfile,
+                        server
+                    )
                 )
             )
         );

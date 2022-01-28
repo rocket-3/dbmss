@@ -13,29 +13,42 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package ru.fusionsoft.lib.text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import org.cactoos.Text;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.lib.time.UTC;
+import ru.fusionsoft.lib.time.Utc;
 
-public class DateTextOfUTC extends TextEnvelope {
+/**
+ * The date {@link Text} of {@link Utc}.
+ * @since 0.1
+ */
+public class TextOfUtcDate extends TextEnvelope {
 
-    public DateTextOfUTC(final UTC utc, final Text pattern) {
+    /**
+     * Instantiates a new Date text of utc.
+     * @param utc The {@link Utc} to be encapsulated.
+     * @param pattern The {@link Text} to be encapsulated.
+     */
+    public TextOfUtcDate(final Utc utc, final Text pattern) {
         super(
             new TextOf(
-                () -> new SimpleDateFormat(pattern.asString()).format(
+                () -> new SimpleDateFormat(pattern.asString(), Locale.ENGLISH).format(
                     new Date(utc.millis())
                 )
             )
         );
     }
 
-    public DateTextOfUTC(final UTC utc) {
+    /**
+     * Instantiates a new Date text of utc.
+     * @param utc The {@link Utc} to be encapsulated.
+     */
+    public TextOfUtcDate(final Utc utc) {
         this(
             utc,
             new TextOf("dd.MM.yyyy HH:mm.ss")

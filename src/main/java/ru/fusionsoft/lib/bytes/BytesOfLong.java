@@ -40,14 +40,14 @@ public class BytesOfLong implements Bytes {
 
     /**
      * Instantiates a new Bytes of long.
-     * @param scalar The {@link Scalar<Long>} to be encapsulated.
+     * @param scalar The {@link Scalar} of {@link Long} to be encapsulated.
      */
     public BytesOfLong(final Scalar<Long> scalar) {
         this.scalar = scalar;
     }
 
     @Override
-    public byte[] asBytes() throws Exception {
+    public final byte[] asBytes() throws Exception {
         //@checkstyle MagicNumberCheck (1 lines)
         return ByteBuffer.allocate(8).putLong(this.scalar.value()).array();
     }

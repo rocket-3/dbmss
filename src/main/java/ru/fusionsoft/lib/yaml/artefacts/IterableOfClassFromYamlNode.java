@@ -21,6 +21,7 @@ import com.amihaiemil.eoyaml.YamlSequence;
 import org.cactoos.BiFunc;
 import org.cactoos.Func;
 import org.cactoos.iterable.IterableEnvelope;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 
 /**
@@ -43,7 +44,7 @@ public class IterableOfClassFromYamlNode<Y> extends IterableEnvelope<Y> {
         super(
             new Mapped<>(
                 key -> constructor.apply(mapping, key),
-                mapping.keys()
+                new IterableOf<>(() -> mapping.keys().iterator())
             )
         );
     }

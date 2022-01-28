@@ -15,31 +15,18 @@
  */
 package ru.fusionsoft.lib.time;
 
-import org.cactoos.Scalar;
-import org.cactoos.scalar.Unchecked;
+import java.util.Date;
 
 /**
- * The {@link UTC}, that can be constructed of {@link Scalar} of {@link Long}.
+ * The class representing Coordinated Universal Time, i.e. 'Astronomical type'
+ *  at the moment of current access.
  * @since 0.1
  */
-public class UTCOfScalar implements UTC {
-
-    /**
-     * The Unchecked<Long> encapsulated.
-     */
-    private final Unchecked<Long> scalar;
-
-    /**
-     * Instantiates a new Utc of scalar.
-     * @param scalar The {@link Scalar<Long>} to be encapsulated.
-     */
-    public UTCOfScalar(final Scalar<Long> scalar) {
-        this.scalar = new Unchecked<>(scalar);
-    }
+public class UtcNow implements Utc {
 
     @Override
-    public Long millis() {
-        return this.scalar.value();
+    public final Long millis() {
+        return new Date().getTime();
     }
 
 }

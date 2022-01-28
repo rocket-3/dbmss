@@ -29,7 +29,7 @@ import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.folder.FolderOfScalar;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
 import ru.fusionsoft.lib.path.TempFolder;
@@ -65,7 +65,7 @@ class SeparateDataFilesOfTablesWritableTest {
                 connection,
                 new ObjectsWithType<>(
                     new ObjectTypeTable(),
-                    new ObjectsFromServer(
+                    new ObjectsOfServer(
                         connection
                     )
                 )

@@ -19,11 +19,11 @@ import java.text.MessageFormat;
 import org.cactoos.text.TextEnvelope;
 import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.lib.text.HexOfLong;
-import ru.fusionsoft.lib.time.UTC;
+import ru.fusionsoft.lib.time.Utc;
 
 /**
  * The type of {@link org.cactoos.Text} that represents name of snapshot created
- *  at some {@link UTC} moment.
+ *  at some {@link Utc} moment.
  * @since 0.1
  */
 public class SnapshotCatalogName extends TextEnvelope {
@@ -32,7 +32,7 @@ public class SnapshotCatalogName extends TextEnvelope {
      * Instantiates a new Snapshot name.
      * @param time The AstronomicalTime to be encapsulated.
      */
-    public SnapshotCatalogName(final UTC time) {
+    public SnapshotCatalogName(final Utc time) {
         super(
             new TextOfScalar(
                 () -> MessageFormat.format(

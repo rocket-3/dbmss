@@ -16,7 +16,7 @@
 package ru.fusionsoft.database.snapshot.dbms;
 
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromMySql;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfMySql;
 
 /**
  * The MySQL Server {@link Dbms}.
@@ -31,7 +31,7 @@ public class MySqlDbms extends SimpleDbms {
         super(
             "MYSQL",
             "MySQL",
-            ObjectsFromMySql::new
+            ObjectsOfMySql::new
         );
     }
 

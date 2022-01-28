@@ -56,8 +56,8 @@ public class TextOfMappingValue implements Text {
     }
 
     @Override
-    public String asString() {
-        return mapping.value(key.asString()).asScalar().value();
+    public final String asString() {
+        return this.mapping.value(this.key.asString()).asScalar().value();
     }
 
 }

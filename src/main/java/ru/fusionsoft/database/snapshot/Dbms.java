@@ -17,7 +17,6 @@ package ru.fusionsoft.database.snapshot;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
-import org.cactoos.Func;
 import org.cactoos.Text;
 
 /**
@@ -40,8 +39,9 @@ public interface Dbms {
 
     /**
      * Objects of {@link Connection} function.
-     * @return The function.
+     * @param connection The {@link Connection} to take objects from.
+     * @return The objects from dbms.
      */
-    Func<Connection, Objects<YamlMapping>> objects();
+    Objects<YamlMapping> objects(Connection connection);
 
 }

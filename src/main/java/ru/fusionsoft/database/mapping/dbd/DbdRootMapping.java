@@ -45,7 +45,10 @@ public class DbdRootMapping extends YamlMappingEnvelope {
                         mapping
                     )
                 ),
-                new IterableOf<Text>(DbdRootFields.values())
+                new IterableOf<Text>(
+                    DbdRootFields.SERVERS,
+                    DbdRootFields.INFO
+                )
             )
         );
     }

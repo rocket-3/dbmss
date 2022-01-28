@@ -24,7 +24,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
  *  and returns specific {@link DbdRootMapping}.
  * @since 0.1
  */
-public class DbdFileOfMapping extends DbdFileYamlOfRootMapping {
+public class DbdFileOfMapping extends DbdFileOfRootMapping {
 
     /**
      * Instantiates a new Dbd file of mapping.

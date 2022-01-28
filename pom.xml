@@ -80,6 +80,7 @@
                     <excludes>
                         <exclude>checkstyle:.*yaml$</exclude>
                         <exclude>checkstyle:.*ResultSetOfScalar.java$</exclude>
+                        <exclude>checkstyle:.*MultilineSqlScalarEntry.java$</exclude>
                         <exclude>findbugs:.*</exclude>
                         <exclude>duplicatefinder:.*</exclude>
                     </excludes>
@@ -142,8 +143,8 @@
                             <binFolder>bin</binFolder>
                             <programs>
                                 <program>
-                                    <mainClass>ru.fusionsoft.database.api.FetchDbd</mainClass>
-                                    <name>dbdsnap</name>
+                                    <mainClass>ru.fusionsoft.database.application.DbdNew</mainClass>
+                                    <name>dbdnew</name>
                                     <jvmSettings>
                                         <extraArguments>
                                             <extraArgument>-Dfile.encoding=UTF-8</extraArgument>

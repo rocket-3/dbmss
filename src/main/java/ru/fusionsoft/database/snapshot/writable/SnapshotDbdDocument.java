@@ -16,7 +16,7 @@
 package ru.fusionsoft.database.snapshot.writable;
 
 import ru.fusionsoft.database.Writable;
-import ru.fusionsoft.database.dbdfile.DbdFileOfSnapshotObjects;
+import ru.fusionsoft.database.dbdfile.DbdFileOfServerSnapshot;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.snapshot.Objects;
@@ -41,7 +41,7 @@ public class SnapshotDbdDocument extends DbdDocument {
         final Objects<?> objects
     ) {
         super(
-            new DbdFileOfSnapshotObjects(server, info, objects)
+            new DbdFileOfServerSnapshot(server, info, objects)
         );
     }
 

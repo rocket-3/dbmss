@@ -17,7 +17,7 @@ package ru.fusionsoft.database.snapshot.objects.ofresultset;
 
 import java.sql.ResultSet;
 import ru.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
-import ru.fusionsoft.database.mapping.entries.MultilineScalarEntry;
+import ru.fusionsoft.database.mapping.entries.MultilineSqlScalarEntry;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdFunctionFields;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
@@ -70,7 +70,7 @@ public class FunctionOfResultSet extends SimpleDbObjectOfEntries<DbdFunctionMapp
                     rset
                 )
             ),
-            new MultilineScalarEntry(
+            new MultilineSqlScalarEntry(
                 DbdFunctionFields.DDL,
                 new TextOfResultSet(
                     query.outcomeFor(DbdFunctionFields.DDL),

@@ -19,6 +19,8 @@ import java.util.Set;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.set.SetOf;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.ObjectSignature;
@@ -34,7 +36,7 @@ public class ObjectMentionedInPredicate implements Func<DbObject<?>, Boolean> {
     /**
      * The Set of String of signatures encapsulated.
      */
-    private final Set<String> names;
+    private final Unchecked<Set<String>> names;
 
     /**
      * Instantiates a new Objects with names.
@@ -43,10 +45,14 @@ public class ObjectMentionedInPredicate implements Func<DbObject<?>, Boolean> {
     private ObjectMentionedInPredicate(
         final Iterable<ObjectSignature> names
     ) {
-        this.names = new SetOf<String>(
-            new Mapped<>(
-                Text::asString,
-                names
+        this.names = new Unchecked<>(
+            new Sticky<>(
+                () -> new SetOf<String>(
+                    new Mapped<>(
+                        Text::asString,
+                        names
+                    )
+                )
             )
         );
     }
@@ -61,7 +67,7 @@ public class ObjectMentionedInPredicate implements Func<DbObject<?>, Boolean> {
 
     @Override
     public final Boolean apply(final DbObject input) {
-        return this.names.contains(input.signature().asString());
+        return this.names.value().contains(input.signature().asString());
     }
 
 }

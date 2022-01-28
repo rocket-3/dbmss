@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.objects.ofresultset;
 import java.sql.ResultSet;
 import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.mapping.dbd.DbdProcedureMapping;
-import ru.fusionsoft.database.mapping.entries.MultilineScalarEntry;
+import ru.fusionsoft.database.mapping.entries.MultilineSqlScalarEntry;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdProcedureFields;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
@@ -54,7 +54,7 @@ public class ProcedureOfResultSet extends SimpleDbObjectOfEntries<DbdProcedureMa
                     DbdProcedureFields.ARGUMENTS,
                     new TextOfResultSet(DbdProcedureFields.ARGUMENTS, rset, query)
                 ),
-                new MultilineScalarEntry(
+                new MultilineSqlScalarEntry(
                     DbdProcedureFields.DDL,
                     new TextOfResultSet(DbdProcedureFields.DDL, rset, query)
                 )

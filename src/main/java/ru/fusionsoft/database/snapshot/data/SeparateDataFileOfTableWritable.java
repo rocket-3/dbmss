@@ -75,8 +75,7 @@ public class SeparateDataFileOfTableWritable implements Writable {
                     )
                 );
                 entroduce.exec(DbdTableFields.COLUMNS);
-                final ColumnsOfTable columns = new ColumnsOfTable(this.table);
-                for (final Column column : columns) {
+                for (final Column column : new ColumnsOfTable(this.table)) {
                     file.write(spaces + sequence + column.name().asString() + linefeed);
                 }
                 entroduce.exec(DbdTableFields.DATA);

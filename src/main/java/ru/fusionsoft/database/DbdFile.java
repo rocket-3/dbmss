@@ -21,6 +21,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
  * The interface representing a DBD file.
  * @since 0.1
  */
+@FunctionalInterface
 public interface DbdFile extends YamlRepresentative<DbdRootMapping> {
 
     /**

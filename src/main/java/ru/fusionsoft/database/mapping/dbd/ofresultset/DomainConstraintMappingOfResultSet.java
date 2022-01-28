@@ -17,7 +17,7 @@ package ru.fusionsoft.database.mapping.dbd.ofresultset;
 
 import java.sql.ResultSet;
 import ru.fusionsoft.database.mapping.dbd.DbdDomainConstraintMapping;
-import ru.fusionsoft.database.mapping.entries.MultilineScalarEntry;
+import ru.fusionsoft.database.mapping.entries.MultilineSqlScalarEntry;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdDomainConstraintFields;
 import ru.fusionsoft.database.snapshot.query.Query;
@@ -58,7 +58,7 @@ public class DomainConstraintMappingOfResultSet extends DbdDomainConstraintMappi
                             rset
                         )
                     ),
-                    new MultilineScalarEntry(
+                    new MultilineSqlScalarEntry(
                         DbdDomainConstraintFields.CONDITION,
                         new TextOfResultSet(
                             query.outcomeFor(DbdDomainConstraintFields.CONDITION),

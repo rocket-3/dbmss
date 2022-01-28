@@ -16,37 +16,33 @@
 package ru.fusionsoft.database.snapshot.writable;
 
 import org.cactoos.Text;
-import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import ru.fusionsoft.database.mapping.dbd.built.SimpleDbdInfoMapping;
 import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.SnapshotCatalogName;
-import ru.fusionsoft.database.snapshot.SnapshotDefaultDescription;
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
 import ru.fusionsoft.database.snapshot.objects.StickyObjects;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsFromServer;
+import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
-import ru.fusionsoft.lib.time.UTC;
-import ru.fusionsoft.lib.time.UTCOfFirstAccess;
+import ru.fusionsoft.lib.time.Utc;
+import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
 /**
  * The {@link SnapshotFiles} of whole new DBD of some database's url and credentials,
  *  always with all data, being marked as configuration data.
  * @since 0.1
  * @todo #40:30min Design filtered version of this.
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class SnapshotOfServerFiles extends SnapshotFiles {
+public class SnapshotFilesOfServerDefault extends SnapshotFiles {
 
     /**
      * Instantiates a new Created from server dbd file writable.
-     * @param time The {@link UTC} to be encapsulated.
+     * @param time The {@link Utc} to be encapsulated.
      * @param server The {@link DbdServerMapping} to be encapsulated.
      * @param objects The {@link Objects} to be encapsulated.
      */
-    private SnapshotOfServerFiles(
-        final UTC time,
+    private SnapshotFilesOfServerDefault(
+        final Utc time,
         final DbdServerMapping server,
         final Objects<?> objects
     ) {
@@ -55,16 +51,9 @@ public class SnapshotOfServerFiles extends SnapshotFiles {
                 time,
                 Boolean.TRUE
             ),
-            new SnapshotDbdDocument(
-                new DbdServerEntry(
-                    new TextOf("origin"),
-                    server
-                ),
-                new SimpleDbdInfoMapping(
-                    new SnapshotCatalogName(time),
-                    new SnapshotDefaultDescription(server),
-                    new TextOf("1.0")
-                ),
+            new DbdDocumentOfServerSnapshotDefault(
+                server,
+                time,
                 objects
             ),
             new SeparateDataFilesOfTables(
@@ -76,11 +65,11 @@ public class SnapshotOfServerFiles extends SnapshotFiles {
 
     /**
      * Instantiates a new Created from server dbd file writable.
-     * @param time The {@link UTC} to be encapsulated.
+     * @param time The {@link Utc} to be encapsulated.
      * @param server The {@link DbdServerMapping} to be encapsulated.
      */
-    public SnapshotOfServerFiles(
-        final UTC time,
+    public SnapshotFilesOfServerDefault(
+        final Utc time,
         final DbdServerMapping server
     ) {
         this(
@@ -88,7 +77,7 @@ public class SnapshotOfServerFiles extends SnapshotFiles {
             server,
             new StickyObjects<>(
                 new ObjectsWithInlineLinkDataAdded(
-                    new ObjectsFromServer(server)
+                    new ObjectsOfServer(server)
                 )
             )
         );
@@ -98,22 +87,23 @@ public class SnapshotOfServerFiles extends SnapshotFiles {
      * Instantiates a new Created from server dbd file writable.
      * @param server The {@link DbdServerMapping} to be encapsulated.
      */
-    public SnapshotOfServerFiles(final DbdServerMapping server) {
+    public SnapshotFilesOfServerDefault(final DbdServerMapping server) {
         this(
-            new UTCOfFirstAccess(),
+            new UtcOfFirstAccess(),
             server
         );
     }
 
     /**
      * Instantiates a new Created from server dbd file writable.
-     * @param time The {@link UTC} to be encapsulated.
+     * @param time The {@link Utc} to be encapsulated.
      * @param url The {@link Text} to be encapsulated.
      * @param username The {@link Text} to be encapsulated.
      * @param password The {@link Text} to be encapsulated.
+     * @checkstyle ParameterNumberCheck (100 lines)
      */
-    public SnapshotOfServerFiles(
-        final UTC time,
+    public SnapshotFilesOfServerDefault(
+        final Utc time,
         final Text url,
         final Text username,
         final Text password
@@ -134,13 +124,13 @@ public class SnapshotOfServerFiles extends SnapshotFiles {
      * @param username The {@link Text} to be encapsulated.
      * @param password The {@link Text} to be encapsulated.
      */
-    public SnapshotOfServerFiles(
+    public SnapshotFilesOfServerDefault(
         final Text url,
         final Text username,
         final Text password
     ) {
         this(
-            new UTCOfFirstAccess(),
+            new UtcOfFirstAccess(),
             new DbdServerMappingWithCredentials(
                 url,
                 username,

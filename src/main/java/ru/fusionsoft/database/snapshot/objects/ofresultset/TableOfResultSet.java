@@ -19,7 +19,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import org.cactoos.Func;
 import org.cactoos.map.MapEntry;
-import ru.fusionsoft.database.mapping.dbd.DbdColumnMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdColumnsMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.mapping.dbd.ofresultset.DbdColumnMappingOfResultSet;
 import ru.fusionsoft.database.mapping.entries.ScalarEntryOfResultSet;
@@ -35,7 +35,6 @@ import ru.fusionsoft.database.snapshot.query.QueryOfScalar;
 import ru.fusionsoft.lib.collection.ListOfResultSet;
 import ru.fusionsoft.lib.text.TextOfResultSet;
 import ru.fusionsoft.lib.yaml.YamlScalarSequenceOfResultSet;
-import ru.fusionsoft.lib.yaml.YamlSequenceOfNodes;
 
 /**
  * The type of {@link DbObject}
@@ -158,8 +157,8 @@ public class TableOfResultSet extends SimpleDbObjectOfEntries<DbdTableMapping> {
             ),
             new MapEntry<>(
                 DbdTableFields.COLUMNS,
-                new YamlSequenceOfNodes(
-                    new ListOfResultSet<DbdColumnMapping>(
+                new DbdColumnsMappingOfEntries(
+                    new ListOfResultSet<>(
                         rs -> new DbdColumnMappingOfResultSet(
                             rs,
                             columns
