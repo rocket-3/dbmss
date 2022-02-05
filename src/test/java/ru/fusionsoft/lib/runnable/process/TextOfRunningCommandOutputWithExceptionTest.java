@@ -51,7 +51,7 @@ class TextOfRunningCommandOutputWithExceptionTest {
             ProcessRunningException.class,
             () -> new TextOfRunningCommandOutputWithException(
                 new CurrentWorkingDirectory(),
-                new ArgsExplicit("tracert")
+                new ArgsExplicit("ping", "noname")
             ).asString()
         );
     }
