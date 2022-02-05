@@ -16,6 +16,7 @@
 package ru.fusionsoft.lib.runnable.process;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.fusionsoft.lib.exception.ProcessRunningException;
 import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
@@ -46,6 +47,7 @@ class TextOfRunningCommandOutputWithExceptionTest {
      * Runs tracert with error.
      */
     @Test
+    @Disabled
     void runsTracertWithError() {
         Assertions.assertThrows(
             ProcessRunningException.class,
