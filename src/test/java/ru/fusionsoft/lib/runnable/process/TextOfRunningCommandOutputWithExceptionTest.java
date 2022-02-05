@@ -32,6 +32,7 @@ class TextOfRunningCommandOutputWithExceptionTest {
      * Runs nslookup with input.
      */
     @Test
+    @Disabled
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
     void runsNslookupWithInput() {
         final String output = new TextOfRunningCommandOutputWithException(
