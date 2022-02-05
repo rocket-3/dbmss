@@ -17,7 +17,7 @@ package ru.fusionsoft.database.application;
 
 import org.cactoos.Func;
 import org.cactoos.Output;
-import org.cactoos.io.Stdout;
+import org.cactoos.io.DeadOutput;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.TextOf;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ class ApplicationTest {
                 .resolve("bin")
                 .resolve(app);
         };
-        final Output output = new Stdout();
+        final Output output = new DeadOutput();
         for (final Runnable runnable : new IterableOf<Runnable>(
             new ProcessRunnable(
                 new CurrentWorkingDirectory(),
