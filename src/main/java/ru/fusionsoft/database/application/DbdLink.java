@@ -15,15 +15,13 @@
  */
 package ru.fusionsoft.database.application;
 
-import org.cactoos.io.InputOf;
-import org.cactoos.io.Stdout;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.WriteTo;
 import ru.fusionsoft.database.api.DbdAddServerProcedure;
-import ru.fusionsoft.database.folder.CurrentWorkingDirectoryFolder;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
+import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
+import ru.fusionsoft.lib.runnable.ExitWithError;
 
 /**
  * The application class of adding a server to DBD file in current directory.
@@ -44,19 +42,13 @@ public final class DbdLink {
     public static void main(final String[] args) throws Exception {
         final int arguments = 4;
         new Ternary<Runnable>(
-            () -> args.length == arguments,
-            () -> new WriteTo(
-                new InputOf(
-                    String.join(
-                        "",
-                        "Wrong arguments, need ",
-                        "{server name} ",
-                        "{jdbc:<dbms>://<url>:<port>/<catalog>} ",
-                        "{user} ",
-                        "{pass}"
-                    )
-                ),
-                new Stdout()
+            () -> args.length != arguments,
+            () -> new ExitWithError(
+                "Wrong arguments, need ",
+                "{server name} ",
+                "{jdbc:<dbms>://<url>:<port>/<catalog>} ",
+                "{user} ",
+                "{pass}"
             ),
             () -> new DbdAddServerProcedure(
                 new DbdServerEntry(
@@ -67,7 +59,7 @@ public final class DbdLink {
                         new TextOf(args[3])
                     )
                 ),
-                new CurrentWorkingDirectoryFolder()
+                new CurrentWorkingDirectory()
             )
         ).value().run();
     }

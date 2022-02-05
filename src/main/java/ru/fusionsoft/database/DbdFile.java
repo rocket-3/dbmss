@@ -16,6 +16,7 @@
 package ru.fusionsoft.database;
 
 import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
 /**
  * The interface representing a DBD file.

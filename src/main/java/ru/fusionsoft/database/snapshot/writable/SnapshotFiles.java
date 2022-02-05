@@ -16,10 +16,11 @@
 package ru.fusionsoft.database.snapshot.writable;
 
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
-import ru.fusionsoft.database.writable.JoinedWritable;
+import ru.fusionsoft.lib.path.Writable;
+import ru.fusionsoft.lib.path.writable.JoinedWritable;
 
 /**
- * The {@link ru.fusionsoft.database.Writable} of snapshot files.
+ * The {@link Writable} of snapshot files.
  * @since 0.1
  */
 public class SnapshotFiles extends JoinedWritable {

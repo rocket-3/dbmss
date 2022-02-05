@@ -24,7 +24,7 @@ import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.StickyObjects;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
-import ru.fusionsoft.database.writable.JoinedWritable;
+import ru.fusionsoft.lib.path.writable.JoinedWritable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**

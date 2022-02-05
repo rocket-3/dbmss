@@ -17,11 +17,11 @@ package ru.fusionsoft.database.api;
 
 import org.cactoos.Text;
 import ru.fusionsoft.database.DbdFile;
-import ru.fusionsoft.database.Folder;
-import ru.fusionsoft.database.WriteToFolderProcedure;
-import ru.fusionsoft.database.dbdfile.DbdFileOfFolder;
-import ru.fusionsoft.database.snapshot.CreatingSnapshotFolder;
-import ru.fusionsoft.database.snapshot.writable.SnapshotOfDbdFiles;
+import ru.fusionsoft.database.dbdfile.DbdFileOfDirectory;
+import ru.fusionsoft.database.snapshot.CreatingSnapshotDirectory;
+import ru.fusionsoft.database.snapshot.writable.SnapshotFilesOfDbd;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
@@ -30,15 +30,15 @@ import ru.fusionsoft.lib.time.UtcOfFirstAccess;
  * @since 0.1
  * @checkstyle ParameterNumberCheck (100 lines)
  */
-public class SnapshotCreateProcedure extends WriteToFolderProcedure {
+public class SnapshotCreateProcedure extends WriteToDirectoryRunnable {
 
     /**
      * Instantiates a new Snapshot create procedure.
      * @param writable The Writable to be encapsulated.
-     * @param folder The Folder to be encapsulated.
+     * @param directory The Folder to be encapsulated.
      */
-    public SnapshotCreateProcedure(final SnapshotOfDbdFiles writable, final Folder folder) {
-        super(writable, folder);
+    public SnapshotCreateProcedure(final SnapshotFilesOfDbd writable, final Directory directory) {
+        super(writable, directory);
     }
 
     /**
@@ -55,25 +55,25 @@ public class SnapshotCreateProcedure extends WriteToFolderProcedure {
         final Boolean alldata
     ) {
         this(
-            new SnapshotOfDbdFiles(time, dbd, server, alldata),
-            new CreatingSnapshotFolder(time)
+            new SnapshotFilesOfDbd(time, dbd, server, alldata),
+            new CreatingSnapshotDirectory(time)
         );
     }
 
     /**
      * Instantiates a new Snapshot create procedure.
      * @param server The {@link Text} to be encapsulated.
-     * @param folder The {@link Folder} to be encapsulated.
+     * @param directory The {@link Directory} to be encapsulated.
      * @param alldata Should it take operational data tables.
      */
     public SnapshotCreateProcedure(
         final Text server,
-        final Folder folder,
+        final Directory directory,
         final Boolean alldata
     ) {
         this(
             new UtcOfFirstAccess(),
-            new DbdFileOfFolder(folder),
+            new DbdFileOfDirectory(directory),
             server,
             alldata
         );

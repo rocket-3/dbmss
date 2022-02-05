@@ -14,6 +14,6 @@
  * and limitations under the License.
  */
 /**
- * Package for {@link ru.fusionsoft.database.Folder} iface implementations.
+ * Package for {@link ru.fusionsoft.lib.path.Directory} iface implementations.
  */
 package ru.fusionsoft.database.folder;

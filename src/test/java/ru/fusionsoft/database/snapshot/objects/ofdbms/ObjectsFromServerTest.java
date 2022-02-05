@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
 import org.llorllale.cactoos.matchers.HasValues;
-import ru.fusionsoft.database.Folder;
 import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
@@ -39,7 +38,8 @@ import ru.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.StickyObjects;
-import ru.fusionsoft.database.writable.YamlDocument;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.path.writable.YamlDocument;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
@@ -203,7 +203,7 @@ class ObjectsFromServerTest {
     @Disabled
     @SuppressWarnings("PMD")
     public void showDbd() {
-        final Folder test = () -> new File(
+        final Directory test = () -> new File(
             "src/test/java/org/fusionsoft/database/snapshot/objects/ofdbms"
         ).toPath();
         final ConnectionOfDbdServerMapping connection = new ConnectionOfDbdServerMapping(

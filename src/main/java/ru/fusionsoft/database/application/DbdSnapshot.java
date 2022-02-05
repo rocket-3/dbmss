@@ -15,14 +15,12 @@
  */
 package ru.fusionsoft.database.application;
 
-import org.cactoos.io.InputOf;
-import org.cactoos.io.Stdout;
 import org.cactoos.scalar.ScalarOf;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.WriteTo;
 import ru.fusionsoft.database.api.SnapshotCreateProcedure;
-import ru.fusionsoft.database.folder.CurrentWorkingDirectoryFolder;
+import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
+import ru.fusionsoft.lib.runnable.ExitWithError;
 
 /**
  * The application class of creating a DBD snapshot from server mentioned in DBD
@@ -41,19 +39,16 @@ public final class DbdSnapshot {
      * @throws Exception when can't.
      */
     public static void main(final String[] args) throws Exception {
-        final int arguments = 1;
+        final int arguments = 2;
         new Ternary<Runnable>(
-            () -> args.length < arguments,
-            () -> new WriteTo(
-                new InputOf(
-                    "Wrong arguments, need {server name from DBD} {with op data true\\false}"
-                ),
-                new Stdout()
+            () -> args.length != arguments,
+            () -> new ExitWithError(
+                "Wrong arguments, need {server name from DBD} {with op data true\\false}"
             ),
             () -> new SnapshotCreateProcedure(
                 new TextOf(args[0]),
-                new CurrentWorkingDirectoryFolder(),
-                new ScalarOf<Boolean>(() -> Boolean.valueOf(args[1])).value()
+                new CurrentWorkingDirectory(),
+                new ScalarOf<>(() -> Boolean.valueOf(args[1])).value()
             )
         ).value().run();
     }

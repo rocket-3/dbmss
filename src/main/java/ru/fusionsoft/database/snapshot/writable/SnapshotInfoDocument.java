@@ -17,12 +17,12 @@ package ru.fusionsoft.database.snapshot.writable;
 
 import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
-import ru.fusionsoft.database.SimpleYamlRepresentative;
-import ru.fusionsoft.database.Writable;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
-import ru.fusionsoft.database.writable.YamlDocument;
+import ru.fusionsoft.lib.path.Writable;
+import ru.fusionsoft.lib.path.writable.YamlDocument;
 import ru.fusionsoft.lib.text.TextOfUtcDate;
 import ru.fusionsoft.lib.time.Utc;
+import ru.fusionsoft.lib.yaml.SimpleYamlRepresentative;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**

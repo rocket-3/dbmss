@@ -16,38 +16,38 @@
 package ru.fusionsoft.database.api;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.Folder;
-import ru.fusionsoft.database.WriteToFolderProcedure;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
-import ru.fusionsoft.database.snapshot.writable.SnapshotFilesOfServerDefault;
+import ru.fusionsoft.database.snapshot.writable.CreatingDbdFilesOfServer;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 
 /**
- * The procedure to create new DBD files from database, see {@link SnapshotFilesOfServerDefault}.
+ * The procedure to create new DBD files from database, see {@link CreatingDbdFilesOfServer}.
  * @since 0.1
  * @checkstyle ParameterNumberCheck (100 lines)
  */
-public class DbdCreateProcedure extends WriteToFolderProcedure {
+public class DbdCreateProcedure extends WriteToDirectoryRunnable {
 
     /**
      * Instantiates a new Snapshot create procedure.
      * @param writable The Writable to be encapsulated.
-     * @param folder The Folder to be encapsulated.
+     * @param directory The Folder to be encapsulated.
      */
-    public DbdCreateProcedure(final SnapshotFilesOfServerDefault writable, final Folder folder) {
-        super(writable, folder);
+    public DbdCreateProcedure(final CreatingDbdFilesOfServer writable, final Directory directory) {
+        super(writable, directory);
     }
 
     /**
      * Instantiates a new Snapshot create procedure.
      * @param server The {@link DbdServerMapping} to be encapsulated.
-     * @param folder The {@link Folder} to be encapsulated.
+     * @param directory The {@link Directory} to be encapsulated.
      */
-    public DbdCreateProcedure(final DbdServerMapping server, final Folder folder) {
+    public DbdCreateProcedure(final DbdServerMapping server, final Directory directory) {
         this(
-            new SnapshotFilesOfServerDefault(
+            new CreatingDbdFilesOfServer(
                 server
             ),
-            folder
+            directory
         );
     }
 
@@ -56,19 +56,19 @@ public class DbdCreateProcedure extends WriteToFolderProcedure {
      * @param url The JDBC url {@link Text} to be encapsulated.
      * @param username The {@link Text} to be encapsulated.
      * @param password The {@link Text} to be encapsulated.
-     * @param folder The {@link Folder} to be encapsulated.
+     * @param directory The {@link Directory} to be encapsulated.
      */
     public DbdCreateProcedure(
         final Text url,
         final Text username,
         final Text password,
-        final Folder folder
+        final Directory directory
     ) {
         this(
-            new SnapshotFilesOfServerDefault(
+            new CreatingDbdFilesOfServer(
                 url, username, password
             ),
-            folder
+            directory
         );
     }
 

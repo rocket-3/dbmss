@@ -16,39 +16,39 @@
 package ru.fusionsoft.database.api;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.Folder;
-import ru.fusionsoft.database.WriteToFolderProcedure;
-import ru.fusionsoft.database.dbdfile.DbdFileOfFolder;
+import ru.fusionsoft.database.dbdfile.DbdFileOfDirectory;
 import ru.fusionsoft.database.snapshot.writable.MergedWithServerDbdFiles;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 
 /**
  * The procedure to update DBD document and files from server.
  * @since 0.1
  * @todo #40:30min Clean existing data files before merge
  */
-public class DbdMergeProcedure extends WriteToFolderProcedure {
+public class DbdMergeProcedure extends WriteToDirectoryRunnable {
 
     /**
      * Instantiates a new Dbd merge procedure.
      * @param writable The {@link MergedWithServerDbdFiles} to be encapsulated.
-     * @param folder The {@link Folder} to be encapsulated.
+     * @param directory The {@link Directory} to be encapsulated.
      */
-    public DbdMergeProcedure(final MergedWithServerDbdFiles writable, final Folder folder) {
-        super(writable, folder);
+    public DbdMergeProcedure(final MergedWithServerDbdFiles writable, final Directory directory) {
+        super(writable, directory);
     }
 
     /**
      * Instantiates a new Dbd merge procedure.
      * @param server The {@link Text} of server name from 'servers' node to be encapsulated.
-     * @param folder The {@link Folder} to be encapsulated.
+     * @param directory The {@link Directory} to be encapsulated.
      */
-    public DbdMergeProcedure(final Text server, final Folder folder) {
+    public DbdMergeProcedure(final Text server, final Directory directory) {
         this(
             new MergedWithServerDbdFiles(
-                new DbdFileOfFolder(folder),
+                new DbdFileOfDirectory(directory),
                 server
             ),
-            folder
+            directory
         );
     }
 

@@ -15,13 +15,12 @@
  */
 package ru.fusionsoft.database.application;
 
-import org.cactoos.io.InputOf;
-import org.cactoos.io.Stdout;
+import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.WriteTo;
 import ru.fusionsoft.database.api.DbdCreateProcedure;
-import ru.fusionsoft.database.folder.CurrentWorkingDirectoryFolder;
-import ru.fusionsoft.database.snapshot.writable.SnapshotFilesOfServerDefault;
+import ru.fusionsoft.database.snapshot.writable.CreatingDbdFilesOfServer;
+import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
+import ru.fusionsoft.lib.runnable.ExitWithError;
 
 /**
  * The application class of just creating a bare snapshot with a new DBD and fetching all the data.
@@ -35,26 +34,24 @@ public final class DbdNew {
      * Main.
      * @param args The array of {@link String} args, which are:
      *  {connectionString} {user} {password}.
+     * @throws Exception when can't.
      */
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws Exception {
         final int arguments = 3;
-        if (args.length != arguments) {
-            new WriteTo(
-                new InputOf(
-                    "Wrong arguments, need {jdbc:<dbms>://<url>:<port>/<catalog>} {user} {pass}"
-                ),
-                new Stdout()
-            ).run();
-        } else {
-            new DbdCreateProcedure(
-                new SnapshotFilesOfServerDefault(
+        new Ternary<>(
+            () -> args.length != arguments,
+            () -> new ExitWithError(
+                "Wrong arguments, need {jdbc:<dbms>://<url>:<port>/<catalog>} {user} {pass}"
+            ),
+            () -> new DbdCreateProcedure(
+                new CreatingDbdFilesOfServer(
                     new TextOf(args[0]),
                     new TextOf(args[1]),
                     new TextOf(args[2])
                 ),
-                new CurrentWorkingDirectoryFolder()
-            ).run();
-        }
+                new CurrentWorkingDirectory()
+            )
+        ).value().run();
     }
 
 }

@@ -23,7 +23,7 @@ import org.cactoos.Scalar;
  * The {@link Scalar} of {@link Path} that represents current working directory.
  * @since 0.1
  */
-public class CurrentWorkingDirectory implements Scalar<Path> {
+public class CurrentWorkingDirectory implements Directory {
 
     @Override
     public final Path value() {

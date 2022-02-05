@@ -19,9 +19,9 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import java.text.MessageFormat;
 import org.cactoos.text.Repeated;
 import org.cactoos.text.UncheckedText;
-import ru.fusionsoft.database.SimpleYamlRepresentative;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.ObjectSignature;
+import ru.fusionsoft.lib.yaml.SimpleYamlRepresentative;
 
 /**
  * The naive impl of DbObject.

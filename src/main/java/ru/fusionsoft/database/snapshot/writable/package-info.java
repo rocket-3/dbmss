@@ -15,6 +15,6 @@
  */
 
 /**
- * {@link ru.fusionsoft.database.Writable} implementations for creating snapshots.
+ * {@link ru.fusionsoft.lib.path.Writable} implementations for creating snapshots.
  */
 package ru.fusionsoft.database.snapshot.writable;

@@ -18,21 +18,18 @@ package ru.fusionsoft.database.snapshot.data;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.cactoos.scalar.NumberOf;
-import org.cactoos.scalar.Sticky;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsNumber;
-import ru.fusionsoft.database.Folder;
 import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
-import ru.fusionsoft.database.folder.FolderOfScalar;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
-import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
-import ru.fusionsoft.lib.path.TempFolder;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.path.UncheckedTempFolder;
 
 /**
  * The test for {@link SeparateDataFilesOfTables}.
@@ -46,13 +43,7 @@ class SeparateDataFilesOfTablesWritableTest {
      */
     @Test
     public void writesBigFilesFast() throws SQLException {
-        final Folder folder = new FolderOfScalar(
-            new Sticky<>(
-                new TempFolder(
-                    new CurrentWorkingDirectory().value().resolve("temp")
-                )
-            )
-        );
+        final Directory directory = new UncheckedTempFolder();
         try (
             Connection connection = new ConnectionOfDbdServerMapping(
                 new DbdServerMappingWithCredentials(
@@ -69,10 +60,10 @@ class SeparateDataFilesOfTablesWritableTest {
                         connection
                     )
                 )
-            ).writeTo(folder);
+            ).writeTo(directory);
             new Assertion<>(
                 "the biggest data file has expected size",
-                folder.path().resolve("public.million.data.yaml").toFile().length(),
+                directory.value().resolve("public.million.data.yaml").toFile().length(),
                 new IsNumber(new NumberOf("236778131"))
             ).affirm();
         }

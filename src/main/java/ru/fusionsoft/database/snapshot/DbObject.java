@@ -16,7 +16,7 @@
 package ru.fusionsoft.database.snapshot;
 
 import com.amihaiemil.eoyaml.YamlNode;
-import ru.fusionsoft.database.YamlRepresentative;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
 /**
  * The interface DbObject representing object in Dbms coordinates and attributes.

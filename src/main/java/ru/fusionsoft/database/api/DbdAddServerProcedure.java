@@ -15,32 +15,32 @@
  */
 package ru.fusionsoft.database.api;
 
-import ru.fusionsoft.database.Folder;
-import ru.fusionsoft.database.WriteToFolderProcedure;
 import ru.fusionsoft.database.dbdfile.DbdFileMerged;
-import ru.fusionsoft.database.dbdfile.DbdFileOfFolder;
+import ru.fusionsoft.database.dbdfile.DbdFileOfDirectory;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdServersMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.entry.DbdServersEntry;
 import ru.fusionsoft.database.snapshot.writable.DbdDocument;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The procedure to add server to DBD/servers mapping.
  * @since 0.1
  */
-public class DbdAddServerProcedure extends WriteToFolderProcedure {
+public class DbdAddServerProcedure extends WriteToDirectoryRunnable {
 
     /**
      * Instantiates a new Dbd add server procedure.
      * @param server The {@link DbdServerEntry} to be encapsulated.
-     * @param folder The {@link Folder} to be encapsulated.
+     * @param directory The {@link Directory} to be encapsulated.
      */
-    public DbdAddServerProcedure(final DbdServerEntry server, final Folder folder) {
+    public DbdAddServerProcedure(final DbdServerEntry server, final Directory directory) {
         super(
             new DbdDocument(
                 new DbdFileMerged(
-                    new DbdFileOfFolder(folder),
+                    new DbdFileOfDirectory(directory),
                     new YamlMappingOfEntries(
                         new DbdServersEntry(
                             new DbdServersMappingOfEntries(
@@ -50,7 +50,7 @@ public class DbdAddServerProcedure extends WriteToFolderProcedure {
                     )
                 )
             ),
-            folder
+            directory
         );
     }
 

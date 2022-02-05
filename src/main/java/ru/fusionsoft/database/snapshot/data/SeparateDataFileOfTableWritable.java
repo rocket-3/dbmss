@@ -20,12 +20,12 @@ import java.text.MessageFormat;
 import org.cactoos.Proc;
 import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.Unchecked;
-import ru.fusionsoft.database.Folder;
-import ru.fusionsoft.database.Writable;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.collection.IterableAutoCloseable;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.path.Writable;
 
 /**
  * The {@link Writable} of separate table date,
@@ -58,14 +58,14 @@ public class SeparateDataFileOfTableWritable implements Writable {
     }
 
     @Override
-    public final void writeTo(final Folder folder) {
+    public final void writeTo(final Directory directory) {
         new Unchecked<>(
             () -> {
                 final String spaces = "   ";
                 final String sequence = "- ";
                 final String linefeed = "\n";
                 final WriterTo file = new WriterTo(
-                    folder.path().resolve(
+                    directory.value().resolve(
                         new SeparateDataFileName(this.table).asString()
                     )
                 );

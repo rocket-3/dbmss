@@ -15,11 +15,11 @@
  */
 package ru.fusionsoft.database.snapshot.writable;
 
-import ru.fusionsoft.database.Writable;
 import ru.fusionsoft.database.dbdfile.DbdFileOfServerSnapshot;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.lib.path.Writable;
 
 /**
  * The type of {@link Writable} representing Dbd yaml file,

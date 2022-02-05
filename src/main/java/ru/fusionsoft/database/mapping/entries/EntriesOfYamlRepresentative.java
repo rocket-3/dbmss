@@ -20,9 +20,9 @@ import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Map;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
-import ru.fusionsoft.database.YamlRepresentative;
 import ru.fusionsoft.database.mapping.MappingOfRepresentative;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
 /**
  * The Map.Entry of Text and YamlNode from {@link YamlRepresentative}.

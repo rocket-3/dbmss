@@ -23,7 +23,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
-import ru.fusionsoft.database.writable.JoinedWritable;
+import ru.fusionsoft.lib.path.writable.JoinedWritable;
 
 /**
  * The {@link JoinedWritable} of {@link SeparateDataFilesOfTables}, can be constructed from

@@ -15,9 +15,9 @@
  */
 package ru.fusionsoft.database.mapping;
 
-import ru.fusionsoft.database.YamlRepresentative;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
 /**
  * The YamlMapping of {@link DbObject} YamlRepresentative.

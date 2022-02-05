@@ -18,25 +18,22 @@ package ru.fusionsoft.database.api;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import ru.fusionsoft.database.Folder;
-import ru.fusionsoft.database.WriteToFolderProcedure;
 import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
-import ru.fusionsoft.database.dbdfile.DbdFileOfFolder;
-import ru.fusionsoft.database.dbdfile.DbdFileOfServerSnapshotDefault;
-import ru.fusionsoft.database.folder.FolderOfScalar;
+import ru.fusionsoft.database.dbdfile.CreatingDbdFileOfServer;
+import ru.fusionsoft.database.dbdfile.DbdFileOfDirectory;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import ru.fusionsoft.database.snapshot.writable.SnapshotFilesOfServerDefault;
-import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
-import ru.fusionsoft.lib.path.TempFolder;
+import ru.fusionsoft.database.snapshot.writable.CreatingDbdFilesOfServer;
+import ru.fusionsoft.lib.path.Directory;
+import ru.fusionsoft.lib.path.UncheckedTempFolder;
+import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 
 /**
  * The type of that can be constructed of.
@@ -53,13 +50,7 @@ class DbdRunnableTest {
      */
     @Test
     public void mergesPagillaIntoSakillaDbd() throws Exception {
-        final Folder folder = new FolderOfScalar(
-            new Sticky<>(
-                new TempFolder(
-                    new CurrentWorkingDirectory().value().resolve("temp")
-                )
-            )
-        );
+        final Directory directory = new UncheckedTempFolder();
         final Func<Text, DbdServerMapping> mkserver = server -> {
             return new DbdServerMappingWithCredentials(
                 new UrlOfPgGitLabDatabaseV11(server),
@@ -70,24 +61,24 @@ class DbdRunnableTest {
         final Text sakilla = new TextOf("dvdrental");
         new IterableOf<>(
             new DbdCreateProcedure(
-                new SnapshotFilesOfServerDefault(
+                new CreatingDbdFilesOfServer(
                     mkserver.apply(sakilla)
                 ),
-                folder
+                directory
             ),
             new DbdAddServerProcedure(
                 new DbdServerEntry(
                     pagilla,
                     mkserver.apply(pagilla)
                 ),
-                folder
+                directory
             ),
             new DbdMergeProcedure(
                 pagilla,
-                folder
+                directory
             )
         ).forEach(
-            WriteToFolderProcedure::run
+            WriteToDirectoryRunnable::run
         );
     }
 
@@ -98,9 +89,7 @@ class DbdRunnableTest {
     @Test
     @Disabled
     public void diffWithMerged() throws Exception {
-        final Folder folder = new FolderOfScalar(
-            new Sticky<>(new TempFolder(new CurrentWorkingDirectory().value().resolve("temp")))
-        );
+        final Directory directory = new UncheckedTempFolder();
         final Func<Text, DbdServerMapping> mkserver = server -> {
             return new DbdServerMappingWithCredentials(
                 new UrlOfPgGitLabDatabaseV11(server),
@@ -109,16 +98,16 @@ class DbdRunnableTest {
         };
         final Text pagilla = new TextOf("pagilla");
         final Text sakilla = new TextOf("dvdrental");
-        final SnapshotFilesOfServerDefault files = new SnapshotFilesOfServerDefault(
+        final CreatingDbdFilesOfServer files = new CreatingDbdFilesOfServer(
             mkserver.apply(sakilla)
         );
         final Text original = new TextOfScalar(
             () -> {
                 new DbdCreateProcedure(
                     files,
-                    folder
+                    directory
                 ).run();
-                return new DbdFileOfFolder(folder).asYaml().toString();
+                return new DbdFileOfDirectory(directory).asYaml().toString();
             }
         );
         final Text merged = new TextOfScalar(
@@ -129,16 +118,16 @@ class DbdRunnableTest {
                             pagilla,
                             mkserver.apply(pagilla)
                         ),
-                        folder
+                        directory
                     ),
                     new DbdMergeProcedure(
                         pagilla,
-                        folder
+                        directory
                     )
                 ).forEach(
-                    WriteToFolderProcedure::run
+                    WriteToDirectoryRunnable::run
                 );
-                return new DbdFileOfFolder(folder).asYaml().toString();
+                return new DbdFileOfDirectory(directory).asYaml().toString();
             }
         );
         Assertions.assertEquals(
@@ -155,7 +144,7 @@ class DbdRunnableTest {
     @Disabled
     public void diffWithPagilla() throws Exception {
         final Func<Text, Text> yamlOf = server -> new TextOfScalar(
-            () -> new DbdFileOfServerSnapshotDefault(
+            () -> new CreatingDbdFileOfServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11(server),
                     new CredsOfPgTestDatabase()
