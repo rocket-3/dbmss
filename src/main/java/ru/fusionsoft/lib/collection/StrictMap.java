@@ -67,7 +67,7 @@ public class StrictMap<X, Y> implements Map<X, Y> {
     }
 
     @Override
-    public final Y get(final Object key) {
+    public final Y get(final Object key) throws ValueNotFoundException {
         if (this.containsKey(key)) {
             return this.map.get(key);
         } else {

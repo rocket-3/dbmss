@@ -33,7 +33,7 @@ public class DbdMergeProcedure extends WriteToDirectoryRunnable {
      * @param writable The {@link MergedWithServerDbdFiles} to be encapsulated.
      * @param directory The {@link Directory} to be encapsulated.
      */
-    public DbdMergeProcedure(final MergedWithServerDbdFiles writable, final Directory directory) {
+    private DbdMergeProcedure(final MergedWithServerDbdFiles writable, final Directory directory) {
         super(writable, directory);
     }
 

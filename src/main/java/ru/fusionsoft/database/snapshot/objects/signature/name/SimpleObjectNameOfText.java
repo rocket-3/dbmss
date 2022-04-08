@@ -16,18 +16,19 @@
 package ru.fusionsoft.database.snapshot.objects.signature.name;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The text that used as delimiter for names in
- *  {@link DbObject}.
+ * The {@link SimpleObjectName} can be created of text to be parsed.
  * @since 0.1
  */
-public class SimpleObjectNameDelimiter implements Text {
+public class SimpleObjectNameOfText extends SimpleObjectName {
 
-    @Override
-    public final String asString() {
-        return " (->) ";
+    /**
+     * Instantiates a new Simple object name of text.
+     * @param text The {@link Text} to be encapsulated.
+     */
+    public SimpleObjectNameOfText(final Text text) {
+        super(text);
     }
 
 }

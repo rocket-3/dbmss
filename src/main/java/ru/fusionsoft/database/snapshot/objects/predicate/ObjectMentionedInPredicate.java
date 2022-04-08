@@ -42,7 +42,7 @@ public class ObjectMentionedInPredicate implements Func<DbObject<?>, Boolean> {
      * Instantiates a new Objects with names.
      * @param names The Sinatures to be encapsulated.
      */
-    private ObjectMentionedInPredicate(
+    public ObjectMentionedInPredicate(
         final Iterable<ObjectSignature> names
     ) {
         this.names = new Unchecked<>(

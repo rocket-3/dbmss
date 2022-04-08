@@ -16,6 +16,7 @@
 package ru.fusionsoft.database.snapshot.query.pg;
 
 import ru.fusionsoft.database.mapping.fields.DbdViewFields;
+import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameDelimiter;
 
 /**
  * The only type of {@link PgMessageFormatQuery} of {@link DbdViewFields}.
@@ -41,7 +42,9 @@ public class PgViewsQuery extends PgMessageFormatQuery<DbdViewFields> {
             + " || pg_get_viewdef(cls.oid) AS {3},\n"
             + " (\n"
             + "    select array_agg(\n"
-            + "        distinct source_ns.nspname || '/' || source_table.relname || '.vw'\n"
+            + "        distinct source_ns.nspname || "
+            + "'" + new SimpleObjectNameDelimiter().asString() + "'"
+            + " || source_table.relname\n"
             + "    ) as dependencySam\n"
             + "    from pg_depend \n"
             + "    join pg_rewrite on pg_depend.objid = pg_rewrite.oid \n"

@@ -15,9 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects.signature;
 
-import java.text.MessageFormat;
 import java.util.Objects;
-import org.cactoos.text.UncheckedText;
 import ru.fusionsoft.database.snapshot.ObjectSignature;
 
 /**
@@ -58,11 +56,7 @@ public class SimpleObjectSignature implements ObjectSignature {
 
     @Override
     public final String asString() {
-        return MessageFormat.format(
-            "{0}: {1}",
-            new UncheckedText(this.name()).asString(),
-            new UncheckedText(this.type()).asString()
-        );
+        return new SimpleObjectSignatureFormat().string(this.nam, this.typ);
     }
 
     @Override

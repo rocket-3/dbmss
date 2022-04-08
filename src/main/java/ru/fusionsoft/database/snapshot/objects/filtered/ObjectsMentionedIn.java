@@ -16,6 +16,7 @@
 package ru.fusionsoft.database.snapshot.objects.filtered;
 
 import com.amihaiemil.eoyaml.YamlNode;
+import ru.fusionsoft.database.snapshot.ObjectSignature;
 import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInPredicate;
@@ -33,6 +34,16 @@ public class ObjectsMentionedIn<T extends YamlNode> extends ObjectsFiltered<T> {
      * @param origin The Objects to be filtered.
      */
     public ObjectsMentionedIn(final Objects<?> mentions, final Objects<T> origin) {
+        super(origin, new ObjectMentionedInPredicate(mentions));
+    }
+
+    /**
+     * Instantiates a new Objects mentioned in.
+     * @param mentions The {@link ru.fusionsoft.database.snapshot.ObjectSignature}s
+     *  to be mentioned in.
+     * @param origin The Objects to be filtered.
+     */
+    public ObjectsMentionedIn(final Iterable<ObjectSignature> mentions, final Objects<T> origin) {
         super(origin, new ObjectMentionedInPredicate(mentions));
     }
 

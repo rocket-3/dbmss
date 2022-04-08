@@ -20,6 +20,7 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlMappingBuilder;
 import java.util.Set;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.set.SetOf;
@@ -43,6 +44,21 @@ public class MappingOfMappingIgnoreKeys extends YamlMappingOfScalar {
         this(
             mapping,
             new SetOf<String>(new Mapped<>(Text::asString, ignore))
+        );
+    }
+
+    /**
+     * Instantiates a new Mapping from mapping ignore keys.
+     * @param mapping The YamlMapping to be encapsulated.
+     * @param ignores The array of Text to be encapsulated.
+     */
+    public MappingOfMappingIgnoreKeys(
+        final YamlMapping mapping,
+        final Text... ignores
+    ) {
+        this(
+            mapping,
+            new IterableOf<Text>(ignores)
         );
     }
 

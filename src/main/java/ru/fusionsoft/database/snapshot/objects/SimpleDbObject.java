@@ -15,7 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.text.MessageFormat;
 import org.cactoos.text.Repeated;
 import org.cactoos.text.UncheckedText;
@@ -28,7 +28,7 @@ import ru.fusionsoft.lib.yaml.SimpleYamlRepresentative;
  * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public class SimpleDbObject<Y extends YamlMapping>
+public class SimpleDbObject<Y extends YamlNode>
     extends SimpleYamlRepresentative<Y>
     implements DbObject<Y> {
 
