@@ -17,6 +17,7 @@ package ru.fusionsoft.lib.yaml.artefacts;
 
 import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.util.Set;
 import org.cactoos.Text;
 import org.cactoos.scalar.ScalarOf;
@@ -52,7 +53,8 @@ public class MaybeEmptyTextOfYamlMapping implements Text {
                         String value = "";
                         final Set<String> keys = new KeysFromYamlNode(mapping);
                         if (keys.contains(key.asString())) {
-                            value = mapping.value(key.asString()).asScalar().value();
+                            final YamlNode node = mapping.value(key.asString());
+                            value = node.asScalar().value();
                         }
                         return value;
                     }

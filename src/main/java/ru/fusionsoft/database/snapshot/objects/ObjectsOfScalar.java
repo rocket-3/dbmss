@@ -31,9 +31,7 @@ public class ObjectsOfScalar<T extends YamlNode> extends ObjectsEnvelope<T> {
      * Ctor.
      * @param scalar The Scalar of Iterable of DbObject to be encapsulated.
      */
-    public ObjectsOfScalar(
-        final Scalar<Iterable<DbObject<T>>> scalar
-    ) {
+    public ObjectsOfScalar(final Scalar<Iterable<DbObject<T>>> scalar) {
         super(
             new IterableOf<>(
                 () -> scalar.value().iterator()

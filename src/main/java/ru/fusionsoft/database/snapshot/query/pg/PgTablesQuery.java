@@ -50,7 +50,7 @@ public class PgTablesQuery extends PgMessageFormatQuery<DbdTableFields> {
                         + " ) AS {4},\n"
                         + " (\n"
                         + "    SELECT "
-                        + "        array_agg( distinct n2.nspname || '" + new SimpleObjectNameDelimiter() + "' || c2.relname )\n"
+                        + "        array_agg( distinct n2.nspname || '" + new SimpleObjectNameDelimiter().asString()+ "' || c2.relname )\n"
                         + "        AS dependencies\n"
                         + "    FROM pg_catalog.pg_constraint c \n"
                         + "    JOIN ONLY pg_catalog.pg_class c1     ON c1.oid = c.conrelid\n"

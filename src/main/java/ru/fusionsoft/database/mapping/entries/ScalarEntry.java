@@ -21,8 +21,8 @@ import org.cactoos.Text;
 import org.cactoos.text.TextOf;
 
 /**
- * The type of Map.Entry of Text -> YamlNode that can be constructed of
- *  Text and Scalar of YamlNode.
+ * The type of Map.Entry of Text -> Text that can be constructed of
+ *  Text or String.
  * @since 0.1
  */
 public class ScalarEntry extends YamlMappingEntryOfScalar<YamlNode> {

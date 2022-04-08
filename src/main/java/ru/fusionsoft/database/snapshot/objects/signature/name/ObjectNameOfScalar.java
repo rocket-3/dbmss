@@ -15,7 +15,6 @@
  */
 package ru.fusionsoft.database.snapshot.objects.signature.name;
 
-import java.util.Objects;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.scalar.Unchecked;
@@ -62,16 +61,12 @@ public class ObjectNameOfScalar implements ObjectName {
 
     @Override
     public final boolean equals(final Object obj) {
-        boolean equ = false;
-        if (obj instanceof ObjectName) {
-            equ = this.equalsTo((ObjectName) obj);
-        }
-        return equ;
+        return this.scalar.value().equals(obj);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(this.asString());
+        return this.scalar.value().hashCode();
     }
 
 }
