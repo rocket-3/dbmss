@@ -34,7 +34,7 @@ import ru.fusionsoft.lib.time.UtcOfFirstAccess;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class CreatingDbdFileOfServer extends DbdFileOfServerSnapshot {
+public class CreatingDbdFileOfServer extends DbdFileOfSnapshotObjects {
 
     /**
      * Instantiates a new Dbd file of snapshot objects.

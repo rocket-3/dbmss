@@ -15,7 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.dbms;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
@@ -55,7 +55,7 @@ public class DbmsOfScalar implements Dbms {
     }
 
     @Override
-    public final Objects<YamlMapping> objects(final Connection connection) {
+    public final Objects<YamlNode> objects(final Connection connection) {
         return this.scalar.value().objects(connection);
     }
 

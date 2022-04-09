@@ -19,7 +19,6 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.iterable.Filtered;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 
 /**
  * The type of DbObjects that was filtered by some predicate.
@@ -34,7 +33,7 @@ public class ObjectsFiltered<T extends YamlNode> extends ObjectsEnvelope<T> {
      * @param predicate The predicate to be used.
      */
     public ObjectsFiltered(
-        final Objects<T> origin,
+        final Iterable<DbObject<T>> origin,
         final Func<DbObject<?>, Boolean> predicate
     ) {
         super(
@@ -52,7 +51,7 @@ public class ObjectsFiltered<T extends YamlNode> extends ObjectsEnvelope<T> {
      */
     public ObjectsFiltered(
         final Func<DbObject<?>, Boolean> predicate,
-        final Objects<T> origin
+        final Iterable<DbObject<T>> origin
     ) {
         this(origin, predicate);
     }
