@@ -15,7 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import ru.fusionsoft.database.DbdFile;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdFile;
@@ -31,7 +31,7 @@ import ru.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFil
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsOfServerFromDbd extends ObjectsFiltered<YamlMapping> {
+public class ObjectsOfServerFromDbd extends ObjectsFiltered<YamlNode> {
 
     /**
      * Instantiates a new Objects from server mentioned in dbd.

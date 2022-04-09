@@ -19,49 +19,51 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Not;
 import org.cactoos.scalar.Or;
+import org.cactoos.set.SetOf;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.ObjectSignature;
 import ru.fusionsoft.database.snapshot.objects.predicate.JoinedAndPredicate;
-import ru.fusionsoft.database.snapshot.objects.signature.ObjectSignatureOfScalar;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeFunction;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeProcedure;
+import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTrigger;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeView;
 
 public class ObjectDependsOnAnotherPredicate extends JoinedAndPredicate {
 
-    public ObjectDependsOnAnotherPredicate(final ObjectSignature source) {
+    public ObjectDependsOnAnotherPredicate(final DbObject<?> source) {
         super(
-            target -> new Not(
-                () -> target.signature().equalsTo(source)
-            ).value(),
-            target -> new And(
-                new Or(
-                    (ObjectType<?> type) -> target.signature().type().equalsTo(type),
-                    new IterableOf<>(
-                        new ObjectTypeView(),
-                        new ObjectTypeProcedure(),
-                        new ObjectTypeFunction()
+            target -> new Not(() -> target.signature().equalsTo(source.signature())).value(),
+            target -> new Or(
+                new And(
+                    () -> source.signature().type().equalsTo(new ObjectTypeTable()),
+                    () -> target.signature().type().equalsTo(new ObjectTypeTable()),
+                    () -> new SetOf<>(new SignaturesOfObjectDependencies(source)).contains(
+                        target.signature().name()
                     )
                 ),
-                new Or(
-                    (ObjectType<?> type) -> source.type().equalsTo(type),
-                    new IterableOf<>(
-                        new ObjectTypeView(),
-                        new ObjectTypeTrigger(),
-                        new ObjectTypeProcedure(),
-                        new ObjectTypeFunction()
-                    )
+                new And(
+                    new Or(
+                        (ObjectType<?> type) -> target.signature().type().equalsTo(type),
+                        new IterableOf<>(
+                            new ObjectTypeView(),
+                            new ObjectTypeProcedure(),
+                            new ObjectTypeFunction(),
+                            new ObjectTypeTable()
+                        )
+                    ),
+                    new Or(
+                        (ObjectType<?> type) -> source.signature().type().equalsTo(type),
+                        new IterableOf<>(
+                            new ObjectTypeView(),
+                            new ObjectTypeTrigger(),
+                            new ObjectTypeProcedure(),
+                            new ObjectTypeFunction()
+                        )
+                    ),
+                    () -> new ObjectHasNameInSqlPredicate(source).apply(target)
                 )
-            ).value(),
-            new ObjectHasNameInSqlPredicate(source)
-        );
-    }
-
-    public ObjectDependsOnAnotherPredicate(final DbObject<?> source) {
-        this(
-            new ObjectSignatureOfScalar(source::signature)
+            ).value()
         );
     }
 

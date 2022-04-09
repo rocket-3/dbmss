@@ -15,34 +15,32 @@
  */
 package ru.fusionsoft.database.snapshot.objects.dependencies;
 
-import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.iterable.Filtered;
-import org.cactoos.iterable.Mapped;
+import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.scalar.Or;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 
-public class ObjectsWithCrossDependenciesAdded extends ObjectsOfScalar<YamlMapping> {
+public class ObjectsOfOneDependsOnAnother<T extends YamlNode> extends ObjectsOfScalar<T> {
 
     /**
      * Ctor.
      */
-    public ObjectsWithCrossDependenciesAdded(final Objects<?> objects) {
+    public ObjectsOfOneDependsOnAnother(
+        final Objects<T> one,
+        final Objects<?> another
+    ) {
         super(
-            () -> new Mapped<>(
-                object -> new ObjectWithDependenciesMerged(
-                    new Mapped<ObjectName>(
-                        dependency -> dependency.signature().name(),
-                        new Filtered<DbObject<?>>(
-                            other -> new ObjectDependsOnAnotherPredicate(object).apply(other),
-                            objects
-                        )
-                    ),
-                    object
-                ),
-                objects
-            )
+            () -> {
+                return new ObjectsFiltered<T>(
+                    dbo -> new Or(
+                        (DbObject<?> upd) -> new ObjectDependsOnAnotherPredicate(dbo).apply(upd),
+                        another
+                    ).value(),
+                    one
+                );
+            }
         );
     }
 

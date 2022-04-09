@@ -15,7 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
@@ -25,7 +25,7 @@ import ru.fusionsoft.database.snapshot.dbms.DbmsOfConnection;
  * The DbObjects from {@link DbdServerMapping}.
  * @since 0.1
  */
-public class ObjectsOfServer extends ObjectsOfConnection<YamlMapping> {
+public class ObjectsOfServer extends ObjectsOfConnection<YamlNode> {
 
     /**
      * Ctor.
