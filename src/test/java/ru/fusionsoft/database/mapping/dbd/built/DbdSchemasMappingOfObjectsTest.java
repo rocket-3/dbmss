@@ -17,6 +17,7 @@ package ru.fusionsoft.database.mapping.dbd.built;
 
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
+import org.cactoos.iterable.Sticky;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -25,15 +26,14 @@ import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import ru.fusionsoft.database.mapping.MappingOfExampleYaml;
 import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingOfObjects;
-import ru.fusionsoft.database.snapshot.objects.StickyObjects;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingValueOfObjects;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdRootMapping;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
- * The tests for {@link DbdSchemasMappingOfObjects}.
+ * The tests for {@link DbdSchemasMappingValueOfObjects}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (255 lines)
  */
@@ -47,7 +47,7 @@ class DbdSchemasMappingOfObjectsTest {
         final MappingOfExampleYaml yaml = new MappingOfExampleYaml();
         Assertions.assertEquals(
             new YamlMappingOfPath(yaml, "schemas").toString(),
-            new DbdSchemasMappingOfObjects(
+            new DbdSchemasMappingValueOfObjects(
                 new ObjectsOfDbdRootMapping(
                     new DbdRootMapping(
                         yaml
@@ -68,8 +68,8 @@ class DbdSchemasMappingOfObjectsTest {
                 entry -> entry.getKey().asString(),
                 new EntriesOfYamlMapping(
                     new YamlMappingOfPath(
-                        new DbdSchemasMappingOfObjects(
-                            new StickyObjects<>(
+                        new DbdSchemasMappingValueOfObjects(
+                            new Sticky<>(
                                 new ObjectsOfServer(
                                     new DbdServerMappingWithCredentials(
                                         new UrlOfPgGitLabDatabaseV11("pagilla"),

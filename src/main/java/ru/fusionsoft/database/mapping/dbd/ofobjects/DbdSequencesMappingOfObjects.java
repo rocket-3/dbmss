@@ -15,15 +15,15 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSequence;
 
 /**
  * DBD/schemas/#schema/sequences node.
  * The mapping with values type of {@link DbdSequenceMapping}
- *  that can be constructed of {@link Objects}
+ *  that can be constructed of {@link Iterable} of {@link DbObject}s
  *  and filtered by schema.
  * @since 0.1
  */
@@ -34,9 +34,10 @@ public class DbdSequencesMappingOfObjects
      * Instantiates a new Dbd sequences mapping of objects.
      * @param objects The all Objects to be encapsulated.
      * @param schema The parent schema DbObject to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdSequencesMappingOfObjects(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdSequencesMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<?> schema
     ) {
         super(

@@ -15,22 +15,33 @@
  */
 package ru.fusionsoft.database.snapshot.objects.dependencies;
 
+import org.cactoos.iterable.Sticky;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingOfObjects;
-import ru.fusionsoft.database.snapshot.objects.StickyObjects;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingValueOfObjects;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 
+/**
+ * The test for {@link ObjectsWithCrossDependenciesAdded}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
+@SuppressWarnings("PMD")
 class ObjectsWithCrossDependenciesAddedTest {
 
+    /**
+     * Show dbd.
+     */
     @Test
+    @Disabled
     public void showDbd() {
         System.out.println(
-            new DbdSchemasMappingOfObjects(
+            new DbdSchemasMappingValueOfObjects(
                 new ObjectsWithCrossDependenciesAdded(
-                    new StickyObjects<>(
+                    new Sticky<>(
                         new ObjectsOfServer(
                             new DbdServerMappingWithCredentials(
                                 new UrlOfPgGitLabDatabaseV11("dvdrental"),

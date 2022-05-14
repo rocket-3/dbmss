@@ -19,7 +19,7 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.lib.path.Writable;
-import ru.fusionsoft.lib.path.writable.YamlDocument;
+import ru.fusionsoft.lib.path.writable.YamlWritable;
 import ru.fusionsoft.lib.text.TextOfUtcDate;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.yaml.SimpleYamlRepresentative;
@@ -33,7 +33,7 @@ import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
  * @todo #40:60min Implement `SnapshotInfo` `Writable`.
  */
 @SuppressWarnings("PMD")
-public class SnapshotInfoDocument extends YamlDocument {
+public class SnapshotInfoDocument extends YamlWritable {
 
     /**
      * Instantiates a new Snapshot info.

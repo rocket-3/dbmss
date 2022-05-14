@@ -18,6 +18,7 @@ package ru.fusionsoft.database.api;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import org.junit.jupiter.api.Assertions;
@@ -25,12 +26,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
-import ru.fusionsoft.database.dbdfile.CreatingDbdFileOfServer;
-import ru.fusionsoft.database.dbdfile.DbdFileOfDirectory;
+import ru.fusionsoft.database.dbdreadable.DbdReadableBuiltWithObjectsOfServer;
+import ru.fusionsoft.database.dbdreadable.DbdReadableOfDirectory;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import ru.fusionsoft.database.snapshot.writable.CreatingDbdFilesOfServer;
+import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableCreatingOfDatabaseUrl;
 import ru.fusionsoft.lib.path.Directory;
 import ru.fusionsoft.lib.path.UncheckedTempFolder;
 import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
@@ -60,8 +61,8 @@ class DbdRunnableTest {
         final Text pagilla = new TextOf("pagilla");
         final Text sakilla = new TextOf("dvdrental");
         new IterableOf<>(
-            new DbdCreateProcedure(
-                new CreatingDbdFilesOfServer(
+            new DbdCreateOfDatabaseProcedure(
+                new DbdRepoWritableCreatingOfDatabaseUrl(
                     mkserver.apply(sakilla)
                 ),
                 directory
@@ -73,7 +74,7 @@ class DbdRunnableTest {
                 ),
                 directory
             ),
-            new DbdMergeProcedure(
+            new DbdMergeFromServerProcedure(
                 pagilla,
                 directory
             )
@@ -98,37 +99,41 @@ class DbdRunnableTest {
         };
         final Text pagilla = new TextOf("pagilla");
         final Text sakilla = new TextOf("dvdrental");
-        final CreatingDbdFilesOfServer files = new CreatingDbdFilesOfServer(
+        final DbdRepoWritableCreatingOfDatabaseUrl files = new DbdRepoWritableCreatingOfDatabaseUrl(
             mkserver.apply(sakilla)
         );
         final Text original = new TextOfScalar(
-            () -> {
-                new DbdCreateProcedure(
-                    files,
-                    directory
-                ).run();
-                return new DbdFileOfDirectory(directory).asYaml().toString();
-            }
+            new Sticky<>(
+                () -> {
+                    new DbdCreateOfDatabaseProcedure(
+                        files,
+                        directory
+                    ).run();
+                    return new DbdReadableOfDirectory(directory).asYaml().toString();
+                }
+            )
         );
         final Text merged = new TextOfScalar(
-            () -> {
-                new IterableOf<>(
-                    new DbdAddServerProcedure(
-                        new DbdServerEntry(
-                            pagilla,
-                            mkserver.apply(pagilla)
+            new Sticky<>(
+                () -> {
+                    new IterableOf<>(
+                        new DbdAddServerProcedure(
+                            new DbdServerEntry(
+                                pagilla,
+                                mkserver.apply(pagilla)
+                            ),
+                            directory
                         ),
-                        directory
-                    ),
-                    new DbdMergeProcedure(
-                        pagilla,
-                        directory
-                    )
-                ).forEach(
-                    WriteToDirectoryRunnable::run
-                );
-                return new DbdFileOfDirectory(directory).asYaml().toString();
-            }
+                        new DbdMergeFromServerProcedure(
+                            pagilla,
+                            directory
+                        )
+                    ).forEach(
+                        WriteToDirectoryRunnable::run
+                    );
+                    return new DbdReadableOfDirectory(directory).asYaml().toString();
+                }
+            )
         );
         Assertions.assertEquals(
             original.asString(),
@@ -144,7 +149,7 @@ class DbdRunnableTest {
     @Disabled
     public void diffWithPagilla() throws Exception {
         final Func<Text, Text> yamlOf = server -> new TextOfScalar(
-            () -> new CreatingDbdFileOfServer(
+            () -> new DbdReadableBuiltWithObjectsOfServer(
                 new DbdServerMappingWithCredentials(
                     new UrlOfPgGitLabDatabaseV11(server),
                     new CredsOfPgTestDatabase()

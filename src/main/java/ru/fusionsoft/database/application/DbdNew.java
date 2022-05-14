@@ -17,8 +17,8 @@ package ru.fusionsoft.database.application;
 
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.api.DbdCreateProcedure;
-import ru.fusionsoft.database.snapshot.writable.CreatingDbdFilesOfServer;
+import ru.fusionsoft.database.api.DbdCreateOfDatabaseProcedure;
+import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableCreatingOfDatabaseUrl;
 import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
 import ru.fusionsoft.lib.runnable.ExitWithError;
 
@@ -43,8 +43,8 @@ public final class DbdNew {
             () -> new ExitWithError(
                 "Wrong arguments, need {jdbc:<dbms>://<url>:<port>/<catalog>} {user} {pass}"
             ),
-            () -> new DbdCreateProcedure(
-                new CreatingDbdFilesOfServer(
+            () -> new DbdCreateOfDatabaseProcedure(
+                new DbdRepoWritableCreatingOfDatabaseUrl(
                     new TextOf(args[0]),
                     new TextOf(args[1]),
                     new TextOf(args[2])

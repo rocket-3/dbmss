@@ -17,7 +17,7 @@ package ru.fusionsoft.database.snapshot.objects;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.fusionsoft.database.dbdfile.DbdFileOfMapping;
+import ru.fusionsoft.database.dbdreadable.DbdReadableOfMapping;
 import ru.fusionsoft.database.mapping.MappingOfExampleYaml;
 import ru.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 import ru.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
@@ -39,7 +39,7 @@ class ObjectsInDbdPredicateTest {
     public void matchesObject() {
         Assertions.assertTrue(
             new ObjectMentionedInDbdFilePredicate(
-                new DbdFileOfMapping(
+                new DbdReadableOfMapping(
                     new MappingOfExampleYaml()
                 )
             ).apply(

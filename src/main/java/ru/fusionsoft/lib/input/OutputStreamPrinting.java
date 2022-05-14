@@ -18,6 +18,7 @@ package ru.fusionsoft.lib.input;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import org.cactoos.Text;
+import org.cactoos.text.UncheckedText;
 
 /**
  * The {@link Runnable} that prints {@link Text} to {@link OutputStream}.
@@ -62,7 +63,11 @@ public class OutputStreamPrinting implements Runnable {
 
     @Override
     public final void run() {
-        this.stream.println(this.text);
+        this.stream.println(
+            new UncheckedText(
+                this.text
+            ).asString()
+        );
     }
 
 }

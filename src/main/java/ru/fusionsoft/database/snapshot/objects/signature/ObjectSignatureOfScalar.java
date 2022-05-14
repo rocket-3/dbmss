@@ -19,31 +19,42 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 import ru.fusionsoft.database.snapshot.ObjectSignature;
 
+/**
+ * The {@link ObjectSignature} of {@link Scalar}.
+ * @since 0.1
+ */
 public class ObjectSignatureOfScalar implements ObjectSignature {
 
+    /**
+     * The scalar encapsulated.
+     */
     private final Unchecked<ObjectSignature> scalar;
 
+    /**
+     * Instantiates a new Object signature of scalar.
+     * @param scalar The {@link Scalar} to be encapsulated.
+     */
     public ObjectSignatureOfScalar(final Scalar<ObjectSignature> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
     @Override
-    public ObjectName name() {
+    public final ObjectName name() {
         return this.scalar.value().name();
     }
 
     @Override
-    public ObjectType<?> type() {
+    public final ObjectType<?> type() {
         return this.scalar.value().type();
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return this.scalar.value().asString();
     }
 
     @Override
-    public boolean equalsTo(final ObjectSignature other) {
+    public final boolean equalsTo(final ObjectSignature other) {
         return this.scalar.value().equalsTo(other);
     }
 

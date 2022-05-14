@@ -26,6 +26,13 @@ import org.cactoos.iterable.Mapped;
 public class ArgsExplicit extends Args {
 
     /**
+     * Instantiates a new empty Args.
+     */
+    public ArgsExplicit() {
+        super(new IterableOf<>());
+    }
+
+    /**
      * Ctor.
      * @param args The {@link Iterable} of {@link String} to be encapsulated.
      */

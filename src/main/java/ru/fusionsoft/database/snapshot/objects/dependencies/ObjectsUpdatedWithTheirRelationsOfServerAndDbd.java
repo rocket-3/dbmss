@@ -17,33 +17,56 @@ package ru.fusionsoft.database.snapshot.objects.dependencies;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.Joined;
+import org.cactoos.set.SetOf;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsMentionedIn;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsMentionedInObjects;
 
-public class ObjectsUpdatedWithTheirRelationsOfServerAndDbd<T extends YamlNode> extends ObjectsOfScalar<T> {
+/**
+ * This takes dependencies of 'selected' from server, then all which depends on previous from DBD.
+ * @param <T> The type of {@link YamlNode} parameter.
+ * @since 0.1
+ */
+public class ObjectsUpdatedWithTheirRelationsOfServerAndDbd<T extends YamlNode>
+    extends ObjectsOfScalar<T> {
 
-    public ObjectsUpdatedWithTheirRelationsOfServerAndDbd(
-        final Objects<T> update,
-        final Objects<T> server,
-        final Objects<?> dbd
+    /**
+     * Instantiates a new Objects updated with their relations of server and dbd.
+     * @param selected The target objects set.
+     * @param server The objects to take dependencies from.
+     * @param dbd The objects, which dependency makes them attached too.
+     * @param <Y> The type of YamlNode parameter.
+     * @checkstyle DiamondOperatorCheck (100 lines)
+     */
+    public <Y extends YamlNode> ObjectsUpdatedWithTheirRelationsOfServerAndDbd(
+        final Iterable<DbObject<T>> selected,
+        final Iterable<DbObject<T>> server,
+        final Iterable<DbObject<Y>> dbd
     ) {
         super(
             () -> {
-                final Objects<T> ofserver = new ObjectsOfOneDependsOnAnotherRecursive<>(
-                    server,
-                    update
+                final Iterable<DbObject<T>> adding = new Joined<DbObject<T>>(
+                    selected,
+                    new ObjectsOfOneAreDependenciesOfAnotherRecursive<>(
+                        server,
+                        selected
+                    )
                 );
-                return new Joined<DbObject<T>>(
-                    update,
-                    ofserver,
-                    new ObjectsMentionedIn<T>(
-                        new ObjectsOfOneDependsOnAnotherRecursive<>(
-                            dbd,
-                            ofserver
-                        ),
-                        server
+                final ObjectsMentionedInObjects<T> referrers = new ObjectsMentionedInObjects<>(
+                    new ObjectsOfOneDependingOnAnotherRecursive<>(
+                        dbd,
+                        adding
+                    ),
+                    server
+                );
+                return new SetOf<>(
+                    new Joined<>(
+                        adding,
+                        referrers,
+                        new ObjectsOfOneAreDependenciesOfAnotherRecursive<>(
+                            server,
+                            referrers
+                        )
                     )
                 );
             }

@@ -17,10 +17,11 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.mapping.dbd.DbdDataMapping;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.DataObjectOfMappingAndTable;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.artefacts.MappingOfMappingIncludeKeys;
 
@@ -29,7 +30,7 @@ import ru.fusionsoft.lib.yaml.artefacts.MappingOfMappingIncludeKeys;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class DataObjectsOfDbdTableMapping extends ObjectsEnvelope<DbdDataMapping> {
+public class DataObjectsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdDataMapping>> {
 
     /**
      * Instantiates a new Objects of dbd table mapping.

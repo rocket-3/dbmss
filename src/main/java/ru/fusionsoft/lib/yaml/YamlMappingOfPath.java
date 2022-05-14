@@ -15,18 +15,21 @@
  */
 package ru.fusionsoft.lib.yaml;
 
+import com.amihaiemil.eoyaml.Node;
 import com.amihaiemil.eoyaml.StrictYamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
 
 /**
  * The type of YamlMapping that can be constructed of {@link YamlNode} and path.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (120 lines)
  */
 public class YamlMappingOfPath extends YamlMappingEnvelope {
 
@@ -40,12 +43,22 @@ public class YamlMappingOfPath extends YamlMappingEnvelope {
         super(
             new YamlMappingOfScalar(
                 new Sticky<>(
-                    () -> new StrictYamlMapping(
-                        new YamlNodeOfPath(
+                    () -> {
+                        final YamlNode ofpath = new YamlNodeOfPath(
                             node,
                             paths
-                        ).asMapping()
-                    )
+                        );
+                        return new Ternary<>(
+                            () -> ofpath.type().equals(Node.MAPPING),
+                            () -> new StrictYamlMapping(
+                                new YamlNodeOfPath(
+                                    node,
+                                    paths
+                                ).asMapping()
+                            ),
+                            () -> new MappingEmpty()
+                        ).value();
+                    }
                 )
             )
         );

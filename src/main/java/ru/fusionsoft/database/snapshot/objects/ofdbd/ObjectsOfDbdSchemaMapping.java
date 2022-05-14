@@ -20,7 +20,7 @@ import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -32,7 +32,7 @@ import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * @todo #40:90min Implement parsing all of objects from DbdSchemaMapping
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ObjectsOfDbdSchemaMapping extends DefaultObjectsJoined {
+public class ObjectsOfDbdSchemaMapping extends ObjectsJoined {
 
     /**
      * Instantiates a new Objects of dbd schema mapping.

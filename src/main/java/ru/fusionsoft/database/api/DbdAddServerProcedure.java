@@ -15,12 +15,12 @@
  */
 package ru.fusionsoft.database.api;
 
-import ru.fusionsoft.database.dbdfile.DbdFileMerged;
-import ru.fusionsoft.database.dbdfile.DbdFileOfDirectory;
+import ru.fusionsoft.database.dbdreadable.DbdReadableMerged;
+import ru.fusionsoft.database.dbdreadable.DbdReadableOfDirectory;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdServersMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.entry.DbdServersEntry;
-import ru.fusionsoft.database.snapshot.writable.DbdDocument;
+import ru.fusionsoft.database.snapshot.writable.DbdYamlWritable;
 import ru.fusionsoft.lib.path.Directory;
 import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
@@ -38,9 +38,9 @@ public class DbdAddServerProcedure extends WriteToDirectoryRunnable {
      */
     public DbdAddServerProcedure(final DbdServerEntry server, final Directory directory) {
         super(
-            new DbdDocument(
-                new DbdFileMerged(
-                    new DbdFileOfDirectory(directory),
+            new DbdYamlWritable(
+                new DbdReadableMerged(
+                    new DbdReadableOfDirectory(directory),
                     new YamlMappingOfEntries(
                         new DbdServersEntry(
                             new DbdServersMappingOfEntries(

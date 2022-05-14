@@ -18,13 +18,12 @@ package ru.fusionsoft.database.snapshot.objects.ofdbms;
 import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import org.cactoos.Func;
-import org.cactoos.scalar.ScalarOf;
-import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 
 /**
- * The type of {@link Objects} that can be constructed of {@link Connection}
- *  and function that returns {@link Objects} of {@link Connection}.
+ * The type of {@link Iterable} of {@link DbObject}s that can be constructed of {@link Connection}
+ *  and function that returns {@link Iterable} of {@link DbObject}s of {@link Connection}.
  * @param <T> The subtype of {@link YamlNode} parameter.
  * @since 0.1
  */
@@ -37,13 +36,10 @@ public class ObjectsOfConnection<T extends YamlNode> extends ObjectsOfScalar<T> 
      */
     public ObjectsOfConnection(
         final Connection connection,
-        final Func<Connection, Objects<T>> func
+        final Func<Connection, Iterable<? extends DbObject<T>>> func
     ) {
         super(
-            new ScalarOf<>(
-                func,
-                connection
-            )
+            () -> func.apply(connection)
         );
     }
 

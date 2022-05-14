@@ -18,24 +18,24 @@ package ru.fusionsoft.database.mapping.dbd.ofobjects;
 import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdEnumMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeEnum;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
- * The {@link YamlMappingOfScalar} of all {@link Objects} and schema {@link DbObject}
- *  of DBD/schemas/#schema/enums document node.
+ * The {@link YamlMappingOfScalar} of all {@link Iterable} of {@link DbObject}s
+ *  and schema {@link DbObject} of DBD/schemas/#schema/enums document node.
  * @since 0.1
  */
 public class DbdEnumsMappingOfObjects extends MappingOfObjectsOfParentAndType<DbdEnumMapping> {
 
     /**
      * Instantiates a new Dbd enums mapping of objects.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param schema The {@link DbObject} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdEnumsMappingOfObjects(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdEnumsMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<? extends YamlNode> schema
     ) {
         super(

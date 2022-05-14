@@ -42,6 +42,6 @@ public interface Dbms {
      * @param connection The {@link Connection} to take objects from.
      * @return The objects from dbms.
      */
-    Objects<YamlNode> objects(Connection connection);
+    Iterable<? extends DbObject<YamlNode>> objects(Connection connection);
 
 }

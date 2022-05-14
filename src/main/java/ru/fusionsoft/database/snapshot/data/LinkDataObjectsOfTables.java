@@ -15,24 +15,25 @@
  */
 package ru.fusionsoft.database.snapshot.data;
 
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
  * The Iterable of {@link LinkDataObjectOfTable},
- *  can be constructed from {@link Objects} of {@link DbdTableMapping}.
+ *  can be constructed from {@link Iterable} of {@link DbObject}s of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class LinkDataObjectsOfTables extends ObjectsEnvelope<DbdDataMapping> {
+public class LinkDataObjectsOfTables extends IterableEnvelope<DbObject<DbdDataMapping>> {
 
     /**
      * Instantiates a new Link data objects of tables.
-     * @param tables The {@link Objects} of {@link DbdTableMapping} to be encapsulated.
+     * @param tables The {@link Iterable} of {@link DbObject}s of {@link DbdTableMapping}
+     *  to be encapsulated.
      */
-    public LinkDataObjectsOfTables(final Objects<DbdTableMapping> tables) {
+    public LinkDataObjectsOfTables(final Iterable<DbObject<DbdTableMapping>> tables) {
         super(
             new Mapped<>(
                 LinkDataObjectOfTable::new,

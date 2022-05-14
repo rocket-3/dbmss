@@ -17,7 +17,6 @@ package ru.fusionsoft.database.snapshot.objects.filtered;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
@@ -32,9 +31,9 @@ public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
     /**
      * Ctor.
      * @param parent The Text name of parent to be encapsulated.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      */
-    public ObjectsWithParent(final DbObject<?> parent, final Objects<T> objects) {
+    public ObjectsWithParent(final DbObject<?> parent, final Iterable<DbObject<T>> objects) {
         super(
             obj -> obj.signature().name().parent().equalsTo(
                 parent.signature().name()
@@ -46,9 +45,9 @@ public class ObjectsWithParent<T extends YamlNode> extends ObjectsFiltered<T> {
     /**
      * Ctor.
      * @param name The {@link SimpleObjectName} of parent to be encapsulated.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      */
-    public ObjectsWithParent(final ObjectName name, final Objects<T> objects) {
+    public ObjectsWithParent(final ObjectName name, final Iterable<DbObject<T>> objects) {
         super(
             obj -> obj.signature().name().parent().equalsTo(name),
             objects

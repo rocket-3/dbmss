@@ -15,14 +15,15 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeFunction;
 
 /**
  * The mapping of DBD/schemas/#schema/functions document node, that can be
- *  constructed of all context {@link Objects} and current schema {@link DbObject}.
+ *  constructed of all context {@link Iterable} of {@link DbObject}s
+ *  and current schema {@link DbObject}.
  * @since 0.1
  */
 public class DbdFunctionsMappingOfObjects
@@ -30,11 +31,12 @@ public class DbdFunctionsMappingOfObjects
 
     /**
      * Instantiates a new Dbd functions mapping of objects.
-     * @param objects The all context {@link Objects} to be encapsulated.
+     * @param objects The all context {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param schema The schema {@link DbObject} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdFunctionsMappingOfObjects(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdFunctionsMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<?> schema
     ) {
         super(

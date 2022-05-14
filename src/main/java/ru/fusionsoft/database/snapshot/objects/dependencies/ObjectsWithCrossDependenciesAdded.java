@@ -16,26 +16,31 @@
 package ru.fusionsoft.database.snapshot.objects.dependencies;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 
+/**
+ * The objects being modified by adding heuristic dependencies between each others.
+ * @since 0.1
+ */
 public class ObjectsWithCrossDependenciesAdded extends ObjectsOfScalar<YamlMapping> {
 
     /**
      * Ctor.
+     * @param objects The original objects to be encapsulated.
      */
-    public ObjectsWithCrossDependenciesAdded(final Objects<?> objects) {
+    public ObjectsWithCrossDependenciesAdded(final Iterable<DbObject<YamlNode>> objects) {
         super(
             () -> new Mapped<>(
                 object -> new ObjectWithDependenciesMerged(
                     new Mapped<ObjectName>(
                         dependency -> dependency.signature().name(),
-                        new Filtered<DbObject<?>>(
-                            other -> new ObjectDependsOnAnotherPredicate(object).apply(other),
+                        new Filtered<>(
+                            other -> new ObjectDependsOnAnotherPredicate<>(object).apply(other),
                             objects
                         )
                     ),

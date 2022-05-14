@@ -15,17 +15,18 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
  * The Objects of {@link Connection} of Oracle dbms.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
-public class ObjectsOfOracle extends ObjectsEnvelope<YamlMapping> {
+public class ObjectsOfOracle extends IterableEnvelope<DbObject<YamlNode>> {
 
     /**
      * Ctor.

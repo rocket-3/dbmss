@@ -17,7 +17,6 @@ package ru.fusionsoft.database.snapshot.objects.ofdbms.pg;
 
 import java.sql.Connection;
 import ru.fusionsoft.database.mapping.dbd.DbdTupleMapping;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import ru.fusionsoft.database.snapshot.objects.ofresultset.TupleOfResultSet;
 import ru.fusionsoft.database.snapshot.query.pg.PgTupleAttributesQuery;
@@ -25,7 +24,7 @@ import ru.fusionsoft.database.snapshot.query.pg.PgTuplesQuery;
 import ru.fusionsoft.lib.collection.ListOfResultSet;
 
 /**
- * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of {@link ObjectsOfScalar} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
  */
 @SuppressWarnings("PMD")

@@ -16,11 +16,11 @@
 package ru.fusionsoft.database.mapping.dbd.ofdbdfile;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.DbdFile;
+import ru.fusionsoft.database.DbdReadable;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 
 /**
- * The type of DbdServerMapping that can be constructed of {@link DbdFile}.
+ * The type of DbdServerMapping that can be constructed of {@link DbdReadable}.
  * @since 0.1
  */
 public class DbdServerEntryOfDbdFile extends DbdServerEntry {
@@ -30,10 +30,10 @@ public class DbdServerEntryOfDbdFile extends DbdServerEntry {
      * @param file The DbdFile to be encapsulated.
      * @param name The String of server's name to be used.
      */
-    public DbdServerEntryOfDbdFile(final DbdFile file, final Text name) {
+    public DbdServerEntryOfDbdFile(final DbdReadable file, final Text name) {
         super(
             name,
-            new DbdServerMappingOfDbdFile(
+            new DbdServerMappingOfDbdReadable(
                 file,
                 name
             )

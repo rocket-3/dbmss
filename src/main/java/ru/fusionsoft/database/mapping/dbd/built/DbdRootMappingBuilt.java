@@ -15,15 +15,16 @@
  */
 package ru.fusionsoft.database.mapping.dbd.built;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServersMapping;
 import ru.fusionsoft.database.mapping.dbd.TextOfDbdDefaultJsonSchemaRef;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingOfObjects;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingValueOfObjects;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdRootFields;
-import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
@@ -37,11 +38,12 @@ public class DbdRootMappingBuilt extends DbdRootMapping {
      * @param databases The Iterable of DatabaseInfo to be encapsulated.
      * @param info The DbdInfoMapping to be encapsulated.
      * @param objects The Objects to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdRootMappingBuilt(
+    public <Y extends YamlNode> DbdRootMappingBuilt(
         final DbdServersMapping databases,
         final DbdInfoMapping info,
-        final Objects<?> objects
+        final Iterable<DbObject<Y>> objects
     ) {
         super(
             new YamlMappingOfEntries(
@@ -59,7 +61,7 @@ public class DbdRootMappingBuilt extends DbdRootMapping {
                 ),
                 new MapEntry<>(
                     DbdRootFields.SCHEMAS,
-                    new DbdSchemasMappingOfObjects(objects)
+                    new DbdSchemasMappingValueOfObjects(objects)
                 )
             )
         );

@@ -15,25 +15,30 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdTupleMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTuple;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
  * The {@link YamlMappingOfScalar} of DBD/schemas/#schema/tuples document node,
- *  can be created of all {@link Objects} and current parent schema {@link DbObject}.
+ *  can be created of all {@link Iterable} of {@link DbObject}s
+ *  and current parent schema {@link DbObject}.
  * @since 0.1
  */
 public class DbdTuplesMappingOfObjects extends MappingOfObjectsOfParentAndType<DbdTupleMapping> {
 
     /**
      * Instantiates a new Yaml mapping of scalar.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param schema The schema {@link DbObject} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdTuplesMappingOfObjects(final Objects<?> objects, final DbObject<?> schema) {
+    public <Y extends YamlNode> DbdTuplesMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
+        final DbObject<?> schema
+    ) {
         super(
             objects,
             schema,

@@ -15,6 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects.predicate;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
@@ -22,9 +23,10 @@ import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
 /**
  * The Func of DbObject -> Boolean, that checks {@link DbObject}
  *  has specific {@link ObjectType} node.
+ * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public class ObjectHasTypePredicate implements Func<DbObject<?>, Boolean> {
+public class ObjectHasTypePredicate<Y extends YamlNode> implements Func<DbObject<Y>, Boolean> {
 
     /**
      * The ObjectType encapsulated.
@@ -40,7 +42,7 @@ public class ObjectHasTypePredicate implements Func<DbObject<?>, Boolean> {
     }
 
     @Override
-    public final Boolean apply(final DbObject<?> input) {
+    public final Boolean apply(final DbObject<Y> input) {
         return input.signature().type()
             .asString()
             .equals(

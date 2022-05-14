@@ -15,36 +15,35 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import org.cactoos.Func;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Mapped;
-import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 
 /**
- * The type of {@link Objects} that can be constructed of {@link Connection}
- *  and set of functions of {@link Connection} returns {@link Objects}.
+ * The type of {@link Iterable} of {@link DbObject}s that can be constructed of {@link Connection}
+ *  and set of functions of {@link Connection} returns {@link Iterable} of {@link DbObject}s.
  * @since 0.1
  */
-public class ObjectsOfConnectionJoined extends ObjectsEnvelope {
+public class ObjectsOfConnectionJoined extends ObjectsJoined {
 
     /**
      * Instantiates a new Objects of connection joined.
      * @param connection The Connection to be encapsulated.
-     * @param funcs The Iterable of Funcs of Connection return Objects to be encapsulated.
+     * @param funcs The collection of {@link Connection} to {@link Iterable} of {@link DbObject}'s
+     *  funcs to be encapsulated.
      */
     public ObjectsOfConnectionJoined(
         final Connection connection,
-        final Iterable<Func<Connection, Objects<?>>> funcs
+        final Iterable<Func<Connection, Iterable<? extends DbObject<? extends YamlNode>>>> funcs
     ) {
         super(
-            new Joined<>(
-                new Mapped<>(
-                    x -> x.apply(connection),
-                    funcs
-                )
+            new Mapped<>(
+                x -> x.apply(connection),
+                funcs
             )
         );
     }
@@ -57,7 +56,7 @@ public class ObjectsOfConnectionJoined extends ObjectsEnvelope {
     @SafeVarargs
     public ObjectsOfConnectionJoined(
         final Connection connection,
-        final Func<Connection, Objects<?>>... funcs
+        final Func<Connection, Iterable<? extends DbObject<? extends YamlNode>>>... funcs
     ) {
         this(connection, new IterableOf<>(funcs));
     }
