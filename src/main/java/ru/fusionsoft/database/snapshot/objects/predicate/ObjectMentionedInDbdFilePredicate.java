@@ -15,51 +15,60 @@
  */
 package ru.fusionsoft.database.snapshot.objects.predicate;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
+import org.cactoos.iterable.Sticky;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
-import ru.fusionsoft.database.DbdFile;
+import ru.fusionsoft.database.DbdReadable;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.StickyObjects;
-import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadable;
 
 /**
  * The predicate of {@link DbObject} which tests it presents in DBD file
  *  or is a partition of one of its table.
+ * @param <T> The type of YamlNode parameter.
  * @since 0.1
  */
-public class ObjectMentionedInDbdFilePredicate implements Func<DbObject<?>, Boolean> {
+public class ObjectMentionedInDbdFilePredicate<T extends YamlNode>
+    implements Func<DbObject<T>, Boolean> {
 
     /**
-     * The {@link ObjectMentionedInPredicate} encapsulated.
+     * The {@link ObjectMentionedInObjectsPredicate} encapsulated.
      */
-    private final ObjectMentionedInPredicate mentioned;
+    private final ObjectMentionedInObjectsPredicate mentioned;
 
     /**
-     * The {@link ObjectHasParentMentionedInPredicate} encapsulated.
+     * The {@link TargetObjectParentIsOneOfObjectsPredicate} encapsulated.
      */
-    private final ObjectHasParentMentionedInPredicate parent;
+    private final TargetObjectParentIsOneOfObjectsPredicate parent;
 
     /**
      * Instantiates a new Objects in dbd predicate.
-     * @param filter The {@link Objects} to match by, encapsulated.
+     * @param filter The {@link Iterable} of {@link DbObject}s to match by, encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectMentionedInDbdFilePredicate(final Objects<?> filter) {
-        this.mentioned = new ObjectMentionedInPredicate(filter);
-        this.parent = new ObjectHasParentMentionedInPredicate(filter);
+    public <Y extends YamlNode> ObjectMentionedInDbdFilePredicate(
+        final Iterable<DbObject<Y>> filter
+    ) {
+        this.mentioned = new ObjectMentionedInObjectsPredicate(filter);
+        this.parent = new TargetObjectParentIsOneOfObjectsPredicate(filter);
     }
 
     /**
      * Instantiates a new Objects in dbd predicate.
      * @param file The DbdFile to be encapsulated.
      */
-    public ObjectMentionedInDbdFilePredicate(final DbdFile file) {
-        this(new StickyObjects<>(new ObjectsOfDbdFile(file)));
+    public ObjectMentionedInDbdFilePredicate(final DbdReadable file) {
+        this(
+            new Sticky<>(
+                new ObjectsOfDbdReadable(file)
+            )
+        );
     }
 
     @Override
-    public final Boolean apply(final DbObject<?> input) {
+    public final Boolean apply(final DbObject<T> input) {
         return new Unchecked<>(
             new Or(
                 input,

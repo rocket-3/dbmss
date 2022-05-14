@@ -15,17 +15,17 @@
  */
 package ru.fusionsoft.database.snapshot.objects.filtered;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.list.ListOf;
 import org.cactoos.scalar.And;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.fusionsoft.database.dbdfile.DbdFileOfMapping;
+import ru.fusionsoft.database.dbdreadable.DbdReadableOfMapping;
 import ru.fusionsoft.database.mapping.MappingOfExampleYaml;
+import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjects;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
@@ -46,21 +46,19 @@ class ObjectsMentionedInDbdAsDataTableTest {
     @Test
     public void retrievesExpectedTablesOfExampleYaml() throws Exception {
         final String datatable = "domains";
-        final Func<String, DbObject<?>> mktable = name -> new SimpleDbObject<>(
+        final Func<String, DbObject<YamlNode>> mktable = name -> new SimpleDbObject<>(
             new MappingEmpty(),
             new SimpleObjectSignature(
                 new SimpleObjectName("mts", name),
                 new ObjectTypeTable()
             )
         );
-        final Objects<?> filtered = new ObjectsWithTableDataInDbdFile(
-            new DefaultObjects(
-                new IterableOf<>(
-                    mktable.apply(datatable),
-                    mktable.apply("vendors")
-                )
+        final Iterable<DbObject<DbdTableMapping>> filtered = new ObjectsWithTableDataInDbdFile(
+            new IterableOf<>(
+                mktable.apply(datatable),
+                mktable.apply("vendors")
             ),
-            new DbdFileOfMapping(new MappingOfExampleYaml())
+            new DbdReadableOfMapping(new MappingOfExampleYaml())
         );
         Assertions.assertTrue(
             new And(

@@ -15,26 +15,28 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
-import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.InlineRowsDataObjectsOfConnection;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The {@link DefaultObjectsJoined} with {@link InlineRowsDataObjectsOfConnection} added.
+ * The {@link ObjectsJoined} with {@link InlineRowsDataObjectsOfConnection} added.
  * @since 0.1
  */
-public class ObjectsWithInlineRowsDataAdded extends DefaultObjectsJoined {
+public class ObjectsWithInlineRowsDataAdded extends ObjectsJoined {
 
     /**
      * Ctor.
      * @param objects The wrapped objects
      * @param connection The {@link Connection} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectsWithInlineRowsDataAdded(
-        final Objects<?> objects,
+    public <Y extends YamlNode> ObjectsWithInlineRowsDataAdded(
+        final Iterable<DbObject<Y>> objects,
         final Connection connection
     ) {
         super(
@@ -52,11 +54,12 @@ public class ObjectsWithInlineRowsDataAdded extends DefaultObjectsJoined {
     /**
      * Instantiates a new Objects with inline rows data added.
      * @param connection The {@link Connection} to be encapsulated.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectsWithInlineRowsDataAdded(
+    public <Y extends YamlNode> ObjectsWithInlineRowsDataAdded(
         final Connection connection,
-        final Objects<?> objects
+        final Iterable<DbObject<Y>> objects
     ) {
         this(objects, connection);
     }

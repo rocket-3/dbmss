@@ -15,15 +15,15 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
  * The type of {@link YamlMappingOfEntries} with {@link DbdTableMapping}'s
- *  that can be constructed of {@link Objects}
+ *  that can be constructed of {@link Iterable} of {@link DbObject}s
  *  and filtered by schema.
  * @since 0.1
  */
@@ -34,9 +34,10 @@ public class DbdTablesMappingOfObjects extends MappingOfObjectsOfParentAndType<D
      * Instantiates a new Dbd tables mapping of objects.
      * @param objects The all Objects to be encapsulated.
      * @param schema The parent schema DbObject to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdTablesMappingOfObjects(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdTablesMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<?> schema
     ) {
         super(

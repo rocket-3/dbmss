@@ -15,25 +15,36 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
-import com.amihaiemil.eoyaml.YamlMapping;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import com.amihaiemil.eoyaml.Node;
+import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.Ternary;
+import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
+import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
  * The Objects that can be constructed of DBD/schemas mapping.
  * @since 0.1
  */
-public class ObjectsOfDbdSchemasMapping extends DefaultObjectsJoined {
+public class ObjectsOfDbdSchemasMapping extends ObjectsOfScalar<YamlNode> {
 
     /**
      * Ctor.
-     * @param mapping The wrapped mapping
+     * @param node The wrapped node
      */
-    public ObjectsOfDbdSchemasMapping(final YamlMapping mapping) {
+    public ObjectsOfDbdSchemasMapping(final YamlNode node) {
         super(
-            new IterableOfClassFromYamlNode<>(
-                ObjectsOfDbdSchemaMapping::new,
-                mapping
+            new Ternary<Iterable<? extends DbObject<YamlNode>>>(
+                () -> node.type().equals(Node.MAPPING),
+                () -> new ObjectsJoined(
+                    new IterableOfClassFromYamlNode<>(
+                        ObjectsOfDbdSchemaMapping::new,
+                        node.asMapping()
+                    )
+                ),
+                () -> new IterableOf<>()
             )
         );
     }

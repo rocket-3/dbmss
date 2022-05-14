@@ -15,23 +15,27 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
-import ru.fusionsoft.database.snapshot.Objects;
+import com.amihaiemil.eoyaml.YamlNode;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.LinkDataObjectsOfTables;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The {@link DefaultObjectsJoined} with {@link LinkDataObjectsOfTables} added.
+ * The {@link ObjectsJoined} with {@link LinkDataObjectsOfTables} added.
  * @since 0.1
  */
-public class ObjectsWithInlineLinkDataAdded extends DefaultObjectsJoined {
+public class ObjectsWithInlineLinkDataAdded extends ObjectsJoined {
 
     /**
      * Ctor.
      * @param objects The wrapped objects
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectsWithInlineLinkDataAdded(final Objects<?> objects) {
+    public <Y extends YamlNode> ObjectsWithInlineLinkDataAdded(
+        final Iterable<DbObject<Y>> objects
+    ) {
         super(
             objects,
             new LinkDataObjectsOfTables(

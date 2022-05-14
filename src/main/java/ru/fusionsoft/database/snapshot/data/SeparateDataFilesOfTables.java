@@ -15,31 +15,34 @@
  */
 package ru.fusionsoft.database.snapshot.data;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.path.writable.JoinedWritable;
 
 /**
  * The {@link JoinedWritable} of {@link SeparateDataFilesOfTables}, can be constructed from
- *  {@link Connection} and {@link Objects} of {@link DbdTableMapping}.
+ *  {@link Connection} and {@link DbObject}s of {@link DbdTableMapping}.
  * @since 0.1
+ * @todo #40:30min exclude declarative partition tables from list
  */
 public class SeparateDataFilesOfTables extends JoinedWritable {
 
     /**
      * Instantiates a new Separate data files of tables writable.
      * @param connection The {@link Connection} to be encapsulated.
-     * @param tables The {@link Objects} of {@link DbdTableMapping} to be encapsulated.
+     * @param tables The {@link Iterable} of {@link DbObject}s of {@link DbdTableMapping}
+     *  to be encapsulated.
      */
     public SeparateDataFilesOfTables(
         final Connection connection,
-        final Objects<DbdTableMapping> tables
+        final Iterable<DbObject<DbdTableMapping>> tables
     ) {
         super(
             new Mapped<>(
@@ -52,11 +55,12 @@ public class SeparateDataFilesOfTables extends JoinedWritable {
     /**
      * Instantiates a new Separate data files of tables writable.
      * @param server The {@link DbdServerMapping} to be encapsulated.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public SeparateDataFilesOfTables(
+    public <Y extends YamlNode> SeparateDataFilesOfTables(
         final DbdServerMapping server,
-        final Objects<?> objects
+        final Iterable<DbObject<Y>> objects
     ) {
         this(
             new ConnectionOfDbdServerMapping(server),

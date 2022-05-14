@@ -18,11 +18,10 @@ package ru.fusionsoft.database.snapshot.objects.ofdbms.pg;
 import com.amihaiemil.eoyaml.YamlMapping;
 import java.sql.Connection;
 import org.cactoos.iterable.IterableOf;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 
 /**
- * The type of {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of {@link ObjectsOfScalar} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
  * @todo #101:30min Adapt query for tablespaces from DbGit.
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)

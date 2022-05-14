@@ -17,7 +17,7 @@ package ru.fusionsoft.database.snapshot.objects.filtered;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.predicate.JoinedAndPredicate;
 import ru.fusionsoft.database.snapshot.objects.predicate.ObjectHasNameOfRegexpPredicate;
@@ -39,11 +39,11 @@ public class ObjectsWithTypeAndNameMatchesRegexp<T extends YamlNode> extends Obj
     public ObjectsWithTypeAndNameMatchesRegexp(
         final Text type,
         final Text name,
-        final Objects<T> origin
+        final Iterable<DbObject<T>> origin
     ) {
         super(
             origin,
-            new JoinedAndPredicate(
+            new JoinedAndPredicate<>(
                 new ObjectHasTypeOfRegexpPredicate(type),
                 new ObjectHasNameOfRegexpPredicate(name)
             )

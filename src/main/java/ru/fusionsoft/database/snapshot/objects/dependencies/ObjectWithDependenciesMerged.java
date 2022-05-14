@@ -24,15 +24,25 @@ import org.cactoos.map.MapEntry;
 import org.cactoos.set.SetOf;
 import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.ObjectUpdated;
+import ru.fusionsoft.database.snapshot.objects.DbObjectUpdated;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.MappingMerged;
 import ru.fusionsoft.lib.yaml.MappingWithoutNullScalarsNested;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import ru.fusionsoft.lib.yaml.YamlSequenceOfNodes;
 
-public class ObjectWithDependenciesMerged extends ObjectUpdated<YamlMapping> {
+/**
+ * The {@link DbObject} with some names added to dependencies list.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
+ */
+public class ObjectWithDependenciesMerged extends DbObjectUpdated<YamlMapping> {
 
+    /**
+     * Instantiates a new Object with dependencies merged.
+     * @param dependencies The {@link ObjectName}s to add.
+     * @param object The original {@link DbObject} to be encapsulated.
+     */
     public ObjectWithDependenciesMerged(
         final Iterable<? extends ObjectName> dependencies,
         final DbObject<?> object

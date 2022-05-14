@@ -22,6 +22,7 @@ import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.ObjectSignature;
+import ru.fusionsoft.database.snapshot.objects.ObjectFieldMapped;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfText;
 import ru.fusionsoft.lib.yaml.artefacts.StringSetOfYamlSequence;
@@ -29,9 +30,9 @@ import ru.fusionsoft.lib.yaml.artefacts.StringSetOfYamlSequence;
 /**
  * The {@link ObjectSignature}'s Iterable
  *  of {@link DbObject} dependencies from representation field.
- * @todo #40:30min Modularize to fix suppressed checkstyle warnings.
  * @since 0.1
  */
+@SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
 public class SignaturesOfObjectDependencies extends IterableEnvelope<ObjectName> {
 
     /**
@@ -40,15 +41,17 @@ public class SignaturesOfObjectDependencies extends IterableEnvelope<ObjectName>
      */
     public SignaturesOfObjectDependencies(final DbObject<?> object) {
         super(
-            new ObjectFieldMapped<Iterable<ObjectName>>(
-                object,
-                DbdTableFields.DEPENDENCIES,
-                node -> new Mapped<>(
-                    name -> new SimpleObjectNameOfText(new TextOf(name)),
-                    new StringSetOfYamlSequence(node)
-                ),
-                () -> new IterableOf<>()
-            ).value()
+            new IterableOf<>(
+                () -> new ObjectFieldMapped<Iterable<ObjectName>>(
+                    object,
+                    DbdTableFields.DEPENDENCIES,
+                    node -> new Mapped<>(
+                        name -> new SimpleObjectNameOfText(new TextOf(name)),
+                        new StringSetOfYamlSequence(node)
+                    ),
+                    IterableOf<ObjectName>::new
+                ).value().iterator()
+            )
         );
     }
 

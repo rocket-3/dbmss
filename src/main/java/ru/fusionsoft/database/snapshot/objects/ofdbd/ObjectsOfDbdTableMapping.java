@@ -17,8 +17,9 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.mapping.fields.DbdTableFields;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
+import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -29,7 +30,7 @@ import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class ObjectsOfDbdTableMapping extends DefaultObjectsJoined {
+public class ObjectsOfDbdTableMapping extends ObjectsJoined {
 
     /**
      * Instantiates a new Objects of dbd table mapping.
@@ -64,7 +65,9 @@ public class ObjectsOfDbdTableMapping extends DefaultObjectsJoined {
         final ObjectName table
     ) {
         super(
-            new TableObjectOfDbdTableMapping(mapping, table),
+            new IterableOf<>(
+                new TableObjectOfDbdTableMapping(mapping, table)
+            ),
             new IndexObjectsOfDbdTableMapping(
                 mapping,
                 DbdTableFields.INDEXES,

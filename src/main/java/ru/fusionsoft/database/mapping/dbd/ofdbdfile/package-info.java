@@ -15,6 +15,6 @@
  */
 
 /**
- * Package with classes to extract DBD document parts of {@link ru.fusionsoft.database.DbdFile}.
+ * Package with classes to extract DBD document parts of {@link ru.fusionsoft.database.DbdReadable}.
  */
 package ru.fusionsoft.database.mapping.dbd.ofdbdfile;

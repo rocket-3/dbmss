@@ -17,7 +17,7 @@ package ru.fusionsoft.database.application;
 
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.api.DbdMergeProcedure;
+import ru.fusionsoft.database.api.DbdMergeFromServerProcedure;
 import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
 import ru.fusionsoft.lib.runnable.ExitWithError;
 
@@ -42,7 +42,7 @@ public final class DbdMerge {
             () -> new ExitWithError(
                 "Wrong arguments, need {server name from DBD}"
             ),
-            () -> new DbdMergeProcedure(
+            () -> new DbdMergeFromServerProcedure(
                 new TextOf(args[0]),
                 new CurrentWorkingDirectory()
             )

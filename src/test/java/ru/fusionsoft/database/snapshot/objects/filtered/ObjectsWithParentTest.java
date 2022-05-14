@@ -26,7 +26,6 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjects;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
@@ -67,12 +66,10 @@ class ObjectsWithParentTest {
                     func.apply(
                         new IterableOf<String>(schema)
                     ),
-                    new DefaultObjects(
-                        new IterableOf<DbObject<?>>(
-                            func.apply(new IterableOf<String>(schema, "1")),
-                            func.apply(new IterableOf<String>(schema, "2")),
-                            func.apply(new IterableOf<String>(schema, "3"))
-                        )
+                    new IterableOf<>(
+                        func.apply(new IterableOf<>(schema, "1")),
+                        func.apply(new IterableOf<>(schema, "2")),
+                        func.apply(new IterableOf<>(schema, "3"))
                     )
                 )
             ),

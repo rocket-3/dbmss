@@ -18,7 +18,6 @@ package ru.fusionsoft.database.snapshot.objects.ofdbms.pg;
 import java.sql.Connection;
 import ru.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
 import ru.fusionsoft.database.mapping.fields.DbdFunctionFields;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.dbms.DbmsVersionOfConnection;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import ru.fusionsoft.database.snapshot.objects.ofresultset.FunctionOfResultSet;
@@ -27,7 +26,8 @@ import ru.fusionsoft.database.snapshot.query.pg.PgFunctionsQuery;
 import ru.fusionsoft.lib.collection.ListOfConnection;
 
 /**
- * The type of functions {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of functions {@link ObjectsOfScalar}
+ *  that can be constructed of connection to Postgres DBMS.
  * @since 0.1
  * @checkstyle StringLiteralsConcatenationCheck (100 lines)
  */

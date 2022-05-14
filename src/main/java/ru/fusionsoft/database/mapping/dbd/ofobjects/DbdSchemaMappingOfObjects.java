@@ -15,6 +15,7 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.map.MapEntry;
@@ -22,13 +23,12 @@ import ru.fusionsoft.database.mapping.MappingOfRepresentative;
 import ru.fusionsoft.database.mapping.dbd.DbdSchemaMapping;
 import ru.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.MappingWithoutNullScalars;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
 /**
- * The DBD/schemas/#schema mapping of {@link Objects}.
+ * The DBD/schemas/#schema mapping of {@link Iterable} of {@link DbObject}s.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -36,11 +36,12 @@ public class DbdSchemaMappingOfObjects extends DbdSchemaMapping {
 
     /**
      * Instantiates a new Yaml mapping envelope.
-     * @param objects The {@link Objects} to be used.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be used.
      * @param schema The {@link DbObject} of YamlNode to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdSchemaMappingOfObjects(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdSchemaMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<DbdSchemaMapping> schema
     ) {
         super(

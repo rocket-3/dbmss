@@ -15,28 +15,33 @@
  */
 package ru.fusionsoft.database.snapshot.objects.filtered;
 
+import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.IterableEnvelope;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.predicate.ObjectHasDataNodePredicate;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The {@link ObjectsFiltered} that has {@link ObjectTypeTable} and 'data' node.
+ * The {@link Iterable} of {@link DbObject}s that has {@link ObjectTypeTable} and 'data' node.
  * @since 0.1
  */
-public class ObjectsWithTableData extends ObjectsFiltered<DbdTableMapping> {
+public class ObjectsWithTableData extends IterableEnvelope<DbObject<DbdTableMapping>> {
 
     /**
      * Instantiates a new Objects are data tables.
      * @param origin The Objects to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectsWithTableData(final Objects<?> origin) {
+    public <Y extends YamlNode> ObjectsWithTableData(final Iterable<DbObject<Y>> origin) {
         super(
-            new ObjectHasDataNodePredicate(),
-            new ObjectsWithType<>(
-                new ObjectTypeTable(),
-                origin
+            new Filtered<DbObject<DbdTableMapping>>(
+                new ObjectHasDataNodePredicate(),
+                new ObjectsWithType<>(
+                    new ObjectTypeTable(),
+                    origin
+                )
             )
         );
     }

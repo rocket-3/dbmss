@@ -78,4 +78,9 @@ public class SimpleObjectSignature implements ObjectSignature {
         return Objects.hash(this.asString());
     }
 
+    @Override
+    public final String toString() {
+        return this.asString();
+    }
+
 }

@@ -16,26 +16,40 @@
 package ru.fusionsoft.database.snapshot.objects.filtered;
 
 import com.amihaiemil.eoyaml.YamlNode;
-import ru.fusionsoft.database.snapshot.Objects;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.IterableEnvelope;
+import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import ru.fusionsoft.database.snapshot.objects.predicate.ObjectHasParentMentionedInPredicate;
+import ru.fusionsoft.database.snapshot.objects.predicate.TargetObjectParentIsOneOfObjectsPredicate;
+import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
  * The {@link ObjectsFiltered} by data tables, which given tables point at by 'parent' node.
  * @param <T> The type parameter.
  * @since 0.1
  */
-public class ObjectsArePartitionsOf<T extends YamlNode> extends ObjectsFiltered<T> {
+public class ObjectsArePartitionsOf<T extends YamlNode>
+    extends IterableEnvelope<DbObject<DbdTableMapping>> {
 
     /**
      * Instantiates a new Objects are partitions of.
-     * @param all The filtered {@link Objects} to be encapsulated.
-     * @param filter The filter {@link Objects} to be encapsulated.
+     * @param all The filtered {@link Iterable} of {@link DbObject}s to be encapsulated.
+     * @param filter The filter {@link Iterable} of {@link DbObject}s to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectsArePartitionsOf(final Objects<T> all, final Objects<?> filter) {
+    public <Y extends YamlNode> ObjectsArePartitionsOf(
+        final Iterable<? extends DbObject<T>> all,
+        final Iterable<? extends DbObject<Y>> filter
+    ) {
         super(
-            all,
-            new ObjectHasParentMentionedInPredicate(filter)
+            new ObjectsWithType<>(
+                new ObjectTypeTable(),
+                new Filtered<>(
+                    new TargetObjectParentIsOneOfObjectsPredicate(filter),
+                    all
+                )
+            )
         );
     }
 

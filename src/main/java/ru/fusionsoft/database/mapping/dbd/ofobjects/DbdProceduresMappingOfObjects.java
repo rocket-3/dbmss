@@ -15,14 +15,14 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdProcedureMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeProcedure;
 
 /**
  * The type of {@link DbdProcedureMapping} that can be extracted
- *  of all {@link Objects} context and parent schema {@link DbObject}.
+ *  of all {@link Iterable} of {@link DbObject}s context and parent schema {@link DbObject}.
  * @since 0.1
  */
 public class DbdProceduresMappingOfObjects
@@ -32,8 +32,12 @@ public class DbdProceduresMappingOfObjects
      * Instantiates a new Dbd procedures mapping of objects.
      * @param objects The Objects to be encapsulated.
      * @param schema The DbObject to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdProceduresMappingOfObjects(final Objects<?> objects, final DbObject<?> schema) {
+    public <Y extends YamlNode> DbdProceduresMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
+        final DbObject<?> schema
+    ) {
         super(
             objects,
             schema,

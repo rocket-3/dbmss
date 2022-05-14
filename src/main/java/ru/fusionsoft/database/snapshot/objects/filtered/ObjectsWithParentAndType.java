@@ -17,7 +17,6 @@ package ru.fusionsoft.database.snapshot.objects.filtered;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
@@ -31,16 +30,17 @@ public class ObjectsWithParentAndType<T extends YamlNode> extends ObjectsWithTyp
      * Instantiates a new Objects with parent and type.
      * @param parent The {@link DbObject} of parent to be encapsulated.
      * @param type The {@link ObjectType} to be encapsulated.
-     * @param objects The {@link Objects} to be used.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be used.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectsWithParentAndType(
+    public <Y extends YamlNode> ObjectsWithParentAndType(
         final DbObject<?> parent,
         final ObjectType<T> type,
-        final Objects<?> objects
+        final Iterable<DbObject<Y>> objects
     ) {
         super(
             type,
-            new ObjectsWithParent<>(
+            new ObjectsWithParent<Y>(
                 parent,
                 objects
             )

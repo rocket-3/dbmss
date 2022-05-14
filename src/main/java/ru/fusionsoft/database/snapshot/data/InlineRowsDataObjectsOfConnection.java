@@ -16,27 +16,30 @@
 package ru.fusionsoft.database.snapshot.data;
 
 import java.sql.Connection;
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The {@link Objects} of {@link DbdDataMapping} with '"key": ["value1", "value2"]' format,
- *  can be constructed of {@link Connection} and {@link Objects} of {@link DbdTableMapping}.
+ * The {@link Iterable} of {@link DbObject}s of {@link DbdDataMapping}
+ *  with '"key": ["value1", "value2"]' format,
+ *  can be constructed of {@link Connection}
+ *  and {@link Iterable} of {@link DbObject}s of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class InlineRowsDataObjectsOfConnection extends ObjectsEnvelope<DbdDataMapping> {
+public class InlineRowsDataObjectsOfConnection extends IterableEnvelope<DbObject<DbdDataMapping>> {
 
     /**
      * Instantiates a new Inline rows data objects of connection.
      * @param connection The {@link Connection} to be encapsulated.
-     * @param tables The {@link Objects} of {@link DbdTableMapping} to be encapsulated.
+     * @param tables The {@link Iterable} of {@link DbObject}s of {@link DbdTableMapping}
+     *  to be encapsulated.
      */
     public InlineRowsDataObjectsOfConnection(
         final Connection connection,
-        final Objects<DbdTableMapping> tables
+        final Iterable<DbObject<DbdTableMapping>> tables
     ) {
         super(
             new Mapped<>(

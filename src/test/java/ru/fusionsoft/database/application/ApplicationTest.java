@@ -15,10 +15,12 @@
  */
 package ru.fusionsoft.database.application;
 
+import java.nio.file.Path;
 import org.cactoos.Func;
 import org.cactoos.Output;
 import org.cactoos.io.DeadOutput;
 import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
 import org.junit.jupiter.api.Test;
 import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
@@ -44,7 +46,7 @@ class ApplicationTest {
      */
     @Test
     public void runsSomething() throws Exception {
-        final Directory directory = new UncheckedTempFolder();
+        final Sticky<Path> directory = new Sticky<>(new UncheckedTempFolder());
         final Func<String, Directory> executable = app -> {
             return () -> new CurrentWorkingDirectory()
                 .value()

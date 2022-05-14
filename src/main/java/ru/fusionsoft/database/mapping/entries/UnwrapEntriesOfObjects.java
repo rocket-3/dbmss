@@ -22,10 +22,10 @@ import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 
 /**
- * The iterable of Text -> {@link M} entries of origin and scope {@link Objects}.
+ * The iterable of Text -> {@link M} entries of origin
+ *  and scope {@link Iterable} of {@link DbObject}s.
  * @param <M> The type of YamlMapping parameter.
  * @since 0.1
  */
@@ -36,13 +36,14 @@ public class UnwrapEntriesOfObjects<M extends YamlNode>
      * Ctor.
      * @param scope The scope objects to take in ctor
      * @param origin The objects to map
-     * @param ctor The Func to construct {@link M} of origin {@link Objects}
-     *  and {@link Objects} to take in scope.
+     * @param ctor The Func to construct {@link M} of origin {@link Iterable} of {@link DbObject}s
+     *  and {@link Iterable} of {@link DbObject}s to take in scope.
+     *  @param <Y> The type of YamlNode parameter.
      */
-    public UnwrapEntriesOfObjects(
-        final Objects<?> scope,
-        final Objects<M> origin,
-        final BiFunc<Objects<?>, DbObject<M>, ? extends M> ctor
+    public <Y extends YamlNode> UnwrapEntriesOfObjects(
+        final Iterable<DbObject<Y>> scope,
+        final Iterable<DbObject<M>> origin,
+        final BiFunc<Iterable<DbObject<Y>>, DbObject<M>, ? extends M> ctor
     ) {
         super(
             new Mapped<>(

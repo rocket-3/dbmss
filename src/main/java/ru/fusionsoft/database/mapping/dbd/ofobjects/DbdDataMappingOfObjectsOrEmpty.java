@@ -15,19 +15,19 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdDataMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
 import ru.fusionsoft.lib.collection.SingleOrEmptyFallback;
 import ru.fusionsoft.lib.yaml.MappingEmpty;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
- * The {@link DbdDataMapping}, extracted from {@link Objects}
+ * The {@link DbdDataMapping}, extracted from {@link Iterable} of {@link DbObject}s
  *  and {@link DbObject} of {@link DbdTableMapping} as parent.
  *  Also returns empty mapping, if there's no.
  * @since 0.1
@@ -36,11 +36,12 @@ public class DbdDataMappingOfObjectsOrEmpty extends DbdDataMapping {
 
     /**
      * Instantiates a new Dbd data mapping of objects.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param parent The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdDataMappingOfObjectsOrEmpty(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdDataMappingOfObjectsOrEmpty(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<DbdTableMapping> parent
     ) {
         super(

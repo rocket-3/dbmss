@@ -15,11 +15,11 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.MappingOfRepresentative;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdTableMappingOfEntries;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeConstraint;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeIndex;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTrigger;
@@ -33,11 +33,12 @@ public class DbdTableMappingOfObjects extends DbdTableMappingOfEntries {
 
     /**
      * Instantiates a new DbdTableMapping.
-     * @param objects The Objects to be encapsulated.
-     * @param table The DbObject<?> to be encapsulated.
+     * @param objects The whole Objects to be encapsulated.
+     * @param table The parent DbObject to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdTableMappingOfObjects(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdTableMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<DbdTableMapping> table
     ) {
         super(

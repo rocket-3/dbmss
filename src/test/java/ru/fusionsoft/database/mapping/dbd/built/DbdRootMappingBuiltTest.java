@@ -18,13 +18,13 @@ package ru.fusionsoft.database.mapping.dbd.built;
 import org.cactoos.text.TextOf;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.fusionsoft.database.dbdfile.DbdFileOfMapping;
+import ru.fusionsoft.database.dbdreadable.DbdReadableOfMapping;
 import ru.fusionsoft.database.mapping.MappingOfExampleYaml;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServersMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerEntryOfDbdFile;
 import ru.fusionsoft.database.mapping.fields.DbdRootFields;
-import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
@@ -40,7 +40,7 @@ public class DbdRootMappingBuiltTest {
     @Test
     public void createsMappingIdenticalToInput() {
         final MappingOfExampleYaml yaml = new MappingOfExampleYaml();
-        final DbdFileOfMapping file = new DbdFileOfMapping(yaml);
+        final DbdReadableOfMapping file = new DbdReadableOfMapping(yaml);
         Assertions.assertEquals(
             yaml.toString(),
             new DbdRootMappingBuilt(
@@ -56,7 +56,7 @@ public class DbdRootMappingBuiltTest {
                         DbdRootFields.INFO
                     )
                 ),
-                new ObjectsOfDbdFile(file)
+                new ObjectsOfDbdReadable(file)
             ).toString()
         );
     }

@@ -15,13 +15,14 @@
  */
 package ru.fusionsoft.database.snapshot.objects.ofdbms;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.io.File;
 import java.util.Comparator;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.iterable.Sorted;
+import org.cactoos.iterable.Sticky;
 import org.cactoos.map.MapOf;
 import org.cactoos.text.TextOf;
 import org.junit.jupiter.api.Disabled;
@@ -33,13 +34,12 @@ import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingOfObjects;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingValueOfObjects;
 import ru.fusionsoft.database.mapping.fields.DbdSchemaFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import ru.fusionsoft.database.snapshot.objects.StickyObjects;
 import ru.fusionsoft.lib.path.Directory;
-import ru.fusionsoft.lib.path.writable.YamlDocument;
+import ru.fusionsoft.lib.path.writable.YamlWritable;
 import ru.fusionsoft.lib.yaml.EntriesOfYamlMapping;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
@@ -103,8 +103,8 @@ class ObjectsFromServerTest {
      */
     @Test
     public void canBeRendered() {
-        new DbdSchemasMappingOfObjects(
-            new StickyObjects<>(
+        new DbdSchemasMappingValueOfObjects(
+            new Sticky<>(
                 new ObjectsOfServer(
                     new DbdServerMappingWithCredentials(
                         new UrlOfPgGitLabDatabaseV11(this.database),
@@ -128,8 +128,8 @@ class ObjectsFromServerTest {
                 new MapOf<>(
                     new EntriesOfYamlMapping(
                         new YamlMappingOfPath(
-                            new DbdSchemasMappingOfObjects(
-                                new StickyObjects<>(
+                            new DbdSchemasMappingValueOfObjects(
+                                new Sticky<>(
                                     new ObjectsOfServer(
                                         new DbdServerMappingWithCredentials(
                                             new UrlOfPgGitLabDatabaseV11(this.database),
@@ -166,7 +166,7 @@ class ObjectsFromServerTest {
     @Disabled
     @SuppressWarnings("PMD")
     public void showIndividual() {
-        for (final DbObject<? extends YamlMapping> object : new ObjectsOfServer(
+        for (final DbObject<? extends YamlNode> object : new ObjectsOfServer(
             new DbdServerMappingWithCredentials(
                 new UrlOfPgGitLabDatabaseV11(this.database),
                 new CredsOfPgTestDatabase()
@@ -183,7 +183,7 @@ class ObjectsFromServerTest {
     @Disabled
     @SuppressWarnings("PMD")
     public void showNames() {
-        for (final DbObject<? extends YamlMapping> object : new Sorted<>(
+        for (final DbObject<? extends YamlNode> object : new Sorted<>(
             Comparator.comparing(x -> x.signature().name().asString()),
             new ObjectsOfServer(
                 new DbdServerMappingWithCredentials(
@@ -212,9 +212,9 @@ class ObjectsFromServerTest {
                 new CredsOfPgTestDatabase()
             )
         );
-        new YamlDocument(
-            new DbdSchemasMappingOfObjects(
-                new StickyObjects<>(
+        new YamlWritable(
+            new DbdSchemasMappingValueOfObjects(
+                new Sticky<>(
                     new ObjectsFiltered<>(
                         x -> !x.signature().name().parent().first().asString().contains("million"),
                         new ObjectsWithInlineLinkDataAdded(

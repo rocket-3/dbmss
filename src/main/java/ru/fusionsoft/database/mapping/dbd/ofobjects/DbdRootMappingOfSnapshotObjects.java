@@ -15,12 +15,13 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.iterable.IterableOf;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdServersMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.built.DbdRootMappingBuilt;
-import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
  * The {@link DbdRootMappingBuilt} of database snapshot objects.
@@ -33,11 +34,12 @@ public class DbdRootMappingOfSnapshotObjects extends DbdRootMappingBuilt {
      * @param server The Iterable of DatabaseInfo to be encapsulated.
      * @param info The DbdInfoMapping to be encapsulated.
      * @param objects The Objects to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdRootMappingOfSnapshotObjects(
+    public <Y extends YamlNode> DbdRootMappingOfSnapshotObjects(
         final DbdServerEntry server,
         final DbdInfoMapping info,
-        final Objects<?> objects
+        final Iterable<DbObject<Y>> objects
     ) {
         super(
             new DbdServersMappingOfEntries(

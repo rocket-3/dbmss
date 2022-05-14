@@ -15,12 +15,14 @@
  */
 package ru.fusionsoft.database.snapshot.writable;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import ru.fusionsoft.database.DbdFile;
-import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdFile;
-import ru.fusionsoft.database.snapshot.Objects;
+import org.cactoos.iterable.Joined;
+import ru.fusionsoft.database.DbdReadable;
+import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdReadable;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsArePartitionsOf;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTableDataInDbdFile;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
@@ -35,20 +37,21 @@ public class ConfigurationDataFiles extends SeparateDataFilesOfTables {
     /**
      * Instantiates a new Configuration data files.
      * @param datatables The {@link ObjectsWithTableDataInDbdFile} to be encapsulated.
-     * @param objects The {@link Objects} to be encapsulated.
-     * @param dbdfile The {@link DbdFile} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
+     * @param dbdfile The {@link DbdReadable} to be encapsulated.
      * @param server The {@link Text} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
-    private ConfigurationDataFiles(
-        final ObjectsWithTableDataInDbdFile datatables,
-        final Objects<?> objects,
-        final DbdFile dbdfile,
+    private <Y extends YamlNode> ConfigurationDataFiles(
+        final Iterable<? extends DbObject<DbdTableMapping>> datatables,
+        final Iterable<? extends DbObject<Y>> objects,
+        final DbdReadable dbdfile,
         final Text server
     ) {
         super(
-            new DbdServerMappingOfDbdFile(dbdfile, server),
-            new DefaultObjectsJoined(
+            new DbdServerMappingOfDbdReadable(dbdfile, server),
+            new Joined<DbObject<DbdTableMapping>>(
                 datatables,
                 new ObjectsArePartitionsOf<>(objects, datatables)
             )
@@ -57,13 +60,14 @@ public class ConfigurationDataFiles extends SeparateDataFilesOfTables {
 
     /**
      * Instantiates a new Configuration data files.
-     * @param objects The {@link Objects} to be filtered.
-     * @param dbdfile The {@link DbdFile} to filter by.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be filtered.
+     * @param dbdfile The {@link DbdReadable} to filter by.
      * @param server The {@link Text} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ConfigurationDataFiles(
-        final Objects<?> objects,
-        final DbdFile dbdfile,
+    public <Y extends YamlNode> ConfigurationDataFiles(
+        final Iterable<DbObject<Y>> objects,
+        final DbdReadable dbdfile,
         final Text server
     ) {
         this(
@@ -76,11 +80,11 @@ public class ConfigurationDataFiles extends SeparateDataFilesOfTables {
 
     /**
      * Instantiates a new Configuration data files.
-     * @param dbdfile The {@link DbdFile} to be encapsulated.
+     * @param dbdfile The {@link DbdReadable} to be encapsulated.
      * @param server The {@link Text} to be encapsulated.
      */
     public ConfigurationDataFiles(
-        final DbdFile dbdfile,
+        final DbdReadable dbdfile,
         final Text server
     ) {
         this(

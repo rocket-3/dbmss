@@ -18,16 +18,17 @@ package ru.fusionsoft.database.snapshot.objects;
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 
 /**
- * The type of {@link Objects}, with yaml representation casted to some {@link YamlMapping}.
+ * The type of {@link Iterable} of {@link DbObject}s,
+ *  with yaml representation casted to some {@link YamlMapping}.
  * @param <T> The type of {@link YamlNode} parameter.
  * @since 0.1
  */
-public class ObjectsCasted<T extends YamlNode> extends ObjectsEnvelope<T> implements Objects<T> {
+public class ObjectsCasted<T extends YamlNode> extends IterableEnvelope<DbObject<T>> {
 
     /**
      * Ctor.
@@ -40,7 +41,7 @@ public class ObjectsCasted<T extends YamlNode> extends ObjectsEnvelope<T> implem
     ) {
         super(
             new Mapped<>(
-                object -> new ObjectCasted<>(cast, object),
+                object -> new DbObjectCasted<>(cast, object),
                 iterable
             )
         );

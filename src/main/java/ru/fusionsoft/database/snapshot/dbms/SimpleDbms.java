@@ -15,14 +15,14 @@
  */
 package ru.fusionsoft.database.snapshot.dbms;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import java.sql.Connection;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.func.UncheckedFunc;
 import org.cactoos.text.TextOf;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.Objects;
 
 /**
  * The basic Dbms implementation.
@@ -43,7 +43,7 @@ public class SimpleDbms implements Dbms {
     /**
      * The The Func of Connection returns Objects to be encapsulated.
      */
-    private final Func<Connection, Objects<YamlMapping>> objectsf;
+    private final Func<Connection, Iterable<? extends DbObject<YamlNode>>> objectsf;
 
     /**
      * Instantiates a new Any dbms.
@@ -54,7 +54,7 @@ public class SimpleDbms implements Dbms {
     public SimpleDbms(
         final String dbd,
         final String driver,
-        final Func<Connection, Objects<YamlMapping>> objects
+        final Func<Connection, Iterable<? extends DbObject<YamlNode>>> objects
     ) {
         this(new TextOf(dbd), new TextOf(driver), objects);
     }
@@ -68,7 +68,7 @@ public class SimpleDbms implements Dbms {
     public SimpleDbms(
         final Text dbd,
         final Text driver,
-        final Func<Connection, Objects<YamlMapping>> objects
+        final Func<Connection, Iterable<? extends DbObject<YamlNode>>> objects
     ) {
         this.dbdtext = dbd;
         this.drivertext = driver;
@@ -86,7 +86,7 @@ public class SimpleDbms implements Dbms {
     }
 
     @Override
-    public final Objects<YamlMapping> objects(final Connection connection) {
+    public final Iterable<? extends DbObject<YamlNode>> objects(final Connection connection) {
         return new UncheckedFunc<>(this.objectsf).apply(connection);
     }
 

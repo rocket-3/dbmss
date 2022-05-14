@@ -15,29 +15,34 @@
  */
 package ru.fusionsoft.database.snapshot.objects.filtered;
 
-import ru.fusionsoft.database.DbdFile;
+import com.amihaiemil.eoyaml.YamlNode;
+import ru.fusionsoft.database.DbdReadable;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.snapshot.Objects;
-import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdFile;
+import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadable;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The type of {@link Objects} that represents objects filtered by being
- *  mentioned as tables in {@link DbdFile} presented.
+ * The type of {@link Iterable} of {@link DbObject}s that represents objects filtered by being
+ *  mentioned as tables in {@link DbdReadable} presented.
  * @since 0.1
  */
-public class ObjectsAreTablesInDbdFile extends ObjectsMentionedIn<DbdTableMapping> {
+public class ObjectsAreTablesInDbdFile extends ObjectsMentionedInObjects<DbdTableMapping> {
 
     /**
      * Instantiates a new objects are tables in dbd file.
-     * @param origin The original {@link Objects} to be encapsulated.
-     * @param file The {@link DbdFile} to be encapsulated.
+     * @param origin The original {@link Iterable} of {@link DbObject}s to be encapsulated.
+     * @param file The {@link DbdReadable} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public ObjectsAreTablesInDbdFile(final Objects<?> origin, final DbdFile file) {
+    public <Y extends YamlNode> ObjectsAreTablesInDbdFile(
+        final Iterable<DbObject<Y>> origin,
+        final DbdReadable file
+    ) {
         super(
             new ObjectsWithType<>(
                 new ObjectTypeTable(),
-                new ObjectsOfDbdFile(file)
+                new ObjectsOfDbdReadable(file)
             ),
             new ObjectsWithType<>(
                 new ObjectTypeTable(),

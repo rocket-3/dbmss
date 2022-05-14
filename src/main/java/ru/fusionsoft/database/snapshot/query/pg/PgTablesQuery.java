@@ -33,6 +33,7 @@ public class PgTablesQuery extends PgMessageFormatQuery<DbdTableFields> {
      * @checkstyle AvoidInlineConditionalsCheck (100 lines)
      * @checkstyle CascadeIndentationCheck (100 lines)
      * @checkstyle LineLengthCheck (100 lines)
+     * @checkstyle WhitespaceAroundCheck (100 lines)
      */
     public PgTablesQuery(final Number dbversion) {
         super(

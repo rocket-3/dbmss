@@ -15,9 +15,9 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeDomain;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
@@ -32,9 +32,10 @@ public class DbdDomainsMappingOfObjects extends MappingOfObjectsOfParentAndType<
      * Instantiates a new Dbd domains mapping of objects.
      * @param objects The whole Objects context to be encapsulated.
      * @param schema The parent DbObject to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public DbdDomainsMappingOfObjects(
-        final Objects<?> objects,
+    public <Y extends YamlNode> DbdDomainsMappingOfObjects(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<?> schema
     ) {
         super(

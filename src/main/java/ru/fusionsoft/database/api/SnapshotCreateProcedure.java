@@ -16,17 +16,17 @@
 package ru.fusionsoft.database.api;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.DbdFile;
-import ru.fusionsoft.database.dbdfile.DbdFileOfDirectory;
+import ru.fusionsoft.database.DbdReadable;
+import ru.fusionsoft.database.dbdreadable.DbdReadableOfDirectory;
 import ru.fusionsoft.database.snapshot.CreatingSnapshotDirectory;
-import ru.fusionsoft.database.snapshot.writable.SnapshotFilesOfDbd;
+import ru.fusionsoft.database.snapshot.writable.DbdRepoSnapshotFilesWritableOfDbd;
 import ru.fusionsoft.lib.path.Directory;
 import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
 /**
- * The procedure to create database snapshot by guidance of {@link DbdFile}.
+ * The procedure to create database snapshot by guidance of {@link DbdReadable}.
  * @since 0.1
  * @checkstyle ParameterNumberCheck (100 lines)
  */
@@ -37,25 +37,28 @@ public class SnapshotCreateProcedure extends WriteToDirectoryRunnable {
      * @param writable The Writable to be encapsulated.
      * @param directory The Folder to be encapsulated.
      */
-    public SnapshotCreateProcedure(final SnapshotFilesOfDbd writable, final Directory directory) {
+    public SnapshotCreateProcedure(
+        final DbdRepoSnapshotFilesWritableOfDbd writable,
+        final Directory directory
+    ) {
         super(writable, directory);
     }
 
     /**
      * Instantiates a new Snapshot create procedure.
      * @param time The {@link Utc} to be encapsulated.
-     * @param dbd The {@link DbdFile} to be encapsulated.
+     * @param dbd The {@link DbdReadable} to be encapsulated.
      * @param server The {@link Text} to be encapsulated.
      * @param alldata Should it take operational data tables.
      */
     private SnapshotCreateProcedure(
         final Utc time,
-        final DbdFile dbd,
+        final DbdReadable dbd,
         final Text server,
         final Boolean alldata
     ) {
         this(
-            new SnapshotFilesOfDbd(time, dbd, server, alldata),
+            new DbdRepoSnapshotFilesWritableOfDbd(time, dbd, server, alldata),
             new CreatingSnapshotDirectory(time)
         );
     }
@@ -73,7 +76,7 @@ public class SnapshotCreateProcedure extends WriteToDirectoryRunnable {
     ) {
         this(
             new UtcOfFirstAccess(),
-            new DbdFileOfDirectory(directory),
+            new DbdReadableOfDirectory(directory),
             server,
             alldata
         );

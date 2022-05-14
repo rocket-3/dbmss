@@ -17,17 +17,17 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import ru.fusionsoft.database.DbdFile;
-import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdFile;
-import ru.fusionsoft.database.snapshot.Objects;
+import ru.fusionsoft.database.DbdReadable;
+import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdReadable;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInDbdFilePredicate;
 
 /**
- * The type of {@link Objects} from database of
+ * The type of {@link Iterable} of {@link DbObject}s from database of
  *  {@link ru.fusionsoft.database.mapping.dbd.DbdServersMapping}
- *  and only that, which names present in {@link DbdFile}.
+ *  and only that, which names present in {@link DbdReadable}.
  * @since 0.1
  */
 @SuppressWarnings("PMD")
@@ -39,12 +39,12 @@ public class ObjectsOfServerFromDbd extends ObjectsFiltered<YamlNode> {
      * @param server The Text of server name encapsulated.
      */
     public ObjectsOfServerFromDbd(
-        final DbdFile file,
+        final DbdReadable file,
         final Text server
     ) {
         super(
             new ObjectsOfServer(
-                new DbdServerMappingOfDbdFile(file, server)
+                new DbdServerMappingOfDbdReadable(file, server)
             ),
             new ObjectMentionedInDbdFilePredicate(file)
         );

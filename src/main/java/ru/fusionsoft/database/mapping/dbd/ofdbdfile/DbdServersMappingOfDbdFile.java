@@ -15,23 +15,23 @@
  */
 package ru.fusionsoft.database.mapping.dbd.ofdbdfile;
 
-import ru.fusionsoft.database.DbdFile;
+import ru.fusionsoft.database.DbdReadable;
 import ru.fusionsoft.database.mapping.dbd.DbdServersMapping;
 import ru.fusionsoft.database.mapping.fields.DbdRootFields;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
 /**
- * The {@link DbdServersMapping} that can be constructed of {@link DbdFile}.
+ * The {@link DbdServersMapping} that can be constructed of {@link DbdReadable}.
  * @since 0.1
  */
 public class DbdServersMappingOfDbdFile extends DbdServersMapping {
 
     /**
-     * Instantiates a new {@link DbdServersMapping}, taken from {@link DbdFile}.
-     * @param dbdfile The {@link DbdFile} to be encapsulated.
+     * Instantiates a new {@link DbdServersMapping}, taken from {@link DbdReadable}.
+     * @param dbdfile The {@link DbdReadable} to be encapsulated.
      */
-    public DbdServersMappingOfDbdFile(final DbdFile dbdfile) {
+    public DbdServersMappingOfDbdFile(final DbdReadable dbdfile) {
         super(
             new YamlMappingOfScalar(
                 () -> new YamlMappingOfPath(

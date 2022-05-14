@@ -15,21 +15,21 @@
  */
 package ru.fusionsoft.database.mapping.dbd.entry;
 
-import ru.fusionsoft.database.mapping.dbd.DbdSchemasMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdSchemasMappingValue;
 import ru.fusionsoft.database.mapping.entries.YamlMappingEntryOfScalar;
 import ru.fusionsoft.database.mapping.fields.DbdRootFields;
 
 /**
- * The {@link DbdSchemasMapping} {@link java.util.Map.Entry} of DBD file.
+ * The {@link DbdSchemasMappingValue} {@link java.util.Map.Entry} of DBD file.
  * @since 0.1
  */
-public class DbdSchemasEntry extends YamlMappingEntryOfScalar<DbdSchemasMapping> {
+public class DbdSchemasEntry extends YamlMappingEntryOfScalar<DbdSchemasMappingValue> {
 
     /**
      * Instantiates a new Scalar entry.
-     * @param mapping The {@link DbdSchemasMapping} to be encapsulated.
+     * @param mapping The {@link DbdSchemasMappingValue} to be encapsulated.
      */
-    public DbdSchemasEntry(final DbdSchemasMapping mapping) {
+    public DbdSchemasEntry(final DbdSchemasMappingValue mapping) {
         super(
             DbdRootFields.SCHEMAS,
             () -> mapping

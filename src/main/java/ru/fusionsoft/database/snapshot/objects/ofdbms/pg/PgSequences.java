@@ -17,14 +17,14 @@ package ru.fusionsoft.database.snapshot.objects.ofdbms.pg;
 
 import java.sql.Connection;
 import ru.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import ru.fusionsoft.database.snapshot.objects.ofresultset.SequenceOfResultSet;
 import ru.fusionsoft.database.snapshot.query.pg.PgSequencesQuery;
 import ru.fusionsoft.lib.collection.ListOfConnection;
 
 /**
- * The type of sequence {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of sequence {@link ObjectsOfScalar}
+ *  that can be constructed of connection to Postgres DBMS.
  * @since 0.1
  */
 public class PgSequences extends ObjectsOfScalar<DbdSequenceMapping> {

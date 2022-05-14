@@ -16,16 +16,17 @@
 package ru.fusionsoft.database.mapping.dbd.ofobjects;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.BiFunc;
 import ru.fusionsoft.database.mapping.MappingOfRepresentative;
 import ru.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithParentAndType;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
- * The {@link UnwrapEntriesOfObjects}, specified by {@link ObjectType}, and parent {@link Objects}.
+ * The {@link UnwrapEntriesOfObjects}, specified by {@link ObjectType},
+ *  and parent {@link Iterable} of {@link DbObject}s.
  * @param <T> The type of mapping parameter.
  * @since 0.1
  */
@@ -34,18 +35,19 @@ public class EntriesOfObjectsOfParentAndType<T extends YamlMapping>
 
     /**
      * Ctor.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param parent The {@link DbObject} to be encapsulated.
      * @param type The {@link T} {@link ObjectType} to be encapsulated.
-     * @param ctor The Func to construct {@link T}
-     *  of {@link Objects} of {@link T }and all {@link Objects}.
+     * @param ctor The Func to construct {@link T} of {@link Iterable} of {@link DbObject}s
+     *  and all {@link Iterable} of {@link DbObject}s.
+     * @param <Y> The type of YamlNode parameter.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
-    public EntriesOfObjectsOfParentAndType(
-        final Objects<?> objects,
+    public <Y extends YamlNode> EntriesOfObjectsOfParentAndType(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<?> parent,
         final ObjectType<T> type,
-        final BiFunc<Objects<?>, DbObject<T>, T> ctor
+        final BiFunc<Iterable<DbObject<Y>>, DbObject<T>, T> ctor
     ) {
         super(
             objects,
@@ -56,19 +58,20 @@ public class EntriesOfObjectsOfParentAndType<T extends YamlMapping>
 
     /**
      * Instantiates a new Entries of objects of parent and type.
-     * @param objects The {@link Objects} to be encapsulated.
+     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param parent The {@link DbObject} to be encapsulated.
      * @param type The {@link T} {@link ObjectType} to be encapsulated.
+     * @param <Y> The type of YamlNode parameter.
      */
-    public EntriesOfObjectsOfParentAndType(
-        final Objects<?> objects,
+    public <Y extends YamlNode> EntriesOfObjectsOfParentAndType(
+        final Iterable<DbObject<Y>> objects,
         final DbObject<?> parent,
         final ObjectType<T> type
     ) {
         super(
             objects,
             new ObjectsWithParentAndType<>(parent, type, objects),
-            (Objects<?> all, DbObject<T> object) -> type.node(
+            (Iterable<DbObject<Y>> all, DbObject<T> object) -> type.node(
                 new MappingOfRepresentative(object)
             )
         );

@@ -16,8 +16,10 @@
 package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Joined;
-import ru.fusionsoft.database.snapshot.objects.DefaultObjects;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
@@ -25,7 +27,7 @@ import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  * The db table objects of DBD/schemas/#schema/tables/#table node.
  * @since 0.1
  */
-public class ObjectsOfDbdTablesMapping extends DefaultObjects {
+public class ObjectsOfDbdTablesMapping extends IterableEnvelope<DbObject<YamlNode>> {
 
     /**
      * Instantiates a new Objects of mapping.

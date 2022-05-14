@@ -17,8 +17,9 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableEnvelope;
 import ru.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.YamlMappingOrEmptyWhenNoValueNotFound;
@@ -28,7 +29,7 @@ import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  * The objects of {@link DbdTriggerMapping}, extracted of DBD/schemas/#schema/triggers node.
  * @since 0.1
  */
-public class TriggerObjectsOfDbdTableMapping extends ObjectsEnvelope<DbdTriggerMapping> {
+public class TriggerObjectsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdTriggerMapping>> {
 
     /**
      * Instantiates a new Objects of dbd triggers mapping.

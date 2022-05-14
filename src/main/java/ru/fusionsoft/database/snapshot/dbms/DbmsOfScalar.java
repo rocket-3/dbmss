@@ -22,8 +22,8 @@ import org.cactoos.Text;
 import org.cactoos.scalar.NoNulls;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.Objects;
 
 /**
  * The {@link Dbms} that can be constructed of {@link Scalar} of {@link Dbms}.
@@ -55,7 +55,7 @@ public class DbmsOfScalar implements Dbms {
     }
 
     @Override
-    public final Objects<YamlNode> objects(final Connection connection) {
+    public final Iterable<? extends DbObject<YamlNode>> objects(final Connection connection) {
         return this.scalar.value().objects(connection);
     }
 

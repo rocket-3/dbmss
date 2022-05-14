@@ -18,42 +18,38 @@ package ru.fusionsoft.database.snapshot.objects;
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.IterableEnvelope;
 import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The type of DbObjects that was filtered by some predicate.
- * @param <T> The subtype of {@link YamlNode} parameter.
+ * The objects being filtered by some predicate.
+ * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public class ObjectsFiltered<T extends YamlNode> extends ObjectsEnvelope<T> {
+public class ObjectsFiltered<Y extends YamlNode> extends IterableEnvelope<DbObject<Y>> {
 
     /**
      * Ctor.
-     * @param origin The wrapped DbObjects
-     * @param predicate The predicate to be used.
+     * @param predicate The predicate to be encapsulated.
+     * @param iterable The original objects iterable.
      */
     public ObjectsFiltered(
-        final Iterable<DbObject<T>> origin,
-        final Func<DbObject<?>, Boolean> predicate
+        final Func<DbObject<Y>, Boolean> predicate,
+        final Iterable<DbObject<Y>> iterable
     ) {
-        super(
-            new Filtered<>(
-                predicate,
-                origin
-            )
-        );
+        super(new Filtered<DbObject<Y>>(predicate, iterable));
     }
 
     /**
      * Ctor.
-     * @param predicate The predicate to be used.
-     * @param origin The wrapped DbObjects
+     * @param iterable The original objects iterable.
+     * @param predicate The predicate to be encapsulated.
      */
     public ObjectsFiltered(
-        final Func<DbObject<?>, Boolean> predicate,
-        final Iterable<DbObject<T>> origin
+        final Iterable<DbObject<Y>> iterable,
+        final Func<DbObject<Y>, Boolean> predicate
     ) {
-        this(origin, predicate);
+        this(predicate, iterable);
     }
 
 }

@@ -15,6 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects.predicate;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Func;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.And;
@@ -22,9 +23,10 @@ import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
  * The Func of DbObject -> Boolean, combined by AND operator.
+ * @param <Y> The type of YamlNode parameter.
  * @since 0.1
  */
-public class JoinedAndPredicate implements Func<DbObject<?>, Boolean> {
+public class JoinedAndPredicate<Y extends YamlNode> implements Func<DbObject<Y>, Boolean> {
 
     /**
      * The Iterable of Func of DbObject, Boolean encapsulated.
@@ -49,7 +51,7 @@ public class JoinedAndPredicate implements Func<DbObject<?>, Boolean> {
     }
 
     @Override
-    public final Boolean apply(final DbObject<?> input) throws Exception {
+    public final Boolean apply(final DbObject<Y> input) throws Exception {
         return new And(input, this.funcs).value();
     }
 

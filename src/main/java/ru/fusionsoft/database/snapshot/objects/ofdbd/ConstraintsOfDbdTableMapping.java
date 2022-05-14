@@ -17,8 +17,9 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableEnvelope;
 import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
-import ru.fusionsoft.database.snapshot.objects.ObjectsEnvelope;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.YamlMappingOrEmptyWhenNoValueNotFound;
@@ -29,7 +30,7 @@ import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  *  of DBD/schemas/#schema/tables/#table/constraints mapping.
  * @since 0.1
  */
-public class ConstraintsOfDbdTableMapping extends ObjectsEnvelope<DbdConstraintMapping> {
+public class ConstraintsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdConstraintMapping>> {
 
     /**
      * Instantiates a new Objects of dbd constraints mapping.

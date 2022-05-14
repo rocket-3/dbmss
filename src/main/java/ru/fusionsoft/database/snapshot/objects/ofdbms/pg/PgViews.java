@@ -17,14 +17,13 @@ package ru.fusionsoft.database.snapshot.objects.ofdbms.pg;
 
 import java.sql.Connection;
 import ru.fusionsoft.database.mapping.dbd.DbdViewMapping;
-import ru.fusionsoft.database.snapshot.Objects;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
 import ru.fusionsoft.database.snapshot.objects.ofresultset.ViewOfResultSet;
 import ru.fusionsoft.database.snapshot.query.pg.PgViewsQuery;
 import ru.fusionsoft.lib.collection.ListOfConnection;
 
 /**
- * The type of view {@link Objects} that can be constructed of connection to Postgres DBMS.
+ * The type of view {@link ObjectsOfScalar} that can be constructed of connection to Postgres DBMS.
  * @since 0.1
  */
 public class PgViews extends ObjectsOfScalar<DbdViewMapping> {
