@@ -43,7 +43,7 @@ class ObjectsOfOneDependsOnAnotherTest {
 
     /**
      * Locates expected tables.
-     * @todo 40:60min Add HasValuesExactly matcher for all places
+     * @todo #40:60min Add HasValuesExactly matcher for all places
      */
     @Test
     public void locatesExpectedTables() {
