@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.mapping.value;
+package ru.fusionsoft.database.mapping.values;
 
 import org.cactoos.Text;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;

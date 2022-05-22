@@ -18,7 +18,7 @@ package ru.fusionsoft.database.application;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.api.DbdCreateOfDatabaseProcedure;
-import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableCreatingOfDatabaseUrl;
+import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableOfDbdServerMapping;
 import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
 import ru.fusionsoft.lib.runnable.ExitWithError;
 
@@ -28,7 +28,7 @@ import ru.fusionsoft.lib.runnable.ExitWithError;
  * @checkstyle HideUtilityClassConstructorCheck (100 lines)
  */
 @SuppressWarnings("PMD")
-public final class DbdNew {
+public final class DbdInitAndFetchUrl {
 
     /**
      * Main.
@@ -44,7 +44,7 @@ public final class DbdNew {
                 "Wrong arguments, need {jdbc:<dbms>://<url>:<port>/<catalog>} {user} {pass}"
             ),
             () -> new DbdCreateOfDatabaseProcedure(
-                new DbdRepoWritableCreatingOfDatabaseUrl(
+                new DbdRepoWritableOfDbdServerMapping(
                     new TextOf(args[0]),
                     new TextOf(args[1]),
                     new TextOf(args[2])

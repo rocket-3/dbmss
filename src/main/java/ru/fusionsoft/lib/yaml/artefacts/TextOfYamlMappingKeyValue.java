@@ -24,7 +24,7 @@ import org.cactoos.text.UncheckedText;
  * The type of Text that can be constructed of {@link YamlMapping} and its key.
  * @since 0.1
  */
-public class TextOfMappingValue implements Text {
+public class TextOfYamlMappingKeyValue implements Text {
 
     /**
      * The YamlMapping encapsulated.
@@ -41,7 +41,7 @@ public class TextOfMappingValue implements Text {
      * @param mapping The YamlMapping to be encapsulated.
      * @param key The String of key to be encapsulated.
      */
-    public TextOfMappingValue(final YamlMapping mapping, final Text key) {
+    public TextOfYamlMappingKeyValue(final YamlMapping mapping, final Text key) {
         this.mapping = mapping;
         this.key = new UncheckedText(key);
     }
@@ -51,7 +51,7 @@ public class TextOfMappingValue implements Text {
      * @param mapping The YamlMapping to be encapsulated.
      * @param key The String of key to be encapsulated.
      */
-    public TextOfMappingValue(final YamlMapping mapping, final String key) {
+    public TextOfYamlMappingKeyValue(final YamlMapping mapping, final String key) {
         this(mapping, new TextOf(key));
     }
 

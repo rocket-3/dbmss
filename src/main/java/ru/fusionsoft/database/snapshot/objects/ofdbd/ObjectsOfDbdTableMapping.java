@@ -73,7 +73,7 @@ public class ObjectsOfDbdTableMapping extends ObjectsJoined {
                 DbdTableFields.INDEXES,
                 table
             ),
-            new ConstraintsOfDbdTableMapping(
+            new ConstraintObjectsOfDbdTableMapping(
                 mapping,
                 DbdTableFields.CONSTRAINTS,
                 table

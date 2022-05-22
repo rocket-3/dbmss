@@ -21,7 +21,6 @@ import ru.fusionsoft.database.dbdreadable.DbdReadableBuiltWithObjectsOfServer;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
@@ -30,7 +29,7 @@ import ru.fusionsoft.lib.time.UtcOfFirstAccess;
  *  which {@link DbdServerMapping} points at, with default info mapping and server name.
  * @since 0.1
  */
-public class DbdYamlWritableWithObjectsOfServer extends DbdYamlWritable {
+public class DbdYamlWritableOfDbdServerMapping extends DbdYamlWritable {
 
     /**
      * Instantiates a new Dbd yaml of objects.
@@ -39,7 +38,7 @@ public class DbdYamlWritableWithObjectsOfServer extends DbdYamlWritable {
      * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param <Y> The type of YamlNode parameter.
      */
-    public <Y extends YamlNode> DbdYamlWritableWithObjectsOfServer(
+    public <Y extends YamlNode> DbdYamlWritableOfDbdServerMapping(
         final DbdServerMapping server,
         final Utc time,
         final Iterable<DbObject<Y>> objects
@@ -54,7 +53,7 @@ public class DbdYamlWritableWithObjectsOfServer extends DbdYamlWritable {
      * @param server The {@link DbdServerMapping} to be encapsulated.
      * @param time The {@link Utc} to be encapsulated.
      */
-    public DbdYamlWritableWithObjectsOfServer(
+    public DbdYamlWritableOfDbdServerMapping(
         final DbdServerMapping server,
         final Utc time
     ) {
@@ -62,9 +61,7 @@ public class DbdYamlWritableWithObjectsOfServer extends DbdYamlWritable {
             server,
             time,
             new Sticky<>(
-                new ObjectsWithInlineLinkDataAdded(
-                    new ObjectsOfServer(server)
-                )
+                new ObjectsOfServer(server)
             )
         );
     }
@@ -73,7 +70,7 @@ public class DbdYamlWritableWithObjectsOfServer extends DbdYamlWritable {
      * Instantiates a new Dbd yaml of objects.
      * @param server The {@link DbdServerMapping} to be encapsulated.
      */
-    public DbdYamlWritableWithObjectsOfServer(
+    public DbdYamlWritableOfDbdServerMapping(
         final DbdServerMapping server
     ) {
         this(

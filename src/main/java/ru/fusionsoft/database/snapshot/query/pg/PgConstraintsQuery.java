@@ -16,6 +16,7 @@
 package ru.fusionsoft.database.snapshot.query.pg;
 
 import ru.fusionsoft.database.mapping.fields.DbdConstraintFields;
+import ru.fusionsoft.database.mapping.values.ConstraintTypeValues;
 
 /**
  * The only type of {@link PgMessageFormatQuery} of {@link DbdConstraintFields}.
@@ -41,11 +42,11 @@ public class PgConstraintsQuery extends PgMessageFormatQuery<DbdConstraintFields
             + "        else confrelid::regclass \n"
             + "    end AS {5},\n"
             + "    case \n"
-            + "        when con.contype = 'p' then 'PK'\n"
-            + "        when con.contype = 'f' then 'FK'\n"
-            + "        when con.contype = 'c' then 'CHECK'\n"
-            + "        when con.contype = 'u' then 'UNIQUE'\n"
-            + "        when con.contype = 'x' then 'EXCLUDE'\n"
+            + "        when con.contype = 'p' then '" + ConstraintTypeValues.PK + "'\n"
+            + "        when con.contype = 'f' then '"+ ConstraintTypeValues.FK+ "'\n"
+            + "        when con.contype = 'c' then '"+ConstraintTypeValues.CHECK+"'\n"
+            + "        when con.contype = 'u' then '" + ConstraintTypeValues.UNIQUE + "'\n"
+            + "        when con.contype = 'x' then '" + ConstraintTypeValues.EXCLUDE + "'\n"
             + "    end AS {6},\n"
             + "    array_agg(ta.attname) AS {7},\n"
             + "    case \n"

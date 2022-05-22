@@ -13,55 +13,39 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot.objects.ofdbms;
+package ru.fusionsoft.database.snapshot.objects.generated;
 
 import com.amihaiemil.eoyaml.YamlNode;
-import java.sql.Connection;
+import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.data.InlineRowsDataObjectsOfConnection;
+import ru.fusionsoft.database.snapshot.data.LinkDataObjectsOfTables;
 import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The {@link ObjectsJoined} with {@link InlineRowsDataObjectsOfConnection} added.
+ * The {@link ObjectsJoined} with {@link LinkDataObjectsOfTables} added.
  * @since 0.1
  */
-public class ObjectsWithInlineRowsDataAdded extends ObjectsJoined {
+public class ObjectsWithInlineLinkDataAdded extends ObjectsJoined {
 
     /**
      * Ctor.
      * @param objects The wrapped objects
-     * @param connection The {@link Connection} to be encapsulated.
      * @param <Y> The type of YamlNode parameter.
      */
-    public <Y extends YamlNode> ObjectsWithInlineRowsDataAdded(
-        final Iterable<DbObject<Y>> objects,
-        final Connection connection
+    public <Y extends YamlNode> ObjectsWithInlineLinkDataAdded(
+        final Iterable<? extends DbObject<Y>> objects
     ) {
         super(
             objects,
-            new InlineRowsDataObjectsOfConnection(
-                connection,
-                new ObjectsWithType<>(
+            new LinkDataObjectsOfTables(
+                new ObjectsWithType<DbdTableMapping>(
                     new ObjectTypeTable(),
                     objects
                 )
             )
         );
-    }
-
-    /**
-     * Instantiates a new Objects with inline rows data added.
-     * @param connection The {@link Connection} to be encapsulated.
-     * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
-     * @param <Y> The type of YamlNode parameter.
-     */
-    public <Y extends YamlNode> ObjectsWithInlineRowsDataAdded(
-        final Connection connection,
-        final Iterable<DbObject<Y>> objects
-    ) {
-        this(objects, connection);
     }
 
 }

@@ -13,7 +13,32 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-/**
- * Package for values enumerations of specific fields from mappings.
- */
-package ru.fusionsoft.database.mapping.value;
+
+package ru.fusionsoft.database.mapping.values;
+
+import org.cactoos.Text;
+
+public enum ConstraintTypeValues implements Text {
+    PK("PK"),
+    FK("FK"),
+    NOT_NULL("NN"),
+    CHECK("CHECK"),
+    UNIQUE("UNIQUE"),
+    EXCLUDE("EXCLUDE");
+
+    private final String string;
+
+    ConstraintTypeValues(final String string) {
+        this.string = string;
+    }
+
+    @Override
+    public String asString()  {
+        return this.string;
+    }
+
+    @Override
+    public String toString() {
+        return this.string;
+    }
+}

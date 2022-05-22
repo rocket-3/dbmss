@@ -23,7 +23,6 @@ import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.lib.path.writable.JoinedWritable;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.time.UtcOfFirstAccess;
@@ -35,7 +34,7 @@ import ru.fusionsoft.lib.time.UtcOfFirstAccess;
  * @todo #40:30min Design filtered version of this.
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class DbdRepoWritableCreatingOfDatabaseUrl extends JoinedWritable {
+public class DbdRepoWritableOfDbdServerMapping extends JoinedWritable {
 
     /**
      * Instantiates a new Created from server dbd file writable.
@@ -44,13 +43,13 @@ public class DbdRepoWritableCreatingOfDatabaseUrl extends JoinedWritable {
      * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param <Y> The type of YamlNode parameter.
      */
-    private <Y extends YamlNode> DbdRepoWritableCreatingOfDatabaseUrl(
+    private <Y extends YamlNode> DbdRepoWritableOfDbdServerMapping(
         final Utc time,
         final DbdServerMapping server,
         final Iterable<DbObject<Y>> objects
     ) {
         super(
-            new DbdYamlWritableWithObjectsOfServer(
+            new DbdYamlWritableOfDbdServerMapping(
                 server,
                 time,
                 objects
@@ -67,7 +66,7 @@ public class DbdRepoWritableCreatingOfDatabaseUrl extends JoinedWritable {
      * @param time The {@link Utc} to be encapsulated.
      * @param server The {@link DbdServerMapping} to be encapsulated.
      */
-    public DbdRepoWritableCreatingOfDatabaseUrl(
+    public DbdRepoWritableOfDbdServerMapping(
         final Utc time,
         final DbdServerMapping server
     ) {
@@ -75,9 +74,7 @@ public class DbdRepoWritableCreatingOfDatabaseUrl extends JoinedWritable {
             time,
             server,
             new Sticky<>(
-                new ObjectsWithInlineLinkDataAdded(
-                    new ObjectsOfServer(server)
-                )
+                new ObjectsOfServer(server)
             )
         );
     }
@@ -86,7 +83,7 @@ public class DbdRepoWritableCreatingOfDatabaseUrl extends JoinedWritable {
      * Instantiates a new Created from server dbd file writable.
      * @param server The {@link DbdServerMapping} to be encapsulated.
      */
-    public DbdRepoWritableCreatingOfDatabaseUrl(final DbdServerMapping server) {
+    public DbdRepoWritableOfDbdServerMapping(final DbdServerMapping server) {
         this(
             new UtcOfFirstAccess(),
             server
@@ -101,7 +98,7 @@ public class DbdRepoWritableCreatingOfDatabaseUrl extends JoinedWritable {
      * @param password The {@link Text} to be encapsulated.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
-    public DbdRepoWritableCreatingOfDatabaseUrl(
+    public DbdRepoWritableOfDbdServerMapping(
         final Utc time,
         final Text url,
         final Text username,
@@ -123,7 +120,7 @@ public class DbdRepoWritableCreatingOfDatabaseUrl extends JoinedWritable {
      * @param username The {@link Text} to be encapsulated.
      * @param password The {@link Text} to be encapsulated.
      */
-    public DbdRepoWritableCreatingOfDatabaseUrl(
+    public DbdRepoWritableOfDbdServerMapping(
         final Text url,
         final Text username,
         final Text password

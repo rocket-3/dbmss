@@ -30,7 +30,7 @@ import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.collection.Single;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
 /**
  * The tests for {@link LinkDataObjectOfTable}.
@@ -62,7 +62,7 @@ class LinkDataObjectOfTableTest {
         ).value();
         new Assertion<>(
             "Should render non empty data rows for each table",
-            new TextOfMappingValue(
+            new TextOfYamlMappingKeyValue(
                 new LinkDataObjectOfTable(table).asYaml(),
                 DbdTableFields.DATA
             ),

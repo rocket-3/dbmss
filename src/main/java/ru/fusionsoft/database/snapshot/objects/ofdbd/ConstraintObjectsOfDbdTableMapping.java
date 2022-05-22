@@ -30,7 +30,7 @@ import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
  *  of DBD/schemas/#schema/tables/#table/constraints mapping.
  * @since 0.1
  */
-public class ConstraintsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdConstraintMapping>> {
+public class ConstraintObjectsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdConstraintMapping>> {
 
     /**
      * Instantiates a new Objects of dbd constraints mapping.
@@ -38,7 +38,7 @@ public class ConstraintsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdC
      * @param key The key's {@link Text} to be encapsulated.
      * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ConstraintsOfDbdTableMapping(
+    public ConstraintObjectsOfDbdTableMapping(
         final YamlMapping mapping,
         final Text key,
         final ObjectName table
@@ -56,7 +56,7 @@ public class ConstraintsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdC
      * @param constraints The {@link YamlMapping} to be encapsulated.
      * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ConstraintsOfDbdTableMapping(
+    public ConstraintObjectsOfDbdTableMapping(
         final YamlMapping constraints,
         final ObjectName table
     ) {

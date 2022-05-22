@@ -17,13 +17,13 @@ package ru.fusionsoft.database.api;
 
 import org.cactoos.Text;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
-import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableCreatingOfDatabaseUrl;
+import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableOfDbdServerMapping;
 import ru.fusionsoft.lib.path.Directory;
 import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
 
 /**
  * The procedure to create new DBD files from database,
- *  see {@link DbdRepoWritableCreatingOfDatabaseUrl}.
+ *  see {@link DbdRepoWritableOfDbdServerMapping}.
  * @since 0.1
  * @checkstyle ParameterNumberCheck (100 lines)
  */
@@ -35,7 +35,7 @@ public class DbdCreateOfDatabaseProcedure extends WriteToDirectoryRunnable {
      * @param directory The Folder to be encapsulated.
      */
     public DbdCreateOfDatabaseProcedure(
-        final DbdRepoWritableCreatingOfDatabaseUrl writable,
+        final DbdRepoWritableOfDbdServerMapping writable,
         final Directory directory
     ) {
         super(writable, directory);
@@ -48,7 +48,7 @@ public class DbdCreateOfDatabaseProcedure extends WriteToDirectoryRunnable {
      */
     public DbdCreateOfDatabaseProcedure(final DbdServerMapping server, final Directory directory) {
         this(
-            new DbdRepoWritableCreatingOfDatabaseUrl(
+            new DbdRepoWritableOfDbdServerMapping(
                 server
             ),
             directory
@@ -69,7 +69,7 @@ public class DbdCreateOfDatabaseProcedure extends WriteToDirectoryRunnable {
         final Directory directory
     ) {
         this(
-            new DbdRepoWritableCreatingOfDatabaseUrl(
+            new DbdRepoWritableOfDbdServerMapping(
                 url, username, password
             ),
             directory

@@ -13,35 +13,35 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot.objects.ofdbms;
+package ru.fusionsoft.database.snapshot.objects.generated;
 
 import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.iterable.Joined;
+import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.data.LinkDataObjectsOfTables;
 import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
-/**
- * The {@link ObjectsJoined} with {@link LinkDataObjectsOfTables} added.
- * @since 0.1
- */
-public class ObjectsWithInlineLinkDataAdded extends ObjectsJoined {
+public class ObjectsWithNotNullConstraintsAdded extends ObjectsJoined {
 
     /**
      * Ctor.
      * @param objects The wrapped objects
      * @param <Y> The type of YamlNode parameter.
      */
-    public <Y extends YamlNode> ObjectsWithInlineLinkDataAdded(
-        final Iterable<DbObject<Y>> objects
+    public <Y extends YamlNode> ObjectsWithNotNullConstraintsAdded(
+        final Iterable<? extends DbObject<Y>> objects
     ) {
         super(
             objects,
-            new LinkDataObjectsOfTables(
-                new ObjectsWithType<>(
-                    new ObjectTypeTable(),
-                    objects
+            new Joined<>(
+                new Mapped<>(
+                    NotNullConstraintsOfTable::new,
+                    new ObjectsWithType<>(
+                        new ObjectTypeTable(),
+                        objects
+                    )
                 )
             )
         );

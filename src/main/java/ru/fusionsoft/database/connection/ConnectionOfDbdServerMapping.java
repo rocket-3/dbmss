@@ -18,7 +18,7 @@ package ru.fusionsoft.database.connection;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.fields.DbdServerFields;
 import ru.fusionsoft.lib.connection.ConnectionOfTextArgs;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
 /**
  * The type of {@link java.sql.Connection} of {@link DbdServerMapping}.
@@ -32,9 +32,9 @@ public class ConnectionOfDbdServerMapping extends ConnectionOfTextArgs {
      */
     public ConnectionOfDbdServerMapping(final DbdServerMapping mapping) {
         super(
-            new TextOfMappingValue(mapping, DbdServerFields.URL),
-            new TextOfMappingValue(mapping, DbdServerFields.USER),
-            new TextOfMappingValue(mapping, DbdServerFields.PWD)
+            new TextOfYamlMappingKeyValue(mapping, DbdServerFields.URL),
+            new TextOfYamlMappingKeyValue(mapping, DbdServerFields.USER),
+            new TextOfYamlMappingKeyValue(mapping, DbdServerFields.PWD)
         );
     }
 
