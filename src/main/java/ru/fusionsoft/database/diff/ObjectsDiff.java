@@ -16,6 +16,7 @@
 package ru.fusionsoft.database.diff;
 
 import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.iterable.Sticky;
 import ru.fusionsoft.database.snapshot.DbObject;
 
 public class ObjectsDiff implements TemporalDiff<Iterable<DbObject<YamlNode>>> {
@@ -28,8 +29,8 @@ public class ObjectsDiff implements TemporalDiff<Iterable<DbObject<YamlNode>>> {
         final Iterable<DbObject<YamlNode>> cur,
         final Iterable<DbObject<YamlNode>> next
     ) {
-        this.cur = cur;
-        this.nex = next;
+        this.cur = new Sticky<DbObject<YamlNode>>(cur);
+        this.nex = new Sticky<DbObject<YamlNode>>(next);
     }
 
     @Override

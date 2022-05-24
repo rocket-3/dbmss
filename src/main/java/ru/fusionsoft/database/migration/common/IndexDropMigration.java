@@ -13,37 +13,46 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package ru.fusionsoft.database.migration.common;
 
-import org.cactoos.Scalar;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
+import org.cactoos.Text;
 import ru.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import ru.fusionsoft.database.migration.Migration;
-import ru.fusionsoft.database.migration.MigrationOfScalarSticky;
-import ru.fusionsoft.database.migration.postgres.PgIndexDropMigration;
+import ru.fusionsoft.database.migration.postgres.PgIndexDropSql;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.dbms.PostgresDbms;
-import ru.fusionsoft.lib.collection.StrictMap;
+import ru.fusionsoft.database.text.TextOfDbmsConditional;
+import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
-public class IndexDropMigration extends MigrationOfScalarSticky
+public class IndexDropMigration implements Migration {
 
-    {
+    private final DbObject<DbdIndexMapping> object;
 
-    public IndexDropMigration( final DbObject<DbdIndexMapping> constraint, final Dbms dbms) {
-            super(
-                () -> {
-                    return new StrictMap<>(
-                        new MapOf<>(
-                            new MapEntry<Dbms, Scalar<Migration>>(
-                                new PostgresDbms(),
-                                () -> new PgIndexDropMigration(constraint)
-                            )
-                        )
-                    ).get(dbms).value();
-                }
-            );
-        }
+    private final Dbms dbms;
+
+    public IndexDropMigration(final DbObject<DbdIndexMapping> object, final Dbms dbms) {
+        this.object = object;
+        this.dbms = dbms;
     }
+
+    @Override
+    public Text description() {
+        return new TextOfMessageFormat(
+            "Dropping index {0} of table {1}",
+            () -> this.object.signature().name().parent(),
+            () -> this.object.signature().name().first()
+        );
+    }
+
+    @Override
+    public Text sql() {
+        return new TextOfDbmsConditional(
+            new PgIndexDropSql(this.object),
+            () -> "",
+            () -> "",
+            () -> "",
+            this.dbms
+        );
+    }
+
+}

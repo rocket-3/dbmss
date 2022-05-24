@@ -16,21 +16,24 @@
 package ru.fusionsoft.database.migration.common;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdViewMapping;
 import ru.fusionsoft.database.migration.Migration;
-import ru.fusionsoft.database.migration.postgres.PgConstraintDropSql;
+import ru.fusionsoft.database.migration.postgres.PgViewDropSql;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
-public class ConstraintDropMigration implements Migration {
+public class ViewDropMigration implements Migration {
 
-    private final DbObject<DbdConstraintMapping> object;
+    private final DbObject<DbdViewMapping> object;
 
     private final Dbms dbms;
 
-    public ConstraintDropMigration(final DbObject<DbdConstraintMapping> object, final Dbms dbms) {
+    public ViewDropMigration(
+        final DbObject<DbdViewMapping> object,
+        final Dbms dbms
+    ) {
         this.object = object;
         this.dbms = dbms;
     }
@@ -38,16 +41,15 @@ public class ConstraintDropMigration implements Migration {
     @Override
     public Text description() {
         return new TextOfMessageFormat(
-            "Dropping constraint {0} of table {1}",
-            () -> this.object.signature().name().first(),
-            () -> this.object.signature().name().parent()
+            "Dropping view {0}",
+            () -> this.object.signature().name()
         );
     }
 
     @Override
     public Text sql() {
         return new TextOfDbmsConditional(
-            new PgConstraintDropSql(this.object),
+            new PgViewDropSql(this.object),
             () -> "",
             () -> "",
             () -> "",

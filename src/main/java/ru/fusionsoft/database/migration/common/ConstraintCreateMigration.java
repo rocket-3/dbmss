@@ -15,37 +15,46 @@
  */
 package ru.fusionsoft.database.migration.common;
 
-import org.cactoos.Scalar;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
+import org.cactoos.Text;
 import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import ru.fusionsoft.database.migration.Migration;
-import ru.fusionsoft.database.migration.MigrationOfScalarSticky;
-import ru.fusionsoft.database.migration.postgres.PgConstraintCreateMigration;
+import ru.fusionsoft.database.migration.postgres.PgConstraintCreateSql;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.snapshot.dbms.PostgresDbms;
-import ru.fusionsoft.lib.collection.StrictMap;
+import ru.fusionsoft.database.text.TextOfDbmsConditional;
+import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
-public class ConstraintCreateMigration extends MigrationOfScalarSticky {
+public class ConstraintCreateMigration implements Migration {
 
-    public ConstraintCreateMigration(
-        final DbObject<DbdConstraintMapping> constraint,
-        final Dbms dbms
-    ) {
-        super(
-            () -> {
-                return new StrictMap<>(
-                    new MapOf<>(
-                        new MapEntry<Dbms, Scalar<Migration>>(
-                            new PostgresDbms(),
-                            () -> new PgConstraintCreateMigration(constraint)
-                        )
-                    )
-                ).get(dbms).value();
-            }
+    private final DbObject<DbdConstraintMapping> object;
+
+    private final Dbms dbms;
+
+    public ConstraintCreateMigration(final DbObject<DbdConstraintMapping> object, final Dbms dbms) {
+        this.object = object;
+        this.dbms = dbms;
+    }
+
+    @Override
+    public Text description() {
+        return new TextOfMessageFormat(
+            "Creating constraint {0} of table {1}",
+            () -> this.object.signature().name().first(),
+            () -> this.object.signature().name().parent()
+        );
+    }
+
+    @Override
+    public Text sql() {
+        return new TextOfDbmsConditional(
+            new PgConstraintCreateSql(this.object),
+            () -> "",
+            () -> "",
+            () -> "",
+            dbms
         );
     }
 
 }
+
 

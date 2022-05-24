@@ -23,7 +23,7 @@ import org.cactoos.map.MapOf;
 import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.migration.Migration;
-import ru.fusionsoft.database.migration.postgres.PgConstraintCreateMigration;
+import ru.fusionsoft.database.migration.postgres.PgConstraintCreateSql;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.snapshot.dbms.PostgresDbms;
@@ -42,7 +42,7 @@ public class CreateTableConstraintsMigrations extends IterableOfScalarSticky<Mig
                             new MapOf<>(
                                 new MapEntry<Dbms, Func<DbObject<DbdConstraintMapping>, Migration>>(
                                     new PostgresDbms(),
-                                    PgConstraintCreateMigration::new
+                                    PgConstraintCreateSql::new
                                 )
                             )
                         ).get(dbms),

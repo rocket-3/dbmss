@@ -13,46 +13,28 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.migration.common;
+package ru.fusionsoft.database.migration.postgres;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.mapping.dbd.DbdIndexMapping;
-import ru.fusionsoft.database.migration.Migration;
-import ru.fusionsoft.database.migration.postgres.PgIndexCreateSql;
+import ru.fusionsoft.database.mapping.dbd.DbdViewMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.Dbms;
-import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
-public class IndexCreateMigration implements Migration {
+public class PgViewDropSql implements Text {
 
-    private final DbObject<DbdIndexMapping> object;
+    private final DbObject<DbdViewMapping> object;
 
-    private final Dbms dbms;
-
-    public IndexCreateMigration(final DbObject<DbdIndexMapping> object, final Dbms dbms) {
+    public PgViewDropSql(final DbObject<DbdViewMapping> object) {
         this.object = object;
-        this.dbms = dbms;
     }
 
     @Override
-    public Text description() {
+    public String asString() {
         return new TextOfMessageFormat(
-            "Creating index {0} of table {1}",
+            "DROP VIEW {0}.{1};",
             () -> this.object.signature().name().parent(),
             () -> this.object.signature().name().first()
-        );
-    }
-
-    @Override
-    public Text sql() {
-        return new TextOfDbmsConditional(
-            new PgIndexCreateSql(this.object),
-            () -> "",
-            () -> "",
-            () -> "",
-            this.dbms
-        );
+        ).asString();
     }
 
 }

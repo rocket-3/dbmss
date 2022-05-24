@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.migration.common;
+package ru.fusionsoft.database.migration;
 
 import com.amihaiemil.eoyaml.YamlNode;
+import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
@@ -23,41 +24,49 @@ import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.Newline;
 import ru.fusionsoft.database.diff.TemporalDiff;
-import ru.fusionsoft.database.migration.Migration;
 import ru.fusionsoft.database.migration.common.scenarios.CreateNextTablesConstraintsMigrations;
+import ru.fusionsoft.database.migration.common.scenarios.CreateNextTablesIndexesMigrations;
 import ru.fusionsoft.database.migration.common.scenarios.DropCurrentConstraintsMigrations;
+import ru.fusionsoft.database.migration.common.scenarios.DropCurrentIndexesMigrations;
 import ru.fusionsoft.database.migration.ternary.HasCurrentChangingObjectsThatSatisfy;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
-public class DbdMigration implements Migration {
+public class MigrationOfObjectsDiff implements Migration {
 
     Iterable<Migration> migrations;
 
-    public DbdMigration(final Iterable<Migration> migrations) {
+    public MigrationOfObjectsDiff(final Iterable<Migration> migrations) {
         this.migrations = migrations;
     }
 
-    public DbdMigration(final TemporalDiff<Iterable<DbObject<YamlNode>>> diff, final Dbms dbms) {
+    public MigrationOfObjectsDiff(final TemporalDiff<Iterable<DbObject<YamlNode>>> diff, final Dbms dbms) {
         this(
-            new IterableOf<Migration>(
+            new IterableOf<>(
                 () -> {
+                    final Scalar<Boolean> tchanged = new HasCurrentChangingObjectsThatSatisfy(
+                        obj -> obj.signature().type().equalsTo(new ObjectTypeTable()),
+                        diff
+                    );
                     final Iterable<Migration> before = new Joined<>(
                         new Ternary<Iterable<Migration>>(
-                            new HasCurrentChangingObjectsThatSatisfy(
-                                obj -> obj.signature().type().equalsTo(new ObjectTypeTable()),
-                                diff
+                            tchanged,
+                            () -> new Joined<Migration>(
+                                new DropCurrentIndexesMigrations(diff, dbms),
+                                new DropCurrentConstraintsMigrations(diff, dbms)
                             ),
-                            () -> new DropCurrentConstraintsMigrations(diff, dbms),
                             () -> new IterableOf<>()
                         ).value()
                     );
                     final Iterable<Migration> after = new Joined<>(
                         new Ternary<Iterable<Migration>>(
-                            () -> true,
-                            () -> new CreateNextTablesConstraintsMigrations(diff, dbms),
+                            tchanged,
+                            () -> new Joined<Migration>(
+                                new CreateNextTablesConstraintsMigrations(diff, dbms),
+                                new CreateNextTablesIndexesMigrations(diff, dbms)
+                            ),
                             () -> new IterableOf<>()
                         ).value()
                     );

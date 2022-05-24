@@ -24,6 +24,7 @@ import ru.fusionsoft.database.dbdreadable.DbdReadableWithServerEntry;
 import ru.fusionsoft.database.diff.ObjectsDiffOfDbdReadableServer;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
+import ru.fusionsoft.database.migration.MigrationOfObjectsDiff;
 import ru.fusionsoft.database.snapshot.dbms.PostgresDbms;
 
 class DbdMigrationTest {
@@ -31,27 +32,29 @@ class DbdMigrationTest {
     @Test
     public void show() {
         final String target = "dvdrental";
-        System.out.println(new DbdMigration(
-            new ObjectsDiffOfDbdReadableServer(
-                new DbdReadableWithServerEntry(
-                    new DbdReadableBuiltWithObjectsOfServer(
-                        new DbdServerMappingWithCredentials(
-                            new UrlOfPgGitLabDatabaseV11("pagilla"),
-                            new CredsOfPgTestDatabase()
+        System.out.println(
+            new MigrationOfObjectsDiff(
+                new ObjectsDiffOfDbdReadableServer(
+                    new DbdReadableWithServerEntry(
+                        new DbdReadableBuiltWithObjectsOfServer(
+                            new DbdServerMappingWithCredentials(
+                                new UrlOfPgGitLabDatabaseV11("pagilla"),
+                                new CredsOfPgTestDatabase()
+                            )
+                        ),
+                        new DbdServerEntry(
+                            new TextOf(target),
+                            new DbdServerMappingWithCredentials(
+                                new UrlOfPgGitLabDatabaseV11(target),
+                                new CredsOfPgTestDatabase()
+                            )
                         )
                     ),
-                    new DbdServerEntry(
-                        new TextOf(target),
-                        new DbdServerMappingWithCredentials(
-                            new UrlOfPgGitLabDatabaseV11(target),
-                            new CredsOfPgTestDatabase()
-                        )
-                    )
+                    new TextOf(target)
                 ),
-                new TextOf(target)
-            ),
-            new PostgresDbms()
-        ).sql());
+                new PostgresDbms()
+            ).sql()
+        );
     }
 
 }

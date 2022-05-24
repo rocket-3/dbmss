@@ -18,7 +18,6 @@ package ru.fusionsoft.lib.collection;
 import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.scalar.Sticky;
 
 public class IterableOfScalarSticky<T> extends IterableEnvelope<T> {
 
@@ -28,8 +27,8 @@ public class IterableOfScalarSticky<T> extends IterableEnvelope<T> {
      */
     public IterableOfScalarSticky(final Scalar<Iterable<T>> scalar) {
         super(
-            new IterableOf<T>(
-                new Sticky<>(
+            new org.cactoos.iterable.Sticky<T>(
+                new IterableOf<T>(
                     () -> scalar.value().iterator()
                 )
             )

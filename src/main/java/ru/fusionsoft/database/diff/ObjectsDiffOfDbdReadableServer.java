@@ -16,7 +16,6 @@
 package ru.fusionsoft.database.diff;
 
 import org.cactoos.Text;
-import org.cactoos.iterable.Sticky;
 import ru.fusionsoft.database.DbdReadable;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdReadable;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadable;
@@ -26,13 +25,9 @@ public class ObjectsDiffOfDbdReadableServer extends ObjectsDiff {
 
     public ObjectsDiffOfDbdReadableServer(final DbdReadable dbd, final Text server) {
         super(
-            new Sticky<>(
-                new ObjectsOfDbdReadable(dbd)
-            ),
-            new Sticky<>(
-                new ObjectsOfServer(
-                    new DbdServerMappingOfDbdReadable(dbd, server)
-                )
+            new ObjectsOfDbdReadable(dbd),
+            new ObjectsOfServer(
+                new DbdServerMappingOfDbdReadable(dbd, server)
             )
         );
     }
