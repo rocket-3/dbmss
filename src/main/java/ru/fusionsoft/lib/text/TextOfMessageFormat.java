@@ -19,6 +19,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.list.ListOf;
 import org.cactoos.scalar.Sticky;
@@ -90,6 +91,18 @@ public class TextOfMessageFormat implements Text {
         this(
             new TextOf(pattern),
             new Mapped<Text>(Scalar::value, args)
+        );
+    }
+
+    /**
+     * Instantiates a new Text message format.
+     * @param pattern The {@link Text} of pattern to be encapsulated.
+     * @param args The {@link Text} array of args to be encapsulated.
+     */
+    public TextOfMessageFormat(final CharSequence pattern, final Text... args) {
+        this(
+            new TextOf(pattern),
+            new IterableOf<Text>(args)
         );
     }
 

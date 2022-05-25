@@ -15,6 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects;
 
+import org.cactoos.Func;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import ru.fusionsoft.database.snapshot.DbObject;
@@ -42,6 +43,53 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
         this(
             object,
             field,
+            () -> {
+                throw new ValueNotFoundException(
+                    field.asString(),
+                    object.asYaml().toString()
+                );
+            }
+        );
+    }
+
+    /**
+     * Instantiates a new Object field mapped.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param field The {@link Text} field of object.
+     * @param presence The {@link Text} field of object.
+     * @param absence The {@link Scalar} of what to return, if no value.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
+    public ObjectFieldString(
+        final DbObject<?> object,
+        final Text field,
+        final Func<String, String> presence,
+        final Text absence
+    ) {
+        super(
+            object,
+            field,
+            node -> presence.apply(node.asScalar().value()),
+            absence::asString
+        );
+    }
+
+    /**
+     * Instantiates a new Object field mapped.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param field The {@link Text} field of object.
+     * @param presence The {@link Text} field of object.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
+    public ObjectFieldString(
+        final DbObject<?> object,
+        final Text field,
+        final Func<String, String> presence
+    ) {
+        this(
+            object,
+            field,
+            presence,
             () -> {
                 throw new ValueNotFoundException(
                     field.asString(),
