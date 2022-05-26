@@ -17,52 +17,48 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
-import ru.fusionsoft.database.mapping.dbd.DbdIndexMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdViewMapping;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
-import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeIndex;
+import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeView;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
-/**
- * The db index object of DBD/schemas/#schema/tables/#table/indexes/#index node.
- * @since 0.1
- */
-public class IndexOfDbdMapping extends SimpleDbObject<DbdIndexMapping> {
+public class ObjectOfDbdViewMapping extends SimpleDbObject<DbdViewMapping> {
 
     /**
-     * Instantiates a new Object of dbd index mapping.
-     * @param root The YamlMapping to be encapsulated.
-     * @param key The YamlNode to be encapsulated.
-     * @param table The Text to be encapsulated.
+     * Instantiates a new Trigger of dbd mapping.
+     * @param views The {@link YamlMapping} to be encapsulated.
+     * @param key The {@link YamlNode} to be encapsulated.
+     * @param schema The {@link ObjectName} to be encapsulated.
      */
-    public IndexOfDbdMapping(
-        final YamlMapping root,
+    public ObjectOfDbdViewMapping(
+        final YamlMapping views,
         final YamlNode key,
-        final ObjectName table
+        final ObjectName schema
     ) {
         this(
-            new DbdIndexMapping(new YamlMappingOfPath(root, key)),
-            new SimpleObjectName(table, new TextOfScalarNode(key))
+            new DbdViewMapping(new YamlMappingOfPath(views, key)),
+            new SimpleObjectName(
+                schema,
+                new TextOfYamlScalarNode(key)
+            )
         );
     }
 
     /**
-     * Instantiates a new Object of dbd index mapping.
-     * @param mapping The YamlMapping to be encapsulated.
-     * @param name The Text to be encapsulated.
+     * Instantiates a new simple db object.
+     * @param yaml The {@link DbdViewMapping} to be encapsulated.
+     * @param name The {@link ObjectName} to be encapsulated.
      */
-    public IndexOfDbdMapping(
-        final DbdIndexMapping mapping,
-        final ObjectName name
-    ) {
+    public ObjectOfDbdViewMapping(final DbdViewMapping yaml, final ObjectName name) {
         super(
-            mapping,
+            yaml,
             new SimpleObjectSignature(
-                new SimpleObjectName(name),
-                new ObjectTypeIndex()
+                name,
+                new ObjectTypeView()
             )
         );
     }

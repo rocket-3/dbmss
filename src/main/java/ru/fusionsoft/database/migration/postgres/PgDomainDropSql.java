@@ -13,22 +13,28 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot.objects.ofdbd;
+package ru.fusionsoft.database.migration.postgres;
 
-import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.mapping.fields.DbdTableFields;
+import org.cactoos.Text;
+import ru.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.signature.name.ObjectNameOfScalar;
-import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
+import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
-public class ConstraintsOfDbTable extends ConstraintObjectsOfDbdTableMapping {
+public class PgDomainDropSql implements Text {
 
-    public ConstraintsOfDbTable(final DbObject<DbdTableMapping> table) {
-        super(
-            new YamlMappingOfScalar(table::asYaml),
-            DbdTableFields.CONSTRAINTS,
-            new ObjectNameOfScalar(() -> table.signature().name())
-        );
+    private final DbObject<DbdDomainMapping> object;
+
+    public PgDomainDropSql(final DbObject<DbdDomainMapping> object) {
+        this.object = object;
+    }
+
+    @Override
+    public String asString() {
+        return new TextOfMessageFormat(
+            "DROP DOMAIN {0}.{1} RESTRICT;",
+            this.object.signature().name().parent(),
+            this.object.signature().name().first()
+        ).asString();
     }
 
 }

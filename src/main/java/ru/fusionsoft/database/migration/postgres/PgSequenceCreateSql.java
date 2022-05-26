@@ -20,7 +20,7 @@ import org.cactoos.scalar.Ternary;
 import ru.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
 import ru.fusionsoft.database.mapping.fields.DbdSequenceFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.ObjectFieldText;
+import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
 public class PgSequenceCreateSql implements Text {
@@ -37,7 +37,7 @@ public class PgSequenceCreateSql implements Text {
             "CREATE SEQUENCE \"{0}\".\"{1}\" {2}{3}{4}{5}{6}{7};",
             () -> object.signature().name().parent(),
             () -> object.signature().name().first(),
-            () -> new ObjectFieldText(
+            () -> new TextOfObjectField(
                 this.object,
                 DbdSequenceFields.CYCLE,
                 string -> new Ternary<Text>(
@@ -47,37 +47,31 @@ public class PgSequenceCreateSql implements Text {
                 ).value(),
                 () -> ""
             ),
-            () -> new ObjectFieldText(
+            () -> new TextOfObjectField(
                 this.object,
                 DbdSequenceFields.START,
                 string -> new TextOfMessageFormat(" start {0}", string),
                 () -> ""
             ),
-            () -> new ObjectFieldText(
+            () -> new TextOfObjectField(
                 this.object,
                 DbdSequenceFields.INCREMENT,
                 string -> new TextOfMessageFormat(" increment {0}", string),
                 () -> ""
             ),
-            () -> new ObjectFieldText(
+            () -> new TextOfObjectField(
                 this.object,
                 DbdSequenceFields.MIN,
                 string -> new TextOfMessageFormat(" minvalue {0}", string),
                 () -> ""
             ),
-            () -> new ObjectFieldText(
+            () -> new TextOfObjectField(
                 this.object,
                 DbdSequenceFields.MAX,
                 string -> new TextOfMessageFormat(" maxvalue {0}", string),
                 () -> ""
             ),
-            () -> new ObjectFieldText(
-                this.object,
-                DbdSequenceFields.OWNER,
-                string -> new TextOfMessageFormat(" maxvalue {0}", string),
-                () -> ""
-            ),
-            () -> new ObjectFieldText(
+            () -> new TextOfObjectField(
                 this.object,
                 DbdSequenceFields.OWNER,
                 string -> new TextOfMessageFormat(

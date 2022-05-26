@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
-import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
@@ -26,19 +26,18 @@ import ru.fusionsoft.lib.yaml.YamlMappingOrEmptyWhenNoValueNotFound;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
 /**
- * The db constraint objects
- *  of DBD/schemas/#schema/tables/#table/constraints mapping.
+ * The objects of {@link DbdTriggerMapping}, extracted of DBD/schemas/#schema/triggers node.
  * @since 0.1
  */
-public class ConstraintObjectsOfDbdTableMapping extends IterableEnvelope<DbObject<DbdConstraintMapping>> {
+public class ObjectsOfDbdTriggersMapping extends IterableEnvelope<DbObject<DbdTriggerMapping>> {
 
     /**
-     * Instantiates a new Objects of dbd constraints mapping.
+     * Instantiates a new Objects of dbd triggers mapping.
      * @param mapping The {@link YamlMapping} to be encapsulated.
-     * @param key The key's {@link Text} to be encapsulated.
+     * @param key The {@link Text} to be encapsulated.
      * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ConstraintObjectsOfDbdTableMapping(
+    public ObjectsOfDbdTriggersMapping(
         final YamlMapping mapping,
         final Text key,
         final ObjectName table
@@ -52,18 +51,15 @@ public class ConstraintObjectsOfDbdTableMapping extends IterableEnvelope<DbObjec
     }
 
     /**
-     * Instantiates a new Objects of dbd constraints mapping.
-     * @param constraints The {@link YamlMapping} to be encapsulated.
+     * Instantiates a new Objects of dbd triggers mapping.
+     * @param mapping The {@link YamlMapping} to be encapsulated.
      * @param table The {@link ObjectName} to be encapsulated.
      */
-    public ConstraintObjectsOfDbdTableMapping(
-        final YamlMapping constraints,
-        final ObjectName table
-    ) {
+    public ObjectsOfDbdTriggersMapping(final YamlMapping mapping, final ObjectName table) {
         super(
             new IterableOfClassFromYamlNode<>(
-                (map, node) -> new ConstraintOfDbdMapping(map, node, table),
-                constraints
+                (map, node) -> new ObjectOfDbdTriggerMapping(map, node, table),
+                mapping
             )
         );
     }

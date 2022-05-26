@@ -17,53 +17,52 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
-import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
-import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeConstraint;
+import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeIndex;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
- * The db constraint objects of
- *  DBD/schemas/#schema/tables/#table/constraints/#constraint node.
+ * The db index object of DBD/schemas/#schema/tables/#table/indexes/#index node.
  * @since 0.1
  */
-public class ConstraintOfDbdMapping extends SimpleDbObject<DbdConstraintMapping> {
+public class ObjectOfDbdIndexMapping extends SimpleDbObject<DbdIndexMapping> {
 
     /**
-     * Instantiates a new Objects of dbd constraint mapping.
-     * @param map The YamlMapping to be encapsulated.
+     * Instantiates a new Object of dbd index mapping.
+     * @param root The YamlMapping to be encapsulated.
      * @param key The YamlNode to be encapsulated.
-     * @param table The {@link ObjectName} of table name be encapsulated.
+     * @param table The Text to be encapsulated.
      */
-    public ConstraintOfDbdMapping(
-        final YamlMapping map,
+    public ObjectOfDbdIndexMapping(
+        final YamlMapping root,
         final YamlNode key,
         final ObjectName table
     ) {
         this(
-            new DbdConstraintMapping(new YamlMappingOfPath(map, key)),
-            new SimpleObjectName(table, new TextOfScalarNode(key))
+            new DbdIndexMapping(new YamlMappingOfPath(root, key)),
+            new SimpleObjectName(table, new TextOfYamlScalarNode(key))
         );
     }
 
     /**
-     * Instantiates a new Objects of dbd constraint mapping.
-     * @param map The YamlMapping to be encapsulated.
-     * @param constraint The {@link ObjectName} of constraint to be encapsulated.
+     * Instantiates a new Object of dbd index mapping.
+     * @param mapping The YamlMapping to be encapsulated.
+     * @param name The Text to be encapsulated.
      */
-    public ConstraintOfDbdMapping(
-        final DbdConstraintMapping map,
-        final ObjectName constraint
+    public ObjectOfDbdIndexMapping(
+        final DbdIndexMapping mapping,
+        final ObjectName name
     ) {
         super(
-            map,
+            mapping,
             new SimpleObjectSignature(
-                constraint,
-                new ObjectTypeConstraint()
+                new SimpleObjectName(name),
+                new ObjectTypeIndex()
             )
         );
     }

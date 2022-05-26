@@ -24,7 +24,7 @@ import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
  * The type of YamlMapping that can be constructed of {@link YamlNode} and path.
@@ -87,7 +87,7 @@ public class YamlMappingOfPath extends YamlMappingEnvelope {
         this(
             node,
             new Mapped<>(
-                TextOfScalarNode::new,
+                TextOfYamlScalarNode::new,
                 paths
             )
         );

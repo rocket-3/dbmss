@@ -15,23 +15,78 @@
  */
 package ru.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlNode;
+import com.amihaiemil.eoyaml.YamlMapping;
+import org.cactoos.Func;
 import org.cactoos.Text;
-import org.cactoos.scalar.Sticky;
-import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.database.snapshot.DbObject;
 
-public class TextOfObjectField extends TextEnvelope {
+public class TextOfObjectField implements Text {
 
-    public TextOfObjectField(final DbObject<? extends YamlNode> object, final Text field) {
-        super(
-            new TextOfScalar(
-                new Sticky<>(
-                    new ObjectFieldString(object, field)
-                )
+    private final ObjectFieldString scalar;
+
+    public TextOfObjectField(final ObjectFieldString scalar) {
+        this.scalar = scalar;
+    }
+
+    public TextOfObjectField(
+        final DbObject<? extends YamlMapping> object,
+        final Text field,
+        final Text absence
+    ) {
+        this(
+            new ObjectFieldString(
+                object,
+                field,
+                absence
             )
         );
+    }
+
+    public TextOfObjectField(
+        final DbObject<? extends YamlMapping> object,
+        final Text field
+    ) {
+        this(
+            new ObjectFieldString(
+                object,
+                field
+            )
+        );
+    }
+
+    public TextOfObjectField(
+        final DbObject<? extends YamlMapping> object,
+        final Text field,
+        final Func<String, Text> presence,
+        final Text absence
+    ) {
+        this(
+            new ObjectFieldString(
+                object,
+                field,
+                string -> presence.apply(string).asString(),
+                absence
+            )
+        );
+    }
+
+    public TextOfObjectField(
+        final DbObject<? extends YamlMapping> object,
+        final Text field,
+        final Func<String, Text> presence
+    ) {
+        this(
+            new ObjectFieldString(
+                object,
+                field,
+                string -> presence.apply(string).asString()
+            )
+        );
+    }
+
+    @Override
+    public String asString() {
+        return this.scalar.value();
     }
 
 }

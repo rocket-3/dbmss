@@ -140,9 +140,9 @@ public class DomainOfResultSet extends SimpleDbObjectOfEntries<DbdDomainMapping>
                 )
             ),
             new ScalarEntry(
-                DbdDomainFields.ONWER,
+                DbdDomainFields.OWNER,
                 new TextOfResultSet(
-                    query.outcomeFor(DbdDomainFields.ONWER),
+                    query.outcomeFor(DbdDomainFields.OWNER),
                     rset
                 )
             ),

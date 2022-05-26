@@ -29,14 +29,14 @@ import ru.fusionsoft.lib.yaml.artefacts.MappingOfMappingIgnoreKeys;
  * The {@link SimpleDbObject}, can be constructed of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class TableObjectOfDbdTableMapping extends SimpleDbObject<DbdTableMapping> {
+public class ObjectOfDbdTableMapping extends SimpleDbObject<DbdTableMapping> {
 
     /**
      * Instantiates a new Table of dbd mapping.
      * @param mapping The {@link YamlMapping} to be encapsulated.
      * @param name The {@link ObjectName} to be encapsulated.
      */
-    public TableObjectOfDbdTableMapping(final YamlMapping mapping, final ObjectName name) {
+    public ObjectOfDbdTableMapping(final YamlMapping mapping, final ObjectName name) {
         this(
             new DbdTableMapping(
                 new MappingOfMappingIgnoreKeys(
@@ -57,7 +57,7 @@ public class TableObjectOfDbdTableMapping extends SimpleDbObject<DbdTableMapping
      * @param mapping The {@link DbdTableMapping} to be encapsulated.
      * @param name The {@link ObjectName} to be encapsulated.
      */
-    public TableObjectOfDbdTableMapping(final DbdTableMapping mapping, final ObjectName name) {
+    public ObjectOfDbdTableMapping(final DbdTableMapping mapping, final ObjectName name) {
         super(
             mapping,
             new SimpleObjectSignature(

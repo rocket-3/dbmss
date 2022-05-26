@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.lib.yaml.artefacts;
+package ru.fusionsoft.database.snapshot.objects.signature.type;
 
-import com.amihaiemil.eoyaml.YamlNode;
-import org.cactoos.text.TextEnvelope;
-import org.cactoos.text.TextOfScalar;
+import ru.fusionsoft.database.mapping.dbd.DbdDomainConstraintMapping;
 
-/**
- * The Text of scalar yaml node.
- * @since 0.1
- */
-public class TextOfScalarNode extends TextEnvelope {
+public class ObjectTypeDomainConstraint extends SimpleObjectType<DbdDomainConstraintMapping> {
 
     /**
-     * Ctor.
-     * @param node Scalar yaml node representing the text value.
+     * Instantiates a new Object type constraint.
      */
-    public TextOfScalarNode(final YamlNode node) {
-        super(new TextOfScalar(() -> node.asScalar().value()));
+    public ObjectTypeDomainConstraint() {
+        super(x -> new DbdDomainConstraintMapping(x.asMapping()), "domain constraint");
     }
 
 }
+

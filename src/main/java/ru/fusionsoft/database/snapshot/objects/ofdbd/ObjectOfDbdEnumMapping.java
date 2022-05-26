@@ -17,48 +17,48 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
-import ru.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdEnumMapping;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
-import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTrigger;
+import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeEnum;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
-/**
- * The {@link SimpleDbObject}, can be constructed of {@link DbdTriggerMapping}.
- * @since 0.1
- */
-public class TriggerOfDbdMapping extends SimpleDbObject<DbdTriggerMapping> {
+public class ObjectOfDbdEnumMapping extends SimpleDbObject<DbdEnumMapping> {
 
     /**
      * Instantiates a new Trigger of dbd mapping.
-     * @param root The {@link YamlMapping} to be encapsulated.
+     * @param functions The {@link YamlMapping} to be encapsulated.
      * @param key The {@link YamlNode} to be encapsulated.
-     * @param name The {@link ObjectName} to be encapsulated.
+     * @param schema The {@link ObjectName} to be encapsulated.
      */
-    public TriggerOfDbdMapping(final YamlMapping root, final YamlNode key, final ObjectName name) {
+    public ObjectOfDbdEnumMapping(
+        final YamlMapping functions,
+        final YamlNode key,
+        final ObjectName schema
+    ) {
         this(
-            new DbdTriggerMapping(new YamlMappingOfPath(root, key)),
+            new DbdEnumMapping(new YamlMappingOfPath(functions, key)),
             new SimpleObjectName(
-                name,
-                new TextOfScalarNode(key)
+                schema,
+                new TextOfYamlScalarNode(key)
             )
         );
     }
 
     /**
      * Instantiates a new simple db object.
-     * @param yaml The {@link DbdTriggerMapping} to be encapsulated.
+     * @param yaml The {@link DbdEnumMapping} to be encapsulated.
      * @param name The {@link ObjectName} to be encapsulated.
      */
-    public TriggerOfDbdMapping(final DbdTriggerMapping yaml, final ObjectName name) {
+    public ObjectOfDbdEnumMapping(final DbdEnumMapping yaml, final ObjectName name) {
         super(
             yaml,
             new SimpleObjectSignature(
                 name,
-                new ObjectTypeTrigger()
+                new ObjectTypeEnum()
             )
         );
     }

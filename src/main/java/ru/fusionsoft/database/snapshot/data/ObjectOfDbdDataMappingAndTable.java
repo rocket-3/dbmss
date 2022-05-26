@@ -31,14 +31,14 @@ import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeData;
  *  and parent table {@link DbObject}.
  * @since 0.1
  */
-public class DataObjectOfMappingAndTable extends SimpleDbObject<DbdDataMapping> {
+public class ObjectOfDbdDataMappingAndTable extends SimpleDbObject<DbdDataMapping> {
 
     /**
      * Instantiates a new Inline data object of mapping.
      * @param mapping The {@link DbdDataMapping} to be encapsulated.
      * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
      */
-    public DataObjectOfMappingAndTable(
+    public ObjectOfDbdDataMappingAndTable(
         final DbdDataMapping mapping,
         final ObjectName table
     ) {
@@ -60,7 +60,7 @@ public class DataObjectOfMappingAndTable extends SimpleDbObject<DbdDataMapping> 
      * @param mapping The {@link DbdDataMapping} to be encapsulated.
      * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
      */
-    public DataObjectOfMappingAndTable(
+    public ObjectOfDbdDataMappingAndTable(
         final DbdDataMapping mapping,
         final DbObject<DbdTableMapping> table
     ) {

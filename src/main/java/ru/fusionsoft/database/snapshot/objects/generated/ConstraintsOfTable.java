@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot.data;
+package ru.fusionsoft.database.snapshot.objects.generated;
 
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
+import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfConstraintsMapping;
+import ru.fusionsoft.database.snapshot.objects.signature.name.ObjectNameOfScalar;
+import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
-/**
- * The {@link ObjectOfDbdDataMappingAndTable} of {@link LinkDataMappingOfTable},
- *  can be created from parent {@link DbObject} of {@link DbdTableMapping}.
- * @since 0.1
- */
-public class LinkDataObjectOfTable extends ObjectOfDbdDataMappingAndTable {
+public class ConstraintsOfTable extends ObjectsOfConstraintsMapping {
 
-    /**
-     * Instantiates a new Inline link data object of table.
-     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
-     */
-    public LinkDataObjectOfTable(final DbObject<DbdTableMapping> table) {
+    public ConstraintsOfTable(final DbObject<DbdTableMapping> table) {
         super(
-            new LinkDataMappingOfTable(table),
-            table
+            new YamlMappingOfScalar(table::asYaml),
+            DbdTableFields.CONSTRAINTS,
+            new ObjectNameOfScalar(() -> table.signature().name())
         );
     }
 
