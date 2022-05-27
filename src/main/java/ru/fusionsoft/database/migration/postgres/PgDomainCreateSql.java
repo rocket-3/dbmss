@@ -30,7 +30,7 @@ import ru.fusionsoft.database.snapshot.objects.ObjectFieldExistence;
 import ru.fusionsoft.database.snapshot.objects.ObjectFieldMapped;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
 import ru.fusionsoft.database.snapshot.objects.generated.ConstraintsOfDomain;
-import ru.fusionsoft.database.text.TextOfLinesConditional;
+import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
 public class PgDomainCreateSql implements Text {
@@ -43,7 +43,7 @@ public class PgDomainCreateSql implements Text {
 
     @Override
     public String asString() {
-        return new TextOfLinesConditional(
+        return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,
                 () -> new TextOfMessageFormat(

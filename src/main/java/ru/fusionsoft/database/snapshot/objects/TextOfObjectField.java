@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.objects;
 import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Func;
 import org.cactoos.Text;
-import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
 public class TextOfObjectField implements Text {
 
@@ -29,7 +29,7 @@ public class TextOfObjectField implements Text {
     }
 
     public TextOfObjectField(
-        final DbObject<? extends YamlMapping> object,
+        final YamlRepresentative<? extends YamlMapping> object,
         final Text field,
         final Text absence
     ) {
@@ -43,7 +43,7 @@ public class TextOfObjectField implements Text {
     }
 
     public TextOfObjectField(
-        final DbObject<? extends YamlMapping> object,
+        final YamlRepresentative<? extends YamlMapping> object,
         final Text field
     ) {
         this(
@@ -55,7 +55,7 @@ public class TextOfObjectField implements Text {
     }
 
     public TextOfObjectField(
-        final DbObject<? extends YamlMapping> object,
+        final YamlRepresentative<? extends YamlMapping> object,
         final Text field,
         final Func<String, Text> presence,
         final Text absence
@@ -71,7 +71,7 @@ public class TextOfObjectField implements Text {
     }
 
     public TextOfObjectField(
-        final DbObject<? extends YamlMapping> object,
+        final YamlRepresentative<? extends YamlMapping> object,
         final Text field,
         final Func<String, Text> presence
     ) {

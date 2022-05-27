@@ -21,7 +21,7 @@ import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsMappingsOfTable;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
 import ru.fusionsoft.database.mapping.fields.DbdConstraintFields;
@@ -93,7 +93,7 @@ public class NotNullConstraintsOfTable
                                 DbdColumnFields.DBNULLABLE
                             ).asString()
                         ),
-                        new DbdColumnsMappingsOfTable(table)
+                        new DbdColumnMappingsOfTable(table)
                     )
                 );
             }

@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ru.fusionsoft.database.snapshot.objects;
+package ru.fusionsoft.database.text;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import java.util.Map;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
-import ru.fusionsoft.lib.yaml.YamlRepresentative;
+import org.cactoos.text.TextOf;
 
-public class ObjectFieldExistence implements Scalar<Boolean> {
+public class TextOfConditionsSpaced extends TextOfConditionsJoined {
 
-    private final TextOfObjectFieldMaybeEmpty field;
-
-    public ObjectFieldExistence(final YamlRepresentative<? extends YamlMapping> object, final Text field) {
-        this.field = new TextOfObjectFieldMaybeEmpty(object, field);
+    public TextOfConditionsSpaced(
+        final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals
+    ) {
+        super(new TextOf(" "), conditionals);
     }
 
-    @Override
-    public Boolean value() {
-        return !field.asString().isEmpty();
+    @SafeVarargs
+    public TextOfConditionsSpaced(final Map.Entry<Scalar<Boolean>, Scalar<Text>>... conditionals) {
+        super(new TextOf(" "), conditionals);
     }
 
 }

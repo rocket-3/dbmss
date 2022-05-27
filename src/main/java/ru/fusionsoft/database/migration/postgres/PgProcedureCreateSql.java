@@ -22,7 +22,7 @@ import ru.fusionsoft.database.mapping.fields.DbdProcedureFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
 import ru.fusionsoft.database.text.PgProcedureArgs;
-import ru.fusionsoft.database.text.TextOfLinesConditional;
+import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
@@ -40,7 +40,7 @@ public class PgProcedureCreateSql implements Text {
             this.object.asYaml(),
             DbdProcedureFields.OWNER
         );
-        return new TextOfLinesConditional(
+        return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,
                 () -> new TextOfMessageFormat(

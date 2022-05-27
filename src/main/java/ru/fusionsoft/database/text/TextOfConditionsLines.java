@@ -18,46 +18,27 @@ package ru.fusionsoft.database.text;
 import java.util.Map;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
-import org.cactoos.iterable.Filtered;
-import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Mapped;
-import org.cactoos.text.Joined;
 import org.cactoos.text.Newline;
-import org.cactoos.text.UncheckedText;
 
-public class TextOfLinesConditional implements Text {
+public class TextOfConditionsLines extends TextOfConditionsJoined {
 
-    private final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals;
-
-    public TextOfLinesConditional(
+    public TextOfConditionsLines(
         final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals
     ) {
-        this.conditionals = conditionals;
-    }
-
-    @SafeVarargs
-    public TextOfLinesConditional(
-        final Map.Entry<Scalar<Boolean>, Scalar<Text>>... conditionals
-    ) {
-        this(
-            new IterableOf<>(conditionals)
+        super(
+            new Newline(),
+            conditionals
         );
     }
 
-    @Override
-    public String asString() {
-        return new UncheckedText(
-            new Joined(
-                new Newline(),
-                new Mapped<Text>(
-                    entry -> entry.getValue().value(),
-                    new Filtered<>(
-                        conditional -> conditional.getKey().value(),
-                        this.conditionals
-                    )
-                )
-            )
-        ).asString();
+    @SafeVarargs
+    public TextOfConditionsLines(
+        final Map.Entry<Scalar<Boolean>, Scalar<Text>>... conditionals
+    ) {
+        super(
+            new Newline(),
+            conditionals
+        );
     }
 
 }

@@ -19,12 +19,12 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
 public class TextOfObjectFieldMaybeEmpty extends TextOfObjectField {
 
     public TextOfObjectFieldMaybeEmpty(
-        final DbObject<? extends YamlMapping> object,
+        final YamlRepresentative<? extends YamlMapping> object,
         final Text field,
         final Func<String, Text> presence
     ) {
@@ -32,7 +32,7 @@ public class TextOfObjectFieldMaybeEmpty extends TextOfObjectField {
     }
 
     public TextOfObjectFieldMaybeEmpty(
-        final DbObject<? extends YamlMapping> object,
+        final YamlRepresentative<? extends YamlMapping> object,
         final Text field
     ) {
         super(object, field, new TextOf(""));

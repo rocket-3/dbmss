@@ -20,6 +20,7 @@ import org.cactoos.Scalar;
 import org.cactoos.Text;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.exception.ValueNotFoundException;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
 public class ObjectFieldString extends ObjectFieldMapped<String> {
 
@@ -30,7 +31,7 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
      * @param absence The {@link Scalar} of what to return, if no value.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
-    public ObjectFieldString(final DbObject<?> object, final Text field, final Text absence) {
+    public ObjectFieldString(final YamlRepresentative<?> object, final Text field, final Text absence) {
         super(
             object,
             field,
@@ -39,7 +40,7 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
         );
     }
 
-    public ObjectFieldString(final DbObject<?> object, final Text field) {
+    public ObjectFieldString(final YamlRepresentative<?> object, final Text field) {
         this(
             object,
             field,
@@ -61,7 +62,7 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
      * @checkstyle ParameterNumberCheck (100 lines)
      */
     public ObjectFieldString(
-        final DbObject<?> object,
+        final YamlRepresentative<?> object,
         final Text field,
         final Func<String, String> presence,
         final Text absence
@@ -82,7 +83,7 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
      * @checkstyle ParameterNumberCheck (100 lines)
      */
     public ObjectFieldString(
-        final DbObject<?> object,
+        final YamlRepresentative<?> object,
         final Text field,
         final Func<String, String> presence
     ) {

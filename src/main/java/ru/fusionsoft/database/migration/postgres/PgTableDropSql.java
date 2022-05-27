@@ -16,36 +16,24 @@
 package ru.fusionsoft.database.migration.postgres;
 
 import org.cactoos.Text;
-import org.cactoos.map.MapEntry;
-import ru.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
-import ru.fusionsoft.database.mapping.fields.DbdTriggerFields;
+import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
-import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
-public class PgTriggerCreateSql implements Text {
+public class PgTableDropSql implements Text {
 
-    private final DbObject<DbdTriggerMapping> object;
+    private final DbObject<DbdTableMapping> object;
 
-    public PgTriggerCreateSql(final DbObject<DbdTriggerMapping> object) {
+    public PgTableDropSql(final DbObject<DbdTableMapping> object) {
         this.object = object;
     }
 
     @Override
     public String asString() {
-        final Text ddl = new MaybeEmptyTextOfYamlMapping(
-            this.object.asYaml(),
-            DbdTriggerFields.DDL
-        );
-        return new TextOfConditionsLines(
-            new MapEntry<>(
-                () -> !ddl.asString().isEmpty(),
-                () -> new TextOfMessageFormat(
-                    "{0};",
-                    () -> ddl
-                )
-            )
+        return new TextOfMessageFormat(
+            "DROP TABLE {0}.{1};",
+            () -> this.object.signature().name().first(),
+            () -> this.object.signature().name().parent()
         ).asString();
     }
 

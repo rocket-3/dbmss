@@ -26,7 +26,7 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectFieldExistence;
 import ru.fusionsoft.database.snapshot.objects.ObjectFieldMapped;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
-import ru.fusionsoft.database.text.TextOfLinesConditional;
+import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
@@ -41,7 +41,7 @@ public class PgTupleCreateSql implements Text {
 
     @Override
     public String asString() {
-        return new TextOfLinesConditional(
+        return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,
                 () -> new TextOfMessageFormat(

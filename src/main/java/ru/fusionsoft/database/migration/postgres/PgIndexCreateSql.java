@@ -21,7 +21,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import ru.fusionsoft.database.mapping.fields.DbdIndexFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
-import ru.fusionsoft.database.text.TextOfLinesConditional;
+import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
@@ -39,7 +39,7 @@ public class PgIndexCreateSql implements Text {
             this.object.asYaml(),
             DbdIndexFields.TABLESPACE
         );
-        return new TextOfLinesConditional(
+        return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,
                 () -> new TextOfMessageFormat(

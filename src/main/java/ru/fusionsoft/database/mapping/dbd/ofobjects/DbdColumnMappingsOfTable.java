@@ -36,13 +36,13 @@ import ru.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class DbdColumnsMappingsOfTable extends IterableEnvelope<DbdColumnMapping> {
+public class DbdColumnMappingsOfTable extends IterableEnvelope<DbdColumnMapping> {
 
     /**
      * Instantiates a new Dbd column mappings of table.
      * @param object The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
      */
-    public DbdColumnsMappingsOfTable(final DbObject<DbdTableMapping> object) {
+    public DbdColumnMappingsOfTable(final DbObject<DbdTableMapping> object) {
         this(new MappingOfRepresentative(object));
     }
 
@@ -50,7 +50,7 @@ public class DbdColumnsMappingsOfTable extends IterableEnvelope<DbdColumnMapping
      * Instantiates a new Dbd column mappings of table.
      * @param mapping The {@link YamlMapping} to be encapsulated.
      */
-    private DbdColumnsMappingsOfTable(final YamlMapping mapping) {
+    private DbdColumnMappingsOfTable(final YamlMapping mapping) {
         this(new DbdTableMapping(mapping));
     }
 
@@ -58,7 +58,7 @@ public class DbdColumnsMappingsOfTable extends IterableEnvelope<DbdColumnMapping
      * Instantiates a new Dbd column mappings of table.
      * @param mapping The {@link DbdTableMapping} to be encapsulated.
      */
-    public DbdColumnsMappingsOfTable(final DbdTableMapping mapping) {
+    public DbdColumnMappingsOfTable(final DbdTableMapping mapping) {
         this(
             new YamlNodeOfPath(mapping, DbdTableFields.COLUMNS)
         );
@@ -68,7 +68,7 @@ public class DbdColumnsMappingsOfTable extends IterableEnvelope<DbdColumnMapping
      * Instantiates a new Dbd column mappings of table.
      * @param columns The table\columns mapping node to be encapsulated.
      */
-    public DbdColumnsMappingsOfTable(final YamlNode columns) {
+    public DbdColumnMappingsOfTable(final YamlNode columns) {
         super(
             new IterableOf<>(
                 new Ternary<>(
