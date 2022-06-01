@@ -217,10 +217,8 @@ class ObjectsFromServerTest {
                 new Sticky<>(
                     new ObjectsFiltered<>(
                         x -> !x.signature().name().parent().first().asString().contains("million"),
-                        new ObjectsWithInlineLinkDataAdded(
-                            new ObjectsOfServer(
-                                connection
-                            )
+                        new ObjectsOfServer(
+                            connection
                         )
                     )
                 )

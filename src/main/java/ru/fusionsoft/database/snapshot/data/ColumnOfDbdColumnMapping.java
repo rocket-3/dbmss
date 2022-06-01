@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.data;
 import org.cactoos.scalar.NumberOf;
 import ru.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
 /**
  * The type of {@link Column} can be constructed of {@link DbdColumnMapping}.
@@ -33,18 +33,18 @@ public class ColumnOfDbdColumnMapping extends ColumnOfScalar {
     public ColumnOfDbdColumnMapping(final DbdColumnMapping column) {
         super(
             () -> new ColumnSimple(
-                new TextOfMappingValue(
+                new TextOfYamlMappingKeyValue(
                     column,
                     DbdColumnFields.DBNAME
                 ),
                 new NumberOf(
-                    new TextOfMappingValue(
+                    new TextOfYamlMappingKeyValue(
                         column,
                         DbdColumnFields.ORDER
                     )
                 ),
                 new ValueFormatOfIuType(
-                    new TextOfMappingValue(
+                    new TextOfYamlMappingKeyValue(
                         column,
                         DbdColumnFields.IUTYPE
                     )

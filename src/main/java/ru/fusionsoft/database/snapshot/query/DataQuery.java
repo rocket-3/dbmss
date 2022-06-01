@@ -31,7 +31,7 @@ import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
 /**
  * The {@link BasicQuery} for table data rows.
@@ -69,13 +69,13 @@ public class DataQuery extends BasicQuery<Text> {
                     new Joined(
                         new TextOf(",\n "),
                         new Mapped<Text>(
-                            x -> new TextOfMappingValue(
+                            x -> new TextOfYamlMappingKeyValue(
                                 x, DbdColumnFields.DBNAME
                             ),
                             new Sorted<>(
                                 Comparator.comparing(
                                     x -> new NumberOf(
-                                        new TextOfMappingValue(x, DbdColumnFields.ORDER)
+                                        new TextOfYamlMappingKeyValue(x, DbdColumnFields.ORDER)
                                     ).intValue()
                                 ),
                                 cols

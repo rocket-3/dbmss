@@ -23,8 +23,8 @@ import ru.fusionsoft.database.dbdreadable.DbdReadableMerged;
 import ru.fusionsoft.database.mapping.dbd.entry.DbdSchemasEntry;
 import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingValueOfObjects;
 import ru.fusionsoft.database.snapshot.DbObject;
+import ru.fusionsoft.database.snapshot.objects.generated.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.lib.path.writable.JoinedWritable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 

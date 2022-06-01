@@ -21,6 +21,7 @@ import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.func.UncheckedFunc;
 import org.cactoos.text.TextOf;
+import org.cactoos.text.UncheckedText;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.Dbms;
 
@@ -88,6 +89,20 @@ public class SimpleDbms implements Dbms {
     @Override
     public final Iterable<? extends DbObject<YamlNode>> objects(final Connection connection) {
         return new UncheckedFunc<>(this.objectsf).apply(connection);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        return o instanceof Dbms && new UncheckedText(
+            this.dbd()
+        ).asString().equals(
+            new UncheckedText(((SimpleDbms) o).dbd()).asString()
+        );
+    }
+
+    @Override
+    public int hashCode() {
+        return new UncheckedText(this.dbd()).asString().hashCode();
     }
 
 }

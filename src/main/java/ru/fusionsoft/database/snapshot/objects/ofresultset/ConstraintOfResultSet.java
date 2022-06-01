@@ -24,6 +24,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
 import ru.fusionsoft.database.mapping.entries.MultilineSqlScalarEntry;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdConstraintFields;
+import ru.fusionsoft.database.mapping.values.ConstraintTypeValues;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObjectOfEntries;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfResultSet;
@@ -65,7 +66,9 @@ public class ConstraintOfResultSet extends SimpleDbObjectOfEntries<DbdConstraint
                     () -> new MapOf<Boolean, Text>(
                         new MapEntry<>(true, DbdConstraintFields.SRC_FK_COL),
                         new MapEntry<>(false, DbdConstraintFields.SRC_PK_COL)
-                    ).get(type.asString().equals("FK")).asString()
+                    ).get(
+                        type.asString().equals(ConstraintTypeValues.FK.asString())
+                    ).asString()
                 ),
                 new YamlScalarSequenceOfResultSet(
                     query.outcomeFor(DbdConstraintFields.SRC_PK_COL),

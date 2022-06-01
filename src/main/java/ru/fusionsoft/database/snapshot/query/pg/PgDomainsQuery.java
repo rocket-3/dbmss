@@ -62,7 +62,7 @@ public class PgDomainsQuery extends PgMessageFormatQuery<DbdDomainFields> {
             DbdDomainFields.DOMAIN,
             DbdDomainFields.TYPE,
             DbdDomainFields.DEFAULT,
-            DbdDomainFields.ONWER,
+            DbdDomainFields.OWNER,
             DbdDomainFields.DESCRIPTION
         );
     }

@@ -143,7 +143,7 @@
                             <binFolder>bin</binFolder>
                             <programs>
                                 <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdNew</mainClass>
+                                    <mainClass>ru.fusionsoft.database.application.DbdInitAndFetchUrl</mainClass>
                                     <name>dbdnew</name>
                                     <jvmSettings>
                                         <extraArguments>

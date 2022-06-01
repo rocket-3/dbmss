@@ -24,7 +24,7 @@ import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
  * The type of db schema Objects of DBD/schemas/#schema node.
@@ -49,7 +49,7 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsJoined {
                 key
             ),
             new SimpleObjectName(
-                new TextOfScalarNode(key)
+                new TextOfYamlScalarNode(key)
             )
         );
     }
@@ -74,6 +74,55 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsJoined {
                 new YamlMappingOfPath(
                     mapping,
                     DbdSchemaFields.TABLES.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdSequencesMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.SEQUENCES.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdFunctionsMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.FUNCTIONS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdProceduresMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.PROCEDURES.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdViewsMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.VIEWS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdEnumsMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.ENUMS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdDomainsMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.DOMAINS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdTuplesMapping(
+                new YamlMappingOfPath(
+                    mapping,
+                    DbdSchemaFields.TUPLES.asString()
                 ),
                 schema
             )

@@ -26,7 +26,6 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.SnapshotCatalogName;
 import ru.fusionsoft.database.snapshot.SnapshotDefaultDescription;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
@@ -75,10 +74,8 @@ public class DbdReadableBuiltWithObjectsOfServer extends DbdReadableOfSnapshotOb
             server,
             time,
             new Sticky<>(
-                new ObjectsWithInlineLinkDataAdded(
-                    new ObjectsOfServer(
-                        server
-                    )
+                new ObjectsOfServer(
+                    server
                 )
             )
         );

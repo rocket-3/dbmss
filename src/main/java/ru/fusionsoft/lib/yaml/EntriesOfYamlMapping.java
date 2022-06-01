@@ -22,7 +22,7 @@ import org.cactoos.Text;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
  * The MapEntries of Text and YamlNode constructed of {@link YamlMapping}.
@@ -39,7 +39,7 @@ public class EntriesOfYamlMapping
         super(
             new Mapped<>(
                 entry -> new MapEntry<>(
-                    new TextOfScalarNode(entry.getKey()),
+                    new TextOfYamlScalarNode(entry.getKey()),
                     entry.getValue()
                 ),
                 new NodeEntriesOfYamlMapping(mapping)

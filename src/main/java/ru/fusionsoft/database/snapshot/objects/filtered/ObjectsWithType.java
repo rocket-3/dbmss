@@ -37,7 +37,7 @@ public class ObjectsWithType<T extends YamlNode> extends ObjectsCasted<T> {
      */
     public <Y extends YamlNode> ObjectsWithType(
         final ObjectType<T> type,
-        final Iterable<DbObject<Y>> origin
+        final Iterable<? extends DbObject<Y>> origin
     ) {
         super(
             type::node,

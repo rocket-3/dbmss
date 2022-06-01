@@ -35,7 +35,7 @@ public class ObjectsFiltered<Y extends YamlNode> extends IterableEnvelope<DbObje
      */
     public ObjectsFiltered(
         final Func<DbObject<Y>, Boolean> predicate,
-        final Iterable<DbObject<Y>> iterable
+        final Iterable<? extends DbObject<Y>> iterable
     ) {
         super(new Filtered<DbObject<Y>>(predicate, iterable));
     }

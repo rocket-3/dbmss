@@ -17,6 +17,7 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 
 import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
 import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
+import ru.fusionsoft.database.snapshot.objects.generated.ObjectsWithNotNullConstraintsAdded;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 
 /**
@@ -31,8 +32,10 @@ public class ObjectsOfDbdRootMapping extends ObjectsJoined {
      */
     public ObjectsOfDbdRootMapping(final DbdRootMapping mapping) {
         super(
-            new ObjectsOfDbdSchemasMapping(
-                new YamlMappingOfPath(mapping, "schemas")
+            new ObjectsWithNotNullConstraintsAdded(
+                new ObjectsOfDbdSchemasMapping(
+                    new YamlMappingOfPath(mapping, "schemas")
+                )
             )
         );
     }
