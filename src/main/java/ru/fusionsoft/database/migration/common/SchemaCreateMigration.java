@@ -24,12 +24,27 @@ import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The Migration to create schema of schema {@link DbObject} and DBMS specified.
+ * @since 0.1
+ */
 public class SchemaCreateMigration implements Migration {
 
+    /**
+     * The DbObject encapsulated.
+     */
     private final DbObject<DbdSchemaMapping> object;
 
+    /**
+     * The Dbms encapsulated.
+     */
     private final Dbms dbms;
 
+    /**
+     * Instantiates a new Schema create migration.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param dbms The {@link Dbms} to be encapsulated.
+     */
     public SchemaCreateMigration(
         final DbObject<DbdSchemaMapping> object,
         final Dbms dbms
@@ -39,7 +54,7 @@ public class SchemaCreateMigration implements Migration {
     }
 
     @Override
-    public Text description() {
+    public final Text description() {
         return new TextOfMessageFormat(
             "Creating schema {0}",
             () -> this.object.signature().name()
@@ -47,13 +62,13 @@ public class SchemaCreateMigration implements Migration {
     }
 
     @Override
-    public Text sql() {
+    public final Text sql() {
         return new TextOfDbmsConditional(
             new PgSchemaCreateSql(this.object),
             () -> "",
             () -> "",
             () -> "",
-            dbms
+            this.dbms
         );
     }
 

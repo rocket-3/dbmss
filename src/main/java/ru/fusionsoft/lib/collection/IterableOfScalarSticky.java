@@ -19,6 +19,12 @@ import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 
+/**
+ * {@link Scalar} of {@link Iterable} to {@link IterableEnvelope}.
+ *  We should replace it and all lazy style calculus.
+ * @param <T> The type parameter.
+ * @since 0.1
+ */
 public class IterableOfScalarSticky<T> extends IterableEnvelope<T> {
 
     /**

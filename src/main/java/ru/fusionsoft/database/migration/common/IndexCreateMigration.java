@@ -24,19 +24,34 @@ import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The Migration to create index of index {@link DbObject} and DBMS specified.
+ * @since 0.1
+ */
 public class IndexCreateMigration implements Migration {
 
+    /**
+     * The DbObject encapsulated.
+     */
     private final DbObject<DbdIndexMapping> object;
 
+    /**
+     * The Dbms encapsulated.
+     */
     private final Dbms dbms;
 
+    /**
+     * Instantiates a new Index create migration.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param dbms The {@link Dbms} to be encapsulated.
+     */
     public IndexCreateMigration(final DbObject<DbdIndexMapping> object, final Dbms dbms) {
         this.object = object;
         this.dbms = dbms;
     }
 
     @Override
-    public Text description() {
+    public final Text description() {
         return new TextOfMessageFormat(
             "Creating index {0} of table {1}",
             () -> this.object.signature().name().parent(),
@@ -45,7 +60,7 @@ public class IndexCreateMigration implements Migration {
     }
 
     @Override
-    public Text sql() {
+    public final Text sql() {
         return new TextOfDbmsConditional(
             new PgIndexCreateSql(this.object),
             () -> "",

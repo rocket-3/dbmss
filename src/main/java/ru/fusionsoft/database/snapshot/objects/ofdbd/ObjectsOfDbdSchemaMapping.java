@@ -24,6 +24,7 @@ import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
+import ru.fusionsoft.lib.yaml.YamlMappingOfPathOrEmpty;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
@@ -71,56 +72,56 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsJoined {
                 )
             ),
             new ObjectsOfDbdTablesMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.TABLES.asString()
                 ),
                 schema
             ),
             new ObjectsOfDbdSequencesMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.SEQUENCES.asString()
                 ),
                 schema
             ),
             new ObjectsOfDbdFunctionsMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.FUNCTIONS.asString()
                 ),
                 schema
             ),
             new ObjectsOfDbdProceduresMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.PROCEDURES.asString()
                 ),
                 schema
             ),
             new ObjectsOfDbdViewsMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.VIEWS.asString()
                 ),
                 schema
             ),
             new ObjectsOfDbdEnumsMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.ENUMS.asString()
                 ),
                 schema
             ),
             new ObjectsOfDbdDomainsMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.DOMAINS.asString()
                 ),
                 schema
             ),
             new ObjectsOfDbdTuplesMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.TUPLES.asString()
                 ),

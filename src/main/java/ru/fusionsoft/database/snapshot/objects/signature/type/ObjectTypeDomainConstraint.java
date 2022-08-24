@@ -17,6 +17,10 @@ package ru.fusionsoft.database.snapshot.objects.signature.type;
 
 import ru.fusionsoft.database.mapping.dbd.DbdDomainConstraintMapping;
 
+/**
+ * The only {@link SimpleObjectType} of {@link DbdDomainConstraintMapping} implementation.
+ * @since 0.1
+ */
 public class ObjectTypeDomainConstraint extends SimpleObjectType<DbdDomainConstraintMapping> {
 
     /**

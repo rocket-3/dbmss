@@ -20,8 +20,16 @@ import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.text.Newline;
 
+/**
+ * The {@link TextOfConditionsJoined}, but always with {@link Newline} as separator.
+ * @since 0.1
+ */
 public class TextOfConditionsLines extends TextOfConditionsJoined {
 
+    /**
+     * Instantiates a new Text of conditions lines.
+     * @param conditionals Conditionals
+     */
     public TextOfConditionsLines(
         final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals
     ) {
@@ -31,6 +39,10 @@ public class TextOfConditionsLines extends TextOfConditionsJoined {
         );
     }
 
+    /**
+     * Instantiates a new Text of conditions lines.
+     * @param conditionals Conditionals
+     */
     @SafeVarargs
     public TextOfConditionsLines(
         final Map.Entry<Scalar<Boolean>, Scalar<Text>>... conditionals

@@ -26,21 +26,26 @@ import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeEnum;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
+/**
+ * {@link SimpleDbObject} constructed of given 'enums' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectOfDbdEnumMapping extends SimpleDbObject<DbdEnumMapping> {
 
     /**
      * Instantiates a new Trigger of dbd mapping.
-     * @param functions The {@link YamlMapping} to be encapsulated.
+     * @param enums The {@link YamlMapping} to be encapsulated.
      * @param key The {@link YamlNode} to be encapsulated.
      * @param schema The {@link ObjectName} to be encapsulated.
      */
     public ObjectOfDbdEnumMapping(
-        final YamlMapping functions,
+        final YamlMapping enums,
         final YamlNode key,
         final ObjectName schema
     ) {
         this(
-            new DbdEnumMapping(new YamlMappingOfPath(functions, key)),
+            new DbdEnumMapping(new YamlMappingOfPath(enums, key)),
             new SimpleObjectName(
                 schema,
                 new TextOfYamlScalarNode(key)

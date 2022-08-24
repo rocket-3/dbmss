@@ -23,20 +23,31 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to create any sequence of given sequence {@link DbObject}.
+ * @since 0.1
+ */
 public class PgSequenceCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdSequenceMapping}.
+     */
     private final DbObject<DbdSequenceMapping> object;
 
+    /**
+     * Instantiates a new Pg sequence create sql.
+     * @param object The DbObject of {@link DbdSequenceMapping}.
+     */
     public PgSequenceCreateSql(final DbObject<DbdSequenceMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
             "CREATE SEQUENCE \"{0}\".\"{1}\" {2}{3}{4}{5}{6}{7};",
-            () -> object.signature().name().parent(),
-            () -> object.signature().name().first(),
+            () -> this.object.signature().name().parent(),
+            () -> this.object.signature().name().first(),
             () -> new TextOfObjectField(
                 this.object,
                 DbdSequenceFields.CYCLE,
@@ -76,8 +87,8 @@ public class PgSequenceCreateSql implements Text {
                 DbdSequenceFields.OWNER,
                 string -> new TextOfMessageFormat(
                     ";\nALTER SEQUENCE {0}.{1} OWNER TO {2}",
-                    object.signature().name().parent().asString(),
-                    object.signature().name().first().asString(),
+                    this.object.signature().name().parent().asString(),
+                    this.object.signature().name().first().asString(),
                     string
                 ),
                 () -> ""

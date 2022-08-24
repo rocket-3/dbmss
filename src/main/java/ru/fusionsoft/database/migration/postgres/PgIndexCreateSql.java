@@ -20,21 +20,33 @@ import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import ru.fusionsoft.database.mapping.fields.DbdIndexFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
+import ru.fusionsoft.database.text.ObjectDdlUnescaped;
 import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to create any index of given index {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgIndexCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdIndexMapping}.
+     */
     private final DbObject<DbdIndexMapping> object;
 
+    /**
+     * Instantiates a new Pg index create sql.
+     * @param object The DbObject of {@link DbdIndexMapping}.
+     */
     public PgIndexCreateSql(final DbObject<DbdIndexMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         final Text tablespace = new MaybeEmptyTextOfYamlMapping(
             this.object.asYaml(),
             DbdIndexFields.TABLESPACE
@@ -44,14 +56,11 @@ public class PgIndexCreateSql implements Text {
                 () -> true,
                 () -> new TextOfMessageFormat(
                     "{0};",
-                    () -> new TextOfObjectField(
-                        this.object,
-                        DbdIndexFields.DDL
-                    )
+                    () -> new ObjectDdlUnescaped(this.object)
                 )
             ),
             new MapEntry<>(
-                () -> ! tablespace.asString().isEmpty(),
+                () -> !tablespace.asString().isEmpty(),
                 () -> new TextOfMessageFormat(
                     "ALTER INDEX {0} SET TABLESPACE {1};",
                     () -> this.object.signature().name().first(),

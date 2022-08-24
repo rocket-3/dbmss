@@ -20,7 +20,6 @@ import java.sql.Connection;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.snapshot.dbms.DbmsOfConnection;
-import ru.fusionsoft.database.snapshot.objects.generated.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.database.snapshot.objects.generated.ObjectsWithNotNullConstraintsAdded;
 
 /**
@@ -45,9 +44,7 @@ public class ObjectsOfServer extends ObjectsOfConnection<YamlNode> {
         super(
             connection,
             c -> new ObjectsWithNotNullConstraintsAdded(
-                new ObjectsWithInlineLinkDataAdded(
-                    new DbmsOfConnection(c).objects(c)
-                )
+                new DbmsOfConnection(c).objects(c)
             )
         );
     }

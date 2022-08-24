@@ -24,10 +24,21 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to drop any constraint of given constraint {@link DbObject}.
+ * @since 0.1
+ */
 public class PgConstraintDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdConstraintMapping}.
+     */
     private final DbObject<DbdConstraintMapping> object;
 
+    /**
+     * Instantiates a new Pg constraint drop sql.
+     * @param object The DbObject of {@link DbdConstraintMapping}.
+     */
     public PgConstraintDropSql(final DbObject<DbdConstraintMapping> object) {
         this.object = object;
     }
@@ -42,14 +53,14 @@ public class PgConstraintDropSql implements Text {
                 ConstraintTypeValues.NOT_NULL.asString()
             ),
             () -> new TextOfMessageFormat(
-                "ALTER TABLE {0}.{1} ALTER COLUMN {2} SET NULL;",
+                "ALTER TABLE {0}.{1} ALTER COLUMN {2} DROP NOT NULL;",
                 () -> this.object.signature().name().parent().parent(),
                 () -> this.object.signature().name().parent().first(),
                 () -> new TextOfObjectField(this.object, DbdConstraintFields.SRC_PK_COL)
             ).asString(),
             () -> new TextOfMessageFormat(
                 "ALTER TABLE {0}.{1} DROP CONSTRAINT {2};",
-                () -> this.object.signature().name().parent().parent(),
+                () -> this.object.signature().name().parent().parent().first(),
                 () -> this.object.signature().name().parent().first(),
                 () -> this.object.signature().name().first()
             ).asString()

@@ -15,33 +15,47 @@
  */
 package ru.fusionsoft.database.migration.postgres;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
-import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsOfTable;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
 import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectFieldExistence;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
+import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectNameOfText;
 import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.database.text.TextOfConditionsSpaced;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
+/**
+ * The sql Text for Postgres DBMS to create any table of given table {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines).
+ */
+@SuppressWarnings("PMD.ExcessiveMethodLength")
 public class PgTableCreateSql implements Text {
 
-    private final DbObject<DbdTableMapping> object;
+    /**
+     * The DbObject of table.
+     */
+    private final DbObject<? extends YamlNode> object;
 
-    public PgTableCreateSql(final DbObject<DbdTableMapping> object) {
+    /**
+     * Instantiates a new Pg table create sql.
+     * @param object The DbObject of table.
+     */
+    public PgTableCreateSql(final DbObject<? extends YamlNode> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,
@@ -84,7 +98,7 @@ public class PgTableCreateSql implements Text {
                                             )
                                         )
                                     ),
-                                    new DbdColumnMappingsOfTable(
+                                    new DbdColumnsOfTable(
                                         this.object
                                     )
                                 )
@@ -131,8 +145,13 @@ public class PgTableCreateSql implements Text {
                 () -> new TextOfMessageFormat(
                     "ALTER TABLE {0}.{1} ATTACH PARTITION {0}.{2} {3};",
                     () -> this.object.signature().name().parent(),
+                    () -> new SimpleObjectNameOfText(
+                        new TextOfObjectField(
+                            this.object,
+                            DbdTableFields.PARENT
+                        )
+                    ).first(),
                     () -> this.object.signature().name().first(),
-                    () -> new TextOfObjectField(this.object, DbdTableFields.PARENT),
                     () -> new TextOfObjectField(this.object, DbdTableFields.PARTKEYRANGE)
                 )
             )

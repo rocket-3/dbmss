@@ -15,6 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
@@ -35,7 +36,7 @@ public interface ObjectSignature extends Text {
      * The DBMS type of object text.
      * @return The object type.
      */
-    ObjectType<?> type();
+    ObjectType<? extends YamlNode> type();
 
     /**
      * Overridden contract of {@link Text} w/0 exception thrown.

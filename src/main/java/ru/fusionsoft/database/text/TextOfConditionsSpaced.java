@@ -20,14 +20,26 @@ import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.text.TextOf;
 
+/**
+ * The {@link TextOfConditionsJoined}, but always with one space as separator.
+ * @since 0.1
+ */
 public class TextOfConditionsSpaced extends TextOfConditionsJoined {
 
+    /**
+     * Instantiates a new Text of conditions spaced.
+     * @param conditionals The conditionals
+     */
     public TextOfConditionsSpaced(
         final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals
     ) {
         super(new TextOf(" "), conditionals);
     }
 
+    /**
+     * Instantiates a new Text of conditions spaced.
+     * @param conditionals The conditionals
+     */
     @SafeVarargs
     public TextOfConditionsSpaced(final Map.Entry<Scalar<Boolean>, Scalar<Text>>... conditionals) {
         super(new TextOf(" "), conditionals);

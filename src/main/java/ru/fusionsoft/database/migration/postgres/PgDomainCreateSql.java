@@ -33,16 +33,29 @@ import ru.fusionsoft.database.snapshot.objects.generated.ConstraintsOfDomain;
 import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to create any domain UDT of given domain UDT {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines).
+ * @checkstyle BracketsStructureCheck (200 lines).
+ */
 public class PgDomainCreateSql implements Text {
 
+    /**
+     * The The DbObject of {@link DbdDomainMapping}.
+     */
     private final DbObject<DbdDomainMapping> object;
 
+    /**
+     * Instantiates a new Pg domain create sql.
+     * @param object The DbObject of {@link DbdDomainMapping}.
+     */
     public PgDomainCreateSql(final DbObject<DbdDomainMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,

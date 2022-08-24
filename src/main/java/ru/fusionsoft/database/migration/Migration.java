@@ -17,10 +17,22 @@ package ru.fusionsoft.database.migration;
 
 import org.cactoos.Text;
 
+/**
+ * The interface representing some sql migration.
+ * @since 0.1
+ */
 public interface Migration {
 
+    /**
+     * Description text.
+     * @return The text.
+     */
     Text description();
 
+    /**
+     * Sql text.
+     * @return The text.
+     */
     Text sql();
 
 }

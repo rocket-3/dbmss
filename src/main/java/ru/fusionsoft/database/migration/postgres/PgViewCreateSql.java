@@ -20,21 +20,32 @@ import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdViewMapping;
 import ru.fusionsoft.database.mapping.fields.DbdViewFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
+import ru.fusionsoft.database.text.ObjectDdlUnescaped;
 import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to create any view of given view {@link DbObject}.
+ * @since 0.1
+ */
 public class PgViewCreateSql implements Text {
 
+    /**
+     * The The DbObject of {@link DbdViewMapping}.
+     */
     private final DbObject<DbdViewMapping> object;
 
+    /**
+     * Instantiates a new Pg view create sql.
+     * @param object The DbObject of {@link DbdViewMapping}.
+     */
     public PgViewCreateSql(final DbObject<DbdViewMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         final Text owner = new MaybeEmptyTextOfYamlMapping(
             this.object.asYaml(),
             DbdViewFields.OWNER
@@ -44,10 +55,7 @@ public class PgViewCreateSql implements Text {
                 () -> true,
                 () -> new TextOfMessageFormat(
                     "{0};",
-                    () -> new TextOfObjectField(
-                        this.object,
-                        DbdViewFields.DDL
-                    )
+                    () -> new ObjectDdlUnescaped(this.object)
                 )
             ),
             new MapEntry<>(

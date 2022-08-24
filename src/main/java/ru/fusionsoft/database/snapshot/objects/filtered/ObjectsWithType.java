@@ -17,34 +17,27 @@ package ru.fusionsoft.database.snapshot.objects.filtered;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.ObjectsCasted;
 import ru.fusionsoft.database.snapshot.objects.ObjectsFiltered;
-import ru.fusionsoft.database.snapshot.objects.predicate.ObjectHasTypePredicate;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
- * The {@link Iterable} of {@link DbObject}s filtered by {@link ObjectType}.
- * @param <T> The type of {@link ObjectType} parameter.
+ * Objects filtered by having specific {@link ObjectType}.
  * @since 0.1
  */
-public class ObjectsWithType<T extends YamlNode> extends ObjectsCasted<T> {
+public class ObjectsWithType extends ObjectsFiltered<YamlNode> {
 
     /**
      * Instantiates a new Objects with type.
      * @param type The {@link ObjectType} to be encapsulated.
-     * @param origin The {@link Iterable} of {@link DbObject}s to be encapsulated.
-     * @param <Y> The type of YamlNode parameter.
+     * @param origin The {@link DbObject}'s iterable to be encapsulated.
      */
-    public <Y extends YamlNode> ObjectsWithType(
-        final ObjectType<T> type,
-        final Iterable<? extends DbObject<Y>> origin
+    public ObjectsWithType(
+        final ObjectType<?> type,
+        final Iterable<DbObject<YamlNode>> origin
     ) {
         super(
-            type::node,
-            new ObjectsFiltered<>(
-                new ObjectHasTypePredicate<>(type),
-                origin
-            )
+            object -> object.signature().type().equalsTo(type),
+            origin
         );
     }
 

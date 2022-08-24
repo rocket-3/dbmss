@@ -19,21 +19,32 @@ import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * The {@link Migration} that uses {@link Scalar} returning value as delegate.
+ * @since 0.1
+ */
 public class MigrationOfScalar implements Migration {
 
+    /**
+     * The {@link Unchecked} of Migration encapsulated.
+     */
     private final Unchecked<Migration> origin;
 
+    /**
+     * Instantiates a new Migration of scalar.
+     * @param origin The {@link Scalar} of Migration to be encapsulated.
+     */
     public MigrationOfScalar(final Scalar<Migration> origin) {
         this.origin = new Unchecked<>(origin);
     }
 
     @Override
-    public Text description() {
+    public final Text description() {
         return this.origin.value().description();
     }
 
     @Override
-    public Text sql() {
+    public final Text sql() {
         return this.origin.value().sql();
     }
 

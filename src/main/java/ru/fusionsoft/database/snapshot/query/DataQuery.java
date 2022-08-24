@@ -27,7 +27,7 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsOfTable;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
@@ -47,7 +47,7 @@ public class DataQuery extends BasicQuery<Text> {
     public DataQuery(final DbObject<DbdTableMapping> table) {
         this(
             table.signature().name(),
-            new DbdColumnMappingsOfTable(table)
+            new DbdColumnsOfTable(table)
         );
     }
 

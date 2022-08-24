@@ -58,4 +58,14 @@ public class ObjectSignatureOfScalar implements ObjectSignature {
         return this.scalar.value().equalsTo(other);
     }
 
+    @Override
+    public final boolean equals(final Object obj) {
+        return this.scalar.value().equals(obj);
+    }
+
+    @Override
+    public final int hashCode() {
+        return this.scalar.hashCode();
+    }
+
 }

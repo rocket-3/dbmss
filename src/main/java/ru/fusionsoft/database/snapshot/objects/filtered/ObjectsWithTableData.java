@@ -38,7 +38,7 @@ public class ObjectsWithTableData extends IterableEnvelope<DbObject<DbdTableMapp
         super(
             new Filtered<DbObject<DbdTableMapping>>(
                 new ObjectHasDataNodePredicate(),
-                new ObjectsWithType<>(
+                new ObjectsWithTypeCasted<>(
                     new ObjectTypeTable(),
                     origin
                 )

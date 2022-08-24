@@ -29,7 +29,8 @@ import ru.fusionsoft.database.snapshot.objects.predicate.ObjectMentionedInObject
  * @param <T> The type of {@link YamlNode} parameter.
  * @since 0.1
  */
-public class ObjectsNotMentionedInObjects<T extends YamlNode> extends IterableEnvelope<DbObject<T>> {
+public class ObjectsNotMentionedInObjects<T extends YamlNode>
+    extends IterableEnvelope<DbObject<T>> {
 
     /**
      * Instantiates a new Objects not mentioned in.

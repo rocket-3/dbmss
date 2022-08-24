@@ -22,16 +22,20 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
+/**
+ * Sequences {@link DbObject}s extracted of 'sequences' mapping.
+ * @since 0.1
+ */
 public class ObjectsOfDbdSequencesMapping extends IterableEnvelope<DbObject<DbdSequenceMapping>> {
 
     /**
      * Instantiates a new Objects of sequences.
      * @param sequences The YamlMapping to be encapsulated.
-     * @param schema The Text to be encapsulated.
+     * @param schema Parent schema.
      */
     public ObjectsOfDbdSequencesMapping(final YamlMapping sequences, final ObjectName schema) {
         super(
-            new IterableOfClassFromYamlNode<DbObject<DbdSequenceMapping>>(
+            new IterableOfClassFromYamlNode<>(
                 (parent, key) -> new ObjectsOfDbdSequenceMapping(parent, key, schema),
                 sequences
             )

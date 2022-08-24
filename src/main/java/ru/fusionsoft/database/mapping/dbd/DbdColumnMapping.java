@@ -16,11 +16,8 @@
 package ru.fusionsoft.database.mapping.dbd;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import org.cactoos.Text;
-import org.cactoos.iterable.IterableOf;
-import ru.fusionsoft.lib.yaml.YamlMappingHasKeys;
+import org.cactoos.scalar.Sticky;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
-import ru.fusionsoft.lib.yaml.YamlNodeValidated;
 
 /**
  * The DBD/schemas/#schema/tables/#table/columns/# node mapping.
@@ -34,13 +31,12 @@ public class DbdColumnMapping extends YamlMappingOfScalar {
      */
     public DbdColumnMapping(final YamlMapping mapping) {
         super(
-            () -> new YamlNodeValidated(
-                new DbdColumnValidation(),
-                new YamlMappingHasKeys(
-                    mapping,
-                    new IterableOf<Text>()
-                )
-            ).asMapping()
+            new Sticky<>(
+                () -> {
+                    new DbdColumnValidation().exec(mapping);
+                    return mapping;
+                }
+            )
         );
     }
 

@@ -24,12 +24,27 @@ import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The Migration to drop sequence of sequence {@link DbObject} and DBMS specified.
+ * @since 0.1
+ */
 public class SequenceDropMigration implements Migration {
 
+    /**
+     * The DbObject encapsulated.
+     */
     private final DbObject<DbdSequenceMapping> object;
 
+    /**
+     * The Dbms encapsulated.
+     */
     private final Dbms dbms;
 
+    /**
+     * Instantiates a new Sequence drop migration.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param dbms The {@link Dbms} to be encapsulated.
+     */
     public SequenceDropMigration(
         final DbObject<DbdSequenceMapping> object,
         final Dbms dbms
@@ -39,7 +54,7 @@ public class SequenceDropMigration implements Migration {
     }
 
     @Override
-    public Text description() {
+    public final Text description() {
         return new TextOfMessageFormat(
             "Dropping sequence {0}",
             () -> this.object.signature().name()
@@ -47,13 +62,13 @@ public class SequenceDropMigration implements Migration {
     }
 
     @Override
-    public Text sql() {
+    public final Text sql() {
         return new TextOfDbmsConditional(
             new PgSequenceDropSql(this.object),
             () -> "",
             () -> "",
             () -> "",
-            dbms
+            this.dbms
         );
     }
 

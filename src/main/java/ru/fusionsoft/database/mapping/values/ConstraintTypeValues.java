@@ -13,27 +13,54 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package ru.fusionsoft.database.mapping.values;
 
 import org.cactoos.Text;
 
+/**
+ * The enum of all known DBMS constraints types.
+ */
 public enum ConstraintTypeValues implements Text {
+    /**
+     * Primary key.
+     */
     PK("PK"),
+    /**
+     * Foreign key.
+     */
     FK("FK"),
+    /**
+     * Not null.
+     */
     NOT_NULL("NN"),
+    /**
+     * General check.
+     */
     CHECK("CHECK"),
+    /**
+     * Unique constraint.
+     */
     UNIQUE("UNIQUE"),
+    /**
+     * Exclude constraint.
+     */
     EXCLUDE("EXCLUDE");
 
+    /**
+     * The String encapsulated.
+     */
     private final String string;
 
+    /**
+     * Instantiates a new Constraint type values.
+     * @param string The {@link String} to be encapsulated.
+     */
     ConstraintTypeValues(final String string) {
         this.string = string;
     }
 
     @Override
-    public String asString()  {
+    public String asString() {
         return this.string;
     }
 

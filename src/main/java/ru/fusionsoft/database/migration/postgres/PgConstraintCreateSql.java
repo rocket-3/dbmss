@@ -22,12 +22,24 @@ import ru.fusionsoft.database.mapping.fields.DbdConstraintFields;
 import ru.fusionsoft.database.mapping.values.ConstraintTypeValues;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
+import ru.fusionsoft.database.text.ObjectDdlUnescaped;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to create any constraint of given constraint {@link DbObject}.
+ * @since 0.1
+ */
 public class PgConstraintCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdConstraintMapping} encapsulated.
+     */
     private final DbObject<DbdConstraintMapping> object;
 
+    /**
+     * Instantiates a new Pg constraint create sql.
+     * @param object The DbObject of {@link DbdConstraintMapping}.
+     */
     public PgConstraintCreateSql(final DbObject<DbdConstraintMapping> object) {
         this.object = object;
     }
@@ -43,16 +55,16 @@ public class PgConstraintCreateSql implements Text {
             ),
             () -> new TextOfMessageFormat(
                 "ALTER TABLE {0}.{1} ALTER COLUMN {2} SET NOT NULL;",
-                () -> this.object.signature().name().parent().parent(),
+                () -> this.object.signature().name().parent().parent().first(),
                 () -> this.object.signature().name().parent().first(),
                 () -> new TextOfObjectField(this.object, DbdConstraintFields.SRC_PK_COL)
             ),
             () -> new TextOfMessageFormat(
                 "ALTER TABLE {0}.{1} ADD CONSTRAINT {2} {3};",
-                () -> this.object.signature().name().parent().parent(),
+                () -> this.object.signature().name().parent().parent().first(),
                 () -> this.object.signature().name().parent().first(),
                 () -> this.object.signature().name().first(),
-                () -> new TextOfObjectField(this.object, DbdConstraintFields.DDL)
+                () -> new ObjectDdlUnescaped(this.object)
             )
         ).value().asString();
     }

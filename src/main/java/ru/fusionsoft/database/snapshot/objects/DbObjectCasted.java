@@ -20,6 +20,7 @@ import org.cactoos.Func;
 import org.cactoos.func.UncheckedFunc;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.ObjectSignature;
+import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
 
 /**
  * The type of that can be constructed of.
@@ -46,6 +47,18 @@ public class DbObjectCasted<T extends YamlNode> implements DbObject<T> {
     public DbObjectCasted(final Func<? super YamlNode, T> cast, final DbObject<?> object) {
         this.object = object;
         this.cast = new UncheckedFunc<>(cast);
+    }
+
+    /**
+     * Instantiates a new Object casted.
+     * @param type The {@link ObjectType} to cast to.
+     * @param object The {@link DbObject} to be encapsulated.
+     */
+    public DbObjectCasted(final ObjectType<T> type, final DbObject<?> object) {
+        this(
+            type::node,
+            object
+        );
     }
 
     @Override

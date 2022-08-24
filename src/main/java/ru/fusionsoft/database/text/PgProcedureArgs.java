@@ -15,26 +15,37 @@
  */
 package ru.fusionsoft.database.text;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
 import org.cactoos.text.Replaced;
 import ru.fusionsoft.database.mapping.fields.DbdProcedureFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * Args signature inside braces for Postgres procedure {@link Text} of procedure {@link DbObject}.
+ * @since 0.1
+ */
 public class PgProcedureArgs implements Text {
 
-    private final DbObject<? extends YamlMapping> object;
+    /**
+     * The Object.
+     */
+    private final DbObject<? extends YamlNode> object;
 
-    public PgProcedureArgs(final DbObject<? extends YamlMapping> object) {
+    /**
+     * Instantiates a new Pg procedure args.
+     * @param object The object
+     */
+    public PgProcedureArgs(final DbObject<? extends YamlNode> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() throws Exception {
+    public final String asString() throws Exception {
         return new Replaced(
             new MaybeEmptyTextOfYamlMapping(
-                this.object.asYaml(),
+                this.object.asYaml().asMapping(),
                 DbdProcedureFields.ARGUMENTS
             ),
             "(\\w+ \\w+) (DEFAULT [^\\,\\n]+)(\\,|\\b)",

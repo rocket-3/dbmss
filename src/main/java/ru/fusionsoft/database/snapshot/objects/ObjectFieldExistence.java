@@ -15,22 +15,37 @@
  */
 package ru.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
 import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
+/**
+ * Is specific field of {@link YamlRepresentative} has value?.
+ * @since 0.1
+ */
 public class ObjectFieldExistence implements Scalar<Boolean> {
 
+    /**
+     * The TextOfObjectFieldMaybeEmpty encapsulated.
+     */
     private final TextOfObjectFieldMaybeEmpty field;
 
-    public ObjectFieldExistence(final YamlRepresentative<? extends YamlMapping> object, final Text field) {
+    /**
+     * Instantiates a new Object field existence.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     */
+    public ObjectFieldExistence(
+        final YamlRepresentative<? extends YamlNode> object,
+        final Text field
+    ) {
         this.field = new TextOfObjectFieldMaybeEmpty(object, field);
     }
 
     @Override
-    public Boolean value() {
-        return !field.asString().isEmpty();
+    public final Boolean value() {
+        return !this.field.asString().isEmpty();
     }
 
 }

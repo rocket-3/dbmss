@@ -16,36 +16,35 @@
 package ru.fusionsoft.database.migration.postgres;
 
 import org.cactoos.Text;
-import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
-import ru.fusionsoft.database.mapping.fields.DbdTriggerFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.text.TextOfConditionsLines;
+import ru.fusionsoft.database.text.ObjectDdlUnescaped;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
-import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to create any trigger of given trigger {@link DbObject}.
+ * @since 0.1
+ */
 public class PgTriggerCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdTriggerMapping}.
+     */
     private final DbObject<DbdTriggerMapping> object;
 
+    /**
+     * Instantiates a new Pg trigger create sql.
+     * @param object The DbObject of {@link DbdTriggerMapping}.
+     */
     public PgTriggerCreateSql(final DbObject<DbdTriggerMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
-        final Text ddl = new MaybeEmptyTextOfYamlMapping(
-            this.object.asYaml(),
-            DbdTriggerFields.DDL
-        );
-        return new TextOfConditionsLines(
-            new MapEntry<>(
-                () -> !ddl.asString().isEmpty(),
-                () -> new TextOfMessageFormat(
-                    "{0};",
-                    () -> ddl
-                )
-            )
+    public final String asString() {
+        return new TextOfMessageFormat(
+            "{0};",
+            () -> new ObjectDdlUnescaped(this.object)
         ).asString();
     }
 

@@ -24,7 +24,7 @@ import ru.fusionsoft.database.snapshot.objects.signature.ObjectType;
  * @param <T> The type of {@link YamlNode} parameter.
  * @since 0.1
  */
-public class ObjectsWithParentAndType<T extends YamlNode> extends ObjectsWithType<T> {
+public class ObjectsWithParentAndType<T extends YamlNode> extends ObjectsWithTypeCasted<T> {
 
     /**
      * Instantiates a new Objects with parent and type.

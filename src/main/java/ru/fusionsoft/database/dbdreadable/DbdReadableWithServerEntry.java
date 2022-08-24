@@ -21,8 +21,17 @@ import ru.fusionsoft.database.mapping.dbd.DbdServersMappingOfEntries;
 import ru.fusionsoft.database.mapping.dbd.entry.DbdServersEntry;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
+/**
+ * The {@link DbdReadable} with {@link DbdServerEntry} added inside.
+ * @since 0.1
+ */
 public class DbdReadableWithServerEntry extends DbdReadableMerged {
 
+    /**
+     * Instantiates a new Dbd readable with server entry.
+     * @param original The {@link DbdReadable} to be encapsulated.
+     * @param server The {@link DbdServerEntry} to be encapsulated.
+     */
     public DbdReadableWithServerEntry(final DbdReadable original, final DbdServerEntry server) {
         super(
             original,

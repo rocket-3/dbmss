@@ -15,24 +15,38 @@
  */
 package ru.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import org.cactoos.text.TextOf;
 import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
+/**
+ * Its like {@link TextOfObjectField}, but with empty string placeholder for absent fields values.
+ * @since 0.1
+ */
 public class TextOfObjectFieldMaybeEmpty extends TextOfObjectField {
 
+    /**
+     * Instantiates a new Text of object field maybe empty.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     * @param presence Transformation if field present.
+     */
     public TextOfObjectFieldMaybeEmpty(
-        final YamlRepresentative<? extends YamlMapping> object,
+        final YamlRepresentative<?> object,
         final Text field,
         final Func<String, Text> presence
     ) {
         super(object, field, presence, new TextOf(""));
     }
 
+    /**
+     * Instantiates a new Text of object field maybe empty.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     */
     public TextOfObjectFieldMaybeEmpty(
-        final YamlRepresentative<? extends YamlMapping> object,
+        final YamlRepresentative<?> object,
         final Text field
     ) {
         super(object, field, new TextOf(""));

@@ -43,7 +43,7 @@ public class SnapshotDefaultDescription implements Text {
     @Override
     public final String asString() {
         return MessageFormat.format(
-            "Clean snapshot of database at {0}",
+            "Snapshot of database at {0}",
             new TextOfYamlMappingKeyValue(
                 this.mapping,
                 DbdServerFields.URL

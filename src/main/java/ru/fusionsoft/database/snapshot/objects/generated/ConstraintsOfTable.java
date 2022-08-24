@@ -15,6 +15,7 @@
  */
 package ru.fusionsoft.database.snapshot.objects.generated;
 
+import ru.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.mapping.fields.DbdTableFields;
 import ru.fusionsoft.database.snapshot.DbObject;
@@ -22,8 +23,16 @@ import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfConstraintsMapping
 import ru.fusionsoft.database.snapshot.objects.signature.name.ObjectNameOfScalar;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
 
+/**
+ * Constraints {@link DbObject}'s extracted of {@link DbdDomainMapping} {@link DbObject}.
+ * @since 0.1
+ */
 public class ConstraintsOfTable extends ObjectsOfConstraintsMapping {
 
+    /**
+     * Instantiates a new Constraints of table.
+     * @param table The {@link DbObject} of {@link DbdDomainMapping} to be encapsulated.
+     */
     public ConstraintsOfTable(final DbObject<DbdTableMapping> table) {
         super(
             new YamlMappingOfScalar(table::asYaml),

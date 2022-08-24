@@ -21,6 +21,7 @@ import org.cactoos.iterable.Mapped;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import ru.fusionsoft.database.snapshot.Dbms;
+import ru.fusionsoft.lib.collection.StrictMap;
 
 /**
  * The type of {@link Dbms} that can be constructed of Scalar.
@@ -35,14 +36,16 @@ public class DbmsOfText extends DbmsOfScalar {
      */
     public DbmsOfText(final Text text) {
         super(
-            () -> new MapOf<String, Dbms>(
-                new Mapped<>(
-                    x -> new MapEntry<>(x.dbd().asString(), x),
-                    new IterableOf<Dbms>(
-                        new PostgresDbms(),
-                        new MySqlDbms(),
-                        new OracleDbms(),
-                        new MsSqlDbms()
+            () -> new StrictMap<>(
+                new MapOf<String, Dbms>(
+                    new Mapped<>(
+                        x -> new MapEntry<>(x.dbd().asString(), x),
+                        new IterableOf<Dbms>(
+                            new PostgresDbms(),
+                            new MySqlDbms(),
+                            new OracleDbms(),
+                            new MsSqlDbms()
+                        )
                     )
                 )
             ).get(text.asString())

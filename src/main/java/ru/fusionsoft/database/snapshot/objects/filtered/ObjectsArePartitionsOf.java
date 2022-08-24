@@ -43,7 +43,7 @@ public class ObjectsArePartitionsOf<T extends YamlNode>
         final Iterable<? extends DbObject<Y>> filter
     ) {
         super(
-            new ObjectsWithType<>(
+            new ObjectsWithTypeCasted<>(
                 new ObjectTypeTable(),
                 new Filtered<>(
                     new TargetObjectParentIsOneOfObjectsPredicate(filter),

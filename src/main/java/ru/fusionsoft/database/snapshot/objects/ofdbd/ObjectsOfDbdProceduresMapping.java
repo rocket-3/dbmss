@@ -23,6 +23,11 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
+/**
+ * Procedures {@link DbObject}'s constructed of given 'procedures' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectsOfDbdProceduresMapping extends IterableEnvelope<DbObject<DbdProcedureMapping>> {
 
     /**

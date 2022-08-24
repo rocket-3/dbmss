@@ -22,7 +22,7 @@ import org.cactoos.iterable.Sorted;
 import org.cactoos.iterable.Sticky;
 import ru.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsOfTable;
 import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
@@ -55,7 +55,7 @@ public class ColumnsOfTable extends IterableEnvelope<Column> {
      */
     public ColumnsOfTable(final DbObject<DbdTableMapping> table) {
         this(
-            new DbdColumnMappingsOfTable(
+            new DbdColumnsOfTable(
                 table
             )
         );
@@ -67,7 +67,7 @@ public class ColumnsOfTable extends IterableEnvelope<Column> {
      */
     public ColumnsOfTable(final DbdTableMapping mapping) {
         this(
-            new DbdColumnMappingsOfTable(
+            new DbdColumnsOfTable(
                 mapping
             )
         );

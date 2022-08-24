@@ -23,10 +23,17 @@ import org.llorllale.cactoos.matchers.IsText;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
+/**
+ * The tests for {@link  YamlMappingOfEntries}.
+ * @since 0.1
+ */
 class YamlMappingOfEntriesTest {
 
+    /**
+     * Latter non unique entry rewrites previous.
+     */
     @Test
-    public void latterMathingEntriesRewritesPrevious() {
+    public void latterNonUniqueEntryRewritesPrevious() {
         final Text kfirst = () -> "kfirst";
         final Text ksecond = () -> "ksecond";
         final Text vfirst = () -> "vfirst";

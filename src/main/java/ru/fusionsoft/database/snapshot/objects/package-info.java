@@ -15,6 +15,6 @@
  */
 
 /**
- * Ways to get {@link ru.fusionsoft.database.snapshot.Objects}.
+ * Ways to work with {@link ru.fusionsoft.database.snapshot.DbObject}.
  */
 package ru.fusionsoft.database.snapshot.objects;

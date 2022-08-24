@@ -16,7 +16,6 @@
 package ru.fusionsoft.database.migration.common;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.migration.Migration;
 import ru.fusionsoft.database.migration.postgres.PgTableDropSql;
 import ru.fusionsoft.database.snapshot.DbObject;
@@ -24,14 +23,29 @@ import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The Migration to drop table of table {@link DbObject} and DBMS specified.
+ * @since 0.1
+ */
 public class TableDropMigration implements Migration {
 
-    private final DbObject<DbdTableMapping> object;
+    /**
+     * The DbObject encapsulated.
+     */
+    private final DbObject<?> object;
 
+    /**
+     * The Dbms encapsulated.
+     */
     private final Dbms dbms;
 
+    /**
+     * Instantiates a new Table drop migration.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param dbms The {@link Dbms} to be encapsulated.
+     */
     public TableDropMigration(
-        final DbObject<DbdTableMapping> object,
+        final DbObject<?> object,
         final Dbms dbms
     ) {
         this.object = object;
@@ -39,7 +53,7 @@ public class TableDropMigration implements Migration {
     }
 
     @Override
-    public Text description() {
+    public final Text description() {
         return new TextOfMessageFormat(
             "Dropping table {0}",
             () -> this.object.signature().name()
@@ -47,13 +61,13 @@ public class TableDropMigration implements Migration {
     }
 
     @Override
-    public Text sql() {
+    public final Text sql() {
         return new TextOfDbmsConditional(
             new PgTableDropSql(this.object),
             () -> "",
             () -> "",
             () -> "",
-            dbms
+            this.dbms
         );
     }
 

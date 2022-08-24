@@ -19,18 +19,27 @@ import java.nio.file.Path;
 import org.cactoos.Func;
 import org.cactoos.Output;
 import org.cactoos.io.DeadOutput;
+import org.cactoos.io.InputOf;
+import org.cactoos.io.OutputTo;
+import org.cactoos.io.ResourceOf;
+import org.cactoos.io.Stdout;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.text.Replaced;
 import org.cactoos.text.TextOf;
 import org.junit.jupiter.api.Test;
 import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
+import ru.fusionsoft.database.text.FixMark;
 import ru.fusionsoft.lib.path.CurrentWorkingDirectory;
 import ru.fusionsoft.lib.path.Directory;
 import ru.fusionsoft.lib.path.UncheckedTempFolder;
 import ru.fusionsoft.lib.runnable.ProcessRunnable;
+import ru.fusionsoft.lib.runnable.WriteTo;
 import ru.fusionsoft.lib.runnable.process.ArgsExplicit;
 import ru.fusionsoft.lib.runnable.process.ArgsRunningExecutable;
+import ru.fusionsoft.lib.yaml.SimpleYamlRepresentative;
+import ru.fusionsoft.lib.yaml.YamlMappingOf;
 
 /**
  * The tests for @{@link ru.fusionsoft.database.application} package.
@@ -114,6 +123,97 @@ class ApplicationTest {
                     executable.apply("dbdmerge"),
                     new ArgsExplicit(
                         "pagilla"
+                    )
+                ),
+                output
+            )
+        )) {
+            runnable.run();
+        }
+    }
+
+    /**
+     * Runs something.
+     * @throws Exception When can't.
+     */
+    @Test
+    public void canTouchThis() throws Exception {
+        final Directory directory = () -> new CurrentWorkingDirectory().value()
+            .resolve("target")
+            .resolve("api")
+            .resolve("bin");
+        final Directory executable = () -> directory.value().resolve("dbd");
+        final Output output = new Stdout();
+        for (final Runnable runnable : new IterableOf<Runnable>(
+            new ProcessRunnable(
+                new CurrentWorkingDirectory(),
+                new ArgsRunningExecutable(
+                    new TextOf("mvn"),
+                    new ArgsExplicit(
+                        "clean",
+                        "install",
+                        "-P",
+                        "api",
+                        "-D",
+                        "skipTests"
+                    )
+                ),
+                output
+            ),
+            () -> {
+                new WriteTo(
+                    new SimpleYamlRepresentative<>(
+                        new YamlMappingOf(
+                            new ResourceOf("db2.yaml")
+                        )
+                    ),
+                    directory,
+                    () -> "DBD.yaml"
+                ).run();
+            },
+            new ProcessRunnable(
+                directory,
+                new ArgsRunningExecutable(
+                    executable,
+                    new ArgsExplicit(
+                        "compare",
+                        "db2"
+                    )
+                ),
+                output
+            ),
+            new ProcessRunnable(
+                directory,
+                new ArgsRunningExecutable(
+                    executable,
+                    new ArgsExplicit(
+                        "migration",
+                        "db2"
+                    )
+                ),
+                output
+            ),
+            new WriteTo(
+                new InputOf(
+                    new Replaced(
+                        new TextOf(
+                            directory.value().resolve(new MigrationSqlFileName().asString())
+                        ),
+                        new FixMark().asString(),
+                        ""
+                    )
+                ),
+                new OutputTo(
+                    directory.value().resolve(new MigrationSqlFileName().asString())
+                )
+            ),
+            new ProcessRunnable(
+                directory,
+                new ArgsRunningExecutable(
+                    executable,
+                    new ArgsExplicit(
+                        "apply",
+                        "db2"
                     )
                 ),
                 output

@@ -26,6 +26,11 @@ import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeProcedur
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
+/**
+ * {@link SimpleDbObject} constructed of given 'procedures' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectOfDbdProcedureMapping extends SimpleDbObject<DbdProcedureMapping> {
 
     /**

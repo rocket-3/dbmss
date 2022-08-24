@@ -20,22 +20,34 @@ import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdProcedureMapping;
 import ru.fusionsoft.database.mapping.fields.DbdProcedureFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
+import ru.fusionsoft.database.text.ObjectDdlUnescaped;
 import ru.fusionsoft.database.text.PgProcedureArgs;
 import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to create any procedure of given procedure {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgProcedureCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdProcedureMapping}.
+     */
     private final DbObject<DbdProcedureMapping> object;
 
+    /**
+     * Instantiates a new Pg procedure create sql.
+     * @param object The DbObject of {@link DbdProcedureMapping}.
+     */
     public PgProcedureCreateSql(final DbObject<DbdProcedureMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         final Text owner = new MaybeEmptyTextOfYamlMapping(
             this.object.asYaml(),
             DbdProcedureFields.OWNER
@@ -45,10 +57,7 @@ public class PgProcedureCreateSql implements Text {
                 () -> true,
                 () -> new TextOfMessageFormat(
                     "{0};",
-                    () -> new TextOfObjectField(
-                        this.object,
-                        DbdProcedureFields.DDL
-                    )
+                    () -> new ObjectDdlUnescaped(this.object)
                 )
             ),
             new MapEntry<>(

@@ -15,21 +15,30 @@
  */
 package ru.fusionsoft.database.snapshot.objects;
 
-import com.amihaiemil.eoyaml.YamlMapping;
 import org.cactoos.Func;
 import org.cactoos.Text;
 import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
+/**
+ * The ways to extract field value of {@link YamlRepresentative}
+ *  or {@link ru.fusionsoft.database.snapshot.DbObject}.
+ * @since 0.1
+ */
 public class TextOfObjectField implements Text {
 
+    /**
+     * The ObjectFieldString encapsulated.
+     */
     private final ObjectFieldString scalar;
 
-    public TextOfObjectField(final ObjectFieldString scalar) {
-        this.scalar = scalar;
-    }
-
+    /**
+     * Instantiates a new Text of object field.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     * @param absence The {@link Text} to be encapsulated.
+     */
     public TextOfObjectField(
-        final YamlRepresentative<? extends YamlMapping> object,
+        final YamlRepresentative<?> object,
         final Text field,
         final Text absence
     ) {
@@ -42,8 +51,21 @@ public class TextOfObjectField implements Text {
         );
     }
 
+    /**
+     * Instantiates a new Text of object field.
+     * @param scalar The {@link ObjectFieldString} to be encapsulated.
+     */
+    public TextOfObjectField(final ObjectFieldString scalar) {
+        this.scalar = scalar;
+    }
+
+    /**
+     * Instantiates a new Text of object field.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     */
     public TextOfObjectField(
-        final YamlRepresentative<? extends YamlMapping> object,
+        final YamlRepresentative<?> object,
         final Text field
     ) {
         this(
@@ -54,8 +76,16 @@ public class TextOfObjectField implements Text {
         );
     }
 
+    /**
+     * Instantiates a new Text of object field.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     * @param presence Transformation if field present.
+     * @param absence The {@link Text} to be encapsulated.
+     * @checkstyle ParameterNumberCheck (200 lines).
+     */
     public TextOfObjectField(
-        final YamlRepresentative<? extends YamlMapping> object,
+        final YamlRepresentative<?> object,
         final Text field,
         final Func<String, Text> presence,
         final Text absence
@@ -70,8 +100,14 @@ public class TextOfObjectField implements Text {
         );
     }
 
+    /**
+     * Instantiates a new Text of object field.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     * @param presence Transformation if field present.
+     */
     public TextOfObjectField(
-        final YamlRepresentative<? extends YamlMapping> object,
+        final YamlRepresentative<?> object,
         final Text field,
         final Func<String, Text> presence
     ) {
@@ -85,7 +121,7 @@ public class TextOfObjectField implements Text {
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return this.scalar.value();
     }
 

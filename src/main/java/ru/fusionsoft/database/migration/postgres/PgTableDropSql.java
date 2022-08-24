@@ -16,24 +16,34 @@
 package ru.fusionsoft.database.migration.postgres;
 
 import org.cactoos.Text;
-import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to drop any table of given table {@link DbObject}.
+ * @since 0.1
+ */
 public class PgTableDropSql implements Text {
 
-    private final DbObject<DbdTableMapping> object;
+    /**
+     * The DbObject of table.
+     */
+    private final DbObject<?> object;
 
-    public PgTableDropSql(final DbObject<DbdTableMapping> object) {
+    /**
+     * Instantiates a new Pg table drop sql.
+     * @param object The The DbObject of table.
+     */
+    public PgTableDropSql(final DbObject<?> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
             "DROP TABLE {0}.{1};",
-            () -> this.object.signature().name().first(),
-            () -> this.object.signature().name().parent()
+            () -> this.object.signature().name().parent().first(),
+            () -> this.object.signature().name().first()
         ).asString();
     }
 

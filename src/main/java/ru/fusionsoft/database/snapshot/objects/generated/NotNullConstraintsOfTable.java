@@ -20,8 +20,9 @@ import org.cactoos.iterable.Mapped;
 import org.cactoos.text.TextOf;
 import ru.fusionsoft.database.mapping.dbd.DbdColumnMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdConstraintMapping;
+import ru.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
-import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnMappingsOfTable;
+import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdColumnsOfTable;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
 import ru.fusionsoft.database.mapping.fields.DbdConstraintFields;
@@ -37,9 +38,17 @@ import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
+/**
+ * Constraints {@link DbObject}'s extracted of {@link DbdDomainMapping} {@link DbObject}.
+ * @since 0.1
+ */
 public class NotNullConstraintsOfTable
     extends IterableOfScalarSticky<DbObject<DbdConstraintMapping>> {
 
+    /**
+     * Instantiates a new Not null constraints of table.
+     * @param table The {@link DbObject} of {@link DbdTableMapping} to be encapsulated.
+     */
     public NotNullConstraintsOfTable(final DbObject<DbdTableMapping> table) {
         super(
             () -> {
@@ -87,13 +96,13 @@ public class NotNullConstraintsOfTable
                         );
                     },
                     new Filtered<DbdColumnMapping>(
-                        mapping -> ! Boolean.parseBoolean(
+                        mapping -> !Boolean.parseBoolean(
                             new TextOfYamlMappingKeyValue(
                                 mapping,
                                 DbdColumnFields.DBNULLABLE
                             ).asString()
                         ),
-                        new DbdColumnMappingsOfTable(table)
+                        new DbdColumnsOfTable(table)
                     )
                 );
             }

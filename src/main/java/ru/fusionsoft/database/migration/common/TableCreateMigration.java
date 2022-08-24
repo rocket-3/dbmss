@@ -15,8 +15,8 @@
  */
 package ru.fusionsoft.database.migration.common;
 
+import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
-import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.migration.Migration;
 import ru.fusionsoft.database.migration.postgres.PgTableCreateSql;
 import ru.fusionsoft.database.snapshot.DbObject;
@@ -24,14 +24,29 @@ import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The Migration to create table of table {@link DbObject} and DBMS specified.
+ * @since 0.1
+ */
 public class TableCreateMigration implements Migration {
 
-    private final DbObject<DbdTableMapping> object;
+    /**
+     * The DbObject encapsulated.
+     */
+    private final DbObject<? extends YamlNode> object;
 
+    /**
+     * The Dbms encapsulated.
+     */
     private final Dbms dbms;
 
+    /**
+     * Instantiates a new Table create migration.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param dbms The {@link Dbms} to be encapsulated.
+     */
     public TableCreateMigration(
-        final DbObject<DbdTableMapping> object,
+        final DbObject<? extends YamlNode> object,
         final Dbms dbms
     ) {
         this.object = object;
@@ -39,7 +54,7 @@ public class TableCreateMigration implements Migration {
     }
 
     @Override
-    public Text description() {
+    public final Text description() {
         return new TextOfMessageFormat(
             "Creating table {0}",
             () -> this.object.signature().name()
@@ -47,13 +62,13 @@ public class TableCreateMigration implements Migration {
     }
 
     @Override
-    public Text sql() {
+    public final Text sql() {
         return new TextOfDbmsConditional(
             new PgTableCreateSql(this.object),
             () -> "",
             () -> "",
             () -> "",
-            dbms
+            this.dbms
         );
     }
 

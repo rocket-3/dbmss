@@ -26,8 +26,16 @@ import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.YamlMappingOfScalar;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
 
+/**
+ * Constraints {@link DbObject}'s extracted of {@link DbdDomainMapping} {@link DbObject}.
+ * @since 0.1
+ */
 public class ConstraintsOfDomain extends IterableEnvelope<DbObject<DbdDomainConstraintMapping>> {
 
+    /**
+     * Instantiates a new Constraints of domain.
+     * @param domain The {@link DbObject} of {@link DbdDomainMapping} to be encapsulated.
+     */
     public ConstraintsOfDomain(final DbObject<DbdDomainMapping> domain) {
         super(
             new IterableOfYamlSequence<>(

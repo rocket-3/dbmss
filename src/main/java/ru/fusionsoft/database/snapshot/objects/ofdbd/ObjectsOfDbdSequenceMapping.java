@@ -18,6 +18,7 @@ package ru.fusionsoft.database.snapshot.objects.ofdbd;
 import com.amihaiemil.eoyaml.YamlMapping;
 import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
+import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.SimpleDbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.SimpleObjectSignature;
@@ -26,6 +27,11 @@ import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSequence
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
+/**
+ * Sequences {@link DbObject}'s constructed of given 'sequences' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectsOfDbdSequenceMapping extends SimpleDbObject<DbdSequenceMapping> {
 
     /**

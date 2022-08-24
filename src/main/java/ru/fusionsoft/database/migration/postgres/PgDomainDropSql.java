@@ -20,16 +20,27 @@ import ru.fusionsoft.database.mapping.dbd.DbdDomainMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to drop any domain UDT of given domain UDT {@link DbObject}.
+ * @since 0.1
+ */
 public class PgDomainDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdDomainMapping}.
+     */
     private final DbObject<DbdDomainMapping> object;
 
+    /**
+     * Instantiates a new Pg domain drop sql.
+     * @param object The The DbObject of {@link DbdDomainMapping}.
+     */
     public PgDomainDropSql(final DbObject<DbdDomainMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
             "DROP DOMAIN {0}.{1} RESTRICT;",
             this.object.signature().name().parent(),

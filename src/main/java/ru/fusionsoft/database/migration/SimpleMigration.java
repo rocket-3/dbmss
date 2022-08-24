@@ -19,17 +19,38 @@ package ru.fusionsoft.database.migration;
 import org.cactoos.Text;
 import org.cactoos.text.TextOf;
 
+/**
+ * A {@link Migration}, assembled from its behaviour parts.
+ * @since 0.1
+ */
 public class SimpleMigration implements Migration {
 
+    /**
+     * The Text of description encapsulated.
+     */
     private final Text desc;
+
+    /**
+     * The Text of sql encapsulated.
+     */
     private final Text code;
 
+    /**
+     * Instantiates a new Simple migration.
+     * @param desc The {@link Text} to be encapsulated.
+     * @param code The {@link Text} to be encapsulated.
+     */
     public SimpleMigration(final Text desc, final Text code) {
         this.desc = desc;
         this.code = code;
     }
 
-    public SimpleMigration(final String desc, final String code){
+    /**
+     * Instantiates a new Simple migration.
+     * @param desc The {@link String} to be encapsulated.
+     * @param code The {@link String} to be encapsulated.
+     */
+    public SimpleMigration(final String desc, final String code) {
         this(
             new TextOf(desc),
             new TextOf(code)

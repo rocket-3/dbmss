@@ -23,8 +23,7 @@ import ru.fusionsoft.database.dbdreadable.DbdReadableMerged;
 import ru.fusionsoft.database.mapping.dbd.entry.DbdSchemasEntry;
 import ru.fusionsoft.database.mapping.dbd.ofobjects.DbdSchemasMappingValueOfObjects;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.generated.ObjectsWithInlineLinkDataAdded;
-import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadableServer;
 import ru.fusionsoft.lib.path.writable.JoinedWritable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
@@ -74,11 +73,9 @@ public class DbdRepoWritableUpdatingFromDbdServer extends JoinedWritable {
             dbdfile,
             server,
             new Sticky<>(
-                new ObjectsWithInlineLinkDataAdded(
-                    new ObjectsOfServerFromDbd(
-                        dbdfile,
-                        server
-                    )
+                new ObjectsOfDbdReadableServer(
+                    dbdfile,
+                    server
                 )
             )
         );

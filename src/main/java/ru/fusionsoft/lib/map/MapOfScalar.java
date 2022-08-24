@@ -24,137 +24,154 @@ import java.util.function.Function;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
+/**
+ * The {@link Map}, using {@link Scalar} returning values as Map delegate.
+ * @param <K> Key type parameter
+ * @param <V> Value type parameter
+ * @checkstyle LineLengthCheck (200 lines).
+ * @checkstyle ParameterNameCheck (200 lines).
+ * @since 0.1
+ */
+@SuppressWarnings("PMD")
 public class MapOfScalar<K, V> implements Map<K, V> {
 
+    /**
+     * The Scalar.
+     */
     private final Unchecked<Map<K, V>> scalar;
 
+    /**
+     * Instantiates a new Map of scalar.
+     *
+     * @param scalar The scalar
+     */
     public MapOfScalar(final Scalar<Map<K, V>> scalar) {
         this.scalar = new Unchecked<>(scalar);
     }
 
     @Override
-    public int size() {
-        return scalar.value().size();
+    public final int size() {
+        return this.scalar.value().size();
     }
 
     @Override
-    public boolean isEmpty() {
-        return scalar.value().isEmpty();
+    public final boolean isEmpty() {
+        return this.scalar.value().isEmpty();
     }
 
     @Override
-    public boolean containsKey(final Object key) {
-        return scalar.value().containsKey(key);
+    public final boolean containsKey(final Object key) {
+        return this.scalar.value().containsKey(key);
     }
 
     @Override
-    public boolean containsValue(final Object value) {
-        return scalar.value().containsValue(value);
+    public final boolean containsValue(final Object value) {
+        return this.scalar.value().containsValue(value);
     }
 
     @Override
-    public V get(final Object key) {
-        return scalar.value().get(key);
+    public final V get(final Object key) {
+        return this.scalar.value().get(key);
     }
 
     @Override
-    public V put(final K key, final V value) {
-        return scalar.value().put(key, value);
+    public final V put(final K key, final V value) {
+        return this.scalar.value().put(key, value);
     }
 
     @Override
-    public V remove(final Object key) {
-        return scalar.value().remove(key);
+    public final V remove(final Object key) {
+        return this.scalar.value().remove(key);
     }
 
     @Override
-    public void putAll(final Map<? extends K, ? extends V> m) {
-        scalar.value().putAll(m);
+    public final void putAll(final Map<? extends K, ? extends V> m) {
+        this.scalar.value().putAll(m);
     }
 
     @Override
-    public void clear() {
-        scalar.value().clear();
+    public final void clear() {
+        this.scalar.value().clear();
     }
 
     @Override
-    public Set<K> keySet() {
-        return scalar.value().keySet();
+    public final Set<K> keySet() {
+        return this.scalar.value().keySet();
     }
 
     @Override
-    public Collection<V> values() {
-        return scalar.value().values();
+    public final Collection<V> values() {
+        return this.scalar.value().values();
     }
 
     @Override
-    public Set<Entry<K, V>> entrySet() {
-        return scalar.value().entrySet();
+    public final Set<Entry<K, V>> entrySet() {
+        return this.scalar.value().entrySet();
     }
 
     @Override
-    public boolean equals(final Object o) {
-        return scalar.value().equals(o);
+    public final V getOrDefault(final Object key, final V defaultValue) {
+        return this.scalar.value().getOrDefault(key, defaultValue);
     }
 
     @Override
-    public int hashCode() {
-        return scalar.value().hashCode();
+    public final void forEach(final BiConsumer<? super K, ? super V> action) {
+        this.scalar.value().forEach(action);
     }
 
     @Override
-    public V getOrDefault(final Object key, final V defaultValue) {
-        return scalar.value().getOrDefault(key, defaultValue);
+    public final void replaceAll(final BiFunction<? super K, ? super V, ? extends V> function) {
+        this.scalar.value().replaceAll(function);
     }
 
     @Override
-    public void forEach(final BiConsumer<? super K, ? super V> action) {
-        scalar.value().forEach(action);
+    public final V putIfAbsent(final K key, final V value) {
+        return this.scalar.value().putIfAbsent(key, value);
     }
 
     @Override
-    public void replaceAll(final BiFunction<? super K, ? super V, ? extends V> function) {
-        scalar.value().replaceAll(function);
+    public final boolean remove(final Object key, final Object value) {
+        return this.scalar.value().remove(key, value);
     }
 
     @Override
-    public V putIfAbsent(final K key, final V value) {
-        return scalar.value().putIfAbsent(key, value);
+    public final boolean replace(final K key, final V oldValue, final V newValue) {
+        return this.scalar.value().replace(key, oldValue, newValue);
     }
 
     @Override
-    public boolean remove(final Object key, final Object value) {
-        return scalar.value().remove(key, value);
+    public final V replace(final K key, final V value) {
+        return this.scalar.value().replace(key, value);
     }
 
     @Override
-    public boolean replace(final K key, final V oldValue, final V newValue) {
-        return scalar.value().replace(key, oldValue, newValue);
+    public final V computeIfAbsent(final K key, final Function<? super K, ? extends V> mappingFunction) {
+        return this.scalar.value().computeIfAbsent(key, mappingFunction);
     }
 
     @Override
-    public V replace(final K key, final V value) {
-        return scalar.value().replace(key, value);
+    public final V computeIfPresent(final K key, final BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+        return this.scalar.value().computeIfPresent(key, remappingFunction);
     }
 
     @Override
-    public V computeIfAbsent(final K key, final Function<? super K, ? extends V> mappingFunction) {
-        return scalar.value().computeIfAbsent(key, mappingFunction);
+    public final V compute(final K key, final BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+        return this.scalar.value().compute(key, remappingFunction);
     }
 
     @Override
-    public V computeIfPresent(final K key, final BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
-        return scalar.value().computeIfPresent(key, remappingFunction);
+    public final V merge(final K key, final V value, final BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
+        return this.scalar.value().merge(key, value, remappingFunction);
     }
 
     @Override
-    public V compute(final K key, final BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
-        return scalar.value().compute(key, remappingFunction);
+    public final int hashCode() {
+        return this.scalar.value().hashCode();
     }
 
     @Override
-    public V merge(final K key, final V value, final BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
-        return scalar.value().merge(key, value, remappingFunction);
+    public final boolean equals(final Object o) {
+        return this.scalar.value().equals(o);
     }
 
 }

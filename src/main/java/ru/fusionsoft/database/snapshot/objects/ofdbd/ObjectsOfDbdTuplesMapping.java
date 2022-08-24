@@ -23,6 +23,11 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
+/**
+ * Tuples {@link DbObject}'s constructed of given 'tuples' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectsOfDbdTuplesMapping extends IterableEnvelope<DbObject<DbdTupleMapping>> {
 
     /**

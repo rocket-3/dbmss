@@ -27,16 +27,28 @@ import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to drop any tuple UDT of given tuple UDT {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgTupleDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdTupleMapping}.
+     */
     private final DbObject<DbdTupleMapping> object;
 
+    /**
+     * Instantiates a new Pg tuple drop sql.
+     * @param object The DbObject of {@link DbdTupleMapping}.
+     */
     public PgTupleDropSql(final DbObject<DbdTupleMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         final Text owner = new MaybeEmptyTextOfYamlMapping(
             this.object.asYaml(),
             DbdFunctionFields.OWNER

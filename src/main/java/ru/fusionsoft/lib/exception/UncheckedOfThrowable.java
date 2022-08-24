@@ -26,7 +26,7 @@ public class UncheckedOfThrowable extends RuntimeException {
      * @param cause The {@link Exception} to be encapsulated.
      */
     public UncheckedOfThrowable(final Exception cause) {
-        super(cause);
+        super(cause.getMessage(), cause);
     }
 
 }

@@ -21,16 +21,28 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.text.PgProcedureArgs;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to drop any procedure of given procedure {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgProcedureDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdProcedureMapping}.
+     */
     private final DbObject<DbdProcedureMapping> object;
 
+    /**
+     * Instantiates a new Pg procedure drop sql.
+     * @param object The DbObject of {@link DbdProcedureMapping}.
+     */
     public PgProcedureDropSql(final DbObject<DbdProcedureMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
             "DROP PROCEDURE {0}.{1}({2});",
             () -> this.object.signature().name().parent(),

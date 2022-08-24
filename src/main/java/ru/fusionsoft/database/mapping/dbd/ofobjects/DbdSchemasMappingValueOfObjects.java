@@ -19,7 +19,7 @@ import com.amihaiemil.eoyaml.YamlNode;
 import ru.fusionsoft.database.mapping.dbd.DbdSchemasMappingValue;
 import ru.fusionsoft.database.mapping.entries.UnwrapEntriesOfObjects;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTypeCasted;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeSchema;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
 
@@ -41,7 +41,7 @@ public class DbdSchemasMappingValueOfObjects extends DbdSchemasMappingValue {
             new YamlMappingOfEntries(
                 new UnwrapEntriesOfObjects<>(
                     objects,
-                    new ObjectsWithType<>(
+                    new ObjectsWithTypeCasted<>(
                         new ObjectTypeSchema(),
                         objects
                     ),

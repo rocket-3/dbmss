@@ -20,20 +20,31 @@ import ru.fusionsoft.database.mapping.dbd.DbdTriggerMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to create any trigger of given trigger {@link DbObject}.
+ * @since 0.1
+ */
 public class PgTriggerDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdTriggerMapping}.
+     */
     private final DbObject<DbdTriggerMapping> object;
 
+    /**
+     * Instantiates a new Pg trigger drop sql.
+     * @param object The DbObject of {@link DbdTriggerMapping}.
+     */
     public PgTriggerDropSql(final DbObject<DbdTriggerMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
             "DROP TRIGGER {0} ON {1}.{2};",
             () -> this.object.signature().name().first(),
-            () -> this.object.signature().name().parent().parent(),
+            () -> this.object.signature().name().parent().parent().first(),
             () -> this.object.signature().name().parent().first()
         ).asString();
     }

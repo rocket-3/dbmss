@@ -31,16 +31,28 @@ import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
+/**
+ * The sql Text for Postgres DBMS to create any tuple UDT of given tuple UDT {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
+ */
 public class PgTupleCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdTupleMapping}.
+     */
     private final DbObject<DbdTupleMapping> object;
 
+    /**
+     * Instantiates a new Pg tuple create sql.
+     * @param object The tuple {@link DbObject} to be encapsulated.
+     */
     public PgTupleCreateSql(final DbObject<DbdTupleMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,

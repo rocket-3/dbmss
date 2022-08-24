@@ -92,16 +92,16 @@ public class SimpleDbms implements Dbms {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        return o instanceof Dbms && new UncheckedText(
+    public final boolean equals(final Object object) {
+        return object instanceof Dbms && new UncheckedText(
             this.dbd()
         ).asString().equals(
-            new UncheckedText(((SimpleDbms) o).dbd()).asString()
+            new UncheckedText(((Dbms) object).dbd()).asString()
         );
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return new UncheckedText(this.dbd()).asString().hashCode();
     }
 

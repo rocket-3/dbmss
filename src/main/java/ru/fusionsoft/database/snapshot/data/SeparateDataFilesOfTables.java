@@ -22,7 +22,7 @@ import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTypeCasted;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.path.writable.JoinedWritable;
 
@@ -64,7 +64,7 @@ public class SeparateDataFilesOfTables extends JoinedWritable {
     ) {
         this(
             new ConnectionOfDbdServerMapping(server),
-            new ObjectsWithType<>(
+            new ObjectsWithTypeCasted<>(
                 new ObjectTypeTable(),
                 objects
             )

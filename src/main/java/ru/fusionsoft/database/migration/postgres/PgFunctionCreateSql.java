@@ -20,22 +20,34 @@ import org.cactoos.map.MapEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdFunctionMapping;
 import ru.fusionsoft.database.mapping.fields.DbdFunctionFields;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
+import ru.fusionsoft.database.text.ObjectDdlUnescaped;
 import ru.fusionsoft.database.text.PgProcedureArgs;
 import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to create any function of given function {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgFunctionCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdFunctionMapping}.
+     */
     private final DbObject<DbdFunctionMapping> object;
 
+    /**
+     * Instantiates a new Pg function create sql.
+     * @param object The DbObject of {@link DbdFunctionMapping}.
+     */
     public PgFunctionCreateSql(final DbObject<DbdFunctionMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         final Text owner = new MaybeEmptyTextOfYamlMapping(
             this.object.asYaml(),
             DbdFunctionFields.OWNER
@@ -45,10 +57,7 @@ public class PgFunctionCreateSql implements Text {
                 () -> true,
                 () -> new TextOfMessageFormat(
                     "{0};",
-                    () -> new TextOfObjectField(
-                        this.object,
-                        DbdFunctionFields.DDL
-                    )
+                    () -> new ObjectDdlUnescaped(this.object)
                 )
             ),
             new MapEntry<>(

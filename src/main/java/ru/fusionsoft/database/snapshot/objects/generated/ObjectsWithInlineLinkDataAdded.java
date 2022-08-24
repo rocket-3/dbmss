@@ -20,7 +20,7 @@ import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.LinkDataObjectsOfTables;
 import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTypeCasted;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
@@ -40,7 +40,7 @@ public class ObjectsWithInlineLinkDataAdded extends ObjectsJoined {
         super(
             objects,
             new LinkDataObjectsOfTables(
-                new ObjectsWithType<DbdTableMapping>(
+                new ObjectsWithTypeCasted<DbdTableMapping>(
                     new ObjectTypeTable(),
                     objects
                 )

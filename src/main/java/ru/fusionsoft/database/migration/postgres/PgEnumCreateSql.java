@@ -29,16 +29,28 @@ import ru.fusionsoft.database.text.TextOfConditionsLines;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfYamlSequence;
 
+/**
+ * The sql Text for Postgres DBMS to create any enum UDT of given enum UDT {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgEnumCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdEnumMapping}.
+     */
     private final DbObject<DbdEnumMapping> object;
 
+    /**
+     * Instantiates a new Pg enum create sql.
+     * @param object The DbObject of {@link DbdEnumMapping}.
+     */
     public PgEnumCreateSql(final DbObject<DbdEnumMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfConditionsLines(
             new MapEntry<>(
                 () -> true,

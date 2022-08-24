@@ -38,7 +38,7 @@ public class PgDomainConstraintsQuery extends PgMessageFormatQuery<DbdDomainCons
                     "SELECT \n",
                     " con.conname AS {0},\n",
                     " CASE WHEN con.convalidated = 't' THEN 'true' ELSE 'false' END AS {1},\n",
-                    " con.consrc AS {2}\n",
+                    "  pg_catalog.pg_get_constraintdef(con.oid, true) AS {2}\n",
                     "FROM information_schema.domains dom\n",
                     "INNER JOIN information_schema.domain_constraints dcon \n",
                     "ON dcon.domain_schema = dom.domain_schema \n",

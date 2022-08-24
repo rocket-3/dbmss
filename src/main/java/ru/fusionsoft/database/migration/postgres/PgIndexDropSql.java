@@ -20,20 +20,32 @@ import ru.fusionsoft.database.mapping.dbd.DbdIndexMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to drop any index of given index {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgIndexDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdIndexMapping}.
+     */
     private final DbObject<DbdIndexMapping> index;
 
+    /**
+     * Instantiates a new Pg index drop sql.
+     * @param index The DbObject of {@link DbdIndexMapping}.
+     */
     public PgIndexDropSql(final DbObject<DbdIndexMapping> index) {
         this.index = index;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
-            "DROP INDEX {0}.{1}",
-            () -> index.signature().name().parent().parent(),
-            () -> index.signature().name().first()
+            "DROP INDEX {0}.{1};",
+            () -> this.index.signature().name().parent().parent().first(),
+            () -> this.index.signature().name().first()
         ).asString();
     }
 

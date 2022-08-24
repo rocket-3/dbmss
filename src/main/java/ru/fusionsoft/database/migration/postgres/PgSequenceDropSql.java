@@ -20,16 +20,27 @@ import ru.fusionsoft.database.mapping.dbd.DbdSequenceMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The sql Text for Postgres DBMS to drop any sequence of given sequence {@link DbObject}.
+ * @since 0.1
+ */
 public class PgSequenceDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdSequenceMapping}.
+     */
     private final DbObject<DbdSequenceMapping> object;
 
+    /**
+     * Instantiates a new Pg sequence drop sql.
+     * @param object The DbObject of {@link DbdSequenceMapping}.
+     */
     public PgSequenceDropSql(final DbObject<DbdSequenceMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
             "DROP SEQUENCE {0}.{1};",
             () -> this.object.signature().name().first(),

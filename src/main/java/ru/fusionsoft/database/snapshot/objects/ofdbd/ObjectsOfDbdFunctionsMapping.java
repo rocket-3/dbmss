@@ -23,6 +23,11 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
+/**
+ * Functions {@link DbObject}'s constructed of given 'functions' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectsOfDbdFunctionsMapping extends IterableEnvelope<DbObject<DbdFunctionMapping>> {
 
     /**

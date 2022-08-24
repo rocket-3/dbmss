@@ -20,15 +20,19 @@ import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Mapped;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTypeCasted;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
+/**
+ * Objects with tables not-null constraints extracted as entries to 'constraints' list.
+ * @since 0.1
+ */
 public class ObjectsWithNotNullConstraintsAdded extends ObjectsJoined {
 
     /**
      * Ctor.
-     * @param objects The wrapped objects
-     * @param <Y> The type of YamlNode parameter.
+     * @param objects The wrapped objects.
+     * @param <Y> The type of object mapping.
      */
     public <Y extends YamlNode> ObjectsWithNotNullConstraintsAdded(
         final Iterable<? extends DbObject<Y>> objects
@@ -38,7 +42,7 @@ public class ObjectsWithNotNullConstraintsAdded extends ObjectsJoined {
             new Joined<>(
                 new Mapped<>(
                     NotNullConstraintsOfTable::new,
-                    new ObjectsWithType<>(
+                    new ObjectsWithTypeCasted<>(
                         new ObjectTypeTable(),
                         objects
                     )

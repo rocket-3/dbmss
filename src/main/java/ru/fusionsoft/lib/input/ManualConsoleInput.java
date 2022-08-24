@@ -22,6 +22,7 @@ import org.cactoos.Scalar;
 import org.cactoos.Text;
 import org.cactoos.io.Stdin;
 import org.cactoos.scalar.ScalarOf;
+import org.cactoos.text.TextOf;
 
 /**
  * The type of Input that uses console and returns at 'Enter' key being pressed.
@@ -33,6 +34,13 @@ public class ManualConsoleInput implements Input {
      * The Scalar of Input encapsulated.
      */
     private final Scalar<Input> scalar;
+
+    /**
+     * Instantiates a new Manual console input with utf-8 charset as default.
+     */
+    public ManualConsoleInput() {
+        this(new TextOf("utf-8"));
+    }
 
     /**
      * Instantiates a new Manual console input.

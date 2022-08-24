@@ -22,7 +22,7 @@ import ru.fusionsoft.database.ci.UrlOfPgGitLabDatabaseV11;
 import ru.fusionsoft.database.ci.credentials.CredsOfPgTestDatabase;
 import ru.fusionsoft.database.connection.ConnectionOfDbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTypeCasted;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.yaml.YamlMappingOfEntries;
@@ -49,7 +49,7 @@ class RowsDataEntriesOfConnectionTest {
         );
         final Mapped<InlineRowsDataEntriesOfConnection> datas = new Mapped<>(
             x -> new InlineRowsDataEntriesOfConnection(connection, x),
-            new ObjectsWithType<>(
+            new ObjectsWithTypeCasted<>(
                 new ObjectTypeTable(),
                 new ObjectsOfServer(connection)
             )

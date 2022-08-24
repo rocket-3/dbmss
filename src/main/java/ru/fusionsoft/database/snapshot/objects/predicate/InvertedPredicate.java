@@ -17,16 +17,28 @@ package ru.fusionsoft.database.snapshot.objects.predicate;
 
 import org.cactoos.Func;
 
+/**
+ * Predicate decorator, which inverts the value.
+ * @param <T> The type parameter.
+ * @since 0.1
+ */
 public class InvertedPredicate<T> implements Func<T, Boolean> {
 
+    /**
+     * The predicate encapsulated.
+     */
     private final Func<T, Boolean> original;
 
+    /**
+     * Instantiates a new Inverted predicate.
+     * @param original The predicate to be encapsulated.
+     */
     public InvertedPredicate(final Func<T, Boolean> original) {
         this.original = original;
     }
 
     @Override
-    public Boolean apply(final T input) throws Exception {
+    public final Boolean apply(final T input) throws Exception {
         return !this.original.apply(input);
     }
 

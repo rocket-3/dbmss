@@ -28,6 +28,11 @@ import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
+/**
+ * {@link SimpleDbObject} constructed of given 'constraints' mapping,
+ *  its key and parent domain object name.
+ * @since 0.1
+ */
 public class ObjectOfDbdDomainConstraintMapping extends SimpleDbObject<DbdDomainConstraintMapping> {
 
     /**
@@ -50,6 +55,11 @@ public class ObjectOfDbdDomainConstraintMapping extends SimpleDbObject<DbdDomain
         );
     }
 
+    /**
+     * Instantiates a new Object of dbd domain constraint mapping.
+     * @param constraint The {@link YamlMapping} to be encapsulated.
+     * @param domain The {@link ObjectName} to be encapsulated.
+     */
     public ObjectOfDbdDomainConstraintMapping(
         final YamlMapping constraint,
         final ObjectName domain

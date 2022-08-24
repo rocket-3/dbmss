@@ -18,26 +18,32 @@ package ru.fusionsoft.database.migration.postgres;
 import org.cactoos.Text;
 import ru.fusionsoft.database.mapping.dbd.DbdSchemaMapping;
 import ru.fusionsoft.database.mapping.fields.DbdSchemaFields;
-import ru.fusionsoft.database.mapping.fields.DbdTriggerFields;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.TextOfObjectField;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
-import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to create any schema of given schema {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgSchemaCreateSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdSchemaMapping}.
+     */
     private final DbObject<DbdSchemaMapping> object;
 
+    /**
+     * Instantiates a new Pg schema create sql.
+     * @param object The DbObject of {@link DbdSchemaMapping}.
+     */
     public PgSchemaCreateSql(final DbObject<DbdSchemaMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
-        final Text owner = new MaybeEmptyTextOfYamlMapping(
-            this.object.asYaml(),
-            DbdTriggerFields.DDL
-        );
+    public final String asString() {
         return new TextOfMessageFormat(
             "CREATE SCHEMA {0}{1};",
             () -> this.object.signature().name(),

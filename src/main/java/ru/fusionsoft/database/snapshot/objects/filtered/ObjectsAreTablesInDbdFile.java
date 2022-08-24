@@ -40,11 +40,11 @@ public class ObjectsAreTablesInDbdFile extends ObjectsMentionedInObjects<DbdTabl
         final DbdReadable file
     ) {
         super(
-            new ObjectsWithType<>(
+            new ObjectsWithTypeCasted<>(
                 new ObjectTypeTable(),
                 new ObjectsOfDbdReadable(file)
             ),
-            new ObjectsWithType<>(
+            new ObjectsWithTypeCasted<>(
                 new ObjectTypeTable(),
                 origin
             )

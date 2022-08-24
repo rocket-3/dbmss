@@ -28,12 +28,27 @@ import ru.fusionsoft.database.snapshot.dbms.OracleDbms;
 import ru.fusionsoft.database.snapshot.dbms.PostgresDbms;
 import ru.fusionsoft.lib.collection.StrictMap;
 
+/**
+ * Text which delegate is mapped to {@link Dbms}'s instances.
+ * @since 0.1
+ */
 public class TextOfDbmsConditional implements Text {
 
+    /**
+     * The Map.
+     */
     private final Map<Dbms, Text> map;
 
+    /**
+     * The Dbms.
+     */
     private final Dbms dbms;
 
+    /**
+     * Instantiates a new Text of dbms conditional.
+     * @param entries The entries
+     * @param dbms Dbms
+     */
     public TextOfDbmsConditional(
         final Iterable<Map.Entry<? extends Dbms, ? extends Text>> entries,
         final Dbms dbms
@@ -42,11 +57,25 @@ public class TextOfDbmsConditional implements Text {
         this.dbms = dbms;
     }
 
+    /**
+     * Instantiates a new Text of dbms conditional.
+     * @param dbms Dbms
+     * @param entries The entries
+     */
     @SafeVarargs
     public TextOfDbmsConditional(final Dbms dbms, final MapEntry<Dbms, Text>... entries) {
         this(new IterableOf<>(entries), dbms);
     }
 
+    /**
+     * Instantiates a new Text of dbms conditional.
+     * @param postgres If postgres
+     * @param mssql If mssql
+     * @param mysql If mysql
+     * @param oracle If oracle
+     * @param dbms If dbms
+     * @checkstyle ParameterNumberCheck (200 lines)
+     */
     public TextOfDbmsConditional(
         final Text postgres,
         final Text mssql,
@@ -76,7 +105,7 @@ public class TextOfDbmsConditional implements Text {
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new UncheckedText(
             this.map.get(this.dbms)
         ).asString();

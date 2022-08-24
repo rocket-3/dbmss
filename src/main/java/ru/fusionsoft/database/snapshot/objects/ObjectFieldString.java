@@ -22,7 +22,29 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.exception.ValueNotFoundException;
 import ru.fusionsoft.lib.yaml.YamlRepresentative;
 
+/**
+ * The String of given field's name value.
+ * @since 0.1
+ */
 public class ObjectFieldString extends ObjectFieldMapped<String> {
+
+    /**
+     * Instantiates a new Object field string.
+     * @param object The {@link YamlRepresentative} to be encapsulated.
+     * @param field The {@link Text} to be encapsulated.
+     */
+    public ObjectFieldString(final YamlRepresentative<?> object, final Text field) {
+        this(
+            object,
+            field,
+            () -> {
+                throw new ValueNotFoundException(
+                    field.asString(),
+                    object.asYaml().toString()
+                );
+            }
+        );
+    }
 
     /**
      * Instantiates a new Object field mapped.
@@ -31,7 +53,11 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
      * @param absence The {@link Scalar} of what to return, if no value.
      * @checkstyle ParameterNumberCheck (100 lines)
      */
-    public ObjectFieldString(final YamlRepresentative<?> object, final Text field, final Text absence) {
+    public ObjectFieldString(
+        final YamlRepresentative<?> object,
+        final Text field,
+        final Text absence
+    ) {
         super(
             object,
             field,
@@ -40,10 +66,22 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
         );
     }
 
-    public ObjectFieldString(final YamlRepresentative<?> object, final Text field) {
+    /**
+     * Instantiates a new Object field mapped.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param field The {@link Text} field of object.
+     * @param presence The {@link Text} field of object.
+     * @checkstyle ParameterNumberCheck (100 lines)
+     */
+    public ObjectFieldString(
+        final YamlRepresentative<?> object,
+        final Text field,
+        final Func<String, String> presence
+    ) {
         this(
             object,
             field,
+            presence,
             () -> {
                 throw new ValueNotFoundException(
                     field.asString(),
@@ -72,31 +110,6 @@ public class ObjectFieldString extends ObjectFieldMapped<String> {
             field,
             node -> presence.apply(node.asScalar().value()),
             absence::asString
-        );
-    }
-
-    /**
-     * Instantiates a new Object field mapped.
-     * @param object The {@link DbObject} to be encapsulated.
-     * @param field The {@link Text} field of object.
-     * @param presence The {@link Text} field of object.
-     * @checkstyle ParameterNumberCheck (100 lines)
-     */
-    public ObjectFieldString(
-        final YamlRepresentative<?> object,
-        final Text field,
-        final Func<String, String> presence
-    ) {
-        this(
-            object,
-            field,
-            presence,
-            () -> {
-                throw new ValueNotFoundException(
-                    field.asString(),
-                    object.asYaml().toString()
-                );
-            }
         );
     }
 

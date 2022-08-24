@@ -25,16 +25,28 @@ import ru.fusionsoft.database.text.PgProcedureArgs;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 
+/**
+ * The sql Text for Postgres DBMS to drop any function of given function {@link DbObject}.
+ * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines).
+ */
 public class PgFunctionDropSql implements Text {
 
+    /**
+     * The DbObject of {@link DbdFunctionMapping}.
+     */
     private final DbObject<DbdFunctionMapping> object;
 
+    /**
+     * Instantiates a new Pg function drop sql.
+     * @param object The DbObject of {@link DbdFunctionMapping}.
+     */
     public PgFunctionDropSql(final DbObject<DbdFunctionMapping> object) {
         this.object = object;
     }
 
     @Override
-    public String asString() {
+    public final String asString() {
         return new TextOfMessageFormat(
             "DROP {3} {0}.{1}({2});",
             () -> this.object.signature().name().parent(),

@@ -20,7 +20,7 @@ import java.sql.Connection;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.InlineRowsDataObjectsOfConnection;
 import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTypeCasted;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
@@ -43,7 +43,7 @@ public class ObjectsWithInlineRowsDataAdded extends ObjectsJoined {
             objects,
             new InlineRowsDataObjectsOfConnection(
                 connection,
-                new ObjectsWithType<>(
+                new ObjectsWithTypeCasted<>(
                     new ObjectTypeTable(),
                     objects
                 )

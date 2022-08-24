@@ -21,10 +21,10 @@ import org.cactoos.iterable.Sticky;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
 import ru.fusionsoft.database.DbdReadable;
-import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdInfoMappingOfDbdFile;
+import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdInfoMappingOfDbdReadable;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerEntryOfDbdFile;
 import ru.fusionsoft.database.snapshot.DbObject;
-import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadableServer;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
@@ -73,7 +73,7 @@ public class DbdRepoSnapshotFilesWritableOfDbd extends DbdRepoSnapshotFilesWrita
             time,
             dbd,
             server,
-            new Sticky<>(new ObjectsOfServerFromDbd(dbd, server)),
+            new Sticky<>(new ObjectsOfDbdReadableServer(dbd, server)),
             alldata
         );
     }
@@ -101,7 +101,7 @@ public class DbdRepoSnapshotFilesWritableOfDbd extends DbdRepoSnapshotFilesWrita
             ),
             new DbdYamlWritableTakingServerSnaphot(
                 new DbdServerEntryOfDbdFile(dbd, server),
-                new DbdInfoMappingOfDbdFile(dbd),
+                new DbdInfoMappingOfDbdReadable(dbd),
                 objects
             ),
             new Unchecked<>(

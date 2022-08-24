@@ -24,19 +24,34 @@ import ru.fusionsoft.database.snapshot.Dbms;
 import ru.fusionsoft.database.text.TextOfDbmsConditional;
 import ru.fusionsoft.lib.text.TextOfMessageFormat;
 
+/**
+ * The Migration to create constraint of constraint {@link DbObject} and DBMS specified.
+ * @since 0.1
+ */
 public class ConstraintCreateMigration implements Migration {
 
+    /**
+     * The DbObject encapsulated.
+     */
     private final DbObject<DbdConstraintMapping> object;
 
+    /**
+     * The Dbms encapsulated.
+     */
     private final Dbms dbms;
 
+    /**
+     * Instantiates a new Constraint create migration.
+     * @param object The {@link DbObject} to be encapsulated.
+     * @param dbms The {@link Dbms} to be encapsulated.
+     */
     public ConstraintCreateMigration(final DbObject<DbdConstraintMapping> object, final Dbms dbms) {
         this.object = object;
         this.dbms = dbms;
     }
 
     @Override
-    public Text description() {
+    public final Text description() {
         return new TextOfMessageFormat(
             "Creating constraint {0} of table {1}",
             () -> this.object.signature().name().first(),
@@ -45,16 +60,14 @@ public class ConstraintCreateMigration implements Migration {
     }
 
     @Override
-    public Text sql() {
+    public final Text sql() {
         return new TextOfDbmsConditional(
             new PgConstraintCreateSql(this.object),
             () -> "",
             () -> "",
             () -> "",
-            dbms
+            this.dbms
         );
     }
 
 }
-
-

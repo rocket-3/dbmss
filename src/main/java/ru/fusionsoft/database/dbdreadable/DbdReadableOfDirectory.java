@@ -15,6 +15,9 @@
  */
 package ru.fusionsoft.database.dbdreadable;
 
+import java.nio.file.Path;
+import org.cactoos.Text;
+import org.cactoos.text.UncheckedText;
 import ru.fusionsoft.database.DbdReadable;
 import ru.fusionsoft.database.text.DbdFileName;
 import ru.fusionsoft.lib.path.Directory;
@@ -30,16 +33,38 @@ public class DbdReadableOfDirectory extends DbdReadableOfMapping {
     /**
      * Instantiates a new Dbd file of mapping.
      * @param directory The {@link Directory} to be encapsulated.
+     * @param name The name of file in directory.
      */
-    public DbdReadableOfDirectory(final Directory directory) {
+    public DbdReadableOfDirectory(final Directory directory, final Text name) {
+        this(
+            directory.value().resolve(
+                new UncheckedText(name).asString()
+            )
+        );
+    }
+
+    /**
+     * Instantiates a new Dbd readable of directory.
+     * @param path The {@link Path} to be encapsulated.
+     */
+    public DbdReadableOfDirectory(final Path path) {
         super(
             new YamlMappingOfScalar(
                 () -> new YamlMappingOf(
-                    directory.value().resolve(
-                        new DbdFileName().asString()
-                    )
+                    path
                 )
             )
+        );
+    }
+
+    /**
+     * Instantiates a new Dbd file of mapping.
+     * @param directory The {@link Directory} to be encapsulated.
+     */
+    public DbdReadableOfDirectory(final Directory directory) {
+        this(
+            directory,
+            new DbdFileName()
         );
     }
 

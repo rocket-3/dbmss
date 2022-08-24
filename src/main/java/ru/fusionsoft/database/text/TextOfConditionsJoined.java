@@ -24,20 +24,29 @@ import org.cactoos.iterable.Mapped;
 import org.cactoos.text.Joined;
 import org.cactoos.text.UncheckedText;
 
+/**
+ * Like String::join, but each entry is combined with condition by which it can be completely
+ *  filtered out.
+ * @since 0.1
+ */
 public class TextOfConditionsJoined implements Text {
 
+    /**
+     * The Conditionals.
+     */
     private final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals;
 
+    /**
+     * The Separator.
+     */
     private final Text separator;
 
-    public TextOfConditionsJoined(
-        final Text separator,
-        final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals
-    ) {
-        this.separator = separator;
-        this.conditionals = conditionals;
-    }
-
+    /**
+     * Instantiates a new Text of conditions joined.
+     *
+     * @param separator Attribute separator
+     * @param conditionals Attribute conditionals
+     */
     @SafeVarargs
     public TextOfConditionsJoined(
         final Text separator,
@@ -49,8 +58,22 @@ public class TextOfConditionsJoined implements Text {
         );
     }
 
+    /**
+     * Instantiates a new Text of conditions joined.
+     *
+     * @param separator Separator
+     * @param conditionals Conditionals
+     */
+    public TextOfConditionsJoined(
+        final Text separator,
+        final Iterable<Map.Entry<Scalar<Boolean>, Scalar<Text>>> conditionals
+    ) {
+        this.separator = separator;
+        this.conditionals = conditionals;
+    }
+
     @Override
-    public String asString() {
+    public final String asString() {
         return new UncheckedText(
             new Joined(
                 this.separator,

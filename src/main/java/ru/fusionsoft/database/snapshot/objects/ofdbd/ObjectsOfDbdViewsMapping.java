@@ -22,6 +22,11 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.lib.yaml.artefacts.IterableOfClassFromYamlNode;
 
+/**
+ * Views {@link DbObject}'s constructed of given 'views' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectsOfDbdViewsMapping extends IterableEnvelope<DbObject<DbdViewMapping>> {
 
     /**

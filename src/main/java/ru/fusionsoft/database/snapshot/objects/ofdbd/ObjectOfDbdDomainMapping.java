@@ -26,6 +26,11 @@ import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeDomain;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
 import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
+/**
+ * {@link SimpleDbObject} constructed of given 'domains' mapping,
+ *  its key and parent schema object name.
+ * @since 0.1
+ */
 public class ObjectOfDbdDomainMapping extends SimpleDbObject<DbdDomainMapping> {
 
     /**

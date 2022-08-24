@@ -69,7 +69,7 @@ public class SimpleObjectType<T extends YamlNode> implements ObjectType<T> {
         if (this == other) {
             equal = true;
         } else if (other instanceof ObjectType) {
-            equal = this.equalsTo((SimpleObjectType<?>) other);
+            equal = this.equalsTo((ObjectType<?>) other);
         }
         return equal;
     }
