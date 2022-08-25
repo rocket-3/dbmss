@@ -1,4 +1,4 @@
-image: g4s8/rultor:alpine3.10
+image:  yegor256/rultor-image
 architect:
   - rocket-3
 assets:
