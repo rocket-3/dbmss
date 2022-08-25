@@ -17,10 +17,10 @@ jobs:
           ruby-version: 2.7
       - name: Install pdd
         run: gem install pdd
-      - name: JDK 1.8
+      - name: JDK 14
         uses: actions/setup-java@v1
         with:
-          java-version: 12
+          java-version: 14
       - name: Puzzles
         run: pdd --file=/dev/null
       - name: Qulice
