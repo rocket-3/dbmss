@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.data;
 import org.cactoos.Text;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
-import ru.fusionsoft.database.mapping.value.IuTypeValues;
+import ru.fusionsoft.database.mapping.values.IuTypeValues;
 
 /**
  * The {@link ValueFormatOfScalar} which uses different {@link ValueFormat}s inside,

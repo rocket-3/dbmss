@@ -29,5 +29,4 @@ public class ObjectTypeTrigger extends SimpleObjectType<DbdTriggerMapping> {
     public ObjectTypeTrigger() {
         super(x -> new DbdTriggerMapping(x.asMapping()), "trigger");
     }
-
 }

@@ -31,7 +31,7 @@ import ru.fusionsoft.database.dbdreadable.DbdReadableOfDirectory;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.dbd.built.DbdServerMappingWithCredentials;
-import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableCreatingOfDatabaseUrl;
+import ru.fusionsoft.database.snapshot.writable.DbdRepoWritableOfDbdServerMapping;
 import ru.fusionsoft.lib.path.Directory;
 import ru.fusionsoft.lib.path.UncheckedTempFolder;
 import ru.fusionsoft.lib.runnable.WriteToDirectoryRunnable;
@@ -62,7 +62,7 @@ class DbdRunnableTest {
         final Text sakilla = new TextOf("dvdrental");
         new IterableOf<>(
             new DbdCreateOfDatabaseProcedure(
-                new DbdRepoWritableCreatingOfDatabaseUrl(
+                new DbdRepoWritableOfDbdServerMapping(
                     mkserver.apply(sakilla)
                 ),
                 directory
@@ -99,7 +99,7 @@ class DbdRunnableTest {
         };
         final Text pagilla = new TextOf("pagilla");
         final Text sakilla = new TextOf("dvdrental");
-        final DbdRepoWritableCreatingOfDatabaseUrl files = new DbdRepoWritableCreatingOfDatabaseUrl(
+        final DbdRepoWritableOfDbdServerMapping files = new DbdRepoWritableOfDbdServerMapping(
             mkserver.apply(sakilla)
         );
         final Text original = new TextOfScalar(

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 package ru.fusionsoft.lib.yaml;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Proc;
 import org.cactoos.scalar.ScalarOf;
+import org.cactoos.scalar.Sticky;
 
 /**
  * The type of YamlNode that is validated over {@link Proc}.
@@ -36,7 +36,9 @@ public class YamlNodeValidated extends YamlNodeOfScalar {
         final YamlNode node
     ) {
         super(
-            new ScalarOf<>(validation, node, node)
+            new Sticky<>(
+                new ScalarOf<>(validation, node, node)
+            )
         );
     }
 

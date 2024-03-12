@@ -22,7 +22,7 @@ import ru.fusionsoft.database.mapping.fields.DbdInfoFields;
 import ru.fusionsoft.database.mapping.fields.DbdRootFields;
 import ru.fusionsoft.lib.exception.ValidationException;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
 /**
  * The procedure of {@link YamlNode} that checks it to be DBD root mapping.
@@ -34,7 +34,7 @@ public class DbdRootNodeValidation implements Proc<YamlNode> {
     public final void exec(final YamlNode input) {
         final YamlMapping mapping = input.asMapping();
         if (!"db".equals(
-            new TextOfMappingValue(
+            new TextOfYamlMappingKeyValue(
                 new DbdInfoMapping(
                     new YamlMappingOfPath(
                         mapping,

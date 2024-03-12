@@ -26,7 +26,6 @@ import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.SnapshotCatalogName;
 import ru.fusionsoft.database.snapshot.SnapshotDefaultDescription;
 import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsOfServer;
-import ru.fusionsoft.database.snapshot.objects.ofdbms.ObjectsWithInlineLinkDataAdded;
 import ru.fusionsoft.lib.time.Utc;
 import ru.fusionsoft.lib.time.UtcOfFirstAccess;
 
@@ -36,7 +35,7 @@ import ru.fusionsoft.lib.time.UtcOfFirstAccess;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public class DbdReadableBuiltWithObjectsOfServer extends DbdReadableOfSnapshotObjects {
+public class DbdReadableBuiltWithObjectsOfServer extends DbdReadableConstructedOfSnapshotObjects {
 
     /**
      * Instantiates a new Dbd file of snapshot objects.
@@ -75,10 +74,8 @@ public class DbdReadableBuiltWithObjectsOfServer extends DbdReadableOfSnapshotOb
             server,
             time,
             new Sticky<>(
-                new ObjectsWithInlineLinkDataAdded(
-                    new ObjectsOfServer(
-                        server
-                    )
+                new ObjectsOfServer(
+                    server
                 )
             )
         );

@@ -64,15 +64,13 @@ class TextIterableOfFlowYamlSequenceTest {
                 new TextIterableOfFlowYamlSequence(
                     new YamlNodeOfPath(
                         new YamlMappingOf(
-                            new YamlInputOf(
-                                String.join(
-                                    "",
-                                    "data:\n",
-                                    "  \"instanceStatus~ACTIVE\": ",
-                                    "[0, 1, \"ACTIVE\", \"ACTIVE\",null, null]\n",
-                                    "  \"instanceStatus~DELETED\": ",
-                                    "[0, 2, \"D\\nELE\\TED,\", \"DEL\"\",\"\"ETED\", null, null]"
-                                )
+                            String.join(
+                                "",
+                                "data:\n",
+                                "  \"instanceStatus~ACTIVE\": ",
+                                "[0, 1, \"ACTIVE\", \"ACTIVE\",null, null]\n",
+                                "  \"instanceStatus~DELETED\": ",
+                                "[0, 2, \"D\\nELE\\TED,\", \"DEL\"\",\"\"ETED\", null, null]"
                             )
                         ),
                         "data",

@@ -14,6 +14,6 @@
  * and limitations under the License.
  */
 /**
- * The whole project interfaces.
+ * The whole project package.
  */
 package ru.fusionsoft.database;

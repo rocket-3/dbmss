@@ -17,6 +17,7 @@ package ru.fusionsoft.database.snapshot.objects.dependencies;
 
 import com.amihaiemil.eoyaml.YamlNode;
 import org.cactoos.Text;
+import org.cactoos.scalar.Sticky;
 import ru.fusionsoft.database.DbdReadable;
 import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdReadable;
 import ru.fusionsoft.database.snapshot.objects.ObjectsOfScalar;
@@ -45,18 +46,20 @@ public class ObjectsOfDbdAddSingle extends ObjectsOfScalar<YamlNode> {
         final Text rgxname
     ) {
         super(
-            () -> {
-                return new ObjectsWithTypeAndNameMatchesRegexp<>(
-                    rgxtype,
-                    rgxname,
-                    new ObjectsOfServer(
-                        new DbdServerMappingOfDbdReadable(
-                            dbd,
-                            server
+            new Sticky<>(
+                () -> {
+                    return new ObjectsWithTypeAndNameMatchesRegexp<>(
+                        rgxtype,
+                        rgxname,
+                        new ObjectsOfServer(
+                            new DbdServerMappingOfDbdReadable(
+                                dbd,
+                                server
+                            )
                         )
-                    )
-                );
-            }
+                    );
+                }
+            )
         );
     }
 

@@ -25,6 +25,7 @@ import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.lib.yaml.YamlNodeOfPath;
+import ru.fusionsoft.lib.yaml.YamlRepresentative;
 import ru.fusionsoft.lib.yaml.artefacts.KeysFromYamlNode;
 
 /**
@@ -37,7 +38,7 @@ public class ObjectFieldMapped<T> implements Scalar<T> {
     /**
      * The DbObject encapsulated.
      */
-    private final DbObject<?> object;
+    private final YamlRepresentative<?> object;
 
     /**
      * The Text encapsulated.
@@ -63,7 +64,7 @@ public class ObjectFieldMapped<T> implements Scalar<T> {
      * @checkstyle ParameterNumberCheck (100 lines)
      */
     public ObjectFieldMapped(
-        final DbObject<?> object,
+        final YamlRepresentative<?> object,
         final Text field,
         final Func<YamlNode, T> presence,
         final Scalar<T> absence

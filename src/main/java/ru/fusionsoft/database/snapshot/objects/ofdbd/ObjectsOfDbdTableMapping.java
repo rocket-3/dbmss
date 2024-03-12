@@ -23,7 +23,7 @@ import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
  * The type of db table Objects of DBD/schemas/#schema/tables/#table node.
@@ -50,7 +50,7 @@ public class ObjectsOfDbdTableMapping extends ObjectsJoined {
             ),
             new SimpleObjectName(
                 schema,
-                new TextOfScalarNode(key)
+                new TextOfYamlScalarNode(key)
             )
         );
     }
@@ -66,24 +66,24 @@ public class ObjectsOfDbdTableMapping extends ObjectsJoined {
     ) {
         super(
             new IterableOf<>(
-                new TableObjectOfDbdTableMapping(mapping, table)
+                new ObjectOfDbdTableMapping(mapping, table)
             ),
-            new IndexObjectsOfDbdTableMapping(
+            new ObjectsOfDbdIndexesMapping(
                 mapping,
                 DbdTableFields.INDEXES,
                 table
             ),
-            new ConstraintsOfDbdTableMapping(
+            new ObjectsOfConstraintsMapping(
                 mapping,
                 DbdTableFields.CONSTRAINTS,
                 table
             ),
-            new TriggerObjectsOfDbdTableMapping(
+            new ObjectsOfDbdTriggersMapping(
                 mapping,
                 DbdTableFields.TRIGGERS,
                 table
             ),
-            new DataObjectsOfDbdTableMapping(
+            new ObjectsOfDbdDataMapping(
                 mapping,
                 DbdTableFields.DATA,
                 table

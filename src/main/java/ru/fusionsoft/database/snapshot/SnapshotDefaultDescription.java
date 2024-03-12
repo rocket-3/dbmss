@@ -19,7 +19,7 @@ import java.text.MessageFormat;
 import org.cactoos.Text;
 import ru.fusionsoft.database.mapping.dbd.DbdServerMapping;
 import ru.fusionsoft.database.mapping.fields.DbdServerFields;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
 
 /**
  * The default description of bare snapshot {@link Text} representation.
@@ -43,8 +43,8 @@ public class SnapshotDefaultDescription implements Text {
     @Override
     public final String asString() {
         return MessageFormat.format(
-            "Clean snapshot of database at {0}",
-            new TextOfMappingValue(
+            "Snapshot of database at {0}",
+            new TextOfYamlMappingKeyValue(
                 this.mapping,
                 DbdServerFields.URL
             ).asString()

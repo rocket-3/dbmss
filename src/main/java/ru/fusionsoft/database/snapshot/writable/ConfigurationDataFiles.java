@@ -24,8 +24,8 @@ import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdReadabl
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsArePartitionsOf;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTableDataInDbdFile;
-import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithDataMentionedInDbdFile;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadableServer;
 
 /**
  * The {@link SeparateDataFilesOfTables} for given objects, which are mentioned in specific
@@ -36,7 +36,7 @@ public class ConfigurationDataFiles extends SeparateDataFilesOfTables {
 
     /**
      * Instantiates a new Configuration data files.
-     * @param datatables The {@link ObjectsWithTableDataInDbdFile} to be encapsulated.
+     * @param datatables The {@link ObjectsWithDataMentionedInDbdFile} to be encapsulated.
      * @param objects The {@link Iterable} of {@link DbObject}s to be encapsulated.
      * @param dbdfile The {@link DbdReadable} to be encapsulated.
      * @param server The {@link Text} to be encapsulated.
@@ -71,7 +71,7 @@ public class ConfigurationDataFiles extends SeparateDataFilesOfTables {
         final Text server
     ) {
         this(
-            new ObjectsWithTableDataInDbdFile(objects, dbdfile),
+            new ObjectsWithDataMentionedInDbdFile(objects, dbdfile),
             objects,
             dbdfile,
             server
@@ -88,7 +88,7 @@ public class ConfigurationDataFiles extends SeparateDataFilesOfTables {
         final Text server
     ) {
         this(
-            new ObjectsOfServerFromDbd(
+            new ObjectsOfDbdReadableServer(
                 dbdfile,
                 server
             ),

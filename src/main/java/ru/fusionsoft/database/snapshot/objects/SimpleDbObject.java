@@ -48,6 +48,18 @@ public class SimpleDbObject<Y extends YamlNode>
     }
 
     @Override
+    public final int hashCode() {
+        return this.signature().hashCode();
+    }
+
+    @Override
+    public final boolean equals(final Object other) {
+        return other instanceof DbObject && this.signature().equalsTo(
+            ((DbObject<?>) other).signature()
+        );
+    }
+
+    @Override
     public final ObjectSignature signature() {
         return this.sig;
     }

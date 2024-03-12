@@ -33,7 +33,7 @@ public class DbdDomainMapping extends YamlMappingHasKeys {
     public DbdDomainMapping(final YamlMapping mapping) {
         super(
             mapping,
-            DbdDomainFields.ONWER,
+            DbdDomainFields.OWNER,
             DbdDomainFields.TYPE,
             DbdDomainFields.CONSTRAINTS
         );

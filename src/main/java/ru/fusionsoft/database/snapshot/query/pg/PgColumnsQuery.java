@@ -18,7 +18,7 @@ package ru.fusionsoft.database.snapshot.query.pg;
 import java.text.MessageFormat;
 import org.cactoos.text.TextOfScalar;
 import ru.fusionsoft.database.mapping.fields.DbdColumnFields;
-import ru.fusionsoft.database.mapping.value.IuTypeValues;
+import ru.fusionsoft.database.mapping.values.IuTypeValues;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import ru.fusionsoft.database.snapshot.query.Query;

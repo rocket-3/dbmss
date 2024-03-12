@@ -69,7 +69,7 @@ public class TextIterableOfFlowYamlSequence extends IterableEnvelope<Text> {
      * @param node The {@link YamlNode} to be encapsulated.
      */
     public TextIterableOfFlowYamlSequence(final YamlNode node) {
-        this(new TextOfScalarNode(node));
+        this(new TextOfYamlScalarNode(node));
     }
 
 }

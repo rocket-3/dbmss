@@ -38,7 +38,7 @@ public class PgSequencesQuery extends PgMessageFormatQuery<DbdSequenceFields> {
             + "    s.minimum_value AS {4}, \n"
             + "    s.maximum_value AS {5}, \n"
             + "    s.increment AS {6}, \n"
-            + "    s.cycle_option AS {7}, \n"
+            + "    CASE WHEN s.cycle_option = 'YES' THEN 'true' ELSE 'false' END AS {7}, \n"
             + "    cl.relname AS {8} \n"
             + "from pg_class cls \n"
             + "  join pg_roles rol on rol.oid = cls.relowner  \n"

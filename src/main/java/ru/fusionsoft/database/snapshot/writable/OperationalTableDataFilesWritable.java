@@ -22,7 +22,7 @@ import ru.fusionsoft.database.mapping.dbd.ofdbdfile.DbdServerMappingOfDbdReadabl
 import ru.fusionsoft.database.snapshot.DbObject;
 import ru.fusionsoft.database.snapshot.data.SeparateDataFilesOfTables;
 import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsAreTablesInDbdFile;
-import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfServerFromDbd;
+import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdReadableServer;
 
 /**
  * The type of {@link SeparateDataFilesOfTables}
@@ -66,7 +66,7 @@ public class OperationalTableDataFilesWritable extends SeparateDataFilesOfTables
         final Text server
     ) {
         this(
-            new ObjectsOfServerFromDbd(
+            new ObjectsOfDbdReadableServer(
                 dbdfile,
                 server
             ),

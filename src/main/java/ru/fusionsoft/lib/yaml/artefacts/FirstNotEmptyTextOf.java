@@ -16,6 +16,7 @@
 package ru.fusionsoft.lib.yaml.artefacts;
 
 import java.util.Iterator;
+import java.util.Objects;
 import org.cactoos.Text;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.IterableOf;
@@ -25,7 +26,7 @@ import org.cactoos.text.TextOf;
 
 /**
  * The type of Text that can be constructed of array of CharSequence, most of
- * which can be empty. You get a first non-empty one.
+ *  which can be empty. You get a first non-empty one.
  * @since 0.1
  * @checkstyle HiddenFieldCheck (100 lines)
  */
@@ -81,12 +82,27 @@ public class FirstNotEmptyTextOf implements Text {
         }
     }
 
+    @Override
+    public final String toString() {
+        return this.asString();
+    }
+
+    @Override
+    public final boolean equals(final Object object) {
+        return object instanceof Text && object.hashCode() == this.hashCode();
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hashCode(this.asString());
+    }
+
     /**
      * The type of Exception that means all variants in
      * {@link FirstNotEmptyTextOf} are empty.
      * @since 0.1
      */
-    public static class AllEmptyException extends Exception {
+    public static class AllEmptyException extends RuntimeException {
 
         /**
          * Instantiates a new All empty exception.

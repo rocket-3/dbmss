@@ -16,7 +16,7 @@
 package ru.fusionsoft.database.snapshot.writable;
 
 import com.amihaiemil.eoyaml.YamlNode;
-import ru.fusionsoft.database.dbdreadable.DbdReadableOfSnapshotObjects;
+import ru.fusionsoft.database.dbdreadable.DbdReadableConstructedOfSnapshotObjects;
 import ru.fusionsoft.database.mapping.dbd.DbdInfoMapping;
 import ru.fusionsoft.database.mapping.dbd.DbdServerEntry;
 import ru.fusionsoft.database.snapshot.DbObject;
@@ -43,7 +43,7 @@ public class DbdYamlWritableTakingServerSnaphot extends DbdYamlWritable {
         final Iterable<DbObject<Y>> objects
     ) {
         super(
-            new DbdReadableOfSnapshotObjects(server, info, objects)
+            new DbdReadableConstructedOfSnapshotObjects(server, info, objects)
         );
     }
 

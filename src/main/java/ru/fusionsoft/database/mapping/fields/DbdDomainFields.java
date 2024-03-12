@@ -41,7 +41,7 @@ public enum DbdDomainFields implements Text {
     /**
      *Onwer dbd domain fields.
      */
-    ONWER("owner"),
+    OWNER("owner"),
     /**
      *Description dbd domain fields.
      */

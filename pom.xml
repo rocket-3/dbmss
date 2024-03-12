@@ -64,6 +64,14 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>ru.fusionsoft.database.application.gui.Verify</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
                 <!--
                 Qulice-maven-plugin is a compound static analysis
                 tool that aggregates Checkstyle, PMD, FindBugs,
@@ -74,15 +82,23 @@
                 -->
                 <groupId>com.qulice</groupId>
                 <artifactId>qulice-maven-plugin</artifactId>
-                <version>0.19.0</version>
+                <version>0.21.1</version>
                 <configuration>
                     <license>file:${basedir}/LICENSE</license>
                     <excludes>
                         <exclude>checkstyle:.*yaml$</exclude>
                         <exclude>checkstyle:.*ResultSetOfScalar.java$</exclude>
                         <exclude>checkstyle:.*MultilineSqlScalarEntry.java$</exclude>
+                        <exclude>checkstyle:.*Controls.java$</exclude>
+                        <exclude>checkstyle:.*ScrollBarMark.java$</exclude>
+                        <exclude>checkstyle:.*Verify.java$</exclude>
+                        <exclude>checkstyle:.*ObjectDdlUnescaped.java$</exclude>
                         <exclude>findbugs:.*</exclude>
                         <exclude>duplicatefinder:.*</exclude>
+                        <exclude>dependencies:org.openjfx:javafx</exclude>
+                        <exclude>dependencies:org.openjfx:javafx</exclude>
+                        <exclude>dependencies:com.fasterxml</exclude>
+                        <exclude>dependencies:org.glassfish</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -132,6 +148,7 @@
             <id>api</id>
             <build>
                 <plugins>
+
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>appassembler-maven-plugin</artifactId>
@@ -143,62 +160,8 @@
                             <binFolder>bin</binFolder>
                             <programs>
                                 <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdNew</mainClass>
-                                    <name>dbdnew</name>
-                                    <jvmSettings>
-                                        <extraArguments>
-                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
-                                        </extraArguments>
-                                    </jvmSettings>
-                                </program>
-                                <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdMerge</mainClass>
-                                    <name>dbdmerge</name>
-                                    <jvmSettings>
-                                        <extraArguments>
-                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
-                                        </extraArguments>
-                                    </jvmSettings>
-                                </program>
-                                <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdLink</mainClass>
-                                    <name>dbdlink</name>
-                                    <jvmSettings>
-                                        <extraArguments>
-                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
-                                        </extraArguments>
-                                    </jvmSettings>
-                                </program>
-                                <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdSnapshot</mainClass>
-                                    <name>dbdsnap</name>
-                                    <jvmSettings>
-                                        <extraArguments>
-                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
-                                        </extraArguments>
-                                    </jvmSettings>
-                                </program>
-                                <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdAddSingle</mainClass>
-                                    <name>dbdadd</name>
-                                    <jvmSettings>
-                                        <extraArguments>
-                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
-                                        </extraArguments>
-                                    </jvmSettings>
-                                </program>
-                                <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdAddGraph</mainClass>
-                                    <name>dbdaddgraph</name>
-                                    <jvmSettings>
-                                        <extraArguments>
-                                            <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
-                                        </extraArguments>
-                                    </jvmSettings>
-                                </program>
-                                <program>
-                                    <mainClass>ru.fusionsoft.database.application.DbdInit</mainClass>
-                                    <name>dbdinit</name>
+                                    <mainClass>ru.fusionsoft.database.application.Application</mainClass>
+                                    <name>dbd</name>
                                     <jvmSettings>
                                         <extraArguments>
                                             <extraArgument>-Dfile.encoding=UTF-8</extraArgument>
@@ -230,12 +193,27 @@
         <dependency>
             <groupId>com.amihaiemil.web</groupId>
             <artifactId>eo-yaml</artifactId>
-            <version>5.2.1</version>
+            <version>6.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.llorllale</groupId>
             <artifactId>cactoos-matchers</artifactId>
             <version>0.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.5</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -266,6 +244,38 @@
             <artifactId>unescaped-string</artifactId>
             <version>0.5</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javafx</groupId>-->
+<!--            <artifactId>jfxrt</artifactId>-->
+<!--            <version>1.8</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>12.0.2</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>12.0.2</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>14</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>12.0.2</version>
+            <type>pom</type>
+        </dependency>
+
     </dependencies>
 
 </project>

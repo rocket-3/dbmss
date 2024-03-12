@@ -20,11 +20,11 @@ import ru.fusionsoft.database.mapping.dbd.DbdTableMapping;
 import ru.fusionsoft.database.snapshot.DbObject;
 
 /**
- * The {@link DataObjectOfMappingAndTable} with {@link InlineRowsDataMappingOfConnection},
+ * The {@link ObjectOfDbdDataMappingAndTable} with {@link InlineRowsDataMappingOfConnection},
  *  can be constructed of {@link Connection} and parent {@link DbObject} of {@link DbdTableMapping}.
  * @since 0.1
  */
-public class InlineRowsDataObjectOfConnection extends DataObjectOfMappingAndTable {
+public class InlineRowsDataObjectOfConnection extends ObjectOfDbdDataMappingAndTable {
 
     /**
      * Instantiates a new simple db object.

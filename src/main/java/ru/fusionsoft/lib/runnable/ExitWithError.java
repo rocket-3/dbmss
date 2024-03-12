@@ -56,6 +56,7 @@ public class ExitWithError implements Runnable {
 
     @Override
     public final void run() {
+        System.out.println(this.message);
         System.err.println(this.message);
         System.exit(1);
     }

@@ -34,8 +34,8 @@ import org.llorllale.cactoos.matchers.IsText;
 import ru.fusionsoft.database.mapping.entries.ScalarEntry;
 import ru.fusionsoft.lib.text.JsonUndefinedText;
 import ru.fusionsoft.lib.yaml.artefacts.KeysFromYamlNode;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfMappingValue;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlMappingKeyValue;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
  * The test for {@link MappingMerged}.
@@ -88,7 +88,7 @@ class MappingMergedTest {
         final ScalarEntry second = new ScalarEntry(key, value);
         new Assertion<>(
             "Should have entry from second set exactly",
-            new TextOfMappingValue(
+            new TextOfYamlMappingKeyValue(
                 new MappingMerged(
                     new YamlMappingOfEntries(first),
                     new YamlMappingOfEntries(second)
@@ -132,7 +132,7 @@ class MappingMergedTest {
         final TextOf second = new TextOf("2");
         new Assertion<>(
             "Entry should have the with second value exactly",
-            new TextOfScalarNode(
+            new TextOfYamlScalarNode(
                 new YamlNodeOfPath(
                     new MappingMerged(
                         withDeepValue.apply(new TextOf("1")),
@@ -206,7 +206,7 @@ class MappingMergedTest {
         );
         new Assertion<>(
             "Should have entry from second set, which is null",
-            new TextOfMappingValue(
+            new TextOfYamlMappingKeyValue(
                 new MappingMerged(
                     new YamlMappingOfEntries(first),
                     new YamlMappingOfEntries(

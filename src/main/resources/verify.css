@@ -1,0 +1,51 @@
+/*
+ * Copyright (C) 2018-2022 FusionSoft
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ *
+ * See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
+
+.text-area {
+    content-background: white;
+}
+
+.text-area .content {
+    -fx-background-color: content-background;
+    -fx-control-inner-background: content-background;
+}
+
+.text-field {
+    -fx-background-color: #e7e7e7;
+    -fx-font-size: 20;
+}
+
+.text-field.bad{
+    -fx-background-color: #f4d5ce;
+}
+
+.text-field.good{
+    -fx-background-color: #e2f4e0;
+}
+
+.text-field.info{
+    -fx-background-color: #f4efc4;
+    -fx-font-weight: bold;
+}
+
+.text-field.hyper{
+    -fx-background-color: #fffcf9;
+    -fx-font-weight: bold;
+}
+
+.text-field.data{
+    -fx-background-color: #fffae2;
+}

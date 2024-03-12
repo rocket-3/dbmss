@@ -59,4 +59,14 @@ public class DbmsOfScalar implements Dbms {
         return this.scalar.value().objects(connection);
     }
 
+    @Override
+    public final boolean equals(final Object object) {
+        return this.scalar.value().equals(object);
+    }
+
+    @Override
+    public final int hashCode() {
+        return this.scalar.value().hashCode();
+    }
+
 }

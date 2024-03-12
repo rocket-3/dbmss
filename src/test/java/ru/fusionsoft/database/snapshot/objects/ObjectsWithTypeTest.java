@@ -20,12 +20,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.fusionsoft.database.mapping.MappingOfExampleYaml;
 import ru.fusionsoft.database.mapping.dbd.DbdRootMapping;
-import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithType;
+import ru.fusionsoft.database.snapshot.objects.filtered.ObjectsWithTypeCasted;
 import ru.fusionsoft.database.snapshot.objects.ofdbd.ObjectsOfDbdRootMapping;
 import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 
 /**
- * The tests for {@link ObjectsWithType}.
+ * The tests for {@link ObjectsWithTypeCasted}.
  * @since 0.1
  */
 class ObjectsWithTypeTest {
@@ -39,7 +39,7 @@ class ObjectsWithTypeTest {
         Assertions.assertEquals(
             tables,
             new ListOf<>(
-                new ObjectsWithType<>(
+                new ObjectsWithTypeCasted<>(
                     new ObjectTypeTable(),
                     new ObjectsOfDbdRootMapping(
                         new DbdRootMapping(

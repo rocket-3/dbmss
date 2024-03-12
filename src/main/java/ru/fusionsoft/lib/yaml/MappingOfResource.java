@@ -31,7 +31,7 @@ public class MappingOfResource extends YamlMappingOf {
      * @param resource The Text to be encapsulated.
      */
     public MappingOfResource(final Text resource) {
-        super(new YamlInputOf(new ResourceOf(resource)));
+        super(new ResourceOf(resource));
     }
 
     /**

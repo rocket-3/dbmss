@@ -38,7 +38,9 @@ public class ObjectsOfDbdTablesMapping extends IterableEnvelope<DbObject<YamlNod
         super(
             new Joined<>(
                 new IterableOfClassFromYamlNode<>(
-                    (map, node) -> new ObjectsOfDbdTableMapping(map, node, schema),
+                    (map, node) -> new Joined<>(
+                        new ObjectsOfDbdTableMapping(map, node, schema)
+                    ),
                     mapping
                 )
             )

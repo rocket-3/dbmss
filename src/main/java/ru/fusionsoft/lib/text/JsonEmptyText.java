@@ -28,7 +28,7 @@ public class JsonEmptyText extends TextEnvelope {
      * Ctor.
      */
     public JsonEmptyText() {
-        super(new TextOf("''"));
+        super(new TextOf("' '"));
     }
 
 }

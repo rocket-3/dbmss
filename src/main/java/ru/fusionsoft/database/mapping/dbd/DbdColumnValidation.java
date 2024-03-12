@@ -31,7 +31,7 @@ import ru.fusionsoft.lib.yaml.artefacts.MaybeEmptyTextOfYamlMapping;
 public class DbdColumnValidation implements Proc<YamlNode> {
 
     @Override
-    public final void exec(final YamlNode node) throws Exception {
+    public final void exec(final YamlNode node) {
         new FirstNotEmptyTextOf(
             new Mapped<Text>(
                 key -> new MaybeEmptyTextOfYamlMapping(

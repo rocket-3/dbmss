@@ -24,7 +24,8 @@ import ru.fusionsoft.database.snapshot.objects.ObjectsJoined;
 import ru.fusionsoft.database.snapshot.objects.signature.ObjectName;
 import ru.fusionsoft.database.snapshot.objects.signature.name.SimpleObjectName;
 import ru.fusionsoft.lib.yaml.YamlMappingOfPath;
-import ru.fusionsoft.lib.yaml.artefacts.TextOfScalarNode;
+import ru.fusionsoft.lib.yaml.YamlMappingOfPathOrEmpty;
+import ru.fusionsoft.lib.yaml.artefacts.TextOfYamlScalarNode;
 
 /**
  * The type of db schema Objects of DBD/schemas/#schema node.
@@ -49,7 +50,7 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsJoined {
                 key
             ),
             new SimpleObjectName(
-                new TextOfScalarNode(key)
+                new TextOfYamlScalarNode(key)
             )
         );
     }
@@ -71,9 +72,58 @@ public class ObjectsOfDbdSchemaMapping extends ObjectsJoined {
                 )
             ),
             new ObjectsOfDbdTablesMapping(
-                new YamlMappingOfPath(
+                new YamlMappingOfPathOrEmpty(
                     mapping,
                     DbdSchemaFields.TABLES.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdSequencesMapping(
+                new YamlMappingOfPathOrEmpty(
+                    mapping,
+                    DbdSchemaFields.SEQUENCES.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdFunctionsMapping(
+                new YamlMappingOfPathOrEmpty(
+                    mapping,
+                    DbdSchemaFields.FUNCTIONS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdProceduresMapping(
+                new YamlMappingOfPathOrEmpty(
+                    mapping,
+                    DbdSchemaFields.PROCEDURES.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdViewsMapping(
+                new YamlMappingOfPathOrEmpty(
+                    mapping,
+                    DbdSchemaFields.VIEWS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdEnumsMapping(
+                new YamlMappingOfPathOrEmpty(
+                    mapping,
+                    DbdSchemaFields.ENUMS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdDomainsMapping(
+                new YamlMappingOfPathOrEmpty(
+                    mapping,
+                    DbdSchemaFields.DOMAINS.asString()
+                ),
+                schema
+            ),
+            new ObjectsOfDbdTuplesMapping(
+                new YamlMappingOfPathOrEmpty(
+                    mapping,
+                    DbdSchemaFields.TUPLES.asString()
                 ),
                 schema
             )

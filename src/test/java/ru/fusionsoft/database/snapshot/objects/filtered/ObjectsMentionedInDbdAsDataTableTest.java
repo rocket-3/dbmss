@@ -33,7 +33,7 @@ import ru.fusionsoft.database.snapshot.objects.signature.type.ObjectTypeTable;
 import ru.fusionsoft.lib.yaml.MappingEmpty;
 
 /**
- * The tests for {@link ObjectsWithTableDataInDbdFile}.
+ * The tests for {@link ObjectsWithDataMentionedInDbdFile}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
@@ -53,7 +53,7 @@ class ObjectsMentionedInDbdAsDataTableTest {
                 new ObjectTypeTable()
             )
         );
-        final Iterable<DbObject<DbdTableMapping>> filtered = new ObjectsWithTableDataInDbdFile(
+        final Iterable<DbObject<DbdTableMapping>> filtered = new ObjectsWithDataMentionedInDbdFile(
             new IterableOf<>(
                 mktable.apply(datatable),
                 mktable.apply("vendors")

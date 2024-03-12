@@ -15,14 +15,19 @@
  */
 package ru.fusionsoft.lib.yaml;
 
-import com.amihaiemil.eoyaml.YamlInput;
+import com.amihaiemil.eoyaml.Yaml;
 import com.amihaiemil.eoyaml.YamlNode;
+import java.io.InputStream;
 import java.nio.file.Path;
+import org.cactoos.Input;
+import org.cactoos.Text;
+import org.cactoos.io.InputStreamOf;
 import org.cactoos.scalar.Sticky;
 
 /**
  * The type of on-demand YamlMapping that can be constructed of YamlInput.
  * @since 0.1
+ * @checkstyle LineLengthCheck (200 lines)
  */
 public class YamlMappingOf extends YamlMappingEnvelope {
 
@@ -44,13 +49,45 @@ public class YamlMappingOf extends YamlMappingEnvelope {
      * Instantiates a new YamlMapping of YamlInput, that is used on demand.
      * @param input The YamlInput to be used.
      */
-    public YamlMappingOf(final YamlInput input) {
+    public YamlMappingOf(final InputStream input) {
         super(
             new YamlMappingOfScalar(
                 new Sticky<>(
-                    input::readYamlMapping
+                    () -> {
+                        return Yaml.createYamlInput(input).readYamlMapping();
+                    }
                 )
             )
+        );
+    }
+
+    /**
+     * Instantiates a new Yaml mapping of.
+     * @param input The {@link Input} to be encapsulated.
+     */
+    public YamlMappingOf(final Input input) {
+        this(
+            new InputStreamOf(input)
+        );
+    }
+
+    /**
+     * Instantiates a new Yaml mapping of.
+     * @param input The {@link Text} to be encapsulated.
+     */
+    public YamlMappingOf(final Text input) {
+        this(
+            new InputStreamOf(input)
+        );
+    }
+
+    /**
+     * Instantiates a new Yaml mapping of any String or CharSequence.
+     * @param input The input
+     */
+    public YamlMappingOf(final CharSequence input) {
+        this(
+            new InputStreamOf(input)
         );
     }
 
@@ -59,7 +96,9 @@ public class YamlMappingOf extends YamlMappingEnvelope {
      * @param path The {@link Path} to be used.
      */
     public YamlMappingOf(final Path path) {
-        this(new YamlInputOf(path));
+        this(
+            new InputStreamOf(path)
+        );
     }
 
 }

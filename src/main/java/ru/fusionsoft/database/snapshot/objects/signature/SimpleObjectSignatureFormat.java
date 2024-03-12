@@ -65,7 +65,7 @@ public class SimpleObjectSignatureFormat implements ObjectSignatureFormat {
 
     @Override
     public final String delimiter() {
-        return " (type) ";
+        return " > ";
     }
 
 }

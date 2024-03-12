@@ -33,7 +33,7 @@ import ru.fusionsoft.lib.runnable.process.ArgsExplicit;
 import ru.fusionsoft.lib.runnable.process.ArgsRunningExecutable;
 
 /**
- * The test for {@link DbdAddSingle}.
+ * The test for {@link AddSingle}.
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
